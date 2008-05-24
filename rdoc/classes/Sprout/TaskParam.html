@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Sprout::TaskParam</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Sprout::TaskParam</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/sprout/lib/sprout/tasks/tool_task_rb.html">
+                sprout/lib/sprout/tasks/tool_task.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The base class for all <a href="ToolTask.html">ToolTask</a> parameters.
+This class is extended by a variety of concrete implementations.
+</p>
+<p>
+At the time of this writing, only the :boolean <a
+href="TaskParam.html">TaskParam</a> modifies the interface by adding the
+<tt>show_on_false</tt> attribute.
+</p>
+<p>
+Some other helpful features are as follows:
+</p>
+<p>
+:file, :files, :path and :paths will all add any items that have been added
+to their values as file task prerequisites. This is especially helpful when
+writing rake tasks for Command Line Interface (CLI) compilers.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000098">delimiter</a>&nbsp;&nbsp;
+      <a href="#M000093">hidden_name?</a>&nbsp;&nbsp;
+      <a href="#M000094">hidden_value?</a>&nbsp;&nbsp;
+      <a href="#M000087">init</a>&nbsp;&nbsp;
+      <a href="#M000095">prefix</a>&nbsp;&nbsp;
+      <a href="#M000091">prepare</a>&nbsp;&nbsp;
+      <a href="#M000092">prepare_prerequisites</a>&nbsp;&nbsp;
+      <a href="#M000089">required?</a>&nbsp;&nbsp;
+      <a href="#M000099">shell_name</a>&nbsp;&nbsp;
+      <a href="#M000097">shell_value</a>&nbsp;&nbsp;
+      <a href="#M000101">to_rdoc</a>&nbsp;&nbsp;
+      <a href="#M000100">to_shell</a>&nbsp;&nbsp;
+      <a href="#M000090">validate</a>&nbsp;&nbsp;
+      <a href="#M000096">value</a>&nbsp;&nbsp;
+      <a href="#M000088">visible?</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">belongs_to</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">delimiter</td>
+          <td class="context-item-value">&nbsp;[W]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">description</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">file_expression</td>
+          <td class="context-item-value">&nbsp;[W]&nbsp;</td>
+          <td class="context-item-desc">
+Set the file_expression (blob) to append to each path in order to build the
+prerequisites FileList.
+
+<p>
+Defaults to parent <a
+href="ToolTask.html#M000114">ToolTask.default_file_expression</a>
+</p>
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">hidden_name</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">hidden_value</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">name</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">prefix</td>
+          <td class="context-item-value">&nbsp;[W]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">required</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">shell_name</td>
+          <td class="context-item-value">&nbsp;[W]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">type</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">validator</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">value</td>
+          <td class="context-item-value">&nbsp;[W]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">visible</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000098" class="method-detail">
+        <a name="M000098"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000098.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000098.html');return false;">
+          <span class="method-name">delimiter</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+ToolParams join their name/value pair with an equals sign by default, this
+can be modified To a space or whatever you wish
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000093" class="method-detail">
+        <a name="M000093"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000093.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000093.html');return false;">
+          <span class="method-name">hidden_name?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Should the param name be hidden from the shell? Used for params like
+&#8216;input&#8217; on mxmlc
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000094" class="method-detail">
+        <a name="M000094"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000094.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000094.html');return false;">
+          <span class="method-name">hidden_value?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Should the param <a href="TaskParam.html#M000096">value</a> be hidden from
+the shell? Usually used for Boolean toggles like &#8217;-debug&#8216;
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000087" class="method-detail">
+        <a name="M000087"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000087.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000087.html');return false;">
+          <span class="method-name">init</span><span class="method-args">() {|self if block_given?| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000095" class="method-detail">
+        <a name="M000095"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000095.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000095.html');return false;">
+          <span class="method-name">prefix</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Leading character for each parameter Can sometimes be an empty string,
+other times it&#8216;s a double dash &#8217;&#8212;&#8217; but usually
+it&#8216;s just a single dash &#8217;-&#8217;
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000091" class="method-detail">
+        <a name="M000091"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000091.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000091.html');return false;">
+          <span class="method-name">prepare</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000092" class="method-detail">
+        <a name="M000092"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000092.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000092.html');return false;">
+          <span class="method-name">prepare_prerequisites</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000089" class="method-detail">
+        <a name="M000089"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000089.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000089.html');return false;">
+          <span class="method-name">required?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000099" class="method-detail">
+        <a name="M000099"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000099.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000099.html');return false;">
+          <span class="method-name">shell_name</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the name with a single leading dash and underscores replaced with
+dashes
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000097" class="method-detail">
+        <a name="M000097"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000097.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000097.html');return false;">
+          <span class="method-name">shell_value</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000101" class="method-detail">
+        <a name="M000101"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000101.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000101.html');return false;">
+          <span class="method-name">to_rdoc</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Create a string that can be turned into a file that rdoc can parse to
+describe the customized or generated task using param name, type and
+description
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000100" class="method-detail">
+        <a name="M000100"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000100.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000100.html');return false;">
+          <span class="method-name">to_shell</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000090" class="method-detail">
+        <a name="M000090"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000090.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000090.html');return false;">
+          <span class="method-name">validate</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000096" class="method-detail">
+        <a name="M000096"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000096.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000096.html');return false;">
+          <span class="method-name">value</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000088" class="method-detail">
+        <a name="M000088"></a>
+
+        <div class="method-heading">
+          <a href="TaskParam.src/M000088.html" target="Code" class="method-signature"
+            onclick="popupCode('TaskParam.src/M000088.html');return false;">
+          <span class="method-name">visible?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+By default, ToolParams only appear in the shell output when they are not
+nil
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

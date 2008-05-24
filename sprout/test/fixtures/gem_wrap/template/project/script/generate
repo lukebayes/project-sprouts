@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'sprout'
+include PatternPark
+require Sprout.rakefile
+Dir.chdir(Sprout.project_path)
+Generate.new(ARGV)
+Log.flush

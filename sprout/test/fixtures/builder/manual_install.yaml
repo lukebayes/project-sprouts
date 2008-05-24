@@ -1,0 +1,3 @@
+- !ruby/object:Sprout::RemoteFileTarget 
+  platform: universal
+  archive_path: swfmill

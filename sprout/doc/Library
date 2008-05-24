@@ -1,0 +1,63 @@
+
+A Library is simply shared code. Some libraries are distributed with only source, others are only pre-compiled binaries (SWC for ActionScript libraries), and still others are made available in both forms. 
+
+The Sprout::LibraryTask will download and copy a remote library sprout gem.
+The remote archive can include (or reference) either source or a pre-compiled
+file. For ActionScript libraries, this would be a SWC file.
+
+This task is integrated with some of the compiler tasks in such
+a way that if an Sprout::MXMLCTask has any number of library tasks in
+it's prerequisites list, each of those libraries will be added
+to the compiler directive appropriately.
+
+Following is a simple example of a library task. Using only
+this simple task definition, the Adobe corelib library sprout gem
+will be downloaded, installed and copied to your Sprout::ProjectModel +lib_dir+.
+  
+  library :corelib
+
+By adding this named task as a prerequisite to your compilation task,
+that SWC will also be added to the Sprout::MXMLCTask +library_path+ parameter.
+
+  mxmlc 'bin/SomeProject.swf' => :corelib
+
+You can also specify a particular library gem version if the library
+has changed since your project began.
+
+  library :asunit3 do |t|
+    t.version = '3.0.1'
+  end
+
+This will ensure that only that particular library version is used for this project.
+
+You may want to refer to a library using a particular task name, but have it
+use a different library sprout gem. This can be done using the gem_name parameter
+as follows:
+
+  library :asunit do |t|
+    t.gem_name = 'sprout-asunit3-library'
+  end
+
+This may be useful because now the AsUnit[http://www.asunit.org] sources will be installed to:
+  lib/asunit
+instead of:
+  lib/asunit3
+and you can now depend on this library as simply +:asunit+ in your compiler tasks.
+
+You can easily create your own library gems using the Sprout::GemWrapTask and then
+refer to them by gem name. 
+
+In order to share your library tasks, you will need to
+do one of the following:
+
+* Tell interested developers to manually install your library gem
+* Upload your gem to any Rubyforge[http://www.rubyforge.org] project file releases area.
+    If your gem name begins with 'sprout-' and ends with '-library', you (and others) can refer to it by only
+    the string in between that prefix and suffix. Otherwise, you (and others) will always have
+    to set the gem_name parameter to the full name of your custom library.
+* Submit your library for inclusion from the ProjectSprouts[http://www.projectsprouts.org] project.
+* Add your gem to your own custom gem_server[http://rambleon.org/2007/04/19/creating-your-own-gem-server/], and set up your rakefiles to pull from that server
+
+You can search for all available libraries as follows:
+  gem search -r sprout-*library
+Only results that begin with 'sprout-' are known, valid libraries.

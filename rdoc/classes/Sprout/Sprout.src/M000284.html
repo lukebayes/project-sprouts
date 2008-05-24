@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>find_gem_spec (Sprout::Sprout)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 325</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">find_gem_spec</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">requirements</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">recursed</span>=<span class="ruby-keyword kw">false</span>)
+      <span class="ruby-identifier">specs</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-identifier">cache</span>.<span class="ruby-identifier">search</span>(<span class="ruby-node">/.*#{name}$/</span>)
+      <span class="ruby-identifier">requirement</span> = <span class="ruby-keyword kw">nil</span>
+      <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">requirements</span>)
+        <span class="ruby-identifier">requirement</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Requirement</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">requirements</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">specs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">spec</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">requirements</span>)
+          <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">requirement</span>.<span class="ruby-identifier">satisfied_by?</span>(<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">version</span>))
+            <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">spec</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">spec</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">recursed</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">SproutError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Gem Spec not found for #{name} #{requirements}&quot;</span>)
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">msg</span> = <span class="ruby-node">&quot;&gt;&gt; Loading gem [#{name}]&quot;</span>
+        <span class="ruby-identifier">msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; #{requirements}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">requirements</span>
+        <span class="ruby-identifier">msg</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; from #{gem_sources.join(', ')} with it's dependencies&quot;</span>
+        <span class="ruby-constant">Log</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">msg</span>
+        <span class="ruby-identifier">parts</span> = []
+        <span class="ruby-identifier">parts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;ins&quot;</span>
+        <span class="ruby-identifier">parts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;-r&quot;</span>
+        <span class="ruby-identifier">parts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">name</span>
+        <span class="ruby-comment cmt"># This url should be removed once released, released gems should be hosted from the rubyforge</span>
+        <span class="ruby-comment cmt"># project, and development gems will be hosted on our domain.</span>
+        <span class="ruby-identifier">parts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;--source #{gem_sources.join(' --source ')}&quot;</span> <span class="ruby-keyword kw">if</span>(<span class="ruby-constant">Log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value str">'sprout-'</span>))
+        <span class="ruby-identifier">parts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;-v #{requirements}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">requirements</span>.<span class="ruby-identifier">nil?</span>
+
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">load_gem</span>(<span class="ruby-identifier">parts</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>))
+        <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-identifier">cache</span>.<span class="ruby-identifier">refresh!</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">find_gem_spec</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">requirements</span>, <span class="ruby-keyword kw">true</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

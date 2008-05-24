@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>initialize_task (Sprout::MXMLCTask)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/mxmlc_task.rb, line 64</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_task</span>
+      <span class="ruby-ivar">@default_gem_name</span> = <span class="ruby-value str">'sprout-flex2sdk-tool'</span>
+      <span class="ruby-ivar">@default_gem_path</span> = <span class="ruby-value str">'bin/mxmlc'</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:accessible</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">hidden_value</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Enables accessibility features when compiling the Flex application or SWC file. The default value is false.&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:actionscript_file_encoding</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Sets the file encoding for ActionScript files. For more information see: http://livedocs.adobe.com/flex/2/docs/00001503.html#149244&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:allow_source_path_overlap</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">hidden_value</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Checks if a source-path entry is a subdirectory of another source-path entry. It helps make the package names of MXML components unambiguous. This is an advanced option.&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-comment cmt"># multiline strings won't work in stupid aptana!</span>
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:as3</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">show_on_false</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Use the ActionScript 3.0 class-based object model for greater performance and better error reporting. In the class-based object model, most built-in functions are implemented as fixed methods of classes.\n\nThe default value is true. If you set this value to false, you must set the es option to true.\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:benchmark</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">show_on_false</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Prints detailed compile times to the standard output. The default value is true.&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:context_root</span>, <span class="ruby-identifier">:path</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Sets the value of the {context.root} token in channel definitions in the flex-services.xml file. If you do not specify the value of this option, Flex uses an empty string.\n        \nFor more information on using the {context.root} token, see http://livedocs.adobe.com/flex/2/docs/00001446.html#205687.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:contributor</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:creator</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files. (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380)&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:date</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files. (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380)&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:debug</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">hidden_value</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Generates a debug SWF file. This file includes line numbers and filenames of all the source files. When a run-time error occurs, the stacktrace shows these line numbers and filenames. This information is also used by the command-line debugger and the Flex Builder debugger. Enabling the debug option generates larger SWF files.\n\nFor the mxmlc compiler, the default value is false. For the compc compiler, the default value is true.\n\nFor SWC files generated with the compc compiler, set this value to true, unless the target SWC file is an RSL. In that case, set the debug option to false.\n\nFor information about the command-line debugger, see Using the Command-Line Debugger (http://livedocs.adobe.com/flex/2/docs/00001540.html#181846).\n\nFlex also uses the verbose-stacktraces setting to determine whether line numbers are added to the stacktrace.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:debug_password</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Lets you engage in remote debugging sessions with the Flash IDE. This is an advanced option.&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:default_background_color</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Sets the application's background color. You use the 0x notation to set the color, as the following example shows:\n\n-default-background-color=0xCCCCFF\n\nThe default value is null. The default background of a Flex application is an image of a gray gradient. You must override this image for the value of the default-background-color option to be visible. For more information, see Editing application settings (http://livedocs.adobe.com/flex/2/docs/00001504.html#138781).\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:default_frame_rate</span>, <span class="ruby-identifier">:number</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Sets the application's frame rate. The default value is 24. This is an advanced option.&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-comment cmt"># TODO: Based on this description, I don't understand how to set these values:</span>
+      <span class="ruby-comment cmt">#      add_param(:default_script_limits, :number) do |p|</span>
+      <span class="ruby-comment cmt">#        p.description = &quot;Defines the application's script execution limits.</span>
+      <span class="ruby-comment cmt">#The max-recursion-depth value specifies the maximum depth of Adobe Flash Player call stack before Flash Player stops. This is essentially the stack overflow limit. The default value is 1000.</span>
+      <span class="ruby-comment cmt">#The max-execution-time value specifies the maximum duration, in seconds, that an ActionScript event handler can execute before Flash Player assumes that it is hung, and aborts it. The default value is 60 seconds. You cannot set this value above 60 seconds.</span>
+      <span class="ruby-comment cmt">#You can override these settings in the application.</span>
+      <span class="ruby-comment cmt">#This is an advanced option.</span>
+      <span class="ruby-comment cmt">#end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:default_size</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">delimiter</span> = <span class="ruby-value str">' '</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">value</span> = <span class="ruby-value str">'950 550'</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Defines the default application size, in pixels for example: default_size = '950 550'. This is an advanced option.&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:default_css_url</span>, <span class="ruby-identifier">:url</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Defines the location of the default style sheet. Setting this option overrides the implicit use of the defaults.css style sheet in the framework.swc file.\n\nFor more information on the defaults.css file, see Using Styles and Themes (http://livedocs.adobe.com/flex/2/docs/00000751.html#241755) in Flex 2 Developer's Guide.\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:description</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:dump_config</span>, <span class="ruby-identifier">:file</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Outputs the compiler options in the flex-config.xml file to the target path; for example:\n\nmxmlc -dump-config myapp-config.xml\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-comment cmt"># TODO: Add parameter interactions to ensure</span>
+      <span class="ruby-comment cmt"># valid state?</span>
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:es</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Use the ECMAScript edition 3 prototype-based object model to allow dynamic overriding of prototype properties. In the prototype-based object model, built-in functions are implemented as dynamic properties of prototype objects.\n\nYou can set the strict option to true when you use this model, but it might result in compiler errors for references to dynamic properties.\n\nThe default value is false. If you set this option to true, you must set the es3 option to false.\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:externs</span>, <span class="ruby-identifier">:symbols</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Sets a list of symbols to exclude from linking when compiling a SWF file.\n\nThis option provides compile-time link checking for external references that are dynamically linked.\n\nFor more information about dynamic linking, see About linking (http://livedocs.adobe.com/flex/2/docs/00001521.html#205852).\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:external_library_path</span>, <span class="ruby-identifier">:files</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Specifies a list of SWC files or directories to exclude from linking when compiling a SWF file. This option provides compile-time link checking for external components that are dynamically linked.\n\nFor more information about dynamic linking, see About linking (http://livedocs.adobe.com/flex/2/docs/00001521.html#205852).\n\nYou can use the += operator to append the new SWC file to the list of external libraries.\n\nThis parameter has been aliased as +el+.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param_alias</span>(<span class="ruby-identifier">:el</span>, <span class="ruby-identifier">:external_library_path</span>)
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:file_specs</span>, <span class="ruby-identifier">:files</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Specifies source files to compile. This is the default option for the mxmlc compiler.&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:fonts_languages_language_range</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">shell_name</span> = <span class="ruby-value str">'-compiler.fonts.languages.language-range'</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Specifies the range of Unicode settings for that language. For more information, see Using Styles and Themes (http://livedocs.adobe.com/flex/2/docs/00000751.html#241755) in Flex 2 Developer's Guide.\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:fonts_managers</span>, <span class="ruby-identifier">:symbols</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Defines the font manager. The default is flash.fonts.JREFontManager. You can also use the flash.fonts.BatikFontManager. For more information, see Using Styles and Themes in Flex 2 Developer's Guide (http://livedocs.adobe.com/flex/2/docs/00000751.html#241755).\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:fonts_max_cached_fonts</span>, <span class="ruby-identifier">:number</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Sets the maximum number of fonts to keep in the server cache. For more information, see Caching fonts and glyphs (http://livedocs.adobe.com/flex/2/docs/00001469.html#208457).\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:fonts_max_glyphs_per_face</span>, <span class="ruby-identifier">:number</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Sets the maximum number of character glyph-outlines to keep in the server cache for each font face. For more information, see Caching fonts and glyphs (http://livedocs.adobe.com/flex/2/docs/00001469.html#208457).\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:frames_frame</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Specifies a SWF file frame label with a sequence of class names that are linked onto the frame.\n\nFor example: frames_frame = 'someLabel MyProject OtherProject FoodProject'\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:generate_frame_loader</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Toggles the generation of an IFlexBootstrap-derived loader class.\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:headless_server</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Enables the headless implementation of the Flex compiler. This sets the following:\n\nSystem.setProperty('java.awt.headless', 'true')\n\nThe headless setting (java.awt.headless=true) is required to use fonts and SVG on UNIX systems without X Windows.\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:include_libraries</span>, <span class="ruby-identifier">:files</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Links all classes inside a SWC file to the resulting application SWF file, regardless of whether or not they are used.\n\nContrast this option with the library-path option that includes only those classes that are referenced at compile time.\n\nTo link one or more classes whether or not they are used and not an entire SWC file, use the includes option.\n\nThis option is commonly used to specify resource bundles.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:includes</span>, <span class="ruby-identifier">:symbols</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Links one or more classes to the resulting application SWF file, whether or not those classes are required at compile time.\n\nTo link an entire SWC file rather than individual classes, use the include-libraries option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:incremental</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Enables incremental compilation. For more information, see About incremental compilation (http://livedocs.adobe.com/flex/2/docs/00001506.html#153980).\n\nThis option is true by default for the Flex Builder application compiler. For the command-line compiler, the default is false. The web-tier compiler does not support incremental compilation.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:keep_generated_actionscript</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Determines whether to keep the generated ActionScript class files.\n\nThe generated class files include stubs and classes that are generated by the compiler and used to build the SWF file.\n\nThe default location of the files is the /generated subdirectory, which is directly below the target MXML file. If the /generated directory does not exist, the compiler creates one.\n\nThe default names of the primary generated class files are filename-generated.as and filename-interface.as.\n\nThe default value is false.\\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:language</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:lazy_init</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Enables ABC bytecode lazy initialization.\n\nThe default value is false.\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:library_path</span>, <span class="ruby-identifier">:files</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Links SWC files to the resulting application SWF file. The compiler only links in those classes for the SWC file that are required.\n\nThe default value of the library-path option includes all SWC files in the libs directory and the current locale. These are required.\n\nTo point to individual classes or packages rather than entire SWC files, use the source-path option.\n\nIf you set the value of the library-path as an option of the command-line compiler, you must also explicitly add the framework.swc and locale SWC files. Your new entry is not appended to the library-path but replaces it.\n\nYou can use the += operator to append the new argument to the list of existing SWC files.\n\nIn a configuration file, you can set the append attribute of the library-path tag to true to indicate that the values should be appended to the library path rather than replace it.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param_alias</span>(<span class="ruby-identifier">:l</span>, <span class="ruby-identifier">:library_path</span>)
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:link_report</span>, <span class="ruby-identifier">:file</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Prints linking information to the specified output file. This file is an XML file that contains &lt;def&gt;, &lt;pre&gt;, and &lt;ext&gt; symbols showing linker dependencies in the final SWF file.\n\nThe file format output by this command can be used to write a file for input to the load-externs option.\n\nFor more information on the report, see Examining linker dependencies (http://livedocs.adobe.com/flex/2/docs/00001394.html#211202).\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:load_config</span>, <span class="ruby-identifier">:file</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Specifies the location of the configuration file that defines compiler options.\n\nIf you specify a configuration file, you can override individual options by setting them on the command line.\n\nAll relative paths in the configuration file are relative to the location of the configuration file itself.\n\nUse the += operator to chain this configuration file to other configuration files.\n\nFor more information on using configuration files to provide options to the command-line compilers, see About configuration files (http://livedocs.adobe.com/flex/2/docs/00001490.html#138195).\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:load_externs</span>, <span class="ruby-identifier">:file</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Specifies the location of an XML file that contains &lt;def&gt;, &lt;pre&gt;, and &lt;ext&gt; symbols to omit from linking when compiling a SWF file. The XML file uses the same syntax as the one produced by the link-report option. For more information on the report, see Examining linker dependencies (http://livedocs.adobe.com/flex/2/docs/00001394.html#211202).\n\nThis option provides compile-time link checking for external components that are dynamically linked.\n\nFor more information about dynamic linking, see About linking (http://livedocs.adobe.com/flex/2/docs/00001521.html#205852).\n\nThis is an advanced option.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:locale</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Specifies the locale that should be packaged in the SWF file (for example, en_EN). You run the mxmlc compiler multiple times to create SWF files for more than one locale, with only the locale option changing.\n\nYou must also include the parent directory of the individual locale directories, plus the token {locale}, in the source-path; for example:\n\nmxmlc -locale en_EN -source-path locale/{locale} -file-specs MainApp.mxml\n\nFor more information, see Localizing Flex Applicationsin (http://livedocs.adobe.com/flex/2/docs/00000898.html#129288) Flex 2 Developer's Guide.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:localized_description</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:localized_title</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:namespaces_namespace</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Specifies a namespace for the MXML file. You must include a URI and the location of the manifest file that defines the contents of this namespace. This path is relative to the MXML file.\n\nFor more information about manifest files, see About manifest files (http://livedocs.adobe.com/flex/2/docs/00001519.html#134676).\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:optimize</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Enables the ActionScript optimizer. This optimizer reduces file size and increases performance by optimizing the SWF file's bytecode.\n\nThe default value is false.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:output</span>, <span class="ruby-identifier">:file</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Specifies the output path and filename for the resulting file. If you omit this option, the compiler saves the SWF file to the directory where the target file is located.\n\nThe default SWF filename matches the target filename, but with a SWF file extension.\n\nIf you use a relative path to define the filename, it is always relative to the current working directory, not the target MXML application root.\n\nThe compiler creates extra directories based on the specified filename if those directories are not present.\n\nWhen using this option with the component compiler, the output is a SWC file rather than a SWF file.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:publisher</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:resource_bundle_list</span>, <span class="ruby-identifier">:file</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Prints a list of resource bundles to input to the compc compiler to create a resource bundle SWC file. The filename argument is the name of the file that contains the list of bundles.\n\nFor more information, see Localizing Flex Applications (http://livedocs.adobe.com/flex/2/docs/00000898.html#129288) in Flex 2 Developer's Guide.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:runtime_shared_libraries</span>, <span class="ruby-identifier">:urls</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Specifies a list of run-time shared libraries (RSLs) to use for this application. RSLs are dynamically-linked at run time.\n\nYou specify the location of the SWF file relative to the deployment location of the application. For example, if you store a file named library.swf file in the web_root/libraries directory on the web server, and the application in the web root, you specify libraries/library.swf.\n\nFor more information about RSLs, see Using Runtime Shared Libraries. (http://livedocs.adobe.com/flex/2/docs/00001520.html#168690)\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param_alias</span>(<span class="ruby-identifier">:rsl</span>, <span class="ruby-identifier">:runtime_shared_libraries</span>)
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:services</span>, <span class="ruby-identifier">:file</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Specifies the location of the services-config.xml file. This file is used by Flex Data Services.&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:show_binding_warnings</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">show_on_false</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Shows a warning when Flash Player cannot detect changes to a bound property.\n\nThe default value is true.\n\nFor more information about compiler warnings, see Using SWC files (http://livedocs.adobe.com/flex/2/docs/00001505.html#158337).\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:show_actionscript_warnings</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">show_on_false</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Shows warnings for ActionScript classes.\n\nThe default value is true.\n\nFor more information about viewing warnings and errors, see Viewing warnings and errors (http://livedocs.adobe.com/flex/2/docs/00001517.html#182413).\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:show_deprecation_warnings</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">show_on_false</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Shows deprecation warnings for Flex components. To see warnings for ActionScript classes, use the show-actionscript-warnings option.\n\nThe default value is true.\n\nFor more information about viewing warnings and errors, see Viewing warnings and errors.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:source_path</span>, <span class="ruby-identifier">:paths</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Adds directories or files to the source path. The Flex compiler searches directories in the source path for MXML or AS source files that are used in your Flex applications and includes those that are required at compile time.\n\nYou can use wildcards to include all files and subdirectories of a directory.\n\nTo link an entire library SWC file and not individual classes or directories, use the library-path option.\n\nThe source path is also used as the search path for the component compiler's include-classes and include-resource-bundles options.\n\nYou can also use the += operator to append the new argument to the list of existing source path entries.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param_alias</span>(<span class="ruby-identifier">:sp</span>, <span class="ruby-identifier">:source_path</span>)
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:strict</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">show_on_false</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Prints undefined property and function calls; also performs compile-time type checking on assignments and options supplied to method calls.\n\nThe default value is true.\n\nFor more information about viewing warnings and errors, see Viewing warnings and errors (http://livedocs.adobe.com/flex/2/docs/00001517.html#182413).\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:theme</span>, <span class="ruby-identifier">:files</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Specifies a list of theme files to use with this application. Theme files can be SWC files with CSS files inside them or CSS files.\n\nFor information on compiling a SWC theme file, see Using Styles and Themes (http://livedocs.adobe.com/flex/2/docs/00000751.html#241755) in Flex 2 Developer's Guide.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:title</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:use_network</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">show_on_false</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Specifies that the current application uses network services.\n\nThe default value is true.\n\nWhen the use-network property is set to false, the application can access the local filesystem (for example, use the XML.load() method with file: URLs) but not network services. In most circumstances, the value of this property should be true.\n\nFor more information about the use-network property, see Applying Flex Security (http://livedocs.adobe.com/flex/2/docs/00001328.html#137544).\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:verbose_stacktraces</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Generates source code that includes line numbers. When a run-time error occurs, the stacktrace shows these line numbers.\n\nEnabling this option generates larger SWF files.\\nThe default value is false.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:warn_warning_type</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Enables specified warnings. For more information, see Viewing warnings and errors (http://livedocs.adobe.com/flex/2/docs/00001517.html#182413).&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:warnings</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;Enables all warnings. Set to false to disable all warnings. This option overrides the warn-warning_type options.\n\nThe default value is true.\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-comment cmt"># This must be the last item in this list</span>
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:input</span>, <span class="ruby-identifier">:file</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">hidden_name</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Main source file to send compiler&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

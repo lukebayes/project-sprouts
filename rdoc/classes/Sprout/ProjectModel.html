@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Sprout::ProjectModel</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Sprout::ProjectModel</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/sprout/lib/sprout/project_model_rb.html">
+                sprout/lib/sprout/project_model.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Hash
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The <a href="ProjectModel.html">ProjectModel</a> gives you a place to
+describe your project so that you don&#8216;t need to repeat yourself
+throughout a rakefile.
+</p>
+<p>
+The default set of properties are also used from code generators, library
+tasks and sometimes tools.
+</p>
+<p>
+This class should have some reasonable default values, but can be modified
+from any rakefile. If you don&#8216;t find some properties that you&#8216;d
+like on the <a href="ProjectModel.html">ProjectModel</a>, you can simply
+add <a href="ProjectModel.html#M000237">new</a> properties and use them
+however you wish. To Monkey Patch the <a
+href="ProjectModel.html">ProjectModel</a>, just add something like the
+following to any Rakefile before the model is used.
+</p>
+<pre>
+  class Sprout::ProjectModel &lt; Hash
+    # The new_param is now available at model.new_param
+    attr_accessor :new_param
+  end
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000244">controller_dir</a>&nbsp;&nbsp;
+      <a href="#M000243">controller_dir=</a>&nbsp;&nbsp;
+      <a href="#M000235">instance</a>&nbsp;&nbsp;
+      <a href="#M000240">model_dir</a>&nbsp;&nbsp;
+      <a href="#M000239">model_dir=</a>&nbsp;&nbsp;
+      <a href="#M000237">new</a>&nbsp;&nbsp;
+      <a href="#M000238">project_path</a>&nbsp;&nbsp;
+      <a href="#M000236">setup</a>&nbsp;&nbsp;
+      <a href="#M000242">view_dir</a>&nbsp;&nbsp;
+      <a href="#M000241">view_dir=</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">asset_dir</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+Relative path to the folder where compile time assets will be stored
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">bin_dir</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The folder where binary files will be created. Usually this is where any
+build artifacts like SWF files get placed.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">doc_dir</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+Directory where documentation should be placed.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">language</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The technology language that is being used, right now this is either
+&#8216;as2&#8217; or &#8216;as3&#8217;. Code generators take advantage of
+this setting to determine which templates to use.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">lib_dir</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The relative path to your library directory. Defaults to &#8216;lib&#8216;
+
+<p>
+Any remote .SWC and source libraries that are referenced in your rakefile
+will be installed into this directory. Source libraries will be placed in a
+folder that matches the library name, while SWCs will be simply placed
+directly into the lib_dir.
+</p>
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">output</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The production file that this Project will generate
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">project_name</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The real name of the project, usually capitalized like a class name
+&#8216;SomeProject&#8216;
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">skin_dir</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The folder where compile time skins can be loaded from
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">skin_output</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The skin file that will be generated
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">src_dir</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The relative path to your main source directory. Defaults to
+&#8216;src&#8216;
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">swc_dir</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The relative path to the directory where swc files should be kept. This
+value defaults to lib_dir
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">test_dir</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+Relative path to the folder that contains your test cases
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">test_output</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+The test executable
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000235" class="method-detail">
+        <a name="M000235"></a>
+
+        <div class="method-heading">
+          <a href="ProjectModel.src/M000235.html" target="Code" class="method-signature"
+            onclick="popupCode('ProjectModel.src/M000235.html');return false;">
+          <span class="method-name">instance</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+TODO: Add clean hash interface so that users can simply add to this
+object&#8216;s properties like: model.foo = &#8216;bar&#8217; model.junk =
+true and then just as easily reference those vars from external
+generators&#8230;
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000237" class="method-detail">
+        <a name="M000237"></a>
+
+        <div class="method-heading">
+          <a href="ProjectModel.src/M000237.html" target="Code" class="method-signature"
+            onclick="popupCode('ProjectModel.src/M000237.html');return false;">
+          <span class="method-name">new</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000236" class="method-detail">
+        <a name="M000236"></a>
+
+        <div class="method-heading">
+          <a href="ProjectModel.src/M000236.html" target="Code" class="method-signature"
+            onclick="popupCode('ProjectModel.src/M000236.html');return false;">
+          <span class="method-name">setup</span><span class="method-args">() {|instance| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Patch submitted by Thomas Winkler
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000244" class="method-detail">
+        <a name="M000244"></a>
+
+        <div class="method-heading">
+          <a href="ProjectModel.src/M000244.html" target="Code" class="method-signature"
+            onclick="popupCode('ProjectModel.src/M000244.html');return false;">
+          <span class="method-name">controller_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Simple MVC helper for project-wide views if your project is called
+&#8216;SomeProject&#8217; this will default to:
+</p>
+<pre>
+  SomeProject/src/someproject/controllers
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000243" class="method-detail">
+        <a name="M000243"></a>
+
+        <div class="method-heading">
+          <a href="ProjectModel.src/M000243.html" target="Code" class="method-signature"
+            onclick="popupCode('ProjectModel.src/M000243.html');return false;">
+          <span class="method-name">controller_dir=</span><span class="method-args">(dir)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000240" class="method-detail">
+        <a name="M000240"></a>
+
+        <div class="method-heading">
+          <a href="ProjectModel.src/M000240.html" target="Code" class="method-signature"
+            onclick="popupCode('ProjectModel.src/M000240.html');return false;">
+          <span class="method-name">model_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Simple MVC helper for project-wide models if your project is called
+&#8216;SomeProject&#8217; this will default to:
+</p>
+<pre>
+  SomeProject/src/someproject/models
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000239" class="method-detail">
+        <a name="M000239"></a>
+
+        <div class="method-heading">
+          <a href="ProjectModel.src/M000239.html" target="Code" class="method-signature"
+            onclick="popupCode('ProjectModel.src/M000239.html');return false;">
+          <span class="method-name">model_dir=</span><span class="method-args">(dir)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000238" class="method-detail">
+        <a name="M000238"></a>
+
+        <div class="method-heading">
+          <a href="ProjectModel.src/M000238.html" target="Code" class="method-signature"
+            onclick="popupCode('ProjectModel.src/M000238.html');return false;">
+          <span class="method-name">project_path</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Path to the project directory from which all other paths are created
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000242" class="method-detail">
+        <a name="M000242"></a>
+
+        <div class="method-heading">
+          <a href="ProjectModel.src/M000242.html" target="Code" class="method-signature"
+            onclick="popupCode('ProjectModel.src/M000242.html');return false;">
+          <span class="method-name">view_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Simple MVC helper for project-wide views if your project is called
+&#8216;SomeProject&#8217; this will default to:
+</p>
+<pre>
+  SomeProject/src/someproject/views
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000241" class="method-detail">
+        <a name="M000241"></a>
+
+        <div class="method-heading">
+          <a href="ProjectModel.src/M000241.html" target="Code" class="method-signature"
+            onclick="popupCode('ProjectModel.src/M000241.html');return false;">
+          <span class="method-name">view_dir=</span><span class="method-args">(dir)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

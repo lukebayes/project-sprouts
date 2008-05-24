@@ -1,0 +1,26 @@
+-------------------------
+LIBRARIES
+-------------------------
+
+Libraries are essentially shared code. This code can be packaged in whatever format your compiler can understand. For example, ActionScript compilers can accept text source code or precompiled SWC files while Java compilers can accept text source code or precompiled JAR files.
+
+The code that comprises a library must be posted in a zip archive on a publicly available url.
+Once that has been done, a library gem can be created that contains a 'sprout.spec' file that describes this archive.
+
+We have created a convenience rake task called 'gem_wrap' to create these library gem files.
+
+-------------------------
+To create a new library sprout:
+
+ 1) Copy the library_template.rb file into the 'files' folder
+ 2) Rename it to [yourlibraryname.rb]
+	* Don't worry about our gem naming convention, we'll 
+	  modify the gem name as needed.
+ 3) Open the newly created file and edit it's contents
+ 4) run 'rake yourlibraryname' to build your new gem!
+ 5) You can make your gem available in any of three different ways:
+	a) Create a new rubyforge project and host it there
+	b) Submit your .rb file to projectsprouts@googlegroups.com
+	   so that we can include it in our rubyforge project
+	c) Run a local gem server and make your library available to
+	   as small or large an audience as you wish

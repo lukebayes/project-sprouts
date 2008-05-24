@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<%= xml_edit_warning %>
+<movie width="600" height="450" framerate="24" version="8">
+	<background color="#FFFFFF"/>
+	<frame>
+		<library><% files.each do |file| if(!ignore_file?(file) && !File.directory?(file)) %>
+			<clip id="<%= get_symbol_id(file) %>" import="<%=file%>" /><% end end %>
+		</library>
+	</frame>
+	<frame>
+		<stop />
+	</frame>
+</movie>

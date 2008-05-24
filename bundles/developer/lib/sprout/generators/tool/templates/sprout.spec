@@ -1,0 +1,1 @@
+<%= sprout_spec %>

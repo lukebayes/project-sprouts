@@ -1,0 +1,14 @@
+
+A Sprout Bundle is a collection of Ruby code that supports a particular interest or technology. At the time of this writing, we have two bundles available.
+
+* ActionScript 2 Bundle (link[link:files/bundles/as2/README.html]) which supports ActionScript 2.0 development
+* ActionScript 3 Bundle (link[link:files/bundles/as3/README.html]) which supports ActionScript 3.0, MXML and AIR development
+
+Bundles are the named entry point that the +sprout+ shell tool uses to find project generators[link:files/doc/Generator.html].
+
+Bundles should be packaged and published to the RubyForge gem repository with very specific names as follows:
+
+sprout-#{bundle_name}-bundle where ${bundle_name} is what will be given to the -n parameter of the +sprout+ gem.
+
+The as3 bundle is released as sprout-as3-bundle on RubyForge, but we can simply enter the short name when creating new as3 projects.
+

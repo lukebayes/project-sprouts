@@ -1,0 +1,185 @@
+<testsuites>
+  <testsuite name="AllTests" errors="1" failures="0" tests="93" time="11.711">
+    <testsuite name="nitro.utils.ImageHelperTest" errors="0" failures="0" tests="1" time="0.077">
+      <testcase classname="nitro.utils.ImageHelperTest" name="testInstantiated" time="0.008" />
+    </testsuite>
+    <testsuite name="nitro.net.NitroServiceTest" errors="0" failures="0" tests="1" time="0.064">
+      <testcase classname="nitro.net.NitroServiceTest" name="testInstantiated" time="0.002" />
+    </testsuite>
+
+    <testsuite name="nitro.data.NitroRecordTest" errors="0" failures="0" tests="1" time="0.065">
+      <testcase classname="nitro.data.NitroRecordTest" name="testInstantiated" time="0" />
+    </testsuite>
+    <testsuite name="integration.catalog.CatalogTest" errors="0" failures="0" tests="1" time="1.673">
+      <testcase classname="integration.catalog.CatalogTest" name="testFacade" time="1.475" />
+    </testsuite>
+    <testsuite name="flexmvcs.patterns.command.FlexCommandTest" errors="0" failures="0" tests="6" time="0.151">
+      <testcase classname="flexmvcs.patterns.command.FlexCommandTest" name="testFailureWithMessage" time="0.011" />
+      <testcase classname="flexmvcs.patterns.command.FlexCommandTest" name="testComplete" time="0" />
+
+      <testcase classname="flexmvcs.patterns.command.FlexCommandTest" name="testInstantiated" time="0" />
+      <testcase classname="flexmvcs.patterns.command.FlexCommandTest" name="testAsyncFailureWithMessage" time="0.001" />
+      <testcase classname="flexmvcs.patterns.command.FlexCommandTest" name="testAsyncComplete" time="0.012" />
+      <testcase classname="flexmvcs.patterns.command.FlexCommandTest" name="testFailure" time="0" />
+    </testsuite>
+    <testsuite name="nitro.SocialFacadeTest" errors="0" failures="0" tests="3" time="0.132">
+      <testcase classname="nitro.SocialFacadeTest" name="testServices" time="0.009000000000000001" />
+      <testcase classname="nitro.SocialFacadeTest" name="testProxies" time="0.015" />
+      <testcase classname="nitro.SocialFacadeTest" name="testInstantiated" time="0.017" />
+
+    </testsuite>
+    <testsuite name="nitro.utils.DateHelperTest" errors="1" failures="0" tests="4" time="0.149">
+      <testcase classname="nitro.utils.DateHelperTest" name="testStringToDate" time="0" />
+      <testcase classname="nitro.utils.DateHelperTest" name="testInstantiated" time="0" />
+      <testcase classname="nitro.utils.DateHelperTest" name="testError" time="0.001">
+        <error type="TypeError"><![CDATA[TypeError: Error #1010: A term is undefined and has no properties.
+	at nitro.utils::DateHelperTest/testError()[/home/cruise/project/projects/nitro-client/test/src/nitro/utils/DateHelperTest.as:37]
+	at asunit.framework::TestCase/runMethod()[/home/cruise/project/projects/nitro-client/test/lib/asunit/asunit/framework/TestCase.as:246]
+	at asunit.framework::TestCase/runBare()[/home/cruise/project/projects/nitro-client/test/lib/asunit/asunit/framework/TestCase.as:212]
+	at Function/http://adobe.com/AS3/2006/builtin::apply()
+	at <anonymous>()
+	at SetIntervalTimer/onTimer()
+	at flash.utils::Timer/_timerDispatch()
+	at flash.utils::Timer/tick()]]></error>
+
+      </testcase>
+    </testsuite>
+    <testsuite name="nitro.view.ModulesMediatorTest" errors="0" failures="0" tests="7" time="0.131">
+      <testcase classname="nitro.view.ModulesMediatorTest" name="testModuleDescriptionsUpdateView" time="0.001" />
+      <testcase classname="nitro.view.ModulesMediatorTest" name="testSelectedAnchorUpdatesView" time="0.002" />
+      <testcase classname="nitro.view.ModulesMediatorTest" name="testDispatchNavigateNotification" time="0.001" />
+      <testcase classname="nitro.view.ModulesMediatorTest" name="testBubblingSetSelectedAnchor" time="0.002" />
+      <testcase classname="nitro.view.ModulesMediatorTest" name="testDefaultValues" time="0.001" />
+      <testcase classname="nitro.view.ModulesMediatorTest" name="testInstantiated" time="0.001" />
+
+      <testcase classname="nitro.view.ModulesMediatorTest" name="testSetIsBusy" time="0.001" />
+    </testsuite>
+    <testsuite name="nitro.data.ActiveRecordTest" errors="0" failures="0" tests="5" time="0.124">
+      <testcase classname="nitro.data.ActiveRecordTest" name="testToDTO" time="0.001" />
+      <testcase classname="nitro.data.ActiveRecordTest" name="testLoad" time="0.001" />
+      <testcase classname="nitro.data.ActiveRecordTest" name="testInstantiated" time="0.001" />
+      <testcase classname="nitro.data.ActiveRecordTest" name="testSave" time="0.012" />
+      <testcase classname="nitro.data.ActiveRecordTest" name="testFromDTO" time="0" />
+    </testsuite>
+
+    <testsuite name="flexmvcs.patterns.facade.FlexFacadeTest" errors="0" failures="0" tests="5" time="0.442">
+      <testcase classname="flexmvcs.patterns.facade.FlexFacadeTest" name="testProxy" time="0.05" />
+      <testcase classname="flexmvcs.patterns.facade.FlexFacadeTest" name="testMediator" time="0.005" />
+      <testcase classname="flexmvcs.patterns.facade.FlexFacadeTest" name="testService" time="0.003" />
+      <testcase classname="flexmvcs.patterns.facade.FlexFacadeTest" name="testCompositeFacade" time="0.003" />
+      <testcase classname="flexmvcs.patterns.facade.FlexFacadeTest" name="testCommand" time="0.004" />
+    </testsuite>
+    <testsuite name="nitro.data.MyItemsRecordTest" errors="0" failures="0" tests="2" time="0.084">
+      <testcase classname="nitro.data.MyItemsRecordTest" name="testAddItem" time="0.003" />
+
+      <testcase classname="nitro.data.MyItemsRecordTest" name="testInstantiated" time="0.001" />
+    </testsuite>
+    <testsuite name="nitro.model.ModulesProxyTest" errors="0" failures="0" tests="6" time="0.136">
+      <testcase classname="nitro.model.ModulesProxyTest" name="testSetSelectedAnchorOnlyModuleId" time="0.002" />
+      <testcase classname="nitro.model.ModulesProxyTest" name="testDefaultSelectedModule" time="0" />
+      <testcase classname="nitro.model.ModulesProxyTest" name="testSetSelectedAnchorFull" time="0.001" />
+      <testcase classname="nitro.model.ModulesProxyTest" name="testInstantiated" time="0.001" />
+      <testcase classname="nitro.model.ModulesProxyTest" name="testDefaultSelectedModuleAndAnchorWithNewCollection" time="0.001" />
+      <testcase classname="nitro.model.ModulesProxyTest" name="testDefaultState" time="0" />
+
+    </testsuite>
+    <testsuite name="flexmvcs.patterns.command.CompositeCommandTest" errors="0" failures="0" tests="6" time="0.304">
+      <testcase classname="flexmvcs.patterns.command.CompositeCommandTest" name="testDeepComposite" time="0.112" />
+      <testcase classname="flexmvcs.patterns.command.CompositeCommandTest" name="testSimple" time="0.036000000000000004" />
+      <testcase classname="flexmvcs.patterns.command.CompositeCommandTest" name="testInstantiated" time="0" />
+      <testcase classname="flexmvcs.patterns.command.CompositeCommandTest" name="testConfiguredCommand" time="0.024" />
+      <testcase classname="flexmvcs.patterns.command.CompositeCommandTest" name="testStopOnFailure" time="0.025" />
+      <testcase classname="flexmvcs.patterns.command.CompositeCommandTest" name="testFirstFailure" time="0.036000000000000004" />
+    </testsuite>
+
+    <testsuite name="nitro.net.ChatServiceTest" errors="0" failures="0" tests="2" time="0.088">
+      <testcase classname="nitro.net.ChatServiceTest" name="testSendMessage" time="0.064" />
+      <testcase classname="nitro.net.ChatServiceTest" name="testInstantiated" time="0" />
+    </testsuite>
+    <testsuite name="nitro.view.components.ModulesViewTest" errors="0" failures="0" tests="5" time="0.912">
+      <testcase classname="nitro.view.components.ModulesViewTest" name="testSelectedModuleDescriptionChange" time="0.191" />
+      <testcase classname="nitro.view.components.ModulesViewTest" name="testIsBusy" time="0.108" />
+      <testcase classname="nitro.view.components.ModulesViewTest" name="testInstantiated" time="0.155" />
+      <testcase classname="nitro.view.components.ModulesViewTest" name="testViewStackBinding" time="0.154" />
+
+      <testcase classname="nitro.view.components.ModulesViewTest" name="testViewAnchorBinding" time="0.106" />
+    </testsuite>
+    <testsuite name="integration.games.GamesTest" errors="0" failures="0" tests="1" time="0.157">
+      <testcase classname="integration.games.GamesTest" name="testView" time="0.063" />
+    </testsuite>
+    <testsuite name="nitro.skin.FormButtonSkinTest" errors="0" failures="0" tests="1" time="0.076">
+      <testcase classname="nitro.skin.FormButtonSkinTest" name="testInstantiated" time="0.005" />
+    </testsuite>
+    <testsuite name="nitro.display.AvatarSavingTest" errors="0" failures="0" tests="0" time="0" />
+
+    <testsuite name="nitro.NitroFacadeTest" errors="0" failures="0" tests="10" time="0.483">
+      <testcase classname="nitro.NitroFacadeTest" name="testRegisterService" time="0.001" />
+      <testcase classname="nitro.NitroFacadeTest" name="testRetrieveService" time="0" />
+      <testcase classname="nitro.NitroFacadeTest" name="testInstantiated" time="0" />
+      <testcase classname="nitro.NitroFacadeTest" name="testRemoveService" time="0" />
+      <testcase classname="nitro.NitroFacadeTest" name="testRegisterServiceWithNullId" time="0.001" />
+      <testcase classname="nitro.NitroFacadeTest" name="testRegisterIServiceClientProxy" time="0.001" />
+      <testcase classname="nitro.NitroFacadeTest" name="testRegisterMultipleServices" time="0.001" />
+      <testcase classname="nitro.NitroFacadeTest" name="testRetrieveUnknownService" time="0.001" />
+
+      <testcase classname="nitro.NitroFacadeTest" name="testServiceFacadeClient" time="0" />
+      <testcase classname="nitro.NitroFacadeTest" name="testRegisterServiceWithDuplicate" time="0" />
+    </testsuite>
+    <testsuite name="nitro.controller.ConfigureNitroTest" errors="0" failures="0" tests="1" time="0.117">
+      <testcase classname="nitro.controller.ConfigureNitroTest" name="testExecute" time="0.001" />
+    </testsuite>
+    <testsuite name="nitro.controller.NavigateToLocationTest" errors="0" failures="0" tests="2" time="0.083">
+      <testcase classname="nitro.controller.NavigateToLocationTest" name="testNavigate" time="0.003" />
+      <testcase classname="nitro.controller.NavigateToLocationTest" name="testNavigateToUrl" time="0.001" />
+
+    </testsuite>
+    <testsuite name="nitro.utils.StringHelperTest" errors="0" failures="0" tests="1" time="0.089">
+      <testcase classname="nitro.utils.StringHelperTest" name="testNumberToString" time="0.001" />
+    </testsuite>
+    <testsuite name="integration.catalog.AvatarCatalogTest" errors="0" failures="0" tests="3" time="4.726">
+      <testcase classname="integration.catalog.AvatarCatalogTest" name="testColorPickersDefaultConfiguration" time="1.7850000000000001" />
+      <testcase classname="integration.catalog.AvatarCatalogTest" name="testFacade" time="1.326" />
+      <testcase classname="integration.catalog.AvatarCatalogTest" name="testView" time="1.357" />
+    </testsuite>
+
+    <testsuite name="nitro.display.AvatarViewTest" errors="0" failures="0" tests="1" time="0.256">
+      <testcase classname="nitro.display.AvatarViewTest" name="testConfiguration" time="0.191" />
+    </testsuite>
+    <testsuite name="nitro.display.ColorSelectorTest" errors="0" failures="0" tests="2" time="0.225">
+      <testcase classname="nitro.display.ColorSelectorTest" name="testInstantiated" time="0.015" />
+      <testcase classname="nitro.display.ColorSelectorTest" name="testDefaultLayout" time="0.015" />
+    </testsuite>
+    <testsuite name="nitro.chat.ChatModuleTest" errors="0" failures="0" tests="1" time="0.066">
+      <testcase classname="nitro.chat.ChatModuleTest" name="testInstantiated" time="0.012" />
+
+    </testsuite>
+    <testsuite name="nitro.display.SelectableCanvasTest" errors="0" failures="0" tests="4" time="0.46">
+      <testcase classname="nitro.display.SelectableCanvasTest" name="testAddItem" time="0.004" />
+      <testcase classname="nitro.display.SelectableCanvasTest" name="testListInteraction" time="0.003" />
+      <testcase classname="nitro.display.SelectableCanvasTest" name="testCollectionChangeHandler" time="0.125" />
+      <testcase classname="nitro.display.SelectableCanvasTest" name="testInstantiated" time="0.004" />
+    </testsuite>
+    <testsuite name="nitro.controller.LoginTest" errors="0" failures="0" tests="1" time="0.066">
+      <testcase classname="nitro.controller.LoginTest" name="testInstantiated" time="0" />
+
+    </testsuite>
+    <testsuite name="nitro.display.NitroTabBarTest" errors="0" failures="0" tests="1" time="0.069">
+      <testcase classname="nitro.display.NitroTabBarTest" name="testInstantiated" time="0.002" />
+    </testsuite>
+    <testsuite name="nitro.display.BetterTabBarTest" errors="0" failures="0" tests="2" time="0.16">
+      <testcase classname="nitro.display.BetterTabBarTest" name="testSetSelectedItem" time="0.012" />
+      <testcase classname="nitro.display.BetterTabBarTest" name="testInstantiated" time="0.005" />
+    </testsuite>
+    <testsuite name="nitro.avatarcatalog.data.AvatarCatalogRecordTest" errors="0" failures="0" tests="7" time="0.139">
+
+      <testcase classname="nitro.avatarcatalog.data.AvatarCatalogRecordTest" name="testGetCatetoryItems" time="0.003" />
+      <testcase classname="nitro.avatarcatalog.data.AvatarCatalogRecordTest" name="testDefaultItemsLength" time="0" />
+      <testcase classname="nitro.avatarcatalog.data.AvatarCatalogRecordTest" name="testCategoryLength" time="0.002" />
+      <testcase classname="nitro.avatarcatalog.data.AvatarCatalogRecordTest" name="testInstantiated" time="0" />
+      <testcase classname="nitro.avatarcatalog.data.AvatarCatalogRecordTest" name="testFromRemoteDTO" time="0.002" />
+      <testcase classname="nitro.avatarcatalog.data.AvatarCatalogRecordTest" name="testGetCategoryById" time="0.003" />
+      <testcase classname="nitro.avatarcatalog.data.AvatarCatalogRecordTest" name="testCatalogItem" time="0.002" />
+    </testsuite>
+  </testsuite>
+
+</testsuites>

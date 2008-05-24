@@ -1,0 +1,13 @@
+
+gem_wrap 'sprout-<%= tool_name %>-tool' do |t|
+  t.version       = '<%= gem_version %>'
+  t.summary       = 'ActionScript 3.0 API for Flickr'
+  t.author        = 'Charles Bihis, Mike Potter, Darron Schall and Mike Chambers'
+  t.homepage      = 'http://actionscript3libraries.riaforge.org/'
+  t.sprout_spec   =<<EOF
+- !ruby/object:Sprout::RemoteFileTarget 
+  platform: universal
+  url: http://as3flickrlib.googlecode.com/files/flickr-.87.zip
+  archive_path: flickr-.87/src
+EOF
+end

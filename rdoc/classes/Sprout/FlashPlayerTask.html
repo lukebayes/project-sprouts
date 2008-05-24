@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Sprout::FlashPlayerTask</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Sprout::FlashPlayerTask</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/bundles/flashplayer/lib/sprout/tasks/flashplayer_task_rb.html">
+                bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Rake::Task
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The <a href="FlashPlayerTask.html">FlashPlayerTask</a> will download,
+unpack, configure and launch the debug Flash Player for OS X, Windows and
+Linux.
+</p>
+<p>
+Simply send the rake task the <tt><a
+href="FlashPlayerTask.html#M000196">swf</a></tt> you&#8216;d like to launch
+either indirectly as a rake dependency or directly as the <tt><a
+href="FlashPlayerTask.html#M000196">swf</a></tt> property of this task.
+</p>
+<pre>
+  flashplayer :run =&gt; 'bin/SomeProject.swf'
+</pre>
+<p>
+Or you could:
+</p>
+<pre>
+  flashplayer :run do |t|
+    t.swf = 'bin/SomeProject.swf'
+  end
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000207">close</a>&nbsp;&nbsp;
+      <a href="#M000191">define_task</a>&nbsp;&nbsp;
+      <a href="#M000198">do_not_focus</a>&nbsp;&nbsp;
+      <a href="#M000197">do_not_focus=</a>&nbsp;&nbsp;
+      <a href="#M000213">examine_test_result</a>&nbsp;&nbsp;
+      <a href="#M000206">execute</a>&nbsp;&nbsp;
+      <a href="#M000209">focus_player_on_mac</a>&nbsp;&nbsp;
+      <a href="#M000202">gem_name</a>&nbsp;&nbsp;
+      <a href="#M000201">gem_name=</a>&nbsp;&nbsp;
+      <a href="#M000200">gem_version</a>&nbsp;&nbsp;
+      <a href="#M000199">gem_version=</a>&nbsp;&nbsp;
+      <a href="#M000193">home</a>&nbsp;&nbsp;
+      <a href="#M000194">home_paths</a>&nbsp;&nbsp;
+      <a href="#M000190">new</a>&nbsp;&nbsp;
+      <a href="#M000211">parse_test_result</a>&nbsp;&nbsp;
+      <a href="#M000210">read_log</a>&nbsp;&nbsp;
+      <a href="#M000208">run</a>&nbsp;&nbsp;
+      <a href="#M000196">swf</a>&nbsp;&nbsp;
+      <a href="#M000195">swf=</a>&nbsp;&nbsp;
+      <a href="#M000205">test_result</a>&nbsp;&nbsp;
+      <a href="#M000204">test_result_file</a>&nbsp;&nbsp;
+      <a href="#M000203">test_result_file=</a>&nbsp;&nbsp;
+      <a href="#M000192">trust</a>&nbsp;&nbsp;
+      <a href="#M000212">write_test_result</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000191" class="method-detail">
+        <a name="M000191"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000191.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000191.html');return false;">
+          <span class="method-name">define_task</span><span class="method-args">(args) {|t if block_given?| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000193" class="method-detail">
+        <a name="M000193"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000193.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000193.html');return false;">
+          <span class="method-name">home</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Local system path to where the Flash Player stores trace output logs and <a
+href="FlashPlayerTask.html#M000192">trust</a> files
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000194" class="method-detail">
+        <a name="M000194"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000194.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000194.html');return false;">
+          <span class="method-name">home_paths</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Collection of the potential locations of the Flash Player Home For each
+supported Platform, the first existing location will be used.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000190" class="method-detail">
+        <a name="M000190"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000190.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000190.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(task_name, app)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000192" class="method-detail">
+        <a name="M000192"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000192.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000192.html');return false;">
+          <span class="method-name">trust</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Local system path to the Flash Player Trust file
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000207" class="method-detail">
+        <a name="M000207"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000207.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000207.html');return false;">
+          <span class="method-name">close</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000198" class="method-detail">
+        <a name="M000198"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000198.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000198.html');return false;">
+          <span class="method-name">do_not_focus</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000197" class="method-detail">
+        <a name="M000197"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000197.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000197.html');return false;">
+          <span class="method-name">do_not_focus=</span><span class="method-args">(focus)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+By default, the Flash Player should be given focus after being launched.
+Unfortunately, this doesn&#8216;t work properly on OS X, so we needed to do
+some hackery in order to make it happen. This in turn can lead to multiple
+instances of the Player being instantiated. In the case of running a test
+harness, this is absolutely not desirable, so we had expose a parameter
+that allows us to prevent auto-focus of the player.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000213" class="method-detail">
+        <a name="M000213"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000213.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000213.html');return false;">
+          <span class="method-name">examine_test_result</span><span class="method-args">(result)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000206" class="method-detail">
+        <a name="M000206"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000206.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000206.html');return false;">
+          <span class="method-name">execute</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000209" class="method-detail">
+        <a name="M000209"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000209.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000209.html');return false;">
+          <span class="method-name">focus_player_on_mac</span><span class="method-args">(out, exe)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000202" class="method-detail">
+        <a name="M000202"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000202.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000202.html');return false;">
+          <span class="method-name">gem_name</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000201" class="method-detail">
+        <a name="M000201"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000201.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000201.html');return false;">
+          <span class="method-name">gem_name=</span><span class="method-args">(name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Full name of the sprout tool gem that this tool task will use. This
+defaults to sprout-flashplayer-tool
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000200" class="method-detail">
+        <a name="M000200"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000200.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000200.html');return false;">
+          <span class="method-name">gem_version</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000199" class="method-detail">
+        <a name="M000199"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000199.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000199.html');return false;">
+          <span class="method-name">gem_version=</span><span class="method-args">(version)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The gem version of the sprout-flashplayer-tool RubyGem to download.
+</p>
+<p>
+It&#8216;s important to note that this version number will differ slightly
+from the actual player version in that the final revision (the last of
+three numbers), is the gem version, while the first two describe the player
+version being downloaded. The exact gem version that you would like the <a
+href="ToolTask.html">ToolTask</a> to <a
+href="FlashPlayerTask.html#M000206">execute</a>. By default this value
+should be nil and will download the latest version of the gem that is
+available unless there is a version already installed on your system.
+</p>
+<p>
+This attribute could be an easy way to update your local gem to the latest
+version without leaving your build file, but it&#8216;s primary purpose is
+to allow you to specify very specific versions of the tools that your
+project depends on. This way your team can rest assured that they are all
+working with the same tools.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000211" class="method-detail">
+        <a name="M000211"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000211.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000211.html');return false;">
+          <span class="method-name">parse_test_result</span><span class="method-args">(line, thread)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if inside of a test result
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000210" class="method-detail">
+        <a name="M000210"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000210.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000210.html');return false;">
+          <span class="method-name">read_log</span><span class="method-args">(thread, log_file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000208" class="method-detail">
+        <a name="M000208"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000208.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000208.html');return false;">
+          <span class="method-name">run</span><span class="method-args">(tool, gem_version, swf)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000196" class="method-detail">
+        <a name="M000196"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000196.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000196.html');return false;">
+          <span class="method-name">swf</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000195" class="method-detail">
+        <a name="M000195"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000195.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000195.html');return false;">
+          <span class="method-name">swf=</span><span class="method-args">(swf)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The <a href="FlashPlayerTask.html#M000196">swf</a> parameter can be set
+explicitly in the block sent to this task as in:
+</p>
+<pre>
+  flashplayer :run do |t|
+    t.swf = 'bin/SomeProject.swf'
+  end
+</pre>
+<p>
+Or it can be set implicitly as a rake prerequisite as follows:
+</p>
+<pre>
+  flashplayer :run =&gt; 'bin/SomeProject' do |t|
+  end
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000205" class="method-detail">
+        <a name="M000205"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000205.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000205.html');return false;">
+          <span class="method-name">test_result</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000204" class="method-detail">
+        <a name="M000204"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000204.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000204.html');return false;">
+          <span class="method-name">test_result_file</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000203" class="method-detail">
+        <a name="M000203"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000203.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000203.html');return false;">
+          <span class="method-name">test_result_file=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The File where JUnit test results should be written. This value defaults to
+&#8216;AsUnitResults.xml&#8216;
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000212" class="method-detail">
+        <a name="M000212"></a>
+
+        <div class="method-heading">
+          <a href="FlashPlayerTask.src/M000212.html" target="Code" class="method-signature"
+            onclick="popupCode('FlashPlayerTask.src/M000212.html');return false;">
+          <span class="method-name">write_test_result</span><span class="method-args">(result)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

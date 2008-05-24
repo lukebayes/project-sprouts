@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FlexRunner 
+	xmlns="asunit.textui.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	creationComplete="runTests()"
+	>
+    <mx:Script>
+    	<![CDATA[
+			import sprout.SomeTest;
+    		import asunit.textui.TestRunner;
+
+			public function runTests():void {
+				start(SomeTest);
+			}
+    	]]>
+    </mx:Script>
+</FlexRunner>

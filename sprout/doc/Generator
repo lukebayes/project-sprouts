@@ -1,0 +1,35 @@
+A SproutGenerator is a set of specifically configured folders and files that have been placed in a particular, expected location on disk.
+The Sprout generator feature is a minor modification to the standard Rails generators.
+
+Sprouts modifies the underlying Rails Generator implementation mainly by changing where it looks for available, named generators. This was an importat change that will help prevent Sprout projects from clobbering generators that are intended for Rails support and vice versa. We also have a slightly different requirement in that we need support for multiple languages or technologies while Rails is able to simply expect that it's generating Ruby code. 
+
+Generators can exist in multiple different locations on disk, to learn how to create a new generator, see the Rails documentation[http://wiki.rubyonrails.org/rails/pages/UnderstandingGenerators].
+
+To use a new or existing generator, simply enter it's name from within a project after calling
+  script/generate
+
+When a string is passed to the generate command, sprouts will look in the following locations in the following order with 'name' being the generator name that you have requested:
+* #{project_path}/generators/#{name}
+* #{project_path}/script/generators/#{name}
+* #{project_path}/vendor/generators/#{name}
+* #{Sprout::Sprout.sprout_cache}/generators/#{Sprout::ProjectModel.language}/#{name}
+* All Rubygems with a name ending with '-bundle' and with contents that match '/lib/sprout/**/generators/[name]'
+
+This means that when you have a new project and enter:
+  script/generate foo
+
+We will first look in your project for, 'generators/foo', 'script/generators/foo' and 'vendor/generators/foo'.
+
+Assuming no viable generator is found in your project, we will then look in your Sprout::Sprout sprout_cache for a folder named 'generators/foo'.
+
+Assuming no viable generator is found in your system wide path, we will begin looking inside of installed Ruby Gems. The expected gem will have a file at:
+
+  lib/sprout/**/generators/foo/foo_generator.rb
+
+If no named generator is found in any of these places an exception will be encountered.
+
+Sprouts generators can be initiated from one of two places, either from a project directory with script/generate or directly from the Sprout gem.
+
+When executing generators directly from the Sprout gem, you must send in a bundle base name and know that only 'project' generators found in that bundle will be executed.
+
+When executing generators from a project, the Sprout::ProjectModel language parameter is used to determine the bundle (if necessary), and then the Generator name is used to execute any found generator.

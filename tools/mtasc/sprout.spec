@@ -1,0 +1,15 @@
+- !ruby/object:Sprout::RemoteFileTarget 
+  platform: macosx
+  url: http://projectsprouts.googlecode.com/files/mtasc-1.13.b-osx.zip
+  archive_path: mtasc-1.13-osx/mtasc
+  md5: c50d411162332f457e058796d980e087
+- !ruby/object:Sprout::RemoteFileTarget 
+  platform: win32
+  url: http://www.mtasc.org/zip/mtasc-1.13.zip
+  archive_path: mtasc-1.13/mtasc.exe
+  md5: 5fac13c426612816dc967d49e3d8b4d0
+- !ruby/object:Sprout::RemoteFileTarget 
+  platform: linux
+  url: http://www.mtasc.org/zip/mtasc-1.12-linux.tgz
+  archive_path: mtasc
+  md5: ff79307111b023b108c46e23c99bea08

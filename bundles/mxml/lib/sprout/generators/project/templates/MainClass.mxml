@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	backgroundImage=""
+	backgroundColor="#FFFFFF"
+	creationComplete="creationCompleteHandler(event)"
+	>
+	<mx:Script>
+		<![CDATA[
+		
+		private function creationCompleteHandler(event:Event):void {
+			trace(">> CreationComplete");
+		}
+		]]>
+	</mx:Script>
+	
+	<!-- Import StyleSheet -->
+	<mx:Style source="../css/<%= project_name %>.css" />
+	<mx:Container styleName="SproutLogo" width="100%" height="100%" />
+</mx:Application>

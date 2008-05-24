@@ -1,0 +1,4 @@
+!ruby/object:Sprout::RemoteFileTarget 
+url: http://swfmill.org/releases/swfmill-0.2.12-macosx.tar.gz
+archive_path: swfmill-0.2.12-macosx/swfmill
+md5: 9c708c0fc4977f774a70671e06420e52

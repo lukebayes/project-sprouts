@@ -1,0 +1,47 @@
+
+= ActionScript 2.0 Bundle
+
+The ActionScript 2 Bundle provides support for ActionScript 2.0 project and class generators as well as Rake build tasks.
+
+You can install this bundle and run it's project generator as follows:
+
+  sprout -n as2 SomeProject
+
+Once you have generated a new project, using a terminal, you can change to the newly created directory
+and use script/generate to create a variety of other features.
+
+To generate a new ActionScript class, test case and test suite, simply run the following from the
+same directory as your rakefile.
+
+  script/generate class [fully-qualified-class-name]
+
+For example:
+
+  script/generate class utils.MathUtil
+
+While you can change where classes are created by modifying your ProjectModel, 
+if the default values are used, the following statements should be correct:
+
+The class will be created in:
+  src/utils/MathUtil.as
+The test case will will be created in:
+  test/utils/MathUtilTest.as
+The test suite will be created or updated at:
+  test/AllTests.as
+
+If the class name passed into this generator ends with 'Test', only a test case
+and test suite will be generated in the test package and no class will be generated.
+
+You can also only create the test case and test suite by calling it's generator directly as follows:
+
+  script/generate test utils.MathUtilTest
+
+You can update only your test suite by simply initiating the suite generator as follows:
+
+  script/generate suite
+
+= Available Rake Tasks
+
+* Sprout::MTASCTask
+* Sprout::SWFMillInputTask
+* Sprout::SWFMillTask

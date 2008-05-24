@@ -1,0 +1,5 @@
+sprout 'flashplayer'
+require 'sprout/tasks/flashplayer_task'
+require 'sprout/tasks/swfmill_input_task'
+require 'sprout/tasks/swfmill_task'
+require 'sprout/tasks/mtasc_task'
