@@ -5,6 +5,9 @@ module Sprout #:nodoc:
   end
 
   # The FDBTask provides a procedural rake front end to the FDB command line tool
+  # 
+  # Here is a decent tutorial on using FDB with SWF or HTML content:
+  # http://installingcats.wordpress.com/tag/adobe-flex/
   class FDBTask < ToolTask
     # The SWF file to debug.
     attr_accessor :swf

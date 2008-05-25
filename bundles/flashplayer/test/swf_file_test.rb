@@ -17,7 +17,8 @@ class SWFFileTest <  Test::Unit::TestCase
   
   def test_instantiated
     Sprout::SWFFile.new @swf do |swf|
-      assert swf.debug?
+      assert swf.compressed?, "Should be compressed"
+      assert_equal(9, swf.version)
     end
   end
 
