@@ -20,40 +20,40 @@ class FDBTest <  Test::Unit::TestCase
     assert debugger.is_a?(Sprout::FDBTask)
   end
   
-  def test_simple_buffer
+  def create_buffer(str=nil)
     process = MockProcess.new
     output = MockProcess.new
     buffer = Sprout::FDBBuffer.new(process, output)
-    process.print "Adobe"
+
+    process.print str unless str.nil?
     sleep(0.2)
-    assert_equal("Adobe", output)
+
+    return [process, output, buffer]
+  end
+  
+  def test_simple_buffer
+    str = "Adobe"
+    process, output, buffer = create_buffer(str)
+    assert_equal(str, output)
   end
 
   def test_fdb_buffer
-    process = MockProcess.new
-    output = MockProcess.new
-    buffer = Sprout::FDBBuffer.new(process, output)
-    
     str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
     str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
     str << "(fdb) "
-
-    process.print str
     
-    sleep(0.2)
+    process, output, buffer = create_buffer(str)
     assert_equal(str, output)
   end
   
   def test_fdb_buffer_wait_for_prompt
-    process = MockProcess.new
-    output = MockProcess.new
-    buffer = Sprout::FDBBuffer.new(process, output)
-    
     str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
     str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
     str << "(fdb) "
 
+    process, output, buffer = create_buffer
     process.print str
+
     timeout 60 do
       buffer.wait_for_prompt
     end
@@ -86,7 +86,7 @@ class MockProcess < String
   def readpartial(count)
     if(size == 0)
       sleep(0.01)
-      return readpartial count
+      return readpartial(count)
     end
     
     return self.slice!(0).chr
