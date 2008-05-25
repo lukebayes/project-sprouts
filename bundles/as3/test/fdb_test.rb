@@ -21,7 +21,7 @@ class FDBTest <  Test::Unit::TestCase
   end
   
   def create_buffer(str=nil)
-    process = MockProcess.new
+    process = MockProces.new
     output = MockProcess.new
     buffer = Sprout::FDBBuffer.new(process, output)
 
@@ -59,6 +59,7 @@ class FDBTest <  Test::Unit::TestCase
     end
   end
 
+=begin
   def test_launch_player
     debugger = fdb :debug do |t|
       t.file = @swf
@@ -77,6 +78,7 @@ class FDBTest <  Test::Unit::TestCase
     
     debugger.invoke
   end
+=end
 
 end
 

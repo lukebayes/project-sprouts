@@ -2,9 +2,9 @@
 require 'sprout'
 # Optionally load gems from the leading edge:
 # set_sources 'http://gems.projectsprouts.org'
-#$:.push( File.dirname(__FILE__) + '/../../lib' )
-sprout 'as3'
-#require 'sprout/as3_tasks'
+$:.push( File.dirname(__FILE__) + '/../../lib' )
+#sprout 'as3'
+require 'sprout/as3_tasks'
 
 # Configure the Project Model
 project_model :model do |m|
@@ -13,21 +13,16 @@ project_model :model do |m|
   m.width             = 800
   m.height            = 600
   m.language          = 'mxml'
-  m.compiler_gem      = 'sprout-flex3sdk-tool'
   m.libraries         << :corelib
 end
 
 library :corelib
 
-task :foo do 
-  puts "FOO EXECUTED"
-end
-
 desc 'Compile and debug the application'
-debug :debug => [:foo]
+debug :debug
 
 desc 'Compile run the test harness'
-asunit :test
+unit :test
 
 desc 'Compile the optimized deployment'
 deploy :deploy

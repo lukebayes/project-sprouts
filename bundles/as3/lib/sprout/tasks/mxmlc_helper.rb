@@ -82,7 +82,12 @@ module Sprout
     end
     
     def define_player
-      flashplayer player_task_name => output_file
+      fdb player_task_name do |t|
+        t.file = output_file
+        t.run
+        t.continue
+      end
+#      flashplayer player_task_name => output_file
     end
     
     def define_outer_task
@@ -111,7 +116,7 @@ module Sprout
     end
     
     def player_task_name
-      return "run_#{create_output}"
+      return "run_#{output_file}"
     end
   
     def create_input

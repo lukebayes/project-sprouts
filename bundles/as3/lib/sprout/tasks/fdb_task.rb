@@ -28,8 +28,7 @@ module Sprout #:nodoc:
     end
     
     def execute(*args)
-      debugger = create_process
-      buffer = FDBBuffer.new(debugger, stdout)
+      buffer = FDBBuffer.new(get_executable, stdout)
       buffer.wait_for_prompt
 
       @queue.each do |command|
@@ -40,16 +39,9 @@ module Sprout #:nodoc:
       self
     end
     
-    def enter_interactive_mode(debugger)
-      puts ">> Entering Interactive Debugger Mode, type 'help' for more info"
-      execute_command(debugger, $stdin.gets)
-      enter_interactive_mode(debugger)
-    end
-    
-    def create_process
+    def get_executable
       exe = Sprout.get_executable(gem_name, gem_path, gem_version)
-      tool = User.clean_path(exe)
-      return ProcessRunner.new("#{tool}")
+      User.clean_path(exe)
     end
     
     def command_queue
@@ -133,6 +125,7 @@ module Sprout #:nodoc:
     
     # Specify application to be debugged.
     def file=(file)
+      @prerequisites << file
       @queue << "file #{file}"
     end
     
@@ -296,16 +289,17 @@ module Sprout #:nodoc:
   # A buffer that provides clean blocking support for the fdb command shell
   class FDBBuffer
     PLAYER_TERMINATED = 'Player session terminated'
+    EXIT_PROMPT = 'The program is running.  Exit anyway? (y or n)'
     PROMPT = '(fdb) '
     QUIT = 'quit'
     
     # The constructor expects a buffered input and output
-    def initialize(input, output, user_input=nil)
-      @input = input
+    def initialize(exe, output, user_input=nil)
       @output = output
       @user_input = user_input
       @prompted = false
-      listen
+      @faulted = false
+      listen exe
     end
     
     def user_input
@@ -313,8 +307,10 @@ module Sprout #:nodoc:
     end
     
     # Listen for messages from the input process
-    def listen
+    def listen(exe)
+      @input = nil
       @listener = Thread.new do
+        @input = ProcessRunner.new("#{exe}")
 
         def puts(msg)
           $stdout.puts msg
@@ -326,20 +322,26 @@ module Sprout #:nodoc:
           if(char == "\n")
             line = ''
           end
-          char = @input.readpartial 1
+          begin
+            char = @input.readpartial 1
+          rescue EOFError => e
+            puts ">> Exiting Now!"
+            break
+          end
           @output.print char
+          @output.flush
           line << char
           if(line == PROMPT)
-            @output.flush
             @prompted = true
             line = ''
           elsif(line == PLAYER_TERMINATED)
             puts ""
             puts "Exiting Now!"
-            exit
+            break
           end
         end
       end
+      
     end
 
     # Block for the life of the input process
@@ -347,17 +349,16 @@ module Sprout #:nodoc:
       puts ">> Entering FDB interactive mode, type 'help' for more info."
       print PROMPT
       $stdout.flush
-      
-      looping = true
-      while looping do
-        msg = user_input.gets
-        if(msg.chomp! == QUIT)
-          looping = false
-        else
+
+      Thread.new do
+        while true do
+          msg = user_input.gets.chomp!
           @input.puts msg
           wait_for_prompt
         end
       end
+
+      @listener.join
     end
     
     # Block until prompted returns true
