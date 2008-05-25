@@ -18,6 +18,13 @@ end
 
 library :corelib
 
+desc 'Compile and debug the application in a browser'
+fdb :html do |t|
+  t.file = 'bin/JSonExample.html'
+  t.run
+  t.continue
+end
+
 desc 'Compile and debug the application'
 debug :debug
 
