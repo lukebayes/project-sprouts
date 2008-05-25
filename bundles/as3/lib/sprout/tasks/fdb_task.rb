@@ -28,6 +28,7 @@ module Sprout #:nodoc:
     end
     
     def execute(*args)
+      # TODO: First check the SWF file to ensure that debugging is enabled!
       buffer = FDBBuffer.new(get_executable, stdout)
       buffer.wait_for_prompt
 
