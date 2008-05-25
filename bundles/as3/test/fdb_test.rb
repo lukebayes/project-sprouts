@@ -65,8 +65,8 @@ class FDBTest <  Test::Unit::TestCase
       t.file = @swf
       t.run
       t.continue
-      t.pwd
 #      t.info_sources
+#      t.pwd
 #      t.break = "SomeProject.as#1"
 #      t.continue
 #      t.info

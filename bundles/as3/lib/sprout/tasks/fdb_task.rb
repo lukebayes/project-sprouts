@@ -18,46 +18,26 @@ module Sprout #:nodoc:
       self
     end
     
+    def stdout=(out)
+      @stdout = out
+    end
+    
+    def stdout
+      @stdout ||= $stdout
+    end
+    
     def execute(*args)
       debugger = create_process
-      get_prompt(debugger)
-      @queue.each do |command|
-        execute_command(debugger, command)
-      end
-
-      enter_interactive_mode(debugger)
+      buffer = FDBBuffer.new(debugger, stdout)
       
-      self
-    end
-    
-    def execute_command(debugger, command=nil)
-      debugger.puts command
-      puts command
-      if(command == "continue")
-        puts ">> RUNNING SWF NOW"
-      else
-        get_prompt(debugger)
+      @queue.each do |command|
+        buffer.wait_for_prompt
+        buffer.puts command
       end
-    end
-    
-    def get_prompt(debugger)
-      char = debugger.readpartial 1
-      line = ''
+      
+      buffer.join
 
-      while(char) do
-        if(char == "\n")
-          line = ''
-        end
-        char = debugger.readpartial 1
-        print char
-        line << char
-        if(line == "(fdb)")
-          print " "
-          $stdout.flush
-          return
-          char = nil
-        end
-      end
+      self
     end
     
     def enter_interactive_mode(debugger)
@@ -92,8 +72,8 @@ module Sprout #:nodoc:
     end
     
     # Clear breakpoint at specified line or function
-    def clear
-      @queue << "clear"
+    def clear=(point)
+      @queue << "clear #{point}"
     end
     
     # Apply/remove conditional expression to a breakpoint
@@ -313,15 +293,24 @@ module Sprout #:nodoc:
     
   end
   
+  # A buffer that provides clean blocking support for the fdb command shell
   class FDBBuffer
     PROMPT = '(fdb) '
+    QUIT = 'quit'
     
-    def initialize(input, output)
+    # The constructor expects a buffered input and output
+    def initialize(input, output, user_input=nil)
       @input = input
       @output = output
+      @user_input = user_input
       listen
     end
     
+    def user_input
+      @user_input ||= $stdin
+    end
+    
+    # Listen for messages from the input process
     def listen
       @prompted = false
       @listener = Thread.new do
@@ -346,32 +335,49 @@ module Sprout #:nodoc:
         end
       end
     end
-        
-    def wait
-      @listener.join
+
+    # Block for the life of the input process
+    def join
+      $stdout.puts ">> Entering FDB interactive mode, type 'help' for more info."
+      $stdout.print "(fdb) "
+      $stdout.flush
+      looping = true
+      while looping do
+        msg = user_input.gets
+        if(msg.chomp! == QUIT)
+          looping = false
+        else
+          @input.puts msg
+          wait_for_prompt
+        end
+      end
     end
     
+    # Block until prompted? returns true
     def wait_for_prompt
+      sleep(0.2)
       while(!prompted?)
         sleep(0.2)
       end
     end
     
+    # Kill the buffer
     def kill
       @listener.kill
     end
     
+    # Send a message to the buffer input and reset the prompted? flag to false
     def puts(msg)
       @prompted = false
       @input.puts msg
     end
     
+    # Has a prompt been encountered since the last call to puts?
     def prompted?
       return @prompted
     end
     
   end
-
 end
 
 def fdb(args, &block)
