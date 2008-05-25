@@ -12,6 +12,7 @@ module Sprout #:nodoc:
     def initialize(*command)
       @command = command
       begin
+        @alive = true
         usr = User.new()
         if(usr.is_a?(WinUser) && !usr.is_a?(CygwinUser))
           require 'win32/open3'
@@ -26,8 +27,23 @@ module Sprout #:nodoc:
           @pid, @w, @r, @e = open4.popen4(*@command)
         end
       rescue Errno::ENOENT => e
+        @alive = false
         part = command[0].split(' ').shift
         raise ProcessRunnerError.new("The expected executable was not found for command [#{part}], please check your system path and/or sprout definition")
+      end
+    end
+    
+    def alive?
+      @alive = update_status
+    end
+    
+    def update_status
+      pid_int = Integer("#{ @pid }")
+      begin
+        Process::kill 0, pid_int
+        true
+      rescue Errno::ESRCH
+        false
       end
     end
     
