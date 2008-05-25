@@ -4,14 +4,12 @@ module Sprout
 
     def initialize(args, &block)
       super
-      t = define_outer_task
-      t.prerequisites << player_task_name
-
       library :asunit3
       
       mxmlc output do |t|
         configure_mxmlc t
         configure_mxmlc_application t
+        t.debug = true
         t.prerequisites << :asunit3
         t.source_path << model.test_dir
         
@@ -23,7 +21,8 @@ module Sprout
       end
 
       define_player
-      return output
+      t = define_outer_task
+      t.prerequisites << player_task_name
     end
     
     def create_output

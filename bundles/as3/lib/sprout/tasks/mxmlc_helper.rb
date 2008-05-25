@@ -86,8 +86,8 @@ module Sprout
         t.file = output_file
         t.run
         t.continue
+        t.continue
       end
-#      flashplayer player_task_name => output_file
     end
     
     def define_outer_task
