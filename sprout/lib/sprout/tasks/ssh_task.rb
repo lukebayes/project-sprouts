@@ -29,7 +29,8 @@ a) Get the same functionality in a cross-platform manner
 b) Only require and use termios on systems that allow it
 =end
 
-
+gem 'net-ssh', '1.1.4'
+gem 'net-sftp', '1.1.1'
 require 'net/ssh'
 require 'net/sftp'
 #require 'termios'

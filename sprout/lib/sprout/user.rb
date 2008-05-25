@@ -47,6 +47,10 @@ module Sprout
     def User.home=(path) # :nodoc:
       User.new().home = path
     end
+    
+    def User.is_a?(type)
+      User.new().is_a?(type)
+    end
 
     # Pass an executable or binary file name and find out if that file exists in the system
     # path or not

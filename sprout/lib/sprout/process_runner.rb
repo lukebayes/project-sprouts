@@ -31,16 +31,36 @@ module Sprout #:nodoc:
       end
     end
     
+    def readpartial(count)
+      @r.readpartial(count)
+    end
+    
+    def readlines
+      @r.readlines
+    end
+    
+    def flush
+      @w.flush
+    end
+    
+    def getc
+      @r.getc
+    end
+    
+    def print(msg)
+      @w.print msg
+    end
+    
     def puts(msg)
       @w.puts(msg)
     end
-
+    
     def read
-      return r.read
+      return @r.read
     end
     
     def read_err
-      return e.read
+      return @e.read
     end
   end
 end

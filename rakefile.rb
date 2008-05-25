@@ -64,6 +64,7 @@ end
 $:.push(File.dirname(__FILE__) + '/sprout/lib')
 $:.push(File.dirname(__FILE__) + '/bundles/as2/lib')
 $:.push(File.dirname(__FILE__) + '/bundles/as3/lib')
+
 require 'sprout/as2'
 require 'sprout/as3'
 
@@ -244,7 +245,7 @@ task :release_to_rubyforge do |t|
         puts "++ RELEASED #{package_name} #{version} with #{files.join(', ')}"
       rescue StandardError => e
         if(e.message.index('already released this version'))
-          puts ">> Rubyforge already has a release for: #{file}"
+          puts ">> Rubyforge already has a release for: #{package_name} #{version}"
         elsif(e.message.index('Invalid package_id'))
           puts ">> Rubyforge cannot work with #{package_name}"
         else
