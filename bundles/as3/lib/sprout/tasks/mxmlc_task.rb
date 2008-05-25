@@ -27,6 +27,7 @@ TODO: Investigate jruby support, especially:
 module Sprout
   class MXMLCError < StandardError #:nodoc:
   end
+  
   class ExecutionError < StandardError #:nodoc:
   end
   
@@ -699,6 +700,8 @@ EOF
       if(incremental)
         CLEAN.add(FileList['**/**/*.cache'])
       end
+
+      self
     end
     
     protected 

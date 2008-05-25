@@ -242,6 +242,7 @@ EOF
     def validate_templates
       if(templates_path.size == 0)
         templates_dir = Sprout.get_executable(gem_name, 'asdoc/templates', gem_version)
+        templates_dir = templates_dir.split('.exe').join('')
         templates_path << templates_dir
       end
     end

@@ -26,15 +26,15 @@ class AsDocTest <  Test::Unit::TestCase
   end
 
   def test_configure_directly
-    asdoc :docs do |t|
+    t = asdoc :docs do |t|
       t.doc_sources << @asunit
       t.doc_sources << @src
       t.doc_sources << @test
+      # Need to force templates_path so that these tests run on different machines
+      t.templates_path << 'foo'
     end
     
-    run_task :docs
-    
-    assert_file @doc_index
+    assert_equal('-doc-sources+=lib/asunit -doc-sources+=src -doc-sources+=test -output=doc -templates-path+=foo', t.to_shell)
   end
 
   def test_configure_as_dependency
@@ -46,12 +46,18 @@ class AsDocTest <  Test::Unit::TestCase
       t.library_path << @lib
     end
     
-    asdoc :docs => @output
+    t = asdoc :docs => @output do |t|
+      # Need to force templates_path so that these tests run on different machines
+      t.templates_path << 'foo' 
+    end
     
-    run_task :docs
-    
-    assert_file @output
-    assert_file @doc_index
+    assert_equal('-doc-sources+=lib/asunit -doc-sources+=src -doc-sources+=test -library-path+=lib -output=doc -templates-path+=foo', t.to_shell)
   end
   
+  def test_automatic_template_path
+    t = asdoc :docs
+
+    assert(t.to_shell.match(/-templates-path\+=.*\/Sprouts\/cache\//))
+  end
+
 end

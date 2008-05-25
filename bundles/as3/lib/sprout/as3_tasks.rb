@@ -6,6 +6,7 @@ require 'sprout/tasks/compc_task'
 require 'sprout/tasks/asdoc_task'
 require 'sprout/tasks/adl_task'
 require 'sprout/tasks/adt_task'
+require 'sprout/tasks/fdb_task'
 
 require 'sprout/tasks/mxmlc_helper'
 require 'sprout/tasks/mxmlc_flex_builder'
