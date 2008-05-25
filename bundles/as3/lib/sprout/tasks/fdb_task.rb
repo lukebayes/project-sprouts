@@ -4,6 +4,7 @@ module Sprout #:nodoc:
   class FDBTaskError < StandardError #:nodoc:
   end
 
+  # The FDBTask provides a procedural rake front end to the FDB command line tool
   class FDBTask < ToolTask
     # The SWF file to debug.
     attr_accessor :swf
@@ -29,14 +30,13 @@ module Sprout #:nodoc:
     def execute(*args)
       debugger = create_process
       buffer = FDBBuffer.new(debugger, stdout)
-      
-      @queue.each do |command|
-        buffer.wait_for_prompt
-        buffer.puts command
-      end
-      
-      buffer.join
+      buffer.wait_for_prompt
 
+      @queue.each do |command|
+        buffer.write command
+      end
+
+      buffer.join
       self
     end
     
@@ -177,8 +177,8 @@ module Sprout #:nodoc:
     end
     
     # All function names
-    def info_functions
-      @queue << "i fu"
+    def info_functions=(value)
+      @queue << "i fu #{value}"
     end
     
     # How to handle a fault
@@ -295,6 +295,7 @@ module Sprout #:nodoc:
   
   # A buffer that provides clean blocking support for the fdb command shell
   class FDBBuffer
+    PLAYER_TERMINATED = 'Player session terminated'
     PROMPT = '(fdb) '
     QUIT = 'quit'
     
@@ -303,6 +304,7 @@ module Sprout #:nodoc:
       @input = input
       @output = output
       @user_input = user_input
+      @prompted = false
       listen
     end
     
@@ -312,7 +314,6 @@ module Sprout #:nodoc:
     
     # Listen for messages from the input process
     def listen
-      @prompted = false
       @listener = Thread.new do
 
         def puts(msg)
@@ -329,8 +330,13 @@ module Sprout #:nodoc:
           @output.print char
           line << char
           if(line == PROMPT)
-            @prompted = true
             @output.flush
+            @prompted = true
+            line = ''
+          elsif(line == PLAYER_TERMINATED)
+            puts ""
+            puts "Exiting Now!"
+            exit
           end
         end
       end
@@ -338,9 +344,10 @@ module Sprout #:nodoc:
 
     # Block for the life of the input process
     def join
-      $stdout.puts ">> Entering FDB interactive mode, type 'help' for more info."
-      $stdout.print "(fdb) "
+      puts ">> Entering FDB interactive mode, type 'help' for more info."
+      print PROMPT
       $stdout.flush
+      
       looping = true
       while looping do
         msg = user_input.gets
@@ -353,10 +360,9 @@ module Sprout #:nodoc:
       end
     end
     
-    # Block until prompted? returns true
+    # Block until prompted returns true
     def wait_for_prompt
-      sleep(0.2)
-      while(!prompted?)
+      while !@prompted do
         sleep(0.2)
       end
     end
@@ -366,15 +372,13 @@ module Sprout #:nodoc:
       @listener.kill
     end
     
-    # Send a message to the buffer input and reset the prompted? flag to false
-    def puts(msg)
+    # Send a message to the buffer input and reset the prompted flag to false
+    def write(msg)
       @prompted = false
       @input.puts msg
-    end
-    
-    # Has a prompt been encountered since the last call to puts?
-    def prompted?
-      return @prompted
+      print msg + "\n"
+      $stdout.flush
+      wait_for_prompt
     end
     
   end

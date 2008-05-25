@@ -59,15 +59,15 @@ class FDBTest <  Test::Unit::TestCase
     end
   end
 
-=begin
   def test_launch_player
     debugger = fdb :debug do |t|
       t.file = @swf
       t.run
-      t.continue
-#      t.info_sources
-#      t.pwd
+      t.info_files
 #      t.break = "SomeProject.as#1"
+#      t.continue
+#      t.quit
+#      t.pwd
 #      t.continue
 #      t.info
 #      t.continue
@@ -77,7 +77,6 @@ class FDBTest <  Test::Unit::TestCase
     
     debugger.invoke
   end
-=end
 
 end
 
