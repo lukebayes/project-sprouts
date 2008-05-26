@@ -21,16 +21,16 @@ class FDBTest <  Test::Unit::TestCase
   end
   
   def create_buffer(str=nil)
-    process = MockProces.new
+    process = MockProcess.new
     output = MockProcess.new
-    buffer = Sprout::FDBBuffer.new(process, output)
+    buffer = FDBBufferStub.new(process, output)
 
     process.print str unless str.nil?
     sleep(0.2)
 
     return [process, output, buffer]
   end
-  
+
   def test_simple_buffer
     str = "Adobe"
     process, output, buffer = create_buffer(str)
@@ -42,10 +42,11 @@ class FDBTest <  Test::Unit::TestCase
     str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
     str << "(fdb) "
     
-    process, output, buffer = create_buffer(str)
+    process, output, buffer = create_buffer str
     assert_equal(str, output)
   end
-  
+
+=begin
   def test_fdb_buffer_wait_for_prompt
     str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
     str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
@@ -54,10 +55,11 @@ class FDBTest <  Test::Unit::TestCase
     process, output, buffer = create_buffer
     process.print str
 
-    timeout 60 do
+    timeout 1 do
       buffer.wait_for_prompt
     end
   end
+=end
 
 =begin
   def test_launch_player
@@ -82,11 +84,25 @@ class FDBTest <  Test::Unit::TestCase
 
 end
 
+class FDBBufferStub < Sprout::FDBBuffer
+
+  def initialize(input, output, user_input=nil)
+    @mock_input = input
+    super
+  end
+  
+  # Use provided mock input instead of external ProcessRunner
+  def create_input(exe)
+    @mock_input
+  end
+  
+end
+
 class MockProcess < String
   
   def readpartial(count)
     if(size == 0)
-      sleep(0.01)
+      sleep(0.10)
       return readpartial(count)
     end
     

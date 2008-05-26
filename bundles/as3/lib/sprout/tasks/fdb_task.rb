@@ -300,9 +300,9 @@ module Sprout #:nodoc:
     # The constructor expects a buffered input and output
     def initialize(exe, output, user_input=nil)
       @output = output
-      @user_input = user_input
       @prompted = false
       @faulted = false
+      @user_input = user_input
       listen exe
     end
     
@@ -310,12 +310,15 @@ module Sprout #:nodoc:
       @user_input ||= $stdin
     end
     
+    def create_input(exe)
+      ProcessRunner.new("#{exe}")
+    end
+    
     # Listen for messages from the input process
     def listen(exe)
       @input = nil
       @listener = Thread.new do
-        @input = ProcessRunner.new("#{exe}")
-
+        @input = create_input(exe)
         def puts(msg)
           $stdout.puts msg
         end
@@ -323,18 +326,22 @@ module Sprout #:nodoc:
         char = ''
         line = ''
         while true do
-          if(char == "\n")
-            line = ''
-          end
           begin
             char = @input.readpartial 1
           rescue EOFError => e
             puts ">> Exiting Now!"
             break
           end
+
+          if(char == "\n")
+            line = ''
+          else
+            line << char
+          end
+          
           @output.print char
           @output.flush
-          line << char
+
           if(line == PROMPT)
             @prompted = true
             line = ''

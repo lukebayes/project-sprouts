@@ -64,7 +64,6 @@ spec = Gem::Specification.new do |s|
   s.files               = PKG_LIST.to_a
 
   s.add_dependency('sprout', '>= 0.7.182')
-  s.add_dependency('sprout-flashplayer-bundle', '>= 9.124.0')
 end
 
 Rake::GemPackageTask.new(spec) do |p|
