@@ -218,6 +218,18 @@ module Sprout
       return "[Sprout::ProjectModel project_name=#{project_name}]"
     end
     
+    protected
+    
+    def method_missing(method_name,*args)
+      method_name = method_name.to_s
+      if method_name =~ /=$/
+        super if args.size > 1
+        self[method_name[0...-1]] = args[0]
+      else
+        super unless has_key?(method_name) and args.empty?
+        self[method_name]
+      end
+    end
   end
 end
 

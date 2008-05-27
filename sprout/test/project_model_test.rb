@@ -30,5 +30,10 @@ class ProjectModelTest <  Test::Unit::TestCase
   def test_external_css
     assert @model.external_css.is_a?(Array)
   end
+  
+  def test_unknown_property
+    @model.unknown_property = 'mary'
+    assert_equal('mary', @model.unknown_property)
+  end
 
 end
