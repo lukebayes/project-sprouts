@@ -5,15 +5,38 @@ module Sprout
   #
   # The default set of properties are also used from code generators, library tasks and sometimes tools.
   #
+  # The ProjectModel can be configured as follows:
+  #   project_model do |p|
+  #     p.source_path << 'somedir/otherdir'
+  #     p.library_path << 'somedir'
+  #   end
+  #
   # This class should have some reasonable default values, but can be modified from any rakefile.
   # If you don't find some properties that you'd like on the ProjectModel, you can simply add 
-  # new properties and use them however you wish. To Monkey Patch the ProjectModel, just add something
-  # like the following to any Rakefile before the model is used.
+  # new properties and use them however you wish. 
   #
-  #   class Sprout::ProjectModel < Hash
-  #     # The new_param is now available at model.new_param
-  #     attr_accessor :new_param
+  # Arbitrary properties can be added as follows:
+  #   m = project_model do |p|
+  #     p.unknown_property = 'someValue'
   #   end
+  # 
+  #   puts "Unknown Property: #{m.unknown_property}"
+  #
+  # The ProjetModel is typically treated as if it is a Singleton, and many helper tasks
+  # will automatically go look for their model at:
+  # 
+  #   Sprout::ProjectModel.instance
+  #
+  # Unlike a real Singleton, this static property will actually be populated with the most
+  # recently instantiated ProjectModel, and any well-behaved helper task will also
+  # allow you to send in a model instance directly - as a prerequisite.
+  #
+  # a = project_model
+  # b = project_model
+  #
+  # debug :debug_a => a
+  #
+  # debug :debug_b => b
   #
   class ProjectModel < Hash
     
