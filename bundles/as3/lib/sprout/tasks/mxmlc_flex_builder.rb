@@ -1,5 +1,15 @@
 
 module Sprout
+  
+  # The Sprout::MXMLCFlexBuilder task is intended to 
+  # transform Sprout::ProjectModel instances into Flex Builder Eclipse 
+  # project files.
+  #
+  # This task should also be able to analyze Flex Builder project files
+  # and emit a Sprout::ProjectModel based on the information found there.
+  #
+  # The current incarnation is a proof of concept and may not work properly.
+  #
   class MXMLCFlexBuilder < MXMLCHelper # :nodoc:
     PROJECT                  = '.project'
     ACTION_SCRIPT_PROPERTIES = '.actionScriptProperties'

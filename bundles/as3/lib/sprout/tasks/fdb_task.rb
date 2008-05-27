@@ -8,29 +8,42 @@ module Sprout #:nodoc:
   # 
   # Here is a decent tutorial on using FDB with SWF or HTML content:
   # http://installingcats.wordpress.com/tag/adobe-flex/
+  #
+  # You can send the fdb task some debug commands directly or simply
+  # execute the rake task and interact with the debugger manually.
+  #
+  # Following is an example of setting up a breakpoint in
+  # SomeFile at line 23
+  #   fdb :debug do |t|
+  #     t.file = 'bin/SomeProject-debug.swf'
+  #     t.run
+  #     t.break = 'SomeFile:23'
+  #     t.continue
+  #   end
+  #
   class FDBTask < ToolTask
     # The SWF file to debug.
     attr_accessor :swf
 
-    def initialize_task
+    def initialize_task # :nodoc:
       @default_gem_name = 'sprout-flex3sdk-tool'
       @default_gem_path = 'bin/fdb'
       @queue = []
     end
 
-    def define
+    def define # :nodoc:
       self
     end
     
-    def stdout=(out)
+    def stdout=(out) # :nodoc:
       @stdout = out
     end
     
-    def stdout
+    def stdout # :nodoc:
       @stdout ||= $stdout
     end
     
-    def execute(*args)
+    def execute(*args) # :nodoc:
       # TODO: First check the SWF file to ensure that debugging is enabled!
       buffer = FDBBuffer.new(get_executable, stdout)
       buffer.wait_for_prompt
@@ -43,7 +56,7 @@ module Sprout #:nodoc:
       self
     end
     
-    def handle_command(buffer, command)
+    def handle_command(buffer, command) # :nodoc:
       parts = command.split(' ')
       name = parts.shift
       value = parts.shift
@@ -57,12 +70,12 @@ module Sprout #:nodoc:
       end
     end
     
-    def get_executable
+    def get_executable # :nodoc:
       exe = Sprout.get_executable(gem_name, gem_path, gem_version)
       User.clean_path(exe)
     end
     
-    def command_queue
+    def command_queue # :nodoc:
       @queue
     end
     

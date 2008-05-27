@@ -1,6 +1,24 @@
 
 module Sprout
-  class MXMLCUnit < MXMLCHelper # :nodoc:
+
+  
+  # The MXMLCUnit helper wraps up fdb and mxmlc unit test tasks by
+  # using either a Singleton or provided Sprout::ProjectModel instance
+  #
+  # The simple case:
+  #   unit :test
+  #
+  # Using a ProjectModel instance:
+  #   model = Sprout::ProjectModel.setup
+  #
+  #   unit :test => model
+  #
+  # Configuring the proxy Sprout::MXMLCTask
+  #   unit :test do |t|
+  #     t.link_report = 'LinkReport.rpt'
+  #   end
+  #
+  class MXMLCUnit < MXMLCHelper
 
     def initialize(args, &block)
       super

@@ -1,5 +1,5 @@
 
-module Sprout
+module Sprout # :nodoc:
   class MXMLCHelper # :nodoc:
     attr_reader :model
     

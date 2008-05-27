@@ -39,6 +39,9 @@ document :doc
 # set up the default rake task
 task :default => :debug
 
+desc 'Create a SWC file of this project'
+swc :swc
+
 # Coming Soon....
 #desc "Generate Flex Builder projects"
 #flex_builder :project

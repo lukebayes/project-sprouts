@@ -1,6 +1,23 @@
 
 module Sprout # :nodoc:
-  class MXMLCSWC < MXMLCHelper # :nodoc:
+
+  # The MXMLCSWC helper wraps a compc task to create
+  # a SWC library.
+  #
+  # The simple case:
+  #   swc :swc
+  #
+  # Using a ProjectModel instance:
+  #   model = Sprout::ProjectModel.setup
+  #
+  #   swc :swc => model
+  #
+  # Configuring the proxy Sprout::MXMLCTask
+  #   swc :swc do |t|
+  #     t.link_report = 'LinkReport.rpt'
+  #   end
+  #
+  class MXMLCSWC < MXMLCHelper
   
     def initialize(args, &block)
       super

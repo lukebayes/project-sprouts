@@ -1,6 +1,23 @@
 
 module Sprout # :nodoc:
-  class MXMLCDebug < MXMLCHelper # :nodoc:
+  
+  # The MXMLCDebug helper wraps up fdb and mxmlc tasks by
+  # using either a Singleton or provided Sprout::ProjectModel instance
+  #
+  # The simple case:
+  #   debug :debug
+  #
+  # Using a ProjectModel instance:
+  #   model = Sprout::ProjectModel.setup
+  #
+  #   debug :debug => model
+  #
+  # Configuring the proxy Sprout::MXMLCTask
+  #   debug :debug do |t|
+  #     t.link_report = 'LinkReport.rpt'
+  #   end
+  #
+  class MXMLCDebug < MXMLCHelper
   
     def initialize(args, &block)
       super

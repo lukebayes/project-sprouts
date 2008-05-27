@@ -1,6 +1,25 @@
 
-module Sprout
-  class MXMLCDeploy < MXMLCHelper # :nodoc:
+module Sprout # :nodoc:
+
+  # The MXMLCDeploy helper wraps up an mxmlc task by
+  # using either a Singleton or provided Sprout::ProjectModel instance
+  # This helper turns off debugging and turns on optimization for
+  # the compiled SWF file.
+  #
+  # The simple case:
+  #   deploy :deploy
+  #
+  # Using a ProjectModel instance:
+  #   model = Sprout::ProjectModel.setup
+  #
+  #   deploy :deploy => model
+  #
+  # Configuring the proxy Sprout::MXMLCTask
+  #   deploy :deploy do |t|
+  #     t.link_report = 'LinkReport.rpt'
+  #   end
+  #
+  class MXMLCDeploy < MXMLCHelper
 
     def initialize(args, &block)
       super

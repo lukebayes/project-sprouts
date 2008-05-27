@@ -1,6 +1,25 @@
 
 module Sprout # :nodoc:
-  class MXMLCStyleSheet < MXMLCHelper # :nodoc:
+  
+  # The MXMLCStylesheet helper simplifies the creation of
+  # runtime CSS stylesheet SWFs for Flex applications.
+  # This task can work using either a Singleton or 
+  # provided Sprout::ProjectModel instance
+  #
+  # The simple case:
+  #   stylesheet :skin
+  #
+  # Using a ProjectModel instance:
+  #   model = Sprout::ProjectModel.setup
+  #
+  #   stylesheet :skin => model
+  #
+  # Configuring the proxy Sprout::MXMLCTask
+  #   stylesheet :skin do |t|
+  #     t.link_report = 'LinkReport.rpt'
+  #   end
+  #
+  class MXMLCStyleSheet < MXMLCHelper
   
     def initialize(args, &block)
       super
