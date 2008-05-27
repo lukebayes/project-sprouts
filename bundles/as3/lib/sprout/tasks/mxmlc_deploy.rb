@@ -2,11 +2,12 @@
 module Sprout # :nodoc:
 
   # The MXMLCDeploy helper wraps up an mxmlc task by
-  # using either a Singleton or provided Sprout::ProjectModel instance
+  # using either a Singleton or provided ProjectModel instance.
+  #
   # This helper turns off debugging and turns on optimization for
   # the compiled SWF file.
   #
-  # The simple case:
+  # The simple case that uses a Singleton ProjectModel:
   #   deploy :deploy
   #
   # Using a ProjectModel instance:

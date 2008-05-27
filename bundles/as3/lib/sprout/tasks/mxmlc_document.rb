@@ -2,9 +2,9 @@
 module Sprout # :nodoc:
 
   # The MXMLCDocument helper wraps up the asdoc task
-  # using either a Singleton or provided Sprout::ProjectModel instance
+  # using either a Singleton or provided ProjectModel instance.
   #
-  # The simple case:
+  # The simple case that uses a Singleton ProjectModel:
   #   document :doc
   #
   # Using a ProjectModel instance:
@@ -12,7 +12,7 @@ module Sprout # :nodoc:
   #
   #   document :doc => model
   #
-  # Configuring the proxy Sprout::ASDocTask
+  # Configuring the proxy ASDocTask
   #   document :doc do |t|
   #     t.link_report = 'LinkReport.rpt'
   #   end

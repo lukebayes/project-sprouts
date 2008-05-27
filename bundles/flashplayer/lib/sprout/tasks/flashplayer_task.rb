@@ -29,7 +29,7 @@ module Sprout
   # This exception will be raised when the FlashPlayerTask has encountered
   # a test_result_pre_delimiter and subsequently a well-formatted JUnit
   # XML result test failure
-  class AssertionFailure < StandardError
+  class AssertionFailure < StandardError #:nodoc:
   end
   
   # The FlashPlayerTask will download, unpack, configure and launch the debug 

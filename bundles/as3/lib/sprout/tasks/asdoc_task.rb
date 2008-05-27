@@ -3,7 +3,7 @@
 module Sprout
   #
   # The AsDoc Task provides Rake support for the asdoc documentation engine.
-  # If a Sprout::MXMLCTask or Sprout::COMPCTask are found as prerequisites
+  # If a MXMLCTask or COMPCTask are found as prerequisites
   # to the AsDoc task, AsDoc will inherit the source_path and library_path
   # from those tasks. You can also configure AsDoc normally if you wish.
   #

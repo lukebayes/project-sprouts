@@ -8,7 +8,10 @@ module Sprout
   # This task should also be able to analyze Flex Builder project files
   # and emit a Sprout::ProjectModel based on the information found there.
   #
-  # The current incarnation is a proof of concept and may not work properly.
+  # The current incarnation is a proof of concept and may not work properly,
+  # but here is an example just in case:
+  #
+  # flex_builder :project
   #
   class MXMLCFlexBuilder < MXMLCHelper # :nodoc:
     PROJECT                  = '.project'

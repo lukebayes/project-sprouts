@@ -12,12 +12,28 @@ module Sprout #:nodoc:
   # You can send the fdb task some debug commands directly or simply
   # execute the rake task and interact with the debugger manually.
   #
+  # The FDBTask requires that you have a debug Flash Player installed
+  # on your system as the default execution application for SWF files.
+  #
   # Following is an example of setting up a breakpoint in
   # SomeFile at line 23
   #   fdb :debug do |t|
   #     t.file = 'bin/SomeProject-debug.swf'
   #     t.run
   #     t.break = 'SomeFile:23'
+  #     t.continue
+  #   end
+  #
+  # You can also point the FDBTask at HTML pages. These pages will be 
+  # launched in your default browswer. You will need to manually install
+  # a debug Flash Player in that particular browser.
+  # To use a browser instead of the desktop Flash Player, simply point
+  # file argument at an HTML document or remote URL. The SWF file loaded
+  # must be compiled using the -debug flag in order to connect to the 
+  # debugger.
+  #   fdb :debug do |t|
+  #     t.file = 'bin/SomeProject-debug.html'
+  #     t.run
   #     t.continue
   #   end
   #
@@ -330,7 +346,7 @@ module Sprout #:nodoc:
   end
   
   # A buffer that provides clean blocking support for the fdb command shell
-  class FDBBuffer
+  class FDBBuffer #:nodoc:
     PLAYER_TERMINATED = 'Player session terminated'
     EXIT_PROMPT = 'The program is running.  Exit anyway? (y or n)'
     PROMPT = '(fdb) '

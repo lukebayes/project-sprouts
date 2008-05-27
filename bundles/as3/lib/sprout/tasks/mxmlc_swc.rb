@@ -4,7 +4,7 @@ module Sprout # :nodoc:
   # The MXMLCSWC helper wraps a compc task to create
   # a SWC library.
   #
-  # The simple case:
+  # The simple case that uses a Singleton ProjectModel:
   #   swc :swc
   #
   # Using a ProjectModel instance:
@@ -12,7 +12,7 @@ module Sprout # :nodoc:
   #
   #   swc :swc => model
   #
-  # Configuring the proxy Sprout::MXMLCTask
+  # Configuring the proxy MXMLCTask
   #   swc :swc do |t|
   #     t.link_report = 'LinkReport.rpt'
   #   end

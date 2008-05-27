@@ -3,17 +3,17 @@ module Sprout
 
   
   # The MXMLCUnit helper wraps up fdb and mxmlc unit test tasks by
-  # using either a Singleton or provided Sprout::ProjectModel instance
+  # using either a Singleton or provided ProjectModel instance.
   #
-  # The simple case:
+  # The simple case that uses a Singleton ProjectModel:
   #   unit :test
   #
   # Using a ProjectModel instance:
-  #   model = Sprout::ProjectModel.setup
+  #   model = project_model.setup
   #
   #   unit :test => model
   #
-  # Configuring the proxy Sprout::MXMLCTask
+  # Configuring the proxy MXMLCTask
   #   unit :test do |t|
   #     t.link_report = 'LinkReport.rpt'
   #   end
