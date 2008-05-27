@@ -22,26 +22,25 @@ module Sprout
   # 
   #   puts "Unknown Property: #{m.unknown_property}"
   #
-  # The ProjetModel is typically treated as if it is a Singleton, and many helper tasks
+  # The ProjectModel is typically treated as if it is a Singleton, and many helper tasks
   # will automatically go look for their model at:
   # 
   #   Sprout::ProjectModel.instance
   #
   # Unlike a real Singleton, this static property will actually be populated with the most
   # recently instantiated ProjectModel, and any well-behaved helper task will also
-  # allow you to send in a model instance directly - as a prerequisite.
+  # allow you to send in a model as a prerequisite.
   #
-  # a = project_model
-  # b = project_model
+  #   a = project_model
+  #   b = project_model
   #
-  # debug :debug_a => a
+  #   desc 'Compile and run a'
+  #   debug :debug_a => a
   #
-  # debug :debug_b => b
+  #   desc 'Compile and run b'
+  #   debug :debug_b => b
   #
   class ProjectModel < Hash
-    
-    @@DEFAULT_TEST_WIDTH  = 1000
-    @@DEFAULT_TEST_HEIGHT = 550
     
     # Relative path to the folder where compile time assets will be stored
     attr_accessor :asset_dir
@@ -56,6 +55,7 @@ module Sprout
     # Possible values are:
     # * sprout-flex2sdk-tool
     # * sprout-flex3sdk-tool
+    # * sprout-flex4sdk-tool (Experimental)
     # * sprout-mtasc-tool
     attr_accessor :compiler_gem_name
     # The version number of the compiler gem to use
@@ -117,34 +117,31 @@ module Sprout
     attr_accessor :test_dir
     # The test executable
     attr_accessor :test_output
-    # The test runner SWF width
-    attr_writer :test_width
     # The test runner SWF height
-    attr_writer :test_height
+    attr_accessor :test_height
+    # The test runner SWF width
+    attr_accessor :test_width
     # The default width of the SWF file
     # _(This value is overridden when embedded in an HTML page)_
     attr_accessor :width
 
-    # TODO: Add clean hash interface so that users
-    # can simply add to this object's properties like:
-    # model.foo = 'bar'
-    # model.junk = true
-    # and then just as easily reference those vars from
-    # external generators...  
+    # Static method that returns the most recently instantiated ProjectModel,
+    # or instantiates one if none have been created yet.
     def self.instance
       @@instance ||= ProjectModel.new
       yield @@instance if block_given?
       return @@instance
     end
     
-    def self.destroy # :nodoc:
-      @@instance = nil
+    # Decorates the static instance method.
+    def self.setup
+      @@instance ||= ProjectModel.new
+      yield @@instance if block_given?
+      return @@instance
     end
 
-    # Patch submitted by Thomas Winkler
-    def self.setup(&block)
-      yield instance if block_given?
-      return instance
+    def self.destroy # :nodoc:
+      @@instance = nil
     end
 
     def initialize
@@ -171,6 +168,8 @@ module Sprout
       @view_dir       = nil
       @controller_dir = nil
       
+      @test_height    = 900
+      @test_width     = 550
       @@instance      = self
     end
     
@@ -221,14 +220,7 @@ module Sprout
       return @controller_dir
     end
     
-    def test_width
-      @test_width ||= @@DEFAULT_TEST_WIDTH
-    end
-    
-    def test_height
-      @test_height ||= @@DEFAULT_TEST_HEIGHT
-    end
-    
+    # Alias for project_name
     def name=(name)
       @project_name = name
     end
@@ -243,7 +235,7 @@ module Sprout
     
     protected
     
-    def method_missing(method_name,*args)
+    def method_missing(method_name, *args)
       method_name = method_name.to_s
       if method_name =~ /=$/
         super if args.size > 1
@@ -256,11 +248,12 @@ module Sprout
   end
 end
 
-def project_model(args)
+# Helper method to expose the project model as a Rake Task
+def project_model(task_name)
   model = Sprout::ProjectModel.new
   yield model if block_given?
 
-  t = task args
+  t = task task_name
 
   def t.project_model=(model)
     @model = model
