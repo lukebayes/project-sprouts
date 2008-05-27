@@ -27,7 +27,7 @@ Rake::RDocTask.new do |t|
                         'bundles/**/lib/**/*.rb',
                         'bundles/**/README'
                         ])
-  t.title    = "Project Sprouts -- Core Documentation"
+  t.title    = "Project Sprouts"
   t.rdoc_dir = 'rdoc'
   t.options << '-i . -i sprout'
   t.main = 'Sprout::Sprout'
