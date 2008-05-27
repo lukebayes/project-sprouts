@@ -68,6 +68,7 @@ module Sprout
       @name = name
       @host = nil
       @queue = []
+      @commands = []
     end
 
     def self.define_task(args, &block) # :nodoc:
