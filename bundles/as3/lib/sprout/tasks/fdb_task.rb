@@ -36,11 +36,25 @@ module Sprout #:nodoc:
       buffer.wait_for_prompt
 
       @queue.each do |command|
-        buffer.write command
+        handle_command(buffer, command)
       end
 
       buffer.join
       self
+    end
+    
+    def handle_command(buffer, command)
+      parts = command.split(' ')
+      name = parts.shift
+      value = parts.shift
+      case name
+        when "sleep"
+          buffer.sleep_until value
+        when "terminate"
+          buffer.kill
+        else
+          buffer.write command
+      end
     end
     
     def get_executable
@@ -246,6 +260,8 @@ module Sprout #:nodoc:
     # Exit fdb
     def quit
       @queue << "quit"
+      @queue << "y"
+      @queue << "terminate"
     end
     
     # Start debugged program
@@ -258,6 +274,11 @@ module Sprout #:nodoc:
       @queue << "set #{value}"
     end
     
+    # Sleep until some 'str' String is sent to the output
+    def sleep_until(str)
+      @queue << "sleep #{str}"
+    end
+    
     # Read fdb commands from a file
     def source=(file)
       @queue << "source #{file}"
@@ -266,6 +287,11 @@ module Sprout #:nodoc:
     # Step program until it reaches a different source line
     def step
       @queue << "step"
+    end
+    
+    # Force the Flash Debugger and running SWF to close
+    def terminate
+      @queue << "terminate"
     end
     
     # Remove an auto-display expression
@@ -303,6 +329,8 @@ module Sprout #:nodoc:
       @prompted = false
       @faulted = false
       @user_input = user_input
+      @found_search = false
+      @pending_expression = nil
       listen exe
     end
     
@@ -312,6 +340,14 @@ module Sprout #:nodoc:
     
     def create_input(exe)
       ProcessRunner.new("#{exe}")
+    end
+    
+    def sleep_until(str)
+      @found_search = false
+      @pending_expression = str
+      while !@found_search do
+        sleep(0.2)
+      end
     end
     
     # Listen for messages from the input process
@@ -329,7 +365,8 @@ module Sprout #:nodoc:
           begin
             char = @input.readpartial 1
           rescue EOFError => e
-            puts ">> Exiting Now!"
+            puts "End of File - Exiting Now"
+            @prompted = true
             break
           end
 
@@ -342,12 +379,16 @@ module Sprout #:nodoc:
           @output.print char
           @output.flush
 
-          if(line == PROMPT)
+          if(line == PROMPT || line.match(/\(y or n\) $/))
             @prompted = true
             line = ''
+          elsif(@pending_expression && line.match(/#{@pending_expression}/))
+            @found_search = true
+            @pending_expression = nil
           elsif(line == PLAYER_TERMINATED)
             puts ""
-            puts "Exiting Now!"
+            puts "Closed SWF Connection - Exiting Now"
+            @prompted = true
             break
           end
         end
@@ -390,7 +431,9 @@ module Sprout #:nodoc:
       @input.puts msg
       print msg + "\n"
       $stdout.flush
-      wait_for_prompt
+      if(msg != "c" && msg != "continue")
+        wait_for_prompt
+      end
     end
     
   end

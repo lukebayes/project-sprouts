@@ -46,7 +46,6 @@ class FDBTest <  Test::Unit::TestCase
     assert_equal(str, output)
   end
 
-=begin
   def test_fdb_buffer_wait_for_prompt
     str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
     str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
@@ -59,14 +58,28 @@ class FDBTest <  Test::Unit::TestCase
       buffer.wait_for_prompt
     end
   end
-=end
+
+  def test_fdb_confirmation_prompt
+    str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
+    str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
+    str << "The program is running.  Exit anyway? (y or n) "
+
+    process, output, buffer = create_buffer
+    process.print str
+
+    timeout 1 do
+      buffer.wait_for_prompt
+    end
+    
+  end
 
 =begin
   def test_launch_player
     debugger = fdb :debug do |t|
       t.file = @swf
       t.run
-      t.info_files
+      t.continue
+      t.sleep_until('SomeProject instantiated!')
 #      t.break = "SomeProject.as#1"
 #      t.continue
 #      t.quit
