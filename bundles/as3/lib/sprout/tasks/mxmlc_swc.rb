@@ -8,9 +8,9 @@ module Sprout # :nodoc:
   #   swc :swc
   #
   # Using a ProjectModel instance:
-  #   model = Sprout::ProjectModel.setup
+  #   project_model :model
   #
-  #   swc :swc => model
+  #   swc :swc => :model
   #
   # Configuring the proxy MXMLCTask
   #   swc :swc do |t|

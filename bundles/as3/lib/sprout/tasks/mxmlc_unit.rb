@@ -9,9 +9,9 @@ module Sprout
   #   unit :test
   #
   # Using a ProjectModel instance:
-  #   model = project_model.setup
+  #   project_model :model
   #
-  #   unit :test => model
+  #   unit :test => :model
   #
   # Configuring the proxy MXMLCTask
   #   unit :test do |t|

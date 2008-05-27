@@ -10,9 +10,9 @@ module Sprout # :nodoc:
   #   stylesheet :skin
   #
   # Using a ProjectModel instance:
-  #   model = Sprout::ProjectModel.setup
+  #   project_model :model
   #
-  #   stylesheet :skin => model
+  #   stylesheet :skin => :model
   #
   # Configuring the proxy MXMLCTask
   #   stylesheet :skin do |t|

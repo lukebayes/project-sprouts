@@ -6,9 +6,10 @@ module Sprout
   # The default set of properties are also used from code generators, library tasks and sometimes tools.
   #
   # The ProjectModel can be configured as follows:
-  #   project_model do |p|
-  #     p.source_path << 'somedir/otherdir'
-  #     p.library_path << 'somedir'
+  #   project_model :model do |p|
+  #     p.name          = 'SomeProject'
+  #     p.source_path   << 'somedir/otherdir'
+  #     p.library_path  << 'somedir'
   #   end
   #
   # This class should have some reasonable default values, but can be modified from any rakefile.
@@ -16,7 +17,7 @@ module Sprout
   # new properties and use them however you wish. 
   #
   # Arbitrary properties can be added as follows:
-  #   m = project_model do |p|
+  #   m = project_model :model do |p|
   #     p.unknown_property = 'someValue'
   #   end
   # 
@@ -31,14 +32,14 @@ module Sprout
   # recently instantiated ProjectModel, and any well-behaved helper task will also
   # allow you to send in a model as a prerequisite.
   #
-  #   a = project_model
-  #   b = project_model
+  #   project_model :model_a
+  #   project_model :model_b
   #
   #   desc 'Compile and run a'
-  #   debug :debug_a => a
+  #   debug :debug_a => :model_a
   #
   #   desc 'Compile and run b'
-  #   debug :debug_b => b
+  #   debug :debug_b => :model_b
   #
   class ProjectModel < Hash
     

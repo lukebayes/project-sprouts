@@ -7,7 +7,7 @@ end
 # 
 #   sprout -n developer Flex3SDK
 #
-class ToolGenerator < Sprout::Generator::NamedBase
+class ToolGenerator < Sprout::Generator::NamedBase # :nodoc:
   
   def manifest
     record do |m|

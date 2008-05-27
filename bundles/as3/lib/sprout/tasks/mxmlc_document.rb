@@ -8,9 +8,9 @@ module Sprout # :nodoc:
   #   document :doc
   #
   # Using a ProjectModel instance:
-  #   model = Sprout::ProjectModel.setup
+  #   project_model :model
   #
-  #   document :doc => model
+  #   document :doc => :model
   #
   # Configuring the proxy ASDocTask
   #   document :doc do |t|

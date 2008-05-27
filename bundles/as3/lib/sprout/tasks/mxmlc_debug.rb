@@ -8,9 +8,9 @@ module Sprout # :nodoc:
   #   debug :debug
   #
   # Using a ProjectModel instance:
-  #   model = Sprout::ProjectModel.setup
+  #   project_model :model
   #
-  #   debug :debug => model
+  #   debug :debug => :model
   #
   # Configuring the proxy Sprout::MXMLCTask
   #   debug :debug do |t|

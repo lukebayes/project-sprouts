@@ -11,9 +11,9 @@ module Sprout # :nodoc:
   #   deploy :deploy
   #
   # Using a ProjectModel instance:
-  #   model = Sprout::ProjectModel.setup
+  #   project_model :model
   #
-  #   deploy :deploy => model
+  #   deploy :deploy => :model
   #
   # Configuring the proxy Sprout::MXMLCTask
   #   deploy :deploy do |t|
