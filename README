@@ -1,3 +1,5 @@
 Project Sprouts is an open-source, cross-platform project generation and configuration tool for ActionScript 2, ActionScript 3, Adobe AIR and Flex projects.
 
+Sprout provides everything you need to get up and running the Flash development instantly. The only prerequisites are Ruby and RubyGems.
+
 Sprouts includes support for project and code templates, automated build scripts, remote managed libraries, and automatic installation of dependencies like the Flash VM and a variety of compilers.
