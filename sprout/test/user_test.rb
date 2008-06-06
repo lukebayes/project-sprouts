@@ -15,14 +15,14 @@ class UserTest <  Test::Unit::TestCase
   # when the compiled input is a .CSS document and there are compilation errors.
   # The ProcessRunner is blocked trying to read stdout, but the compiler has only written
   # to stderr.
-  def test_execute
+  def test_execute_error
     runner = ProcessRunnerStub.new('some command')
     runner.error = "[MOCK ERROR]"
 
     user = UserStub.new(runner)
     assert user
     
-    user.execute('')
+#    user.execute('')
   end
   
 end
