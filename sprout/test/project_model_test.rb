@@ -72,7 +72,7 @@ class ProjectModelTest <  Test::Unit::TestCase
     b = project_model :model_b do |p|
       p.test_dir = 'bar'
     end
-
+    
     assert_equal('foo', a.test_dir)
     assert_equal('bar', b.test_dir)
     assert_equal('bar', Sprout::ProjectModel.instance.test_dir)
