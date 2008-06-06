@@ -72,15 +72,16 @@ class FDBTest <  Test::Unit::TestCase
     end
     
   end
-
+  
 =begin
+
   def test_launch_player
     debugger = fdb :debug do |t|
       t.file = @swf
       t.run
-      t.continue
-      t.sleep_until('SomeProject instantiated!')
-#      t.break = "SomeProject.as#1"
+      t.break = "SomeProject.as#4"
+#      t.continue
+#      t.sleep_until('SomeProject instantiated!')
 #      t.continue
 #      t.quit
 #      t.pwd
