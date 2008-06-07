@@ -63,7 +63,7 @@ spec = Gem::Specification.new do |s|
   s.rdoc_options        << '-i'             << '.'
   s.files               = PKG_LIST.to_a
 
-  s.add_dependency('sprout', '>= 0.7.182')
+  s.add_dependency('sprout', '>= 0.7.189')
 end
 
 Rake::GemPackageTask.new(spec) do |p|

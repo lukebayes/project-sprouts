@@ -90,7 +90,7 @@ def execute_in_project(project, str)
   start = File.expand_path(Dir.pwd)
   Dir.chdir project
   begin
-    raise "[ERROR] '#{p}' exited with errors: #{$?}" unless system(str)
+    raise "[ERROR] '#{project}' exited with errors: #{$?}" unless system(str)
   ensure
     Dir.chdir start
   end
@@ -303,30 +303,27 @@ task :release => [:update_gem_index, :release_to_rubyforge]
 
 desc "Remove all gems that begin with 'sprout-'"
 task :remove_all do |t|
-  Rails::Generator::GemGeneratorSource.new().each_sprout do |sprout|
+  RubiGen::GemGeneratorSource.new().each_sprout do |sprout|
     puts "found sprout: #{sprout.name}"
     raise ">> Exited with errors: #{$?}" unless system("gem uninstall -x -a #{sprout.name}")
   end
 end
 
 # Add required support for remove_all task
-gem 'activesupport', '>= 2.0.2'
-require 'rails_generator'
+gem 'rubigen', '>= 1.3.2'
+require 'rubigen'
 
-module Rails
-  module Generator
+module RubiGen
+  class GemGeneratorSource < AbstractGemSource
 
-    class GemGeneratorSource < AbstractGemSource
-
-      def each_sprout
-        Gem::cache.search(/sprout-*/).inject({}) { |latest, gem|
-          hem = latest[gem.name]
-          latest[gem.name] = gem if hem.nil? or gem.version > hem.version
-          latest
-        }.values.each { |gem|
-          yield Spec.new(gem.name, gem.full_gem_path, label)
-        }
-      end
+    def each_sprout
+      Gem::cache.search(/sprout-*/).inject({}) { |latest, gem|
+        hem = latest[gem.name]
+        latest[gem.name] = gem if hem.nil? or gem.version > hem.version
+        latest
+      }.values.each { |gem|
+        yield Spec.new(gem.name, gem.full_gem_path, label)
+      }
     end
   end
 end

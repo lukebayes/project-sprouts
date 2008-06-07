@@ -87,8 +87,12 @@ end
 
 desc "Reinstall this gem"
 task :reinstall do |t|
-  system "sudo gem uninstall #{NAME}"
+  gem_system "uninstall #{NAME}"
   system "rake clean package"
-  system "sudo gem install -f pkg/#{NAME}-#{GEM_VERSION}.gem"
+  gem_system "install -f pkg/#{NAME}-#{GEM_VERSION}.gem"
 end
 
+def gem_system command
+  puts "using gem_system"
+  system [ Sprout::Sprout.get_gem_preamble, command ].join(' ')
+end

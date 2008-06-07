@@ -1,9 +1,9 @@
 A SproutGenerator is a set of specifically configured folders and files that have been placed in a particular, expected location on disk.
-The Sprout generator feature is a minor modification to the standard Rails generators.
+The Sprout generator feature is a minor modification to the standard Rubigen generators.
 
-Sprouts modifies the underlying Rails Generator implementation mainly by changing where it looks for available, named generators. This was an importat change that will help prevent Sprout projects from clobbering generators that are intended for Rails support and vice versa. We also have a slightly different requirement in that we need support for multiple languages or technologies while Rails is able to simply expect that it's generating Ruby code. 
+Sprouts modifies the underlying Rubigen Generator implementation in that we need support for multiple languages or technologies while Rubigen is able to simply expect that it's generating Ruby code. 
 
-Generators can exist in multiple different locations on disk, to learn how to create a new generator, see the Rails documentation[http://wiki.rubyonrails.org/rails/pages/UnderstandingGenerators].
+Generators can exist in multiple different locations on disk, to learn how to create a new generator, see the Rubigen documentation[http://rubigen.rubyforge.org/].
 
 To use a new or existing generator, simply enter it's name from within a project after calling
   script/generate

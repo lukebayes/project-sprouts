@@ -18,7 +18,7 @@ module Sprout
     # Regardless of which format the name was sent in, the helper
     # methods should provide valid results
     #
-    class NamedBase < Rails::Generator::Base
+    class NamedBase < RubiGen::Base
 
       # Fully qualified class named including package name like 'flash.display.Sprite'
       attr_reader :full_class_name

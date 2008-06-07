@@ -35,12 +35,14 @@ require 'sprout/tasks/tool_task'
 require 'sprout/general_tasks'
 
 module Sprout
+  SUDO_INSTALL_GEMS = 'false' == ENV['SUDO_INSTALL_GEMS'] ? false : true
+
   class SproutError < StandardError #:nodoc:
   end
 
   # Sprouts is an open-source, cross-platform project generation and configuration tool
   # for ActionScript 2, ActionScript 3, Adobe AIR and Flex projects. It is built on top 
-  # of Ruby Gems, Rails Generators and is intended to work on any platform that Ruby runs
+  # of Ruby Gems, Rubigen Generators and is intended to work on any platform that Ruby runs
   # on including specifically, Windows XP, Windows Vista, Cygwin, OS X and Linux.
   #
   # Sprouts can be separated into some core concepts as follows:
@@ -122,8 +124,8 @@ module Sprout
     # This Rakefile will usually be loaded by the referenced Generator, and it should have a configured ProjectModel
     # defined in it.
     def self.generate(sprout_name, generator_name, params, project_path=nil)
-      Rails::Generator::Base.use_sprout_sources!(sprout_name, project_path)
-      generator = Rails::Generator::Base.instance(generator_name, params)
+      RubiGen::Base.use_sprout_sources!(sprout_name, project_path)
+      generator = RubiGen::Base.instance(generator_name, params)
       generator.command(:create).invoke!
     end
     
@@ -134,7 +136,7 @@ module Sprout
       confirmation = false
       count = 0
       # For each sprout found, remove it!
-      Rails::Generator::GemGeneratorSource.new().each_sprout do |sprout|
+      RubiGen::GemGeneratorSource.new().each_sprout do |sprout|
         count += 1
         command = "#{get_gem_preamble} uninstall -x -a -i -q #{sprout.name}"
 
@@ -178,7 +180,7 @@ module Sprout
       usr = User.new()
       if(!usr.is_a?(WinUser))
         # Everyone but Win and Cygwin users get 'sudo '
-        return "sudo gem"
+        return "#{SUDO_INSTALL_GEMS ? 'sudo ' : ''}gem"
       elsif(!usr.is_a?(CygwinUser))
         # We're in the DOS Shell
         return "ruby #{get_executable_from_path('gem')}"
@@ -344,10 +346,7 @@ EOF
         msg << " #{requirements}" if requirements
         msg << " from #{gem_sources.join(', ')} with it's dependencies"
         Log.puts msg
-        parts = []
-        parts << "ins"
-        parts << "-r"
-        parts << name
+        parts = [ 'ins', '-r', name ]
         # This url should be removed once released, released gems should be hosted from the rubyforge
         # project, and development gems will be hosted on our domain.
         parts << "--source #{gem_sources.join(' --source ')}" if(Log.debug || name.index('sprout-'))

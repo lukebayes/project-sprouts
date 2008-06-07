@@ -1,5 +1,5 @@
-gem 'activesupport', '>= 2.0.2'
-require 'rails_generator'
+# gem 'activesupport', '>= 2.0.2'
+require 'rubigen'
 require 'sprout/generator/base_mixins'
 require 'sprout/generator/named_base'
 

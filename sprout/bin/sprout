@@ -118,7 +118,7 @@ begin
     end
     # Try to run the generator against user home and existing gems first
     Sprout::Sprout.generate(sprout_name, 'project', [project_name])
-rescue Rails::Generator::GeneratorError
+rescue RubiGen::GeneratorError
     # Failing that, try to download a sprout gem by name
     sprout(sprout_name, sprout_requirements)
     # Then try again....

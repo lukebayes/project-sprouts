@@ -17,11 +17,11 @@ module GeneratorTestHelper  # :nodoc:[all]
 
   # Silences the logger temporarily and returns the output as a String
   def silence_generator
-    logger_original=Rails::Generator::Base.logger
+    logger_original=RubiGen::Base.logger
     myout=StringIO.new
-    Rails::Generator::Base.logger=Rails::Generator::SimpleLogger.new(myout)
+    RubiGen::Base.logger=RubiGen::SimpleLogger.new(myout)
     yield if block_given?
-    Rails::Generator::Base.logger=logger_original
+    RubiGen::Base.logger=logger_original
     myout.string
   end
 

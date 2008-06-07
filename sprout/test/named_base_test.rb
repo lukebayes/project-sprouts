@@ -141,9 +141,7 @@ class NamedBaseTest <  Test::Unit::TestCase
   
 end
 
-# Prevent the rails lookup service
-# from looking for gems and generators
-# in the test context
+# Prevent the lookup service from looking for gems and generators in the test context
 class FakeNamedBase < Sprout::Generator::NamedBase
 
   def initialize(runtime_args, runtime_options = {})
