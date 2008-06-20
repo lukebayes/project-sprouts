@@ -70,7 +70,7 @@ class MXMLCHelperTest <  Test::Unit::TestCase
     t.define
 
     # The test method will modify the width unless otherwise specified within the task itself
-    assert_equal('-debug -default-background-color=#FFFFFF -default-frame-rate=24 -default-size 1000 550 -library-path+=bar -output=bin/SomeProjectRunner.swf -source-path+=src -source-path+=foo -source-path+=assets -source-path+=test -source-path+=lib/asunit3 -verbose-stacktraces=true -warnings=true src/SomeProjectRunner.as', t.to_shell)
+    assert_equal('-debug -default-background-color=#FFFFFF -default-frame-rate=24 -default-size 550 900 -library-path+=bar -output=bin/SomeProjectRunner.swf -source-path+=src -source-path+=foo -source-path+=assets -source-path+=test -source-path+=lib/asunit3 -verbose-stacktraces=true -warnings=true src/SomeProjectRunner.as', t.to_shell)
   end
   
   def test_deploy_helper
