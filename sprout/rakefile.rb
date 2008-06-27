@@ -57,6 +57,7 @@ def apply_shared_spec(s)
     s.add_dependency('archive-tar-minitar', '>= 0.5.1')
     s.add_dependency('rubigen', '>= 1.3.2')
     s.add_dependency('net-sftp')
+    s.add_dependency('net-ssh')
 end
 
 osx_spec = Gem::Specification.new do |s|
