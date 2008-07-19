@@ -7,10 +7,8 @@
     <mx:Script>
     	<![CDATA[
 			import someproject.SomeTest;
-    		import asunit.textui.TestRunner;
 
 			public function runTests():void {
-				trace("foobar");
 				start(SomeTest);
 			}
     	]]>

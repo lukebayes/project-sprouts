@@ -5,3 +5,4 @@ rdoc
 rdoc/**/**/*
 *_documentation.rb
 bundles/as3/samples/mxmlc/bin/*.swf
+bundles/as3/samples/mxmlc/doc

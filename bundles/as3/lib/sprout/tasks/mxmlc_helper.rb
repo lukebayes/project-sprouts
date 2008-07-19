@@ -43,8 +43,15 @@ module Sprout # :nodoc:
       end
     end
     
-    def configure_mxmlc(compiler)
-      compiler.input                    = input
+    def configure_asdoc(compiler)
+      compiler.doc_sources << model.src_dir
+      model.source_path.each do |path|
+        compiler.doc_sources << path
+      end
+    end
+    
+    def configure_mxmlc(compiler, is_asdoc=false)
+      compiler.input                    = input unless is_asdoc
       compiler.gem_name                 = model.compiler_gem_name
       compiler.gem_version              = model.compiler_gem_version
 

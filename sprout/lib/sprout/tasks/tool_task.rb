@@ -300,6 +300,7 @@ module Sprout
       end
       return path
     end
+    
   end
 
   #######################################################
@@ -432,11 +433,19 @@ module Sprout
       result << "def #{name}=(#{type})\n  @#{name} = #{type}\nend\n\n"
       return result
     end
-
+    
   end
 
   # Concrete param object for :string values
   class StringParam < TaskParam # :nodoc:
+    
+    def shell_value
+      str = super
+      if(str.index(' '))
+        str = %{"#{str}"}
+      end
+      return str
+    end
   end
 
   # Concrete param object for :symbol values

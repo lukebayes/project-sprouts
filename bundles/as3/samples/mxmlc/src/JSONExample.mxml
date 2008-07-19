@@ -34,7 +34,6 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOURCE CODE, EVEN IF
 ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
-
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="*" 
 	layout="absolute"
 	creationComplete="service.send()" viewSourceURL="srcview/index.html">
@@ -45,6 +44,9 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 			import mx.rpc.events.ResultEvent;
 			import com.adobe.serialization.json.JSON;
 			
+			/**
+			 * Handle loaded JSON data.
+			 */
 			private function onJSONLoad(event:ResultEvent):void
 			{
 				var rawData:String = String(event.result);

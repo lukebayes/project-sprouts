@@ -5,15 +5,15 @@ module Sprout # :nodoc:
   # using either a Singleton or provided ProjectModel instance.
   #
   # The simple case that uses a Singleton ProjectModel:
-  #   document :doc
+  #   document :asdoc
   #
   # Using a ProjectModel instance:
   #   project_model :model
   #
-  #   document :doc => :model
+  #   document :asdoc => :model
   #
   # Configuring the proxy ASDocTask
-  #   document :doc do |t|
+  #   document :asdoc do |t|
   #     t.link_report = 'LinkReport.rpt'
   #   end
   #
@@ -21,22 +21,19 @@ module Sprout # :nodoc:
   
     def initialize(args, &block)
       super
-      outer = define_outer_task
       
-      asdoc output => input do |t|
-        t.output = 'doc'
+      asdoc task_name do |t|
+        configure_mxmlc(t, true)
+        t.output = model.doc_dir
+        t.doc_classes = input
+        t.main_title = model.project_name
         yield t if block_given?
       end
       
-      outer.prerequisites << output
     end
     
-    def create_output
-      return File.join(model.doc_dir, 'index.html')
-    end
-
     def create_input
-      return "#{create_output_base}.swf"
+      return File.basename(super).split('.')[0]
     end
     
   end

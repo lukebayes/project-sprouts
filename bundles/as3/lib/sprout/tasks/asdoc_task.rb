@@ -15,6 +15,17 @@ module Sprout
   #   # Alias the compilation task with one that is easier to type
   #   # task :compile => 'SomeProject.swf'
   #
+  # AsDoc tasks can be created and configured directly like any other rake task.
+  #
+  #   # Create a simple, standard asdoc task
+  #   asdoc :doc do |t|
+  #     t.source_path               << 'src'
+  #     t.library_path              << 'lib/corelib.swc'
+  #     t.doc_classes               = 'SomeProject'
+  #     t.main_title                = 'Some Project Title'
+  #     t.footer                    = 'This is the footer for your project docs'
+  #   end
+  #
   #   # Create an MXMLCTask named for the output file that it creates. This task depends on the
   #   # corelib library and will automatically add the corelib.swc to it's library_path
   #   mxmlc 'bin/SomeProject.swf' => :corelib do |t|
@@ -78,7 +89,8 @@ This option works the same way as does the -include-sources option for the compc
 EOF
       end
 
-      add_param(:exclude_classes, :string) do |p|
+      add_param(:exclude_classes, :strings) do |p|
+        p.delimiter = '='
         p.description =<<EOF
 A list of classes that should not be documented. You must specify individual class names. Alternatively, if the ASDoc comment for the class contains the @private tag, is not documented.
 EOF
@@ -218,7 +230,7 @@ EOF
     def define # :nodoc:
       super
       validate_templates
-      CLEAN.add(output)
+      CLEAN.add(output + '/*')
     end
     
     def prepare
@@ -266,6 +278,17 @@ EOF
     # automatically chmod it to 744.
     def update_helper_mode
       exe = Sprout.get_executable(gem_name, 'asdoc/templates/asDocHelper', gem_version)
+    end
+
+    def resolve_library(library_task)
+      #TODO: Add support for libraries that don't get
+      # copied into the project
+      path = library_task.project_path
+      if(path.match(/.swc$/))
+        library_path << library_task.project_path
+      else
+        source_path << library_task.project_path
+      end
     end
 
   end

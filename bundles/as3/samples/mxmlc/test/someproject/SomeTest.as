@@ -11,6 +11,5 @@ package someproject {
 			assertTrue("Some test can be executed", true);
 			assertTrue("Broken!", false);
 		}
-
 	}
 }
