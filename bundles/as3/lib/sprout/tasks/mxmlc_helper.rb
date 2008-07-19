@@ -82,11 +82,8 @@ module Sprout # :nodoc:
     end
     
     def define_player
-      fdb player_task_name do |t|
-        t.file = output_file
-        t.run
-        t.continue
-        t.continue
+      flashplayer player_task_name do |t|
+        t.swf = output_file
       end
     end
     

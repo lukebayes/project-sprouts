@@ -18,13 +18,6 @@ end
 
 library :corelib
 
-desc 'Compile and debug the application in a browser'
-fdb :html do |t|
-  t.file = 'bin/JSonExample.html'
-  t.run
-  t.continue
-end
-
 desc 'Compile and debug the application'
 debug :debug
 
@@ -33,6 +26,9 @@ unit :test
 
 desc 'Compile the optimized deployment'
 deploy :deploy
+
+desc 'Create documentation'
+document :doc
 
 #desc 'Compile a SWC file for this project'
 #deploy_swc :deploy

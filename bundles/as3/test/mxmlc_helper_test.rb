@@ -58,7 +58,7 @@ class MXMLCHelperTest <  Test::Unit::TestCase
     
     # Get the MXMLC build task out:
     t = Rake::application['bin/SomeProject-debug.swf']
-    assert_equal('-debug -default-background-color=#FFFFFF -default-frame-rate=24 -default-size 900 600 -library-path+=bar -output=bin/SomeProject-debug.swf -source-path+=src -source-path+=foo -source-path+=assets -verbose-stacktraces=true -warnings=true src/SomeProject.as', t.to_shell)
+    assert_equal('-default-background-color=#FFFFFF -default-frame-rate=24 -default-size 900 600 -library-path+=bar -output=bin/SomeProject-debug.swf -source-path+=src -source-path+=foo -source-path+=assets -verbose-stacktraces=true -warnings=true src/SomeProject.as', t.to_shell)
   end
   
   def test_test_helper

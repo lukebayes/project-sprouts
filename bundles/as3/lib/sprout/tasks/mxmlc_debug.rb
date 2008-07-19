@@ -12,7 +12,7 @@ module Sprout # :nodoc:
   #
   #   debug :debug => :model
   #
-  # Configuring the proxy Sprout::MXMLCTask
+  # Configuring the proxied Sprout::MXMLCTask
   #   debug :debug do |t|
   #     t.link_report = 'LinkReport.rpt'
   #   end
@@ -21,8 +21,8 @@ module Sprout # :nodoc:
   
     def initialize(args, &block)
       super
+
       mxmlc output do |t|
-        t.debug = true
         configure_mxmlc t
         configure_mxmlc_application t
         yield t if block_given?
@@ -31,6 +31,7 @@ module Sprout # :nodoc:
       define_player
       
       t = define_outer_task
+      t.prerequisites << output
       t.prerequisites << player_task_name
     end
     

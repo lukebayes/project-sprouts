@@ -40,6 +40,7 @@ module Sprout
 
       define_player
       t = define_outer_task
+      t.prerequisites << output
       t.prerequisites << player_task_name
     end
     
