@@ -683,6 +683,10 @@ EOF
         end
       end
       
+      if(!input.match(/.css/) && File.exists?(input))
+        source_path << File.dirname(input)
+      end
+
       if(!input)
         raise MXMLCError.new('MXMLCTask.input is a required field')
       end
@@ -692,6 +696,7 @@ EOF
       end
       
       source_path.uniq!
+      param_hash['source_path'].value = clean_nested_source_paths(source_path)
       
       CLEAN.add(output)
       if(incremental)
@@ -703,6 +708,28 @@ EOF
     
     protected 
     
+    def clean_nested_source_paths(paths)
+      results = []
+      paths.each do |path|
+        if(check_nested_source_path(results, path))
+          results << path
+        end
+      end
+      return results
+    end
+    
+    def check_nested_source_path(array, path)
+      array.each_index do |index|
+        item = array[index]
+        if(item =~ /^#{path}/)
+          array.slice!(index, 1)
+        elsif(path =~ /^#{item}/)
+          return false
+        end
+      end
+      return true
+    end
+
     # Use the swc path if possible
     # Otherwise add to source
     def resolve_library(library_task)

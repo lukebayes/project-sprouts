@@ -30,11 +30,15 @@ class COMPCTest <  Test::Unit::TestCase
   
   def test_basic_compilation
     
-    compc @compc_output do |t|
+    compiler = compc @compc_output do |t|
       t.input = @compc_input
-      t.source_path << 'src'
-      t.source_path << 'test'
+      t.source_path << @src
+      t.source_path << @test
     end
+    
+    assert_equal(2, compiler.source_path.size)
+    assert_equal('src', compiler.source_path[0])
+    assert_equal('test', compiler.source_path[1])
 
     run_task @compc_output
     

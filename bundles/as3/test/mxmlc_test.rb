@@ -10,6 +10,7 @@ class MXMLCTest <  Test::Unit::TestCase
 
     @lib          = 'lib'
     @input        = 'src/SomeProject.as'
+    @nested_input = 'src/display/OrangeBox.as'
     @output       = 'bin/SomeProject.swf'
     
     Dir.chdir(fixture)
@@ -46,8 +47,24 @@ class MXMLCTest <  Test::Unit::TestCase
   def test_simplest_compiler_setup
     compiler = mxmlc @output do |t|
       t.input       = @input
-      t.source_path << @lib
     end
+
+    reqs = compiler.prerequisites
+    assert_equal(5, reqs.size, "There should be 5 requirements set up by the task")
+  end
+  
+  def test_nested_input
+    compiler = mxmlc @output do |t|
+      t.input       = @nested_input
+      t.source_path << 'src'
+    end
+    
+#    compiler.source_path.each do |path|
+#      puts ">> #{path}"
+#    end
+    
+    assert_equal(1, compiler.source_path.size)
+    assert_equal('src', compiler.source_path[0])
 
     reqs = compiler.prerequisites
     assert_equal(5, reqs.size, "There should be 5 requirements set up by the task")
