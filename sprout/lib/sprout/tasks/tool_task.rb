@@ -534,7 +534,6 @@ module Sprout
       value.each_index do |index|
         path = value[index]
         value[index] = usr.clean_path path
-#        p = usr.clean_path p
       end
     end
 
