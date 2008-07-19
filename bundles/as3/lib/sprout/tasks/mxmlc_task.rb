@@ -287,6 +287,7 @@ EOF
       end
       
       add_param(:frames_frame, :string) do |p|
+        p.shell_name = '-frames.frame'
         p.description =<<EOF
 Specifies a SWF file frame label with a sequence of class names that are linked onto the frame.
 
