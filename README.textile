@@ -53,7 +53,6 @@ Display all available Rake tasks:
 h3. Some Simple, Sample Rake Tasks
 
 _ActionScript 3 and MXML Projects:_
-
 <pre><code>mxmlc :debug do |t|
 	t.input = 'src/SomeProject.as'
 	t.output = 'bin/SomeProject.swf'
@@ -75,7 +74,6 @@ end
 </code></pre>
 
 _ActionScript 2 Projects:_
-
 <code><pre>mtasc :debug do |t|
 	t.main = true
 	t.header = '800:600:24'
