@@ -21,22 +21,26 @@ module Sprout # :nodoc:
   
     def initialize(args, &block)
       super
-      t = define_outer_task
+      outer_task = define_outer_task
       
       compc output do |t|
         configure_mxmlc t
         configure_mxmlc_application t
+        t.input = input
         yield t if block_given?
       end
 
-      t.prerequisites << output
-      return t
+      outer_task.prerequisites << output
+      return outer_task
     end
 
     def create_output
       return "#{create_output_base}.swc"
     end
     
+    def create_input
+      return @model.project_name
+    end
   end
 end
 

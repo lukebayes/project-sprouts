@@ -27,22 +27,17 @@ unit :test
 desc 'Compile the optimized deployment'
 deploy :deploy
 
-desc 'Create documentation for this project'
+desc 'Create documentation'
 document :doc
 
-# do |t|
-#  t.doc_classes << 'JSONExample'
-#  t.library_path << 'lib/corelib.swc'
-#end
-
-#desc 'Compile a SWC file for this project'
-#deploy_swc :deploy
-
-#desc 'Package up this project as a library gem'
-#deploy_lib :deploy
+desc 'Compile a SWC file'
+swc :swc
 
 #desc 'Compile, run and terminate the test harness'
 #ci :cruise
+
+#desc 'Package up this project as a library gem'
+#create_library_gem :create_library_gem
 
 # Make :debug the default (no-name) rake task
 task :default => :debug
