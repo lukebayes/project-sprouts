@@ -230,7 +230,7 @@ EOF
     def define # :nodoc:
       super
       validate_templates
-      CLEAN.add(output + '/*')
+      CLEAN.add(output)
     end
     
     def prepare
