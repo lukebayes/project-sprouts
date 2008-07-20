@@ -5,7 +5,7 @@
 	creationComplete="runTests()"
 	>
 	<!-- Import Application Styles -->
-	<mx:Style source="../css/<%= project_name %>.css" />
+	<mx:Style source="<%= project_name %>Skin.css" />
     <mx:Script>
     	<![CDATA[
     		import asunit.textui.TestRunner;
