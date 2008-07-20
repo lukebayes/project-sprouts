@@ -1,0 +1,32 @@
+h1. Project Sprouts
+
+h3. Description
+
+Project Sprouts is an open-source, cross-platform project generation and configuration tool for ActionScript 2, ActionScript 3, and Flex projects.
+
+Project Sprouts provides everything you need to get up and running with SWF development instantly. The only prerequisites are Ruby and RubyGems.
+
+Sprouts includes support for project and code templates, automated build scripts, remote managed libraries, and automatic installation of dependencies like the Flash VM and a variety of compilers and tools.
+
+h3. Installation
+
+# "Install Ruby":http://www.ruby-lang.org/en/downloads/
+# "Install RubyGems":http://rubyforge.org/frs/?group_id=126
+# Install the Sprout gem
+
+<code><pre>gem install sprout</pre></code>
+
+h3. Getting Started
+
+<code><pre>
+sprout -n as3 SomeProject # -n can also be as2 or mxml
+cd SomeProject
+rake
+script/generate utils.MathUtil
+rake test
+</pre></code>
+
+h3. More Info
+
+* "Project Sprouts":http://www.projectsprouts.org
+* "Ruby Docs":http://www.projectsprouts.org/rdoc
