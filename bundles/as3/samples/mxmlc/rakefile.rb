@@ -18,8 +18,6 @@ project_model :model do |m|
   m.libraries         << :corelib
 end
 
-library :corelib
-
 desc 'Compile and debug the application'
 debug :debug
 
