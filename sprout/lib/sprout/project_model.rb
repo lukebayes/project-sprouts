@@ -169,8 +169,8 @@ module Sprout
       @view_dir       = nil
       @controller_dir = nil
       
-      @test_height    = 900
-      @test_width     = 550
+      @test_height    = 550
+      @test_width     = 900
       @@instance      = self
     end
     
