@@ -54,7 +54,7 @@ h3. Some Simple, Sample Rake Tasks
 
 Sprouts brings the power of the "Rake":http://martinfowler.com/articles/rake.html build language to SWF development. Rake is similar to Make and Ant, but harnesses the full power and flexibility of Ruby to help us describe the structure and automate the behavior of any build, from the simplest to the most complex.
 
-Following are some simple examples of a few of the Rake tasks that Sprouts provides:
+Following are some simple examples of the Rake tasks that Sprouts provides:
 
 _ActionScript 3 and MXML Projects:_
 <pre><code>mxmlc :debug do |t|
