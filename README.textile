@@ -12,25 +12,99 @@ h3. Installation
 
 # "Install Ruby":http://www.ruby-lang.org/en/downloads/
 # "Install RubyGems":http://rubyforge.org/frs/?group_id=126
-# Install the Sprout gem for your platform.
+# Install the Sprout gem:
 
 <code><pre>gem install sprout</pre></code>
-_If prompted, select the appropriate gem for your platform._
+_(If prompted, select the appropriate gem for your platform.)_
 
 h3. Getting Started
 
 Open a terminal and enter the following commands:
-<code><pre>
-sprout -n as3 SomeProject # -n can also be as2 or mxml
-cd SomeProject
-rake
-script/generate utils.MathUtil
-rake test
-</pre></code>
+
+Create a new ActionScript 3 project and move into it:
+
+<pre><code>sprout -n as3 SomeProject
+cd SomeProject</code></pre>
+
+Resolve all dependencies, compile and launch the SWF:
+
+<pre><code>rake</code></pre>
+
+Generate a new class, test case and test suite:
+
+<pre><code>script/generate utils.MathUtil</code></pre>
+
+Compile and launch the test harness:
+
+<pre><code>rake test</code></pre>
+
+Compile a SWC file:
+
+<pre><code>rake swc</code></pre>
+
+Generate documentation using "AsDoc":http://labs.adobe.com/wiki/index.php/ASDoc:
+
+<pre><code>rake doc</code></pre>
+
+h3. Some Simple, Sample Rake Tasks
+
+<pre><code>
+mxmlc :debug do |t|
+	t.input = 'src/SomeProject.as'
+	t.output = 'bin/SomeProject.swf'
+end
+
+compc :deploy do |t|
+	t.input = 'src/SomeProject.as'
+	t.output = 'bin/SomeProject.swc'
+end
+
+asdoc :doc do |t|
+	t.doc_classes = 'SomeProject'
+	t.source_path = 'src'
+end
+
+mtasc :debug do |t|
+	t.main = true
+	t.header = '800:600:24'
+	t.input = 'src/SomeProject.as'
+	t.output = 'bin/SomeProject.swf'
+end
+
+swfmill :skin do |t|
+	t.input = 'assets/skins/SomeProjectSkin'
+	t.output = 'assets/skins/SomeProjectSkin.swf'
+end
+</code></pre>
 
 h3. Some Links
 
-* "Official Site":http://www.projectsprouts.org
+* "Web Site":http://www.projectsprouts.org
 * "File a Bug":http://code.google.com/p/projectsprouts/issues
 * "See the Documentation":http://www.projectsprouts.org/rdoc
 * "Meet the Community":http://groups.google.com/group/projectsprouts
+
+h3. MIT License
+
+<pre>
+Copyright (c) 2007, 2008 Pattern Park
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</pre>

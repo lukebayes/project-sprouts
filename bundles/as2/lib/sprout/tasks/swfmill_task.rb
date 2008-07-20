@@ -38,8 +38,8 @@ module Sprout
         p.hidden_name = true
         p.description =<<EOF
 The input can be one of the following
- * SWFMill XML document: Create and manually manage an input file as described at http://www.swfmill.org
- * Directory: if you point at a directory, this task will automatically include all files found forward of that directory. As it descends into child directories, the items found will be exposed in the library using period delimiters as follows:
+* SWFMill XML document: Create and manually manage an input file as described at http://www.swfmill.org
+* Directory: if you point at a directory, this task will automatically include all files found forward of that directory. As it descends into child directories, the items found will be exposed in the library using period delimiters as follows:
 
 The file:
   yourcompany/yourproject/SomeFile.png
