@@ -81,7 +81,7 @@ win_spec = Gem::Specification.new do |s|
   apply_shared_spec(s)
   s.platform = 'mswin32'
   # Add win-specific dependencies here
-  s.add_dependency('win32-open3')
+  s.add_dependency('win32-open3', '0.2.5')
 end
 
 ruby_spec = Gem::Specification.new do |s|

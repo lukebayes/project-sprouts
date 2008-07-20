@@ -1,7 +1,7 @@
 
 module Sprout # :nodoc:
   
-  # The MXMLCDebug helper wraps up fdb and mxmlc tasks by
+  # The MXMLCDebug helper wraps up the flashplayer and mxmlc tasks by
   # using either a Singleton or provided ProjectModel instance.
   #
   # The simple case that uses a Singleton ProjectModel:
