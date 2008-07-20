@@ -15,7 +15,8 @@ module Sprout #:nodoc:
         @alive = true
         usr = User.new()
         if(usr.is_a?(WinUser) && !usr.is_a?(CygwinUser))
-          gem 'win32/open3', '0.2.5'
+          gem 'win32-open3', '0.2.5'
+          require 'win32/open3'
           Open3.popen3(*@command) do |w, r, e, pid|
           	@w = w
           	@r = r
