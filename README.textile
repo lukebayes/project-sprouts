@@ -52,7 +52,7 @@ Display all available Rake tasks:
 
 h3. Some Simple, Sample Rake Tasks
 
-h4. ActionScript 3 and MXML Projects:
+_ActionScript 3 and MXML Projects:_
 
 <pre><code>mxmlc :debug do |t|
 	t.input = 'src/SomeProject.as'
@@ -74,7 +74,7 @@ flashplayer :run do |t|
 end
 </code></pre>
 
-h4. ActionScript 2 Projects:
+_ActionScript 2 Projects:_
 
 <code><pre>mtasc :debug do |t|
 	t.main = true
