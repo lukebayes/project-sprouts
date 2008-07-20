@@ -324,7 +324,7 @@ EOF
     # This method will actually download and install the provided gem by +name+ and +requirements+ if
     # it is not found locally on the system.
     def self.find_gem_spec(name, requirements=nil, recursed=false)
-      specs = Gem::cache.search(/.*#{name}$/)
+      specs = Gem::cache.search(/.*#{name}$/).reverse # Found specs are returned in order from oldest to newest!?
       requirement = nil
       if(requirements)
         requirement = Gem::Requirement.new(requirements)
@@ -423,8 +423,6 @@ EOF
       end
       return @@project_rakefile ||= nil
     end
-
-    private
 
     # Look in the provided +dir+ for files that meet the criteria to be a valid Rakefile.
     def self.child_rakefile(dir)
