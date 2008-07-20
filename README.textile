@@ -46,10 +46,15 @@ Generate documentation using "AsDoc":http://labs.adobe.com/wiki/index.php/ASDoc:
 
 <pre><code>rake doc</code></pre>
 
+Display all available Rake tasks:
+
+<pre><code>rake -T</code></pre>
+
 h3. Some Simple, Sample Rake Tasks
 
-<pre><code>
-mxmlc :debug do |t|
+h4. ActionScript 3 and MXML Projects:
+
+<pre><code>mxmlc :debug do |t|
 	t.input = 'src/SomeProject.as'
 	t.output = 'bin/SomeProject.swf'
 end
@@ -64,7 +69,14 @@ asdoc :doc do |t|
 	t.source_path = 'src'
 end
 
-mtasc :debug do |t|
+flashplayer :run do |t|
+	t.swf = 'bin/SomeProject.swf'
+end
+</code></pre>
+
+h4. ActionScript 2 Projects:
+
+<code><pre>mtasc :debug do |t|
 	t.main = true
 	t.header = '800:600:24'
 	t.input = 'src/SomeProject.as'
@@ -74,6 +86,10 @@ end
 swfmill :skin do |t|
 	t.input = 'assets/skins/SomeProjectSkin'
 	t.output = 'assets/skins/SomeProjectSkin.swf'
+end
+
+flashplayer :run do |t|
+	t.swf = 'bin/SomeProject.swf'
 end
 </code></pre>
 
