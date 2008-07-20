@@ -64,6 +64,8 @@ osx_spec = Gem::Specification.new do |s|
   apply_shared_spec(s)
   s.platform = 'darwin'
   # Add osx-specific dependencies here
+
+  # Can't really depend on rb-appscript b/c this requires OS X dev-tool disk
   #s.add_dependency('rb-appscript', '>= 0.5.0')
   s.add_dependency('open4', '>= 0.9.6')
 end
@@ -85,6 +87,7 @@ end
 ruby_spec = Gem::Specification.new do |s|
   apply_shared_spec(s)
   s.platform = Gem::Platform::RUBY
+  s.add_dependency('open4', '>= 0.9.6')
 end
 
 Rake::GemPackageTask.new(osx_spec) do |pkg|

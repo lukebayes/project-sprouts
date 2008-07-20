@@ -59,7 +59,7 @@ class AsDocTest <  Test::Unit::TestCase
       t.source_path << 'src'
     end
     
-    assert_equal('-output=doc -source-path+=src -templates-path+=/Users/lbayes/Library/Sprouts/cache/0.7/sprout-flex3sdk-tool-3.0.2/archive/asdoc/templates"', t.to_shell)
+    assert_equal('-output=doc -source-path+=src -templates-path+=/Users/lbayes/Library/Sprouts/cache/0.7/sprout-flex3sdk-tool-3.0.2/archive/asdoc/templates', t.to_shell)
   end
   
   def test_automatic_template_path

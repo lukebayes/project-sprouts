@@ -24,24 +24,21 @@ project_model :model do |m|
   # m.libraries             << :corelib
 end
 
-desc 'Compile and run the application for debugging'
+
+desc 'Compile and debug the application'
 debug :debug
 
-desc 'Compile and run the test harness'
+desc 'Compile run the test harness'
 unit :test
 
-desc 'Compile for deployment'
+desc 'Compile the optimized deployment'
 deploy :deploy
 
-desc 'Generate documentation'
+desc 'Create documentation'
 document :doc
+
+desc 'Compile a SWC file'
+swc :swc
 
 # set up the default rake task
 task :default => :debug
-
-desc 'Create a SWC file of this project'
-swc :swc
-
-# Coming Soon....
-#desc "Generate Flex Builder projects"
-#flex_builder :project

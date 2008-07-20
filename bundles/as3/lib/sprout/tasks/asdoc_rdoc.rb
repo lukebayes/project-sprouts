@@ -34,8 +34,8 @@ def doc_sources=(paths)
 end
 
 # A list of classes that should not be documented. You must specify individual class names. Alternatively, if the ASDoc comment for the class contains the @private tag, is not documented.
-def exclude_classes=(string)
-  @exclude_classes = string
+def exclude_classes=(strings)
+  @exclude_classes = strings
 end
 
 # Whether all dependencies found by the compiler are documented. If true, the dependencies of the input classes are not documented.

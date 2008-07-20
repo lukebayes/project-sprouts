@@ -70,7 +70,7 @@ class MXMLCHelperTest <  Test::Unit::TestCase
     t.define
 
     # The test method will modify the width unless otherwise specified within the task itself
-    assert_equal('-debug -default-background-color=#FFFFFF -default-frame-rate=24 -default-size 550 900 -library-path+=bar -output=bin/SomeProjectRunner.swf -source-path+=src -source-path+=foo -source-path+=assets -source-path+=test -source-path+=lib/asunit3 -verbose-stacktraces=true -warnings=true src/SomeProjectRunner.as', t.to_shell)
+    assert_equal('-debug -default-background-color=#FFFFFF -default-frame-rate=24 -default-size 900 550 -library-path+=bar -output=bin/SomeProjectRunner.swf -source-path+=src -source-path+=foo -source-path+=assets -source-path+=test -source-path+=lib/asunit3 -verbose-stacktraces=true -warnings=true src/SomeProjectRunner.as', t.to_shell)
   end
   
   def test_deploy_helper
@@ -130,8 +130,8 @@ class MXMLCHelperTest <  Test::Unit::TestCase
     deploy :deploy
     document :doc
 
-    t = Rake::application['doc/index.html']
-    result = "-doc-sources+=src -doc-sources+=foo -doc-sources+=assets -library-path+=bar -output=doc"
+    t = Rake::application['doc']
+    result = "-doc-classes+=SomeProject -library-path+=bar -main-title=SomeProject -output=doc -source-path+=src -source-path+=foo -source-path+=assets -templates-path+="
     assert_equal(result, t.to_shell[0...result.size])
   end
   
