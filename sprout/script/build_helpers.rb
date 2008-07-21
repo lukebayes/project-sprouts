@@ -30,7 +30,7 @@ end
 # Duplicate code from ../../rakefile.rb!
 def add_tool(file, clazz)
   name = File.basename(file).gsub(/.rb$/, '').gsub(/_task/, '')
-  doc_file = File.expand_path(File.dirname(file) + "/#{name}_rdoc.rb")
+  doc_file = File.expand_path(File.dirname(file) + "/#{name}_documentation.rb")
   content = clazz.new(name, Rake::application).to_rdoc
 
   File.open(doc_file, 'w') do |f|
