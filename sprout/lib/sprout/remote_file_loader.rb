@@ -183,7 +183,7 @@ module Sprout
     # the command works fine!?
     def unpack_dmg(dmg_file, dir)
       # 1) Mount the dmg in place
-      # 2) Recursively Copy it's contents to asproject_home
+      # 2) Recursively Copy its contents to asproject_home
       # 3) Unmount the dmg
       if(mounted_path.nil?)
         raise StandardError.new('DMG file downloaded, but the RemoteFileTask needs a mounted_path in order to mount it')

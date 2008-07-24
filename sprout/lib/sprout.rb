@@ -344,7 +344,7 @@ EOF
       else
         msg = ">> Loading gem [#{name}]"
         msg << " #{requirements}" if requirements
-        msg << " from #{gem_sources.join(', ')} with it's dependencies"
+        msg << " from #{gem_sources.join(', ')} with its dependencies"
         Log.puts msg
         parts = [ 'ins', '-r', name ]
         # This url should be removed once released, released gems should be hosted from the rubyforge

@@ -16,7 +16,7 @@ module Sprout
     # be compared and if they differ, the installation process will break.
     attr_accessor :md5
 
-    # Used for dmg archives. Absolute path to the mounted dmg (essentially it's name)
+    # Used for dmg archives. Absolute path to the mounted dmg (essentially its name)
     attr_accessor :mount_path
 
     # Which platform will this RemoteFileTarget support.
