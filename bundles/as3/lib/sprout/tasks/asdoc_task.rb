@@ -47,8 +47,6 @@ module Sprout
   # http://livedocs.adobe.com/flex/201/html/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Book_Parts&file=asdoc_127_1.html
   # 
   class AsDocTask < ToolTask
-		attr_accessor :exclude_expressions
-
     def initialize_task
       super
       @default_gem_name = 'sprout-flex3sdk-tool'
@@ -228,8 +226,13 @@ EOF
       end
     end
 
-    def define # :nodoc:
+		def exclude_expressions
 			@exclude_expressions ||= []
+		end
+
+    def define # :nodoc:
+			apply_exclusions_from_expression unless @exclude_expressions.nil?
+
       super
       validate_templates
       CLEAN.add(output)
@@ -293,16 +296,29 @@ EOF
       end
     end
 
-		def filename_to_import_name( filename )
-			name = filename.scan(/\w+/)
-			# Ignore the first (Base directory), and last (AS file extension) elements from
-			# the filename.
-			name[1..-2].join('.')
+		# Requires that @exclude_expressions is not nil.
+		def apply_exclusions_from_expression
+			FileList[@exclude_expressions].each do |file_path|
+				import_file = remove_source_path_from_file_path(file_path)
+				import_class = filename_to_import_class(import_file)
+
+				exclude_classes << import_class unless import_class.nil?
+			end
 		end
 
-		def filelist_from_expressions
-			FileList[@exclude_expressions] unless @exclude_expressions.empty?
+		def remove_source_path_from_file_path(file)
+				source_path.each do |source_dir|
+					import_file = file.sub(Regexp.new("^#{source_dir}"),"")
+					return import_file if import_file != file
+				end
 		end
+
+		def filename_to_import_class(filename)
+			name = filename.scan(/\w+/)
+			# Ignore the AS file extension.
+			name[0..-2].join('.') unless name[-1] != 'as'
+		end
+
   end
 end
 
