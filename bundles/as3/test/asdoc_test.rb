@@ -7,14 +7,14 @@ class AsDocTest <  Test::Unit::TestCase
     super
     @start        = Dir.pwd
     @fixture      = File.join(fixtures, 'asdoc')
-	  @input		    = 'src/SomeProject.as'
-	  @output       = 'bin/SomeProject.swf'
-	  @asunit       = 'lib/asunit'
-	  @lib          = 'lib'
-	  @src          = 'src'
-	  @test         = 'test'
-	  @doc          = 'doc'
-	  @doc_index    = 'doc/index.html'
+    @input        = 'src/SomeProject.as'
+    @output       = 'bin/SomeProject.swf'
+    @asunit       = 'lib/asunit'
+    @lib          = 'lib'
+    @src          = 'src'
+    @test         = 'test'
+    @doc          = 'doc'
+    @doc_index    = 'doc/index.html'
     Dir.chdir(@fixture)
   end
   
@@ -26,7 +26,7 @@ class AsDocTest <  Test::Unit::TestCase
   end
 
   def test_configure_directly
-		t = asdoc :docs do |t|
+    t = asdoc :docs do |t|
       t.doc_sources << @asunit
       t.doc_sources << @src
       t.doc_sources << @test
@@ -68,20 +68,20 @@ class AsDocTest <  Test::Unit::TestCase
     assert(t.to_shell.match(/-templates-path\+=.*\/Sprouts\/cache\//))
   end
 
-	def test_exclude_expressions
-		t = asdoc :docs do |t|
-			t.doc_sources << @src
+  def test_exclude_expressions
+    t = asdoc :docs do |t|
+      t.doc_sources << @src
       t.source_path << @asunit
       t.source_path << @src
       t.source_path << @test
       # Need to force templates_path so that these tests run on different machines
       t.templates_path << 'foo'
-			t.exclude_expressions << 'lib/asunit/**/*'
-			t.exclude_expressions << 'test/**/*'
+      t.exclude_expressions << 'lib/asunit/**/*'
+      t.exclude_expressions << 'test/**/*'
     end
 
-		excluded_classes = %w{ asunit.errors.AbstractMemberCalledError asunit.errors.AssertionFailedError asunit.errors.ClassNotFoundError asunit.errors.InstanceNotFoundError asunit.errors.UnimplementedFeatureError asunit.framework.Assert asunit.framework.AsynchronousTestCase asunit.framework.AsynchronousTestCaseExample asunit.framework.RemotingTestCase asunit.framework.Test asunit.framework.TestCase asunit.framework.TestCaseExample asunit.framework.TestFailure asunit.framework.TestListener asunit.framework.TestMethod asunit.framework.TestResult asunit.framework.TestSuite asunit.runner.BaseTestRunner asunit.runner.TestSuiteLoader asunit.runner.Version asunit.textui.FlexRunner asunit.textui.FlexTestRunner asunit.textui.ResultPrinter asunit.textui.TestRunner asunit.textui.XMLResultPrinter asunit.util.ArrayIterator asunit.util.Iterator asunit.util.Properties AllTests utils.MathUtilTest }.join( " -exclude-classes=" )
+    excluded_classes = %w{ asunit.errors.AbstractMemberCalledError asunit.errors.AssertionFailedError asunit.errors.ClassNotFoundError asunit.errors.InstanceNotFoundError asunit.errors.UnimplementedFeatureError asunit.framework.Assert asunit.framework.AsynchronousTestCase asunit.framework.AsynchronousTestCaseExample asunit.framework.RemotingTestCase asunit.framework.Test asunit.framework.TestCase asunit.framework.TestCaseExample asunit.framework.TestFailure asunit.framework.TestListener asunit.framework.TestMethod asunit.framework.TestResult asunit.framework.TestSuite asunit.runner.BaseTestRunner asunit.runner.TestSuiteLoader asunit.runner.Version asunit.textui.FlexRunner asunit.textui.FlexTestRunner asunit.textui.ResultPrinter asunit.textui.TestRunner asunit.textui.XMLResultPrinter asunit.util.ArrayIterator asunit.util.Iterator asunit.util.Properties AllTests utils.MathUtilTest }.join( " -exclude-classes=" )
 
     assert_equal("-doc-sources+=src -exclude-classes=#{excluded_classes} -output=doc -source-path+=lib/asunit -source-path+=src -source-path+=test -templates-path+=foo", t.to_shell)
-	end
+  end
 end
