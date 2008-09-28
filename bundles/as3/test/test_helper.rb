@@ -5,7 +5,7 @@ require 'test/unit'
 # indiidually, SPROUT_HOME should be a system or vm var and set 
 # Your local path where you've checked out the following branch:
 # https://projectsprouts.googlecode.com/svn/branches/rubygems/sprouts/sprout
-SPROUT_HOME = ENV['SPROUT_HOME']
+SPROUT_HOME = ENV['SPROUT_HOME'] || '../../../'
 $:.push(SPROUT_HOME + '/sprout/lib')
 $:.push(SPROUT_HOME + '/sprout/test')
 
