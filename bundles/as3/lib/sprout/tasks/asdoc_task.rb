@@ -226,12 +226,12 @@ EOF
       end
     end
 
-		def exclude_expressions
-			@exclude_expressions ||= []
-		end
+    def exclude_expressions
+      @exclude_expressions ||= []
+    end
 
     def define # :nodoc:
-			apply_exclusions_from_expression unless @exclude_expressions.nil?
+      apply_exclusions_from_expression unless @exclude_expressions.nil?
 
       super
       validate_templates
@@ -296,28 +296,30 @@ EOF
       end
     end
 
-		# Requires that @exclude_expressions is not nil.
-		def apply_exclusions_from_expression
-			FileList[@exclude_expressions].each do |file_path|
-				import_file = remove_source_path_from_file_path(file_path)
-				import_class = filename_to_import_class(import_file)
+    # Requires that @exclude_expressions is not nil.
+    def apply_exclusions_from_expression
+      FileList[@exclude_expressions].each do |file_path|
+        import_file = remove_source_path_from_file_path(file_path) || file_path
+        import_class = filename_to_import_class(import_file)
 
-				exclude_classes << import_class unless import_class.nil?
-			end
-		end
+        exclude_classes << import_class unless import_class.nil?
+      end
+    end
 
-		def remove_source_path_from_file_path(file)
-				source_path.each do |source_dir|
-					import_file = file.sub(Regexp.new("^#{source_dir}"),"")
-					return import_file if import_file != file
-				end
-		end
+    def remove_source_path_from_file_path(file)
+        source_path.each do |source_dir|
+          import_file = file.sub(Regexp.new("^#{source_dir}"),"")
+          return import_file if import_file != file
+        end
+        
+        return file
+    end
 
-		def filename_to_import_class(filename)
-			name = filename.scan(/\w+/)
-			# Ignore the AS file extension.
-			name[0..-2].join('.') unless name[-1] != 'as'
-		end
+    def filename_to_import_class(filename)
+      name = filename.scan(/\w+/)
+      # Ignore the AS file extension.
+      name[0..-2].join('.') unless name[-1] != 'as'
+    end
 
   end
 end
