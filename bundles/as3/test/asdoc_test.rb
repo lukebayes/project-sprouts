@@ -26,7 +26,14 @@ class AsDocTest <  Test::Unit::TestCase
   end
 
   def test_configure_directly
-    t = direct_configuration
+		t = asdoc :docs do |t|
+      t.doc_sources << @asunit
+      t.doc_sources << @src
+      t.doc_sources << @test
+      # Need to force templates_path so that these tests run on different machines
+      t.templates_path << 'foo'
+    end
+
     assert_equal('-doc-sources+=lib/asunit -doc-sources+=src -doc-sources+=test -output=doc -templates-path+=foo', t.to_shell)
   end
 
@@ -62,24 +69,19 @@ class AsDocTest <  Test::Unit::TestCase
   end
 
 	def test_exclude_expressions
-		t = direct_configuration
-		t.exclude_expressions << 'lib/asunit/**/*'
-		t.exclude_expressions << 'test/**/*'
-
-		excluded_classes = %w{ asunit.asunit.util.Properties asunit.asunit.util.Iterator asunit.asunit.util.ArrayIterator asunit.asunit.textui.XMLResultPrinter asunit.asunit.textui.TestRunner asunit.asunit.textui.ResultPrinter asunit.asunit.textui.FlexTestRunner asunit.asunit.textui.FlexRunner asunit.asunit.runner.Version asunit.asunit.runner.TestSuiteLoader asunit.asunit.runner.BaseTestRunner asunit.asunit.framework.TestSuite asunit.asunit.framework.TestResult asunit.asunit.framework.TestMethod asunit.asunit.framework.TestListener asunit.asunit.framework.TestFailure asunit.asunit.framework.TestCaseExample asunit.asunit.framework.TestCase asunit.asunit.framework.Test asunit.asunit.framework.RemotingTestCase asunit.asunit.framework.AsynchronousTestCaseExample asunit.asunit.framework.AsynchronousTestCase asunit.asunit.framework.Assert asunit.asunit.errors.UnimplementedFeatureError asunit.asunit.errors.InstanceNotFoundError asunit.asunit.errors.ClassNotFoundError asunit.asunit.errors.AssertionFailedError asunit.asunit.errors.AbstractMemberCalledError utils.MathUtilTest AllTests }.join( " -exclude-classes=" )
-    assert_equal("-doc-sources+=lib/asunit -doc-sources+=src -doc-sources+=test -library-path+=lib -output=doc -templates-path+=foo -exclude-classes=#{excluded_classes}", t.to_shell)
-	end
-
-	private
-
-	def direct_configuration
-		asdoc :docs do |t|
-      t.doc_sources << @asunit
-      t.doc_sources << @src
-      t.doc_sources << @test
+		t = asdoc :docs do |t|
+			t.doc_sources << @src
+      t.source_path << @asunit
+      t.source_path << @src
+      t.source_path << @test
       # Need to force templates_path so that these tests run on different machines
       t.templates_path << 'foo'
+			t.exclude_expressions << 'lib/asunit/**/*'
+			t.exclude_expressions << 'test/**/*'
     end
-	end
 
+		excluded_classes = %w{ asunit.errors.AbstractMemberCalledError asunit.errors.AssertionFailedError asunit.errors.ClassNotFoundError asunit.errors.InstanceNotFoundError asunit.errors.UnimplementedFeatureError asunit.framework.Assert asunit.framework.AsynchronousTestCase asunit.framework.AsynchronousTestCaseExample asunit.framework.RemotingTestCase asunit.framework.Test asunit.framework.TestCase asunit.framework.TestCaseExample asunit.framework.TestFailure asunit.framework.TestListener asunit.framework.TestMethod asunit.framework.TestResult asunit.framework.TestSuite asunit.runner.BaseTestRunner asunit.runner.TestSuiteLoader asunit.runner.Version asunit.textui.FlexRunner asunit.textui.FlexTestRunner asunit.textui.ResultPrinter asunit.textui.TestRunner asunit.textui.XMLResultPrinter asunit.util.ArrayIterator asunit.util.Iterator asunit.util.Properties AllTests utils.MathUtilTest }.join( " -exclude-classes=" )
+
+    assert_equal("-doc-sources+=src -exclude-classes=#{excluded_classes} -output=doc -source-path+=lib/asunit -source-path+=src -source-path+=test -templates-path+=foo", t.to_shell)
+	end
 end
