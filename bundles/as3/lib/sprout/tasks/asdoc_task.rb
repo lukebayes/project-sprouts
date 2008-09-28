@@ -47,6 +47,7 @@ module Sprout
   # http://livedocs.adobe.com/flex/201/html/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Book_Parts&file=asdoc_127_1.html
   # 
   class AsDocTask < ToolTask
+		attr_accessor :exclude_expressions
 
     def initialize_task
       super
@@ -228,6 +229,7 @@ EOF
     end
 
     def define # :nodoc:
+			@exclude_expressions ||= []
       super
       validate_templates
       CLEAN.add(output)
@@ -248,7 +250,7 @@ EOF
         end
       end
     end
-    
+
     protected
     
     def validate_templates
@@ -258,7 +260,7 @@ EOF
         templates_path << templates_dir
       end
     end
-    
+
     def execute(*args)
       update_helper_mode
       begin
@@ -291,6 +293,16 @@ EOF
       end
     end
 
+		def filename_to_import_name( filename )
+			name = filename.scan(/\w+/)
+			# Ignore the first (Base directory), and last (AS file extension) elements from
+			# the filename.
+			name[1..-2].join('.')
+		end
+
+		def filelist_from_expressions
+			FileList[@exclude_expressions] unless @exclude_expressions.empty?
+		end
   end
 end
 
