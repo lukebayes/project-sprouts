@@ -6,7 +6,7 @@ package <%= package_name %> {
 		private var <%= instance_name %>:<%= class_name %>;
 
 		public function <%= test_case_name %>(methodName:String=null) {
-			super(methodName)
+			super(methodName);
 		}
 
 		override protected function setUp():void {
