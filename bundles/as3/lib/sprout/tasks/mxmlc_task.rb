@@ -686,10 +686,6 @@ EOF
       if(input && !input.match(/.css/) && File.exists?(input))
         source_path << File.dirname(input)
       end
-
-      if(!input)
-        raise MXMLCError.new('MXMLCTask.input is a required field')
-      end
       
       if(link_report)
         CLEAN.add(link_report)
