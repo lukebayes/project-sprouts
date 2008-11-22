@@ -683,7 +683,7 @@ EOF
         end
       end
       
-      if(!input.match(/.css/) && File.exists?(input))
+      if(input && !input.match(/.css/) && File.exists?(input))
         source_path << File.dirname(input)
       end
 
