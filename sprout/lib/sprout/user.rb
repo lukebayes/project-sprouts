@@ -196,7 +196,7 @@ module Sprout
         return Platform::IMPL
       end
     end
-    
+
     def get_process_runner(command)
       return ProcessRunner.new(command)
     end
@@ -205,12 +205,14 @@ module Sprout
       Log.puts(">> Execute: #{File.basename(tool)} #{options}")
       tool = clean_path(tool)
       runner = get_process_runner("#{tool} #{options}")
-    
+
       result = runner.read
       error = runner.read_err
+
       if(result.size > 0)
         Log.puts result
       end
+
       if(error.size > 0)
         raise ExecutionError.new("[ERROR] #{error}")
       end
@@ -220,7 +222,7 @@ module Sprout
       tool = clean_path(tool)
       return get_process_runner("#{tool} #{options}")
     end
-    
+
     def execute_thread(tool, options='')
       return Thread.new {
         execute(tool, options)
