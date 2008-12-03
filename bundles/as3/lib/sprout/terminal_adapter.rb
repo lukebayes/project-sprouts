@@ -24,27 +24,46 @@ TODO: Investigate jruby support, especially:
     http://livedocs.adobe.com/flex/201/html/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Book_Parts&file=compilers_123_09.html
 =end
 
-require 'sprout/terminal_adapter'
-
 module Sprout
-  class FCSHError < StandardError #:nodoc:
-  end
   
-  class FCSHService
-    
-    def initialize
-      @tokens = ["\n(fcsh)", "WARNING", "ERROR"]
+  # TerminalAdapter is expected to read from a stream
+  # as it changes, and throw events based on the messages
+  # that the Terminal responds with.
+  class TerminalAdapter
+  
+    def open(stream, tokens)
+      @is_open = true
+      Thread.new {
+        index = 0
+        processed = ''
+        while(@is_open) do
+          while(stream.size > index) do
+            processed << stream[index].chr
+            token = find_token(processed, tokens)
+            yield token if !token.nil?
+            index += 1
+          end
+          sleep(0.1)
+        end
+      }
     end
     
-    def open
-      # TODO: This should use configurable SDK destinations:
-      exe = Sprout.get_executable('sprout-flex3sdk-tool', 'bin/fcsh')
-      @response = User.execute_silent(exe)
-      
+    def close
+      @is_open = false
     end
     
     protected
+
+    def find_token(str, tokens)
+      tokens.each do |token|
+        puts "checking #{str} #{token}"
+        parts = str.match(token)
+        if(!parts.nil?)
+          return token
+        end
+      end
+      return nil
+    end
+
   end
-
-
 end

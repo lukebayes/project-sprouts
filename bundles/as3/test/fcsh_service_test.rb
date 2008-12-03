@@ -14,8 +14,7 @@ class FCSHServiceTest <  Test::Unit::TestCase
     super
   end
   
-  def test_open
-    assert service.open
+  def test_simple_read
   end
   
 end
