@@ -110,6 +110,7 @@ class Lexer
       next_token(string) do |t,token, tail|
         result_string << t
         token_list << token
+        yield t, token if block_given?
       end
     end
     return result_string, token_list

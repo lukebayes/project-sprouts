@@ -1,6 +1,8 @@
 require File.dirname(__FILE__) + '/test_helper'
 require File.dirname(__FILE__) + '/../../../sprout/lib/sprout/project_model'
 
+require 'little_lexer'
+
 class TerminalAdapterTest <  Test::Unit::TestCase
   attr_reader :adapter
   
@@ -13,27 +15,8 @@ class TerminalAdapterTest <  Test::Unit::TestCase
     super
   end
   
-  def test_find_simple_token
-    tokens = ['a']
-    stream = 'bcd'
-    found = []
-    adapter.open(stream, tokens) do |token|
-      found << token
-    end
-
-    stream << 'e'
-    stream << 'f'
-    stream << 'a'
-    sleep(0.2)
-    
-    assert_equal 1, found.size
-    assert_equal 'a', found[0]
-    adapter.close
-  end
-  
-  def test_find_deeper_token
-    tokens = ["\n(fcsh)"]
-    out =<<EOF
+  def test_little_lexer
+    input =<<EOF
 Adobe Flex Compiler SHell (fcsh)
 Version 3.0.0 build 477
 Copyright (c) 2004-2007 Adobe Systems, Inc. All rights reserved.
@@ -41,13 +24,14 @@ Copyright (c) 2004-2007 Adobe Systems, Inc. All rights reserved.
 (fcsh)
 EOF
 
-    found = []
-    adapter.open(out, tokens) do |token|
-      puts "FOUND #{token}"
-      found << token
+    lexer = Lexer.new([[/\n\(fcsh\)/, ?=], 
+                       [/[\s\S]/, ?_],
+                       ])
+    string, list = lexer.scan(input) do |token, source|
+      if(token == ?=)
+        puts "HIT COMMAND PROMPT NOW!"
+      end
     end
-    assert_equal 1, found.size
-    adapter.close
   end
   
 end

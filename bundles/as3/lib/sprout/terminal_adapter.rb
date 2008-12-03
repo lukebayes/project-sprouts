@@ -30,7 +30,7 @@ module Sprout
   # as it changes, and throw events based on the messages
   # that the Terminal responds with.
   class TerminalAdapter
-  
+
     def open(stream, tokens)
       @is_open = true
       Thread.new {
