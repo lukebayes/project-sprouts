@@ -24,14 +24,15 @@ TODO: Investigate jruby support, especially:
     http://livedocs.adobe.com/flex/201/html/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Book_Parts&file=compilers_123_09.html
 =end
 
+require 'sprout/fcsh_lexer'
+
 module Sprout
   class FCSHError < StandardError #:nodoc:
   end
-  
+
   class FCSHService
     
     def initialize
-      @tokens = ["\n(fcsh)", "WARNING", "ERROR"]
     end
     
     def open

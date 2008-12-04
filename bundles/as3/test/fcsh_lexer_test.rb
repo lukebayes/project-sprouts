@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 require File.dirname(__FILE__) + '/../../../sprout/lib/sprout/project_model'
 
-require 'sprout/fcsh_lexer'
-
 class TerminalAdapterTest <  Test::Unit::TestCase
   
   def input

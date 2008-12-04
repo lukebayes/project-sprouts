@@ -27,6 +27,17 @@ TODO: Investigate jruby support, especially:
 module Sprout
   class FCSHError < StandardError #:nodoc:
   end
+
+  # Look for $USER_TMP_DIR/fcsh.pid
+  #   If found, look in the file for current project directory as hash key
+  #   If found, grab the port number for this project directory and connect
+  # If no pid file or no existing service indexed for this project directory:
+  #   Fork a new process with FCSHService at some available port
+  #   add project directory and port number to $USER_TMP_DIR/fcsh.pid
+  # Once FCSH has been started remind the user that they'll need to run
+  # rake fcsh:stop to kill the process associated with this project.
+  #
+  # If this system cannot fork (Windoze), prompt the user to run rake fcsh:start
   
   class FCSHClient
   end
