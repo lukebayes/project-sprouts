@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/test_helper'
 require File.dirname(__FILE__) + '/../../../sprout/lib/sprout/project_model'
 
-require 'little_lexer'
+require 'sprout/fcsh_lexer'
 
 class TerminalAdapterTest <  Test::Unit::TestCase
   
@@ -41,7 +41,7 @@ EOF
 
     reader, writer = IO.pipe
 
-    lexer = FCSHLexer.new
+    lexer = Sprout::FCSHLexer.new
     lexer.scan_stream(reader) do |token, match|
       case token
         when FCSHLexer::PRELUDE
@@ -75,67 +75,3 @@ EOF
 
 end
 
-class FCSHLexer
-  PROMPT  = ':prompt'
-  WARNING = ':warning'
-  ERROR   = ':error'
-  PRELUDE = ':prelude'
-
-  PRELUDE_EXPRESSION = /Adobe Flex Compiler.*\n.*\nCopyright.*\n/m
-
-  def initialize
-    @regex_to_char = [
-                      [/\n\(fcsh\)/,               PROMPT], # Prompt for input
-                      [/\n(.*Warning:.*\^\s+)\n/m, WARNING], # Warning encountered
-                      [/\n(.*Error:.*\^\s+)\n/m,   ERROR], # Error encountered
-                      [PRELUDE_EXPRESSION,         PRELUDE]
-                     ]
-  end
-  
-  def scan_stream(reader, out=nil)
-    out = out || $stdout
-    out.printf "Waiting for FCSH."
-    
-    @t = Thread.new {
-      partial = ''
-      index = 0
-      while(!reader.eof?) do
-        partial << reader.readpartial(1)
-        token, match = next_token(partial)
-        if(token)
-          partial = ''
-          out.puts ''
-          yield token, match
-        end
-        
-        if((index += 1) > 10)
-          out.printf '.'
-          out.flush
-          index = 0
-          sleep(0.02)
-        end
-      end
-    }
-    @t.abort_on_exception = true
-  end
-
-  def next_token(string)
-    @regex_to_char.each do |regex, char|
-      # puts "checking: #{string}"
-      match = regex.match(string)
-      if match
-        return char, match # token, match
-      end
-    end
-    return nil
-  end
-
-  def join
-    @t.join
-  end
-  
-  def close
-    @t.kill
-  end
-  
-end
