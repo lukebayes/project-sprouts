@@ -34,7 +34,6 @@ module Sprout
     def open(stream, tokens)
       @is_open = true
       Thread.new {
-        index = 0
         processed = ''
         while(@is_open) do
           while(stream.size > index) do
