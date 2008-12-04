@@ -21,11 +21,13 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-TODO: Investigate jruby support, especially:
-    http://livedocs.adobe.com/flex/201/html/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Book_Parts&file=compilers_123_09.html
 =end
-
+  
+  # This class should allow us to parse the stream output that FCSH provides.
+  # It was largely inspired by "LittleLexer" (http://rubyforge.org/projects/littlelexer/)
+  # which is a beautiful and concise general purpose lexer written by John Carter.
+  # Unfortunately, LittleLexer did not support long-lived Stream input, which 
+  # (I think) we needed.
   class FCSHLexer
     PROMPT  = ':prompt'
     WARNING = ':warning'
