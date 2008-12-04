@@ -32,18 +32,10 @@ module Sprout
 
   class FCSHService
     
-    def initialize
-    end
-    
     def open
       # TODO: This should use configurable SDK destinations:
       exe = Sprout.get_executable('sprout-flex3sdk-tool', 'bin/fcsh')
       @response = User.execute_silent(exe)
-      
     end
-    
-    protected
   end
-
-
 end
