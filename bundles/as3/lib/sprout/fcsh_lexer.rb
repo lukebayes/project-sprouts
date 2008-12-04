@@ -32,7 +32,7 @@ TODO: Investigate jruby support, especially:
     ERROR   = ':error'
     PRELUDE = ':prelude'
 
-    PRELUDE_EXPRESSION = /Adobe Flex Compiler.*\n.*\nCopyright.*\n/m
+    PRELUDE_EXPRESSION = /(Adobe Flex Compiler.*\n.*\nCopyright.*\n)/m
 
     def initialize
       @regex_to_token = [
