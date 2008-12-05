@@ -3,30 +3,6 @@ require File.dirname(__FILE__) + '/../../../sprout/lib/sprout/project_model'
 
 class TerminalAdapterTest <  Test::Unit::TestCase
   
-  def input
-      value =<<EOF
-Adobe Flex Compiler SHell (fcsh)
-Version 3.0.0 build 477
-Copyright (c) 2004-2007 Adobe Systems, Inc. All rights reserved.
-
-/Users/lbayes/Projects/Demo/SomeProject/src/SomeProject.as(10): col: 8 Warning: variable 'mine' has no type declaration.
-
-                        var mine = [];
-                            ^
-
-
-/Users/lbayes/Projects/Demo/SomeProject/src/SomeProject.as(10): col: 4 Error: Access of undefined property tr.
-
-                        tr
-                        ^
-
-
-
-(fcsh)
-
-EOF
-  end
-  
   def test_fcsh_parser
     found = []
     fake_stdin, fake_stdout = IO.pipe
@@ -64,17 +40,43 @@ EOF
     end
     
     result = found.shift
-    assert_equal(Sprout::FCSHLexer::PRELUDE, result[:token])
-    assert(result[:match][1].match(/Adobe Flex Compiler/))
+    assert_equal(Sprout::FCSHLexer::PRELUDE, result[:token], 'Expected prelude token')
+    assert(result[:match][1].match(/Adobe Flex Compiler/), 'Expected prelude content')
     result = found.shift
-    assert_equal(Sprout::FCSHLexer::WARNING, result[:token])
-    assert(result[:match][1].match(/\^/))
+    assert_equal(Sprout::FCSHLexer::WARNING, result[:token], 'Expected warning token')
+    assert(result[:match][1].match(/\^/), 'Expected warning content')
     result = found.shift
-    assert_equal(Sprout::FCSHLexer::ERROR, result[:token])
-    assert(result[:match][1].match(/\^/))
+    assert_equal(Sprout::FCSHLexer::ERROR, result[:token], 'Expected error token')
+    assert(result[:match][1].match(/\^/), 'Expected error content')
     result = found.shift
-    assert_equal(Sprout::FCSHLexer::PROMPT, result[:token])
+    assert_equal(Sprout::FCSHLexer::PROMPT, result[:token], 'Expected prompt')
+  end
+
+  def input
+    value =<<EOF
+Adobe Flex Compiler SHell (fcsh)
+Version 3.0.0 build 477
+Copyright (c) 2004-2007 Adobe Systems, Inc. All rights reserved.
+
+/Users/lbayes/Projects/Demo/SomeProject/src/SomeProject.as(10): col: 8 Warning: variable 'mine' has no type declaration.
+
+                          var mine = [];
+                              ^
+
+
+/Users/lbayes/Projects/Demo/SomeProject/src/SomeProject.as(10): col: 4 Error: Access of undefined property tr.
+
+                          tr
+                          ^
+
+
+
+
+(fcsh)
+
+
+
+EOF
   end
 
 end
-

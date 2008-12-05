@@ -38,9 +38,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     def initialize
       @regex_to_token = [
-                        [/\n\(fcsh\)/,               PROMPT], # Prompt for input
-                        [/\n(.*Warning:.*\^\s+)\n/m, WARNING], # Warning encountered
-                        [/\n(.*Error:.*\^\s+)\n/m,   ERROR], # Error encountered
+                        [/\n\(fcsh\)/m,               PROMPT], # Prompt for input
+                        [/\n(.*Warning:.*\^\s*)\n/m, WARNING], # Warning encountered
+                        [/\n(.*Error:.*\^\s*)\n/m,   ERROR], # Error encountered
                         [PRELUDE_EXPRESSION,         PRELUDE]
                        ]
     end
