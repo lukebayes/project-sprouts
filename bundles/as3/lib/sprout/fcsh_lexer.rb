@@ -1,5 +1,3 @@
-module Sprout
-
 =begin
 Copyright (c) 2007 Pattern Park
 
@@ -22,6 +20,8 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 =end
+
+module Sprout
   
   # This class should allow us to parse the stream output that FCSH provides.
   # It was largely inspired by "LittleLexer" (http://rubyforge.org/projects/littlelexer/)
@@ -38,7 +38,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     def initialize
       @regex_to_token = [
-                        [/\n\(fcsh\)/m,               PROMPT], # Prompt for input
+                        [/\n\(fcsh\)/,              PROMPT], # Prompt for input
                         [/\n(.*Warning:.*\^\s*)\n/m, WARNING], # Warning encountered
                         [/\n(.*Error:.*\^\s*)\n/m,   ERROR], # Error encountered
                         [PRELUDE_EXPRESSION,         PRELUDE]
@@ -51,42 +51,50 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     # tokens with each character added.
     def scan_stream(reader, out=nil)
       out = out || $stdout
-      out.printf "Waiting for FCSH."
 
       @t = Thread.new {
         partial = ''
         index = 0
         while(!reader.eof?) do
+          out.puts "-------"
+          out.puts "a"
           partial << reader.readpartial(1)
           token, match = next_token(partial)
           if(token)
-            partial = ''
+            out.puts "inside found"
             out.puts ''
-            yield token, match
+            yield token, match if block_given?
+            partial = ''
           end
+          out.puts "b"
+          out.flush
 
-          if((index += 1) > 10)
-            out.printf '.'
-            out.flush
-            index = 0
-            sleep(0.02)
-          end
+          # if((index += 1) > 10)
+          #   out.printf '.'
+          #   out.flush
+          #   index = 0
+          #   sleep(0.2)
+          # end
+          out.puts "c"
         end
+        puts "OUTSIDE!"
       }
       @t.abort_on_exception = true
+      self
     end
-
+    
     # Retrieve the next token from the string, and
     # return nil if no token is found
     def next_token(string)
+      puts "checking: #{string}"
       @regex_to_token.each do |regex, token|
-        # puts "checking: #{string}"
         match = regex.match(string)
         if match
           return token, match
         end
       end
-      return nil
+      puts "returning nil"
+      return [nil, nil]
     end
 
     def join

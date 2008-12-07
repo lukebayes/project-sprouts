@@ -10,7 +10,8 @@ class TerminalAdapterTest <  Test::Unit::TestCase
     reader, writer = IO.pipe
 
     lexer = Sprout::FCSHLexer.new
-    lexer.scan_stream(reader, fake_stdout) do |token, match|
+    # lexer.scan_stream(reader, fake_stdout) do |token, match|
+    lexer.scan_stream(reader, $stdout) do |token, match|
       case token
         when Sprout::FCSHLexer::PRELUDE
           found << {:token => token, :match => match}
@@ -35,19 +36,25 @@ class TerminalAdapterTest <  Test::Unit::TestCase
       index += 1
       if((index % 10) == 0)
         writer.flush
-        sleep(0.02)
+        sleep(0.03)
       end
     end
+    
+    lexer.join
+    puts "---------------------------"
     
     result = found.shift
     assert_equal(Sprout::FCSHLexer::PRELUDE, result[:token], 'Expected prelude token')
     assert(result[:match][1].match(/Adobe Flex Compiler/), 'Expected prelude content')
+
     result = found.shift
     assert_equal(Sprout::FCSHLexer::WARNING, result[:token], 'Expected warning token')
     assert(result[:match][1].match(/\^/), 'Expected warning content')
+
     result = found.shift
     assert_equal(Sprout::FCSHLexer::ERROR, result[:token], 'Expected error token')
     assert(result[:match][1].match(/\^/), 'Expected error content')
+
     result = found.shift
     assert_equal(Sprout::FCSHLexer::PROMPT, result[:token], 'Expected prompt')
   end
@@ -69,13 +76,7 @@ Copyright (c) 2004-2007 Adobe Systems, Inc. All rights reserved.
                           tr
                           ^
 
-
-
-
 (fcsh)
-
-
-
 EOF
   end
 
