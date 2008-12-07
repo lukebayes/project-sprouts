@@ -39,7 +39,7 @@ module Sprout
     def initialize
       @regex_to_token = [
                         [/\n\(fcsh\)/,              PROMPT], # Prompt for input
-                        [/\n(.*Warning:.*\^\s*)\n/m, WARNING], # Warning encountered
+                        [/\n(.*Warning:.*\^.*)\n/m, WARNING], # Warning encountered
                         [/\n(.*Error:.*\^\s*)\n/m,   ERROR], # Error encountered
                         [PRELUDE_EXPRESSION,         PRELUDE]
                        ]
@@ -49,51 +49,47 @@ module Sprout
     # persistent CLI application, it never sends an EOF or even a consistent
     # EOL. In order to tokenize the output, we need to attempt to check 
     # tokens with each character added.
+    # scan_stream will block and read characters from the reader provided until
+    # it encounters a PROMPT token, at that time, it will return an array
+    # of all tokens found.
+    # It will additionally yield each token as it's found if a block is provided.
     def scan_stream(reader, out=nil)
       out = out || $stdout
-
+      
+      tokens = []
       @t = Thread.new {
         partial = ''
         index = 0
         while(!reader.eof?) do
-          out.puts "-------"
-          out.puts "a"
           partial << reader.readpartial(1)
           token, match = next_token(partial)
           if(token)
-            out.puts "inside found"
-            out.puts ''
+            tokens << {:token => token, :match => match}
             yield token, match if block_given?
             partial = ''
+            if(token == PROMPT)
+              out.flush
+              break
+            end
           end
-          out.puts "b"
           out.flush
-
-          # if((index += 1) > 10)
-          #   out.printf '.'
-          #   out.flush
-          #   index = 0
-          #   sleep(0.2)
-          # end
-          out.puts "c"
         end
-        puts "OUTSIDE!"
       }
       @t.abort_on_exception = true
-      self
+      @t.join
+      return tokens
     end
     
     # Retrieve the next token from the string, and
     # return nil if no token is found
     def next_token(string)
-      puts "checking: #{string}"
+      # puts "checking: #{string}"
       @regex_to_token.each do |regex, token|
         match = regex.match(string)
         if match
           return token, match
         end
       end
-      puts "returning nil"
       return [nil, nil]
     end
 
