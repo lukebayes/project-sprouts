@@ -36,7 +36,8 @@ module Sprout
 
     PRELUDE_EXPRESSION = /(Adobe Flex Compiler.*\n.*\nCopyright.*\n)/m
 
-    def initialize
+    def initialize(out=nil)
+      @out = out || $stdout
       @regex_to_token = [
                         [/\n\(fcsh\)/,              PROMPT], # Prompt for input
                         [/\n(.*Warning:.*\^.*)\n/m, WARNING], # Warning encountered
@@ -53,30 +54,24 @@ module Sprout
     # it encounters a PROMPT token, at that time, it will return an array
     # of all tokens found.
     # It will additionally yield each token as it's found if a block is provided.
-    def scan_stream(reader, out=nil)
-      out = out || $stdout
-      
+    def scan_stream(reader)
       tokens = []
-      @t = Thread.new {
-        partial = ''
-        index = 0
-        while(!reader.eof?) do
-          partial << reader.readpartial(1)
-          token, match = next_token(partial)
-          if(token)
-            tokens << {:token => token, :match => match}
-            yield token, match if block_given?
-            partial = ''
-            if(token == PROMPT)
-              out.flush
-              break
-            end
-          end
-          out.flush
+      partial = ''
+      index = 0
+      while(true) do
+        code = reader.getc
+        return if code.nil?
+        
+        partial << code.chr
+        token, match = next_token(partial)
+        if(token)
+          tokens << {:token => token, :match => match}
+          yield token, match if block_given?
+          partial = ''
+          break if(token == PROMPT)
         end
-      }
-      @t.abort_on_exception = true
-      @t.join
+      end
+
       return tokens
     end
     
@@ -101,5 +96,10 @@ module Sprout
       @t.kill
     end
 
+    private
+    
+    def out
+      @out
+    end
   end
 end

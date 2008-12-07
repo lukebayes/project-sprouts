@@ -7,7 +7,7 @@ class TerminalAdapterTest <  Test::Unit::TestCase
     found = []
     fake_stdin, fake_stdout = IO.pipe
     reader, writer = IO.pipe
-    lexer = Sprout::FCSHLexer.new
+    lexer = Sprout::FCSHLexer.new(fake_stdout)
 
     t = Thread.new {
       sleep(0.2)
@@ -22,7 +22,7 @@ class TerminalAdapterTest <  Test::Unit::TestCase
       end
     }
     
-    return lexer.scan_stream(reader, $stdout)
+    return lexer.scan_stream(reader)
   end
   
   def test_warning

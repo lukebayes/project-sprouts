@@ -34,10 +34,6 @@ module Sprout #:nodoc:
       end
     end
     
-    def eof?
-      @r.eof?
-    end
-    
     def alive?
       @alive = update_status
     end

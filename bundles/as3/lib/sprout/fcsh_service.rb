@@ -33,63 +33,56 @@ module Sprout
 
   class FCSHService
     # This is probably a dumb, overused port number.
-    # Isn't the default for Tomcat or something?
+    # Isn't it the default for Tomcat or something?
     # Any safer / more compatible suggestions are welcome!
-    DEFAULT_PORT = 8090
+    # DEFAULT_PORT = 8090
     
     def initialize(out=nil)
       @out = out || $stdout
       @tasks = []
-      @pending = []
-      @lexer = nil
-    end
-    
-    def open(path, port=DEFAULT_PORT)
-      @busy = true
-      @out.puts "[FCSH] Starting up FCSH process"
+      @lexer = FCSHLexer.new @out
+
       # TODO: This should use configurable SDK destinations:
-      @lexer = FCSHLexer.new
       exe = Sprout.get_executable('sprout-flex3sdk-tool', 'bin/fcsh')
       @process = User.execute_silent(exe)
-
-      @lexer.scan_stream(@process, $stdout) do |token, match|
-        case token
-          when FCSHLexer::PRELUDE
-            # found << {:token => token, :match => match}
-            @out.puts match
-          when FCSHLexer::WARNING
-            # found << {:token => token, :match => match}
-            @out.puts "[WARNING] #{match[1]}"
-          when FCSHLexer::ERROR
-            # found << {:token => token, :match => match}
-            @out.puts "[ERROR] #{match[1]}"
-          when FCSHLexer::PROMPT
-            # found << {:token => token, :match => match}
-            @out.print "(fcsh) #{match.pre_match}"
-            @busy = false
-            execute_next
-          else
-            puts "unexpected token found #{token} #{match}"
-        end
-      end
-      
-      self
+      @lexer.scan_stream(@process) # Block until the next prompt...
     end
     
-    def compile(request)
+    def execute(request)
       hashed = Digest::MD5.hexdigest(request)
-      task = nil
+      @out.puts "(fcsh) #{request}"
+      
       # First, see if we've already received a task with this
       # Exact command:
       @tasks.each_index do |index|
         task = @tasks[index]
         if(task[:hash] == hashed)
           # Compile with an existing task at index+1
-          @pending << task
+          write "compile #{index+1}"
           return
         end
       end
 
+      task = {:hash => hashed, :request => request, :executed => false}
+      @tasks << task
+      write task[:request]
+    end
+    
+    def close
+      puts "======================"
+      @process.close
+    end
+    
+    private
+    
+    def write(message)
+      @process.puts "#{message}\n"
+      @lexer.scan_stream(@process).each do |token|
+        @out.puts token[:match].pre_match
+      end
+    end
+
+=begin
       # No existing task found, create a new one and add to pending:
       task = {:hash => hashed, :request => request, :shortcut => "compile #{@tasks.size}", :executed => false}
       @tasks << task
@@ -110,15 +103,7 @@ module Sprout
         end
       end
     end
-    
-    def close
-      @process.close
-    end
-    
-    def write(message)
-      @busy = true
-      @process.puts message
-    end
+=end
     
   end
 end

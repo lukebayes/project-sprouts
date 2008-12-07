@@ -1,16 +1,21 @@
 require File.dirname(__FILE__) + '/test_helper'
 require File.dirname(__FILE__) + '/../../../sprout/lib/sprout/project_model'
+require File.dirname(__FILE__) + '/../../../sprout/test/generator_test_helper'
 
 class FCSHServiceTest <  Test::Unit::TestCase
   
   attr_reader :service
+  
+  include GeneratorTestHelper
 
   def setup
     @path = File.dirname(__FILE__) + '/fixtures/mxmlc'
     @start = Dir.pwd
     Dir.chdir @path
 
-    @fcsh = Sprout::FCSHService.new
+    fake_stdin, fake_stdout = IO.pipe
+
+    @fcsh = Sprout::FCSHService.new(fake_stdout)
     @task = "mxmlc -source-path=src/ -output=bin/SomeProject.swf src/SomeProject.as"
     super
   end
@@ -22,10 +27,8 @@ class FCSHServiceTest <  Test::Unit::TestCase
   end
   
   def test_open
-    @fcsh.open(Dir.pwd)
-    @fcsh.compile(@task)
-    
-    puts "COMPILE FINISHED!"
+    @fcsh.execute(@task)
+    assert_file_exists('bin/SomeProject.swf')
   end
   
 end
