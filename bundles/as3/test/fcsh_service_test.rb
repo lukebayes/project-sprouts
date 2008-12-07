@@ -14,7 +14,8 @@ class FCSHServiceTest <  Test::Unit::TestCase
     Dir.chdir @path
 
     fake_stdin, fake_stdout = IO.pipe
-
+    # Uncomment to see output:
+    # @fcsh = Sprout::FCSHService.new
     @fcsh = Sprout::FCSHService.new(fake_stdout)
     @task = "mxmlc -source-path=src/ -output=bin/SomeProject.swf src/SomeProject.as"
     super
@@ -26,14 +27,35 @@ class FCSHServiceTest <  Test::Unit::TestCase
     Dir.chdir @start
   end
   
-  def test_open
+  def test_compile_once
+    result = @fcsh.execute(@task)
+  
+    assert_file_exists('bin/SomeProject.swf')
+    assert(result =~ /Assigned 1/, "Second run should include some mention of and updated file in:\n#{result}")
+  end
+  
+  def test_compile_twice
     @fcsh.execute(@task)
     assert_file_exists('bin/SomeProject.swf')
+  
+    FileUtils.touch('src/SomeProject.as')
+    result = @fcsh.execute(@task)
+    assert_file_exists('bin/SomeProject.swf')
+    assert(result =~ /has been updated/, "Second run should include some mention of an updated file in:\n#{result}")
+  end
+  
+  def test_compilation_error
+  end
+  
+  def test_compilation_warning
   end
   
 end
 
 =begin
+
+Did exploration on Client/Service interactions...
+
 module Sprout
   class FCSHClient
     

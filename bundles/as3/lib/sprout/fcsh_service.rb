@@ -50,7 +50,7 @@ module Sprout
     
     def execute(request)
       hashed = Digest::MD5.hexdigest(request)
-      @out.puts "(fcsh) #{request}"
+      out.puts "(fcsh) #{request}"
       
       # First, see if we've already received a task with this
       # Exact command:
@@ -58,52 +58,37 @@ module Sprout
         task = @tasks[index]
         if(task[:hash] == hashed)
           # Compile with an existing task at index+1
-          write "compile #{index+1}"
-          return
+          return write("compile #{index+1}")
         end
       end
 
       task = {:hash => hashed, :request => request, :executed => false}
       @tasks << task
-      write task[:request]
+
+      return write(task[:request])
     end
     
     def close
-      puts "======================"
       @process.close
     end
     
     private
     
     def write(message)
+      result = ''
       @process.puts "#{message}\n"
       @lexer.scan_stream(@process).each do |token|
-        @out.puts token[:match].pre_match
+        result << token[:match].pre_match + "\n"
       end
+
+      out.puts ''
+      out.puts result
+      return result
+    end
+    
+    def out
+      @out
     end
 
-=begin
-      # No existing task found, create a new one and add to pending:
-      task = {:hash => hashed, :request => request, :shortcut => "compile #{@tasks.size}", :executed => false}
-      @tasks << task
-      @pending << task
-      
-      execute_next
-    end
-    
-    def execute_next
-      if(!@busy && @pending.size > 0)
-        task = @pending.shift
-        @out.print "#{task[:request]}\n"
-        if(task[:executed])
-          write task[:shortcut]
-        else
-          write task[:request]
-          task[:executed] = true
-        end
-      end
-    end
-=end
-    
   end
 end
