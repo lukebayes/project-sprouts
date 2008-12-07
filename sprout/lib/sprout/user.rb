@@ -201,6 +201,9 @@ module Sprout
       return ProcessRunner.new(command)
     end
 
+    # Creates a new process, executes the command
+    # and returns the result and throws if the process
+    # writes to stderr
     def execute(tool, options='')
       Log.puts(">> Execute: #{File.basename(tool)} #{options}")
       tool = clean_path(tool)
@@ -218,6 +221,10 @@ module Sprout
       end
     end
 
+    # Creates and returns the process without
+    # attempting to read or write to the stream.
+    # This is useful for interacting with
+    # long-lived CLI processes like FCSH or FDB.
     def execute_silent(tool, options='')
       tool = clean_path(tool)
       return get_process_runner("#{tool} #{options}")
