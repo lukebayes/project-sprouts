@@ -9,6 +9,7 @@ package {
 		
 		public function SomeProject() {
 			var box:OrangeBox = new OrangeBox();
+			tr
 			addChild(box);
 		}
 	}

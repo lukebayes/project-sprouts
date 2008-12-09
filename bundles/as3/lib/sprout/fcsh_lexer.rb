@@ -39,10 +39,10 @@ module Sprout
     def initialize(out=nil)
       @out = out || $stdout
       @regex_to_token = [
-                        [/\n\(fcsh\)/,              PROMPT], # Prompt for input
                         [/\n(.*Warning:.*\^.*)\n/m, WARNING], # Warning encountered
-                        [/\n(.*Error:.*\^\s*)\n/m,   ERROR], # Error encountered
-                        [PRELUDE_EXPRESSION,         PRELUDE]
+                        [/\n(.*Error:.*\^\s*)\n/m,  ERROR], # Error encountered
+                        [PRELUDE_EXPRESSION,        PRELUDE],
+                        [/\n\(fcsh\)/,              PROMPT] # Prompt for input
                        ]
     end
 
@@ -68,10 +68,10 @@ module Sprout
           tokens << {:token => token, :match => match}
           yield token, match if block_given?
           partial = ''
+          puts "FOUND PROMPT" if token == PROMPT
           break if(token == PROMPT)
         end
       end
-
       return tokens
     end
     
@@ -82,6 +82,8 @@ module Sprout
       @regex_to_token.each do |regex, token|
         match = regex.match(string)
         if match
+          puts "--------------------------"
+          puts "token #{token}"
           return token, match
         end
       end

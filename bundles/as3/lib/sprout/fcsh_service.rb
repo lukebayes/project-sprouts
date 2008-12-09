@@ -45,12 +45,12 @@ module Sprout
       # TODO: This should use configurable SDK destinations:
       exe = Sprout.get_executable('sprout-flex3sdk-tool', 'bin/fcsh')
       @process = User.execute_silent(exe)
-      @lexer.scan_stream(@process) # Block until the next prompt...
+      @lexer.scan_stream(@process)
     end
     
     def execute(request)
       hashed = Digest::MD5.hexdigest(request)
-      out.puts "(fcsh) #{request}"
+      out.puts "[fcsh] #{request}"
       
       # First, see if we've already received a task with this
       # Exact command:
@@ -80,6 +80,9 @@ module Sprout
       @lexer.scan_stream(@process).each do |token|
         result << token[:match].pre_match + "\n"
       end
+      
+      puts ">>>>>>>>>>>>"
+      puts ">> LEXER RETURNED"
 
       out.puts ''
       out.puts result

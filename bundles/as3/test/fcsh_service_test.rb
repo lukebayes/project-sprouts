@@ -15,8 +15,8 @@ class FCSHServiceTest <  Test::Unit::TestCase
 
     fake_stdin, fake_stdout = IO.pipe
     # Uncomment to see output:
-    # @fcsh = Sprout::FCSHService.new
-    @fcsh = Sprout::FCSHService.new(fake_stdout)
+    @fcsh = Sprout::FCSHService.new
+    # @fcsh = Sprout::FCSHService.new(fake_stdout)
     @task = "mxmlc -source-path=src/ -output=bin/SomeProject.swf src/SomeProject.as"
     super
   end
@@ -27,13 +27,14 @@ class FCSHServiceTest <  Test::Unit::TestCase
     Dir.chdir @start
   end
   
+=begin
   def test_compile_once
     result = @fcsh.execute(@task)
   
     assert_file_exists('bin/SomeProject.swf')
-    assert(result =~ /Assigned 1/, "Second run should include some mention of and updated file in:\n#{result}")
+    assert(result =~ /Assigned 1/, "First run should assign the compilation number:\n#{result}")
   end
-  
+
   def test_compile_twice
     @fcsh.execute(@task)
     assert_file_exists('bin/SomeProject.swf')
@@ -43,11 +44,15 @@ class FCSHServiceTest <  Test::Unit::TestCase
     assert_file_exists('bin/SomeProject.swf')
     assert(result =~ /has been updated/, "Second run should include some mention of an updated file in:\n#{result}")
   end
-  
-  def test_compilation_error
-  end
-  
+
   def test_compilation_warning
+  end
+=end
+
+  def test_compilation_error
+    result = @fcsh.execute(@task)
+    puts "FINISH WITH: #{result}"
+    # assert(result =~ /Error/, "Compilation with errors should return and describe the error(s):\n#{result}")
   end
   
 end
