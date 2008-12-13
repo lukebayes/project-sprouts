@@ -45,6 +45,18 @@ module Sprout
                         [/\n\(fcsh\)/,              PROMPT] # Prompt for input
                        ]
     end
+    
+    def scan_process(process_runner)
+      failures = [];
+      t = Thread.new {
+        failures = scan_stream(process_runner.e)
+      }
+      
+      responses = scan_stream(process_runner.r)
+      sleep(0.2)
+      t.kill
+      return responses.concat failures
+    end
 
     # We need to scan the stream as FCSH writes to it. Since FCSH is a
     # persistent CLI application, it never sends an EOF or even a consistent
@@ -65,7 +77,7 @@ module Sprout
         partial << code.chr
         token, match = next_token(partial)
         if(token)
-          tokens << {:token => token, :match => match}
+          tokens << {:token => token, :match => match, :output => get_output(token, match)}
           yield token, match if block_given?
           partial = ''
           break if(token == PROMPT || token == ERROR)
@@ -78,16 +90,24 @@ module Sprout
     # Retrieve the next token from the string, and
     # return nil if no token is found
     def next_token(string)
-      puts "checking: #{string}"
+      # puts "checking: #{string}"
       @regex_to_token.each do |regex, token|
         match = regex.match(string)
         if match
-          puts "--------------------------"
-          puts "token #{token}"
+          # puts "--------------------------"
+          # puts "token #{token}"
           return token, match
         end
       end
       return [nil, nil]
+    end
+    
+    def get_output(token, match)
+      if(token == PROMPT)
+        return match.pre_match + "\n"
+      else
+        return match.to_s
+      end
     end
 
     def join
