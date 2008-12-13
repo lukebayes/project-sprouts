@@ -14,10 +14,12 @@ class FCSHServiceTest <  Test::Unit::TestCase
     Dir.chdir @path
 
     fake_stdin, fake_stdout = IO.pipe
+    puts "--------------"
     # Uncomment to see output:
     @fcsh = Sprout::FCSHService.new
     # @fcsh = Sprout::FCSHService.new(fake_stdout)
     @task = "mxmlc -source-path=src/ -output=bin/SomeProject.swf src/SomeProject.as"
+    @failing_task = "mxmlc -source-path=src/ -output=bin/SomeProjectFailure.swf src/SomeProjectFailure.as"
     super
   end
 
@@ -50,9 +52,9 @@ class FCSHServiceTest <  Test::Unit::TestCase
 =end
 
   def test_compilation_error
-    result = @fcsh.execute(@task)
+    result = @fcsh.execute(@failing_task)
     puts "FINISH WITH: #{result}"
-    # assert(result =~ /Error/, "Compilation with errors should return and describe the error(s):\n#{result}")
+    assert(result =~ /Error/, "Compilation with errors should return and describe the error(s):\n#{result}")
   end
   
 end

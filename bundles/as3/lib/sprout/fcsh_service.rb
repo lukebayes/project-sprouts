@@ -45,7 +45,7 @@ module Sprout
       # TODO: This should use configurable SDK destinations:
       exe = Sprout.get_executable('sprout-flex3sdk-tool', 'bin/fcsh')
       @process = User.execute_silent(exe)
-      @lexer.scan_stream(@process)
+      @lexer.scan_stream(@process.r)
     end
     
     def execute(request)
@@ -77,15 +77,16 @@ module Sprout
     def write(message)
       result = ''
       @process.puts "#{message}\n"
-      @lexer.scan_stream(@process).each do |token|
+      @lexer.scan_stream(@process.r).each do |token|
         result << token[:match].pre_match + "\n"
       end
       
+      @lexer.scan_stream(@process.e).each do |token|
+        result << token[:match].to_s + "\n"
+      end
+      
       puts ">>>>>>>>>>>>"
-      puts ">> LEXER RETURNED"
-
-      out.puts ''
-      out.puts result
+      puts ">> LEXER RETURNED #{result}"
       return result
     end
     
