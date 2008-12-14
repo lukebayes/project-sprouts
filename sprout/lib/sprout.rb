@@ -138,11 +138,12 @@ module Sprout
       # For each sprout found, remove it!
       RubiGen::GemGeneratorSource.new().each_sprout do |sprout|
         count += 1
-        command = "#{get_gem_preamble} uninstall -x -a -i -q #{sprout.name}"
+        command = "#{get_gem_preamble} uninstall -x -a -q #{sprout.name}"
 
         if(!confirmation)
           break unless confirmation = remove_gems_confirmation
         end
+        puts "executing #{command}"
         raise ">> Exited with errors: #{$?}" unless system(command)
       end
       
@@ -324,7 +325,7 @@ EOF
     # This method will actually download and install the provided gem by +name+ and +requirements+ if
     # it is not found locally on the system.
     def self.find_gem_spec(name, requirements=nil, recursed=false)
-      specs = Gem::cache.search(/.*#{name}$/).reverse # Found specs are returned in order from oldest to newest!?
+      specs = Gem::cache.sprout_search(/.*#{name}$/).reverse # Found specs are returned in order from oldest to newest!?
       requirement = nil
       if(requirements)
         requirement = Gem::Requirement.new(requirements)

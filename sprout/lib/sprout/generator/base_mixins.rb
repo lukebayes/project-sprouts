@@ -1,3 +1,58 @@
+
+class Gem::SourceIndex
+  
+  # This feature seems to be getting deprecated from the latest
+  # gems releases (1.3.x). 
+  # We actually need it and don't want the nagging - so,
+  # copied sources from RubyGems SVN trunk, and mixing in...
+  # :-(
+  # There should be a more stable integration point with RubyGems
+  # Any ideas or contributions are welcome!
+  def sprout_search(gem_pattern, platform_only = false)
+    version_requirement = nil
+    only_platform = false
+
+    # unless Gem::Dependency === gem_pattern
+    #   warn "#{Gem.location_of_caller.join ':'}:Warning: Gem::SourceIndex#search support for #{gem_pattern.class} patterns is deprecated"
+    # end
+
+    case gem_pattern
+    when Regexp then
+      version_requirement = platform_only || Gem::Requirement.default
+    when Gem::Dependency then
+      only_platform = platform_only
+      version_requirement = gem_pattern.version_requirements
+      gem_pattern = if Regexp === gem_pattern.name then
+                      gem_pattern.name
+                    elsif gem_pattern.name.empty? then
+                      //
+                    else
+                      /^#{Regexp.escape gem_pattern.name}$/
+                    end
+    else
+      version_requirement = platform_only || Gem::Requirement.default
+      gem_pattern = /#{gem_pattern}/i
+    end
+
+    unless Gem::Requirement === version_requirement then
+      version_requirement = Gem::Requirement.create version_requirement
+    end
+
+    specs = @gems.values.select do |spec|
+      spec.name =~ gem_pattern and
+        version_requirement.satisfied_by? spec.version
+    end
+
+    if only_platform then
+      specs = specs.select do |spec|
+        Gem::Platform.match spec.platform
+      end
+    end
+
+    specs.sort_by { |s| s.sort_obj }
+  end
+end
+
 module RubiGen # :nodoc:[all]
 
   class Base # :nodoc:[all]
@@ -37,7 +92,7 @@ module RubiGen # :nodoc:[all]
 
     # Yield latest versions of generator gems.
     def each
-      Gem::cache.search(/sprout-*#{@sprout_name}-bundle$/).inject({}) { |latest, gem|
+      Gem::cache.sprout_search(/sprout-*#{@sprout_name}-bundle$/).inject({}) { |latest, gem|
         hem = latest[gem.name]
         latest[gem.name] = gem if hem.nil? or gem.version > hem.version
         latest
@@ -47,7 +102,7 @@ module RubiGen # :nodoc:[all]
     end
 
     def each_sprout
-      Gem::cache.search(/^sprout-.*/).inject({}) { |latest, gem|
+      Gem::cache.sprout_search(/^sprout-.*/).inject({}) { |latest, gem|
         hem = latest[gem.name]
         latest[gem.name] = gem if hem.nil? or gem.version > hem.version
         latest
