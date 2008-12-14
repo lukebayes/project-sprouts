@@ -60,6 +60,11 @@ module Sprout
   #
   class MXMLCTask < ToolTask
     
+    # Use a running instance of the FCSH command shell to speed up compilation.
+    # You need to run 'rake fcsh:start' in another terminal before turning on 
+    # this flag and compiling.
+    attr_accessor :use_fcsh
+
     # Interface and descriptions found here:
     # http://livedocs.adobe.com/flex/2/docs/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&file=00001481.html
     def initialize_task
@@ -739,9 +744,21 @@ EOF
       end
     end
     
+    def execute_with_fcsh(command)
+      begin
+        puts FCSHSocket.execute("mxmlc #{command}")
+      rescue SocketError => e
+        Log.puts("There was a problem hitting FCSH, are you sure you ran 'rake fcsh:start' in another terminal?")
+      end
+    end
+    
     def execute(*args)
       begin
-        super
+        if(@use_fcsh)
+          execute_with_fcsh(to_shell)
+        else
+          super
+        end
       rescue ExecutionError => e
         if(e.message.index('Warning:'))
           # MXMLC sends warnings to stderr....

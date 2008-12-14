@@ -45,18 +45,30 @@ module Sprout
       # TODO: This should use configurable SDK destinations:
       exe = Sprout.get_executable('sprout-flex3sdk-tool', 'bin/fcsh')
       @process = User.execute_silent(exe)
-      @lexer.scan_process(@process)
+      
+      response = ''
+      @lexer.scan_process(@process).each do |token|
+        response << token[:output]
+      end
+      out.puts response
     end
     
-    def clear
-      @tasks.each_index do |index|
-        write("clear #{index+1}")
-      end
-      @tasks = []
-      out.puts("[fcsh] All tasks have been cleared")
-    end
+    # Temporarily pulled support for clear - 
+    # since it's easier to just stop and start the server.
+    # The clear feature continues to increment task ids
+    # and requires deeper changes for full support...
+    # def clear
+    #   @tasks.each_index do |index|
+    #     write("clear #{index+1}")
+    #   end
+    #   @tasks = []
+    #   return "[fcsh] All tasks have been cleared"
+    # end
     
     def execute(request)
+      # if(request =~ /^clear/)
+      #   return clear
+      # end
       hashed = Digest::MD5.hexdigest(request)
       
       # First, see if we've already received a task with this

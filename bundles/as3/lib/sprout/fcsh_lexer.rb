@@ -78,8 +78,6 @@ module Sprout
       return tokens
     end
 
-    private
-
     # We need to scan the stream as FCSH writes to it. Since FCSH is a
     # persistent CLI application, it never sends an EOF or even a consistent
     # EOL. In order to tokenize the output, we need to attempt to check 
@@ -109,6 +107,8 @@ module Sprout
       return tokens
     end
     
+    private
+
     # Retrieve the next token from the string, and
     # return nil if no token is found
     def next_token(string)

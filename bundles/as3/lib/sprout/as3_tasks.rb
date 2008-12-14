@@ -17,4 +17,4 @@ require 'sprout/tasks/mxmlc_document'
 require 'sprout/tasks/mxmlc_stylesheet'
 require 'sprout/tasks/mxmlc_swc'
 
-require 'sprout/fcsh_service'
+require 'sprout/tasks/fcsh'

@@ -30,17 +30,17 @@ class FCSHServiceTest <  Test::Unit::TestCase
     Dir.chdir @start
   end
 
-  # def test_compile_twice
-  #   result = @fcsh.execute(@task)
-  #   assert_file_exists('bin/SomeProject.swf')
-  #   assert(result =~ /Assigned 1/, "First run should assign the compilation number:\n#{result}")
-  # 
-  #   FileUtils.touch('src/SomeProject.as')
-  # 
-  #   result = @fcsh.execute(@task)
-  #   assert_file_exists('bin/SomeProject.swf')
-  #   assert(result =~ /has been updated/, "Second run should include some mention of an updated file in:\n#{result}")
-  # end
+  def test_compile_twice
+    result = @fcsh.execute(@task)
+    assert_file_exists('bin/SomeProject.swf')
+    assert(result =~ /Assigned 1/, "First run should assign the compilation number:\n#{result}")
+  
+    FileUtils.touch('src/SomeProject.as')
+  
+    result = @fcsh.execute(@task)
+    assert_file_exists('bin/SomeProject.swf')
+    assert(result =~ /has been updated/, "Second run should include some mention of an updated file in:\n#{result}")
+  end
 
   def test_compilation_error
     result = @fcsh.execute(@failing_task)
@@ -57,64 +57,3 @@ class FCSHServiceTest <  Test::Unit::TestCase
   end
 
 end
-
-=begin
-
-Did exploration on Client/Service IO interactions...
-
-module Sprout
-  class FCSHClient
-    
-    def initialize
-      @processes = []
-    end
-    
-    def open(path)
-      puts "open with: #{path}"
-      pid, port = pid_and_port_for(path)
-      puts "pid: #{pid}, port: #{port}"
-    end
-    
-    # PID File with lines that look like:
-    # [pid]\t[port]\t[path]\n
-    # Example:
-    # 2324\t8091\t/Users/lbayes/Projects/Foo\n
-    def get_pids
-      path = Sprout.sprout_cache + '/temp/fcsh.pids'
-      pids = []
-      if(!File.exists?(path))
-        FileUtils.mkdir_p([File.dirname(path)])
-        FileUtils.touch([path])
-      end
-
-      File.open(path, 'r+') do |file|
-        pids = file.readlines
-      end
-      
-      return pids
-    end
-    
-    def write_pid
-    end
-    
-    def pid_and_port_for(path)
-      parts = []
-      get_pids.each do |pid|
-        parts = pid.split("\t")
-        if(parts[2] == path)
-          return parts[0], parts[1]
-        end
-      end
-      return create_process(path)
-    end
-    
-    def create_process(path)
-      exe = Sprout.get_executable('sprout-flex3sdk-tool', 'bin/fcsh')
-      process = User.execute_silent(exe)
-      @processes = << process
-      return process.pid, 5678
-    end
-  end
-end
-=end
-

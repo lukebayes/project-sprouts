@@ -50,7 +50,7 @@ class MXMLCTest <  Test::Unit::TestCase
     end
 
     reqs = compiler.prerequisites
-    assert_equal(5, reqs.size, "There should be 5 requirements set up by the task")
+    assert_equal(7, reqs.size, "There should be 5 requirements set up by the task")
   end
   
   def test_nested_input
@@ -67,7 +67,7 @@ class MXMLCTest <  Test::Unit::TestCase
     assert_equal('src', compiler.source_path[0])
 
     reqs = compiler.prerequisites
-    assert_equal(5, reqs.size, "There should be 5 requirements set up by the task")
+    assert_equal(7, reqs.size, "There should be 5 requirements set up by the task")
   end
   
   def test_fonts_languages_with_shell_name

@@ -1,10 +1,9 @@
 require File.dirname(__FILE__) + '/test_helper'
 require File.dirname(__FILE__) + '/../../../sprout/lib/sprout/project_model'
 
-class TerminalAdapterTest <  Test::Unit::TestCase
+class FCSHLexerTest <  Test::Unit::TestCase
   
   def run_lexer(input)
-    found = []
     fake_stdin, fake_stdout = IO.pipe
     reader, writer = IO.pipe
     lexer = Sprout::FCSHLexer.new(fake_stdout)
@@ -22,37 +21,38 @@ class TerminalAdapterTest <  Test::Unit::TestCase
       end
     }
     
-    return lexer.scan_stream(reader)
+    tokens = []
+    lexer.scan_stream(reader) do |token|
+      tokens << token
+    end
+    return tokens
   end
   
   def test_warning
     tokens = run_lexer warning_text
     result = tokens.shift
-    assert_equal(Sprout::FCSHLexer::WARNING, result[:token], 'Expected warning token')
+    assert_equal(Sprout::FCSHLexer::WARNING, result[:name], 'Expected warning token')
     assert(result[:match][1].match(/\^/), 'Expected warning content')
 
     result = tokens.shift
-    assert_equal(Sprout::FCSHLexer::PROMPT, result[:token])
+    assert_equal(Sprout::FCSHLexer::PROMPT, result[:name])
   end
 
   def test_prelude
     tokens = run_lexer prelude_text
     result = tokens.shift
-    assert_equal(Sprout::FCSHLexer::PRELUDE, result[:token], 'Expected prelude token')
+    assert_equal(Sprout::FCSHLexer::PRELUDE, result[:name], 'Expected prelude token')
     assert(result[:match][1].match(/Adobe Flex Compiler/), 'Expected prelude content')
 
     result = tokens.shift
-    assert_equal(Sprout::FCSHLexer::PROMPT, result[:token])
+    assert_equal(Sprout::FCSHLexer::PROMPT, result[:name])
   end
 
   def test_error
     tokens = run_lexer error_text
     result = tokens.shift
-    assert_equal(Sprout::FCSHLexer::ERROR, result[:token], 'Expected error token')
+    assert_equal(Sprout::FCSHLexer::ERROR, result[:name], 'Expected error token')
     assert(result[:match][1].match(/\^/), 'Expected error content')
-
-    result = tokens.shift
-    assert_equal(Sprout::FCSHLexer::PROMPT, result[:token])
   end
 
   def prelude_text
