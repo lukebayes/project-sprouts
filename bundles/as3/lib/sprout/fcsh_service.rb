@@ -32,10 +32,6 @@ module Sprout
   end
 
   class FCSHService
-    # This is probably a dumb, overused port number.
-    # Isn't it the default for Tomcat or something?
-    # Any safer / more compatible suggestions are welcome!
-    # DEFAULT_PORT = 8090
     
     def initialize(out=nil)
       @out = out || $stdout

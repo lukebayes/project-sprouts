@@ -26,8 +26,8 @@ module Sprout
   # This class should allow us to parse the stream output that FCSH provides.
   # It was largely inspired by "LittleLexer" (http://rubyforge.org/projects/littlelexer/)
   # which is a beautiful and concise general purpose lexer written by John Carter.
-  # Unfortunately, LittleLexer did not support long-lived Stream input, which 
-  # (I think) we needed.
+  # Unfortunately, LittleLexer did not support streamed input, which 
+  # we definitely need.
   class FCSHLexer
     PROMPT  = ':prompt'
     WARNING = ':warning'
@@ -72,7 +72,14 @@ module Sprout
       # Should we move to Highline for interactive
       # shell applications?
       # http://rubyforge.org/projects/highline/
-      sleep(0.05)
+      # In fact - this problem actually ruins
+      # the entire implementation, the larger/longer
+      # it takes for errors to be bufferred, the more
+      # likely it is we'll return without displaying them.
+      # The only way to overcome this with the current 
+      # implementation, is to increase the timeout so that
+      # FCSH takes a long, long time on every compilation!!!
+      sleep(0.2)
       
       t.kill
       return tokens
