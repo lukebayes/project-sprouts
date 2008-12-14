@@ -53,10 +53,12 @@ module Sprout # :nodoc:
     end
     
     def configure_mxmlc(compiler, is_asdoc=false)
-      compiler.input       = input unless is_asdoc
+      if(!is_asdoc)
+        compiler.input     = input
+        compiler.use_fcsh  = use_fcsh || model.use_fcsh
+      end
       compiler.gem_name    = model.compiler_gem_name
       compiler.gem_version = model.compiler_gem_version
-      compiler.use_fcsh    = self.use_fcsh
 
       # Set up library deps
       model.libraries.each do |lib|

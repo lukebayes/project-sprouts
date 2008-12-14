@@ -750,8 +750,7 @@ EOF
       rescue FCSHError => fcsh_error
         raise fcsh_error
       rescue StandardError => std_error
-        Log.puts("There was a problem hitting FCSH, run 'rake fcsh:start' in another terminal.")
-        raise std_error
+        raise StandardError("[ERROR] There was a problem connecting to the Flex Compiler SHell, run 'rake fcsh:start' in another terminal.")
       end
     end
     

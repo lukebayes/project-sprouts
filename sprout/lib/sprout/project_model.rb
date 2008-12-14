@@ -122,6 +122,8 @@ module Sprout
     attr_accessor :test_height
     # The test runner SWF width
     attr_accessor :test_width
+    # Tasks that can, will use the Flex Compiler SHell.
+    attr_accessor :use_fcsh
     # The default width of the SWF file
     # _(This value is overridden when embedded in an HTML page)_
     attr_accessor :width

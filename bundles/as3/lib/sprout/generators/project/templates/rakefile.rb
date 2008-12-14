@@ -11,6 +11,7 @@ project_model :model do |m|
   m.background_color        = '#FFFFFF'
   m.width                   = 970
   m.height                  = 550
+  # m.use_fcsh                = true
   # m.src_dir               = 'src'
   # m.lib_dir               = 'lib'
   # m.swc_dir               = 'lib'
