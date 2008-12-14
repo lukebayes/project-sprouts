@@ -50,21 +50,22 @@ module Sprout
     
     def execute(request)
       hashed = Digest::MD5.hexdigest(request)
-      out.puts "[fcsh] #{request}"
       
       # First, see if we've already received a task with this
       # Exact command:
       @tasks.each_index do |index|
         task = @tasks[index]
         if(task[:hash] == hashed)
+          out.puts "[fcsh] #{request})"
           # Compile with an existing task at index+1
           return write("compile #{index+1}")
         end
       end
 
+      # No existing task found with this hash, create a new
+      # task, store it for later, execute and return the result:
       task = {:hash => hashed, :request => request, :executed => false}
       @tasks << task
-
       return write(task[:request])
     end
     
@@ -76,12 +77,13 @@ module Sprout
     
     def write(message)
       result = ''
+      out.puts "[fcsh] #{message}"
       @process.puts "#{message}\n"
-
-      @lexer.scan_process(@process).each do |token|
+      @lexer.scan_process(@process) do |token|
+        yield token if block_given?
         result << token[:output]
       end
-      
+      out.puts "[fcsh] #{result.strip}\n"
       return result
     end
     

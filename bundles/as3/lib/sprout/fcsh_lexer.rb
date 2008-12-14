@@ -40,22 +40,32 @@ module Sprout
       @out = out || $stdout
       @regex_to_token = [
                         [/(.*Warning:.*\^.*)\n/m,   WARNING], # Warning encountered
-                        [/(.*Error:.*\^.*)\n/m,   ERROR], # Error encountered
+                        [/(.*Error:.*\^.*)\n/m,     ERROR], # Error encountered
                         [PRELUDE_EXPRESSION,        PRELUDE],
                         [/\n\(fcsh\)/,              PROMPT] # Prompt for input
                        ]
     end
     
     def scan_process(process_runner)
-      failures = [];
+      tokens = [];
+      # Collect Errors and Warnings in a way that doesn't
+      # Block forever when we have none....
       t = Thread.new {
-        failures = scan_stream(process_runner.e)
+        scan_stream(process_runner.e) do |token|
+          yield token if block_given?
+          tokens << token
+        end
       }
       
-      responses = scan_stream(process_runner.r)
-      sleep(0.2)
+      # Collect stdout from the process:
+      scan_stream(process_runner.r) do |token|
+        yield token if block_given?
+        tokens << token
+      end
+
+      sleep(0.5)
       t.kill
-      return responses.concat failures
+      return tokens
     end
 
     # We need to scan the stream as FCSH writes to it. Since FCSH is a
@@ -75,12 +85,12 @@ module Sprout
         return if code.nil?
         
         partial << code.chr
-        token, match = next_token(partial)
+        token = next_token(partial)
         if(token)
-          tokens << {:token => token, :match => match, :output => get_output(token, match)}
-          yield token, match if block_given?
+          tokens << token
+          yield token if block_given?
           partial = ''
-          break if(token == PROMPT || token == ERROR)
+          break if(token[:name] == PROMPT || token[:name] == ERROR)
         end
       end
       
@@ -91,22 +101,20 @@ module Sprout
     # return nil if no token is found
     def next_token(string)
       # puts "checking: #{string}"
-      @regex_to_token.each do |regex, token|
+      @regex_to_token.each do |regex, token_name|
         match = regex.match(string)
         if match
-          # puts "--------------------------"
-          # puts "token #{token}"
-          return token, match
+          return {:name => token_name, :match => match, :output => get_output(token_name, match)}
         end
       end
-      return [nil, nil]
+      return nil
     end
     
-    def get_output(token, match)
-      if(token == PROMPT)
+    def get_output(name, match)
+      if(name == PROMPT)
         return match.pre_match + "\n"
       else
-        return match.to_s
+        return match[0] + "\n"
       end
     end
 
