@@ -747,8 +747,11 @@ EOF
     def execute_with_fcsh(command)
       begin
         puts FCSHSocket.execute("mxmlc #{command}")
-      rescue SocketError => e
-        Log.puts("There was a problem hitting FCSH, are you sure you ran 'rake fcsh:start' in another terminal?")
+      rescue FCSHError => fcsh_error
+        raise fcsh_error
+      rescue StandardError => std_error
+        Log.puts("There was a problem hitting FCSH, run 'rake fcsh:start' in another terminal.")
+        raise std_error
       end
     end
     

@@ -47,6 +47,9 @@ module Sprout
   # http://livedocs.adobe.com/flex/201/html/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Book_Parts&file=asdoc_127_1.html
   # 
   class AsDocTask < ToolTask
+    
+    attr_accessor :use_fcsh # :nodoc:
+
     def initialize_task
       super
       @default_gem_name = 'sprout-flex3sdk-tool'

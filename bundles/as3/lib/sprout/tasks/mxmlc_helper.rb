@@ -3,6 +3,8 @@ module Sprout # :nodoc:
   class MXMLCHelper # :nodoc:
     attr_reader :model
     
+    attr_accessor :use_fcsh
+    
     def initialize(args, &block)
       resolve_task_args(args)
       @model = get_model args
@@ -51,9 +53,10 @@ module Sprout # :nodoc:
     end
     
     def configure_mxmlc(compiler, is_asdoc=false)
-      compiler.input                    = input unless is_asdoc
-      compiler.gem_name                 = model.compiler_gem_name
-      compiler.gem_version              = model.compiler_gem_version
+      compiler.input       = input unless is_asdoc
+      compiler.gem_name    = model.compiler_gem_name
+      compiler.gem_version = model.compiler_gem_version
+      compiler.use_fcsh    = self.use_fcsh
 
       # Set up library deps
       model.libraries.each do |lib|
