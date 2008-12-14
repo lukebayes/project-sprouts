@@ -69,6 +69,9 @@ module Sprout
       # It seems we need to wait
       # for the fsch $stderr buffer to flush?
       # There must be a better way... Anyone?
+      # Should we move to Highline for interactive
+      # shell applications?
+      # http://rubyforge.org/projects/highline/
       sleep(0.05)
       
       t.kill
