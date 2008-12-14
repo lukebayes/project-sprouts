@@ -30,17 +30,17 @@ class FCSHServiceTest <  Test::Unit::TestCase
     Dir.chdir @start
   end
 
-  def test_compile_twice
-    result = @fcsh.execute(@task)
-    assert_file_exists('bin/SomeProject.swf')
-    assert(result =~ /Assigned 1/, "First run should assign the compilation number:\n#{result}")
-  
-    FileUtils.touch('src/SomeProject.as')
-
-    result = @fcsh.execute(@task)
-    assert_file_exists('bin/SomeProject.swf')
-    assert(result =~ /has been updated/, "Second run should include some mention of an updated file in:\n#{result}")
-  end
+  # def test_compile_twice
+  #   result = @fcsh.execute(@task)
+  #   assert_file_exists('bin/SomeProject.swf')
+  #   assert(result =~ /Assigned 1/, "First run should assign the compilation number:\n#{result}")
+  # 
+  #   FileUtils.touch('src/SomeProject.as')
+  # 
+  #   result = @fcsh.execute(@task)
+  #   assert_file_exists('bin/SomeProject.swf')
+  #   assert(result =~ /has been updated/, "Second run should include some mention of an updated file in:\n#{result}")
+  # end
 
   def test_compilation_error
     result = @fcsh.execute(@failing_task)

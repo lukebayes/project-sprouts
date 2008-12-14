@@ -62,11 +62,20 @@ module Sprout
         yield token if block_given?
         tokens << token
       end
+      
+      process_runner.e.sync = true
 
-      sleep(0.5)
+      # GROSS HACK! 
+      # It seems we need to wait
+      # for the fsch $stderr buffer to flush?
+      # There must be a better way... Anyone?
+      sleep(0.05)
+      
       t.kill
       return tokens
     end
+
+    private
 
     # We need to scan the stream as FCSH writes to it. Since FCSH is a
     # persistent CLI application, it never sends an EOF or even a consistent
@@ -118,16 +127,6 @@ module Sprout
       end
     end
 
-    def join
-      @t.join
-    end
-
-    def close
-      @t.kill
-    end
-
-    private
-    
     def out
       @out
     end

@@ -48,6 +48,14 @@ module Sprout
       @lexer.scan_process(@process)
     end
     
+    def clear
+      @tasks.each_index do |index|
+        write("clear #{index+1}")
+      end
+      @tasks = []
+      out.puts("[fcsh] All tasks have been cleared")
+    end
+    
     def execute(request)
       hashed = Digest::MD5.hexdigest(request)
       
@@ -70,7 +78,7 @@ module Sprout
     end
     
     def close
-      @process.close
+      write("quit")
     end
     
     private
