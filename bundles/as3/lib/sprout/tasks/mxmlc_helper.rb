@@ -54,9 +54,10 @@ module Sprout # :nodoc:
     
     def configure_mxmlc(compiler, is_asdoc=false)
       if(!is_asdoc)
-        compiler.input     = input
-        compiler.use_fcsh  = use_fcsh || model.use_fcsh
+        compiler.input       = input
+        compiler.use_fcsh    = use_fcsh || model.use_fcsh
       end
+
       compiler.gem_name    = model.compiler_gem_name
       compiler.gem_version = model.compiler_gem_version
 
