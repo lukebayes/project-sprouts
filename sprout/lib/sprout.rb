@@ -253,7 +253,7 @@ EOF
         exe = target.archive_path
       end
       
-      if(File.exists?(exe) && !File.directory?(exe) && File.stat(exe).mode != 33261)
+      if(File.exists?(exe) && !File.directory?(exe) && File.stat(exe).executable?)
         File.chmod 0755, exe
       end
       
