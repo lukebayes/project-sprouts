@@ -25,12 +25,13 @@ module Sprout #:nodoc:
   #   end
   #
   # You can also point the FDBTask at HTML pages. These pages will be 
-  # launched in your default browswer. You will need to manually install
+  # launched in your default browser. You will need to manually install
   # a debug Flash Player in that particular browser.
-  # To use a browser instead of the desktop Flash Player, simply point
+  # 
+  # To use a browser instead of the desktop Flash Player, simply point the
   # file argument at an HTML document or remote URL. The SWF file loaded
-  # must be compiled using the -debug flag in order to connect to the 
-  # debugger.
+  # must be compiled using the -debug flag, and executed in a debug Flash Player
+  # in order to connect to properly connect to the debugger.
   #   fdb :debug do |t|
   #     t.file = 'bin/SomeProject-debug.html'
   #     t.run
@@ -40,10 +41,12 @@ module Sprout #:nodoc:
   class FDBTask < ToolTask
     # The SWF file to debug.
     attr_accessor :swf
+    attr_writer :kill_on_fault
 
     def initialize_task # :nodoc:
       @default_gem_name = 'sprout-flex3sdk-tool'
       @default_gem_path = 'bin/fdb'
+      @kill_on_fault = false
       @queue = []
     end
 
@@ -63,8 +66,11 @@ module Sprout #:nodoc:
       # TODO: First check the SWF file to ensure that debugging is enabled!
       buffer = FDBBuffer.new(get_executable, stdout)
       buffer.wait_for_prompt
+      buffer.kill_on_fault = kill_on_fault?
 
       @queue.each do |command|
+        puts '_________________________'
+        puts "command: #{command}"
         handle_command(buffer, command)
       end
 
@@ -93,6 +99,19 @@ module Sprout #:nodoc:
     
     def command_queue # :nodoc:
       @queue
+    end
+    
+    def kill_on_fault?
+      @kill_on_fault
+    end
+    
+    # alias for self.file=
+    def input=(file)
+      self.file = file
+    end
+    
+    def input
+      self.file
     end
     
     # Print backtrace of all stack frames
@@ -347,6 +366,9 @@ module Sprout #:nodoc:
   
   # A buffer that provides clean blocking support for the fdb command shell
   class FDBBuffer #:nodoc:
+    
+    attr_writer :kill_on_fault
+    
     PLAYER_TERMINATED = 'Player session terminated'
     EXIT_PROMPT = 'The program is running.  Exit anyway? (y or n)'
     PROMPT = '(fdb) '
@@ -361,6 +383,10 @@ module Sprout #:nodoc:
       @found_search = false
       @pending_expression = nil
       listen exe
+    end
+    
+    def kill_on_fault?
+      @kill_on_fault
     end
     
     def user_input
@@ -388,6 +414,7 @@ module Sprout #:nodoc:
           $stdout.puts msg
         end
         
+        full_output = ''
         char = ''
         line = ''
         while true do
@@ -403,14 +430,28 @@ module Sprout #:nodoc:
             line = ''
           else
             line << char
+            full_output << char
           end
           
           @output.print char
           @output.flush
 
           if(line == PROMPT || line.match(/\(y or n\) $/))
-            @prompted = true
+            full_output_cache = full_output
             line = ''
+            full_output = ''
+            @prompted = true
+            if(should_kill?(full_output_cache))
+              Thread.new {
+                wait_for_prompt
+                write('info stack') # Output the full stack trace
+                write('info locals') # Output local variables
+                write('kill') # Kill the running SWF file
+                write('y') # Confirm killing SWF
+                write('quit') # Quit FDB safely
+              }
+            end
+
           elsif(@pending_expression && line.match(/#{@pending_expression}/))
             @found_search = true
             @pending_expression = nil
@@ -423,6 +464,15 @@ module Sprout #:nodoc:
         end
       end
       
+    end
+    
+    def should_kill?(message)
+      return (@kill_on_fault && fault_found?(message))
+    end
+    
+    def fault_found?(message)
+      match = message.match(/\[Fault\]\s.*,.*$/) 
+      return !match.nil?
     end
 
     # Block for the life of the input process

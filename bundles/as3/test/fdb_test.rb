@@ -5,7 +5,7 @@ class FDBTest <  Test::Unit::TestCase
   
   def setup
     @start                  = Dir.pwd
-    fixture                 = File.join(fixtures, 'fdb')
+    fixture                 = File.join(fixtures, 'fdb-exception')
     @swf                    = 'SomeProject-debug.swf'
     Dir.chdir fixture
   end
@@ -13,11 +13,6 @@ class FDBTest <  Test::Unit::TestCase
   def teardown
     Dir.chdir @start
     clear_tasks
-  end
-
-  def test_instantiated
-    debugger = fdb :debug
-    assert debugger.is_a?(Sprout::FDBTask)
   end
   
   def create_buffer(str=nil)
@@ -30,47 +25,70 @@ class FDBTest <  Test::Unit::TestCase
 
     return [process, output, buffer]
   end
-
-  def test_simple_buffer
-    str = "Adobe"
-    process, output, buffer = create_buffer(str)
-    assert_equal(str, output)
-  end
-
-  def test_fdb_buffer
-    str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
-    str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
-    str << "(fdb) "
+  # 
+  # def test_instantiated
+  #   debugger = fdb :debug
+  #   assert debugger.is_a?(Sprout::FDBTask)
+  # end
+  # 
+  # def test_simple_buffer
+  #   str = "Adobe"
+  #   process, output, buffer = create_buffer(str)
+  #   assert_equal(str, output)
+  # end
+  # 
+  # def test_fdb_buffer
+  #   str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
+  #   str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
+  #   str << "(fdb) "
+  #   
+  #   process, output, buffer = create_buffer str
+  #   assert_equal(str, output)
+  # end
+  # 
+  # def test_fdb_buffer_wait_for_prompt
+  #   str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
+  #   str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
+  #   str << "(fdb) "
+  # 
+  #   process, output, buffer = create_buffer
+  #   process.print str
+  # 
+  #   timeout 1 do
+  #     buffer.wait_for_prompt
+  #   end
+  # end
+  # 
+  # def test_fdb_confirmation_prompt
+  #   str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
+  #   str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
+  #   str << "The program is running.  Exit anyway? (y or n) "
+  # 
+  #   process, output, buffer = create_buffer
+  #   process.print str
+  # 
+  #   timeout 1 do
+  #     buffer.wait_for_prompt
+  #   end
+  #   
+  # end
+  
+  def test_close_on_error
+    # debugger = fdb :debugger do |t|
+    #   t.kill_on_fault = true
+    #   t.file = @swf
+    #   t.run
+    #   t.continue
+    # end
     
-    process, output, buffer = create_buffer str
-    assert_equal(str, output)
-  end
-
-  def test_fdb_buffer_wait_for_prompt
-    str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
-    str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
-    str << "(fdb) "
-
-    process, output, buffer = create_buffer
-    process.print str
-
-    timeout 1 do
-      buffer.wait_for_prompt
-    end
-  end
-
-  def test_fdb_confirmation_prompt
-    str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
-    str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
-    str << "The program is running.  Exit anyway? (y or n) "
-
-    process, output, buffer = create_buffer
-    process.print str
-
-    timeout 1 do
-      buffer.wait_for_prompt
+    debugger = fdb :debugger do |t|
+      t.kill_on_fault = true
+      t.file = @swf
+      t.run
+      t.continue
     end
     
+    debugger.execute
   end
   
 =begin
