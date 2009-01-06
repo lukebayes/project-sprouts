@@ -39,8 +39,39 @@ module Sprout #:nodoc:
   #   end
   #
   class FDBTask < ToolTask
-    # The SWF file to debug.
-    attr_accessor :swf
+    TEST_RESULT_PRELUDE = '<XMLResultPrinter>'
+    TEST_RESULT_CLOSING = '</XMLResultPrinter>'
+    TEST_RESULT_FILE    = 'AsUnitResults.xml'
+    
+    # Relative or absolute path to where unit test results
+    # should be written to disk.
+    # This field can be used in conjunction with the AsUnit
+    # XMLResultPrinter which will trace out JUnit style XML 
+    # test results.
+    # By telling fdb where to write those test results, it
+    # will scan the trace output stream looking for +test_result_prelude+,
+    # and +test_result_closing+. Once the closing is encountered, the
+    # prelude and closing (and everything in between) will be written
+    # to disk in the file identified by +test_result_file+, and fdb
+    # will be closed down.
+    attr_writer :test_result_file
+
+    # String that indicates the beginning of printable test results
+    # Default value is '<XMLResultPrinter>'
+    attr_writer :test_result_prelude
+
+    # String that indicates the closing of printable test results
+    # Default value is '</XMLResultPrinter>'
+    # See test_result_prelude for more info.
+    attr_writer :test_result_closing
+
+    # Boolean value that tells fdb whether or not it should automatically
+    # shut down when an exception is encountered. This feature is used to
+    # prevent GUI prompts for unhandled exceptions, especially when running
+    # a test harness under a continuous integration tool - like cruise control.
+    # If an exception is encountered, fdb will automatically print the exception,
+    # a full stack trace and all local variables in the function where the failure 
+    # occured.
     attr_writer :kill_on_fault
 
     def initialize_task # :nodoc:
@@ -51,6 +82,8 @@ module Sprout #:nodoc:
     end
 
     def define # :nodoc:
+      super
+      CLEAN.add(test_result_file)
       self
     end
     
@@ -62,19 +95,35 @@ module Sprout #:nodoc:
       @stdout ||= $stdout
     end
     
+    def validate_swf(swf)
+      # TODO: Ensure the SWF has been compiled with debugging
+      # turned on.
+      # I believe this will require actually parsing the SWF file and
+      # scanning for the EnableDebugger2 tag.
+      # http://www.adobe.com/devnet/swf/pdf/swf_file_format_spec_v9.pdf
+    end
+    
     def execute(*args) # :nodoc:
-      # TODO: First check the SWF file to ensure that debugging is enabled!
+      # Ensure that if we load a SWF it's been compiled with debugging turned on!
+      file_name = @file
+
+      if(file_name.match(/\.swf$/))
+        validate_swf(file_name)
+      end
+
       buffer = FDBBuffer.new(get_executable, stdout)
       buffer.wait_for_prompt
+      buffer.test_result_file = test_result_file
+      buffer.test_result_prelude = test_result_prelude
+      buffer.test_result_closing = test_result_closing
       buffer.kill_on_fault = kill_on_fault?
 
       @queue.each do |command|
-        puts '_________________________'
-        puts "command: #{command}"
         handle_command(buffer, command)
       end
 
-      buffer.join
+      buffer.join # wait here until the buffer is closed.
+
       self
     end
     
@@ -105,13 +154,16 @@ module Sprout #:nodoc:
       @kill_on_fault
     end
     
-    # alias for self.file=
-    def input=(file)
-      self.file = file
+    def test_result_file
+      @test_result_file ||= TEST_RESULT_FILE
     end
     
-    def input
-      self.file
+    def test_result_prelude
+      @test_result_prelude ||= TEST_RESULT_PRELUDE
+    end
+    
+    def test_result_closing
+      @test_result_closing ||= TEST_RESULT_CLOSING
     end
     
     # Print backtrace of all stack frames
@@ -193,6 +245,12 @@ module Sprout #:nodoc:
     def file=(file)
       @prerequisites << file
       @queue << "file #{file}"
+      @file = file
+    end
+    
+    # alias for self.file=
+    def input=(file)
+      self.file = file
     end
     
     # Execute until current function returns
@@ -366,9 +424,11 @@ module Sprout #:nodoc:
   
   # A buffer that provides clean blocking support for the fdb command shell
   class FDBBuffer #:nodoc:
-    
+    attr_accessor :test_result_file
+    attr_accessor :test_result_prelude
+    attr_accessor :test_result_closing
     attr_writer :kill_on_fault
-    
+
     PLAYER_TERMINATED = 'Player session terminated'
     EXIT_PROMPT = 'The program is running.  Exit anyway? (y or n)'
     PROMPT = '(fdb) '
@@ -414,7 +474,9 @@ module Sprout #:nodoc:
           $stdout.puts msg
         end
         
+        @inside_test_result = false
         full_output = ''
+        test_result = ''
         char = ''
         line = ''
         while true do
@@ -435,6 +497,19 @@ module Sprout #:nodoc:
           
           @output.print char
           @output.flush
+          
+          if(line == test_result_prelude)
+            @inside_test_result = true
+          end
+          
+          if(@inside_test_result)
+            test_result << line
+          end
+          
+          if(@inside_test_result && line == test_result_closing)
+            write_test_result(test_result)
+            kill
+          end
 
           if(line == PROMPT || line.match(/\(y or n\) $/))
             full_output_cache = full_output
@@ -473,6 +548,13 @@ module Sprout #:nodoc:
     def fault_found?(message)
       match = message.match(/\[Fault\]\s.*,.*$/) 
       return !match.nil?
+    end
+    
+    def write_test_result(result)
+      FileUtils.makedirs(File.dirname(test_result_file))
+      File.open(test_result_file, File::CREAT|File::TRUNC|File::RDWR) do |f|
+        f.puts(result)
+      end
     end
 
     # Block for the life of the input process

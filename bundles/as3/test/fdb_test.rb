@@ -5,7 +5,7 @@ class FDBTest <  Test::Unit::TestCase
   
   def setup
     @start                  = Dir.pwd
-    fixture                 = File.join(fixtures, 'fdb-exception')
+    fixture                 = File.join(fixtures, 'fdb')
     @swf                    = 'SomeProject-debug.swf'
     Dir.chdir fixture
   end
@@ -25,7 +25,7 @@ class FDBTest <  Test::Unit::TestCase
 
     return [process, output, buffer]
   end
-  # 
+
   # def test_instantiated
   #   debugger = fdb :debug
   #   assert debugger.is_a?(Sprout::FDBTask)
@@ -83,7 +83,7 @@ class FDBTest <  Test::Unit::TestCase
     
     debugger = fdb :debugger do |t|
       t.kill_on_fault = true
-      t.file = @swf
+      t.file = 'XMLRunner.swf'
       t.run
       t.continue
     end
