@@ -5,7 +5,7 @@
 name = File.basename(__FILE__).split('.').shift
 
 gem_wrap name do |t|
-  t.version       = '2.0.3'
+  t.version       = '2.0.4'
   t.summary       = "PureMVC is a lightweight framework for creating applications in ActionScript 3, based upon the classic Model-View-Controller design meta-pattern."
   t.author        = 'Cliff Hall'
   t.email         = 'cliff@puremvc.org'
@@ -14,6 +14,6 @@ gem_wrap name do |t|
 - !ruby/object:Sprout::RemoteFileTarget 
   platform: universal
   url: http://puremvc.org/pages/downloads/AS3/PureMVC_AS3.zip
-  archive_path: PureMVC_AS3_2_0_3/bin/PureMVC_AS3_2_0_3.swc
+  archive_path: PureMVC_AS3_2_0_4/bin/PureMVC_AS3_2_0_4.swc
 EOF
 end
