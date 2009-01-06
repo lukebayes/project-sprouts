@@ -30,6 +30,7 @@ module Sprout # :nodoc:
       out_task = mxmlc output do |t|
         configure_mxmlc t
         configure_mxmlc_application t
+        t.debug               = false
         t.optimize            = true
         t.warnings            = false
         t.verbose_stacktraces = false
