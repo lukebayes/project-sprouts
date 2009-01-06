@@ -2,23 +2,23 @@
 module Sprout
 
   
-  # The MXMLCUnit helper wraps up flashplayer and mxmlc unit test tasks by
+  # The MXMLCCruise helper wraps up the fdb and mxmlc unit test tasks by
   # using either a Singleton or provided ProjectModel instance.
   #
   # The simple case that uses a Singleton ProjectModel:
-  #   unit :test
+  #   ci :cruise
   #
-  # Using a ProjectModel instance:
+  # Using a specific ProjectModel instance:
   #   project_model :model
   #
-  #   unit :test => :model
+  #   ci :cruise => :model
   #
-  # Configuring the proxy MXMLCTask
-  #   unit :test do |t|
+  # Configuring the proxied MXMLCTask
+  #   ci :cruise do |t|
   #     t.link_report = 'LinkReport.rpt'
   #   end
   #
-  class MXMLCUnit < MXMLCHelper
+  class MXMLCCruise < MXMLCHelper
 
     def initialize(args, &block)
       super
@@ -38,25 +38,25 @@ module Sprout
         yield t if block_given?
       end
 
-      define_player
+      define_fdb
       t = define_outer_task
       t.prerequisites << output
       t.prerequisites << player_task_name
     end
     
     def create_output
-      return "#{create_output_base}Runner.swf"
+      return "#{create_output_base}XMLRunner.swf"
     end
 
     def create_input
       input = super
-      input.gsub!(/#{input_extension}$/, "Runner#{input_extension}") 
+      input.gsub!(/#{input_extension}$/, "XMLRunner#{input_extension}") 
       return input
     end
   
   end
 end
 
-def unit(args, &block)
-  return Sprout::MXMLCUnit.new(args, &block)
+def ci(args, &block)
+  return Sprout::MXMLCCruise.new(args, &block)
 end

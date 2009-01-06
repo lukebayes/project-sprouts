@@ -100,6 +100,15 @@ module Sprout # :nodoc:
       end
     end
     
+    def define_fdb
+      fdb player_task_name do |t|
+        t.file = output_file
+        t.kill_on_fault = true
+        t.run
+        t.continue
+      end
+    end
+    
     def define_outer_task
       t = task task_name
       self.prerequisites.each do |dep|

@@ -21,6 +21,7 @@ class ProjectGenerator < Sprout::Generator::NamedBase # :nodoc:
 
       m.template 'MainClass.as', File.join(base, 'src', "#{class_name}.as")
       m.template 'TestRunner.as', File.join(base, 'src', "#{class_name}Runner.as")
+      m.template 'XMLRunner.as', File.join(base, 'src', "#{class_name}XMLRunner.as")
     end
   end
 
