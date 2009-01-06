@@ -99,7 +99,12 @@ module Sprout #:nodoc:
   #     t.continue
   #   end
   #
-
+  # 4) Configure your CI task to call:
+  # 
+  #   rake cruise
+  #
+  # 5) That's it!
+  #
   class FDBTask < ToolTask
     TEST_RESULT_PRELUDE = '<XMLResultPrinter>'
     TEST_RESULT_CLOSING = '</XMLResultPrinter>'
@@ -564,7 +569,7 @@ module Sprout #:nodoc:
             @output.flush
           end
           
-          if(line.index(test_result_prelude))
+          if(!test_result_prelude.nil? && line.index(test_result_prelude))
             test_result = test_result_prelude
             @inside_test_result = true
           end
@@ -638,13 +643,13 @@ module Sprout #:nodoc:
       print PROMPT
       $stdout.flush
 
-      Thread.new do
+      t = Thread.new {
         while true do
           msg = user_input.gets.chomp!
           @input.puts msg
           wait_for_prompt
         end
-      end
+      }
 
       @listener.join
     end

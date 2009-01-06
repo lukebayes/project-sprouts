@@ -18,12 +18,12 @@ class FDBTest <  Test::Unit::TestCase
     clear_tasks
   end
   
-  def create_buffer(str=nil)
+  def create_buffer(input=nil)
     process = MockProcess.new
     output = MockProcess.new
     buffer = FDBBufferStub.new(process, output)
 
-    process.print str unless str.nil?
+    process.print input unless input.nil?
     sleep(0.2)
 
     return [process, output, buffer]
@@ -37,7 +37,11 @@ class FDBTest <  Test::Unit::TestCase
   def test_simple_buffer
     str = "Adobe"
     process, output, buffer = create_buffer(str)
+    
+    sleep(1.8)
+    
     assert_equal(str, output)
+    
   end
   
   def test_fdb_buffer
