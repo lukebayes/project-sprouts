@@ -380,7 +380,7 @@ module Sprout #:nodoc:
       @queue << "set #{value}"
     end
     
-    # Sleep until some 'str' String is sent to the output
+    # Sleep until some 'str' String is sent to the output,
     def sleep_until(str)
       @queue << "sleep #{str}"
     end

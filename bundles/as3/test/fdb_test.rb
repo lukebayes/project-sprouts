@@ -7,10 +7,13 @@ class FDBTest <  Test::Unit::TestCase
     @start                  = Dir.pwd
     fixture                 = File.join(fixtures, 'fdb')
     @swf                    = 'SomeProject-debug.swf'
+    @runner_swf             = 'XMLRunner.swf'
+    @exception_swf          = 'Exception.swf'
     Dir.chdir fixture
   end
   
   def teardown
+    remove_file 'AsUnitResults.xml'
     Dir.chdir @start
     clear_tasks
   end
@@ -26,64 +29,64 @@ class FDBTest <  Test::Unit::TestCase
     return [process, output, buffer]
   end
 
-  # def test_instantiated
-  #   debugger = fdb :debug
-  #   assert debugger.is_a?(Sprout::FDBTask)
-  # end
-  # 
-  # def test_simple_buffer
-  #   str = "Adobe"
-  #   process, output, buffer = create_buffer(str)
-  #   assert_equal(str, output)
-  # end
-  # 
-  # def test_fdb_buffer
-  #   str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
-  #   str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
-  #   str << "(fdb) "
-  #   
-  #   process, output, buffer = create_buffer str
-  #   assert_equal(str, output)
-  # end
-  # 
-  # def test_fdb_buffer_wait_for_prompt
-  #   str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
-  #   str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
-  #   str << "(fdb) "
-  # 
-  #   process, output, buffer = create_buffer
-  #   process.print str
-  # 
-  #   timeout 1 do
-  #     buffer.wait_for_prompt
-  #   end
-  # end
-  # 
-  # def test_fdb_confirmation_prompt
-  #   str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
-  #   str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
-  #   str << "The program is running.  Exit anyway? (y or n) "
-  # 
-  #   process, output, buffer = create_buffer
-  #   process.print str
-  # 
-  #   timeout 1 do
-  #     buffer.wait_for_prompt
-  #   end
-  #   
-  # end
+  def test_instantiated
+    debugger = fdb :debug
+    assert debugger.is_a?(Sprout::FDBTask)
+  end
+  
+  def test_simple_buffer
+    str = "Adobe"
+    process, output, buffer = create_buffer(str)
+    assert_equal(str, output)
+  end
+  
+  def test_fdb_buffer
+    str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
+    str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
+    str << "(fdb) "
+    
+    process, output, buffer = create_buffer str
+    assert_equal(str, output)
+  end
+  
+  def test_fdb_buffer_wait_for_prompt
+    str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
+    str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
+    str << "(fdb) "
+  
+    process, output, buffer = create_buffer
+    process.print str
+  
+    timeout 1 do
+      buffer.wait_for_prompt
+    end
+  end
+  
+  def test_fdb_confirmation_prompt
+    str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
+    str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
+    str << "The program is running.  Exit anyway? (y or n) "
+  
+    process, output, buffer = create_buffer
+    process.print str
+  
+    timeout 1 do
+      buffer.wait_for_prompt
+    end
+    
+  end
+  
+=begin
+
+  # These tests only work well when executed
+  # individually. Otherwise they junk up output
+  # and don't seem to clean up the Flash Player
+  # fast enough to be executed in a suite:
   
   def test_close_on_error
-    # debugger = fdb :debugger do |t|
-    #   t.kill_on_fault = true
-    #   t.file = @swf
-    #   t.run
-    #   t.continue
-    # end
-    
     debugger = fdb :debugger do |t|
       t.kill_on_fault = true
-      t.file = 'XMLRunner.swf'
+      t.file = @exception_swf
       t.run
       t.continue
     end
@@ -91,7 +94,16 @@ class FDBTest <  Test::Unit::TestCase
     debugger.execute
   end
   
-=begin
+  def test_close_after_unit_tests
+    debugger = fdb :debugger do |t|
+      t.kill_on_fault = true
+      t.file = @runner_swf
+      t.run
+      t.continue
+    end
+    
+    debugger.execute
+  end
 
   def test_launch_player
     debugger = fdb :debug do |t|
