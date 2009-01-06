@@ -46,6 +46,10 @@ Generate documentation using "AsDoc":http://labs.adobe.com/wiki/index.php/ASDoc:
 
 <pre><code>rake doc</code></pre>
 
+Execute the test harness, emit a JUnit-compatible test results document, and close the Flash Player when complete or after encountering an uncaught exception:
+
+<pre><code>rake cruise</code></pre>
+
 Display all available Rake tasks:
 
 <pre><code>rake -T</code></pre>
