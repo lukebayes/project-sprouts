@@ -112,11 +112,11 @@ module Sprout #:nodoc:
       end
 
       buffer = FDBBuffer.new(get_executable, stdout)
-      buffer.wait_for_prompt
       buffer.test_result_file = test_result_file
       buffer.test_result_prelude = test_result_prelude
       buffer.test_result_closing = test_result_closing
       buffer.kill_on_fault = kill_on_fault?
+      buffer.wait_for_prompt
 
       @queue.each do |command|
         handle_command(buffer, command)
@@ -494,21 +494,29 @@ module Sprout #:nodoc:
             line << char
             full_output << char
           end
+
+          if(@inside_test_result)
+            test_result << char
+          else
+            @output.print char
+            @output.flush
+          end
           
-          @output.print char
-          @output.flush
-          
-          if(line == test_result_prelude)
+          if(line.index(test_result_prelude))
+            test_result = test_result_prelude
             @inside_test_result = true
           end
           
-          if(@inside_test_result)
-            test_result << line
-          end
-          
-          if(@inside_test_result && line == test_result_closing)
+          if(@inside_test_result && line.index(test_result_closing))
             write_test_result(test_result)
-            kill
+            @inside_test_result = false
+            Thread.new {
+              write("\n")
+              write('y')
+              write('kill')
+              write('y')
+              write('quit')
+            }
           end
 
           if(line == PROMPT || line.match(/\(y or n\) $/))
@@ -550,7 +558,12 @@ module Sprout #:nodoc:
       return !match.nil?
     end
     
+    def clean_test_result(result)
+      return result.gsub(/^\[trace\]\s/m, '')
+    end
+    
     def write_test_result(result)
+      result = clean_test_result result
       FileUtils.makedirs(File.dirname(test_result_file))
       File.open(test_result_file, File::CREAT|File::TRUNC|File::RDWR) do |f|
         f.puts(result)
