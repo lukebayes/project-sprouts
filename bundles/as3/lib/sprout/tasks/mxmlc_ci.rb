@@ -19,6 +19,7 @@ module Sprout
   #   end
   #
   class MXMLCCruise < MXMLCHelper
+    attr_accessor :kill_on_fault # hack b/c of problems with rake task names and incestuous helpers
 
     def initialize(args, &block)
       super
