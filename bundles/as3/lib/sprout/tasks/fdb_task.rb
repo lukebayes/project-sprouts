@@ -38,6 +38,68 @@ module Sprout #:nodoc:
   #     t.continue
   #   end
   #
+  # .h3 Continuous Integration
+  #
+  # The FDBTask is also the only effective way to execute SWF content
+  # in front of a CI (continuous integration) tool like Cruise Control.
+  # The biggest problem facing SWF execution for CI is uncaught
+  # runtime exceptions. The debug Flash Player throws uncaught exceptions
+  # up to the operating system GUI layer where a user must manually dismiss
+  # a dialog. In addition to blocking the CI process indefinitely, these
+  # messages are also difficult to capture and log. 
+  #
+  # Using Sprouts and the FDBTask, we can capture these messages along
+  # with additonal information (e.g. local variables and a complete stack trace)
+  # about the state of the SWF file, and then cleanly exit the Flash Player
+  # and log this information.
+  #
+  # The FDBTask has also been configured to work with the ASUnit XMLPrinter
+  # so that an XML artifact is created and written to disk that includes
+  # the results of running your test suites.
+  # 
+  # To use FDB with a CI tool do the following:
+  #
+  # 1) Create a new base runner class (we usually name this XMLRunner.as)
+  # and make it look like the following:
+  #
+  #   package {
+  #     import asunit.textui.TestRunner;
+  #     import asunit.textui.XMLResultPrinter;
+  # 
+  #     public class XMLRunner extends TestRunner {
+  # 
+  #       public function XMLRunner() {
+  #         setPrinter(new XMLResultPrinter());
+  #         start(AllTests, null, TestRunner.SHOW_TRACE);
+  #       }
+  #     }
+  #   }
+  #
+  # 2) Create a new MXMLCTask to compile the newly created runner.
+  # NOTE: Be sure you set +debug+ to true, otherwise the SWF will
+  # not connect to the debugger properly.
+  #
+  #   library :asunit3
+  #
+  #   desc 'Compile the CI SWF'
+  #   mxmlc 'bin/XMLRunner.swf' => :asunit3 do |t|
+  #     t.input = 'src/XMLRunner.as'
+  #     t.debug = true
+  #     t.source_path << 'test'
+  #     # Add additional configuration here.
+  #   end
+  #
+  # 3) Create a new FDBTask and set +kill_on_fault+ to true.
+  #
+  #   desc 'Execute the test harness for CI'
+  #   fdb :cruise do |t|
+  #     t.kill_on_fault = true
+  #     t.file = 'bin/XMLRunner.swf'
+  #     t.run
+  #     t.continue
+  #   end
+  #
+
   class FDBTask < ToolTask
     TEST_RESULT_PRELUDE = '<XMLResultPrinter>'
     TEST_RESULT_CLOSING = '</XMLResultPrinter>'
