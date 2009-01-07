@@ -556,21 +556,22 @@ module Sprout #:nodoc:
           end
 
           if(char == "\n")
+            if(@inside_test_result && !line.index(test_result_prelude))
+              test_result << line + char
+            end
             line = ''
           else
             line << char
             full_output << char
           end
 
-          if(@inside_test_result)
-            test_result << char
-          else
+          if(!@inside_test_result)
             @output.print char
             @output.flush
           end
           
           if(!test_result_prelude.nil? && line.index(test_result_prelude))
-            test_result = test_result_prelude
+            test_result = ''
             @inside_test_result = true
           end
           
