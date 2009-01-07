@@ -263,11 +263,8 @@ task :release_to_rubyforge do |t|
 end
 
 desc "Release to gems.projectsprouts.org (cannot work from *all* sprouts)"
-sftp :release_to_dev do |t|
-  t.host          = 'dev.patternpark.com'
-  t.remote_path   = '/var/www/projectsprouts/current/gems'
-  t.files         = Dir.glob("pkg/*")
-  t.local_path    = 'pkg'
+task :release_to_dev do |t|
+  exec 'scp pkg/* dev.patternpark.com:/var/www/projectsprouts/current/gems/'
 end
 
 require File.join(File.dirname(__FILE__), 'sprout', 'lib', 'sprout', 'tasks', 'ssh_task')
