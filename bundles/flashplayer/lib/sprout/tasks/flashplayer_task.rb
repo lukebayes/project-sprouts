@@ -176,18 +176,6 @@ module Sprout
       return @gem_version ||= nil
     end
     
-    # If you're already running through the as3 or mxmlc bundle, you can tell the FlashPlayerTask
-    # to execute the SWF file via FDB (Flex Debugger). This will allow you to take advantage of
-    # all the features of FDB.
-    # Of course command-line deubugging isn't for everyone, but it can often be better than nothing!
-    def use_fdb=(use_fdb)
-      @use_fdb = use_fdb
-    end
-    
-    def use_fdb?
-      @use_fdb
-    end
-    
     # Full name of the sprout tool gem that this tool task will use. 
     # This defaults to sprout-flashplayer-tool
     def gem_name=(name)
@@ -240,22 +228,10 @@ module Sprout
         puts '[WARNING] FlashPlayer encountered an error working with the mm.cfg log and/or editing the Trust file'
       end
       
-      if(use_fdb?)
-        sprout 'as3'
-        
-        my_fdb = fdb :fdb_task do |t|
-          t.file = swf
-          t.run
-          t.continue
-        end
-        
-        my_fdb.execute
-      else
-        @running_process = nil
-        @thread = run(gem_name, gem_version, swf)
-        read_log(@thread, log_file)
-        @thread.join
-      end
+      @running_process = nil
+      @thread = run(gem_name, gem_version, swf)
+      read_log(@thread, log_file)
+      @thread.join
     end
     
     def close

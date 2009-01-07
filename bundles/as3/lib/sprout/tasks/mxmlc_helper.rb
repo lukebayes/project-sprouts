@@ -95,8 +95,12 @@ module Sprout # :nodoc:
     end
     
     def define_player
-      flashplayer player_task_name do |t|
-        t.swf = output_file
+      if model.use_fdb
+        define_fdb
+      else
+        flashplayer player_task_name do |t|
+          t.swf = output_file
+        end
       end
     end
     
@@ -105,7 +109,7 @@ module Sprout # :nodoc:
         t.file = output_file
         t.kill_on_fault = true
         t.run
-        t.continue
+        yield t if block_given?
       end
     end
     
