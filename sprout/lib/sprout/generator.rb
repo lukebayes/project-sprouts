@@ -1,4 +1,5 @@
 # gem 'activesupport', '>= 2.0.2'
+gem 'rubigen', '= 1.3.3'
 require 'rubigen'
 require 'sprout/generator/base_mixins'
 require 'sprout/generator/named_base'

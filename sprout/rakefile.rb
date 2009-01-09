@@ -55,7 +55,7 @@ def apply_shared_spec(s)
 
     s.add_dependency('rubyzip', '>= 0.9.1')
     s.add_dependency('archive-tar-minitar', '>= 0.5.1')
-    s.add_dependency('rubigen', '>= 1.3.2')
+    s.add_dependency('rubigen', '= 1.3.3')
     s.add_dependency('net-sftp')
     s.add_dependency('net-ssh')
 end
