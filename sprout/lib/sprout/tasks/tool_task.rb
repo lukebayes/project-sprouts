@@ -485,15 +485,28 @@ module Sprout
       return output_file
     end
     
+    def text_file?(file_name)
+      [/\.as$/, /\.txt$/, /\.mxml$/, /\.xml$/, /\.js$/, /\.html$/, /\.htm$/].select { |regex|
+        if(file_name.match(regex))
+          return true
+        end
+      }.size > 0
+    end
+    
     def setup_preprocessing_file_tasks(input_file, output_file)
+      return if(File.directory?(input_file))
       file input_file
-      file output_file => input_file do |pending_file|
-        pending = pending_file.name
-        FileUtils.mkdir_p(File.dirname(pending))
-        if(!File.directory?(pending))
-          File.open(input_file, 'r') do |readable|
-            File.open(output_file, 'w+') do |writable|
+      file output_file => input_file do
+        dir = File.dirname(output_file)
+        if(!File.exists?(dir))
+          FileUtils.mkdir_p(dir)
+        end
+        File.open(input_file, 'r') do |readable|
+          File.open(output_file, 'w+') do |writable|
+            if(text_file?(input_file))
               preprocess_content(readable, writable, belongs_to.preprocessor)
+            else
+              writable.write(readable.read)
             end
           end
         end
