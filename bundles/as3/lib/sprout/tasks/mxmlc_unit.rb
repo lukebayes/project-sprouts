@@ -28,8 +28,8 @@ module Sprout
         configure_mxmlc t
         configure_mxmlc_application t
         t.debug = true
-        t.prerequisites << :asunit3
         t.source_path << model.test_dir
+        t.prerequisites << :asunit3
         
         if(model.test_width && model.test_height)
           t.default_size = "#{model.test_width} #{model.test_height}"

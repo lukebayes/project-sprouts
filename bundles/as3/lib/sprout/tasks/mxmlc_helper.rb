@@ -60,7 +60,7 @@ module Sprout # :nodoc:
 
       compiler.gem_name          = model.compiler_gem_name
       compiler.gem_version       = model.compiler_gem_version
-      compiler.preprocessor      = model.preprocessor if !model.preprocessor.nil?
+      compiler.preprocessor      = model.preprocessor if !model.preprocessor.nil? && compiler.preprocessor.nil?
       compiler.preprocessed_path = model.preprocessed_path if !model.preprocessed_path.nil?
 
       # Set up library deps

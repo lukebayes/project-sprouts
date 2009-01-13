@@ -132,7 +132,7 @@ module Sprout
     
     def display_preprocess_message
       if(!preprocessor.nil?)
-        puts ">> Preprocessed: #{File.join(Dir.pwd, preprocessed_path)} with #{preprocessor}"
+        puts ">> Preprocessed text files in: #{File.join(Dir.pwd, preprocessed_path)} with #{preprocessor}"
       end
     end
     
@@ -479,6 +479,7 @@ module Sprout
     end
     
     def prepare_preprocessor_path(path)
+      FileUtils.mkdir_p(File.join(belongs_to.preprocessed_path, path))
       files = FileList[path + file_expression]
       files.each do |input_file|
         prepare_preprocessor_file(input_file)
