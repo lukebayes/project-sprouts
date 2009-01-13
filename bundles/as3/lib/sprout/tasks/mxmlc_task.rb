@@ -674,7 +674,7 @@ EOF
       
       # This must be the last item in this list
       add_param(:input, :file) do |p|
-        p.preprocessor = true
+        p.preprocessable = true
         p.hidden_name = true
         p.description = "Main source file to send compiler"
       end

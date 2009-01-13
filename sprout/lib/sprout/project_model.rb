@@ -101,7 +101,7 @@ module Sprout
     # Terminal command to preprocessor application that accepts STDIN and returns on STDOUT
     attr_accessor :preprocessor
     # Folder where preprocessed files will be created. Defaults to '.preprocessed'
-    attr_accessor :preprocessor_path
+    attr_accessor :preprocessed_path
     # The real name of the project, usually capitalized like a class name 'SomeProject'
     attr_accessor :project_name
     # The folder where compile time skins can be loaded from

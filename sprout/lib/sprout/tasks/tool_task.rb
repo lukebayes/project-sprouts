@@ -471,13 +471,12 @@ module Sprout
     end
     
     def prepare_preprocessor_path(path)
-      preprocessed_path = belongs_to.preprocessed_path
       files = FileList[path + file_expression]
       files.each do |input_file|
         prepare_preprocessor_file(input_file)
       end
       
-      return File.join(preprocessed_path, path)
+      return File.join(belongs_to.preprocessed_path, path)
     end
     
     def prepare_preprocessor_file(input_file)
@@ -491,9 +490,11 @@ module Sprout
       file output_file => input_file do |pending_file|
         pending = pending_file.name
         FileUtils.mkdir_p(File.dirname(pending))
-        File.open(input_file, 'r') do |readable|
-          File.open(output_file, 'w+') do |writable|
-            preprocess_content(readable, writable, belongs_to.preprocessor)
+        if(!File.directory?(pending))
+          File.open(input_file, 'r') do |readable|
+            File.open(output_file, 'w+') do |writable|
+              preprocess_content(readable, writable, belongs_to.preprocessor)
+            end
           end
         end
       end
