@@ -13,7 +13,7 @@ class ClassGenerator < Sprout::Generator::NamedBase  # :nodoc:
       m.directory full_test_dir
       m.template 'TestCase.as', full_test_case_path
       
-      m.template 'TestSuite.as', File.join(test_dir, 'AllTests.as')
+      m.template 'TestSuite.as', File.join(test_dir, 'AllTests.as'), :collision => :force
     end
   end
     

@@ -10,7 +10,7 @@ class SuiteGenerator < Sprout::Generator::NamedBase # :nodoc:
 
   def manifest
     record do |m|
-      m.template 'TestSuite.as', File.join(test_dir, 'AllTests.as')
+      m.template 'TestSuite.as', File.join(test_dir, 'AllTests.as'), :collision => :force
     end
   end
   
