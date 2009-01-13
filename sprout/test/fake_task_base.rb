@@ -43,6 +43,7 @@ class FakeTaskBase < Sprout::ToolTask # :nodoc:[all]
     File.open(name.to_s, 'w') do |f|
       f.write 'FakeTaskBase'
     end
+    return to_shell
   end
 end
 

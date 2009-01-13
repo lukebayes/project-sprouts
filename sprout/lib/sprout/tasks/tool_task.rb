@@ -33,7 +33,20 @@ module Sprout
     # Arguments to be prepended in front of the command line output
     attr_accessor :prepended_args
     # Arguments to appended at the end of the command line output
-    attr_accessor :appended_args
+    attr_accessor :appended_args        
+    # Command line arguments to execute preprocessor.
+    # The preprocessor execution should accept via STDIN and return through STDOUT.
+    # For example:
+    #
+    #   mxmlc 'bin/SomeProject.swf' => :corelib do |t|
+    #     t.input                     = 'src/SomeProject.as'
+    #     t.default_size              = '800 600'
+    #     t.preprocessor              = 'cpp -DDEBUG -P - -'
+    #   end
+    #
+    attr_accessor :preprocessor
+    # Path where preprocessed files are stored
+    attr_accessor :preprocessed_path
     
     def initialize(name, app) # :nodoc:
       super
@@ -551,15 +564,58 @@ module Sprout
   class PathsParam < FilesParam # :nodoc:
 
     def prepare_prerequisites
-      usr = User.new
-      value.each do |f|
-        files = FileList[f + file_expression]
-        files.each do |req_file|
-          file req_file
-          belongs_to.prerequisites << req_file
+      if belongs_to.preprocessor.nil?
+        value.each do |f|
+          files = FileList[f + file_expression]
+          files.each do |req_file|
+            file req_file
+            belongs_to.prerequisites << req_file
+          end
         end
+      else
+        prepare_preprocessor
       end
     end
+    
+    def prepare_preprocessor
+      processed = []
+
+      value.each do |f|
+        preprocessed_path = belongs_to.preprocessed_path
+        processed << File.join(preprocessed_path, f)
+
+        files = FileList[f + file_expression]
+        files.each do |input_file|
+          output_file = File.join(preprocessed_path, input_file)
+          setup_preprocessing_file_tasks(input_file, output_file)
+        end
+      end
+      
+      puts ">> processed :: #{processed}"
+      @value = processed
+    end
+    
+    def setup_preprocessing_file_tasks(input_file, output_file)
+      file input_file
+      file output_file => input_file do |pending_file|
+        pending = pending_file.name
+        FileUtils.mkdir_p(File.dirname(pending))
+        File.open(input_file, 'r') do |readable|
+          File.open(output_file, 'w+') do |writable|
+            preprocess_content(readable, writable, belongs_to.preprocessor)
+          end
+        end
+      end
+      belongs_to.prerequisites << output_file
+    end
+    
+    def preprocess_content(readable, writable, processor)
+      process = ProcessRunner.new(processor)
+      process.puts(readable.read)
+      process.close_write
+      writable.write(process.read)
+    end
+
   end
 
   # Concrete param object for collections of files

@@ -50,7 +50,7 @@ module GeneratorTestHelper  # :nodoc:[all]
   
   def assert_file_contains(file, content)
     assert_generated_file(file) do |body|
-      assert(body.index(content), "Generated file #{file} does not contain expected content #{content}")
+      assert(body.index(content), "Generated file #{file} '#{body}' does not contain expected content '#{content}'")
     end
   end
 

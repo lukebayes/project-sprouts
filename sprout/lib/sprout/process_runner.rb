@@ -76,6 +76,10 @@ module Sprout #:nodoc:
       @w.puts(msg)
     end
     
+    def close_write
+      @w.close_write
+    end
+    
     def read
       return @r.read
     end
