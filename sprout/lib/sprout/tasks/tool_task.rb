@@ -531,6 +531,7 @@ module Sprout
       result = process.read
       error = process.read_err
       if(error.size > 0)
+        belongs_to.display_preprocess_message
         FileUtils.rm_rf(belongs_to.preprocessed_path)
         raise ExecutionError.new("[ERROR] Preprocessor failed on file #{file} #{error}")
       end
