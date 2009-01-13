@@ -332,15 +332,16 @@ module Sprout
   # rake tasks for Command Line Interface (CLI) compilers.
   #
   class TaskParam
-    attr_accessor :name
-    attr_accessor :type
-    attr_accessor :validator
+    attr_accessor :belongs_to
     attr_accessor :description
-    attr_accessor :visible
     attr_accessor :hidden_name
     attr_accessor :hidden_value
+    attr_accessor :name
+    attr_accessor :preprocessable
     attr_accessor :required
-    attr_accessor :belongs_to
+    attr_accessor :type
+    attr_accessor :validator
+    attr_accessor :visible
 
     attr_writer   :prefix
     attr_writer   :value
@@ -446,6 +447,65 @@ module Sprout
       result << "def #{name}=(#{type})\n  @#{name} = #{type}\nend\n\n"
       return result
     end
+
+    protected
+    
+    def should_preprocess?
+      return preprocessable && !belongs_to.preprocessor.nil?
+    end
+    
+    def prepare_preprocessor_paths(paths)
+      processed = []
+      paths.each do |path|
+        processed << prepare_preprocessor_path(path)
+      end
+      return processed
+    end
+    
+    def prepare_preprocessor_files(files)
+      processed = []
+      files.each do |file|
+        processed << prepare_preprocessor_file(file)
+      end
+      return processed
+    end
+    
+    def prepare_preprocessor_path(path)
+      preprocessed_path = belongs_to.preprocessed_path
+      files = FileList[path + file_expression]
+      files.each do |input_file|
+        prepare_preprocessor_file(input_file)
+      end
+      
+      return File.join(preprocessed_path, path)
+    end
+    
+    def prepare_preprocessor_file(input_file)
+      output_file = File.join(belongs_to.preprocessed_path, input_file)
+      setup_preprocessing_file_tasks(input_file, output_file)
+      return output_file
+    end
+    
+    def setup_preprocessing_file_tasks(input_file, output_file)
+      file input_file
+      file output_file => input_file do |pending_file|
+        pending = pending_file.name
+        FileUtils.mkdir_p(File.dirname(pending))
+        File.open(input_file, 'r') do |readable|
+          File.open(output_file, 'w+') do |writable|
+            preprocess_content(readable, writable, belongs_to.preprocessor)
+          end
+        end
+      end
+      belongs_to.prerequisites << output_file
+    end
+    
+    def preprocess_content(readable, writable, processor)
+      process = ProcessRunner.new(processor)
+      process.puts(readable.read)
+      process.close_write
+      writable.write(process.read)
+    end
     
   end
 
@@ -469,16 +529,32 @@ module Sprout
 
   # Concrete param object for :file values
   class FileParam < TaskParam # :nodoc:
+
     def prepare_prerequisites
       if(value && value != belongs_to.name.to_s)
-        file value
-        belongs_to.prerequisites << value
+        if(should_preprocess?)
+          @value = prepare_preprocessor_file(value)
+        else
+          file value
+          belongs_to.prerequisites << value
+        end
       end
     end
   end
 
   # Concrete param object for :path values
-  class PathParam < FileParam # :nodoc:
+  class PathParam < TaskParam # :nodoc:
+
+    def prepare_prerequisites
+      if(value && value != belongs_to.name.to_s)
+        if should_preprocess?
+          @value = prepare_preprocessor_path(value)
+        else
+          file value
+          belongs_to.prerequisites << value
+        end
+      end
+    end
   end
 
   # Concrete param object for :boolean values
@@ -553,9 +629,13 @@ module Sprout
     end
 
     def prepare_prerequisites
-      value.each do |f|
-        file f
-        belongs_to.prerequisites << f
+      if should_preprocess?
+        @value = prepare_preprocessor_files(value)
+      else
+        value.each do |f|
+          file f
+          belongs_to.prerequisites << f
+        end
       end
     end
   end
@@ -564,57 +644,19 @@ module Sprout
   class PathsParam < FilesParam # :nodoc:
 
     def prepare_prerequisites
-      if belongs_to.preprocessor.nil?
-        value.each do |f|
-          files = FileList[f + file_expression]
+      if should_preprocess?
+        @value = prepare_preprocessor_paths(value)
+      else
+        value.each do |path|
+          files = FileList[path + file_expression]
           files.each do |req_file|
             file req_file
             belongs_to.prerequisites << req_file
           end
         end
-      else
-        prepare_preprocessor
       end
     end
     
-    def prepare_preprocessor
-      processed = []
-
-      value.each do |f|
-        preprocessed_path = belongs_to.preprocessed_path
-        processed << File.join(preprocessed_path, f)
-
-        files = FileList[f + file_expression]
-        files.each do |input_file|
-          output_file = File.join(preprocessed_path, input_file)
-          setup_preprocessing_file_tasks(input_file, output_file)
-        end
-      end
-      
-      puts ">> processed :: #{processed}"
-      @value = processed
-    end
-    
-    def setup_preprocessing_file_tasks(input_file, output_file)
-      file input_file
-      file output_file => input_file do |pending_file|
-        pending = pending_file.name
-        FileUtils.mkdir_p(File.dirname(pending))
-        File.open(input_file, 'r') do |readable|
-          File.open(output_file, 'w+') do |writable|
-            preprocess_content(readable, writable, belongs_to.preprocessor)
-          end
-        end
-      end
-      belongs_to.prerequisites << output_file
-    end
-    
-    def preprocess_content(readable, writable, processor)
-      process = ProcessRunner.new(processor)
-      process.puts(readable.read)
-      process.close_write
-      writable.write(process.read)
-    end
 
   end
 

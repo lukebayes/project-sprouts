@@ -5,6 +5,7 @@ class FakeTaskBase < Sprout::ToolTask # :nodoc:[all]
     
     add_param(:input, :file) do |p|
       p.hidden_name = true
+      p.preprocessable = true
     end
     
     add_param(:debug, :boolean) do |p|
@@ -14,9 +15,15 @@ class FakeTaskBase < Sprout::ToolTask # :nodoc:[all]
     
     add_param(:source_path, :files) do |p|
       p.delimiter = '=' 
+      p.preprocessable = true
     end
     
     add_param(:library_path, :paths) do |p|
+      p.preprocessable = true
+    end
+    
+    add_param(:fake_path_param, :path) do |p|
+      p.preprocessable = true
     end
     
     add_param(:hidden_name_param, :string) do |p|
