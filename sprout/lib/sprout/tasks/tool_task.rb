@@ -50,10 +50,11 @@ module Sprout
     
     def initialize(name, app) # :nodoc:
       super
-      @prepended_args   = nil
-      @appended_args    = nil
-      @default_gem_name = nil
-      @default_gem_path = nil
+      @preprocessed_path = '.preprocessed'
+      @prepended_args    = nil
+      @appended_args     = nil
+      @default_gem_name  = nil
+      @default_gem_path  = nil
       initialize_task
     end
     
@@ -129,7 +130,14 @@ module Sprout
       return result
     end
     
+    def display_preprocess_message
+      if(!preprocessor.nil?)
+        puts ">> Preprocessed: #{File.join(Dir.pwd, preprocessed_path)} with #{preprocessor}"
+      end
+    end
+    
     def execute(*args)
+      display_preprocess_message
       #puts ">> Executing #{File.basename(exe)} #{to_shell}"
       exe = Sprout.get_executable(gem_name, gem_path, gem_version)
       User.execute(exe, to_shell)
@@ -495,6 +503,8 @@ module Sprout
     
     def setup_preprocessing_file_tasks(input_file, output_file)
       return if(File.directory?(input_file))
+      CLEAN.add(belongs_to.preprocessed_path) if(!CLEAN.index(belongs_to.preprocessed_path))
+      
       file input_file
       file output_file => input_file do
         dir = File.dirname(output_file)
@@ -504,7 +514,7 @@ module Sprout
         File.open(input_file, 'r') do |readable|
           File.open(output_file, 'w+') do |writable|
             if(text_file?(input_file))
-              preprocess_content(readable, writable, belongs_to.preprocessor)
+              preprocess_content(readable, writable, belongs_to.preprocessor, input_file)
             else
               writable.write(readable.read)
             end
@@ -514,11 +524,17 @@ module Sprout
       belongs_to.prerequisites << output_file
     end
     
-    def preprocess_content(readable, writable, processor)
+    def preprocess_content(readable, writable, processor, file)
       process = ProcessRunner.new(processor)
       process.puts(readable.read)
       process.close_write
-      writable.write(process.read)
+      result = process.read
+      error = process.read_err
+      if(error.size > 0)
+        FileUtils.rm_rf(belongs_to.preprocessed_path)
+        raise ExecutionError.new("[ERROR] Preprocessor failed on file #{file} #{error}")
+      end
+      writable.write(result)
     end
     
   end

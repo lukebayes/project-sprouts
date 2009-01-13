@@ -764,6 +764,7 @@ EOF
           super
         end
       rescue ExecutionError => e
+        e = repair_preprocessed_paths(e)
         if(e.message.index('Warning:'))
           # MXMLC sends warnings to stderr....
           Log.puts(e.message.gsub('[ERROR]', '[WARNING]'))
@@ -773,6 +774,15 @@ EOF
       end
     end
 
+    def repair_preprocessed_paths(error)
+      if(!preprocessor.nil? && !preprocessed_path.nil?)
+        msg = error.message.gsub(preprocessed_path + '/', '')
+        new_error = ExecutionError.new(msg)
+        new_error.set_backtrace(error.backtrace.join("\n"))
+        return new_error
+      end
+      return error
+    end
   end
 end
 
