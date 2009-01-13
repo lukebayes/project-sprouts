@@ -48,7 +48,7 @@ module Sprout
   #   library :corelib
   # 
   #   # Alias the compilation task with one that is easier to type
-  #   # task :compile => 'SomeProject.swf'
+  #   task :compile => 'SomeProject.swf'
   #
   #   # Create an MXMLCTask named for the output file that it creates. This task depends on the
   #   # corelib library and will automatically add the corelib.swc to it's library_path
@@ -57,6 +57,8 @@ module Sprout
   #     t.default_size              = '800 600'
   #     t.default_background_color  = "#FFFFFF"
   #   end
+  #
+  # Note: Be sure to check out the features of the ToolTask to learn more about gem_version and preprocessor
   #
   class MXMLCTask < ToolTask
     
