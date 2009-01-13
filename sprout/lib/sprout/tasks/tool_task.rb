@@ -478,18 +478,23 @@ module Sprout
       return processed
     end
     
+    def cleaned_preprocessed_path(path)
+      File.join(belongs_to.preprocessed_path, path.gsub('../', 'backslash/'))
+    end
+    
     def prepare_preprocessor_path(path)
-      FileUtils.mkdir_p(File.join(belongs_to.preprocessed_path, path))
+      processed_path = cleaned_preprocessed_path(path)
+      FileUtils.mkdir_p(processed_path)
       files = FileList[path + file_expression]
       files.each do |input_file|
         prepare_preprocessor_file(input_file)
       end
       
-      return File.join(belongs_to.preprocessed_path, path)
+      return processed_path
     end
     
     def prepare_preprocessor_file(input_file)
-      output_file = File.join(belongs_to.preprocessed_path, input_file)
+      output_file = cleaned_preprocessed_path(input_file)
       setup_preprocessing_file_tasks(input_file, output_file)
       return output_file
     end
