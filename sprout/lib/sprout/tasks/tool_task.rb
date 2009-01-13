@@ -35,17 +35,36 @@ module Sprout
     # Arguments to appended at the end of the command line output
     attr_accessor :appended_args        
     # Command line arguments to execute preprocessor.
-    # The preprocessor execution should accept via STDIN and return through STDOUT.
-    # For example:
+    # The preprocessor execution should accept text via STDIN and return it's processed content via STDOUT.
+    #
+    # In the following example, the +MXMLCTask+ has been configured to use the C preprocessor (cpp) and
+    # place the processed output into a +_preprocessed+ folder, instead of the hidden default folder at 
+    # +.preprocessed+
+    #
+    # One side effect of the cpp tool is that it adds 2 carriage returns to the top of any processed files,
+    # so we have simply piped it's output to the tail command which then strips those carriage returns from
+    # all files - which retains accurate line numbers for any compiler error messages.
     #
     #   mxmlc 'bin/SomeProject.swf' => :corelib do |t|
     #     t.input                     = 'src/SomeProject.as'
     #     t.default_size              = '800 600'
-    #     t.preprocessor              = 'cpp -DDEBUG -P - -'
+    #     t.preprocessor              = 'cpp -D__DEBUG=true -P - - | tail -c +3'
+    #     t.preprocessed_path         = '_preprocessed'
     #   end
     #
+    # Any source files found in this example project can now take advantage of any tools, macros or syntax
+    # available to CPP. For example, the +__DEBUG+ variable is now defined and can be accessed in ActionScript
+    # source code as follows:
+    #
+    #   public static const DEBUG:Boolean = __DEBUG;
+    #
+    # Any commandline tool identified on this attribute will be provided the content of each file on STDIN and 
+    # whatever it returns to STDOUT will be written into the +preprocessed_path+. This means that we can 
+    # take advantage of the entire posix tool chain by piping inputs and outputs from one tool to another.
+    # Whatever the last tool returns will be handed off to the concrete compiler.
+    #
     attr_accessor :preprocessor
-    # Path where preprocessed files are stored
+    # Path where preprocessed files are stored. Defaults to '.preprocessed'
     attr_accessor :preprocessed_path
     
     def initialize(name, app) # :nodoc:
