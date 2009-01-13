@@ -58,8 +58,10 @@ module Sprout # :nodoc:
         compiler.use_fcsh    = use_fcsh || model.use_fcsh
       end
 
-      compiler.gem_name    = model.compiler_gem_name
-      compiler.gem_version = model.compiler_gem_version
+      compiler.gem_name          = model.compiler_gem_name
+      compiler.gem_version       = model.compiler_gem_version
+      compiler.preprocessor      = model.preprocessor
+      compiler.preprocessor_path = model.preprocessor_path
 
       # Set up library deps
       model.libraries.each do |lib|
@@ -87,10 +89,10 @@ module Sprout # :nodoc:
     def configure_mxmlc_application(compiler)
       compiler.warnings                 = true
       compiler.verbose_stacktraces      = true
-      compiler.default_background_color  = model.background_color if model.background_color
-      compiler.default_frame_rate        = model.frame_rate if model.frame_rate
+      compiler.default_background_color = model.background_color if model.background_color
+      compiler.default_frame_rate       = model.frame_rate if model.frame_rate
       if(model.width && model.height)
-        compiler.default_size              = "#{model.width} #{model.height}"
+        compiler.default_size           = "#{model.width} #{model.height}"
       end
     end
     

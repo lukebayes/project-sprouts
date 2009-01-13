@@ -82,6 +82,7 @@ EOF
       end
 
       add_param(:doc_sources, :paths) do |p|
+        p.preprocessable = true
         p.description =<<EOF
 A list of files that should be documented. If a directory name is in the list, it is recursively searched.
 
@@ -179,6 +180,7 @@ EOF
       end
 
       add_param(:source_path, :paths) do |p|
+        p.preprocessable = true
         p.description =<<EOF
 Adds directories or files to the source path. The Flex compiler searches directories in the source path for MXML or AS source files that are used in your Flex applications and includes those that are required at compile time.
 

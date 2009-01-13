@@ -576,6 +576,7 @@ EOF
       end
       
       add_param(:source_path, :paths) do |p|
+        p.preprocessable = true
         p.description =<<EOF
 Adds directories or files to the source path. The Flex compiler searches directories in the source path for MXML or AS source files that are used in your Flex applications and includes those that are required at compile time.
 
@@ -673,6 +674,7 @@ EOF
       
       # This must be the last item in this list
       add_param(:input, :file) do |p|
+        p.preprocessor = true
         p.hidden_name = true
         p.description = "Main source file to send compiler"
       end

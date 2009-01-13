@@ -103,6 +103,7 @@ EOF
       end
 
       add_param(:include_sources, :paths) do |p|
+        p.preprocessable = true
         p.description =<<EOF
 Specifies classes or directories to add to the SWC file. When specifying classes, you specify the path to the class file (for example, MyClass.as) rather than the class name itself (for example, MyClass). This lets you add classes to the SWC file that are not in the source path. In general, though, use the include-classes option, which lets you add classes that are in the source path.
 

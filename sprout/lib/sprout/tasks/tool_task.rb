@@ -638,6 +638,7 @@ module Sprout
         end
       end
     end
+
   end
 
   # Concrete param object for collections of paths
@@ -649,9 +650,9 @@ module Sprout
       else
         value.each do |path|
           files = FileList[path + file_expression]
-          files.each do |req_file|
-            file req_file
-            belongs_to.prerequisites << req_file
+          files.each do |f|
+            file f
+            belongs_to.prerequisites << f
           end
         end
       end
