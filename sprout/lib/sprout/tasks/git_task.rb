@@ -55,6 +55,7 @@ module Sprout
         @version.increment_revision
       end
       create_tag(@version.to_tag)
+      commit
       push
     end
 
