@@ -37,6 +37,9 @@ class GitStub
   def add_tag(name)
   end
   
+  def pull
+  end
+  
   def push(remote, branch, tags)
   end
 end
