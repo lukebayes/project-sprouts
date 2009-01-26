@@ -29,6 +29,7 @@ module Sprout
   # that is implemented on this class.
   #
   class ToolTask < Rake::FileTask
+    PREPROCESSED_TASKS = {}
     
     def initialize(name, app) # :nodoc:
       super
@@ -558,37 +559,51 @@ module Sprout
       return if(File.directory?(input_file))
       CLEAN.add(belongs_to.preprocessed_path) if(!CLEAN.index(belongs_to.preprocessed_path))
       
-      file input_file
-      file output_file => input_file do
-        dir = File.dirname(output_file)
-        if(!File.exists?(dir))
-          FileUtils.mkdir_p(dir)
-        end
-        File.open(input_file, 'r') do |readable|
-          File.open(output_file, 'w+') do |writable|
-            if(text_file?(input_file))
-              preprocess_content(readable, writable, belongs_to.preprocessor, input_file)
-            else
-              writable.write(readable.read)
-            end
+      if( ToolTask::PREPROCESSED_TASKS[input_file].nil? )
+        ToolTask::PREPROCESSED_TASKS[input_file] = true
+        
+        file input_file
+        file output_file => input_file do
+          dir = File.dirname(output_file)
+          if(!File.exists?(dir))
+            FileUtils.mkdir_p(dir)
           end
+
+          content = nil
+          # Open the input file and read its content:
+          File.open(input_file, 'r') do |readable|
+            content = readable.read
+          end
+        
+          # Preprocess the content if it's a known text file type:
+          if(text_file?(input_file))
+            content = preprocess_content(content, belongs_to.preprocessor, input_file)
+          end
+        
+          # Write the content to the output file:
+          File.open(output_file, 'w+') do |writable|
+            writable.write(content)
+          end
+        
         end
+        belongs_to.prerequisites << output_file
       end
-      belongs_to.prerequisites << output_file
     end
     
-    def preprocess_content(readable, writable, processor, file)
-      process = ProcessRunner.new(processor)
-      process.puts(readable.read)
+    def preprocess_content(content, statement, file_name)
+      process = ProcessRunner.new(statement)
+      process.puts(content)
       process.close_write
       result = process.read
       error = process.read_err
       if(error.size > 0)
         belongs_to.display_preprocess_message
         FileUtils.rm_rf(belongs_to.preprocessed_path)
-        raise ExecutionError.new("[ERROR] Preprocessor failed on file #{file} #{error}")
+        raise ExecutionError.new("[ERROR] Preprocessor failed on file #{file_name} #{error}")
       end
-      writable.write(result)
+      process.kill
+      puts "preprocessed: #{file_name}"
+      return result
     end
     
   end
