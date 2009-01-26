@@ -559,6 +559,8 @@ module Sprout
       return if(File.directory?(input_file))
       CLEAN.add(belongs_to.preprocessed_path) if(!CLEAN.index(belongs_to.preprocessed_path))
       
+      # Only create the preprocessed action if one does not
+      # already exist. There were many being created before...
       if( ToolTask::PREPROCESSED_TASKS[input_file].nil? )
         ToolTask::PREPROCESSED_TASKS[input_file] = true
         
@@ -568,23 +570,23 @@ module Sprout
           if(!File.exists?(dir))
             FileUtils.mkdir_p(dir)
           end
-
+          
           content = nil
           # Open the input file and read its content:
           File.open(input_file, 'r') do |readable|
             content = readable.read
           end
-        
+          
           # Preprocess the content if it's a known text file type:
           if(text_file?(input_file))
             content = preprocess_content(content, belongs_to.preprocessor, input_file)
           end
-        
+          
           # Write the content to the output file:
           File.open(output_file, 'w+') do |writable|
             writable.write(content)
           end
-        
+          
         end
         belongs_to.prerequisites << output_file
       end
@@ -602,7 +604,7 @@ module Sprout
         raise ExecutionError.new("[ERROR] Preprocessor failed on file #{file_name} #{error}")
       end
       process.kill
-      puts "preprocessed: #{file_name}"
+      Log.puts ">> Preprocessed: #{file_name} to #{belongs_to.preprocessed_path}"
       return result
     end
     
