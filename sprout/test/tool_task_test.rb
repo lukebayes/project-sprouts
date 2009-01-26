@@ -186,6 +186,7 @@ class ToolTaskTest <  Test::Unit::TestCase
       t.preprocessor = 'cpp -DDEBUG=foobar -P - -'
       t.preprocessed_path = '_preprocessed'
     end
+    
     run_task(:rake_task)
     assert_file_exists('_preprocessed/src/FooClass.as')
     assert_file_exists('_preprocessed/src/OtherClass.as')
@@ -193,7 +194,7 @@ class ToolTaskTest <  Test::Unit::TestCase
   end
   
   def test_preprocessor_on_file
-    rake_task = fake_task_base :rake_task  do |t|
+    fake_task_base :rake_task  do |t|
       t.input = 'src/ProcessMe.txt'
       t.preprocessor = 'cpp -DDEBUG=foobar -P - -'
       t.preprocessed_path = '_preprocessed'

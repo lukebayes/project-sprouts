@@ -561,7 +561,7 @@ module Sprout
       
       # Only create the preprocessed action if one does not
       # already exist. There were many being created before...
-      if( ToolTask::PREPROCESSED_TASKS[input_file].nil? )
+      if(!ToolTask::PREPROCESSED_TASKS[input_file])
         ToolTask::PREPROCESSED_TASKS[input_file] = true
         
         file input_file
@@ -582,12 +582,14 @@ module Sprout
             content = preprocess_content(content, belongs_to.preprocessor, input_file)
           end
           
+          puts "WORKING ON #{output_file}"
           # Write the content to the output file:
           File.open(output_file, 'w+') do |writable|
             writable.write(content)
           end
           
         end
+
         belongs_to.prerequisites << output_file
       end
     end
