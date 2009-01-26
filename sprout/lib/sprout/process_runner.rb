@@ -38,6 +38,10 @@ module Sprout #:nodoc:
       @alive = update_status
     end
     
+    def kill
+      Process.kill(9, pid)
+    end
+    
     def close
       update_status
     end
