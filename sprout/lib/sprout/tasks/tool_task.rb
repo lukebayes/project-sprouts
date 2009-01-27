@@ -573,36 +573,37 @@ module Sprout
       
       # Only create the preprocessed action if one does not
       # already exist. There were many being created before...
-      if(!ToolTask::has_preprocessed_task?(input_file))
-        ToolTask::add_preprocessed_task(input_file)
         
-        file input_file
-        file output_file => input_file do
+      file input_file
+      file output_file => input_file do
+        # Couldn't return, b/c Rake complained...
+        if(!ToolTask::has_preprocessed_task?(output_file))
           dir = File.dirname(output_file)
           if(!File.exists?(dir))
             FileUtils.mkdir_p(dir)
           end
-          
+        
           content = nil
           # Open the input file and read its content:
           File.open(input_file, 'r') do |readable|
             content = readable.read
           end
-          
+        
           # Preprocess the content if it's a known text file type:
           if(text_file?(input_file))
             content = preprocess_content(content, belongs_to.preprocessor, input_file)
           end
-          
+        
           # Write the content to the output file:
           File.open(output_file, 'w+') do |writable|
             writable.write(content)
           end
-          
-        end
 
-        belongs_to.prerequisites << output_file
+          ToolTask::add_preprocessed_task(output_file)
+        end
       end
+      
+      belongs_to.prerequisites << output_file
     end
     
     def preprocess_content(content, statement, file_name)
