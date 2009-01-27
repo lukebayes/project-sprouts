@@ -617,7 +617,7 @@ module Sprout
         raise ExecutionError.new("[ERROR] Preprocessor failed on file #{file_name} #{error}")
       end
       process.kill
-      Log.puts ">> Preprocessed: #{file_name} to #{belongs_to.preprocessed_path}"
+      Log.puts ">> Preprocessed and created: #{belongs_to.preprocessed_path}/#{file_name}"
       return result
     end
     
