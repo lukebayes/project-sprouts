@@ -157,29 +157,40 @@ class ToolTaskTest <  Test::Unit::TestCase
   end
 
   def test_preprocessor
-    rake_task = fake_task_base :rake_task  do |t|
+    rake_task = fake_task_base :fake_task  do |t|
       t.library_path << 'src'
       t.library_path << 'test'
       t.preprocessor = 'cpp -DDEBUG -P - -'
       t.preprocessed_path = '_preprocessed'
     end
-    run_task(:rake_task)
+    run_task(:fake_task)
     result = rake_task.to_shell
     assert_equal('-library-path+=_preprocessed/src -library-path+=_preprocessed/test', result)
   end
 
   def test_preprocessor_on_paths
-    rake_task = fake_task_base :rake_task  do |t|
+    fake_task_base :fake_task  do |t|
       t.library_path << 'src'
       t.preprocessor = 'cpp -DDEBUG=foobar -P - -'
       t.preprocessed_path = '_preprocessed'
     end
-    run_task(:rake_task)
+    run_task(:fake_task)
+    assert_file_contains('_preprocessed/src/ProcessMe.txt', 'foobar')
+  end
+  
+  def test_preprocessor_on_file
+    fake_task_base :fake_task  do |t|
+      t.input = 'src/ProcessMe.txt'
+      t.preprocessor = 'cpp -DDEBUG=foobar -P - -'
+      t.preprocessed_path = '_preprocessed'
+    end
+    
+    run_task(:fake_task)
     assert_file_contains('_preprocessed/src/ProcessMe.txt', 'foobar')
   end
 
   def test_preprocessor_on_files
-    rake_task = fake_task_base :rake_task  do |t|
+    fake_task_base :fake_task  do |t|
       t.source_path << 'src/FooClass.as'
       t.source_path << 'src/OtherClass.as'
       t.source_path << 'src/ProcessMe.txt'
@@ -187,29 +198,19 @@ class ToolTaskTest <  Test::Unit::TestCase
       t.preprocessed_path = '_preprocessed'
     end
     
-    run_task(:rake_task)
+    run_task(:fake_task)
     assert_file_exists('_preprocessed/src/FooClass.as')
     assert_file_exists('_preprocessed/src/OtherClass.as')
     assert_file_contains('_preprocessed/src/ProcessMe.txt', 'foobar')
   end
-  
-  def test_preprocessor_on_file
-    fake_task_base :rake_task  do |t|
-      t.input = 'src/ProcessMe.txt'
-      t.preprocessor = 'cpp -DDEBUG=foobar -P - -'
-      t.preprocessed_path = '_preprocessed'
-    end
-    run_task(:rake_task)
-    assert_file_contains('_preprocessed/src/ProcessMe.txt', 'foobar')
-  end
 
   def test_preprocessor_on_path
-    rake_task = fake_task_base :rake_task  do |t|
+    fake_task_base :fake_task  do |t|
       t.fake_path_param = 'src'
       t.preprocessor = 'cpp -DDEBUG=foobar -P - -'
       t.preprocessed_path = '_preprocessed'
     end
-    run_task(:rake_task)
+    run_task(:fake_task)
     assert_file_contains('_preprocessed/src/ProcessMe.txt', 'foobar')
   end
 

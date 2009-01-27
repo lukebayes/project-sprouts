@@ -29,7 +29,19 @@ module Sprout
   # that is implemented on this class.
   #
   class ToolTask < Rake::FileTask
-    PREPROCESSED_TASKS = {}
+    @@preprocessed_tasks = Hash.new
+    
+    def self.add_preprocessed_task(name)
+      @@preprocessed_tasks[name] = true
+    end
+
+    def self.has_preprocessed_task?(name)
+      !@@preprocessed_tasks[name].nil?
+    end
+
+    def self.clear_preprocessed_tasks
+      @@preprocessed_tasks.clear
+    end
     
     def initialize(name, app) # :nodoc:
       super
@@ -561,8 +573,8 @@ module Sprout
       
       # Only create the preprocessed action if one does not
       # already exist. There were many being created before...
-      if(!ToolTask::PREPROCESSED_TASKS[input_file])
-        ToolTask::PREPROCESSED_TASKS[input_file] = true
+      if(!ToolTask::has_preprocessed_task?(input_file))
+        ToolTask::add_preprocessed_task(input_file)
         
         file input_file
         file output_file => input_file do
@@ -582,7 +594,6 @@ module Sprout
             content = preprocess_content(content, belongs_to.preprocessor, input_file)
           end
           
-          puts "WORKING ON #{output_file}"
           # Write the content to the output file:
           File.open(output_file, 'w+') do |writable|
             writable.write(content)
