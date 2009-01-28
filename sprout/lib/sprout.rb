@@ -36,7 +36,9 @@ require 'sprout/general_tasks'
 require 'sprout/generator'
 
 module Sprout
-  SUDO_INSTALL_GEMS = 'false' == ENV['SUDO_INSTALL_GEMS'] ? false : true
+  if(!defined? SUDO_INSTALL_GEMS)
+    SUDO_INSTALL_GEMS = 'false' == ENV['SUDO_INSTALL_GEMS'] ? false : true
+  end
 
   class SproutError < StandardError #:nodoc:
   end
