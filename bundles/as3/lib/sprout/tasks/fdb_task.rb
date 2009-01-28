@@ -142,6 +142,7 @@ module Sprout #:nodoc:
     attr_writer :kill_on_fault
 
     def initialize_task # :nodoc:
+      Thread.abort_on_exception = true
       @default_gem_name = 'sprout-flex3sdk-tool'
       @default_gem_path = 'bin/fdb'
       @kill_on_fault = false
@@ -191,6 +192,9 @@ module Sprout #:nodoc:
 
       buffer.join # wait here until the buffer is closed.
 
+      if(buffer.runtime_exception_encountered && kill_on_fault?)
+        raise FDBTaskError.new("[ERROR] ActionScript runtime exception encountered")
+      end
       self
     end
     
@@ -494,6 +498,8 @@ module Sprout #:nodoc:
     attr_accessor :test_result_file
     attr_accessor :test_result_prelude
     attr_accessor :test_result_closing
+
+    attr_reader :runtime_exception_encountered
     attr_writer :kill_on_fault
 
     PLAYER_TERMINATED = 'Player session terminated'
@@ -599,6 +605,7 @@ module Sprout #:nodoc:
                 write('info locals') # Output local variables
                 write('kill') # Kill the running SWF file
                 write('y') # Confirm killing SWF
+                @runtime_exception_encountered = true
                 write('quit') # Quit FDB safely
               }
             end
