@@ -22,8 +22,6 @@ module Sprout
     # Path to a plain text file that contains a three-part version number.
     # @see VersionFile
     attr_accessor :version_file
-    # Accessor for mocking the git gem.
-    attr_accessor :scm
     # The remote branch to use, defaults to 'origin'.
     attr_accessor :remote
     # The local branch to send, defaults to 'master'.
@@ -66,6 +64,22 @@ module Sprout
       return t
     end
     
+    # Accessor for mocking the git gem.
+    def scm=(scm)
+      @scm = scm
+    end
+    
+    # Will open on path if no SCM exists yet.
+    def scm
+      if(@scm.nil?)
+        path = path_to_git
+        raise GitTaskError.new("We don't appear to be inside of a git repository") if path.nil?
+        @scm = Git.open(path)
+      end
+
+      @scm
+    end
+    
     private
     
     def push
@@ -92,23 +106,17 @@ module Sprout
     end
     
     def get_tags
-      return @scm.tags.collect do |t|
+      return scm.tags.collect do |t|
         t.name
       end
     end
     
     def create_tag(name)
-      @scm.add_tag name
+      scm.add_tag name
     end
     
     def validate
-      raise GitTaskError.new('version_file is a required configuration for GitTask') if version_file.nil?
-      if(@scm.nil?)
-        path = path_to_git
-        raise GitTaskError.new("We don't appear to be inside of a git repository") if path.nil?
-        @scm = Git.open(path)
-        @scm.pull
-      end
+      raise GitTaskError.new("task.version_file is a required configuration for GitTask") if version_file.nil?
     end
     
   end
