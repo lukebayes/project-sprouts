@@ -111,6 +111,7 @@ module Sprout # :nodoc:
         t.file = output_file
         t.kill_on_fault = true
         t.run
+        t.continue
         yield t if block_given?
       end
     end
