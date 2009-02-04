@@ -3,7 +3,7 @@ require 'fake_task_base'
 
 class ToolTaskTest <  Test::Unit::TestCase
   include GeneratorTestHelper
-
+  
   def setup
     super
     @fixture = File.dirname(__FILE__) + '/fixtures/tool_task'
@@ -20,7 +20,7 @@ class ToolTaskTest <  Test::Unit::TestCase
     clear_tasks
     Dir.chdir(@start)
   end
-
+  
   def test_params
     assert_equal(3, @tool.params.size)
   end
@@ -35,12 +35,12 @@ class ToolTaskTest <  Test::Unit::TestCase
     # Just check a subset of the generated docs
     assert(result.index("source_path=(paths)"))
   end
-
+  
   def test_boolean_accessor
     @task.debug = true
     assert_equal('-debug', @task.to_shell)
   end
-
+  
   def test_unknown_accessor
     assert_raises(NoMethodError) do
       @task.unknown = true
@@ -88,7 +88,7 @@ class ToolTaskTest <  Test::Unit::TestCase
     result = @task.to_shell
     assert_equal('--frame-rate=24', result)
   end
-
+  
   def test_show_on_false
     @task.as3 = false
     result = @task.to_shell
@@ -100,28 +100,27 @@ class ToolTaskTest <  Test::Unit::TestCase
     result = @task.to_shell
     assert_equal("-default-size 500 600", result)
   end
-
+  
   def test_files_param_prerequisites
-
     fake_task_base :fake_task do |t|
       t.input = 'SomeProject.as'
       t.source_path << 'test/SourceClass.as'
       t.library_path << 'src'
       t.library_path << 'src' #Ensure duplicate entires don't persist
     end
-
+    
     reqs = Rake::application[:fake_task].prerequisites
     run_task :fake_task
     
     assert_file('fake_task')
     assert_equal(6, reqs.size, "Prerequisites were not created properly")
-
+    
     input = reqs.shift
     assert_equal('SomeProject.as', input.to_s)
-
+    
     input = reqs.shift
     assert_equal('test/SourceClass.as', input.to_s)
-
+    
     input = reqs.shift
     assert_equal('src/FooClass.as', input.to_s)
     
@@ -137,7 +136,6 @@ class ToolTaskTest <  Test::Unit::TestCase
   end
   
   def test_path_param_cleaned
-    
     @task.library_path << '~/Library/Foo Project'    
     @task.prepare
     result = @task.library_path[0];
@@ -149,13 +147,13 @@ class ToolTaskTest <  Test::Unit::TestCase
     @tool.prepended_args = '--increment-revision'
     assert_equal('--increment-revision -debug=true', @tool.to_shell)
   end
-
+  
   def test_append_args
     @tool.debug = true
     @tool.appended_args = '--increment-revision'
     assert_equal('-debug=true --increment-revision', @tool.to_shell)
   end
-
+  
   def test_preprocessor
     rake_task = fake_task_base :fake_task  do |t|
       t.library_path << 'src'
@@ -167,7 +165,7 @@ class ToolTaskTest <  Test::Unit::TestCase
     result = rake_task.to_shell
     assert_equal('-library-path+=_preprocessed/src -library-path+=_preprocessed/test', result)
   end
-
+  
   def test_preprocessor_on_paths
     fake_task_base :fake_task  do |t|
       t.library_path << 'src'
@@ -188,7 +186,7 @@ class ToolTaskTest <  Test::Unit::TestCase
     run_task(:fake_task)
     assert_file_contains('_preprocessed/src/ProcessMe.txt', 'foobar')
   end
-
+  
   def test_preprocessor_on_files
     fake_task_base :fake_task  do |t|
       t.source_path << 'src/FooClass.as'
@@ -203,7 +201,7 @@ class ToolTaskTest <  Test::Unit::TestCase
     assert_file_exists('_preprocessed/src/OtherClass.as')
     assert_file_contains('_preprocessed/src/ProcessMe.txt', 'foobar')
   end
-
+  
   def test_preprocessor_on_path
     fake_task_base :fake_task  do |t|
       t.fake_path_param = 'src'
@@ -213,7 +211,6 @@ class ToolTaskTest <  Test::Unit::TestCase
     run_task(:fake_task)
     assert_file_contains('_preprocessed/src/ProcessMe.txt', 'foobar')
   end
-
   
 end
 
