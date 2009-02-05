@@ -653,7 +653,9 @@ module Sprout #:nodoc:
 
       t = Thread.new {
         while true do
-          msg = user_input.gets.chomp!
+          input = user_input.gets
+          break if input.nil?
+          msg = input.chomp!
           @input.puts msg
           wait_for_prompt
         end
