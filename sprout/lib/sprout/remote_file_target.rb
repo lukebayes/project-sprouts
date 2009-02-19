@@ -30,6 +30,9 @@ module Sprout
     # URL where Sprouts can go to download the RemoteFileTarget archive
     attr_accessor :url
 
+    # Filename for the downloaded file. Introduced to fix railsy URL issues.
+    attr_accessor :filename
+
     # Relative path within the archive to the executable or binary of interest
     def archive_path
       @archive_path ||= ''
@@ -74,11 +77,17 @@ module Sprout
     # Will strip off any ? arguments and trailing slashes. May not play nice with Rails URLS,
     # We expect archive file name suffixes like, zip, gzip, tar.gz, dmg, etc.
     def file_name
-      if(url.split('').last == '/')
-        return name
+      #check if there is a filename given, if not try to create it
+      if(!filename)
+        if(url.split('').last == '/')
+          return name
+        end
+        file = url.split('/').pop
+        file = file.split('?').shift
+      #if there is a filename given, the downloaded file should be in the archive directory
+      else
+        file = "archive/"+filename
       end
-      file = url.split('/').pop
-      file = file.split('?').shift
       return file
     end
     
