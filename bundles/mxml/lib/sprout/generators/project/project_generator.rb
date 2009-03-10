@@ -22,6 +22,7 @@ class ProjectGenerator < Sprout::Generator::NamedBase # :nodoc:
       m.template 'MainStyle.css', File.join(base, 'src', "#{class_name}Skin.css")
       m.template 'MainClass.mxml', File.join(base, 'src', "#{class_name}.mxml")
       m.template 'TestRunner.mxml', File.join(base, 'src', "#{class_name}Runner.mxml")
+      m.template 'XMLRunner.mxml', File.join(base, 'src', "#{class_name}XMLRunner.mxml")
     end
   end
 

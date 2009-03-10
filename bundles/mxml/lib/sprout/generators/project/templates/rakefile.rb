@@ -40,5 +40,8 @@ document :doc
 desc 'Compile a SWC file'
 swc :swc
 
+desc 'Compile and run the test harness for Ci'
+ci :cruise
+
 # set up the default rake task
 task :default => :debug
