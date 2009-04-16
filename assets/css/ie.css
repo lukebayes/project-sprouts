@@ -1,0 +1,41 @@
+/* -------------------------------------------------------------- 
+   
+   ie.css
+   
+   Contains every hack for Internet Explorer versions prior 
+   to IE7, so that our core files stay sweet and nimble.
+   
+-------------------------------------------------------------- */
+
+/* Make sure the layout is centered in IE5 */
+body        { text-align: center; }
+.container  { text-align: left; }
+
+
+/* This fixes the problem where IE6 adds an extra 3px margin to
+   two columns that are floated up against each other. */
+
+* html .column { overflow-x: hidden; } /* IE6 fix */
+
+.pull-1, .pull-2, .pull-3, .pull-4,
+.push-1, .push-2, .push-3, .push-4, 
+ul, ol {
+  position: relative; /* Keeps IE6 from cutting pulled/pushed images */
+}
+
+/* Fixes incorrect styling of legend in IE6 fieldsets. */
+legend { margin-bottom:1.4em; }
+
+/* Fixes incorrect placement of numbers in ol's in IE6/7 */
+ol { margin-left:2em; }
+
+/* Fixes (IE7 > browser) PNG Transparency Issue */
+* html img, * html .png{
+position:relative;
+behavior: expression((this.runtimeStyle.behavior="none")&&(this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && this.src.toLowerCase().indexOf('.png')>-1?(this.runtimeStyle.backgroundImage = "none",
+this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",
+this.src = "assets/img/transparent.gif"):(this.origBg = this.origBg? this.origBg :this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),
+this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='crop')",
+this.runtimeStyle.backgroundImage = "none")),this.pngSet=true)
+);
+}

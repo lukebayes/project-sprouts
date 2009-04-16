@@ -1,7 +1,0 @@
--------------------------
-TOOLS
--------------------------
-
-Sprout tools are ruby gems that refer to either universal or platform specific binary files in such a way that enables sprouts to download, install and run the appropriate binary on the appropriate system.
-
-As an added benefit, rubygems makes these binary files available in the system path with very little additional effort.

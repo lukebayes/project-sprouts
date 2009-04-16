@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Sprouts Documentation</title>
+		
+		<link rel="stylesheet" href="assets/css/screen.css" type="text/css" media="screen, projection">
+		<link rel="stylesheet" href="assets/css/print.css" type="text/css" media="print">
+		<!--[if IE]><link rel="stylesheet" href="assets/css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	</head>
+	<body>
+		
+		<div class="container"><!-- main wrapper -->
+			
+			<!-- Common Header -->
+			<div id="topNav" class="column span-24 last">
+				
+				<div id="topNav_left" class="column span-1"></div>
+				
+				<div id="topNav_center" class="column span-22">
+					
+					<div class="column span-4">
+						<img id="logo" src="assets/img/sprouts_logo_bw_small_2.png" alt="Small Sprouts Logo" />
+					</div>
+					
+					<div class="column span-12 prepend-6 last">
+						<ul>
+							<li><a href='index.html'>Home</a> |</li>
+							<li><a href='screencasts.html'>Screencasts</a> |</li>
+							<li><a href='getting_started.html'>Get Started</a> |</li>
+							<li><a href='learn.html'>Documentation</a> |</li>
+							<li><a href='community.html'>Community</a></li>
+						</ul>
+					</div>
+					
+				</div>
+				
+				<div id="topNav_right" class="column span-1 last"></div>
+			</div>
+			
+			<!-- Main Border -->
+			<div id="mainBorder" class="column span-24 last">
+		
+					<!-- Title -->
+					<div class="column span-18 append-3 prepend-3 last">
+			
+						<div id="header" class="column span-18 last" >
+													
+							<div class="column mid span-5 append-1 prepend-1 fadedLogo center last">
+								<h2>Quick Links</h2>
+								<ul>
+									<li><a href="#docs">Documentation</a></li>
+									<li><a href="#core">Core Concepts</a></li>
+									<li><a href="#screencasts">Screencasts</a></li>
+								</ul>
+							</div>
+							
+							<div class="center mid column span-9 prepend-1">
+								<h1>Learn about Sprouts</h1>
+								<h3>Find everything you need to be productive with Sprouts right here...
+								</h3>
+							</div>
+						
+						</div>
+					
+					</div>
+					
+					<!-- Main Content -->
+					
+					<div class="column span-16 append-4 prepend-4 last">
+
+						<div class="column span-5 prepend-1">
+							<a name="docs"></a>
+							<h3>Documentation</h3>
+						</div>
+
+						<div class="column span-10 last">
+							<p>The complete Ruby Documentation (RDoc) can be found here: <a href="rdoc/index.html">http://www.projectsprouts.org/rdoc</a>.</p>
+							
+							<p>Please post any questions or issues to the <a href="http://groups.google.com/group/projectsprouts">Google group</a>.</p>
+						</div>
+
+
+<!--						
+						<div class="column span-5 prepend-1">
+							<a name="core"></a>
+							<h3>Project Goals</h3>
+						</div>
+
+						<div class="column span-10 last">
+							<p>
+								Sprout's project goals. <br/><br/>
+							</p>
+						</div>
+-->						
+						<div class="column span-5 prepend-1">
+							<a name="core"></a>
+							<h3>Core Concepts</h3>
+						</div>
+
+						<div class="column span-10 last">
+							<p>Following are the core concepts upon which Sprouts has been constructed.</p>
+							<ul>
+								<li><a href="rdoc/files/sprout/doc/Tool.html"><strong>Tools</strong></a> are executables like <a href="http://www.mtasc.org">MTASC</a>, <a href="http://www.swfmill.org">SWFMill</a>, <a href="http://www.adobe.com/products/flex">MXMLC</a> or the <a href="http://www.adobe.com/products/flashplayer">Flash Player</a>. Tools are often accompanied by a Task so that they can be executed from a build script. When a Sprout <em>Tool</em> Gem is installed on your system, it is usually added to your path so that you can execute that tool directly from any terminal.</li>
+
+								<li><a href="rdoc/files/sprout/doc/Library.html"><strong>Libraries</strong></a> are any shared functionality that has been wrapped and deployed as a <em>Library</em> gem. Today, <em>Libraries</em> can be ActionScript source or pre-compiled SWC files. Many <em>Libraries</em> are distributed in both source and SWC form.</li>
+
+								<li><a href="rdoc/files/sprout/doc/Bundle.html"><strong>Bundles</strong></a> are Ruby Gems that can contain any amount of supporting code for a particular technology. Usually <em>Bundles</em> are how we deploy and share <em>Generators</em> and <em>Tasks</em> since they are usually so closely related. We currently have <em>Bundles</em> for <a href="rdoc/classes/Sprout/As2Bundle.html">ActionScript 2.0</a> and <a href="rdoc/classes/Sprout/As3Bundle.html">ActionScript 3.0</a> projects.</li>
+
+								<li><a href="rdoc/files/sprout/doc/Generator.html"><strong>Generators</strong></a> allow us to instantly create new files or collections of files. These can be as large as complete projects, or simply new classes, test cases, test suites, or MXML components. We have taken advantage of the existing <em>Generator</em> implementation provided by <a href="http://www.rubyonrails.org">Ruby On Rails</a> and have only made minor modifications to that implementation.</li>
+
+								<li><a href="rdoc/files/sprout/doc/Task.html"><strong>Tasks</strong></a> are made available to <a href="">Rake</a> so that you can more easily manage and simplify your build scripts by avoiding duplication and supporting efficient development. We currently have tasks available for <a href="rdoc/classes/Sprout/MXMLCTask.html">MXMLC</a>, <a href="rdoc/classes/Sprout/COMPCTask.html">COMPC</a>, <a href="rdoc/classes/Sprout/MTASCTask.html">MTASC</a>, <a href="rdoc/classes/Sprout/SWFMillTask.html">SWFMill</a>, <a href="rdoc/classes/Sprout/AsUnitTask.html">AsUnit</a>, Flash Player and More....</li>
+
+								<li><a href="rdoc/classes/Sprout/Sprout.html"><strong>Sprout</strong></a> is the core Ruby application that pulls all of these elements together.
+							</ul>						
+						</div>
+<!--						
+						<div class="column span-5 prepend-1">
+							<h3>Tutorials</h3>
+						</div>
+						
+						<div class="column span-9 prepend-1 last">
+							<p>
+								We're still working on filling out the tutorials content. So we do not leave you completly hanging, check out the <a href="http://code.google.com/p/projectsprouts/w/list">wiki</a> for the latest project information.
+							</p>
+						</div>
+-->
+						
+						<div class="column span-5 prepend-1">
+							<a name="screencasts"></a>
+							<h3>Screencasts</h3>
+						</div>
+						
+						<div class="column span-10 last">
+							<p>
+								For an introduction to the basic features available in Sprouts check out our <a href="screencasts.html">screencasts</a>.
+							</p>
+						</div>
+						
+					</div>
+					
+					
+					<!-- Footer -->
+					<div id="footer" class="column span-24 last">
+						<div>
+							Copyright &copy; 2007 Sprouts Core Team | 
+							<a href="http://groups.google.com/group/projectsprouts">Contact</a> | 
+							<a href="getting_started.html">Get Started</a>
+						</div>
+					</div>
+					
+			</div>
+			
+		</div>
+		
+		<!-- Key below is specific to www.projectsprouts.org -->
+		<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">
+		var pageTracker = _gat._getTracker("UA-1619511-4");
+		pageTracker._initData();
+		pageTracker._trackPageview();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,194 @@
+/** Common **/
+body{
+	margin: 0px;
+	padding: 0px;
+}
+a{
+	text-decoration: none;
+	color: #5B4328;
+}
+a:hover{
+	text-decoration: underline;
+	color: #C19C73;
+}
+a:hover h2{
+	text-decoration: underline;
+}
+code {
+	font-size : 12px;
+	color : #999999;
+	border-left: 2px #000000 solid;
+	display : block;
+	padding-left : 5px;
+}
+
+li{
+	padding-bottom: 3px;
+}
+			
+/*** Headers **/
+h1{
+	font-size : 24px;
+}		
+h2{
+	font-size : 18px;
+}
+h3{
+	font-size : 16px;
+	line-height : 22px;
+	color : #555555;
+}
+h4{
+	font-size : 14px;
+}
+
+/** Utility Classes **/
+.center{
+	text-align: center;
+}	
+.white{
+	color: #FFFFFF;
+}	
+.vid{
+	margin-bottom : 25px;
+}	
+.section{
+	margin-top : 25px;
+}
+			
+/** Header **/
+#logo{
+	position:absolute;
+	top:5px;
+}
+#topNav{
+	background-image: url(../img/header_slice.png);
+	background-repeat : repeat-x;
+	background-position : left top;
+	height : 75px;
+}
+		
+#topNav_left{
+	background-image: url(../img/left_header_edge.png);
+	background-repeat : no-repeat; 
+	background-position: left top;
+	height : 75px;
+}
+			
+#topNav_center div{
+	margin-top : 15px;
+}
+			
+#topNav_right{
+	background-image: url(../img/right_header_edge.png);
+	background-repeat : no-repeat; 
+	background-position: right top;
+	height : 75px;
+}
+		
+#header {
+	border: 2px #EAECE8 solid;
+	height : 200px;
+	background-color:#FFFFFF;
+	margin: 15px 0px 15px 0px;
+}
+#header div.mid{
+	margin-top : 35px;
+}
+#header, #header h1{
+	color : #000;
+}
+#header ul{
+	/*padding-top : 35px;*/
+}
+#header li{
+	padding: 0px;
+	font-size: 14px;
+}
+#topNav ul, #topNav li{
+	display : inline;
+}
+#topNav ul, #header ul{
+	list-style : none;
+}
+#topNav a,#topNav a:link,#topNav a:visited{
+	text-decoration : none;
+	color : #000000;
+	font-size : 14px;
+}
+#topNav a:hover{
+	color : #333333;
+	text-decoration:underline;
+}
+
+#contextNav{
+	background-color:#EEEEEE;
+	height:200px;
+}	
+#contextNav li a:link, #contentNav li a:visited{
+	color: #000000;
+}
+#contextNav li a:hover{
+	color: #999999;
+}
+.fadedLogo{
+	background-image:url(../img/sprouts_logo_faded.png);
+	background-repeat:no-repeat;
+	background-position:center top;
+}
+/** Border Styles **/
+#mainBorder{
+	background-image: url(../img/main_border.png);
+	background-repeat : repeat-y;
+	background-position: left;				
+}
+			
+/** Call to Action **/
+#action{
+	background-image: url(../img/action_background.png);
+	background-repeat : repeat-x;
+	background-position: left top;
+}
+#action div{
+	height:200px;
+}
+#leftActionBorder{
+	background-image: url(../img/left_action_border.png);
+	background-repeat : no-repeat;
+	background-position: top left;
+}
+#rightActionBorder{
+	background-image: url(../img/right_action_border.png);
+	background-repeat : no-repeat;
+	background-position: top right;				
+}
+			
+#actionBody div{
+	margin-top: 30px;
+	text-align: center;
+}
+#actionBody div h2{
+	color : #FFFFFF;
+}
+#actionBody div a img{
+	border : 0px;
+}
+						
+/** Footer **/
+div#footer{
+}
+div#footer div{
+	padding-top: 5px;
+	color: #FFFFFF;
+	background : #586853;
+	height: 23px;
+	width:905px;
+	margin: 30px 0px 0px 21px;
+	border-top:2px #DBE8C8 solid;
+	text-align: center;
+	font-size : 10px;
+}
+
+div#footer div a {
+	color: #fff;
+}

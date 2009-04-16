@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>Sprouts Getting Started</title>
+		
+		<link rel="stylesheet" href="assets/css/screen.css" type="text/css" media="screen, projection">
+		<link rel="stylesheet" href="assets/css/print.css" type="text/css" media="print">
+		<!--[if IE]><link rel="stylesheet" href="assets/css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	</head>
+	<body>
+		
+		<div class="container"><!-- main wrapper -->
+			
+			<!-- Common Header -->
+			<div id="topNav" class="column span-24 last">
+				
+				<div id="topNav_left" class="column span-1"></div>
+				
+				<div id="topNav_center" class="column span-22">
+					
+					<div class="column span-4">
+						<img id="logo" src="assets/img/sprouts_logo_bw_small_2.png" alt="Small Sprouts Logo" />
+					</div>
+					
+					<div class="column span-12 prepend-6 last">
+						<ul>
+							<li><a href='index.html'>Home</a> |</li>
+							<li><a href='screencasts.html'>Screencasts</a> |</li>
+							<li><a href='getting_started.html'>Get Started</a> |</li>
+							<li><a href='learn.html'>Documentation</a> |</li>
+							<li><a href='community.html'>Community</a></li>
+						</ul>
+					</div>
+					
+				</div>
+				
+				<div id="topNav_right" class="column span-1 last"></div>
+			</div>
+			
+			<!-- Main Border -->
+			<div id="mainBorder" class="column span-24 last">
+		
+					<!-- Title -->
+					<div class="column span-18 append-3 prepend-3 last">
+			
+						<div id="header" class="column span-18 last" >
+													
+							<div class="column mid span-5 prepend-1 append-1 center fadedLogo last">
+								<h2>Quick Links</h2>
+								<ul>
+									<li><a href="#pre">Prerequisites</a></li>
+									<li><a href="#install">Installing Sprouts</a></li>
+									<li><a href="#first">Your first sprout</a></li>
+									<li><a href="#next">Where to go from here</a></li>
+								</ul>
+							</div>
+							
+							<div class="center mid column span-9 prepend-1">
+								<h1>Get Started</h1>
+								<h3>
+									You are taking the first steps to a better development experience. 
+								</h3>
+							</div>
+							
+						</div>
+					
+					</div>
+					
+					<!-- Main Content -->
+					
+					<div class="column span-16 append-4 prepend-4 last">
+						
+						<div class="column span-5 prepend-1 section">
+							<a name="pre"></a>
+							<h3>Prerequisites</h3>
+							<br/>
+							<a href="http://www.ruby-lang.org"><img src="assets/img/ruby-logo.jpg" alt="Ruby Logo" /></a>
+							<br/>
+							<a href="http://www.rubygems.org"><img src="assets/img/rubygems-logo.png" alt="RubyGems Logo" /></a>
+						</div>
+						
+						<div class="column span-10 last section">
+							<p>
+								Sprouts needs two items installed before you can get going.
+								Start off by installing <a href="http://www.ruby-lang.org/en/downloads/">Ruby</a>. In case you're wondering, Ruby is...
+								<blockquote>A dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.</blockquote>
+								Its a great language for many things, one of which is writing utilities and automation tools.
+								<br/>
+								Once Ruby is installed, head on over to <a href="http://rubygems.org/read/chapter/3">RubyGems</a> and follow their installation instructions. RubyGems is a cross platform package management system allowing for quick installation of source code, libraries and tools.
+								<br/>
+								To make sure everything is working properly run the following from your commandline:
+								
+								<code>sudo gem --help #Windows users drop the sudo</code>
+								
+								If you are greeted by RubyGem usage information, the installation was successful and you can proceed to installing sprouts. If not, check with <a href="http://rubygems.org/read/book/3">RubyGems FAQ's</a> to see if they have a quick solution to your problem. Failing that head over to the Sprouts ListServ on <a href="http://groups.google.com/group/projectsprouts">Google Groups</a> and post your problem in our forum.
+							</p>
+						</div>
+						
+						
+						<div class="column span-5 prepend-1 section">
+							<a name="install"></a>
+							<h3>Installing Sprouts</h3>
+						</div>
+						
+						<div class="column span-10 last section">
+							<p>
+								The big moment has arrived. To install Sprouts, type the following into your commandline:<br/><br/>
+								<strong style="padding-left:20px;">For Windows</strong>
+								
+								<code>gem install sprout</code>
+								
+								<strong style="padding-left:20px;">For Mac/Linux</strong><br/>
+
+								<code>sudo gem install sprout</code>								
+							If the installation was successful you should see the following output:
+							<blockquote>
+								Attempting install of sprout<br/>
+								Successfully installed sprout-x.x.xx<br/>
+								1 gem installed<br/>
+								Gems installed: sprout
+							</blockquote>
+							Sprouts is ready to do thy bidding. Enjoy!<br/><br/>
+							If you run into any trouble, you can always find help in the <a href="http://groups.google.com/group/projectsprouts">forums</a>.
+							</p>
+						</div>
+						
+						<div class="column span-5 prepend-1 section">
+							<a name="first"></a>
+							<h3>Your first sprout</h3>
+						</div>
+						
+						<div class="column span-10 last section">
+							<p>
+								In this quick "Hello World" example for Sprouts, we'll create a new Flex project and a simple Utility Class. 
+								No long introduction required.<br/>
+								Open up your commandline and cd into the path where you'd like to create your project directory:
+								
+								<code>cd C:\projects</code>
+								
+							Now enter the following command to create the project:
+							
+							<code>sprout -n as3 SomeProject</code>
+							
+							You should see sprouts downloading and unpacking a number of required libraries and tools. It took me about a minute to download everything the first time.
+							Now cd into the "SomeProject" directory and run the "rake" task. This will compile and launch the pre-configured application. The first time you run rake against this project, all of the required tools will be downloaded and configured. This may take awhile, especially when we get to the Flex SDK. Once it's done, you can enter:
+<code>cd SomeProject
+rake</code>
+							If everything is going well, you should see a nice photo prominently displaying the Sprouts Logo.<br/>
+							Next we'll create a new Class called "utils.MathUtil" and its corresponding test Class.
+							
+							<code>script/generate utils.MathUtil</code>
+							
+							Not too shabby so far :)<br/>
+							You can run all the unit tests in your project with the following command.
+							
+							<code>rake test</code>
+							
+							Do not worry if the tests fail. Its supposed to do that so you remember to write your unit tests for each Class you generate. 
+							Perhaps I'll leave that discussion for one of the more advanced <a href="learn.html">documentation</a>.<br/>
+							<br />
+							<strong>Welcome to Sprouts.</strong>
+						</p>
+						</div>	
+
+						<div class="column span-5 prepend-1 section">
+							<a name="next"></a>
+							<h3>Where to go from here</h3>
+						</div>
+						
+						<div class="column span-10 last section">
+							<p>Here are a couple ways to learn more about Sprouts.</p>
+								<ul>
+									<li><strong>Get Informed</strong> - Check out our <a href="screencasts.html">screencasts</a> and <a href="learn.html">documentation</a>.</li>
+									<li><strong>Get Active</strong> - <a href="community.html">Join the community discussion</a> or make some time to contribute fixes and features!</li>
+								</ul>
+						</div>
+						
+					</div>
+					
+					
+					<!-- Footer -->
+					<div id="footer" class="column span-24 last">
+						<div>
+							Copyright &copy; 2007 Sprouts Core Team | 
+							<a href="http://groups.google.com/group/projectsprouts">Contact</a> | 
+							<a href="getting_started.html">Get Started</a>
+						</div>
+					</div>
+					
+			</div>
+			
+		</div>
+		
+		<!-- Key below is specific to www.projectsprouts.org -->
+		<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">
+		var pageTracker = _gat._getTracker("UA-1619511-4");
+		pageTracker._initData();
+		pageTracker._trackPageview();
+		</script>
+	</body>
+</html>
