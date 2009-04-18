@@ -97,20 +97,6 @@ module Sprout
     # Base file name represented by the provided +url+
     # Will strip off any ? arguments and trailing slashes. May not play nice with Rails URLS,
     # We expect archive file name suffixes like, zip, gzip, tar.gz, dmg, etc.
-# <<<<<<< HEAD:sprout/lib/sprout/remote_file_target.rb
-#     def file_name
-#       #check if there is a filename given, if not try to create it
-#       if(!filename)
-#         if(url.split('').last == '/')
-#           return name
-#         end
-#         file = url.split('/').pop
-#         file = file.split('?').shift
-#       #if there is a filename given, the downloaded file should be in the archive directory
-#       else
-#         file = "archive/"+filename
-#       end
-# =======
     def file_name(url=nil)
       return @file_name if(@file_name)
 

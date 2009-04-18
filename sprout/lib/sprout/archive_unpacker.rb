@@ -32,16 +32,16 @@ module Sprout
       
       if(!File.exists?(unpacked))
         case archive_type
-          when :zip
+          when :zip || 'zip'
             unpack_zip(file_name, dir)
-          when :targz
+          when :targz || 'targz'
             unpack_targz(file_name, dir)
-          when :dmg
+          when :dmg || 'dmg'
             unpack_dmg(file_name, dir)
-          when :exe
+          when :exe || 'exe'
             FileUtils.mkdir_p(dir)
             File.mv(file_name, dir)
-          when :swc || :rb
+          when :swc || 'swc' || :rb || 'rb'
             return
           else
             raise ArchiveUnpackerError.new("ArchiveUnpacker does not know how to unpack files of type: #{archive_type} for file_name: #{file_name}")
