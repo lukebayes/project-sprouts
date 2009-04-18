@@ -20,6 +20,7 @@ require 'sprout/user'
 require 'sprout/zip_util'
 require 'sprout/remote_file_target'
 require 'sprout/remote_file_loader'
+require 'sprout/remote_file_unpacker'
 require 'sprout/simple_resolver'
 require 'sprout/template_resolver'
 

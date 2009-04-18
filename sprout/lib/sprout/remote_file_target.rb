@@ -100,7 +100,8 @@ module Sprout
     end
     
     def install(from, to, archive_type=nil)
-      @loader.unpack_downloaded_file(from, to, archive_type)
+      unpacker = RemoteFileUnpacker.new
+      unpacker.unpack_downloaded_file(from, to, archive_type)
     end
     
   end
