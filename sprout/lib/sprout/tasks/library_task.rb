@@ -99,6 +99,7 @@ module Sprout
     
     def define_file_task(source, destination)
       file destination do |t|
+        FileUtils.mkdir_p(destination)
         FileUtils.cp_r(library_path, destination)
       end
       prerequisites << destination
