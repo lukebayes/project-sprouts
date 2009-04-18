@@ -110,12 +110,6 @@ module Sprout
     end
     
     def unpack_zip(zip_file, dir)
-      if(!zip_file.match(/.zip$/))
-        new_name = "#{zip_file}.zip"
-        FileUtils.mv(zip_file, new_name)
-        zip_file = new_name
-      end
-      
       # Avoid the rubyzip Segmentation Fault bug
       # at least on os x...
       if(RUBY_PLATFORM =~ /darwin/)
@@ -125,7 +119,7 @@ module Sprout
           zip_name = File.basename(zip_file)
           output = File.expand_path(dir)
           #puts ">> zip_dir: #{zip_dir} zip_name: #{zip_name} output: #{output}"
-          # %x(cd #{zip_dir};unzip #{zip_name} -d #{output})
+          %x(cd #{zip_dir};unzip #{zip_name} -d #{output})
       else
         retries = 0
         begin
