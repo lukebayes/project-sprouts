@@ -105,7 +105,7 @@ module Sprout
           s.email         = @email
           s.homepage      = @homepage
           s.rubyforge_project = 'sprout'
-          s.requirements << {'sprout', '>= 0.7.1'}
+          s.requirements << {'sprout', '>= 0.7.207'}
           gem_dependencies.each do |dep|
             s.requirements << dep
           end
