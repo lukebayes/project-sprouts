@@ -27,6 +27,7 @@ class LibraryTest <  Test::Unit::TestCase
   
   def teardown
     super
+    Sprout::Sprout.sprout_cache = nil
     remove_file(@system_lib)
     remove_file(@lib_dir)
 
