@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Sprout::User</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Sprout::User</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/sprout/lib/sprout/user_rb.html">
+                sprout/lib/sprout/user.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The <a href="User.html">User</a> class provides a single and consistent
+interface to <a href="User.html">User</a> based paths and features so that
+Sprout implementation code doesn&#8216;t need to be concerned with which
+Operating system it is running on.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000470">application_home</a>&nbsp;&nbsp;
+      <a href="#M000475">clean_path</a>&nbsp;&nbsp;
+      <a href="#M000472">execute</a>&nbsp;&nbsp;
+      <a href="#M000473">execute_silent</a>&nbsp;&nbsp;
+      <a href="#M000474">execute_thread</a>&nbsp;&nbsp;
+      <a href="#M000468">get_exe_path</a>&nbsp;&nbsp;
+      <a href="#M000469">home</a>&nbsp;&nbsp;
+      <a href="#M000467">in_path?</a>&nbsp;&nbsp;
+      <a href="#M000466">is_a?</a>&nbsp;&nbsp;
+      <a href="#M000471">library</a>&nbsp;&nbsp;
+      <a href="#M000465">new</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000470" class="method-detail">
+        <a name="M000470"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000470.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000470.html');return false;">
+          <span class="method-name">application_home</span><span class="method-args">(name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="User.html#M000469">home</a> path for a named
+application based on the currently logged in user and operating system. If
+the user name is lbayes and the application name is Sprouts, this path will
+be:
+</p>
+<table>
+<tr><td valign="top">Windows XP:</td><td>C:\Documents And Settings\lbayes\Local Settings\Application Data\Sprouts
+
+</td></tr>
+<tr><td valign="top">Cygwin:</td><td>/cygdrive/c/Documents And Settings/Local Settings/Application Data/Sprouts
+
+</td></tr>
+<tr><td valign="top">OS X:</td><td>/Users/lbayes/Library/Sprouts
+
+</td></tr>
+<tr><td valign="top">Linux:</td><td>~/.sprouts
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000475" class="method-detail">
+        <a name="M000475"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000475.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000475.html');return false;">
+          <span class="method-name">clean_path</span><span class="method-args">(path)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Clean a path string in such a way that works for each platform. For
+example, Windows doesn&#8216;t like it when we backslash to escape spaces
+in a path because that is the character they use as a delimiter. And OS X
+doesn&#8216;t really like it when we wrap paths in quotes.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000472" class="method-detail">
+        <a name="M000472"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000472.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000472.html');return false;">
+          <span class="method-name">execute</span><span class="method-args">(tool, options='')</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Execute a named tool sprout. The full sprout name should be provided to the
+tool parameter, and a string of shell parameters that will be sent to the
+tool itself.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000473" class="method-detail">
+        <a name="M000473"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000473.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000473.html');return false;">
+          <span class="method-name">execute_silent</span><span class="method-args">(tool, options='')</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000474" class="method-detail">
+        <a name="M000474"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000474.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000474.html');return false;">
+          <span class="method-name">execute_thread</span><span class="method-args">(tool, options='')</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Execute a named tool sprout as a <a href="User.html#M000465">new</a> thread
+and return that thread
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000468" class="method-detail">
+        <a name="M000468"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000468.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000468.html');return false;">
+          <span class="method-name">get_exe_path</span><span class="method-args">(executable)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Retrieve the full path to an executable that exists in the user path
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000469" class="method-detail">
+        <a name="M000469"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000469.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000469.html');return false;">
+          <span class="method-name">home</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the <a href="User.html#M000469">home</a> path for the currently
+logged in user. If the user name is lbayes, this should be:
+</p>
+<table>
+<tr><td valign="top">Windows XP:</td><td>C:\Documents And Settings\lbayes
+
+</td></tr>
+<tr><td valign="top">Cygwin:</td><td>/cygdrive/c/Documents And Settings/lbayes
+
+</td></tr>
+<tr><td valign="top">OS X:</td><td>/Users/lbayes
+
+</td></tr>
+<tr><td valign="top">Linux:</td><td>~/
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000467" class="method-detail">
+        <a name="M000467"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000467.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000467.html');return false;">
+          <span class="method-name">in_path?</span><span class="method-args">(executable)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Pass an executable or binary file name and find out if that file exists in
+the system path or not
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000466" class="method-detail">
+        <a name="M000466"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000466.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000466.html');return false;">
+          <span class="method-name">is_a?</span><span class="method-args">(type)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000471" class="method-detail">
+        <a name="M000471"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000471.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000471.html');return false;">
+          <span class="method-name">library</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the <a href="User.html#M000471">library</a> path on the current
+system. This is the general path where all applications should store
+configuration or session data.
+</p>
+<table>
+<tr><td valign="top">Windows XP:</td><td>C:\Documents And Settings\lbayes\Local Settings\Application Data
+
+</td></tr>
+<tr><td valign="top">Cygwin:</td><td>/cygdrive/c/Documents And Settings/lbayes/Local Settings/Application Data
+
+</td></tr>
+<tr><td valign="top">OS X:</td><td>/Users/lbayes/Library
+
+</td></tr>
+<tr><td valign="top">Linux:</td><td>~/
+
+</td></tr>
+</table>
+        </div>
+      </div>
+
+      <div id="method-M000465" class="method-detail">
+        <a name="M000465"></a>
+
+        <div class="method-heading">
+          <a href="User.src/M000465.html" target="Code" class="method-signature"
+            onclick="popupCode('User.src/M000465.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(os=nil, impl=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Retrieve a user instance that represents the currently logged in user on
+this system.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

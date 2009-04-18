@@ -1,0 +1,1897 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Sprout::COMPCTask</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Sprout::COMPCTask</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/bundles/as3/lib/sprout/tasks/compc_doc_rb.html">
+                bundles/as3/lib/sprout/tasks/compc_doc.rb
+                </a>
+        <br />
+                <a href="../../files/bundles/as3/lib/sprout/tasks/compc_task_rb.html">
+                bundles/as3/lib/sprout/tasks/compc_task.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="ToolTask.html">
+                ToolTask
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The <a href="COMPCTask.html">COMPCTask</a> will emit SWC files that are
+usually used to easily distribute and include shared functionality.
+</p>
+<p>
+This task represents a superset of the features available to the <a
+href="MXMLCTask.html">MXMLCTask</a>.
+</p>
+<p>
+A simple COMPC instance is as follows:
+</p>
+<pre>
+  compc 'bin/SomeLibrary.swc' do |t|
+    t.input = 'SomeLibrary' # Class name, not file name
+    t.source_path &lt;&lt; 'src'
+    t.source_path &lt;&lt; 'test'
+  end
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000267">accessible=</a>&nbsp;&nbsp;
+      <a href="#M000268">actionscript_file_encoding=</a>&nbsp;&nbsp;
+      <a href="#M000269">allow_source_path_overlap=</a>&nbsp;&nbsp;
+      <a href="#M000270">as3=</a>&nbsp;&nbsp;
+      <a href="#M000271">benchmark=</a>&nbsp;&nbsp;
+      <a href="#M000272">context_root=</a>&nbsp;&nbsp;
+      <a href="#M000273">contributor=</a>&nbsp;&nbsp;
+      <a href="#M000274">creator=</a>&nbsp;&nbsp;
+      <a href="#M000275">date=</a>&nbsp;&nbsp;
+      <a href="#M000276">debug=</a>&nbsp;&nbsp;
+      <a href="#M000277">debug_password=</a>&nbsp;&nbsp;
+      <a href="#M000278">default_background_color=</a>&nbsp;&nbsp;
+      <a href="#M000281">default_css_url=</a>&nbsp;&nbsp;
+      <a href="#M000279">default_frame_rate=</a>&nbsp;&nbsp;
+      <a href="#M000280">default_size=</a>&nbsp;&nbsp;
+      <a href="#M000282">description=</a>&nbsp;&nbsp;
+      <a href="#M000327">directory=</a>&nbsp;&nbsp;
+      <a href="#M000283">dump_config=</a>&nbsp;&nbsp;
+      <a href="#M000284">es=</a>&nbsp;&nbsp;
+      <a href="#M000336">execute</a>&nbsp;&nbsp;
+      <a href="#M000286">external_library_path=</a>&nbsp;&nbsp;
+      <a href="#M000285">externs=</a>&nbsp;&nbsp;
+      <a href="#M000287">file_specs=</a>&nbsp;&nbsp;
+      <a href="#M000288">fonts_languages_language_range=</a>&nbsp;&nbsp;
+      <a href="#M000289">fonts_managers=</a>&nbsp;&nbsp;
+      <a href="#M000290">fonts_max_cached_fonts=</a>&nbsp;&nbsp;
+      <a href="#M000291">fonts_max_glyphs_per_face=</a>&nbsp;&nbsp;
+      <a href="#M000292">frames_frame=</a>&nbsp;&nbsp;
+      <a href="#M000293">generate_frame_loader=</a>&nbsp;&nbsp;
+      <a href="#M000294">headless_server=</a>&nbsp;&nbsp;
+      <a href="#M000328">include_classes=</a>&nbsp;&nbsp;
+      <a href="#M000329">include_file=</a>&nbsp;&nbsp;
+      <a href="#M000295">include_libraries=</a>&nbsp;&nbsp;
+      <a href="#M000330">include_lookup_only=</a>&nbsp;&nbsp;
+      <a href="#M000331">include_namespaces=</a>&nbsp;&nbsp;
+      <a href="#M000332">include_resource_bundles=</a>&nbsp;&nbsp;
+      <a href="#M000333">include_sources=</a>&nbsp;&nbsp;
+      <a href="#M000296">includes=</a>&nbsp;&nbsp;
+      <a href="#M000297">incremental=</a>&nbsp;&nbsp;
+      <a href="#M000335">initialize_task</a>&nbsp;&nbsp;
+      <a href="#M000326">input=</a>&nbsp;&nbsp;
+      <a href="#M000298">keep_generated_actionscript=</a>&nbsp;&nbsp;
+      <a href="#M000299">language=</a>&nbsp;&nbsp;
+      <a href="#M000300">lazy_init=</a>&nbsp;&nbsp;
+      <a href="#M000301">library_path=</a>&nbsp;&nbsp;
+      <a href="#M000302">link_report=</a>&nbsp;&nbsp;
+      <a href="#M000303">load_config=</a>&nbsp;&nbsp;
+      <a href="#M000304">load_externs=</a>&nbsp;&nbsp;
+      <a href="#M000305">locale=</a>&nbsp;&nbsp;
+      <a href="#M000306">localized_description=</a>&nbsp;&nbsp;
+      <a href="#M000307">localized_title=</a>&nbsp;&nbsp;
+      <a href="#M000334">namespace=</a>&nbsp;&nbsp;
+      <a href="#M000308">namespaces_namespace=</a>&nbsp;&nbsp;
+      <a href="#M000309">optimize=</a>&nbsp;&nbsp;
+      <a href="#M000310">output=</a>&nbsp;&nbsp;
+      <a href="#M000311">publisher=</a>&nbsp;&nbsp;
+      <a href="#M000312">resource_bundle_list=</a>&nbsp;&nbsp;
+      <a href="#M000313">runtime_shared_libraries=</a>&nbsp;&nbsp;
+      <a href="#M000314">services=</a>&nbsp;&nbsp;
+      <a href="#M000316">show_actionscript_warnings=</a>&nbsp;&nbsp;
+      <a href="#M000315">show_binding_warnings=</a>&nbsp;&nbsp;
+      <a href="#M000317">show_deprecation_warnings=</a>&nbsp;&nbsp;
+      <a href="#M000318">source_path=</a>&nbsp;&nbsp;
+      <a href="#M000319">strict=</a>&nbsp;&nbsp;
+      <a href="#M000320">theme=</a>&nbsp;&nbsp;
+      <a href="#M000321">title=</a>&nbsp;&nbsp;
+      <a href="#M000322">use_network=</a>&nbsp;&nbsp;
+      <a href="#M000323">verbose_stacktraces=</a>&nbsp;&nbsp;
+      <a href="#M000324">warn_warning_type=</a>&nbsp;&nbsp;
+      <a href="#M000325">warnings=</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000267" class="method-detail">
+        <a name="M000267"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000267.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000267.html');return false;">
+          <span class="method-name">accessible=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Enables accessibility features when compiling the Flex application or SWC
+file. The default value is false.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000268" class="method-detail">
+        <a name="M000268"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000268.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000268.html');return false;">
+          <span class="method-name">actionscript_file_encoding=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the file encoding for ActionScript files. For more information see: <a
+href="http://livedocs.adobe.com/flex/2/docs/00001503.html#149244">livedocs.adobe.com/flex/2/docs/00001503.html#149244</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000269" class="method-detail">
+        <a name="M000269"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000269.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000269.html');return false;">
+          <span class="method-name">allow_source_path_overlap=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Checks if a source-path entry is a subdirectory of another source-path
+entry. It helps make the package names of MXML components unambiguous. This
+is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000270" class="method-detail">
+        <a name="M000270"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000270.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000270.html');return false;">
+          <span class="method-name">as3=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Use the ActionScript 3.0 class-based object model for greater performance
+and better error reporting. In the class-based object model, most built-in
+functions are implemented as fixed methods of classes.
+</p>
+<p>
+The default value is true. If you set this value to false, you must set the
+es option to true.
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000271" class="method-detail">
+        <a name="M000271"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000271.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000271.html');return false;">
+          <span class="method-name">benchmark=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Prints detailed compile times to the standard output. The default value is
+true.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000272" class="method-detail">
+        <a name="M000272"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000272.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000272.html');return false;">
+          <span class="method-name">context_root=</span><span class="method-args">(path)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the value of the {context.root} token in channel definitions in the
+flex-services.xml file. If you do not specify the value of this option,
+Flex uses an empty string.
+</p>
+<p>
+For more information on using the {context.root} token, see <a
+href="http://livedocs.adobe.com/flex/2/docs/00001446.html#205687">livedocs.adobe.com/flex/2/docs/00001446.html#205687</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000273" class="method-detail">
+        <a name="M000273"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000273.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000273.html');return false;">
+          <span class="method-name">contributor=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000274" class="method-detail">
+        <a name="M000274"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000274.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000274.html');return false;">
+          <span class="method-name">creator=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files. (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000275" class="method-detail">
+        <a name="M000275"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000275.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000275.html');return false;">
+          <span class="method-name">date=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files. (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000276" class="method-detail">
+        <a name="M000276"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000276.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000276.html');return false;">
+          <span class="method-name">debug=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Generates a debug SWF file. This file includes line numbers and filenames
+of all the source files. When a run-time error occurs, the stacktrace shows
+these line numbers and filenames. This information is also used by the
+command-line debugger and the Flex Builder debugger. Enabling the debug
+option generates larger SWF files.
+</p>
+<p>
+For the mxmlc compiler, the default value is false. For the compc compiler,
+the default value is true.
+</p>
+<p>
+For SWC files generated with the compc compiler, set this value to true,
+unless the target SWC file is an RSL. In that case, set the debug option to
+false.
+</p>
+<p>
+For information about the command-line debugger, see Using the Command-Line
+Debugger (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001540.html#181846">livedocs.adobe.com/flex/2/docs/00001540.html#181846</a>).
+</p>
+<p>
+Flex also uses the verbose-stacktraces setting to determine whether line
+numbers are added to the stacktrace.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000277" class="method-detail">
+        <a name="M000277"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000277.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000277.html');return false;">
+          <span class="method-name">debug_password=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Lets you engage in remote debugging sessions with the Flash IDE. This is an
+advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000278" class="method-detail">
+        <a name="M000278"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000278.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000278.html');return false;">
+          <span class="method-name">default_background_color=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the application&#8216;s background color. You use the 0x notation to
+set the color, as the following example shows:
+</p>
+<p>
+-default-background-color=0xCCCCFF
+</p>
+<p>
+The default value is null. The default background of a Flex application is
+an image of a gray gradient. You must override this image for the value of
+the default-background-color option to be visible. For more information,
+see Editing application settings (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001504.html#138781">livedocs.adobe.com/flex/2/docs/00001504.html#138781</a>).
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000281" class="method-detail">
+        <a name="M000281"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000281.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000281.html');return false;">
+          <span class="method-name">default_css_url=</span><span class="method-args">(url)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Defines the location of the default style sheet. Setting this option
+overrides the implicit use of the defaults.css style sheet in the
+framework.swc file.
+</p>
+<p>
+For more information on the defaults.css file, see Using Styles and Themes
+(<a
+href="http://livedocs.adobe.com/flex/2/docs/00000751.html#241755">livedocs.adobe.com/flex/2/docs/00000751.html#241755</a>)
+in Flex 2 Developer&#8216;s Guide.
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000279" class="method-detail">
+        <a name="M000279"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000279.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000279.html');return false;">
+          <span class="method-name">default_frame_rate=</span><span class="method-args">(number)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the application&#8216;s frame rate. The default value is 24. This is
+an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000280" class="method-detail">
+        <a name="M000280"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000280.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000280.html');return false;">
+          <span class="method-name">default_size=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Defines the default application size, in pixels for example: default_size =
+&#8216;950 550&#8217;. This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000282" class="method-detail">
+        <a name="M000282"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000282.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000282.html');return false;">
+          <span class="method-name">description=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000327" class="method-detail">
+        <a name="M000327"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000327.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000327.html');return false;">
+          <span class="method-name">directory=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Outputs the SWC file in an open directory format rather than a SWC file.
+You use this option with the output option to specify a destination
+directory, as the following example shows: compc -directory -output
+destination_directory
+</p>
+<p>
+You use this option when you create RSLs. For more information, see Using
+Runtime Shared Libraries (<a
+href="http://livedocs.adobe.com/flex/201/html/rsl_124_1.html#168690">livedocs.adobe.com/flex/201/html/rsl_124_1.html#168690</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000283" class="method-detail">
+        <a name="M000283"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000283.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000283.html');return false;">
+          <span class="method-name">dump_config=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Outputs the compiler options in the flex-config.xml file to the target
+path; for example:
+</p>
+<p>
+mxmlc -dump-config myapp-config.xml
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000284" class="method-detail">
+        <a name="M000284"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000284.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000284.html');return false;">
+          <span class="method-name">es=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Use the ECMAScript edition 3 prototype-based object model to allow dynamic
+overriding of prototype properties. In the prototype-based object model,
+built-in functions are implemented as dynamic properties of prototype
+objects.
+</p>
+<p>
+You can set the strict option to true when you use this model, but it might
+result in compiler errors for references to dynamic properties.
+</p>
+<p>
+The default value is false. If you set this option to true, you must set
+the es3 option to false.
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000336" class="method-detail">
+        <a name="M000336"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000336.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000336.html');return false;">
+          <span class="method-name">execute</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000286" class="method-detail">
+        <a name="M000286"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000286.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000286.html');return false;">
+          <span class="method-name">external_library_path=</span><span class="method-args">(files)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies a list of SWC files or directories to exclude from linking when
+compiling a SWF file. This option provides compile-time link checking for
+external components that are dynamically linked.
+</p>
+<p>
+For more information about dynamic linking, see About linking (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001521.html#205852">livedocs.adobe.com/flex/2/docs/00001521.html#205852</a>).
+</p>
+<p>
+You can use the += operator to append the new SWC file to the list of
+external libraries.
+</p>
+<p>
+This parameter has been aliased as <tt>el</tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000285" class="method-detail">
+        <a name="M000285"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000285.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000285.html');return false;">
+          <span class="method-name">externs=</span><span class="method-args">(symbols)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets a list of symbols to exclude from linking when compiling a SWF file.
+</p>
+<p>
+This option provides compile-time link checking for external references
+that are dynamically linked.
+</p>
+<p>
+For more information about dynamic linking, see About linking (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001521.html#205852">livedocs.adobe.com/flex/2/docs/00001521.html#205852</a>).
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000287" class="method-detail">
+        <a name="M000287"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000287.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000287.html');return false;">
+          <span class="method-name">file_specs=</span><span class="method-args">(files)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies source files to compile. This is the default option for the mxmlc
+compiler.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000288" class="method-detail">
+        <a name="M000288"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000288.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000288.html');return false;">
+          <span class="method-name">fonts_languages_language_range=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies the range of Unicode settings for that language. For more
+information, see Using Styles and Themes (<a
+href="http://livedocs.adobe.com/flex/2/docs/00000751.html#241755">livedocs.adobe.com/flex/2/docs/00000751.html#241755</a>)
+in Flex 2 Developer&#8216;s Guide.
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000289" class="method-detail">
+        <a name="M000289"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000289.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000289.html');return false;">
+          <span class="method-name">fonts_managers=</span><span class="method-args">(symbols)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Defines the font manager. The default is flash.fonts.JREFontManager. You
+can also use the flash.fonts.BatikFontManager. For more information, see
+Using Styles and Themes in Flex 2 Developer&#8216;s Guide (<a
+href="http://livedocs.adobe.com/flex/2/docs/00000751.html#241755">livedocs.adobe.com/flex/2/docs/00000751.html#241755</a>).
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000290" class="method-detail">
+        <a name="M000290"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000290.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000290.html');return false;">
+          <span class="method-name">fonts_max_cached_fonts=</span><span class="method-args">(number)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the maximum number of fonts to keep in the server cache. For more
+information, see Caching fonts and glyphs (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001469.html#208457">livedocs.adobe.com/flex/2/docs/00001469.html#208457</a>).
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000291" class="method-detail">
+        <a name="M000291"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000291.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000291.html');return false;">
+          <span class="method-name">fonts_max_glyphs_per_face=</span><span class="method-args">(number)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the maximum number of character glyph-outlines to keep in the server
+cache for each font face. For more information, see Caching fonts and
+glyphs (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001469.html#208457">livedocs.adobe.com/flex/2/docs/00001469.html#208457</a>).
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000292" class="method-detail">
+        <a name="M000292"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000292.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000292.html');return false;">
+          <span class="method-name">frames_frame=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies a SWF file frame label with a sequence of class names that are
+linked onto the frame.
+</p>
+<p>
+For example: frames_frame = &#8216;someLabel MyProject OtherProject
+FoodProject&#8216;
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000293" class="method-detail">
+        <a name="M000293"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000293.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000293.html');return false;">
+          <span class="method-name">generate_frame_loader=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Toggles the generation of an IFlexBootstrap-derived loader class.
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000294" class="method-detail">
+        <a name="M000294"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000294.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000294.html');return false;">
+          <span class="method-name">headless_server=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Enables the headless implementation of the Flex compiler. This sets the
+following:
+</p>
+<p>
+System.setProperty(&#8216;java.awt.headless&#8217;, &#8216;true&#8217;)
+</p>
+<p>
+The headless setting (java.awt.headless=true) is required to use fonts and
+SVG on UNIX systems without X Windows.
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000328" class="method-detail">
+        <a name="M000328"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000328.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000328.html');return false;">
+          <span class="method-name">include_classes=</span><span class="method-args">(symbols)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies classes to include in the SWC file. You provide the class name
+(for example, MyClass) rather than the file name (for example, MyClass.as)
+to the file for this option. As a result, all classes specified with this
+option must be in the compiler&#8216;s source path. You specify this by
+using the source-path compiler option.
+</p>
+<p>
+You can use packaged and unpackaged classes. To use components in
+namespaces, use the include-namespaces option.
+</p>
+<p>
+If the components are in packages, ensure that you use dot-notation rather
+than slashes to separate package levels.
+</p>
+<p>
+This is the default option for the component compiler.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000329" class="method-detail">
+        <a name="M000329"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000329.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000329.html');return false;">
+          <span class="method-name">include_file=</span><span class="method-args">(files)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Adds the file to the SWC file. This option does not embed files inside the
+library.swf file. This is useful for skinning and theming, where you want
+to add non-compiled files that can be referenced in a style sheet or
+embedded as assets in MXML files.
+</p>
+<p>
+If you use the [Embed] syntax to add a resource to your application, you
+are not required to use this option to also link it into the SWC file.
+</p>
+<p>
+For more information, see Adding nonsource classes (<a
+href="http://livedocs.adobe.com/flex/201/html/compilers_123_39.html#158900">livedocs.adobe.com/flex/201/html/compilers_123_39.html#158900</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000295" class="method-detail">
+        <a name="M000295"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000295.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000295.html');return false;">
+          <span class="method-name">include_libraries=</span><span class="method-args">(files)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Links all classes inside a SWC file to the resulting application SWF file,
+regardless of whether or not they are used.
+</p>
+<p>
+Contrast this option with the library-path option that includes only those
+classes that are referenced at compile time.
+</p>
+<p>
+To link one or more classes whether or not they are used and not an entire
+SWC file, use the includes option.
+</p>
+<p>
+This option is commonly used to specify resource bundles.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000330" class="method-detail">
+        <a name="M000330"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000330.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000330.html');return false;">
+          <span class="method-name">include_lookup_only=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000331" class="method-detail">
+        <a name="M000331"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000331.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000331.html');return false;">
+          <span class="method-name">include_namespaces=</span><span class="method-args">(urls)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies namespace-style components in the SWC file. You specify a list of
+URIs to include in the SWC file. The uri argument must already be defined
+with the namespace option.
+</p>
+<p>
+To use components in packages, use the include-classes option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000332" class="method-detail">
+        <a name="M000332"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000332.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000332.html');return false;">
+          <span class="method-name">include_resource_bundles=</span><span class="method-args">(files)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies the resource bundles to include in this SWC file. All resource
+bundles specified with this option must be in the compiler&#8216;s source
+path. You specify this using the source-path compiler option.
+</p>
+<p>
+For more information on using resource bundles, see Localizing Flex
+Applications (<a
+href="http://livedocs.adobe.com/flex/201/html/l10n_076_1.html#129288">livedocs.adobe.com/flex/201/html/l10n_076_1.html#129288</a>)
+in Flex 2 Developer&#8216;s Guide.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000333" class="method-detail">
+        <a name="M000333"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000333.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000333.html');return false;">
+          <span class="method-name">include_sources=</span><span class="method-args">(paths)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies classes or directories to add to the SWC file. When specifying
+classes, you specify the path to the class file (for example, MyClass.as)
+rather than the class name itself (for example, MyClass). This lets you add
+classes to the SWC file that are not in the source path. In general,
+though, use the include-classes option, which lets you add classes that are
+in the source path.
+</p>
+<p>
+If you specify a directory, this option includes all files with an MXML or
+AS extension, and ignores all other files.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000296" class="method-detail">
+        <a name="M000296"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000296.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000296.html');return false;">
+          <span class="method-name">includes=</span><span class="method-args">(symbols)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Links one or more classes to the resulting application SWF file, whether or
+not those classes are required at compile time.
+</p>
+<p>
+To link an entire SWC file rather than individual classes, use the
+include-libraries option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000297" class="method-detail">
+        <a name="M000297"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000297.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000297.html');return false;">
+          <span class="method-name">incremental=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Enables incremental compilation. For more information, see About
+incremental compilation (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001506.html#153980">livedocs.adobe.com/flex/2/docs/00001506.html#153980</a>).
+</p>
+<p>
+This option is true by default for the Flex Builder application compiler.
+For the command-line compiler, the default is false. The web-tier compiler
+does not support incremental compilation.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000335" class="method-detail">
+        <a name="M000335"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000335.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000335.html');return false;">
+          <span class="method-name">initialize_task</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000326" class="method-detail">
+        <a name="M000326"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000326.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000326.html');return false;">
+          <span class="method-name">input=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Main source file to send compiler
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000298" class="method-detail">
+        <a name="M000298"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000298.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000298.html');return false;">
+          <span class="method-name">keep_generated_actionscript=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Determines whether to keep the generated ActionScript class files.
+</p>
+<p>
+The generated class files include stubs and classes that are generated by
+the compiler and used to build the SWF file.
+</p>
+<p>
+The default location of the files is the /generated subdirectory, which is
+directly below the target MXML file. If the /generated directory does not
+exist, the compiler creates one.
+</p>
+<p>
+The default names of the primary generated class files are
+filename-generated.as and filename-interface.as.
+</p>
+<p>
+The default value is false. This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000299" class="method-detail">
+        <a name="M000299"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000299.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000299.html');return false;">
+          <span class="method-name">language=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000300" class="method-detail">
+        <a name="M000300"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000300.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000300.html');return false;">
+          <span class="method-name">lazy_init=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Enables ABC bytecode lazy initialization.
+</p>
+<p>
+The default value is false.
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000301" class="method-detail">
+        <a name="M000301"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000301.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000301.html');return false;">
+          <span class="method-name">library_path=</span><span class="method-args">(files)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Links SWC files to the resulting application SWF file. The compiler only
+links in those classes for the SWC file that are required.
+</p>
+<p>
+The default value of the library-path option includes all SWC files in the
+libs directory and the current locale. These are required.
+</p>
+<p>
+To point to individual classes or packages rather than entire SWC files,
+use the source-path option.
+</p>
+<p>
+If you set the value of the library-path as an option of the command-line
+compiler, you must also explicitly add the framework.swc and locale SWC
+files. Your new entry is not appended to the library-path but replaces it.
+</p>
+<p>
+You can use the += operator to append the new argument to the list of
+existing SWC files.
+</p>
+<p>
+In a configuration file, you can set the append attribute of the
+library-path tag to true to indicate that the values should be appended to
+the library path rather than replace it.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000302" class="method-detail">
+        <a name="M000302"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000302.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000302.html');return false;">
+          <span class="method-name">link_report=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Prints linking information to the specified output file. This file is an
+XML file that contains &lt;def&gt;, &lt;pre&gt;, and &lt;ext&gt; symbols
+showing linker dependencies in the final SWF file.
+</p>
+<p>
+The file format output by this command can be used to write a file for
+input to the load-externs option.
+</p>
+<p>
+For more information on the report, see Examining linker dependencies (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001394.html#211202">livedocs.adobe.com/flex/2/docs/00001394.html#211202</a>).
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000303" class="method-detail">
+        <a name="M000303"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000303.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000303.html');return false;">
+          <span class="method-name">load_config=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies the location of the configuration file that defines compiler
+options.
+</p>
+<p>
+If you specify a configuration file, you can override individual options by
+setting them on the command line.
+</p>
+<p>
+All relative paths in the configuration file are relative to the location
+of the configuration file itself.
+</p>
+<p>
+Use the += operator to chain this configuration file to other configuration
+files.
+</p>
+<p>
+For more information on using configuration files to provide options to the
+command-line compilers, see About configuration files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001490.html#138195">livedocs.adobe.com/flex/2/docs/00001490.html#138195</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000304" class="method-detail">
+        <a name="M000304"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000304.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000304.html');return false;">
+          <span class="method-name">load_externs=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies the location of an XML file that contains &lt;def&gt;,
+&lt;pre&gt;, and &lt;ext&gt; symbols to omit from linking when compiling a
+SWF file. The XML file uses the same syntax as the one produced by the
+link-report option. For more information on the report, see Examining
+linker dependencies (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001394.html#211202">livedocs.adobe.com/flex/2/docs/00001394.html#211202</a>).
+</p>
+<p>
+This option provides compile-time link checking for external components
+that are dynamically linked.
+</p>
+<p>
+For more information about dynamic linking, see About linking (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001521.html#205852">livedocs.adobe.com/flex/2/docs/00001521.html#205852</a>).
+</p>
+<p>
+This is an advanced option.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000305" class="method-detail">
+        <a name="M000305"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000305.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000305.html');return false;">
+          <span class="method-name">locale=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies the locale that should be packaged in the SWF file (for example,
+en_EN). You run the mxmlc compiler multiple times to create SWF files for
+more than one locale, with only the locale option changing.
+</p>
+<p>
+You must also include the parent directory of the individual locale
+directories, plus the token {locale}, in the source-path; for example:
+</p>
+<p>
+mxmlc -locale en_EN -source-path locale/{locale} -file-specs MainApp.mxml
+</p>
+<p>
+For more information, see Localizing Flex Applicationsin (<a
+href="http://livedocs.adobe.com/flex/2/docs/00000898.html#129288">livedocs.adobe.com/flex/2/docs/00000898.html#129288</a>)
+Flex 2 Developer&#8216;s Guide.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000306" class="method-detail">
+        <a name="M000306"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000306.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000306.html');return false;">
+          <span class="method-name">localized_description=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000307" class="method-detail">
+        <a name="M000307"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000307.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000307.html');return false;">
+          <span class="method-name">localized_title=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000334" class="method-detail">
+        <a name="M000334"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000334.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000334.html');return false;">
+          <span class="method-name">namespace=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Not sure about this option, it was in the CLI help, but not documented on
+the Adobe site
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000308" class="method-detail">
+        <a name="M000308"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000308.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000308.html');return false;">
+          <span class="method-name">namespaces_namespace=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies a namespace for the MXML file. You must include a URI and the
+location of the manifest file that defines the contents of this namespace.
+This path is relative to the MXML file.
+</p>
+<p>
+For more information about manifest files, see About manifest files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001519.html#134676">livedocs.adobe.com/flex/2/docs/00001519.html#134676</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000309" class="method-detail">
+        <a name="M000309"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000309.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000309.html');return false;">
+          <span class="method-name">optimize=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Enables the ActionScript optimizer. This optimizer reduces file size and
+increases performance by optimizing the SWF file&#8216;s bytecode.
+</p>
+<p>
+The default value is false.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000310" class="method-detail">
+        <a name="M000310"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000310.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000310.html');return false;">
+          <span class="method-name">output=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies the output path and filename for the resulting file. If you omit
+this option, the compiler saves the SWF file to the directory where the
+target file is located.
+</p>
+<p>
+The default SWF filename matches the target filename, but with a SWF file
+extension.
+</p>
+<p>
+If you use a relative path to define the filename, it is always relative to
+the current working directory, not the target MXML application root.
+</p>
+<p>
+The compiler creates extra directories based on the specified filename if
+those directories are not present.
+</p>
+<p>
+When using this option with the component compiler, the output is a SWC
+file rather than a SWF file.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000311" class="method-detail">
+        <a name="M000311"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000311.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000311.html');return false;">
+          <span class="method-name">publisher=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000312" class="method-detail">
+        <a name="M000312"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000312.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000312.html');return false;">
+          <span class="method-name">resource_bundle_list=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Prints a list of resource bundles to input to the compc compiler to create
+a resource bundle SWC file. The filename argument is the name of the file
+that contains the list of bundles.
+</p>
+<p>
+For more information, see Localizing Flex Applications (<a
+href="http://livedocs.adobe.com/flex/2/docs/00000898.html#129288">livedocs.adobe.com/flex/2/docs/00000898.html#129288</a>)
+in Flex 2 Developer&#8216;s Guide.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000313" class="method-detail">
+        <a name="M000313"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000313.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000313.html');return false;">
+          <span class="method-name">runtime_shared_libraries=</span><span class="method-args">(urls)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies a list of run-time shared libraries (RSLs) to use for this
+application. RSLs are dynamically-linked at run time.
+</p>
+<p>
+You specify the location of the SWF file relative to the deployment
+location of the application. For example, if you store a file named
+library.swf file in the web_root/libraries directory on the web server, and
+the application in the web root, you specify libraries/library.swf.
+</p>
+<p>
+For more information about RSLs, see Using Runtime Shared Libraries. (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001520.html#168690">livedocs.adobe.com/flex/2/docs/00001520.html#168690</a>)
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000314" class="method-detail">
+        <a name="M000314"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000314.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000314.html');return false;">
+          <span class="method-name">services=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies the location of the services-config.xml file. This file is used
+by Flex Data Services.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000316" class="method-detail">
+        <a name="M000316"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000316.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000316.html');return false;">
+          <span class="method-name">show_actionscript_warnings=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Shows warnings for ActionScript classes.
+</p>
+<p>
+The default value is true.
+</p>
+<p>
+For more information about viewing warnings and errors, see Viewing
+warnings and errors (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001517.html#182413">livedocs.adobe.com/flex/2/docs/00001517.html#182413</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000315" class="method-detail">
+        <a name="M000315"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000315.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000315.html');return false;">
+          <span class="method-name">show_binding_warnings=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Shows a warning when Flash Player cannot detect changes to a bound
+property.
+</p>
+<p>
+The default value is true.
+</p>
+<p>
+For more information about compiler warnings, see Using SWC files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001505.html#158337">livedocs.adobe.com/flex/2/docs/00001505.html#158337</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000317" class="method-detail">
+        <a name="M000317"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000317.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000317.html');return false;">
+          <span class="method-name">show_deprecation_warnings=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Shows deprecation warnings for Flex components. To see warnings for
+ActionScript classes, use the show-actionscript-warnings option.
+</p>
+<p>
+The default value is true.
+</p>
+<p>
+For more information about viewing warnings and errors, see Viewing
+warnings and errors.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000318" class="method-detail">
+        <a name="M000318"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000318.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000318.html');return false;">
+          <span class="method-name">source_path=</span><span class="method-args">(paths)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Adds directories or files to the source path. The Flex compiler searches
+directories in the source path for MXML or AS source files that are used in
+your Flex applications and includes those that are required at compile
+time.
+</p>
+<p>
+You can use wildcards to include all files and subdirectories of a
+directory.
+</p>
+<p>
+To link an entire library SWC file and not individual classes or
+directories, use the library-path option.
+</p>
+<p>
+The source path is also used as the search path for the component
+compiler&#8216;s include-classes and include-resource-bundles options.
+</p>
+<p>
+You can also use the += operator to append the new argument to the list of
+existing source path entries.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000319" class="method-detail">
+        <a name="M000319"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000319.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000319.html');return false;">
+          <span class="method-name">strict=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Prints undefined property and function calls; also performs compile-time
+type checking on assignments and options supplied to method calls.
+</p>
+<p>
+The default value is true.
+</p>
+<p>
+For more information about viewing warnings and errors, see Viewing
+warnings and errors (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001517.html#182413">livedocs.adobe.com/flex/2/docs/00001517.html#182413</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000320" class="method-detail">
+        <a name="M000320"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000320.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000320.html');return false;">
+          <span class="method-name">theme=</span><span class="method-args">(files)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies a list of theme files to use with this application. Theme files
+can be SWC files with CSS files inside them or CSS files.
+</p>
+<p>
+For information on compiling a SWC theme file, see Using Styles and Themes
+(<a
+href="http://livedocs.adobe.com/flex/2/docs/00000751.html#241755">livedocs.adobe.com/flex/2/docs/00000751.html#241755</a>)
+in Flex 2 Developer&#8216;s Guide.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000321" class="method-detail">
+        <a name="M000321"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000321.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000321.html');return false;">
+          <span class="method-name">title=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000322" class="method-detail">
+        <a name="M000322"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000322.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000322.html');return false;">
+          <span class="method-name">use_network=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies that the current application uses network services.
+</p>
+<p>
+The default value is true.
+</p>
+<p>
+When the use-network property is set to false, the application can access
+the local filesystem (for example, use the XML.load() method with file:
+URLs) but not network services. In most circumstances, the value of this
+property should be true.
+</p>
+<p>
+For more information about the use-network property, see Applying Flex
+Security (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001328.html#137544">livedocs.adobe.com/flex/2/docs/00001328.html#137544</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000323" class="method-detail">
+        <a name="M000323"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000323.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000323.html');return false;">
+          <span class="method-name">verbose_stacktraces=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Generates source code that includes line numbers. When a run-time error
+occurs, the stacktrace shows these line numbers.
+</p>
+<p>
+Enabling this option generates larger SWF files. The default value is
+false.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000324" class="method-detail">
+        <a name="M000324"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000324.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000324.html');return false;">
+          <span class="method-name">warn_warning_type=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Enables specified warnings. For more information, see Viewing warnings and
+errors (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001517.html#182413">livedocs.adobe.com/flex/2/docs/00001517.html#182413</a>).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000325" class="method-detail">
+        <a name="M000325"></a>
+
+        <div class="method-heading">
+          <a href="COMPCTask.src/M000325.html" target="Code" class="method-signature"
+            onclick="popupCode('COMPCTask.src/M000325.html');return false;">
+          <span class="method-name">warnings=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Enables all warnings. Set to false to disable all warnings. This option
+overrides the warn-warning_type options.
+</p>
+<p>
+The default value is true.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

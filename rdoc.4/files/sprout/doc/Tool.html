@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: Tool</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>Tool</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>sprout/doc/Tool
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Tue Feb 12 16:53:31 -0800 2008</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+A Tool is a Ruby <a href="../../../classes/Gem.html">Gem</a> that usually
+refers to an executable or binary application. These applications are
+either natively cross platform, or the Ruby <a
+href="../../../classes/Gem.html">Gem</a> should include a YAML document
+that tells Sprouts where to go in order to get the appropriate binary for
+which platform the user is currently running.
+</p>
+<p>
+CLI Tools are usually referenced by subclasses of <a
+href="../../../classes/Sprout/ToolTask.html">Sprout::ToolTask</a>.
+</p>
+<p>
+Once installed, many Tool Sprouts are made available from your path. For
+example if you install the sprout-mtasc-tool gem, from that point forward
+you can execute mtasc from the terminal as follows:
+</p>
+<pre>
+  mtasc -help # Should throw an error
+  sudo gem install sprout-mtasc-tool
+  mtasc -help # Should download and execute mtasc
+</pre>
+<p>
+Using just Sprout tools by themselves, we now have have the ability to
+install and manage requisite executables across platforms with zero
+configuration.
+</p>
+<p>
+In reality, &#8216;Tool Sprouts&#8217; are actually nothing more than a
+naming convention and expected gem configuration, but once those
+requirements are met, the core Sprout::Sprout can do some important work
+with them.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

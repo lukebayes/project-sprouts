@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>project_path (Sprout::LibraryTask)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/library_task.rb, line 88</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project_path</span>
+      <span class="ruby-keyword kw">if</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-ivar">@library_path</span>))
+        <span class="ruby-comment cmt"># library is source dir</span>
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">project_lib</span>, <span class="ruby-identifier">clean_name</span>)
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-comment cmt"># library is a binary (like swc, jar, etc)</span>
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">project_lib</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-ivar">@file_target</span>.<span class="ruby-identifier">archive_path</span>))
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>remove_all (Sprout::Sprout)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 133</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">remove_all</span>
+      <span class="ruby-comment cmt"># Set up sudo prefix if not on win machine</span>
+      <span class="ruby-comment cmt"># Only show confirmation if there is at least one installed sprout gem</span>
+      <span class="ruby-identifier">confirmation</span> = <span class="ruby-keyword kw">false</span>
+      <span class="ruby-identifier">count</span> = <span class="ruby-value">0</span>
+      <span class="ruby-comment cmt"># For each sprout found, remove it!</span>
+      <span class="ruby-constant">RubiGen</span><span class="ruby-operator">::</span><span class="ruby-constant">GemGeneratorSource</span>.<span class="ruby-identifier">new</span>().<span class="ruby-identifier">each_sprout</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sprout</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">command</span> = <span class="ruby-node">&quot;#{get_gem_preamble} uninstall -x -a -i -q #{sprout.name}&quot;</span>
+
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-operator">!</span><span class="ruby-identifier">confirmation</span>)
+          <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">confirmation</span> = <span class="ruby-identifier">remove_gems_confirmation</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;&gt;&gt; Exited with errors: #{$?}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">system</span>(<span class="ruby-identifier">command</span>)
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">confirmation</span>)
+        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;All Sprout gems have been successfully uninstalled&quot;</span>
+      <span class="ruby-keyword kw">elsif</span>(<span class="ruby-identifier">count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Some Sprout gems have been left on the system&quot;</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;No Sprout gems were found on this system&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># Now clear out the cache</span>
+      <span class="ruby-identifier">cache</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-constant">Sprout</span>.<span class="ruby-identifier">sprout_cache</span>))
+      
+      <span class="ruby-keyword kw">if</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">cache</span>))
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;\n[WARNING]\n\nAbout to irrevocably destroy the sprout cache at:\n\n#{cache}\n\n&quot;</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Are you absolutely sure? [Yn]&quot;</span>
+        <span class="ruby-identifier">response</span> = <span class="ruby-identifier">$stdin</span>.<span class="ruby-identifier">gets</span>.<span class="ruby-identifier">chomp!</span>
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value str">'y'</span>))
+          <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm_rf</span>(<span class="ruby-identifier">cache</span>)
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Leaving the Sprout file cache in tact....&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;No cached files found on this system&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;To completely remove sprouts now, run:&quot;</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  #{get_gem_preamble} uninstall sprout&quot;</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

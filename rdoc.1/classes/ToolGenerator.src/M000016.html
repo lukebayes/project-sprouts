@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>manifest (ToolGenerator)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File bundles/developer/lib/sprout/generators/tool/tool_generator.rb, line 12</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">manifest</span>
+    <span class="ruby-identifier">record</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment cmt"># Create outer directory</span>
+      <span class="ruby-identifier">m</span>.<span class="ruby-identifier">directory</span> <span class="ruby-identifier">tool_name</span>
+      <span class="ruby-identifier">m</span>.<span class="ruby-identifier">directory</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">tool_name</span>, <span class="ruby-value str">'bin'</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">executables</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+
+      <span class="ruby-comment cmt"># Create rakefile</span>
+      <span class="ruby-identifier">m</span>.<span class="ruby-identifier">template</span> <span class="ruby-value str">'rakefile.erb'</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">tool_name</span>, <span class="ruby-value str">'rakefile.rb'</span>)
+
+      <span class="ruby-comment cmt"># Create version.rb file</span>
+      <span class="ruby-identifier">version_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">tool_name</span>, <span class="ruby-value str">'lib'</span>, <span class="ruby-value str">'sprout'</span>, <span class="ruby-identifier">tool_name</span>)
+      <span class="ruby-identifier">m</span>.<span class="ruby-identifier">directory</span> <span class="ruby-identifier">version_path</span>
+      <span class="ruby-identifier">m</span>.<span class="ruby-identifier">template</span> <span class="ruby-value str">'version.erb'</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">version_path</span>, <span class="ruby-value str">'version.rb'</span>)
+      
+      <span class="ruby-comment cmt"># Copy sprout.spec to new project</span>
+      <span class="ruby-identifier">new_spec</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">tool_name</span>, <span class="ruby-value str">'sprout.spec'</span>)
+      <span class="ruby-identifier">m</span>.<span class="ruby-identifier">template</span> <span class="ruby-value str">'sprout.spec'</span>, <span class="ruby-identifier">new_spec</span>
+      
+      <span class="ruby-comment cmt"># Create rubygem binaries for each executable</span>
+      <span class="ruby-identifier">executables</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">binary</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">target</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">tool_name</span>, <span class="ruby-value str">'bin'</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">binary</span>))
+        <span class="ruby-identifier">m</span>.<span class="ruby-identifier">template</span> <span class="ruby-value str">'binary.erb'</span>, <span class="ruby-identifier">target</span>, <span class="ruby-identifier">:assigns</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">:binary</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">binary</span> }
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

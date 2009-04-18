@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: Generator</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>Generator</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>sprout/doc/Generator
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Tue Feb 12 16:53:30 -0800 2008</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+A SproutGenerator is a set of specifically configured folders and files
+that have been placed in a particular, expected location on disk. The
+Sprout generator feature is a minor modification to the standard Rails
+generators.
+</p>
+<p>
+Sprouts modifies the underlying Rails Generator implementation mainly by
+changing where it looks for available, named generators. This was an
+importat change that will help prevent Sprout projects from clobbering
+generators that are intended for Rails support and vice versa. We also have
+a slightly different requirement in that we need support for multiple
+languages or technologies while Rails is able to simply expect that
+it&#8216;s generating Ruby code.
+</p>
+<p>
+Generators can exist in multiple different locations on disk, to learn how
+to create a new generator, see the Rails <a
+href="http://wiki.rubyonrails.org/rails/pages/UnderstandingGenerators">documentation</a>.
+</p>
+<p>
+To use a new or existing generator, simply enter it&#8216;s name from
+within a project after calling
+</p>
+<pre>
+  script/generate
+</pre>
+<p>
+When a string is passed to the generate command, sprouts will look in the
+following locations in the following order with &#8216;name&#8217; being
+the generator name that you have requested:
+</p>
+<ul>
+<li>#{project_path}/generators/#{name}
+
+</li>
+<li>#{project_path}/script/generators/#{name}
+
+</li>
+<li>#{project_path}/vendor/generators/#{name}
+
+</li>
+<li>#{Sprout::Sprout.sprout_cache}/generators/#{Sprout::ProjectModel.language}/#{name}
+
+</li>
+<li>All Rubygems with a name ending with &#8217;-bundle&#8217; and with
+contents that match &#8217;/lib/sprout/**/generators/[name]&#8217;
+
+</li>
+</ul>
+<p>
+This means that when you have a new project and enter:
+</p>
+<pre>
+  script/generate foo
+</pre>
+<p>
+We will first look in your project for, &#8216;generators/foo&#8217;,
+&#8216;script/generators/foo&#8217; and
+&#8216;vendor/generators/foo&#8217;.
+</p>
+<p>
+Assuming no viable generator is found in your project, we will then look in
+your Sprout::Sprout sprout_cache for a folder named
+&#8216;generators/foo&#8217;.
+</p>
+<p>
+Assuming no viable generator is found in your system wide path, we will
+begin looking inside of installed Ruby Gems. The expected gem will have a
+file at:
+</p>
+<pre>
+  lib/sprout/**/generators/foo/foo_generator.rb
+</pre>
+<p>
+If no named generator is found in any of these places an exception will be
+encountered.
+</p>
+<p>
+Sprouts generators can be initiated from one of two places, either from a
+project directory with script/generate or directly from the Sprout gem.
+</p>
+<p>
+When executing generators directly from the Sprout gem, you must send in a
+bundle base name and know that only &#8216;project&#8217; generators found
+in that bundle will be executed.
+</p>
+<p>
+When executing generators from a project, the <a
+href="../../../classes/Sprout/ProjectModel.html">Sprout::ProjectModel</a>
+language parameter is used to determine the bundle (if necessary), and then
+the Generator name is used to execute any found generator.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

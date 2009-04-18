@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Sprout::FDBTask</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Sprout::FDBTask</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/bundles/as3/lib/sprout/tasks/fdb_task_rb.html">
+                bundles/as3/lib/sprout/tasks/fdb_task.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="ToolTask.html">
+                ToolTask
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The <a href="FDBTask.html">FDBTask</a> provides a procedural rake front end
+to the FDB command line tool
+</p>
+<p>
+Here is a decent tutorial on using FDB with SWF or HTML content: <a
+href="http://installingcats.wordpress.com/tag/adobe-flex">installingcats.wordpress.com/tag/adobe-flex</a>/
+</p>
+<p>
+You can send the fdb task some debug commands directly or simply execute
+the rake task and interact with the debugger manually.
+</p>
+<p>
+The <a href="FDBTask.html">FDBTask</a> requires that you have a debug Flash
+Player installed on your system as the default execution application for
+SWF files.
+</p>
+<p>
+Following is an example of setting up a breakpoint in SomeFile at line 23
+</p>
+<pre>
+  fdb :debug do |t|
+    t.file = 'bin/SomeProject-debug.swf'
+    t.run
+    t.break = 'SomeFile:23'
+    t.continue
+  end
+</pre>
+<p>
+You can also point the <a href="FDBTask.html">FDBTask</a> at HTML pages.
+These pages will be launched in your default browser. You will need to
+manually install a debug Flash Player in that particular browser.
+</p>
+<p>
+To use a browser instead of the desktop Flash Player, simply point the file
+argument at an HTML document or remote URL. The SWF file loaded must be
+compiled using the -debug flag, and executed in a debug Flash Player in
+order to connect to properly connect to the debugger.
+</p>
+<pre>
+  fdb :debug do |t|
+    t.file = 'bin/SomeProject-debug.html'
+    t.run
+    t.continue
+  end
+</pre>
+<p>
+.h3 Continuous Integration
+</p>
+<p>
+The <a href="FDBTask.html">FDBTask</a> is also the only effective way to
+execute SWF content in front of a CI (continuous integration) tool like
+Cruise Control. The biggest problem facing SWF execution for CI is uncaught
+runtime exceptions. The debug Flash Player throws uncaught exceptions up to
+the operating system GUI layer <a href="FDBTask.html#M000381">where</a> a
+user must manually dismiss a dialog. In addition to blocking the CI process
+indefinitely, these messages are also difficult to capture and log.
+</p>
+<p>
+Using Sprouts and the <a href="FDBTask.html">FDBTask</a>, we can capture
+these messages along with additonal information (e.g. local variables and a
+complete stack trace) about the state of the SWF file, and then cleanly
+exit the Flash Player and log this information.
+</p>
+<p>
+The <a href="FDBTask.html">FDBTask</a> has also been configured to work
+with the ASUnit XMLPrinter so that an XML artifact is created and written
+to disk that includes the results of running your test suites.
+</p>
+<p>
+To use FDB with a CI tool do the following:
+</p>
+<p>
+1) Create a new base runner class (we usually name this XMLRunner.as) and
+make it look like the following:
+</p>
+<pre>
+  package {
+    import asunit.textui.TestRunner;
+    import asunit.textui.XMLResultPrinter;
+
+    public class XMLRunner extends TestRunner {
+
+      public function XMLRunner() {
+        setPrinter(new XMLResultPrinter());
+        start(AllTests, null, TestRunner.SHOW_TRACE);
+      }
+    }
+  }
+</pre>
+<p>
+2) Create a new <a href="MXMLCTask.html">MXMLCTask</a> to compile the newly
+created runner. NOTE: Be sure you set <tt>debug</tt> to true, otherwise the
+SWF will not connect to the debugger properly.
+</p>
+<pre>
+  library :asunit3
+
+  desc 'Compile the CI SWF'
+  mxmlc 'bin/XMLRunner.swf' =&gt; :asunit3 do |t|
+    t.input = 'src/XMLRunner.as'
+    t.debug = true
+    t.source_path &lt;&lt; 'test'
+    # Add additional configuration here.
+  end
+</pre>
+<p>
+3) Create a new <a href="FDBTask.html">FDBTask</a> and set
+<tt>kill_on_fault</tt> to true.
+</p>
+<pre>
+  desc 'Execute the test harness for CI'
+  fdb :cruise do |t|
+    t.kill_on_fault = true
+    t.file = 'bin/XMLRunner.swf'
+    t.run
+    t.continue
+  end
+</pre>
+<p>
+4) Configure your CI task to call:
+</p>
+<pre>
+  rake cruise
+</pre>
+<p>
+5) That&#8216;s it!
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000333">break</a>&nbsp;&nbsp;
+      <a href="#M000332">bt</a>&nbsp;&nbsp;
+      <a href="#M000338">c</a>&nbsp;&nbsp;
+      <a href="#M000334">cf</a>&nbsp;&nbsp;
+      <a href="#M000335">clear=</a>&nbsp;&nbsp;
+      <a href="#M000339">commands=</a>&nbsp;&nbsp;
+      <a href="#M000336">condition=</a>&nbsp;&nbsp;
+      <a href="#M000337">continue</a>&nbsp;&nbsp;
+      <a href="#M000340">delete</a>&nbsp;&nbsp;
+      <a href="#M000341">directory=</a>&nbsp;&nbsp;
+      <a href="#M000342">disable</a>&nbsp;&nbsp;
+      <a href="#M000343">disassemble</a>&nbsp;&nbsp;
+      <a href="#M000344">display=</a>&nbsp;&nbsp;
+      <a href="#M000346">e</a>&nbsp;&nbsp;
+      <a href="#M000345">enable</a>&nbsp;&nbsp;
+      <a href="#M000347">file=</a>&nbsp;&nbsp;
+      <a href="#M000349">finish</a>&nbsp;&nbsp;
+      <a href="#M000350">handle</a>&nbsp;&nbsp;
+      <a href="#M000351">home</a>&nbsp;&nbsp;
+      <a href="#M000352">info</a>&nbsp;&nbsp;
+      <a href="#M000353">info_arguments</a>&nbsp;&nbsp;
+      <a href="#M000354">info_breakpoints</a>&nbsp;&nbsp;
+      <a href="#M000355">info_display</a>&nbsp;&nbsp;
+      <a href="#M000356">info_files</a>&nbsp;&nbsp;
+      <a href="#M000357">info_functions=</a>&nbsp;&nbsp;
+      <a href="#M000358">info_handle</a>&nbsp;&nbsp;
+      <a href="#M000359">info_locals</a>&nbsp;&nbsp;
+      <a href="#M000360">info_scopechain</a>&nbsp;&nbsp;
+      <a href="#M000361">info_sources</a>&nbsp;&nbsp;
+      <a href="#M000362">info_stack</a>&nbsp;&nbsp;
+      <a href="#M000363">info_swfs</a>&nbsp;&nbsp;
+      <a href="#M000364">info_targets</a>&nbsp;&nbsp;
+      <a href="#M000365">info_variables</a>&nbsp;&nbsp;
+      <a href="#M000348">input=</a>&nbsp;&nbsp;
+      <a href="#M000366">kill</a>&nbsp;&nbsp;
+      <a href="#M000328">kill_on_fault?</a>&nbsp;&nbsp;
+      <a href="#M000367">list</a>&nbsp;&nbsp;
+      <a href="#M000368">next</a>&nbsp;&nbsp;
+      <a href="#M000369">print=</a>&nbsp;&nbsp;
+      <a href="#M000370">pwd</a>&nbsp;&nbsp;
+      <a href="#M000371">quit</a>&nbsp;&nbsp;
+      <a href="#M000372">run</a>&nbsp;&nbsp;
+      <a href="#M000373">set=</a>&nbsp;&nbsp;
+      <a href="#M000374">sleep_until</a>&nbsp;&nbsp;
+      <a href="#M000375">source=</a>&nbsp;&nbsp;
+      <a href="#M000376">step</a>&nbsp;&nbsp;
+      <a href="#M000377">terminate</a>&nbsp;&nbsp;
+      <a href="#M000331">test_result_closing</a>&nbsp;&nbsp;
+      <a href="#M000329">test_result_file</a>&nbsp;&nbsp;
+      <a href="#M000330">test_result_prelude</a>&nbsp;&nbsp;
+      <a href="#M000378">undisplay</a>&nbsp;&nbsp;
+      <a href="#M000327">validate_swf</a>&nbsp;&nbsp;
+      <a href="#M000379">viewswf</a>&nbsp;&nbsp;
+      <a href="#M000380">what=</a>&nbsp;&nbsp;
+      <a href="#M000381">where</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TEST_RESULT_PRELUDE</td>
+          <td>=</td>
+          <td class="context-item-value">'&lt;XMLResultPrinter&gt;'</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TEST_RESULT_CLOSING</td>
+          <td>=</td>
+          <td class="context-item-value">'&lt;/XMLResultPrinter&gt;'</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">TEST_RESULT_FILE</td>
+          <td>=</td>
+          <td class="context-item-value">'AsUnitResults.xml'</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">kill_on_fault</td>
+          <td class="context-item-value">&nbsp;[W]&nbsp;</td>
+          <td class="context-item-desc">
+Boolean value that tells fdb whether or not it should automatically shut
+down when an exception is encountered. This feature is used to prevent GUI
+prompts for unhandled exceptions, especially when running a test harness
+under a continuous integration tool - like cruise control. If an exception
+is encountered, fdb will automatically print the exception, a full stack
+trace and all local variables in the function <a
+href="FDBTask.html#M000381">where</a> the failure occured.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">test_result_closing</td>
+          <td class="context-item-value">&nbsp;[W]&nbsp;</td>
+          <td class="context-item-desc">
+String that indicates the closing of printable test results Default value
+is &#8217;&lt;/XMLResultPrinter&gt;&#8217; See <a
+href="FDBTask.html#M000330">test_result_prelude</a> for more <a
+href="FDBTask.html#M000352">info</a>.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">test_result_file</td>
+          <td class="context-item-value">&nbsp;[W]&nbsp;</td>
+          <td class="context-item-desc">
+Relative or absolute path to <a href="FDBTask.html#M000381">where</a> unit
+test results should be written to disk. This field can be used in
+conjunction with the AsUnit XMLResultPrinter which will trace out JUnit
+style XML test results. By telling fdb <a
+href="FDBTask.html#M000381">where</a> to write those test results, it will
+scan the trace output stream looking for <tt><a
+href="FDBTask.html#M000330">test_result_prelude</a></tt>, and <tt><a
+href="FDBTask.html#M000331">test_result_closing</a></tt>. Once the closing
+is encountered, the prelude and closing (and everything in between) will be
+written to disk in the file identified by <tt><a
+href="FDBTask.html#M000329">test_result_file</a></tt>, and fdb will be
+closed down.
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">test_result_prelude</td>
+          <td class="context-item-value">&nbsp;[W]&nbsp;</td>
+          <td class="context-item-desc">
+String that indicates the beginning of printable test results Default value
+is &#8217;&lt;XMLResultPrinter&gt;&#8217;
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000333" class="method-detail">
+        <a name="M000333"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000333.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000333.html');return false;">
+          <span class="method-name">break</span><span class="method-args">(=(point))</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set breakpoint at specified line or function
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000332" class="method-detail">
+        <a name="M000332"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000332.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000332.html');return false;">
+          <span class="method-name">bt</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Print backtrace of all stack frames
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000338" class="method-detail">
+        <a name="M000338"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000338.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000338.html');return false;">
+          <span class="method-name">c</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="FDBTask.html#M000337">continue</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000334" class="method-detail">
+        <a name="M000334"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000334.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000334.html');return false;">
+          <span class="method-name">cf</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Display the name and number of the current file
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000335" class="method-detail">
+        <a name="M000335"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000335.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000335.html');return false;">
+          <span class="method-name">clear=</span><span class="method-args">(point)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Clear breakpoint at specified line or function
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000339" class="method-detail">
+        <a name="M000339"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000339.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000339.html');return false;">
+          <span class="method-name">commands=</span><span class="method-args">(cmd)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets commands to execute when breakpoint hit
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000336" class="method-detail">
+        <a name="M000336"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000336.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000336.html');return false;">
+          <span class="method-name">condition=</span><span class="method-args">(cond)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Apply/remove conditional expression to a breakpoint
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000337" class="method-detail">
+        <a name="M000337"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000337.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000337.html');return false;">
+          <span class="method-name">continue</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Continue execution after stopping at breakpoint
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000340" class="method-detail">
+        <a name="M000340"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000340.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000340.html');return false;">
+          <span class="method-name">delete</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Delete breakpoints or auto-display expressions
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000341" class="method-detail">
+        <a name="M000341"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000341.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000341.html');return false;">
+          <span class="method-name">directory=</span><span class="method-args">(dir)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Add a directory to the search path for source files
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000342" class="method-detail">
+        <a name="M000342"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000342.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000342.html');return false;">
+          <span class="method-name">disable</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Disable breakpoints or auto-display expressions
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000343" class="method-detail">
+        <a name="M000343"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000343.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000343.html');return false;">
+          <span class="method-name">disassemble</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Disassemble source lines or functions
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000344" class="method-detail">
+        <a name="M000344"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000344.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000344.html');return false;">
+          <span class="method-name">display=</span><span class="method-args">(disp)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Add an auto-display expressions
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000346" class="method-detail">
+        <a name="M000346"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000346.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000346.html');return false;">
+          <span class="method-name">e</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Enable breakpoints or auto-display expressions
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000345" class="method-detail">
+        <a name="M000345"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000345.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000345.html');return false;">
+          <span class="method-name">enable</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Enable breakpoints or auto-display expressions
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000347" class="method-detail">
+        <a name="M000347"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000347.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000347.html');return false;">
+          <span class="method-name">file=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specify application to be debugged.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000349" class="method-detail">
+        <a name="M000349"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000349.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000349.html');return false;">
+          <span class="method-name">finish</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Execute until current function returns
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000350" class="method-detail">
+        <a name="M000350"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000350.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000350.html');return false;">
+          <span class="method-name">handle</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specify how to <a href="FDBTask.html#M000350">handle</a> a fault
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000351" class="method-detail">
+        <a name="M000351"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000351.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000351.html');return false;">
+          <span class="method-name">home</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set listing location to <a href="FDBTask.html#M000381">where</a> execution
+is halted
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000352" class="method-detail">
+        <a name="M000352"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000352.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000352.html');return false;">
+          <span class="method-name">info</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Display information about the program being debugged
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000353" class="method-detail">
+        <a name="M000353"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000353.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000353.html');return false;">
+          <span class="method-name">info_arguments</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Argument variables of current stack frame
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000354" class="method-detail">
+        <a name="M000354"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000354.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000354.html');return false;">
+          <span class="method-name">info_breakpoints</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Status of user-settable breakpoints
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000355" class="method-detail">
+        <a name="M000355"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000355.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000355.html');return false;">
+          <span class="method-name">info_display</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Display <a href="FDBTask.html#M000367">list</a> of auto-display expressions
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000356" class="method-detail">
+        <a name="M000356"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000356.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000356.html');return false;">
+          <span class="method-name">info_files</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Names of targets and files being debugged
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000357" class="method-detail">
+        <a name="M000357"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000357.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000357.html');return false;">
+          <span class="method-name">info_functions=</span><span class="method-args">(value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+All function names
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000358" class="method-detail">
+        <a name="M000358"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000358.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000358.html');return false;">
+          <span class="method-name">info_handle</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+How to <a href="FDBTask.html#M000350">handle</a> a fault
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000359" class="method-detail">
+        <a name="M000359"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000359.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000359.html');return false;">
+          <span class="method-name">info_locals</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Local variables of current stack frame
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000360" class="method-detail">
+        <a name="M000360"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000360.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000360.html');return false;">
+          <span class="method-name">info_scopechain</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Scope chain of current stack frame
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000361" class="method-detail">
+        <a name="M000361"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000361.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000361.html');return false;">
+          <span class="method-name">info_sources</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Source files in the program
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000362" class="method-detail">
+        <a name="M000362"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000362.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000362.html');return false;">
+          <span class="method-name">info_stack</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Backtrace of the stack
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000363" class="method-detail">
+        <a name="M000363"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000363.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000363.html');return false;">
+          <span class="method-name">info_swfs</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+List of swfs in this session
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000364" class="method-detail">
+        <a name="M000364"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000364.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000364.html');return false;">
+          <span class="method-name">info_targets</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Application being debugged
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000365" class="method-detail">
+        <a name="M000365"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000365.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000365.html');return false;">
+          <span class="method-name">info_variables</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+All global and static variable names
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000348" class="method-detail">
+        <a name="M000348"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000348.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000348.html');return false;">
+          <span class="method-name">input=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+alias for self.file=
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000366" class="method-detail">
+        <a name="M000366"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000366.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000366.html');return false;">
+          <span class="method-name">kill</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Kill execution of program being debugged
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000328" class="method-detail">
+        <a name="M000328"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000328.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000328.html');return false;">
+          <span class="method-name">kill_on_fault?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000367" class="method-detail">
+        <a name="M000367"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000367.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000367.html');return false;">
+          <span class="method-name">list</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+List specified function or line
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000368" class="method-detail">
+        <a name="M000368"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000368.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000368.html');return false;">
+          <span class="method-name">next</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Step program
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000369" class="method-detail">
+        <a name="M000369"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000369.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000369.html');return false;">
+          <span class="method-name">print=</span><span class="method-args">(msg)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Print value of variable EXP
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000370" class="method-detail">
+        <a name="M000370"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000370.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000370.html');return false;">
+          <span class="method-name">pwd</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Print working directory
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000371" class="method-detail">
+        <a name="M000371"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000371.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000371.html');return false;">
+          <span class="method-name">quit</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Exit fdb
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000372" class="method-detail">
+        <a name="M000372"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000372.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000372.html');return false;">
+          <span class="method-name">run</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Start debugged program
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000373" class="method-detail">
+        <a name="M000373"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000373.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000373.html');return false;">
+          <span class="method-name">set=</span><span class="method-args">(value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set the value of a variable
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000374" class="method-detail">
+        <a name="M000374"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000374.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000374.html');return false;">
+          <span class="method-name">sleep_until</span><span class="method-args">(str)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sleep until some &#8216;str&#8217; String is sent to the output,
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000375" class="method-detail">
+        <a name="M000375"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000375.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000375.html');return false;">
+          <span class="method-name">source=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Read fdb commands from a file
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000376" class="method-detail">
+        <a name="M000376"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000376.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000376.html');return false;">
+          <span class="method-name">step</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Step program until it reaches a different source line
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000377" class="method-detail">
+        <a name="M000377"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000377.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000377.html');return false;">
+          <span class="method-name">terminate</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Force the Flash Debugger and running SWF to close
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000331" class="method-detail">
+        <a name="M000331"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000331.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000331.html');return false;">
+          <span class="method-name">test_result_closing</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000329" class="method-detail">
+        <a name="M000329"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000329.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000329.html');return false;">
+          <span class="method-name">test_result_file</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000330" class="method-detail">
+        <a name="M000330"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000330.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000330.html');return false;">
+          <span class="method-name">test_result_prelude</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000378" class="method-detail">
+        <a name="M000378"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000378.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000378.html');return false;">
+          <span class="method-name">undisplay</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Remove an auto-display expression
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000327" class="method-detail">
+        <a name="M000327"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000327.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000327.html');return false;">
+          <span class="method-name">validate_swf</span><span class="method-args">(swf)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000379" class="method-detail">
+        <a name="M000379"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000379.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000379.html');return false;">
+          <span class="method-name">viewswf</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set or clear filter for file listing based on swf
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000380" class="method-detail">
+        <a name="M000380"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000380.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000380.html');return false;">
+          <span class="method-name">what=</span><span class="method-args">(value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Displays the context of a variable
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000381" class="method-detail">
+        <a name="M000381"></a>
+
+        <div class="method-heading">
+          <a href="FDBTask.src/M000381.html" target="Code" class="method-signature"
+            onclick="popupCode('FDBTask.src/M000381.html');return false;">
+          <span class="method-name">where</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Same as <a href="FDBTask.html#M000332">bt</a>
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

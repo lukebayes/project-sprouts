@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Sprout::FCSHService)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File bundles/as3/lib/sprout/fcsh_service.rb, line 36</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">out</span>=<span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-ivar">@out</span> = <span class="ruby-identifier">out</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">$stdout</span>
+      <span class="ruby-ivar">@tasks</span> = []
+      <span class="ruby-ivar">@lexer</span> = <span class="ruby-constant">FCSHLexer</span>.<span class="ruby-identifier">new</span> <span class="ruby-ivar">@out</span>
+
+      <span class="ruby-comment cmt"># TODO: This should use configurable SDK destinations:</span>
+      <span class="ruby-identifier">exe</span> = <span class="ruby-constant">Sprout</span>.<span class="ruby-identifier">get_executable</span>(<span class="ruby-value str">'sprout-flex3sdk-tool'</span>, <span class="ruby-value str">'bin/fcsh'</span>)
+      <span class="ruby-ivar">@process</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">execute_silent</span>(<span class="ruby-identifier">exe</span>)
+      
+      <span class="ruby-identifier">response</span> = <span class="ruby-value str">''</span>
+      <span class="ruby-ivar">@lexer</span>.<span class="ruby-identifier">scan_process</span>(<span class="ruby-ivar">@process</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">token</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">response</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">token</span>[<span class="ruby-identifier">:output</span>]
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">out</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">response</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

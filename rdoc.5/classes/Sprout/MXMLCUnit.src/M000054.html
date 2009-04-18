@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Sprout::MXMLCUnit)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/mxmlc_unit.rb, line 23</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">super</span>
+      <span class="ruby-identifier">library</span> <span class="ruby-identifier">:asunit3</span>
+      
+      <span class="ruby-identifier">mxmlc</span> <span class="ruby-identifier">output</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">configure_mxmlc</span> <span class="ruby-identifier">t</span>
+        <span class="ruby-identifier">configure_mxmlc_application</span> <span class="ruby-identifier">t</span>
+        <span class="ruby-identifier">t</span>.<span class="ruby-identifier">debug</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">t</span>.<span class="ruby-identifier">source_path</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">test_dir</span>
+        <span class="ruby-identifier">t</span>.<span class="ruby-identifier">prerequisites</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">:asunit3</span>
+        
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">model</span>.<span class="ruby-identifier">test_width</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">test_height</span>)
+          <span class="ruby-identifier">t</span>.<span class="ruby-identifier">default_size</span> = <span class="ruby-node">&quot;#{model.test_width} #{model.test_height}&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">t</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">define_player</span>
+      <span class="ruby-identifier">t</span> = <span class="ruby-identifier">define_outer_task</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">prerequisites</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">output</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">prerequisites</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">player_task_name</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Sprout::FCSHLexer)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File bundles/as3/lib/sprout/fcsh_lexer.rb, line 39</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">out</span>=<span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-ivar">@out</span> = <span class="ruby-identifier">out</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">$stdout</span>
+      <span class="ruby-ivar">@regex_to_token</span> = [
+                        [<span class="ruby-regexp re">/(.*Warning:.*\^.*)\n/</span><span class="ruby-identifier">m</span>,   <span class="ruby-constant">WARNING</span>], <span class="ruby-comment cmt"># Warning encountered</span>
+                        [<span class="ruby-regexp re">/(.*Error:.*\^.*)\n/</span><span class="ruby-identifier">m</span>,     <span class="ruby-constant">ERROR</span>], <span class="ruby-comment cmt"># Error encountered</span>
+                        [<span class="ruby-constant">PRELUDE_EXPRESSION</span>,        <span class="ruby-constant">PRELUDE</span>],
+                        [<span class="ruby-regexp re">/\n\(fcsh\)/</span>,              <span class="ruby-constant">PROMPT</span>] <span class="ruby-comment cmt"># Prompt for input</span>
+                       ]
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

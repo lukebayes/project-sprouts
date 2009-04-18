@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Sprout::Generator::NamedBase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 34</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">runtime_args</span>, <span class="ruby-identifier">runtime_options</span> = {})
+        <span class="ruby-keyword kw">super</span>
+
+        <span class="ruby-identifier">rakefile</span> = <span class="ruby-constant">Sprout</span>.<span class="ruby-identifier">project_rakefile</span>
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">rakefile</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">rakefile</span>))
+           <span class="ruby-identifier">load</span> <span class="ruby-identifier">rakefile</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-ivar">@model</span> = <span class="ruby-constant">ProjectModel</span>.<span class="ruby-identifier">instance</span>
+
+        <span class="ruby-comment cmt"># Had to stop throwing on no args because the suite generator does</span>
+        <span class="ruby-comment cmt"># not require the user to send in a class name....</span>
+        <span class="ruby-comment cmt">#usage(&quot;Final argument must be a name parameter&quot;) if runtime_args.empty?</span>
+        <span class="ruby-ivar">@args</span> = <span class="ruby-identifier">runtime_args</span>.<span class="ruby-identifier">dup</span>
+        <span class="ruby-identifier">assign_names!</span> <span class="ruby-ivar">@args</span>.<span class="ruby-identifier">shift</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

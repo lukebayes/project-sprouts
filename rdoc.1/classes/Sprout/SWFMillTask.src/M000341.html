@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>initialize_task (Sprout::SWFMillTask)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File bundles/as2/lib/sprout/tasks/swfmill_task.rb, line 27</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_task</span>
+      <span class="ruby-ivar">@default_gem_name</span> = <span class="ruby-value str">'sprout-swfmill-tool'</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:simple</span>, <span class="ruby-identifier">:boolean</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">hidden_value</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">prefix</span> = <span class="ruby-value str">''</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;Set the SWFMill simple flag. This setting will determine what kind of xml document the compiler expects. Unless you really know what you're doing with SWFMill, this setting will usually be left alone.&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:input</span>, <span class="ruby-identifier">:string</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">hidden_name</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;The input can be one of the following\n * SWFMill XML document: Create and manually manage an input file as described at http://www.swfmill.org\n * Directory: if you point at a directory, this task will automatically include all files found forward of that directory. As it descends into child directories, the items found will be exposed in the library using period delimiters as follows:\n\nThe file:\n  yourcompany/yourproject/SomeFile.png\nWill be available in the compiled swf with a linkage identifier of:\n  yourcompany.yourproject.SomeFile\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:output</span>, <span class="ruby-identifier">:file</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">hidden_name</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;The output parameter should not be set from outside of this task, the output file should be the task name&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:template</span>, <span class="ruby-identifier">:file</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;An ERB template to send to the generated SWFMillInputTask. This template can be used to generate an XML input document based on the contents of a directory. If no template is provided, one will be created for you after the first run, and once created, you can configure it however you wish.&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">output</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

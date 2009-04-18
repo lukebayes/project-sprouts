@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>preprocess_content (Sprout::TaskParam)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 580</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">preprocess_content</span>(<span class="ruby-identifier">readable</span>, <span class="ruby-identifier">writable</span>, <span class="ruby-identifier">processor</span>, <span class="ruby-identifier">file</span>)
+      <span class="ruby-identifier">process</span> = <span class="ruby-constant">ProcessRunner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">processor</span>)
+      <span class="ruby-identifier">process</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">readable</span>.<span class="ruby-identifier">read</span>)
+      <span class="ruby-identifier">process</span>.<span class="ruby-identifier">close_write</span>
+      <span class="ruby-identifier">result</span> = <span class="ruby-identifier">process</span>.<span class="ruby-identifier">read</span>
+      <span class="ruby-identifier">error</span> = <span class="ruby-identifier">process</span>.<span class="ruby-identifier">read_err</span>
+      <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">error</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+        <span class="ruby-identifier">belongs_to</span>.<span class="ruby-identifier">display_preprocess_message</span>
+        <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm_rf</span>(<span class="ruby-identifier">belongs_to</span>.<span class="ruby-identifier">preprocessed_path</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ExecutionError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;[ERROR] Preprocessor failed on file #{file} #{error}&quot;</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">writable</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">result</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

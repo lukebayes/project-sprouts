@@ -1,0 +1,1002 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Sprout::Sprout</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Sprout::Sprout</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/sprout/lib/sprout_rb.html">
+                sprout/lib/sprout.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Sprouts is an open-source, cross-platform project generation and
+configuration tool for ActionScript 2, ActionScript 3, Adobe AIR and Flex
+projects. It is built on top of Ruby Gems, Rubigen Generators and is
+intended to work on any platform that Ruby runs on including specifically,
+Windows XP, Windows Vista, Cygwin, OS X and Linux.
+</p>
+<p>
+Sprouts can be separated into some core concepts as follows:
+</p>
+<hr size="2"></hr><h2>Tools</h2>
+<p>
+A Tool is a Ruby <a href="../Gem.html">Gem</a> that usually refers to an
+executable or binary application. These applications are either natively
+cross platform, or the Ruby <a href="../Gem.html">Gem</a> should include a
+YAML document that tells Sprouts where to go in order to get the
+appropriate binary for which platform the user is currently running.
+</p>
+<p>
+CLI Tools are usually referenced by subclasses of <a
+href="ToolTask.html">Sprout::ToolTask</a>.
+</p>
+<p>
+Once installed, many Tool Sprouts are made available from your path. For
+example if you install the <a
+href="Sprout.html#M000417">sprout</a>-mtasc-tool gem, from that point
+forward you can execute mtasc from the terminal as follows:
+</p>
+<pre>
+  mtasc -help # Should throw an error
+  sudo gem install sprout-mtasc-tool
+  mtasc -help # Should download and execute mtasc
+</pre>
+<p>
+Using just <a href="Sprout.html">Sprout</a> tools by themselves, we now
+have have the ability to install and manage requisite executables across
+platforms with zero configuration.
+</p>
+<p>
+In reality, &#8216;Tool Sprouts&#8217; are actually nothing more than a
+naming convention and expected gem configuration, but once those
+requirements are met, the core <a href="Sprout.html">Sprout::Sprout</a> can
+do some important work with them.
+</p>
+<hr size="2"></hr><h2>Libraries</h2>
+<p>
+A Library is simply shared code. Some libraries are distributed with only
+source, others are only pre-compiled binaries (SWC for ActionScript
+libraries), and still others are made available in both forms.
+</p>
+<p>
+The <a href="LibraryTask.html">Sprout::LibraryTask</a> will download and
+copy a remote library <a href="Sprout.html#M000417">sprout</a> gem. The
+remote archive can include (or reference) either source or a pre-compiled
+file. For ActionScript libraries, this would be a SWC file.
+</p>
+<p>
+This task is integrated with some of the compiler tasks in such a way that
+if an <a href="MXMLCTask.html">Sprout::MXMLCTask</a> has any number of
+library tasks in it&#8216;s prerequisites list, each of those libraries
+will be added to the compiler directive appropriately.
+</p>
+<p>
+Following is a simple example of a library task. Using only this simple
+task definition, the Adobe corelib library <a
+href="Sprout.html#M000417">sprout</a> gem will be downloaded, installed and
+copied to your <a href="ProjectModel.html">Sprout::ProjectModel</a>
+<tt>lib_dir</tt>.
+</p>
+<pre>
+  library :corelib
+</pre>
+<p>
+By adding this named task as a prerequisite to your compilation task, that
+SWC will also be added to the <a
+href="MXMLCTask.html">Sprout::MXMLCTask</a> <tt>library_path</tt>
+parameter.
+</p>
+<pre>
+  mxmlc 'bin/SomeProject.swf' =&gt; :corelib
+</pre>
+<p>
+You can also specify a particular library gem version if the library has
+changed since your project began.
+</p>
+<pre>
+  library :asunit3 do |t|
+    t.version = '3.0.1'
+  end
+</pre>
+<p>
+This will ensure that only that particular library version is used for this
+project.
+</p>
+<p>
+You may want to refer to a library using a particular task name, but have
+it use a different library <a href="Sprout.html#M000417">sprout</a> gem.
+This can be done using the gem_name parameter as follows:
+</p>
+<pre>
+  library :asunit do |t|
+    t.gem_name = 'sprout-asunit3-library'
+  end
+</pre>
+<p>
+This may be useful because now the <a
+href="http://www.asunit.org">AsUnit</a> sources will be installed to:
+</p>
+<pre>
+  lib/asunit
+</pre>
+<p>
+instead of:
+</p>
+<pre>
+  lib/asunit3
+</pre>
+<p>
+and you can now depend on this library as simply +:asunit+ in your compiler
+tasks.
+</p>
+<p>
+You can easily create your own library gems using the <a
+href="GemWrapTask.html">Sprout::GemWrapTask</a> and then refer to them by
+gem name.
+</p>
+<p>
+In order to share your library tasks, you will need to do one of the
+following:
+</p>
+<ul>
+<li>Tell interested developers to manually install your library gem
+
+</li>
+<li>Upload your gem to any <a href="http://www.rubyforge.org">Rubyforge</a>
+project file releases area.
+
+<pre>
+  If your gem name begins with 'sprout-' and ends with '-library', you (and others) can refer to it by only
+  the string in between that prefix and suffix. Otherwise, you (and others) will always have
+  to set the gem_name parameter to the full name of your custom library.
+</pre>
+</li>
+<li>Submit your library for inclusion from the <a
+href="http://www.projectsprouts.org">ProjectSprouts</a> project.
+
+</li>
+<li>Add your gem to your own custom <a
+href="http://rambleon.org/2007/04/19/creating-your-own-gem-server/">gem_server</a>,
+and set up your rakefiles to pull from that server
+
+</li>
+</ul>
+<p>
+You can search for all available libraries as follows:
+</p>
+<pre>
+  gem search -r sprout-*library
+</pre>
+<p>
+Only results that begin with &#8216;<a
+href="Sprout.html#M000417">sprout</a>-&#8217; are known, valid libraries.
+</p>
+<hr size="2"></hr><h2>Bundles</h2>
+<p>
+A <a href="Sprout.html">Sprout</a> Bundle is a collection of Ruby code that
+supports a particular interest or technology. At the time of this writing,
+we have two bundles available.
+</p>
+<ul>
+<li>ActionScript 2 Bundle (<a
+href="../../files/bundles/as2/README.html">link</a>) which supports
+ActionScript 2.0 development
+
+</li>
+<li>ActionScript 3 Bundle (<a
+href="../../files/bundles/as3/README.html">link</a>) which supports
+ActionScript 3.0, MXML and AIR development
+
+</li>
+</ul>
+<p>
+Bundles are the named entry point that the <tt><a
+href="Sprout.html#M000417">sprout</a></tt> shell tool uses to find project
+<a href="../../files/doc/Generator.html">generators</a>.
+</p>
+<p>
+Bundles should be packaged and published to the RubyForge gem repository
+with very specific names as follows:
+</p>
+<p>
+<a href="Sprout.html#M000417">sprout</a>-#{bundle_name}-bundle where
+${bundle_name} is what will be given to the -n parameter of the <tt><a
+href="Sprout.html#M000417">sprout</a></tt> gem.
+</p>
+<p>
+The as3 bundle is released as <a
+href="Sprout.html#M000417">sprout</a>-as3-bundle on RubyForge, but we can
+simply enter the short name when creating new as3 projects.
+</p>
+<hr size="2"></hr><h2>Generators</h2>
+<p>
+A SproutGenerator is a set of specifically configured folders and files
+that have been placed in a particular, expected location on disk. The <a
+href="Sprout.html">Sprout</a> generator feature is a minor modification to
+the standard Rubigen generators.
+</p>
+<p>
+Sprouts modifies the underlying Rubigen Generator implementation in that we
+need support for multiple languages or technologies while Rubigen is able
+to simply expect that it&#8216;s generating Ruby code.
+</p>
+<p>
+Generators can exist in multiple different locations on disk, to learn how
+to create a new generator, see the Rubigen <a
+href="http://rubigen.rubyforge.org/">documentation</a>.
+</p>
+<p>
+To use a new or existing generator, simply enter it&#8216;s name from
+within a project after calling
+</p>
+<pre>
+  script/generate
+</pre>
+<p>
+When a string is passed to the <a href="Sprout.html#M000410">generate</a>
+command, sprouts will look in the following locations in the following
+order with &#8216;name&#8217; being the generator name that you have
+requested:
+</p>
+<ul>
+<li>#{<a href="Sprout.html#M000426">project_path</a>}/generators/#{name}
+
+</li>
+<li>#{<a href="Sprout.html#M000426">project_path</a>}/script/generators/#{name}
+
+</li>
+<li>#{<a href="Sprout.html#M000426">project_path</a>}/vendor/generators/#{name}
+
+</li>
+<li>#{<a
+href="Sprout.html#M000420">Sprout::Sprout.sprout_cache</a>}/generators/#{Sprout::ProjectModel.language}/#{name}
+
+</li>
+<li>All Rubygems with a name ending with &#8217;-bundle&#8217; and with
+contents that match &#8217;/lib/sprout/**/generators/[name]&#8217;
+
+</li>
+</ul>
+<p>
+This means that when you have a new project and enter:
+</p>
+<pre>
+  script/generate foo
+</pre>
+<p>
+We will first look in your project for, &#8216;generators/foo&#8217;,
+&#8216;script/generators/foo&#8217; and
+&#8216;vendor/generators/foo&#8217;.
+</p>
+<p>
+Assuming no viable generator is found in your project, we will then look in
+your <a href="Sprout.html">Sprout::Sprout</a> <a
+href="Sprout.html#M000420">sprout_cache</a> for a folder named
+&#8216;generators/foo&#8217;.
+</p>
+<p>
+Assuming no viable generator is found in your system wide path, we will
+begin looking inside of installed Ruby Gems. The expected gem will have a
+file at:
+</p>
+<pre>
+  lib/sprout/**/generators/foo/foo_generator.rb
+</pre>
+<p>
+If no named generator is found in any of these places an exception will be
+encountered.
+</p>
+<p>
+Sprouts generators can be initiated from one of two places, either from a
+project directory with script/generate or directly from the <a
+href="Sprout.html">Sprout</a> gem.
+</p>
+<p>
+When executing generators directly from the <a
+href="Sprout.html">Sprout</a> gem, you must send in a bundle base name and
+know that only &#8216;project&#8217; generators found in that bundle will
+be executed.
+</p>
+<p>
+When executing generators from a project, the <a
+href="ProjectModel.html">Sprout::ProjectModel</a> language parameter is
+used to determine the bundle (if necessary), and then the Generator name is
+used to execute any found generator.
+</p>
+<hr size="2"></hr><h2>Tasks</h2>
+<p>
+In Sprouts, a Task is referring to a <a
+href="http://rake.rubyforge.org/">Rake</a> Task.
+</p>
+<p>
+Rake is the automated build to written in Ruby. This tool is similar to <a
+href="http://ant.apache.org/">Ant</a> and <a
+href="http://www.gnu.org/software/make/">Make</a> if you&#8216;re familiar
+with those technologies.
+</p>
+<p>
+The main thing that differentiates Rake from it&#8216;s competitors is the
+fact that Rake tasks are defined and configured in Ruby code rather than
+XML or C. This lets us more easily avoid repetition throughout a rakefile,
+and we gain the full power of the Ruby language to apply to our build
+scripts.
+</p>
+<p>
+Essentially, Rake allows us to write and maintain much smaller, more
+digestible build scripts.
+</p>
+<p>
+To learn more about Rake, check out Martin Fowler&#8216;s seminal <a
+href="http://martinfowler.com/articles/rake.html">article</a> on the
+subject.
+</p>
+<p>
+At the time of this writing, Sprouts makes the following Rake tasks
+available:
+</p>
+<ul>
+<li>Core <a href="SFTPTask.html">Sprout::SFTPTask</a>
+
+</li>
+<li>Core <a href="ZipTask.html">Sprout::ZipTask</a>
+
+</li>
+<li>Core <a href="LibraryTask.html">Sprout::LibraryTask</a>
+
+</li>
+<li>As3Bundle <a href="AsDocTask.html">Sprout::AsDocTask</a>
+
+</li>
+<li>As3Bundle Sprout::AsUnitTask
+
+</li>
+<li>As3Bundle <a href="COMPCTask.html">Sprout::COMPCTask</a>
+
+</li>
+<li>As3Bundle <a href="MXMLCTask.html">Sprout::MXMLCTask</a>
+
+</li>
+<li>As2Bundle <a href="MTASCTask.html">Sprout::MTASCTask</a>
+
+</li>
+<li>As2Bundle <a href="SWFMillTask.html">Sprout::SWFMillTask</a>
+
+</li>
+</ul>
+<hr size="2"></hr><h2><a href="Sprout.html">Sprout</a></h2>
+<p>
+Tools, Libraries and Bundles are distributed as RubyGems and given a
+specific gem name suffix. For some examples:
+</p>
+<pre>
+  sprout-flex3sdk-tool
+  sprout-asunit-library
+  sprout-as3-bundle
+</pre>
+<p>
+The <a href="Sprout.html">Sprout</a> application provides shared
+functionality for each of the different types of Sprouts.
+</p>
+<p>
+The <a href="Sprout.html">Sprout</a> command line tool primarily provides
+access to project generators from any <a
+href="Sprout.html#M000417">sprout</a> bundle that is available to your
+system, either locally or from the network.
+</p>
+<p>
+When executed from the system path, this class will download and install a
+named bundle, and execute a <tt>project</tt> generator within that bundle.
+Following is an example:
+</p>
+<pre>
+  sprout -n as3 SomeProject
+</pre>
+<p>
+The previous command will download and install the latest version of the <a
+href="Sprout.html#M000417">sprout</a>-as3-bundle gem and initiate the
+project_generator with a single argument of &#8216;SomeProject&#8217;. If
+the string passed to the -n parameter begins with &#8216;<a
+href="Sprout.html#M000417">sprout</a>-&#8217; it will be unmodified for the
+lookup. For example:
+</p>
+<pre>
+  spout -n sprout-as3-bundle SomeProject
+</pre>
+<p>
+will not have duplicate strings prepended or suffixed.
+</p>
+<hr size="2"></hr><p>
+Some additional resources or references:
+</p>
+<p>
+Rake: <a href="http://rake.rubyforge.org">rake.rubyforge.org</a> <a
+href="http://martinfowler.com/articles/rake.html">martinfowler.com/articles/rake.html</a>
+</p>
+<p>
+RubyGems:
+</p>
+<ul>
+<li><a href="http://www.rubygems.org">www.rubygems.org</a>
+
+</li>
+<li><a
+href="http://www.linuxjournal.com/article/8967">www.linuxjournal.com/article/8967</a>
+
+</li>
+</ul>
+<p>
+Ruby Raven (Mostly Inspiration)
+</p>
+<ul>
+<li><a href="http://raven.rubyforge.org">raven.rubyforge.org</a>
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000428">child_rakefile</a>&nbsp;&nbsp;
+      <a href="#M000422">find_gem_spec</a>&nbsp;&nbsp;
+      <a href="#M000421">gem_file_cache</a>&nbsp;&nbsp;
+      <a href="#M000410">generate</a>&nbsp;&nbsp;
+      <a href="#M000416">get_executable</a>&nbsp;&nbsp;
+      <a href="#M000413">get_executable_from_path</a>&nbsp;&nbsp;
+      <a href="#M000412">get_gem_preamble</a>&nbsp;&nbsp;
+      <a href="#M000429">get_implicit_project_path</a>&nbsp;&nbsp;
+      <a href="#M000414">get_path_delimiter</a>&nbsp;&nbsp;
+      <a href="#M000419">home</a>&nbsp;&nbsp;
+      <a href="#M000424">ignore_file?</a>&nbsp;&nbsp;
+      <a href="#M000423">load_gem</a>&nbsp;&nbsp;
+      <a href="#M000425">project_name</a>&nbsp;&nbsp;
+      <a href="#M000426">project_path</a>&nbsp;&nbsp;
+      <a href="#M000427">project_rakefile</a>&nbsp;&nbsp;
+      <a href="#M000411">remove_all</a>&nbsp;&nbsp;
+      <a href="#M000415">remove_gems_confirmation</a>&nbsp;&nbsp;
+      <a href="#M000417">sprout</a>&nbsp;&nbsp;
+      <a href="#M000420">sprout_cache</a>&nbsp;&nbsp;
+      <a href="#M000418">sprout_to_gem_name</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000428" class="method-detail">
+        <a name="M000428"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000428.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000428.html');return false;">
+          <span class="method-name">child_rakefile</span><span class="method-args">(dir)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Look in the provided <tt>dir</tt> for files that meet the criteria to be a
+valid Rakefile.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000422" class="method-detail">
+        <a name="M000422"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000422.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000422.html');return false;">
+          <span class="method-name">find_gem_spec</span><span class="method-args">(name, requirements=nil, recursed=false)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Retrieve the RubyGems gem spec for a particular gem <tt>name</tt> that
+meets the provided <tt>requirements</tt>. <tt>requirements</tt> are
+provided as a string value like:
+</p>
+<pre>
+  '&gt;= 0.0.1'
+</pre>
+<p>
+or
+</p>
+<pre>
+  '0.0.1'
+</pre>
+<p>
+This method will actually download and install the provided gem by
+<tt>name</tt> and <tt>requirements</tt> if it is not found locally on the
+system.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000421" class="method-detail">
+        <a name="M000421"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000421.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000421.html');return false;">
+          <span class="method-name">gem_file_cache</span><span class="method-args">(name, version)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the <tt><a href="Sprout.html#M000420">sprout_cache</a></tt> combined
+with the passed in <tt>name</tt> and <tt>version</tt> so that you will get
+a cache location for a specific gem.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000410" class="method-detail">
+        <a name="M000410"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000410.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000410.html');return false;">
+          <span class="method-name">generate</span><span class="method-args">(sprout_name, generator_name, params, project_path=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Execute a generator that is available locally or from the network.
+</p>
+<ul>
+<li><tt>sprout_name</tt> A full gem name (ex., <a
+href="Sprout.html#M000417">sprout</a>-as3-bundle) that contains a generator
+that matches <tt>generator_name</tt>
+
+</li>
+<li><tt>generator_name</tt> A string like &#8216;project&#8217; or
+&#8216;class&#8217; that maps to a generator
+
+</li>
+<li><tt>params</tt> Arbitrary parameters to pass to the generator
+
+</li>
+<li><tt><a href="Sprout.html#M000426">project_path</a></tt> Optional parameter.
+Will default to the nearest folder that contains a valid Rakefile.
+
+</li>
+</ul>
+<p>
+This Rakefile will usually be loaded by the referenced Generator, and it
+should have a configured <a href="ProjectModel.html">ProjectModel</a>
+defined in it.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000416" class="method-detail">
+        <a name="M000416"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000416.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000416.html');return false;">
+          <span class="method-name">get_executable</span><span class="method-args">(name, archive_path=nil, version=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Retrieve the file target to an executable by <a
+href="Sprout.html#M000417">sprout</a> name. Usually, these are tool
+sprouts.
+</p>
+<ul>
+<li><tt>name</tt> Full <a href="Sprout.html#M000417">sprout</a> gem name that
+contains an executable file
+
+</li>
+<li><tt>archive_path</tt> Optional parameter for tools that contain more than
+one executable, or for
+
+</li>
+</ul>
+<p>
+when you don&#8216;t want to use the default executable presented by the
+tool. For example, the Flex 2 SDK has many executables, when this method is
+called for them, one might use something like:
+</p>
+<pre>
+  Sprout::Sprout.get_executable('sprout-flex3sdk-tool', 'bin/mxmlc')
+</pre>
+<ul>
+<li><tt>version</tt> Optional parameter to specify a particular gem version for
+this executable
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000413" class="method-detail">
+        <a name="M000413"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000413.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000413.html');return false;">
+          <span class="method-name">get_executable_from_path</span><span class="method-args">(exe)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Retrieve the full path to an executable that is available in the system
+path
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000412" class="method-detail">
+        <a name="M000412"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000412.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000412.html');return false;">
+          <span class="method-name">get_gem_preamble</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Build up the platform-specific preamble required to call the gem binary
+from Kernel.execute
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000429" class="method-detail">
+        <a name="M000429"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000429.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000429.html');return false;">
+          <span class="method-name">get_implicit_project_path</span><span class="method-args">(path)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000414" class="method-detail">
+        <a name="M000414"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000414.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000414.html');return false;">
+          <span class="method-name">get_path_delimiter</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000419" class="method-detail">
+        <a name="M000419"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000419.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000419.html');return false;">
+          <span class="method-name">home</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the <a href="Sprout.html#M000419">home</a> directory for this <a
+href="Sprout.html">Sprout</a> installation
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000424" class="method-detail">
+        <a name="M000424"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000424.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000424.html');return false;">
+          <span class="method-name">ignore_file?</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Do not copy files found in the ignore_files list
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000423" class="method-detail">
+        <a name="M000423"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000423.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000423.html');return false;">
+          <span class="method-name">load_gem</span><span class="method-args">(args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000425" class="method-detail">
+        <a name="M000425"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000425.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000425.html');return false;">
+          <span class="method-name">project_name</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the current <a href="Sprout.html#M000425">project_name</a> assuming
+someone has already set it, otherwise return an empty string
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000426" class="method-detail">
+        <a name="M000426"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000426.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000426.html');return false;">
+          <span class="method-name">project_path</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="Sprout.html#M000426">project_path</a> should step backward in the
+file system until it encounters a rakefile. The parent directory of that
+rakefile should be returned. If no rakefile is found, it should return
+Dir.pwd
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000427" class="method-detail">
+        <a name="M000427"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000427.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000427.html');return false;">
+          <span class="method-name">project_rakefile</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the rakefile in the current <tt><a
+href="Sprout.html#M000426">project_path</a></tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000411" class="method-detail">
+        <a name="M000411"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000411.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000411.html');return false;">
+          <span class="method-name">remove_all</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Remove all installed RubyGems that begin with the string &#8216;<a
+href="Sprout.html#M000417">sprout</a>&#8217; and clear the local <a
+href="Sprout.html#M000417">sprout</a> cache
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000415" class="method-detail">
+        <a name="M000415"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000415.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000415.html');return false;">
+          <span class="method-name">remove_gems_confirmation</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000417" class="method-detail">
+        <a name="M000417"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000417.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000417.html');return false;">
+          <span class="method-name">sprout</span><span class="method-args">(name, version=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allows us to easily download and install RubyGem sprouts by name and
+version. Returns a RubyGem <a href="../Gem.html">Gem</a> <a
+href="http://rubygems.org/read/chapter/20">Spec</a> when installation is
+complete. If the installed gem has a Ruby file configured to
+&#8216;autorequire&#8217;, that file will also be required by this method
+so that any provided Ruby functionality will be immediately available to
+client scripts. If the installed gem contains a &#8216;sprout.spec&#8217;
+file, any RemoteFileTargets will be resolved synchronously and those files
+will be available in the Sprout::Sprout.cache.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000420" class="method-detail">
+        <a name="M000420"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000420.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000420.html');return false;">
+          <span class="method-name">sprout_cache</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return the location on disk where this installation of Sprouts stores
+it&#8216;s cached files. If the currently installed version of Sprouts were
+0.7 and your system username were &#8216;foo&#8217; this would return the
+following locations:
+</p>
+<ul>
+<li><tt>OSX</tt> /Users/foo/Library/Sprouts/cache/0.7
+
+</li>
+<li><tt>Windows</tt> C:/Documents And Settings/foo/Local Settings/Application
+Data/Sprouts/cache/0.7
+
+</li>
+<li><tt>Linux</tt> ~/.sprouts/cache/0.7
+
+</li>
+</ul>
+        </div>
+      </div>
+
+      <div id="method-M000418" class="method-detail">
+        <a name="M000418"></a>
+
+        <div class="method-heading">
+          <a href="Sprout.src/M000418.html" target="Code" class="method-signature"
+            onclick="popupCode('Sprout.src/M000418.html');return false;">
+          <span class="method-name">sprout_to_gem_name</span><span class="method-args">(name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return <a href="Sprout.html#M000417">sprout</a>-#{name}-bundle for any name
+that does not begin with &#8216;<a
+href="Sprout.html#M000417">sprout</a>-&#8217;. This was used early on in
+development but should possibly be removed as we move forward and try to
+support arbitrary RubyGems.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

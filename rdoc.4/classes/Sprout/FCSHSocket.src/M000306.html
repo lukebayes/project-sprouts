@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>server (Sprout::FCSHSocket)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File bundles/as3/lib/sprout/fcsh_socket.rb, line 8</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">server</span>(<span class="ruby-identifier">port</span>=<span class="ruby-value">12321</span>, <span class="ruby-identifier">out</span>=<span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-identifier">out</span> = <span class="ruby-identifier">out</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">$stdout</span>
+      <span class="ruby-identifier">server</span> = <span class="ruby-constant">TCPServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">port</span>)
+      <span class="ruby-ivar">@fcsh</span> = <span class="ruby-constant">FCSHService</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">out</span>)
+      <span class="ruby-identifier">out</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;&gt;&gt; fcsh started, waiting for connections on port #{port}&quot;</span>
+      <span class="ruby-keyword kw">while</span>(<span class="ruby-identifier">session</span> = <span class="ruby-identifier">server</span>.<span class="ruby-identifier">accept</span>)
+        <span class="ruby-identifier">response</span> = <span class="ruby-ivar">@fcsh</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-identifier">session</span>.<span class="ruby-identifier">gets</span>)
+        <span class="ruby-identifier">session</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">response</span>)
+        <span class="ruby-identifier">session</span>.<span class="ruby-identifier">flush</span>
+        <span class="ruby-identifier">session</span>.<span class="ruby-identifier">close</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

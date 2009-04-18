@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>scan_process (Sprout::FCSHLexer)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File bundles/as3/lib/sprout/fcsh_lexer.rb, line 49</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">scan_process</span>(<span class="ruby-identifier">process_runner</span>)
+      <span class="ruby-identifier">tokens</span> = [];
+      <span class="ruby-comment cmt"># Collect Errors and Warnings in a way that doesn't</span>
+      <span class="ruby-comment cmt"># Block forever when we have none....</span>
+      <span class="ruby-identifier">t</span> = <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">new</span> {
+        <span class="ruby-identifier">scan_stream</span>(<span class="ruby-identifier">process_runner</span>.<span class="ruby-identifier">e</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">token</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">token</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+          <span class="ruby-identifier">tokens</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">token</span>
+        <span class="ruby-keyword kw">end</span>
+      }
+      
+      <span class="ruby-comment cmt"># Collect stdout from the process:</span>
+      <span class="ruby-identifier">scan_stream</span>(<span class="ruby-identifier">process_runner</span>.<span class="ruby-identifier">r</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">token</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">token</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+        <span class="ruby-identifier">tokens</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">token</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">process_runner</span>.<span class="ruby-identifier">e</span>.<span class="ruby-identifier">sync</span> = <span class="ruby-keyword kw">true</span>
+
+      <span class="ruby-comment cmt"># GROSS HACK! </span>
+      <span class="ruby-comment cmt"># It seems we need to wait</span>
+      <span class="ruby-comment cmt"># for the fsch $stderr buffer to flush?</span>
+      <span class="ruby-comment cmt"># There must be a better way... Anyone?</span>
+      <span class="ruby-comment cmt"># Should we move to Highline for interactive</span>
+      <span class="ruby-comment cmt"># shell applications?</span>
+      <span class="ruby-comment cmt"># http://rubyforge.org/projects/highline/</span>
+      <span class="ruby-comment cmt"># In fact - this problem actually ruins</span>
+      <span class="ruby-comment cmt"># the entire implementation, the larger/longer</span>
+      <span class="ruby-comment cmt"># it takes for errors to be bufferred, the more</span>
+      <span class="ruby-comment cmt"># likely it is we'll return without displaying them.</span>
+      <span class="ruby-comment cmt"># The only way to overcome this with the current </span>
+      <span class="ruby-comment cmt"># implementation, is to increase the timeout so that</span>
+      <span class="ruby-comment cmt"># FCSH takes a long, long time on every compilation!!!</span>
+      <span class="ruby-identifier">sleep</span>(<span class="ruby-value">0</span><span class="ruby-value">.2</span>)
+      
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">kill</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">tokens</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

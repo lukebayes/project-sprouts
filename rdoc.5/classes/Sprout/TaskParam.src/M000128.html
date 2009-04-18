@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>setup_preprocessing_file_tasks (Sprout::TaskParam)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 557</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup_preprocessing_file_tasks</span>(<span class="ruby-identifier">input_file</span>, <span class="ruby-identifier">output_file</span>)
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">input_file</span>))
+      <span class="ruby-constant">CLEAN</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">belongs_to</span>.<span class="ruby-identifier">preprocessed_path</span>) <span class="ruby-keyword kw">if</span>(<span class="ruby-operator">!</span><span class="ruby-constant">CLEAN</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">belongs_to</span>.<span class="ruby-identifier">preprocessed_path</span>))
+      
+      <span class="ruby-identifier">file</span> <span class="ruby-identifier">input_file</span>
+      <span class="ruby-identifier">file</span> <span class="ruby-identifier">output_file</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">input_file</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-identifier">dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">output_file</span>)
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">dir</span>))
+          <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-identifier">dir</span>)
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">input_file</span>, <span class="ruby-value str">'r'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">readable</span><span class="ruby-operator">|</span>
+          <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">output_file</span>, <span class="ruby-value str">'w+'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">writable</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">text_file?</span>(<span class="ruby-identifier">input_file</span>))
+              <span class="ruby-identifier">preprocess_content</span>(<span class="ruby-identifier">readable</span>, <span class="ruby-identifier">writable</span>, <span class="ruby-identifier">belongs_to</span>.<span class="ruby-identifier">preprocessor</span>, <span class="ruby-identifier">input_file</span>)
+            <span class="ruby-keyword kw">else</span>
+              <span class="ruby-identifier">writable</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">readable</span>.<span class="ruby-identifier">read</span>)
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">belongs_to</span>.<span class="ruby-identifier">prerequisites</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">output_file</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

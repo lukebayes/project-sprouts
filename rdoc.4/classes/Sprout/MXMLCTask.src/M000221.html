@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>execute_with_fcsh (Sprout::MXMLCTask)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/mxmlc_task.rb, line 794</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">execute_with_fcsh</span>(<span class="ruby-identifier">command</span>)
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-constant">FCSHSocket</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-node">&quot;mxmlc #{command}&quot;</span>)
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">FCSHError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">fcsh_error</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-identifier">fcsh_error</span>
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">StandardError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">std_error</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">StandardError</span>(<span class="ruby-value str">&quot;[ERROR] There was a problem connecting to the Flex Compiler SHell, run 'rake fcsh:start' in another terminal.&quot;</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

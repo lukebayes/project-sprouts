@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: Task</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>Task</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>sprout/doc/Task
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Tue Feb 12 16:53:30 -0800 2008</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+In Sprouts, a Task is referring to a <a
+href="http://rake.rubyforge.org/">Rake</a> Task.
+</p>
+<p>
+Rake is the automated build to written in Ruby. This tool is similar to <a
+href="http://ant.apache.org/">Ant</a> and <a
+href="http://www.gnu.org/software/make/">Make</a> if you&#8216;re familiar
+with those technologies.
+</p>
+<p>
+The main thing that differentiates Rake from it&#8216;s competitors is the
+fact that Rake tasks are defined and configured in Ruby code rather than
+XML or C. This lets us more easily avoid repetition throughout a rakefile,
+and we gain the full power of the Ruby language to apply to our build
+scripts.
+</p>
+<p>
+Essentially, Rake allows us to write and maintain much smaller, more
+digestible build scripts.
+</p>
+<p>
+To learn more about Rake, check out Martin Fowler&#8216;s seminal <a
+href="http://martinfowler.com/articles/rake.html">article</a> on the
+subject.
+</p>
+<p>
+At the time of this writing, Sprouts makes the following Rake tasks
+available:
+</p>
+<ul>
+<li>Core <a href="../../../classes/Sprout/SFTPTask.html">Sprout::SFTPTask</a>
+
+</li>
+<li>Core <a href="../../../classes/Sprout/ZipTask.html">Sprout::ZipTask</a>
+
+</li>
+<li>Core <a
+href="../../../classes/Sprout/LibraryTask.html">Sprout::LibraryTask</a>
+
+</li>
+<li>As3Bundle <a
+href="../../../classes/Sprout/AsDocTask.html">Sprout::AsDocTask</a>
+
+</li>
+<li>As3Bundle Sprout::AsUnitTask
+
+</li>
+<li>As3Bundle <a
+href="../../../classes/Sprout/COMPCTask.html">Sprout::COMPCTask</a>
+
+</li>
+<li>As3Bundle <a
+href="../../../classes/Sprout/MXMLCTask.html">Sprout::MXMLCTask</a>
+
+</li>
+<li>As2Bundle <a
+href="../../../classes/Sprout/MTASCTask.html">Sprout::MTASCTask</a>
+
+</li>
+<li>As2Bundle <a
+href="../../../classes/Sprout/SWFMillTask.html">Sprout::SWFMillTask</a>
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

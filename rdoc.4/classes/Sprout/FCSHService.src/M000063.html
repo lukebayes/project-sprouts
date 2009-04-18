@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>execute (Sprout::FCSHService)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File bundles/as3/lib/sprout/fcsh_service.rb, line 64</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">execute</span>(<span class="ruby-identifier">request</span>)
+      <span class="ruby-comment cmt"># if(request =~ /^clear/)</span>
+      <span class="ruby-comment cmt">#   return clear</span>
+      <span class="ruby-comment cmt"># end</span>
+      <span class="ruby-identifier">hashed</span> = <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">request</span>)
+      
+      <span class="ruby-comment cmt"># First, see if we've already received a task with this</span>
+      <span class="ruby-comment cmt"># Exact command:</span>
+      <span class="ruby-ivar">@tasks</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">task</span> = <span class="ruby-ivar">@tasks</span>[<span class="ruby-identifier">index</span>]
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">task</span>[<span class="ruby-identifier">:hash</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">hashed</span>)
+          <span class="ruby-identifier">out</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;[fcsh] #{request})&quot;</span>
+          <span class="ruby-comment cmt"># Compile with an existing task at index+1</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">write</span>(<span class="ruby-node">&quot;compile #{index+1}&quot;</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># No existing task found with this hash, create a new</span>
+      <span class="ruby-comment cmt"># task, store it for later, execute and return the result:</span>
+      <span class="ruby-identifier">task</span> = {<span class="ruby-identifier">:hash</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">hashed</span>, <span class="ruby-identifier">:request</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">request</span>, <span class="ruby-identifier">:executed</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>}
+      <span class="ruby-ivar">@tasks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">task</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">task</span>[<span class="ruby-identifier">:request</span>])
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

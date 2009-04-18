@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>assign_names! (Sprout::Generator::NamedBase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 185</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assign_names!</span>(<span class="ruby-identifier">name</span>)
+        <span class="ruby-comment cmt"># trim file name suffix in case it was submitted</span>
+        <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\//</span>, <span class="ruby-value str">'.'</span>)
+        <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\.as$/</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\.mxml$/</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">model</span>)
+          <span class="ruby-comment cmt"># Pull leading src_dir from class name if submitted</span>
+          <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-node">/^#{src_dir}\./</span>, <span class="ruby-value str">''</span>)
+          <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-node">/^#{test_dir}\./</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/Test$/</span>))
+          <span class="ruby-ivar">@user_requested_test</span> = <span class="ruby-keyword kw">true</span>
+          <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/Test$/</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^I/</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/able$/</span>))
+          <span class="ruby-ivar">@user_requested_interface</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-ivar">@full_class_name</span> = <span class="ruby-identifier">name</span>
+        <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.'</span>)
+        <span class="ruby-ivar">@class_name</span> = <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">pop</span>
+        <span class="ruby-ivar">@package_name</span> = <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'.'</span>)
+        <span class="ruby-ivar">@class_file</span> = <span class="ruby-ivar">@full_class_name</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.'</span>).<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEPARATOR</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">'.as'</span>
+        <span class="ruby-ivar">@class_dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@class_file</span>)
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-ivar">@class_dir</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'.'</span>)
+          <span class="ruby-ivar">@class_dir</span> = <span class="ruby-value str">''</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
