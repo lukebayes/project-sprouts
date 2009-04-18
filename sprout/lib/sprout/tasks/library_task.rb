@@ -99,9 +99,12 @@ module Sprout
     
     def define_file_task(source, destination)
       file destination do |t|
-        FileUtils.mkdir_p(destination)
-        puts "destination: #{destination}"
-        FileUtils.cp_r(library_path, destination)
+        lib_path = library_path
+        FileUtils.makedirs(destination)
+        if(File.directory?(lib_path))
+          lib_path = "#{lib_path}/."
+        end
+        FileUtils.cp_r(lib_path, destination)
       end
       prerequisites << destination
     end
