@@ -51,7 +51,10 @@ module Sprout
     # and will download, install and unpack the described archive, unless it is
     # already installed
     def resolve(update=false)
-      raise RemoteFileTargetError.new('Cannot retrieve a RemoteFileTarget without a url') if url.nil?
+      # Wanted to raise, but it seems we support RemoteFileTargets that are actually self-installed binaries...
+      # like SWFMill on Linux. @see the BuilderTest.test_build_no_install for more info.
+      # raise RemoteFileTargetError.new('Cannot retrieve a RemoteFileTarget without a url') if url.nil?
+      return if url.nil?
       
       if(url && (update || !File.exists?(downloaded_path)))
         content = download(url, update)
