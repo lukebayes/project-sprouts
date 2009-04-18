@@ -39,6 +39,7 @@ module Sprout
     #   :swc
     #   :rb
     #   :dmg
+    # @see ArchiveUnpacker
     attr_accessor :archive_type
 
     # Relative path within the archive to the executable or binary of interest
@@ -47,18 +48,25 @@ module Sprout
     end
 
     # Resolve this RemoteFileTarget now. This method is called by the Sprout::Builder
-    # and will download, install and unpack the described archive
+    # and will download, install and unpack the described archive, unless it is
+    # already installed
     def resolve(update=false)
-      if(url)
-        @loader = RemoteFileLoader.new
-        if(url && (update || !File.exists?(downloaded_path)))
-          download(url, downloaded_path, update)
-        end
+      raise RemoteFileTargetError.new('Cannot retrieve a RemoteFileTarget without a url') if url.nil?
+      
+      if(url && (update || !File.exists?(downloaded_path)))
+        content = download(url, update)
+        puts "WRITING FILE TO: #{downloaded_path}"
+        FileUtils.mkdir_p(File.dirname(downloaded_path))
 
-        if(!File.exists?(installed_path) || !File.exists?(File.join(installed_path, archive_path) ))
-          archive_root = File.join(install_path, 'archive')
-          install(downloaded_path, archive_root)
+        FileUtils.touch(downloaded_path)
+        File.open(downloaded_path, 'r+') do |file|
+          file.write(content)
         end
+      end
+
+      if(!File.exists?(installed_path) || !File.exists?(File.join(installed_path, archive_path) ))
+        archive_root = File.join(install_path, 'archive')
+        install(downloaded_path, archive_root, update, archive_root)
       end
     end
     
@@ -77,31 +85,41 @@ module Sprout
     # Parent directory where archives are downloaded
     # can be something like: ~/Library/Sprouts/cache/0.7/sprout-somesprout-tool.x.x.x/
     def downloaded_path
-      @downloaded_path ||= File.join(install_path, file_name)
+      @downloaded_path ||= File.join(install_path, file_name(url))
       return @downloaded_path
     end
     
     # Base file name represented by the provided +url+
     # Will strip off any ? arguments and trailing slashes. May not play nice with Rails URLS,
     # We expect archive file name suffixes like, zip, gzip, tar.gz, dmg, etc.
-    def file_name
-      if(url.split('').last == '/')
-        return name
+    def file_name(url=nil)
+      url ||= self.url
+      
+      url = url.split('?').shift
+      
+      parts = url.split('/')
+      if(parts.last == '/')
+        parts.pop
       end
-      file = url.split('/').pop
-      file = file.split('?').shift
+      
+      file = parts.pop
+
+      if(!archive_type.nil? && file.match(/\.#{archive_type.to_s}$/).nil?)
+        file << ".#{archive_type.to_s}"
+      end
+      
       return file
     end
     
     private
-    def download(url, path, update=false)
-      @loader = RemoteFileLoader.new
-      @loader.get_remote_file(url, path, archive_type, update, md5)
+    def download(url, update=false)
+      loader = RemoteFileLoader.new
+      loader.get_remote_file(url, update, md5)
     end
     
-    def install(from, to, archive_type=nil)
-      unpacker = RemoteFileUnpacker.new
-      unpacker.unpack_downloaded_file(from, to, archive_type)
+    def install(from, to, force, archive_type=nil)
+      unpacker = ArchiveUnpacker.new
+      unpacker.unpack_archive(from, to, force, archive_type)
     end
     
   end

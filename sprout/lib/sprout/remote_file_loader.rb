@@ -5,15 +5,10 @@ module Sprout
 
   class RemoteFileLoader #:nodoc:
     
-    def get_remote_file(uri, target, archive_type=nil, force=false, md5=nil)
-      @archive_type = archive_type
-      puts "get remote file with: #{uri} and target: #{target}"
-
-      if(force || !File.exists?(target))
-        response, name = fetch(uri.to_s)
-        if(response_is_valid?(response, md5))
-          write(response, target, force)
-        end
+    def get_remote_file(uri, force=false, md5=nil)
+      response = fetch(uri.to_s)
+      if(force || response_is_valid?(response, md5))
+        return response
       end
     end
     
@@ -36,22 +31,8 @@ module Sprout
       return true
     end
     
-    def write(response, target, force=false)
-      FileUtils.makedirs(File.dirname(target))
-      if(force && File.exists?(target))
-        File.delete(target)
-      end
-      File.open(target, 'wb') do |f|
-        f.write(response)
-      end
-    end
-    
     def fetch(uri)
       uri = URI.parse(uri)
-      # Download the file now to the downloads dir
-      # If the file is an archive (zip, gz, tar, tar.gz, dmg), extract to
-      # Sprouts/cache/@type/@name
-      # Check the location again...
       progress = nil
       response = nil
       name = uri.path.split("/").pop
@@ -72,7 +53,6 @@ module Sprout
         :progress_proc => lambda {|s|
           progress.set s if progress
         }) {|f|
-          name = f.base_uri.path.split("/").pop
           response = f.read
           progress.finish
         }
@@ -84,7 +64,7 @@ module Sprout
         raise Errno::ECONNREFUSED.new("[ERROR] Connection refused at: '#{uri.to_s}'")
       end
 
-      return response, name
+      return response
     end
     
   end

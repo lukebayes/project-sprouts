@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class RemoteFileLoaderTest <  Test::Unit::TestCase
+class ArchiveUnpackerTest <  Test::Unit::TestCase
   include SproutTestCase
 
   def setup
@@ -14,7 +14,7 @@ class RemoteFileLoaderTest <  Test::Unit::TestCase
     @tgz_target = File.join(@fixture, 'swfmill')
     @tgz_binary = File.join(@tgz_target, 'swfmill-0.2.12-macosx', 'swfmill')
     
-    @unpacker = Sprout::RemoteFileUnpacker.new
+    @unpacker = Sprout::ArchiveUnpacker.new
   end
   
   def teardown
