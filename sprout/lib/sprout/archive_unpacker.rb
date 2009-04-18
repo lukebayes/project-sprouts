@@ -31,17 +31,17 @@ module Sprout
       end
       
       if(!File.exists?(unpacked))
-        case archive_type
-          when :zip || 'zip'
+        case archive_type.to_s
+          when 'zip'
             unpack_zip(file_name, dir)
-          when :targz || 'targz'
+          when 'targz'
             unpack_targz(file_name, dir)
-          when :dmg || 'dmg'
+          when 'dmg'
             unpack_dmg(file_name, dir)
-          when :exe || 'exe'
+          when 'exe'
             FileUtils.mkdir_p(dir)
             File.mv(file_name, dir)
-          when :swc || 'swc' || :rb || 'rb'
+          when 'swc' || 'rb'
             return
           else
             raise ArchiveUnpackerError.new("ArchiveUnpacker does not know how to unpack files of type: #{archive_type} for file_name: #{file_name}")

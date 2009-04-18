@@ -98,7 +98,7 @@ module Sprout
     # Will strip off any ? arguments and trailing slashes. May not play nice with Rails URLS,
     # We expect archive file name suffixes like, zip, gzip, tar.gz, dmg, etc.
     def file_name(url=nil)
-      return @file_name if(@file_name)
+      return @filename if(@filename)
 
       url ||= self.url
       url = url.split('?').shift
