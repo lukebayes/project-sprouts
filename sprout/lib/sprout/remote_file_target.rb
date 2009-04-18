@@ -55,7 +55,6 @@ module Sprout
       
       if(url && (update || !File.exists?(downloaded_path)))
         content = download(url, update)
-        puts "WRITING FILE TO: #{downloaded_path}"
         FileUtils.mkdir_p(File.dirname(downloaded_path))
 
         FileUtils.touch(downloaded_path)

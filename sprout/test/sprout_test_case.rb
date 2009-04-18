@@ -4,7 +4,7 @@
 # the abstract test case didn't have any test mehods
 # or assertions
 module SproutTestCase  # :nodoc:[all]
-
+  
   def fixtures
     @fixtures ||= File.join(File.dirname(__FILE__), 'fixtures')
   end

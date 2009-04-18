@@ -39,10 +39,25 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     super
     remove_file @archive_folder_path
     remove_file @flashplayer_dir
-    # remove_file @asunit_dir
+    remove_file @asunit_dir
   end
 
-=begin
+  def test_redirect_gzip
+    file_target = Sprout::RemoteFileTarget.new
+    file_target.url = @asunit_url
+    file_target.install_path = @asunit_dir
+    file_target.downloaded_path = @asunit_zip
+    file_target.md5 = @asunit_md5
+    file_target.archive_path = 'as3/src'
+    file_target.archive_type = :zip
+
+    assert_equal(@asunit_file_name, file_target.file_name)
+
+    file_target.resolve(true)
+    
+    assert_file @asunit_src
+  end
+
   # BEGIN TEST FILE NAME VARIANTS:
   def test_file_name_zip
     target = Sprout::RemoteFileTarget.new
@@ -130,23 +145,6 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     file_target.resolve
     
     assert_file @flashplayer_binary
-  end
-=end
-
-  def test_redirect_gzip
-    file_target = Sprout::RemoteFileTarget.new
-    file_target.url = @asunit_url
-    file_target.install_path = @asunit_dir
-    file_target.downloaded_path = @asunit_zip
-    file_target.md5 = @asunit_md5
-    file_target.archive_path = 'as3/src'
-    file_target.archive_type = :zip
-
-    assert_equal(@asunit_file_name, file_target.file_name)
-
-    file_target.resolve(true)
-    
-    assert_file @asunit_src
   end
 
 end
