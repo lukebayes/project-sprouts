@@ -1,0 +1,932 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Sprout::Generator::NamedBase</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Sprout::Generator::NamedBase</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/sprout/lib/sprout/generator/named_base_rb.html">
+                sprout/lib/sprout/generator/named_base.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                RubiGen::Base
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The <a href="NamedBase.html">NamedBase</a> is a good default base class for
+ActionScript class Generators. This class will accept the first command
+line argument and create many helpful properties for concrete generators to
+use.
+</p>
+<p>
+Can accept class names in following formats:
+</p>
+<pre>
+  * src/package/package/ClassName.as
+  * test/package/package/ClassName.as
+  * package/package/ClassName
+  * package.package.ClassName
+</pre>
+<p>
+Regardless of which format the name was sent in, the helper methods should
+provide valid results
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000051">actionscript_file_to_class_name</a>&nbsp;&nbsp;
+      <a href="#M000054">assign_names!</a>&nbsp;&nbsp;
+      <a href="#M000052">banner</a>&nbsp;&nbsp;
+      <a href="#M000039">full_class_dir</a>&nbsp;&nbsp;
+      <a href="#M000040">full_class_path</a>&nbsp;&nbsp;
+      <a href="#M000038">full_test_case_name</a>&nbsp;&nbsp;
+      <a href="#M000042">full_test_case_path</a>&nbsp;&nbsp;
+      <a href="#M000041">full_test_dir</a>&nbsp;&nbsp;
+      <a href="#M000043">generate_script_path</a>&nbsp;&nbsp;
+      <a href="#M000044">instance_name</a>&nbsp;&nbsp;
+      <a href="#M000036">language</a>&nbsp;&nbsp;
+      <a href="#M000033">lib_dir</a>&nbsp;&nbsp;
+      <a href="#M000053">model</a>&nbsp;&nbsp;
+      <a href="#M000030">new</a>&nbsp;&nbsp;
+      <a href="#M000035">project_name</a>&nbsp;&nbsp;
+      <a href="#M000034">project_path</a>&nbsp;&nbsp;
+      <a href="#M000031">src_dir</a>&nbsp;&nbsp;
+      <a href="#M000050">test_case_classes</a>&nbsp;&nbsp;
+      <a href="#M000037">test_case_name</a>&nbsp;&nbsp;
+      <a href="#M000048">test_cases</a>&nbsp;&nbsp;
+      <a href="#M000049">test_cases=</a>&nbsp;&nbsp;
+      <a href="#M000032">test_dir</a>&nbsp;&nbsp;
+      <a href="#M000046">test_glob</a>&nbsp;&nbsp;
+      <a href="#M000047">test_glob=</a>&nbsp;&nbsp;
+      <a href="#M000045">user_requested_test</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">class_dir</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+The directory that contains the file, relative to your <a
+href="NamedBase.html#M000031">src_dir</a> like &#8216;flash/diplay&#8216;
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">class_file</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+Path to the class file relative to your <a
+href="NamedBase.html#M000031">src_dir</a> like
+&#8216;flash/display/Sprite.as&#8216;
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">class_name</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+The unqualified name of the class like &#8216;Sprite&#8216;
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">full_class_name</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+Fully qualified class named including package name like
+&#8216;flash.display.Sprite&#8216;
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">package_name</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+The package name of the class like &#8216;flash.display&#8216;
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000030" class="method-detail">
+        <a name="M000030"></a>
+
+        <div class="method-heading">
+          <a href="#M000030" class="method-signature">
+          <span class="method-name">new</span><span class="method-args">(runtime_args, runtime_options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000030-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000030-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 34</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">runtime_args</span>, <span class="ruby-identifier">runtime_options</span> = {})
+        <span class="ruby-keyword kw">super</span>
+
+        <span class="ruby-identifier">rakefile</span> = <span class="ruby-constant">Sprout</span>.<span class="ruby-identifier">project_rakefile</span>
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">rakefile</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">rakefile</span>))
+           <span class="ruby-identifier">load</span> <span class="ruby-identifier">rakefile</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-ivar">@model</span> = <span class="ruby-constant">ProjectModel</span>.<span class="ruby-identifier">instance</span>
+
+        <span class="ruby-comment cmt"># Had to stop throwing on no args because the suite generator does</span>
+        <span class="ruby-comment cmt"># not require the user to send in a class name....</span>
+        <span class="ruby-comment cmt">#usage(&quot;Final argument must be a name parameter&quot;) if runtime_args.empty?</span>
+        <span class="ruby-ivar">@args</span> = <span class="ruby-identifier">runtime_args</span>.<span class="ruby-identifier">dup</span>
+        <span class="ruby-identifier">assign_names!</span> <span class="ruby-ivar">@args</span>.<span class="ruby-identifier">shift</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000051" class="method-detail">
+        <a name="M000051"></a>
+
+        <div class="method-heading">
+          <a href="#M000051" class="method-signature">
+          <span class="method-name">actionscript_file_to_class_name</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Transform a file name in the source or test path to a fully-qualified class
+name
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000051-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000051-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 176</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">actionscript_file_to_class_name</span>(<span class="ruby-identifier">file</span>)
+        <span class="ruby-identifier">name</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">dup</span>
+        <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-node">/^#{Dir.pwd}\//</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-node">/^#{test_dir}\//</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-node">/^#{src_dir}\//</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/.as$/</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-node">/#{File::SEPARATOR}/</span>, <span class="ruby-value str">'.'</span>)
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">name</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000039" class="method-detail">
+        <a name="M000039"></a>
+
+        <div class="method-heading">
+          <a href="#M000039" class="method-signature">
+          <span class="method-name">full_class_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Full path to the parent directory that contains the class like
+&#8216;src/flash/display&#8217; for flash.display.Sprite class.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000039-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000039-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 95</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">full_class_dir</span>
+        <span class="ruby-ivar">@full_class_dir</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">src_dir</span>, <span class="ruby-identifier">class_dir</span>)
+        <span class="ruby-comment cmt"># pull trailing slash for classes in the root package</span>
+        <span class="ruby-ivar">@full_class_dir</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\/$/</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-ivar">@full_class_dir</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000040" class="method-detail">
+        <a name="M000040"></a>
+
+        <div class="method-heading">
+          <a href="#M000040" class="method-signature">
+          <span class="method-name">full_class_path</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Full path to the class file from your <a
+href="NamedBase.html#M000034">project_path</a> like
+&#8216;src/flash/display/Sprite.as&#8216;
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000040-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000040-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 103</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">full_class_path</span>
+        <span class="ruby-ivar">@full_class_path</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">src_dir</span>, <span class="ruby-identifier">class_file</span>)
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000038" class="method-detail">
+        <a name="M000038"></a>
+
+        <div class="method-heading">
+          <a href="#M000038" class="method-signature">
+          <span class="method-name">full_test_case_name</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Full name of the possible test case for this class_name
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000038-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000038-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 89</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">full_test_case_name</span>
+        <span class="ruby-identifier">full_class_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'Test'</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000042" class="method-detail">
+        <a name="M000042"></a>
+
+        <div class="method-heading">
+          <a href="#M000042" class="method-signature">
+          <span class="method-name">full_test_case_path</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Filesystem path to the TestCase file
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000042-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000042-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 113</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">full_test_case_path</span>
+        <span class="ruby-ivar">@full_test_case_path</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">full_test_dir</span>, <span class="ruby-identifier">test_case_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'.as'</span>)
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000041" class="method-detail">
+        <a name="M000041"></a>
+
+        <div class="method-heading">
+          <a href="#M000041" class="method-signature">
+          <span class="method-name">full_test_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Filesystem path to the folder that contains the TestCase file
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000041-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000041-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 108</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">full_test_dir</span>
+        <span class="ruby-ivar">@full_test_dir</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">full_class_dir</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">src_dir</span>, <span class="ruby-identifier">test_dir</span>)
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000043" class="method-detail">
+        <a name="M000043"></a>
+
+        <div class="method-heading">
+          <a href="#M000043" class="method-signature">
+          <span class="method-name">generate_script_path</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Path to the in-project generate script pulled out for DOS branching
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000043-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000043-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 119</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_script_path</span>
+        <span class="ruby-identifier">usr</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">usr</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WinUser</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">usr</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">CygwinUser</span>))
+          <span class="ruby-keyword kw">return</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">class_name</span>, <span class="ruby-value str">'script'</span>, <span class="ruby-value str">&quot;generate.rb&quot;</span>)
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">class_name</span>, <span class="ruby-value str">'script'</span>, <span class="ruby-value str">&quot;generate&quot;</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000044" class="method-detail">
+        <a name="M000044"></a>
+
+        <div class="method-heading">
+          <a href="#M000044" class="method-signature">
+          <span class="method-name">instance_name</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000044-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000044-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 128</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">instance_name</span>
+        <span class="ruby-identifier">name</span> = <span class="ruby-identifier">class_name</span>.<span class="ruby-identifier">dup</span>;
+        <span class="ruby-identifier">char</span> = <span class="ruby-identifier">name</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>]
+        <span class="ruby-identifier">name</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>] = <span class="ruby-identifier">char</span>.<span class="ruby-identifier">downcase</span>
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>)
+          <span class="ruby-identifier">name</span> = <span class="ruby-value str">'instance'</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">name</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000036" class="method-detail">
+        <a name="M000036"></a>
+
+        <div class="method-heading">
+          <a href="#M000036" class="method-signature">
+          <span class="method-name">language</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The technology <a href="NamedBase.html#M000036">language</a> that is stored
+in your project <a href="NamedBase.html#M000053">model</a> usually (as2 or
+as3)
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000036-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000036-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 79</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">language</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">language</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000033" class="method-detail">
+        <a name="M000033"></a>
+
+        <div class="method-heading">
+          <a href="#M000033" class="method-signature">
+          <span class="method-name">lib_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Quick access to the library directory identified by your project <a
+href="NamedBase.html#M000053">model</a>
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000033-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000033-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 61</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lib_dir</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">lib_dir</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000035" class="method-detail">
+        <a name="M000035"></a>
+
+        <div class="method-heading">
+          <a href="#M000035" class="method-signature">
+          <span class="method-name">project_name</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The <a href="NamedBase.html#M000035">project_name</a> that was either sent
+to the sprout gem or defined in your rakefile project <a
+href="NamedBase.html#M000053">model</a>
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000035-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000035-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 74</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project_name</span>
+        <span class="ruby-ivar">@project_name</span> <span class="ruby-operator">||=</span> (<span class="ruby-constant">Sprout</span>.<span class="ruby-identifier">project_name</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">project_name</span>)
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000034" class="method-detail">
+        <a name="M000034"></a>
+
+        <div class="method-heading">
+          <a href="#M000034" class="method-signature">
+          <span class="method-name">project_path</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The path to your project. This will either be the directory from which the
+sprout gem was executed, or the nearest ancestor directory that contains a
+properly named rakefile.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000034-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000034-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 68</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project_path</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">project_path</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
+
+        <div class="method-heading">
+          <a href="#M000031" class="method-signature">
+          <span class="method-name">src_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Quick access to the source directory identified by your project <a
+href="NamedBase.html#M000053">model</a>
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000031-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000031-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 51</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">src_dir</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">src_dir</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000050" class="method-detail">
+        <a name="M000050"></a>
+
+        <div class="method-heading">
+          <a href="#M000050" class="method-signature">
+          <span class="method-name">test_case_classes</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Get the list of <a href="NamedBase.html#M000048">test_cases</a> (which are
+files) as a list of fully qualified class names
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000050-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000050-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 166</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_case_classes</span>
+        <span class="ruby-ivar">@test_case_classes</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">test_cases</span>.<span class="ruby-identifier">dup</span>
+        <span class="ruby-ivar">@test_case_classes</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">actionscript_file_to_class_name</span>(<span class="ruby-identifier">file</span>)
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-ivar">@test_case_classes</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000037" class="method-detail">
+        <a name="M000037"></a>
+
+        <div class="method-heading">
+          <a href="#M000037" class="method-signature">
+          <span class="method-name">test_case_name</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Name of possible test case for this class_name
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000037-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000037-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 84</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_case_name</span>
+        <span class="ruby-ivar">@test_case_name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">class_name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'Test'</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
+
+        <div class="method-heading">
+          <a href="#M000048" class="method-signature">
+          <span class="method-name">test_cases</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Collection of all test case files either assigned or found using the <a
+href="NamedBase.html#M000046">test_glob</a> as provided.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000048-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000048-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 156</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_cases</span>
+        <span class="ruby-ivar">@test_cases</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-identifier">test_dir</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">test_glob</span>)
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000049" class="method-detail">
+        <a name="M000049"></a>
+
+        <div class="method-heading">
+          <a href="#M000049" class="method-signature">
+          <span class="method-name">test_cases=</span><span class="method-args">(collection)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000049-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000049-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 160</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_cases=</span>(<span class="ruby-identifier">collection</span>)
+        <span class="ruby-ivar">@test_cases</span> = <span class="ruby-identifier">collection</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000032" class="method-detail">
+        <a name="M000032"></a>
+
+        <div class="method-heading">
+          <a href="#M000032" class="method-signature">
+          <span class="method-name">test_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Quick access to the test directory identified by your project <a
+href="NamedBase.html#M000053">model</a>
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000032-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000032-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 56</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_dir</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">test_dir</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000046" class="method-detail">
+        <a name="M000046"></a>
+
+        <div class="method-heading">
+          <a href="#M000046" class="method-signature">
+          <span class="method-name">test_glob</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Glob that is used to search for test cases and build up the test suites
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000046-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000046-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 146</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_glob</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@test_glob</span> <span class="ruby-operator">||=</span> <span class="ruby-value str">'**/**/*Test.as'</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000047" class="method-detail">
+        <a name="M000047"></a>
+
+        <div class="method-heading">
+          <a href="#M000047" class="method-signature">
+          <span class="method-name">test_glob=</span><span class="method-args">(glob)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000047-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000047-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 150</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_glob=</span>(<span class="ruby-identifier">glob</span>)
+        <span class="ruby-ivar">@test_glob</span> = <span class="ruby-identifier">glob</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000045" class="method-detail">
+        <a name="M000045"></a>
+
+        <div class="method-heading">
+          <a href="#M000045" class="method-signature">
+          <span class="method-name">user_requested_test</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Will return whether the user originally requested a class name that looks
+like a test case (e.g., name.match(/Test$/) )
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000045-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000045-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 140</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">user_requested_test</span>
+        <span class="ruby-ivar">@user_requested_test</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">false</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000054" class="method-detail">
+        <a name="M000054"></a>
+
+        <div class="method-heading">
+          <a href="#M000054" class="method-signature">
+          <span class="method-name">assign_names!</span><span class="method-args">(name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000054-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000054-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 196</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assign_names!</span>(<span class="ruby-identifier">name</span>)
+        <span class="ruby-comment cmt"># trim file name suffix in case it was submitted</span>
+        <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\//</span>, <span class="ruby-value str">'.'</span>)
+        <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\.as$/</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp re">/\.mxml$/</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">model</span>)
+          <span class="ruby-comment cmt"># Pull leading src_dir from class name if submitted</span>
+          <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-node">/^#{src_dir}\./</span>, <span class="ruby-value str">''</span>)
+          <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-node">/^#{test_dir}\./</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/Test$/</span>))
+          <span class="ruby-ivar">@user_requested_test</span> = <span class="ruby-keyword kw">true</span>
+          <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/Test$/</span>, <span class="ruby-value str">''</span>)
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^I/</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/able$/</span>))
+          <span class="ruby-ivar">@user_requested_interface</span> = <span class="ruby-keyword kw">true</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-ivar">@full_class_name</span> = <span class="ruby-identifier">name</span>
+        <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.'</span>)
+        <span class="ruby-ivar">@class_name</span> = <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">pop</span>
+        <span class="ruby-ivar">@package_name</span> = <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'.'</span>)
+        <span class="ruby-ivar">@class_file</span> = <span class="ruby-ivar">@full_class_name</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.'</span>).<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEPARATOR</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">'.as'</span>
+        <span class="ruby-ivar">@class_dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@class_file</span>)
+        <span class="ruby-keyword kw">if</span>(<span class="ruby-ivar">@class_dir</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'.'</span>)
+          <span class="ruby-ivar">@class_dir</span> = <span class="ruby-value str">''</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000052" class="method-detail">
+        <a name="M000052"></a>
+
+        <div class="method-heading">
+          <a href="#M000052" class="method-signature">
+          <span class="method-name">banner</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000052-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000052-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 188</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">banner</span>
+        <span class="ruby-node">&quot;Usage: #{$0} [options] packagename.ClassName&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000053" class="method-detail">
+        <a name="M000053"></a>
+
+        <div class="method-heading">
+          <a href="#M000053" class="method-signature">
+          <span class="method-name">model</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000053-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000053-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout/generator/named_base.rb, line 192</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">model</span>
+        <span class="ruby-ivar">@model</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ProjectModel</span>.<span class="ruby-identifier">instance</span>
+      <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
