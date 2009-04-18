@@ -2,11 +2,13 @@
 module Sprout
   class RemoteFileLoaderError < StandardError #:nodoc:
   end
-  
+
   class RemoteFileLoader #:nodoc:
     include Archive::Tar
     
-    def get_remote_file(uri, target, force=false, md5=nil)
+    def get_remote_file(uri, target, archive_type=nil, force=false, md5=nil)
+      @archive_type = archive_type
+
       if(force || !File.exists?(target))
         response = fetch(uri.to_s)
         if(response_is_valid?(response, md5))
@@ -84,7 +86,9 @@ module Sprout
       return response
     end
     
-    def unpack_downloaded_file(file_name, dir)
+    def unpack_downloaded_file(file_name, dir, archive_type=nil)
+      puts ">> unpack_downloaded_file with: #{file_name} and #{dir}"
+      @archive_type = archive_type
       if(!File.exists?(dir))
         if(is_zip?(file_name))
           unpack_zip(file_name, dir)
@@ -100,12 +104,18 @@ module Sprout
           FileUtils.mkdir_p(dir)
           File.mv(file_name, dir)
         else
-          raise UsageError.new("RemoteFileTask does not know how to unpack files of type: #{file_name}")
+          raise RemoteFileLoaderError.new("RemoteFileTask does not know how to unpack files of type: #{file_name}")
         end
       end
     end
     
     def unpack_zip(zip_file, dir)
+      if(!zip_file.match(/.zip$/))
+        new_name = "#{zip_file}.zip"
+        FileUtils.mv(zip_file, new_name)
+        zip_file = new_name
+      end
+      
       # Avoid the rubyzip Segmentation Fault bug
       # at least on os x...
       if(RUBY_PLATFORM =~ /darwin/)
@@ -115,7 +125,7 @@ module Sprout
           zip_name = File.basename(zip_file)
           output = File.expand_path(dir)
           #puts ">> zip_dir: #{zip_dir} zip_name: #{zip_name} output: #{output}"
-          %x(cd #{zip_dir};unzip #{zip_name} -d #{output})
+          # %x(cd #{zip_dir};unzip #{zip_name} -d #{output})
       else
         retries = 0
         begin
@@ -215,33 +225,33 @@ module Sprout
     end
     
     def is_exe?(file)
-      return (file.split('.').pop == 'exe')
+      return (@archive_type == :exe || file.split('.').pop == 'exe')
     end
     
     def is_zip?(file)
-      return (file.split('.').pop == 'zip')
+      return (@archive_type == :zip || file.split('.').pop == 'zip')
     end
     
     def is_targz?(file)
       parts = file.split('.')
       part = parts.pop
-      return (part == 'tgz' || part == 'gz' && parts.pop == 'tar')
+      return @archive_type == :targz || (part == 'tgz' || part == 'gz' && parts.pop == 'tar')
     end
     
     def is_gzip?(file)
-      return (file.split('.').pop == 'gz')
+      return @archive_type == :gzip || (file.split('.').pop == 'gz')
     end
     
     def is_swc?(file)
-      return (file.split('.').pop == 'swc')
+      return @archive_type == :swc || (file.split('.').pop == 'swc')
     end
     
     def is_rb?(file)
-      return (file.split('.').pop == 'rb')
+      return @archive_type == :rb || (file.split('.').pop == 'rb')
     end
     
     def is_dmg?(file)
-      return (file.split('.').pop == 'dmg')
+      return @archive_type == :dmg || (file.split('.').pop == 'dmg')
     end
   end
 end

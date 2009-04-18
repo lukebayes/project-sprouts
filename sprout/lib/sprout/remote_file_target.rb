@@ -29,6 +29,17 @@ module Sprout
 
     # URL where Sprouts can go to download the RemoteFileTarget archive
     attr_accessor :url
+    
+    # If the archive type cannot be assumed from the returned file name,
+    # it must be provided as one of the following:
+    #   :exe
+    #   :zip
+    #   :targz
+    #   :gzip
+    #   :swc
+    #   :rb
+    #   :dmg
+    attr_accessor :archive_type
 
     # Relative path within the archive to the executable or binary of interest
     def archive_path
@@ -85,11 +96,11 @@ module Sprout
     private
     def download(url, path, update=false)
       @loader = RemoteFileLoader.new
-      @loader.get_remote_file(url, path, update, md5)
+      @loader.get_remote_file(url, path, archive_type, update, md5)
     end
     
-    def install(from, to)
-      @loader.unpack_downloaded_file(from, to)
+    def install(from, to, archive_type=nil)
+      @loader.unpack_downloaded_file(from, to, archive_type)
     end
     
   end

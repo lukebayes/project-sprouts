@@ -6,7 +6,7 @@ class LibraryTest <  Test::Unit::TestCase
   def setup
     fixture       = File.join(fixtures, 'library')
     @lib_dir      = File.join(fixture, 'lib')
-    @asunit_dir   = File.join(@lib_dir, 'asunit3', 'archive', 'asunit')
+    @asunit_dir   = File.join(@lib_dir, 'asunit3', 'asunit')
     @foo_dir      = File.join(@lib_dir, 'foo', 'asunit')
     @core_swc     = File.join(@lib_dir, 'corelib.swc')
 
@@ -21,10 +21,10 @@ class LibraryTest <  Test::Unit::TestCase
   
   def teardown
     super
-    # remove_file(File.dirname(@asunit_dir))
-    # remove_file(File.dirname(@foo_dir))
-    # remove_file(@core_swc)
-    # remove_file(@output)
+    remove_file(File.dirname(@asunit_dir))
+    remove_file(File.dirname(@foo_dir))
+    remove_file(@core_swc)
+    remove_file(@output)
   end
   
   def test_gem_name

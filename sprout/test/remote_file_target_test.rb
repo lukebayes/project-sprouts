@@ -4,15 +4,20 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
   include SproutTestCase
 
   def setup
-    @fixtures_path = File.join(fixtures, 'remote_file_target') 
-    @fixture_path = File.join(@fixtures_path, 'macosx')
+    @fixtures_path       = File.join(fixtures, 'remote_file_target') 
+    @fixture_path        = File.join(@fixtures_path, 'macosx')
     @archive_folder_path = File.join(@fixtures_path, 'archive')
-    @install_path = File.join(@fixtures_path)
-    @archive_path = File.join('swfmill-0.2.12-macosx', 'swfmill')
-    @download_path = File.join(@install_path, 'swfmill-0.2.12-macosx.tar.gz')
-    @flashplayer_dir = File.join(@fixtures_path, 'flashplayer')
-    @flashplayer_gz = File.join(@fixtures_path, 'flash_player_9_linux_dev.tar.gz')
-    @flashplayer_binary = File.join(@flashplayer_dir, 'archive', 'flash_player_9_linux_dev', 'standalone', 'debugger', 'flashplayer')
+    @install_path        = File.join(@fixtures_path)
+    @archive_path        = File.join('swfmill-0.2.12-macosx', 'swfmill')
+    @download_path       = File.join(@install_path, 'swfmill-0.2.12-macosx.tar.gz')
+    @flashplayer_dir     = File.join(@fixtures_path, 'flashplayer')
+    @flashplayer_gz      = File.join(@fixtures_path, 'flash_player_9_linux_dev.tar.gz')
+    @flashplayer_binary  = File.join(@flashplayer_dir, 'archive', 'flash_player_9_linux_dev', 'standalone', 'debugger', 'flashplayer')
+    
+    @asunit_dir          = File.join(@fixtures_path, 'asunit')
+    @asunit_gz           = File.join(@fixtures_path, 'asunit')
+    @asunit_src          = File.join(@fixtures_path, 'asunit', 'asunit', 'framework', 'TestCase.as')
+
     data = nil
     File.open(@fixture_path, 'r') do |f|
       data = f.read
@@ -28,6 +33,7 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     super
     remove_file @archive_folder_path
     remove_file @flashplayer_dir
+    # remove_file @asunit_dir
   end
   
   def test_serialization
@@ -68,6 +74,19 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     file_target.resolve
     
     assert_file @flashplayer_binary
+  end
+  
+  def test_redirect_gzip
+    file_target = Sprout::RemoteFileTarget.new
+    file_target.url = 'http://github.com/lukebayes/asunit/tarball/4.0.0'
+    file_target.install_path = @asunit_dir
+    file_target.downloaded_path = @asunit_gz
+    file_target.md5 = "dca47aa2334a3f66efd2912c208a8ef4"
+    file_target.archive_path = 'as3/src'
+    file_target.archive_type = :zip
+    file_target.resolve
+    
+    assert_file @asunit_src
   end
 end
 
