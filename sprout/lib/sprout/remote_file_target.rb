@@ -66,7 +66,7 @@ module Sprout
 
       if(!File.exists?(installed_path) || !File.exists?(File.join(installed_path, archive_path) ))
         archive_root = File.join(install_path, 'archive')
-        install(downloaded_path, archive_root, update, archive_root)
+        install(downloaded_path, archive_root, update, archive_type)
       end
     end
     

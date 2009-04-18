@@ -20,30 +20,31 @@ module Sprout
   #   :dmg
   class ArchiveUnpacker #:nodoc:
     include Archive::Tar
-
+    
     def unpack_archive(file_name, dir, force=false, archive_type=nil)
-      unpacked = unpacked_file_name(file_name, dir)
-      puts ">> unpack_archive with: #{unpacked}"
+      archive_type ||= inferred_archive_type(file_name)
+      suffix = suffix_for_archive_type(archive_type)
+      
+      unpacked = unpacked_file_name(file_name, dir, suffix)
       if(File.exists?(unpacked) && force)
         FileUtils.rm_rf(unpacked)
       end
       
       if(!File.exists?(unpacked))
-        if(is_zip?(file_name, archive_type))
-          unpack_zip(file_name, dir)
-        elsif(is_targz?(file_name, archive_type))
-          unpack_targz(file_name, dir)
-        elsif(is_dmg?(file_name, archive_type))
-          unpack_dmg(file_name, dir)
-        elsif(is_swc?(file_name, archive_type))
-          # just copy the swc...
-        elsif(is_rb?(file_name, archive_type))
-          return
-        elsif(is_exe?(file_name, archive_type))
-          FileUtils.mkdir_p(dir)
-          File.mv(file_name, dir)
-        else
-          raise RemoteFileLoaderError.new("RemoteFileTask does not know how to unpack files of type: #{file_name}")
+        case archive_type
+          when :zip
+            unpack_zip(file_name, dir)
+          when :targz
+            unpack_targz(file_name, dir)
+          when :dmg
+            unpack_dmg(file_name, dir)
+          when :exe
+            FileUtils.mkdir_p(dir)
+            File.mv(file_name, dir)
+          when :swc || :rb
+            return
+          else
+            raise ArchiveUnpackerError.new("ArchiveUnpacker does not know how to unpack files of type: #{archive_type} for file_name: #{file_name}")
         end
       end
     end
@@ -93,7 +94,6 @@ module Sprout
         rescue StandardError => err
           FileUtils.rm_rf(dir)
           if(retries < 3)
-            puts ">> [ZIP ERROR ENCOUNTERED] trying again with: #{dir}"
             FileUtils.makedirs(dir)
             retry
           end
@@ -102,8 +102,8 @@ module Sprout
       end
     end
     
-    def unpacked_file_name(file, dir)
-      basename = File.basename(file)
+    def unpacked_file_name(file, dir, suffix=nil)
+      basename = File.basename(file, suffix)
       path = File.expand_path(dir)
       return File.join(path, basename)
     end
@@ -163,34 +163,63 @@ module Sprout
       end
     end
     
-    def is_exe?(file, archive_type=nil)
-      return (archive_type == :exe || file.split('.').pop == 'exe')
+    def suffix_for_archive_type(type)
+      if(type == :targz)
+        return '.tar.gz'
+      else
+        return ".#{type.to_s}"
+      end
     end
     
-    def is_zip?(file, archive_type=nil)
-      return (archive_type == :zip || file.split('.').pop == 'zip')
+    def inferred_archive_type(file_name)
+      if is_zip?(file_name)
+        return :zip
+      elsif is_targz?(file_name)
+        return :targz
+      elsif is_gzip?(file_name)
+        return :gz
+      elsif is_swc?(file_name)
+        return :swc
+      elsif is_rb?(file_name)
+        return :rb
+      elsif is_dmg?(file_name)
+        return :dmg
+      elsif is_exe?(file_name)
+        return :exe
+      else
+        return nil
+      end
+      
     end
     
-    def is_targz?(file, archive_type=nil)
+    def is_zip?(file)
+      return (file.split('.').pop == 'zip')
+    end
+    
+    def is_targz?(file)
       parts = file.split('.')
       part = parts.pop
-      return archive_type == :targz || (part == 'tgz' || part == 'gz' && parts.pop == 'tar')
+      return (part == 'tgz' || part == 'gz' && parts.pop == 'tar')
     end
     
-    def is_gzip?(file, archive_type=nil)
-      return archive_type == :gzip || (file.split('.').pop == 'gz')
+    def is_gzip?(file)
+      return (file.split('.').pop == 'gz')
     end
     
-    def is_swc?(file, archive_type=nil)
-      return archive_type == :swc || (file.split('.').pop == 'swc')
+    def is_swc?(file)
+      return (file.split('.').pop == 'swc')
     end
     
-    def is_rb?(file, archive_type=nil)
-      return archive_type == :rb || (file.split('.').pop == 'rb')
+    def is_rb?(file)
+      return (file.split('.').pop == 'rb')
     end
     
-    def is_dmg?(file, archive_type=nil)
-      return archive_type == :dmg || (file.split('.').pop == 'dmg')
+    def is_dmg?(file)
+      return (file.split('.').pop == 'dmg')
     end    
+
+    def is_exe?(file)
+      return (file.split('.').pop == 'exe')
+    end
   end
 end
