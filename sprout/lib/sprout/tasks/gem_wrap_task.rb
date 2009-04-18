@@ -114,8 +114,8 @@ module Sprout
           }
           
           if(!sprout_requirement)
-            s.requirements << {'sprout', '>= 0.7.209'}
-          }
+            s.add_dependency('sprout', '>= 0.7.209')
+          end
 
           if(File.exists?('sprout.spec'))
             files << 'sprout.spec'
