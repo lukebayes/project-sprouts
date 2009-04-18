@@ -101,9 +101,9 @@ end
 
 h3. Some Links
 
-* "Web Site":http://www.projectsprouts.org
-* "File a Bug":http://code.google.com/p/projectsprouts/issues
-* "See the Documentation":http://www.projectsprouts.org/rdoc
+* "Web Site":http://projectsprouts.org
+* "File a Bug":http://github.com/lukebayes/project-sprouts/issues
+* "See the Documentation":http://projectsprouts.org/rdoc
 * "Meet the Community":http://groups.google.com/group/projectsprouts
 
 h3. MIT License
