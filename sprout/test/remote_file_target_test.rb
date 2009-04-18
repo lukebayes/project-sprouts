@@ -4,15 +4,26 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
   include SproutTestCase
 
   def setup
-    @fixtures_path = File.join(fixtures, 'remote_file_target') 
-    @fixture_path = File.join(@fixtures_path, 'macosx')
+    @fixtures_path       = File.join(fixtures, 'remote_file_target') 
+    @fixture_path        = File.join(@fixtures_path, 'macosx')
     @archive_folder_path = File.join(@fixtures_path, 'archive')
-    @install_path = File.join(@fixtures_path)
-    @archive_path = File.join('swfmill-0.2.12-macosx', 'swfmill')
-    @download_path = File.join(@install_path, 'swfmill-0.2.12-macosx.tar.gz')
-    @flashplayer_dir = File.join(@fixtures_path, 'flashplayer')
-    @flashplayer_gz = File.join(@fixtures_path, 'flash_player_9_linux_dev.tar.gz')
-    @flashplayer_binary = File.join(@flashplayer_dir, 'archive', 'flash_player_9_linux_dev', 'standalone', 'debugger', 'flashplayer')
+    @install_path        = File.join(@fixtures_path)
+
+    @archive_path        = File.join('swfmill-0.2.12-macosx', 'swfmill')
+    @file_name           = 'swfmill-0.2.12-macosx.tar.gz'
+    @download_path       = File.join(@install_path, @file_name)
+
+    @flashplayer_dir     = File.join(@fixtures_path, 'flashplayer')
+    @flashplayer_gz      = File.join(@fixtures_path, 'flash_player_9_linux_dev.tar.gz')
+    @flashplayer_binary  = File.join(@flashplayer_dir, 'archive', 'flash_player_9_linux_dev', 'standalone', 'debugger', 'flashplayer')
+    
+    @asunit_url          = 'http://github.com/lukebayes/asunit/zipball/4.0.0'
+    @asunit_file_name    = '4.0.0.zip'
+    @asunit_md5          = 'dca47aa2334a3f66efd2912c208a8ef4'
+    @asunit_dir          = File.join(@fixtures_path, 'asunit')
+    @asunit_zip          = File.join(@asunit_dir, @asunit_file_name)
+    @asunit_src          = File.join(@asunit_dir, 'archive', 'lukebayes-asunit-50da476d20fa87b71f71ed01b23cd3c4030b26c6', 'as3', 'src', 'asunit', 'framework', 'TestCase.as')
+
     data = nil
     File.open(@fixture_path, 'r') do |f|
       data = f.read
@@ -28,7 +39,65 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     super
     remove_file @archive_folder_path
     remove_file @flashplayer_dir
+    remove_file @asunit_dir
   end
+
+  def test_redirect_gzip
+    file_target = Sprout::RemoteFileTarget.new
+    file_target.url = @asunit_url
+    file_target.install_path = @asunit_dir
+    file_target.downloaded_path = @asunit_zip
+    file_target.md5 = @asunit_md5
+    file_target.archive_path = 'as3/src'
+    file_target.archive_type = :zip
+
+    assert_equal(@asunit_file_name, file_target.file_name)
+
+    file_target.resolve(true)
+    
+    assert_file @asunit_src
+  end
+
+  # BEGIN TEST FILE NAME VARIANTS:
+  def test_file_name_zip
+    target = Sprout::RemoteFileTarget.new
+    assert_equal('foo.zip', target.file_name('http://www.foo.com/foo.zip'))
+  end
+  
+  def test_file_name_tgz
+    target = Sprout::RemoteFileTarget.new
+    assert_equal('foo.tar.gz', target.file_name('http://www.foo.com/foo.tar.gz'))
+  end
+    
+  def test_file_name_trailing_slash
+    target = Sprout::RemoteFileTarget.new
+    target.archive_type = 'zip'
+    assert_equal('foo.zip', target.file_name('http://www.foo.com/foo/'))
+  end
+  
+  def test_file_name_no_extension
+    target = Sprout::RemoteFileTarget.new
+    target.archive_type = 'zip'
+    assert_equal('foo.zip', target.file_name('http://www.foo.com/foo'))
+  end
+
+  def test_file_name_get_params_and_no_extension_and_defined_archive_type
+    target = Sprout::RemoteFileTarget.new
+    target.archive_type = 'zip'
+    assert_equal('foo.zip', target.file_name('http://www.foo.com/foo?bar=1234'))
+  end
+  
+  def test_file_name_get_params_and_extension_type
+    target = Sprout::RemoteFileTarget.new
+    assert_equal('foo.tar.gz', target.file_name('http://www.foo.com/foo.tar.gz?bar=1234'))
+  end
+
+  def test_file_name_no_archive_type_or_extension
+    target = Sprout::RemoteFileTarget.new
+    assert_equal('foo', target.file_name('http://www.foo.com/foo'))
+  end
+  
+  # END TEST FILE NAME VARIANTS:
   
   def test_serialization
     assert(@target)
@@ -50,6 +119,14 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     assert(File.exists?(@target.downloaded_path))
   end
   
+  def test_simple_file_name
+    assert_equal(@file_name, @target.file_name)
+  end
+  
+  def test_rails_file_name
+    assert_equal(@file_name, @target.file_name)
+  end
+  
   def test_executable
     assert_equal('swfmill', @target.executable)
   end
@@ -69,6 +146,7 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     
     assert_file @flashplayer_binary
   end
+
 end
 
 module Sprout

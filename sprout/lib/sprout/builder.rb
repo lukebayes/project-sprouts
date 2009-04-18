@@ -16,8 +16,7 @@ module Sprout
         data = f.read
       end
       
-      usr = User.new
-      platform = usr.platform.to_s
+      platform = User.new.platform.to_s
       
       targets = YAML.load(data)
       targets.each do |target|

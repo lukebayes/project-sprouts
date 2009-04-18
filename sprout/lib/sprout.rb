@@ -18,8 +18,9 @@ require 'progress_bar'
 require 'sprout/log'
 require 'sprout/user'
 require 'sprout/zip_util'
-require 'sprout/remote_file_target'
 require 'sprout/remote_file_loader'
+require 'sprout/archive_unpacker'
+require 'sprout/remote_file_target'
 require 'sprout/simple_resolver'
 require 'sprout/template_resolver'
 
@@ -310,6 +311,14 @@ EOF
     # * +Windows+ C:/Documents And Settings/foo/Local Settings/Application Data/Sprouts/cache/0.7
     # * +Linux+ ~/.sprouts/cache/0.7
     def self.sprout_cache
+      @@sprout_cache ||= self.inferred_sprout_cache
+    end
+    
+    def self.sprout_cache=(cache)
+      @@sprout_cache = cache
+    end
+    
+    def self.inferred_sprout_cache
       home = User.application_home(@@name)
       return File.join(home, @@cache, "#{VERSION::MAJOR}.#{VERSION::MINOR}")
     end

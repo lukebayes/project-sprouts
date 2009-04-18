@@ -4,27 +4,43 @@ class LibraryTest <  Test::Unit::TestCase
   include SproutTestCase
   
   def setup
-    fixture       = File.join(fixtures, 'library')
-    @lib_dir      = File.join(fixture, 'lib')
-    @asunit_dir   = File.join(@lib_dir, 'asunit3', 'asunit')
-    @foo_dir      = File.join(@lib_dir, 'foo', 'asunit')
-    @core_swc     = File.join(@lib_dir, 'corelib.swc')
+    fixture                     = File.join(fixtures, 'library')
+    
+    @system_lib                 = File.join(fixture, 'cache')
+    Sprout::Sprout.sprout_cache = @system_lib
+    @system_asunit              = File.join(@system_lib, '/sprout-asunit3-library-3.2.8/', 'archive')
+    
+    @lib_dir                    = File.join(fixture, 'lib')
+    @project_asunit             = File.join(@lib_dir, 'asunit3', 'asunit')
 
-    @input        = File.join(fixture, 'SomeRunner.mxml')
-    @output       = File.join(fixture, 'SomeRunner.swf')
-    @source_path  = File.join(fixture)
+    @foo_dir                    = File.join(@lib_dir, 'foo', 'asunit')
+    @core_swc                   = File.join(@lib_dir, 'corelib.swc')
 
-    model = Sprout::ProjectModel.instance
-    model.lib_dir = @lib_dir
-    model.swc_dir = @lib_dir
+    @input                      = File.join(fixture, 'SomeRunner.mxml')
+    @output                     = File.join(fixture, 'SomeRunner.swf')
+    @source_path                = File.join(fixture)
+
+    model                       = Sprout::ProjectModel.instance
+    model.lib_dir               = @lib_dir
+    model.swc_dir               = @lib_dir
   end
   
   def teardown
     super
-    remove_file(File.dirname(@asunit_dir))
-    remove_file(File.dirname(@foo_dir))
+    Sprout::Sprout.sprout_cache = nil
+    remove_file(@system_lib)
+    remove_file(@lib_dir)
+
     remove_file(@core_swc)
     remove_file(@output)
+  end
+  
+  def test_source_lib
+    library :asunit3
+    
+    run_task :asunit3
+    assert_file(@system_asunit)
+    assert_file(@project_asunit)
   end
   
   def test_gem_name
@@ -34,13 +50,6 @@ class LibraryTest <  Test::Unit::TestCase
     
     run_task :foo
     assert_file(@foo_dir)
-  end
-
-  def test_source_lib
-    library :asunit3
-    
-    run_task :asunit3
-    assert_file(@asunit_dir)
   end
   
   def test_swc_lib
