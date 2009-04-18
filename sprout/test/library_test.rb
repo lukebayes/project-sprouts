@@ -27,8 +27,9 @@ class LibraryTest <  Test::Unit::TestCase
   
   def teardown
     super
-    # remove_file(File.dirname(@asunit_dir))
-    # remove_file(File.dirname(@foo_dir))
+    remove_file(@system_lib)
+    remove_file(@lib_dir)
+
     remove_file(@core_swc)
     remove_file(@output)
   end
@@ -41,14 +42,14 @@ class LibraryTest <  Test::Unit::TestCase
     assert_file(@project_asunit)
   end
   
-  # def test_gem_name
-  #   library :foo do |t|
-  #     t.gem_name = 'sprout-asunit3-library'
-  #   end
-  #   
-  #   run_task :foo
-  #   assert_file(@foo_dir)
-  # end
+  def test_gem_name
+    library :foo do |t|
+      t.gem_name = 'sprout-asunit3-library'
+    end
+    
+    run_task :foo
+    assert_file(@foo_dir)
+  end
   
   def test_swc_lib
     library :corelib
