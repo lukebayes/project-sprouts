@@ -56,9 +56,7 @@ class FlashPlayerTest <  Test::Unit::TestCase
       player_task = Sprout::FlashPlayerTask.new(:test_asunit_error, Rake::application)
       player_task.examine_test_result(error_result)
     end
-    
   end
-
 
   # def test_use_fdb
   #   flashplayer :run => @some_project do |t|

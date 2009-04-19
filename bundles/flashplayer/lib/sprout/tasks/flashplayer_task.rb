@@ -221,7 +221,7 @@ module Sprout
             f.write('')
           end
         else
-          FileUtils.mkdir_p(File.dirname(log_file))
+          FileUtils.makedirs(File.dirname(log_file))
           FileUtils.touch(log_file)
         end
       rescue
