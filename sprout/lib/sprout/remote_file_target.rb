@@ -59,10 +59,13 @@ module Sprout
       # raise RemoteFileTargetError.new('Cannot retrieve a RemoteFileTarget without a url') if url.nil?
       return if url.nil?
       
+      if(filename)
+        self.downloaded_path = File.join(File.dirname(downloaded_path), filename)
+      end
+      
       if(url && (update || !File.exists?(downloaded_path)))
         content = download(url, update)
-        FileUtils.mkdir_p(File.dirname(downloaded_path))
-
+        FileUtils.makedirs(File.dirname(downloaded_path))
         FileUtils.touch(downloaded_path)
         File.open(downloaded_path, 'r+') do |file|
           file.write(content)
@@ -85,6 +88,11 @@ module Sprout
     def installed_path
       @installed_path ||= File.join(install_path, 'archive')
       return @installed_path
+    end
+    
+    
+    def downloaded_path=(path)
+      @downloaded_path = path
     end
     
     # Parent directory where archives are downloaded

@@ -42,7 +42,6 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     remove_file @asunit_dir
   end
 
-=begin
   # BEGIN TEST FILE NAME VARIANTS:
   def test_file_name_zip
     target = Sprout::RemoteFileTarget.new
@@ -145,31 +144,7 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     file_target.install_path = @asunit_dir
     file_target.downloaded_path = @asunit_zip
     file_target.md5 = 'dca47aa2334a3f66efd2912c208a8ef4'
-    file_target.archive_path = 'as3/src'
-    file_target.archive_type = 'zip'
-
-    assert_equal(@asunit_file_name, file_target.file_name)
-
-    file_target.resolve(true)
-    
-    assert_file @asunit_src
-  end
-=end
-
-  # From asunit3 library gem_wrap:
-  # platform: universal
-  # archive_type: zip
-  # url: http://github.com/lukebayes/asunit/zipball/4.0.0
-  # md5: dca47aa2334a3f66efd2912c208a8ef4
-  # archive_path: 'as3/src'  
-  
-  def test_redirect_zip
-    file_target = Sprout::RemoteFileTarget.new
-    file_target.url = 'http://github.com/lukebayes/asunit/zipball/4.0.0'
-    file_target.install_path = @asunit_dir
-    file_target.downloaded_path = @asunit_zip
-    file_target.md5 = 'dca47aa2334a3f66efd2912c208a8ef4'
-    file_target.archive_path = 'as3/src'
+    file_target.archive_path = 'lukebayes-asunit-50da476d20fa87b71f71ed01b23cd3c4030b26c6/as3/src'
     file_target.filename = 'asunit3.zip'
 
     assert_equal('asunit3.zip', file_target.file_name)
@@ -178,7 +153,6 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     
     assert_file @asunit_src
   end
-
 
 end
 

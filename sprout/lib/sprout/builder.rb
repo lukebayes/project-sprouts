@@ -20,6 +20,12 @@ module Sprout
       
       targets = YAML.load(data)
       targets.each do |target|
+        # iterate over the provided RemoteFileTargets until we 
+        # encounter one that is appropriate for our platform,
+        # or one that claims to be universal.
+        # When authoring a sprout.spec for libraries or tools,
+        # put the most specific RemoteFileTargets first, then
+        # universals to catch unexpected platforms.
         if(target.platform == 'universal' || target.platform == platform)
           target.install_path = FileUtils.mkdir_p(destination)
           target.resolve
