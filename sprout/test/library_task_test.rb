@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class LibraryTest <  Test::Unit::TestCase
+class LibraryTaskTest <  Test::Unit::TestCase
   include SproutTestCase
   
   def setup
@@ -8,7 +8,8 @@ class LibraryTest <  Test::Unit::TestCase
     
     @system_lib                 = File.join(fixture, 'cache')
     Sprout::Sprout.sprout_cache = @system_lib
-    @system_asunit              = File.join(@system_lib, '/sprout-asunit3-library-3.2.8/', 'archive')
+
+    @system_asunit              = File.join(@system_lib, '/sprout-asunit3-library-4.0.5/', 'archive')
     
     @lib_dir                    = File.join(fixture, 'lib')
     @project_asunit             = File.join(@lib_dir, 'asunit3', 'asunit')
@@ -30,7 +31,6 @@ class LibraryTest <  Test::Unit::TestCase
     Sprout::Sprout.sprout_cache = nil
     remove_file(@system_lib)
     remove_file(@lib_dir)
-
     remove_file(@core_swc)
     remove_file(@output)
   end
@@ -43,6 +43,14 @@ class LibraryTest <  Test::Unit::TestCase
     assert_file(@project_asunit)
   end
   
+  def test_legacy_source_lib
+    library :asunit25
+    
+    run_task :asunit25
+    assert_file(File.join(@system_lib, '/sprout-asunit25-library-2.2.1/', 'archive'))
+    assert_file(File.join(@lib_dir, 'asunit25'))
+  end
+
   def test_gem_name
     library :foo do |t|
       t.gem_name = 'sprout-asunit3-library'
