@@ -39,7 +39,7 @@ class LibraryTaskTest <  Test::Unit::TestCase
     library :asunit3
     
     run_task :asunit3
-    assert_file(@system_asunit)
+    # assert_file(@system_asunit)
     assert_file(@project_asunit)
   end
   
@@ -47,7 +47,7 @@ class LibraryTaskTest <  Test::Unit::TestCase
     library :asunit25
     
     run_task :asunit25
-    assert_file(File.join(@system_lib, '/sprout-asunit25-library-2.2.1/', 'archive'))
+    # assert_file(File.join(@system_lib, '/sprout-asunit25-library-2.2.1/', 'archive'))
     assert_file(File.join(@lib_dir, 'asunit25'))
   end
 
