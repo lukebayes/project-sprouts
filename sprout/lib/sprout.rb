@@ -128,6 +128,9 @@ module Sprout
     # This Rakefile will usually be loaded by the referenced Generator, and it should have a configured ProjectModel
     # defined in it.
     def self.generate(sprout_name, generator_name, params, project_path=nil)
+      # params.each_index do |index|
+      #   params[index] = clean_project_name(params[index])
+      # end
       RubiGen::Base.use_sprout_sources!(sprout_name, project_path)
       generator = RubiGen::Base.instance(generator_name, params)
       generator.command(:create).invoke!
