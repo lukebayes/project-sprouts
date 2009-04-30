@@ -6,7 +6,66 @@
 		
 		<link rel="stylesheet" href="assets/css/screen.css" type="text/css" media="screen, projection">
 		<link rel="stylesheet" href="assets/css/print.css" type="text/css" media="print">
+        
+        <style>
+            #twitter_update_list li {
+                clear: both;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+                margin-bottom: 15px;
+                list-style-type: none;
+                font-size: 115%;
+            }
+            
+            #twitter_update_list a.user-image {
+                border: 1px solid #fff;
+                padding: 3px;
+                margin-left: 0px;
+                margin-right: 5px;
+                float: left;
+                width: 30px;
+                height: 30px;
+            }
+            
+            #twitter_update_list a.user-image:hover {
+                border: 1px solid #ffcc00;
+            }
+            
+            #twitter_update_list img {
+                width: 30px;
+                height: 30px;
+                
+            }
+            
+            #twitter_update_list span {
+                text-align: top;
+            }
+            
+        </style>
+        
 		<!--[if IE]><link rel="stylesheet" href="assets/css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+		<script>
+		function renderTwitterCell(tweet, text, name) {
+		    return "<li><a class='user-image' href='http://twitter.com/"+name+"'><img src='"+tweet.profile_image_url+"' /></a><span>"+text+' <a style="font-size:85%" href="http://twitter.com/'+name+"/statuses/"+tweet.id+'">'+relative_time(tweet.created_at)+"</a></span></li>";
+	    }
+		
+        function twitterCallback2(C){var A=[];for(var D=0;D<C.length;D++){var E=C[D].from_user;var B=C[D].text.replace(/((https?|s?ftp|ssh)\:\/\/[^"\s\<\>]*[^.,;'">\:\s\<\>\)\]\!])/g,function(F){return'<a href="'+F+'">'+F+"</a>";}).replace(/\B@([_a-z0-9]+)/ig,function(F){return F.charAt(0)+'<a href="http://www.twitter.com/'+F.substring(1)+'">'+F.substring(1)+"</a>"});A.push( renderTwitterCell(C[D],B,E) )}document.getElementById("twitter_update_list").innerHTML=A.join("")}function relative_time(C){var B=C.split(" ");C=B[1]+" "+B[2]+", "+B[5]+" "+B[3];var A=Date.parse(C);var D=(arguments.length>1)?arguments[1]:new Date();var E=parseInt((D.getTime()-A)/1000);E=E+(D.getTimezoneOffset()*60);if(E<60){return"less than a minute ago"}else{if(E<120){return"about a minute ago"}else{if(E<(60*60)){return(parseInt(E/60)).toString()+" minutes ago"}else{if(E<(120*60)){return"about an hour ago"}else{if(E<(24*60*60)){return"about "+(parseInt(E/3600)).toString()+" hours ago"}else{if(E<(48*60*60)){return"1 day ago"}else{return(parseInt(E/86400)).toString()+" days ago"}}}}}}};
+		
+        // function logit(obj) {
+        //     console.log('--------------------');
+        //     for(var key in obj) {
+        //         console.log(key + " : " + obj[key]);
+        //          }
+        //         }
+		
+		function twitterCallback(json) {
+            twitterCallback2(json.results);
+            // var len = json.results.length;
+            // for(var i=0; i < len; i++) {
+            //     logit(json.results[i]);
+            // }
+	    }
+		</script>
 	</head>
 	<body>
 		
@@ -155,25 +214,20 @@ Windows users may have to run:
 						</ul>
 					</div>
 					
+					<hr style="width:80%;margin-left:auto;margin-right:auto;" />
+					
 					<div class="column span-4 prepend-4 append-2">
 						<h3>Who's talking about Sprouts?</h3>
 					</div>
 					
 					<div class="column span-10 last">
-						<div id="talk">&nbsp;<br/>&nbsp;<br/>&nbsp;</div>
-					</div>					
-					
-					
-					<div class="column span-4 prepend-4 append-2">
-						<h3>What's the community up to?</h3>
+						<div id="talk">
+						    <h3><a href="http://search.twitter.com/search?q=projectsprouts">Twitter Search for 'projectsprouts'</a></h3>
+            				<ul id="twitter_update_list">
+            				</ul>
+						</div>
 					</div>
-					
-					<div class="column span-10 last">
-						<div id="news">&nbsp;<br/>&nbsp;<br/>&nbsp;</div>
-					</div>
-					
-					
-				
+
 					<!-- Footer -->
 					<div id="footer" class="column span-24 last">
 						<div>
@@ -188,6 +242,9 @@ Windows users may have to run:
 		</div>
     <a href="http://github.com/lukebayes/project-sprouts"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub" /></a>
 		
+    	<script type="text/javascript" src="http://search.twitter.com/search.json?q=projectsprouts&callback=twitterCallback&rpp=5"></script>
+	</body>
+
 		<!-- Key below is specific to www.projectsprouts.org -->
 		<script type="text/javascript">
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -198,5 +255,5 @@ Windows users may have to run:
 		pageTracker._initData();
 		pageTracker._trackPageview();
 		</script>
-	</body>
+
 </html>
