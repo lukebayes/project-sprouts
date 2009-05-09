@@ -154,7 +154,7 @@ module Sprout
 
       begin
         return @home = File.expand_path("~")
-      rescue StandardError
+      rescue StandardError => e
         if File::ALT_SEPARATOR
           return @home = "C:\\"
         else

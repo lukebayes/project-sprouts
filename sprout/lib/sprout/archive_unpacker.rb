@@ -156,7 +156,7 @@ module Sprout
         if(File.exists?(from))
           `ditto '#{from}' '#{to}'`
         end
-      rescue
+      rescue StandardError => e
         if(File.exists?(full_mounted_path))
           system("hdiutil unmount -force \"#{full_mounted_path}\"")
         end

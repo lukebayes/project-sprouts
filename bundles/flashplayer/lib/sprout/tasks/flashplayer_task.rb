@@ -224,7 +224,7 @@ module Sprout
           FileUtils.makedirs(File.dirname(log_file))
           FileUtils.touch(log_file)
         end
-      rescue
+      rescue StandardError => e
         puts '[WARNING] FlashPlayer encountered an error working with the mm.cfg log and/or editing the Trust file'
       end
       

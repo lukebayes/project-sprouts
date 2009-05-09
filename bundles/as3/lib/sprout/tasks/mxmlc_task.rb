@@ -755,6 +755,7 @@ EOF
       rescue FCSHError => fcsh_error
         raise fcsh_error
       rescue StandardError => std_error
+        # TODO: Capture a more concrete error here...
         raise MXMLCError.new("[ERROR] There was a problem connecting to the Flex Compiler SHell, run 'rake fcsh:start' in another terminal.")
       end
     end

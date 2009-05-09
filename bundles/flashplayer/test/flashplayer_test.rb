@@ -11,6 +11,7 @@ class FlashPlayerTest <  Test::Unit::TestCase
     @test_result            = 'Result.xml'
     @failure_result_file    = 'ResultFailure.xml'
     @error_result_file      = 'ResultError.xml'
+    @exception_swf          = 'InstantRuntimeException.swf'
     
     @generated_results      = 'AsUnitResults.xml'
     Dir.chdir fixture
@@ -56,6 +57,11 @@ class FlashPlayerTest <  Test::Unit::TestCase
       player_task = Sprout::FlashPlayerTask.new(:test_asunit_error, Rake::application)
       player_task.examine_test_result(error_result)
     end
+  end
+  
+  def test_instant_runtime_exception
+    flashplayer :run_broken => @exception_swf
+    run_task(:run_broken)
   end
 
   # def test_use_fdb

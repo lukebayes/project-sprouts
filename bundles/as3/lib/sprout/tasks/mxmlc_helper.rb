@@ -67,7 +67,7 @@ module Sprout # :nodoc:
       model.libraries.each do |lib|
         begin
           t = Rake::application[lib]
-        rescue
+        rescue StandardError => e
           library lib
         end
         compiler.prerequisites << lib

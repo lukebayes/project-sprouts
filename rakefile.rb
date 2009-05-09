@@ -193,7 +193,7 @@ class RubyForge
         end
       end
       return false
-    rescue
+    rescue StandardError => e
       return false
     end
   end

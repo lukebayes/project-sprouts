@@ -197,7 +197,7 @@ EOF
           puts "#{fn}: binary"
         end
       end
-    rescue
+    rescue StandardError => e
       puts "#$0: #$!"
     end
   end
