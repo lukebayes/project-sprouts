@@ -32,7 +32,7 @@ PKG_LIST.each do |file|
   task :package => file
 end
 
-def apply_shared_spec(s)
+spec = Gem::Specification.new do |s|
     s.summary             = SUMMARY
     s.description         = DESCRIPTION
     s.name                = NAME
@@ -58,48 +58,15 @@ def apply_shared_spec(s)
     s.add_dependency('rubigen', '= 1.3.3')
     s.add_dependency('net-sftp')
     s.add_dependency('net-ssh')
+    
+    if(RUBY_PLATFORM.match('mswin'))
+      s.add_dependency('win32-open3', '0.2.5')
+    else
+      s.add_dependency('open4', '>= 0.9.6')
+    end
 end
 
-osx_spec = Gem::Specification.new do |s|
-  apply_shared_spec(s)
-  s.platform = 'darwin'
-  # Add osx-specific dependencies here
-
-  # Can't really depend on rb-appscript b/c this requires OS X dev-tool disk
-  #s.add_dependency('rb-appscript', '>= 0.5.0')
-  s.add_dependency('open4', '>= 0.9.6')
-end
-
-nix_spec = Gem::Specification.new do |s|
-  apply_shared_spec(s)
-  s.platform = 'x86-linux'
-  # Add nix-specific dependencies here
-  s.add_dependency('open4', '>= 0.9.6')
-end
-
-win_spec = Gem::Specification.new do |s|
-  apply_shared_spec(s)
-  s.platform = 'mswin32'
-  # Add win-specific dependencies here
-  s.add_dependency('win32-open3', '0.2.5')
-end
-
-ruby_spec = Gem::Specification.new do |s|
-  apply_shared_spec(s)
-  s.platform = Gem::Platform::RUBY
-  s.add_dependency('open4', '>= 0.9.6')
-end
-
-Rake::GemPackageTask.new(osx_spec) do |pkg|
-end
-
-Rake::GemPackageTask.new(nix_spec) do |pkg|
-end
-
-Rake::GemPackageTask.new(win_spec) do |pkg|
-end
-
-Rake::GemPackageTask.new(ruby_spec) do |pkg|
+Rake::GemPackageTask.new(spec) do |pkg|
 end
 
 Rake::RDocTask.new do |t|
@@ -113,21 +80,6 @@ Rake::RDocTask.new do |t|
 end
 
 CLEAN.add('rdoc')
-
-
 require File.dirname(__FILE__) + '/script/build_helpers'
-
-def fix_x86_mswin
-  files = Dir.glob('pkg/*x86-mswin*')
-  files.each do |name|
-    new_name = name.gsub('-x86', '')
-    puts "Renaming x86-mswin gem from #{name} to #{new_name}"
-    File.mv(name, new_name)
-  end
-end
-
-task :package do
-  fix_x86_mswin
-end
 
 #task :release => :release_rubyforge
