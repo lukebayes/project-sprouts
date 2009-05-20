@@ -1,13 +1,16 @@
 
 ########################################
 This project was generated using Sprouts
-http://code.google.com/p/projectsprouts/
+http://projectsprouts.org
 
 Please report any bugs to:
-http://code.google.com/p/projectsprouts/issues/list
+http://github.com/lukebayes/project-sprouts/issues
 
 Please feel free to ask questions at:
 http://groups.google.com/group/projectsprouts
+
+Read the RDOCs at:
+http://projectsprouts.org/rdoc
 
 ########################################
 Using your favorite terminal, cd to this directory have fun!
