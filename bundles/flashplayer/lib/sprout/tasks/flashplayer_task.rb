@@ -21,6 +21,8 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 =end
 
+require 'clix_flash_player'
+
 module Sprout
   
   class FlashPlayerError < StandardError #:nodoc:
@@ -65,6 +67,7 @@ module Sprout
     def initialize(task_name, app)
       super(task_name, app)
       @default_gem_name = 'sprout-flashplayer-tool'
+      @default_gem_version = '10.22.0'
       @default_result_file = 'AsUnitResults.xml'
       @inside_test_result = false
     end
@@ -145,8 +148,11 @@ module Sprout
     # happen. This in turn can lead to multiple instances of the Player being instantiated.
     # In the case of running a test harness, this is absolutely not desirable, so we had
     # expose a parameter that allows us to prevent auto-focus of the player.
+    #
+    # This feature is deprecated in current versions of the FlashPlayerTask
     def do_not_focus=(focus)
       @do_not_focus = focus
+      puts "[WARNING] Thanks to fixes in the FlashPlayer task, do_not_focus is deprecated and no longer needs to be used"
     end
     
     def do_not_focus
@@ -233,14 +239,6 @@ module Sprout
       read_log(@thread, log_file)
       @thread.join
     end
-    
-    def close
-      if(User.new().is_a?(WinUser))
-        Thread.kill(@thread)
-      else
-        Process.kill("SIGALRM", @player_pid)
-      end
-    end
 
     def run(tool, gem_version, swf)
       path_to_exe = Sprout.get_executable(tool, nil, gem_version)
@@ -250,31 +248,35 @@ module Sprout
       thread_out = $stdout
       command = "#{target} #{User.clean_path(swf)}"
 
-      return Thread.new {
-        usr = User.new()
-        if(usr.is_a?(WinUser) && !usr.is_a?(CygwinUser))
-          system command
-        else
+      usr = User.new()
+      if(usr.is_a?(WinUser) && !usr.is_a?(CygwinUser))
+        return Thread.new {
+            system command
+        }
+      elsif usr.is_a?(OSXUser)
+        @clix_player = CLIXFlashPlayer.new
+        @clix_player.execute(target, swf)
+        return @clix_player
+      else
+        return Thread.new {
           require 'open4'
           @player_pid, stdin, stdout, stderr = Open4.popen4(command)
-          focus_player_on_mac(thread_out, path_to_exe)
           stdout.read
-        end
-      }
-    end
-    
-    def focus_player_on_mac(out, exe)
-      return if do_not_focus
-      begin
-        if(User.new.is_a?(OSXUser))
-          require 'appscript'
-          Appscript.app(exe).activate
-        end
-      rescue LoadError => e
-        puts "[WARNING] Cannot focus Flash Player without rb-appscript gem"
+        }
       end
     end
-
+    
+    def close
+      usr = User.new
+      if(usr.is_a?(WinUser))
+        Thread.kill(@thread)
+      elsif(usr.is_a?(OSXUser))
+        @thread.kill
+      else
+        Process.kill("SIGALRM", @player_pid)
+      end
+    end
+    
     def read_log(thread, log_file)
       lines_put = 0
 
