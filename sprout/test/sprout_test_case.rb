@@ -19,6 +19,10 @@ module SproutTestCase  # :nodoc:[all]
     t.invoke
     return t
   end
+  
+  def get_task(name)
+    return Rake.application[name]
+  end
 
   def clear_tasks
     Sprout::ToolTask::clear_preprocessed_tasks

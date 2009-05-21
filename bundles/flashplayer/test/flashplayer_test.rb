@@ -11,7 +11,7 @@ class FlashPlayerTest <  Test::Unit::TestCase
     @test_result            = 'Result.xml'
     @failure_result_file    = 'ResultFailure.xml'
     @error_result_file      = 'ResultError.xml'
-    @exception_swf          = 'SomeProject.swf'
+    @exception_swf          = 'InstantRuntimeException.swf'
     
     @generated_results      = 'AsUnitResults.xml'
     Dir.chdir fixture
@@ -24,12 +24,13 @@ class FlashPlayerTest <  Test::Unit::TestCase
     clear_tasks
   end
   
-  def test_compilation
+  def test_asunit_result_file
     flashplayer :run => @swf do |t|
       t.test_result_file = @test_result
     end
-
+  
     run_task(:run)
+    
     assert_file(@test_result)
   end
   
@@ -58,10 +59,16 @@ class FlashPlayerTest <  Test::Unit::TestCase
     end
   end
   
-  # def test_instant_runtime_exception
-  #   flashplayer :run_broken => @exception_swf
-  #   run_task(:run_broken)
-  # end
+  def test_instant_runtime_exception
+    flashplayer :run_broken => @exception_swf
+    t = Thread.new {
+      run_task(:run_broken)
+    }
+    player = get_task(:run_broken)
+    sleep(4.0)
+    player.close
+    t.kill
+  end
   
   # def test_use_fdb
   #   flashplayer :run => @some_project do |t|

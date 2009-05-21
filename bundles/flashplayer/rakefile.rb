@@ -43,10 +43,6 @@ spec = Gem::Specification.new do |s|
 
   s.add_dependency('sprout', '>= 0.7.189')
   s.add_dependency('sprout-flashplayer-tool', '>= 10.22.0')
-  
-  if RUBY_PLATFORM.match('darwin')
-    s.add_dependency('rb-appscript', '>= 0.5.1')
-  end
 end
 
 Rake::GemPackageTask.new(spec) do |p|
