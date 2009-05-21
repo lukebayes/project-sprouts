@@ -21,8 +21,6 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 =end
 
-require 'clix_flash_player'
-
 module Sprout
   
   class FlashPlayerError < StandardError #:nodoc:
@@ -254,6 +252,7 @@ module Sprout
             system command
         }
       elsif usr.is_a?(OSXUser)
+        require 'clix_flash_player'
         @clix_player = CLIXFlashPlayer.new
         @clix_player.execute(target, swf)
         return @clix_player
