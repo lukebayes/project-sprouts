@@ -1,8 +1,8 @@
 module Sprout
   class FlashPlayer # :nodoc:
     module VERSION #:nodoc:
-      MAJOR = 9
-      MINOR = 151
+      MAJOR = 10
+      MINOR = 22
       TINY  = 0
 
       STRING = [MAJOR, MINOR, TINY].join('.')
