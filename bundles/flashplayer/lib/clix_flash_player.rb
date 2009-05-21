@@ -37,9 +37,8 @@ class CLIXFlashPlayer
         @activate_pid, stdin, stdout, stderr = open4.popen4(command)
         puts stdout.read
         error = stderr.read
-        raise error if !error.nil?
-        puts "after error"
-        # Process.wait(@player_pid)
+        raise error if !error.nil? && error != ''
+        Process.wait(@player_pid)
       rescue StandardError => e
         kill
         raise e
