@@ -4,12 +4,14 @@ class BuilderTest <  Test::Unit::TestCase
   include SproutTestCase
   
   def setup
+    super
     @fixture = File.join(fixtures, 'builder')
     @auto_spec = File.join(@fixture, 'auto_install.yaml')
     @manual_spec = File.join(@fixture, 'manual_install.yaml')
   end
   
   def teardown
+    super
     path = File.join(@fixture, 'archive')
     remove_file(path)
   end
