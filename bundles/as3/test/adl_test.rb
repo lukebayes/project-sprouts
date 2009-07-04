@@ -30,8 +30,10 @@ class ADLTest <  Test::Unit::TestCase
   
   # Test launcher task
   def test_launcher
+    runtime = ENV['FLEX_HOME'] + "/runtimes/air/mac/Adobe AIR.framework/Adobe AIR"
+    
     launcher = adl :test_adl do |t|
-      t.runtime = "~/Projects/airsdk/runtime/"
+      t.runtime = runtime
       t.nodebug = true
       t.pubid = "THEPUBID"
       t.root_directory = @root_directory
@@ -39,8 +41,7 @@ class ADLTest <  Test::Unit::TestCase
       t.arguments = "arg1 arg2"
     end
     
-    command = "-runtime ~/Projects/airsdk/runtime/ -nodebug -pubid THEPUBID src/SomeProject-app.xml #{@root_directory} -- arg1 arg2"
-    
+    command = "-runtime #{runtime} -nodebug -pubid THEPUBID src/SomeProject-app.xml #{@root_directory} -- arg1 arg2"
     assert_equal command, launcher.to_shell      
   end
   
