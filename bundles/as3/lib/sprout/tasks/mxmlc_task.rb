@@ -344,6 +344,13 @@ To link an entire SWC file rather than individual classes, use the include-libra
 EOF
       end
       
+      add_param(:include_path, :paths) do |p|
+        p.description =<<EOF
+Define one or more directory paths for include processing. For each path that is provided, all .as and .mxml files found forward of that path will
+be included in the SWF regardless of whether they are imported or not.
+EOF
+      end
+      
       add_param(:incremental, :boolean) do |p|
         p.description =<<EOF
 Enables incremental compilation. For more information, see About incremental compilation (http://livedocs.adobe.com/flex/2/docs/00001506.html#153980).
@@ -696,6 +703,14 @@ EOF
         source_path << File.dirname(input)
       end
       
+      if(include_path)
+        include_path.each do |path|
+          process_include_path(path) if(File.directory?(path))
+        end
+      end
+      
+      self.include_path = []
+      
       if(link_report)
         CLEAN.add(link_report)
       end
@@ -712,6 +727,24 @@ EOF
     end
     
     protected 
+    
+    def process_include_path(path)
+      symbols = []
+      FileList["#{path}/**/*[.as|.mxml|.css]"].each do |file|
+        next if File.directory?(file)
+        file.gsub!(path, '')
+        file.gsub!(/^\//, '')
+        file.gsub!('/', '.')
+        file.gsub!(/.as$/, '')
+        file.gsub!(/.mxml$/, '')
+        file.gsub!(/.css$/, '')
+        symbols << file
+      end
+      
+      symbols.each do |symbol|
+        self.includes << symbol
+      end
+    end
     
     def clean_nested_source_paths(paths)
       results = []

@@ -105,5 +105,15 @@ class MXMLCTest <  Test::Unit::TestCase
 
     assert_equal(2, some_task.source_path.size)
   end
+  
+  def test_includes_path
+    some_task = Sprout::MXMLCTask.new(:some_task, Rake::application)
+    some_task.source_path << 'src'
+    some_task.include_path << 'src'
+    some_task.input = 'src/SomeProject.as'
+    some_task.define
+    
+    assert_equal('-includes+=display.OrangeBox -includes+=SomeFile -includes+=SomeProject -includes+=SomeProjectFailure -includes+=SomeProjectRunner -includes+=SomeProjectWarning -source-path+=src src/SomeProject.as', some_task.to_shell)
+  end
     
 end
