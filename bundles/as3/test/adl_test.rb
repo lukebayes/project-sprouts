@@ -5,7 +5,7 @@ class ADLTest <  Test::Unit::TestCase
   
   def setup
     @start        = Dir.pwd
-    fixture      = File.join(fixtures, 'adl')
+    fixture      = File.join(fixtures, 'air')
     
     @root_directory = fixture
     @application_descriptor = "src/SomeProject-app.xml"

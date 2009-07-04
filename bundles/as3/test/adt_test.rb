@@ -5,7 +5,7 @@ class ADTTest <  Test::Unit::TestCase
   
   def setup
     @start        = Dir.pwd
-    fixture      = File.join(fixtures, 'adt')
+    fixture      = File.join(fixtures, 'air')
     
     @storetype = "PKCS12"
     @keystore = "cert.p12"
