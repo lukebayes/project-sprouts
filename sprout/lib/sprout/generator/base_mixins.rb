@@ -48,8 +48,13 @@ class Gem::SourceIndex
         Gem::Platform.match spec.platform
       end
     end
-
-    specs.sort_by { |s| s.sort_obj }
+    
+    begin
+      specs.sort_by { |s| s.sort_obj }
+    rescue NoMethodError => e
+      puts "It looks like your RubyGems installation is not compatible with this version of Sprouts.\n\nTo update, run:\ngem update --system\n\n"
+      raise e
+    end
   end
 end
 
