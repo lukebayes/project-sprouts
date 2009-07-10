@@ -730,7 +730,7 @@ EOF
     
     def process_include_path(path)
       symbols = []
-      FileList["#{path}/**/*[.as|.mxml|.css]"].each do |file|
+      FileList["#{path}/**/*[.as|.mxml]"].each do |file|
         next if File.directory?(file)
         file.gsub!(path, '')
         file.gsub!(/^\//, '')
