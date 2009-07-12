@@ -261,9 +261,9 @@ EOF
       
       
       
-      # if(!File.exists?(exe))
+      if(!File.exists?(exe))
         raise UsageError.new("Could not retrieve requested executable from path: #{exe}")
-      # end
+      end
       
       if(File.exists?(exe) && !File.directory?(exe) && File.stat(exe).executable?)
         File.chmod 0755, exe
