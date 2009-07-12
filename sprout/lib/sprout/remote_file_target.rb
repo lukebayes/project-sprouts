@@ -7,6 +7,9 @@ module Sprout
 
     attr_writer   :archive_path
     
+    # The string environment variable name to check before downloading anything.
+    attr_accessor :environment
+    
     # The user path where this gem will download and install files
     # This value is set by the Sprout::Builder that creates this RemoteFileTarget
     attr_accessor :install_path
@@ -86,10 +89,9 @@ module Sprout
     # The root path to the unpacked archive files. This is the base path that will be added to any
     # +archive_path+ relative paths
     def installed_path
-      @installed_path ||= File.join(install_path, 'archive')
+      @installed_path ||= inferred_installed_path
       return @installed_path
     end
-    
     
     def downloaded_path=(path)
       @downloaded_path = path
@@ -117,15 +119,24 @@ module Sprout
       end
       
       file = parts.pop
-
+      
       if(!archive_type.nil? && file.match(/\.#{archive_type.to_s}$/).nil?)
         file << ".#{archive_type.to_s}"
       end
-
+      
       return file
     end
     
     private
+    
+    def inferred_installed_path
+      if(!environment.nil? && !ENV[environment].nil? && File.exists?(ENV[environment]))
+        return ENV[environment]
+      end
+      
+      return File.join(install_path, 'archive')
+    end
+    
     def download(url, update=false)
       loader = RemoteFileLoader.new
       loader.get_remote_file(url, update, md5)

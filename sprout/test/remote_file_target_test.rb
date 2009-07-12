@@ -4,7 +4,8 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
   include SproutTestCase
 
   def setup
-    @fixtures_path       = File.join(fixtures, 'remote_file_target') 
+    @fixtures_path       = File.join(fixtures, 'remote_file_target')
+    
     @fixture_path        = File.join(@fixtures_path, 'macosx')
     @archive_folder_path = File.join(@fixtures_path, 'archive')
     @install_path        = File.join(@fixtures_path)
@@ -24,6 +25,8 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     @asunit_zip          = File.join(@asunit_dir, @asunit_file_name)
     @asunit_src          = File.join(@asunit_dir, 'archive', 'lukebayes-asunit-50da476d20fa87b71f71ed01b23cd3c4030b26c6', 'as3', 'src', 'asunit', 'framework', 'TestCase.as')
 
+    ENV['SPROUT_TARGET_HOME'] = @fixtures_path
+
     data = nil
     File.open(@fixture_path, 'r') do |f|
       data = f.read
@@ -40,6 +43,7 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     remove_file @archive_folder_path
     remove_file @flashplayer_dir
     remove_file @asunit_dir
+    ENV['SPROUT_TARGET_HOME'] = nil
   end
 
   # BEGIN TEST FILE NAME VARIANTS:
@@ -152,6 +156,31 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     file_target.resolve(true)
     
     assert_file @asunit_src
+  end
+  
+  def test_environment_variable
+    file_target = Sprout::RemoteFileTarget.new
+    file_target.environment = 'SPROUT_TARGET_HOME'
+    file_target.archive_path = 'macosx'
+    file_target.resolve true
+    
+    assert_file file_target.installed_path + '/macosx'
+  end
+  
+  def test_environment_variable_fallback_to_download
+    ENV['SPROUT_TARGET_HOME'] = nil
+    file_target = Sprout::RemoteFileTarget.new
+    file_target.environment = 'SPROUT_TARGET_HOME' # fails
+    file_target.url = 'http://github.com/lukebayes/asunit/zipball/4.0.0'
+    file_target.install_path = @asunit_dir
+    file_target.downloaded_path = @asunit_zip
+    file_target.md5 = 'dca47aa2334a3f66efd2912c208a8ef4'
+    file_target.archive_path = 'lukebayes-asunit-50da476d20fa87b71f71ed01b23cd3c4030b26c6/as3/src'
+    file_target.filename = 'asunit3.zip'
+    
+    file_target.resolve true
+    assert_file file_target.installed_path
+    assert file_target.installed_path != ENV['SPROUT_TARGET_HOME']
   end
 
 end

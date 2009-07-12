@@ -238,7 +238,7 @@ EOF
     # Retrieve the file target to an executable by sprout name. Usually, these are tool sprouts.
     # * +name+ Full sprout gem name that contains an executable file
     # * +archive_path+ Optional parameter for tools that contain more than one executable, or for
-    # when you don't want to use the default executable presented by the tool. For example, the Flex 2 SDK
+    # when you don't want to use the default executable presented by the tool. For example, the Flex SDK
     # has many executables, when this method is called for them, one might use something like:
     #   Sprout::Sprout.get_executable('sprout-flex3sdk-tool', 'bin/mxmlc')
     # * +version+ Optional parameter to specify a particular gem version for this executable
@@ -258,6 +258,12 @@ EOF
         # Otherwise attempt to run the feature from the system path
         exe = target.archive_path
       end
+      
+      
+      
+      # if(!File.exists?(exe))
+        raise UsageError.new("Could not retrieve requested executable from path: #{exe}")
+      # end
       
       if(File.exists?(exe) && !File.directory?(exe) && File.stat(exe).executable?)
         File.chmod 0755, exe
