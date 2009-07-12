@@ -1,4 +1,3 @@
-require 'git'
 require 'sprout/version_file'
 
 module Sprout
@@ -58,6 +57,7 @@ module Sprout
     end
 
     def self.define_task(args, &block)
+      gem 'git'
       t = super
       yield t if block_given?
       t.define
