@@ -57,7 +57,12 @@ module Sprout
     end
 
     def self.define_task(args, &block)
-      gem 'git'
+      begin
+        require 'git'
+      rescue LoadError => e
+        puts "You need to install the 'git' gem. Try running: sudo gem install git"
+        raise e
+      end
       t = super
       yield t if block_given?
       t.define
