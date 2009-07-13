@@ -41,6 +41,9 @@ module Sprout
     SUDO_INSTALL_GEMS = 'false' == ENV['SUDO_INSTALL_GEMS'] ? false : true
   end
 
+  class UsageError < StandardError #:nodoc
+  end
+
   class SproutError < StandardError #:nodoc:
   end
 

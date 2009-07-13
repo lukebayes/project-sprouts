@@ -1,8 +1,6 @@
 
 module Sprout
   
-  class UsageError < StandardError; end
-
   class TemplateResolver < Hash #:nodoc:
     include Singleton
     
