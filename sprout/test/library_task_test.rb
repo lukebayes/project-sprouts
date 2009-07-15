@@ -35,6 +35,10 @@ class LibraryTaskTest <  Test::Unit::TestCase
     remove_file(@output)
   end
   
+  def test_truth
+    assert true
+  end
+  
   # def test_source_lib
   #   library :asunit3
   #   
