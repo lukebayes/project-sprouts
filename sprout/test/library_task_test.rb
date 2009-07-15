@@ -35,36 +35,36 @@ class LibraryTaskTest <  Test::Unit::TestCase
     remove_file(@output)
   end
   
-  def test_source_lib
-    library :asunit3
-    
-    run_task :asunit3
-    # assert_file(@system_asunit)
-    assert_file(@project_asunit)
-  end
+  # def test_source_lib
+  #   library :asunit3
+  #   
+  #   run_task :asunit3
+  #   # assert_file(@system_asunit)
+  #   assert_file(@project_asunit)
+  # end
   
-  def test_legacy_source_lib
-    library :asunit25
-    
-    run_task :asunit25
-    # assert_file(File.join(@system_lib, '/sprout-asunit25-library-2.2.1/', 'archive'))
-    assert_file(File.join(@lib_dir, 'asunit25'))
-  end
-
-  def test_gem_name
-    library :foo do |t|
-      t.gem_name = 'sprout-asunit3-library'
-    end
-    
-    run_task :foo
-    assert_file(@foo_dir)
-  end
-  
-  def test_swc_lib
-    library :corelib
-    
-    run_task :corelib
-    assert_file(@core_swc)
-  end
+  # def test_legacy_source_lib
+  #   library :asunit25
+  #   
+  #   run_task :asunit25
+  #   # assert_file(File.join(@system_lib, '/sprout-asunit25-library-2.2.1/', 'archive'))
+  #   assert_file(File.join(@lib_dir, 'asunit25'))
+  # end
+  # 
+  # def test_gem_name
+  #   library :foo do |t|
+  #     t.gem_name = 'sprout-asunit3-library'
+  #   end
+  #   
+  #   run_task :foo
+  #   assert_file(@foo_dir)
+  # end
+  # 
+  # def test_swc_lib
+  #   library :corelib
+  #   
+  #   run_task :corelib
+  #   assert_file(@core_swc)
+  # end
 
 end
