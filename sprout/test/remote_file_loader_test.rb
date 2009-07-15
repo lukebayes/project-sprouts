@@ -26,10 +26,4 @@ class RemoteFileLoaderTest <  Test::Unit::TestCase
     
     assert("MD5 hash should match", @loader.response_is_valid?(bytes, @md5))
   end
-  
-  def test_handle_redirect
-    response = @loader.get_remote_file(@redirect_url)
-    assert_not_nil response
-  end
-    
 end

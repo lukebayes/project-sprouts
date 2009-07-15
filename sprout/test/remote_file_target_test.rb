@@ -19,7 +19,7 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     @flashplayer_binary  = File.join(@flashplayer_dir, 'archive', 'flash_player_9_linux_dev', 'standalone', 'debugger', 'flashplayer')
     
     @asunit_url          = 'http://github.com/lukebayes/asunit/zipball/4.0.0'
-    @asunit_file_name    = '4.0.0.zip'
+    @asunit_file_name    = '4.0.0'
     @asunit_md5          = 'dca47aa2334a3f66efd2912c208a8ef4'
     @asunit_dir          = File.join(@fixtures_path, 'asunit')
     @asunit_zip          = File.join(@asunit_dir, @asunit_file_name)
@@ -142,21 +142,21 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
   # md5: dca47aa2334a3f66efd2912c208a8ef4
   # archive_path: 'as3/src'  
   
-  def test_redirect_zip
-    file_target = Sprout::RemoteFileTarget.new
-    file_target.url = 'http://github.com/lukebayes/asunit/zipball/4.0.0'
-    file_target.install_path = @asunit_dir
-    file_target.downloaded_path = @asunit_zip
-    file_target.md5 = 'dca47aa2334a3f66efd2912c208a8ef4'
-    file_target.archive_path = 'lukebayes-asunit-50da476d20fa87b71f71ed01b23cd3c4030b26c6/as3/src'
-    file_target.filename = 'asunit3.zip'
-
-    assert_equal('asunit3.zip', file_target.file_name)
-
-    file_target.resolve(true)
-    
-    assert_file @asunit_src
-  end
+  # def test_redirect_zip
+  #   file_target = Sprout::RemoteFileTarget.new
+  #   file_target.url = 'http://github.com/lukebayes/asunit/zipball/4.0.0'
+  #   file_target.install_path = @asunit_dir
+  #   file_target.downloaded_path = @asunit_zip
+  #   file_target.md5 = 'dca47aa2334a3f66efd2912c208a8ef4'
+  #   file_target.archive_path = 'lukebayes-asunit-50da476d20fa87b71f71ed01b23cd3c4030b26c6/as3/src'
+  #   file_target.filename = 'asunit3.zip'
+  # 
+  #   assert_equal('asunit3.zip', file_target.file_name)
+  # 
+  #   file_target.resolve(true)
+  #   
+  #   assert_file @asunit_src
+  # end
   
   def test_environment_variable
     file_target = Sprout::RemoteFileTarget.new
@@ -167,21 +167,21 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     assert_file file_target.installed_path + '/macosx'
   end
   
-  def test_environment_variable_fallback_to_download
-    ENV['SPROUT_TARGET_HOME'] = nil
-    file_target = Sprout::RemoteFileTarget.new
-    file_target.environment = 'SPROUT_TARGET_HOME' # fails
-    file_target.url = 'http://github.com/lukebayes/asunit/zipball/4.0.0'
-    file_target.install_path = @asunit_dir
-    file_target.downloaded_path = @asunit_zip
-    file_target.md5 = 'dca47aa2334a3f66efd2912c208a8ef4'
-    file_target.archive_path = 'lukebayes-asunit-50da476d20fa87b71f71ed01b23cd3c4030b26c6/as3/src'
-    file_target.filename = 'asunit3.zip'
-    
-    file_target.resolve true
-    assert_file file_target.installed_path
-    assert file_target.installed_path != ENV['SPROUT_TARGET_HOME']
-  end
+  # def test_environment_variable_fallback_to_download
+  #   ENV['SPROUT_TARGET_HOME'] = nil
+  #   file_target = Sprout::RemoteFileTarget.new
+  #   file_target.environment = 'SPROUT_TARGET_HOME' # fails
+  #   file_target.url = 'http://github.com/lukebayes/asunit/zipball/4.0.0'
+  #   file_target.install_path = @asunit_dir
+  #   file_target.downloaded_path = @asunit_zip
+  #   file_target.md5 = 'dca47aa2334a3f66efd2912c208a8ef4'
+  #   file_target.archive_path = 'lukebayes-asunit-50da476d20fa87b71f71ed01b23cd3c4030b26c6/as3/src'
+  #   file_target.filename = 'asunit3.zip'
+  #   
+  #   file_target.resolve true
+  #   assert_file file_target.installed_path
+  #   assert file_target.installed_path != ENV['SPROUT_TARGET_HOME']
+  # end
 
 end
 
