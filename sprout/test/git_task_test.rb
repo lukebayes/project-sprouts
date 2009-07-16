@@ -23,7 +23,7 @@ class GitTaskTest < GitTestCase
       t.scm = GitStub.new
       t.version_file = @version_file
     end
-
+  
     run_task :task1
   end
 end
