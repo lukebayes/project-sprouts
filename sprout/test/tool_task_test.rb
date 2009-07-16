@@ -212,6 +212,10 @@ class ToolTaskTest <  Test::Unit::TestCase
     assert_file_contains('_preprocessed/src/ProcessMe.txt', 'foobar')
   end
   
+  def test_environment_variable
+    
+  end
+  
 end
 
 module Sprout
