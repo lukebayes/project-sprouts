@@ -1,13 +1,13 @@
 require 'rake/gempackagetask'
 require 'rake/clean'
 require 'rake/testtask'
-require 'lib/sprout/mxml/version'
+require 'lib/sprout/flex4/version'
 
 SPROUT_HOME             = ENV['SPROUT_HOME']
 PROJECT                 = 'sprout'
 NAME                    = 'sprout-flex4-bundle'
 SUMMARY                 = 'Project and Code Generators for Flex 4 Development'
-GEM_VERSION             = Sprout::MXML::VERSION::STRING
+GEM_VERSION             = Sprout::Flex4::VERSION::STRING
 AUTHOR                  = 'Pattern Park'
 EMAIL                   = 'projectsprouts@googlegroups.com'
 HOMEPAGE                = 'http://www.projectsprouts.org'

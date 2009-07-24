@@ -14,6 +14,6 @@
 		]]>
 	</fx:Script>
 	<!-- Import StyleSheet -->
-	<mx:Style source="<%= project_name %>Skin.css" />
+	<fx:Style source="<%= project_name %>Skin.css" />
 	<mx:Container styleName="SproutLogo" width="100%" height="100%" />
 </s:Application>

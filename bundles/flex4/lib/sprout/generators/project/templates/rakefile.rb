@@ -1,13 +1,13 @@
 require 'sprout'
 # Optionally load gems from a server other than rubyforge:
 # set_sources 'http://gems.projectsprouts.org'
-sprout 'flex4'
+sprout 'as3'
 
 ############################################
 # Configure your Project Model
 project_model :model do |m|
   m.project_name            = '<%= project_name %>'
-  m.language                = 'flex4'
+  m.language                = 'mxml'
   m.background_color        = '#FFFFFF'
   m.width                   = 970
   m.height                  = 550

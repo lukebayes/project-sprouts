@@ -34,7 +34,6 @@ class ProjectGeneratorTest < Test::Unit::TestCase
     assert_file(File.join(@fixture, @project_name, 'assets/skins/SomeProject/ProjectSprouts.png'))
      
     assert_file_contains(main_runner, "<FlexRunner")
-    assert_file_contains(main_file, "xmlns:mx=\"http://www.adobe.com/2006/mxml\"")
     assert_executable File.join(@fixture, @project_name, 'script', 'generate')
     
     # Step into the newly created project and exercise it
