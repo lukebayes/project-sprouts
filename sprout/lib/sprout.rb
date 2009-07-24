@@ -130,6 +130,9 @@ module Sprout
     # * +project_path+ Optional parameter. Will default to the nearest folder that contains a valid Rakefile.
     # This Rakefile will usually be loaded by the referenced Generator, and it should have a configured ProjectModel
     # defined in it.
+    
+    # TODO: This command should accept an array of sprout names to fall back on...
+    # for example: generate(['flex4', 'as3'], ...)
     def self.generate(sprout_name, generator_name, params, project_path=nil)
       # params.each_index do |index|
       #   params[index] = clean_project_name(params[index])
