@@ -13,7 +13,7 @@ $:.push(File.dirname(__FILE__) + '/../lib')
 $:.push(File.dirname(__FILE__))
 
 require 'generator_test_helper'
-require 'sprout/mxml'
+require 'sprout/flex4'
 
 Sprout::Log.debug = true
 
