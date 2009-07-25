@@ -16,8 +16,8 @@ gem_wrap name do |t|
   filename: asunit3.zip
   library_path: asunit3
   archive_type: zip
-  url: http://github.com/lukebayes/asunit/zipball/4.0.1
-  md5: cf3df9b9f0d9c89a500fef0d681e46fc
-  archive_path: 'lukebayes-asunit-004c1dcef1634a1807ed24066801b874dd156234/as3/src'
+  url: http://github.com/lukebayes/asunit/zipball/4.0.2
+  md5: 9e7054c5aef320360bb0b1d919c6757f
+  archive_path: 'lukebayes-asunit-f29a44593f429fdb0ad2dc1975db929919342757/as3/src'
 EOF
 end
