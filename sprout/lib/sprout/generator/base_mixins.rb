@@ -97,23 +97,23 @@ module RubiGen # :nodoc:[all]
 
     # Yield latest versions of generator gems.
     def each
-      Gem::cache.sprout_search(/sprout-*#{@sprout_name}-bundle$/).inject({}) { |latest, gem|
+      Gem::cache.sprout_search(/sprout-*#{@sprout_name}-bundle$/).inject({}) do |latest, gem|
         hem = latest[gem.name]
         latest[gem.name] = gem if hem.nil? or gem.version > hem.version
         latest
-      }.values.each { |gem|
+      end.values.each do |gem|
         yield Spec.new(gem.name.sub(/sprout-*#{@sprout_name}-bundle$/, ''), gem.full_gem_path, label)
-      }
+      end
     end
 
     def each_sprout
-      Gem::cache.sprout_search(/^sprout-.*/).inject({}) { |latest, gem|
+      Gem::cache.sprout_search(/^sprout-.*/).inject({}) do |latest, gem|
         hem = latest[gem.name]
         latest[gem.name] = gem if hem.nil? or gem.version > hem.version
         latest
-      }.values.each { |gem|
+      end.values.each do |gem|
         yield Spec.new(gem.name, gem.full_gem_path, label)
-      }
+      end
     end
   end
 

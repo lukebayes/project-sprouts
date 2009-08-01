@@ -6,7 +6,7 @@ package display {
 		private var otherComponent:OtherComponent;
 
 		public function OtherComponentTest(methodName:String=null) {
-			super(methodName)
+			super(methodName);
 		}
 
 		override protected function setUp():void {

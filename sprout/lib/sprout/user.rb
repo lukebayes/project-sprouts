@@ -231,9 +231,9 @@ module Sprout
     end
 
     def execute_thread(tool, options='')
-      return Thread.new {
+      return Thread.new do
         execute(tool, options)
-      }
+      end
     end
 
     def clean_path(path)

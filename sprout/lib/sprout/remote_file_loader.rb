@@ -52,10 +52,10 @@ module Sprout
         },
         :progress_proc => lambda {|s|
           progress.set s if progress
-        }) {|f|
+        }) do |f|
           response = f.read
           progress.finish
-        }
+        end
       rescue SocketError => sock_err
         raise RemoteFileLoaderError.new("[ERROR] #{sock_err.to_s}")
       rescue OpenURI::HTTPError => http_err

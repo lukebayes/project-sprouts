@@ -341,7 +341,7 @@ module Sprout
       name = name.to_s
       cleaned = clean_name(name)
       if(!respond_to?(cleaned))
-        raise NoMethodError.new("undefined method '#{name}' for #{self.class}")
+        raise NoMethodError.new("undefined method '#{name}' for #{self.class}", name)
       end
       param = param_hash[cleaned]
 
@@ -560,11 +560,11 @@ module Sprout
     end
     
     def text_file?(file_name)
-      [/\.as$/, /\.txt$/, /\.mxml$/, /\.xml$/, /\.js$/, /\.html$/, /\.htm$/].select { |regex|
-        if(file_name.match(regex))
+      [/\.as$/, /\.txt$/, /\.mxml$/, /\.xml$/, /\.js$/, /\.html$/, /\.htm$/].select do |regex|
+        if (file_name.match(regex))
           return true
         end
-      }.size > 0
+      end.size > 0
     end
     
     def setup_preprocessing_file_tasks(input_file, output_file)

@@ -174,10 +174,10 @@ class ProgressBarImpl # :nodoc:[all]
   end
 
   def show
-    arguments = @format_arguments.map {|method| 
+    arguments = @format_arguments.map do |method|
       method = sprintf("fmt_%s", method)
       send(method)
-    }
+    end
     line = sprintf(@format, *arguments)
 
     width = get_width

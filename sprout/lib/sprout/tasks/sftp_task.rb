@@ -169,8 +169,8 @@ module Sprout
         while(part)
           begin
             sftp.stat(part)
-          rescue Net::SFTP::Operations::StatusException => e
-            raise unless e.code == 2
+          rescue Net::SFTP::Operations::StatusException => ne
+            raise unless ne.code == 2
             sftp.mkdir(part, :permissions => @dir_mode)
           end
           if(parts.size > 0)
