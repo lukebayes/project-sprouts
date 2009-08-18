@@ -155,6 +155,7 @@ EOF
       end
 
       add_param(:pack, :paths) do |p|
+        p.delimiter   = ' '
         p.description = "Compile all the files contained in specified package - not recursively (eg to compile files in c:\flash\code\my\app do mtasc -cp c:\flash\code -pack my/app)."
       end
 
