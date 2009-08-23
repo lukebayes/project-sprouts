@@ -22,6 +22,8 @@ module Sprout # :nodoc:
     def initialize(args, &block)
       super
 
+      t = define_outer_task
+
       mxmlc output do |t|
         configure_mxmlc t
         configure_mxmlc_application t
@@ -30,7 +32,6 @@ module Sprout # :nodoc:
 
       define_player
       
-      t = define_outer_task
       t.prerequisites << output
       t.prerequisites << player_task_name
     end
