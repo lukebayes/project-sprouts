@@ -76,6 +76,13 @@ class MXMLCTest <  Test::Unit::TestCase
     assert_equal('-compiler.fonts.languages.language-range=hello', some_task.to_shell)
   end
   
+  def test_defines_param
+    some_task = Sprout::MXMLCTask.new(:some_task, Rake::application)
+    some_task.define_conditional << 'CONFIG::debug,true'
+    some_task.define_conditional << 'CONFIG::release,false'
+    assert_equal('-define+=CONFIG::debug,true -define+=CONFIG::release,false', some_task.to_shell)
+  end
+  
   def test_use_network_false
     some_task = Sprout::MXMLCTask.new(:some_task, Rake::application)
     some_task.use_network = false

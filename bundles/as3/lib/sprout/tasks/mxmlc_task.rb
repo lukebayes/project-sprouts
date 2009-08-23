@@ -196,8 +196,11 @@ This is an advanced option.
 EOF
       end
 
-      add_param(:define, :string) do |p|
+      add_param(:define_conditional, :strings) do |p|
+        p.shell_name = "-define"
         p.description =<<EOF
+This parameter is normally called 'define' but thanks to scoping issues with Sprouts and Rake, we needed to rename it and chose: 'define_conditional'.
+
 Define a global AS3 conditional compilation definition, e.g. -define=CONFIG::debugging,true or -define+=CONFIG::debugging,true (to append to existing definitions in flex-config.xml)  (advanced, repeatable)
 EOF
       end
