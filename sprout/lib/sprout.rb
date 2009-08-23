@@ -255,7 +255,9 @@ EOF
         exe = File.join(target.installed_path, archive_path)
         if(User.new.is_a?(WinUser) && !archive_path.match(/.exe$/))
           # If we're on Win (even Cygwin), add .exe to support custom binaries (see sprout-flex3sdk-tool)
-          exe << '.exe'
+          if(File.exists?(exe + '.exe'))
+            exe << '.exe'
+          end
         end
       elsif(target.url)
         # Otherwise, use the default path to an executable if the RemoteFileTarget has a url prop
@@ -264,8 +266,6 @@ EOF
         # Otherwise attempt to run the feature from the system path
         exe = target.archive_path
       end
-      
-      
       
       if(!File.exists?(exe))
         raise UsageError.new("Could not retrieve requested executable from path: #{exe}")
