@@ -30,8 +30,13 @@ class ADLTest <  Test::Unit::TestCase
   
   # Test launcher task
   def test_launcher
-    runtime = ENV['FLEX_HOME'] + "/runtimes/air/mac/Adobe AIR.framework/Adobe AIR"
-    
+
+    # This won't actually run:
+    runtime = 'Adobe AIR'
+
+    # If you'd like to see the application run, you'll need something like this:
+    # runtime = ENV['FLEX_HOME'] + "/runtimes/air/mac/Adobe AIR.framework/Adobe AIR"
+
     launcher = adl :test_adl do |t|
       t.runtime = runtime
       t.nodebug = true
