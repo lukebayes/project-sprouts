@@ -70,7 +70,7 @@ module Sprout
         content = download(url, update)
         FileUtils.makedirs(File.dirname(downloaded_path))
         FileUtils.touch(downloaded_path)
-        File.open(downloaded_path, 'r+') do |file|
+        File.open(downloaded_path, 'rb+') do |file|
           file.write(content)
         end
       end
