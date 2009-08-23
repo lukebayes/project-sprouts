@@ -109,7 +109,7 @@ href="ProjectModel.html">Sprout::ProjectModel</a> <tt>lib_dir</tt>.
 By adding this named task as a prerequisite to your compilation task, that
 SWC will also be added to the <a
 href="MXMLCTask.html">Sprout::MXMLCTask</a> <tt><a
-href="LibraryTask.html#M000084">library_path</a></tt> parameter.
+href="LibraryTask.html#M000108">library_path</a></tt> parameter.
 </p>
 <pre>
   mxmlc 'bin/SomeProject.swf' =&gt; :corelib
@@ -130,7 +130,7 @@ project.
 <p>
 You may want to refer to a library using a particular task name, but have
 it use a different library sprout gem. This can be done using the <a
-href="LibraryTask.html#M000082">gem_name</a> parameter as follows:
+href="LibraryTask.html#M000106">gem_name</a> parameter as follows:
 </p>
 <pre>
   library :asunit do |t|
@@ -206,12 +206,12 @@ libraries.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000083">clean_name</a>&nbsp;&nbsp;
-      <a href="#M000086">define</a>&nbsp;&nbsp;
-      <a href="#M000082">gem_name</a>&nbsp;&nbsp;
-      <a href="#M000084">library_path</a>&nbsp;&nbsp;
-      <a href="#M000085">project_lib</a>&nbsp;&nbsp;
-      <a href="#M000087">project_path</a>&nbsp;&nbsp;
+      <a href="#M000107">clean_name</a>&nbsp;&nbsp;
+      <a href="#M000110">define</a>&nbsp;&nbsp;
+      <a href="#M000106">gem_name</a>&nbsp;&nbsp;
+      <a href="#M000108">library_path</a>&nbsp;&nbsp;
+      <a href="#M000109">project_lib</a>&nbsp;&nbsp;
+      <a href="#M000111">project_path</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -250,11 +250,11 @@ The RubyGems gem version string for this library (e.g., +version =
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000083" class="method-detail">
-        <a name="M000083"></a>
+      <div id="method-M000107" class="method-detail">
+        <a name="M000107"></a>
 
         <div class="method-heading">
-          <a href="#M000083" class="method-signature">
+          <a href="#M000107" class="method-signature">
           <span class="method-name">clean_name</span><span class="method-args">()</span>
           </a>
         </div>
@@ -265,8 +265,8 @@ Ensure that namespaced rake tasks only use the final part for name-based
 features
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000083-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000083-source">
+            onclick="toggleCode('M000107-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000107-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/library_task.rb, line 50</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clean_name</span>
@@ -277,11 +277,11 @@ features
         </div>
       </div>
 
-      <div id="method-M000086" class="method-detail">
-        <a name="M000086"></a>
+      <div id="method-M000110" class="method-detail">
+        <a name="M000110"></a>
 
         <div class="method-heading">
-          <a href="#M000086" class="method-signature">
+          <a href="#M000110" class="method-signature">
           <span class="method-name">define</span><span class="method-args">()</span>
           </a>
         </div>
@@ -289,7 +289,7 @@ features
         <div class="method-description">
           <p>
 Unlike other rake tasks, Library tasks are actually resolved at &#8216;<a
-href="LibraryTask.html#M000086">define</a>&#8217; time. This allows the
+href="LibraryTask.html#M000110">define</a>&#8217; time. This allows the
 tool tasks to build their own dependencies (like file deps)
 </p>
 <pre>
@@ -299,8 +299,8 @@ tool tasks to build their own dependencies (like file deps)
 and would like to contribute to sprouts, this might be a good spot for it)
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000086-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000086-source">
+            onclick="toggleCode('M000110-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000110-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/library_task.rb, line 77</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">define</span>
@@ -313,11 +313,11 @@ and would like to contribute to sprouts, this might be a good spot for it)
         </div>
       </div>
 
-      <div id="method-M000082" class="method-detail">
-        <a name="M000082"></a>
+      <div id="method-M000106" class="method-detail">
+        <a name="M000106"></a>
 
         <div class="method-heading">
-          <a href="#M000082" class="method-signature">
+          <a href="#M000106" class="method-signature">
           <span class="method-name">gem_name</span><span class="method-args">()</span>
           </a>
         </div>
@@ -327,8 +327,8 @@ and would like to contribute to sprouts, this might be a good spot for it)
 The full gem name like &#8216;sprout-asunit3-library&#8216;
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000082-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000082-source">
+            onclick="toggleCode('M000106-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000106-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/library_task.rb, line 44</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gem_name</span>
@@ -339,11 +339,11 @@ The full gem name like &#8216;sprout-asunit3-library&#8216;
         </div>
       </div>
 
-      <div id="method-M000084" class="method-detail">
-        <a name="M000084"></a>
+      <div id="method-M000108" class="method-detail">
+        <a name="M000108"></a>
 
         <div class="method-heading">
-          <a href="#M000084" class="method-signature">
+          <a href="#M000108" class="method-signature">
           <span class="method-name">library_path</span><span class="method-args">()</span>
           </a>
         </div>
@@ -355,8 +355,8 @@ project. This can actually be any full or relative path on your system, but
 should almost always be left alone for automatic resolution.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000084-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000084-source">
+            onclick="toggleCode('M000108-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000108-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/library_task.rb, line 57</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">library_path</span>
@@ -367,11 +367,11 @@ should almost always be left alone for automatic resolution.
         </div>
       </div>
 
-      <div id="method-M000085" class="method-detail">
-        <a name="M000085"></a>
+      <div id="method-M000109" class="method-detail">
+        <a name="M000109"></a>
 
         <div class="method-heading">
-          <a href="#M000085" class="method-signature">
+          <a href="#M000109" class="method-signature">
           <span class="method-name">project_lib</span><span class="method-args">()</span>
           </a>
         </div>
@@ -385,8 +385,8 @@ By default, libraries are installed into <a
 href="ProjectModel.html">Sprout::ProjectModel</a> <tt>lib_dir</tt>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000085-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000085-source">
+            onclick="toggleCode('M000109-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000109-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/library_task.rb, line 64</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project_lib</span>
@@ -401,11 +401,11 @@ href="ProjectModel.html">Sprout::ProjectModel</a> <tt>lib_dir</tt>.
         </div>
       </div>
 
-      <div id="method-M000087" class="method-detail">
-        <a name="M000087"></a>
+      <div id="method-M000111" class="method-detail">
+        <a name="M000111"></a>
 
         <div class="method-heading">
-          <a href="#M000087" class="method-signature">
+          <a href="#M000111" class="method-signature">
           <span class="method-name">project_path</span><span class="method-args">()</span>
           </a>
         </div>
@@ -415,8 +415,8 @@ href="ProjectModel.html">Sprout::ProjectModel</a> <tt>lib_dir</tt>.
 The path within the project where this library is installed
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000087-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000087-source">
+            onclick="toggleCode('M000111-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000111-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/library_task.rb, line 88</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project_path</span>

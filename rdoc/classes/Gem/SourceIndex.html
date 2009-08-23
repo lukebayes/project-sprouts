@@ -86,7 +86,7 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000029">sprout_search</a>&nbsp;&nbsp;
+      <a href="#M000034">sprout_search</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -108,11 +108,11 @@
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000029" class="method-detail">
-        <a name="M000029"></a>
+      <div id="method-M000034" class="method-detail">
+        <a name="M000034"></a>
 
         <div class="method-heading">
-          <a href="#M000029" class="method-signature">
+          <a href="#M000034" class="method-signature">
           <span class="method-name">sprout_search</span><span class="method-args">(gem_pattern, platform_only = false)</span>
           </a>
         </div>
@@ -126,8 +126,8 @@ more stable integration point with RubyGems Any ideas or contributions are
 welcome!
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000029-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000029-source">
+            onclick="toggleCode('M000034-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000034-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/generator/base_mixins.rb, line 11</span>
   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sprout_search</span>(<span class="ruby-identifier">gem_pattern</span>, <span class="ruby-identifier">platform_only</span> = <span class="ruby-keyword kw">false</span>)
@@ -170,8 +170,13 @@ welcome!
         <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Platform</span>.<span class="ruby-identifier">match</span> <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">platform</span>
       <span class="ruby-keyword kw">end</span>
     <span class="ruby-keyword kw">end</span>
-
-    <span class="ruby-identifier">specs</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">sort_obj</span> }
+    
+    <span class="ruby-keyword kw">begin</span>
+      <span class="ruby-identifier">specs</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">sort_obj</span> }
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">NoMethodError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;It looks like your RubyGems installation is not compatible with this version of Sprouts.\n\nTo update, run:\ngem update --system\n\n&quot;</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-keyword kw">end</span>
   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>

@@ -103,7 +103,7 @@ follows:
 This class should have some reasonable default values, but can be modified
 from any rakefile. If you don&#8216;t find some properties that you&#8216;d
 like on the <a href="ProjectModel.html">ProjectModel</a>, you can simply
-add <a href="ProjectModel.html#M000271">new</a> properties and use them
+add <a href="ProjectModel.html#M000337">new</a> properties and use them
 however you wish.
 </p>
 <p>
@@ -150,20 +150,20 @@ will also allow you to send in a model as a prerequisite.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000278">controller_dir</a>&nbsp;&nbsp;
-      <a href="#M000277">controller_dir=</a>&nbsp;&nbsp;
-      <a href="#M000269">instance</a>&nbsp;&nbsp;
-      <a href="#M000282">method_missing</a>&nbsp;&nbsp;
-      <a href="#M000274">model_dir</a>&nbsp;&nbsp;
-      <a href="#M000273">model_dir=</a>&nbsp;&nbsp;
-      <a href="#M000280">name</a>&nbsp;&nbsp;
-      <a href="#M000279">name=</a>&nbsp;&nbsp;
-      <a href="#M000271">new</a>&nbsp;&nbsp;
-      <a href="#M000272">project_path</a>&nbsp;&nbsp;
-      <a href="#M000270">setup</a>&nbsp;&nbsp;
-      <a href="#M000281">to_s</a>&nbsp;&nbsp;
-      <a href="#M000276">view_dir</a>&nbsp;&nbsp;
-      <a href="#M000275">view_dir=</a>&nbsp;&nbsp;
+      <a href="#M000344">controller_dir</a>&nbsp;&nbsp;
+      <a href="#M000343">controller_dir=</a>&nbsp;&nbsp;
+      <a href="#M000335">instance</a>&nbsp;&nbsp;
+      <a href="#M000348">method_missing</a>&nbsp;&nbsp;
+      <a href="#M000340">model_dir</a>&nbsp;&nbsp;
+      <a href="#M000339">model_dir=</a>&nbsp;&nbsp;
+      <a href="#M000346">name</a>&nbsp;&nbsp;
+      <a href="#M000345">name=</a>&nbsp;&nbsp;
+      <a href="#M000337">new</a>&nbsp;&nbsp;
+      <a href="#M000338">project_path</a>&nbsp;&nbsp;
+      <a href="#M000336">setup</a>&nbsp;&nbsp;
+      <a href="#M000347">to_s</a>&nbsp;&nbsp;
+      <a href="#M000342">view_dir</a>&nbsp;&nbsp;
+      <a href="#M000341">view_dir=</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -311,7 +311,7 @@ The relative path to your library directory. Defaults to &#8216;lib&#8216;
 Any remote .SWC and source libraries that are referenced in your rakefile
 will be installed into this directory. Source libraries will be placed in a
 folder that matches the library <a
-href="ProjectModel.html#M000280">name</a>, while SWCs will be simply placed
+href="ProjectModel.html#M000346">name</a>, while SWCs will be simply placed
 directly into the lib_dir.
 </p>
 </td>
@@ -389,9 +389,9 @@ on STDOUT
           <td class="context-item-name">project_name</td>
           <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
           <td class="context-item-desc">
-The real <a href="ProjectModel.html#M000280">name</a> of the project,
+The real <a href="ProjectModel.html#M000346">name</a> of the project,
 usually capitalized like a class <a
-href="ProjectModel.html#M000280">name</a> &#8216;SomeProject&#8216;
+href="ProjectModel.html#M000346">name</a> &#8216;SomeProject&#8216;
 
 </td>
         </tr>
@@ -513,11 +513,11 @@ in an HTML page)_
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000269" class="method-detail">
-        <a name="M000269"></a>
+      <div id="method-M000335" class="method-detail">
+        <a name="M000335"></a>
 
         <div class="method-heading">
-          <a href="#M000269" class="method-signature">
+          <a href="#M000335" class="method-signature">
           <span class="method-name">instance</span><span class="method-args">() {|@@instance if block_given?| ...}</span>
           </a>
         </div>
@@ -529,8 +529,8 @@ href="ProjectModel.html">ProjectModel</a>, or instantiates one if none have
 been created yet.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000269-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000269-source">
+            onclick="toggleCode('M000335-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000335-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 139</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">instance</span>
@@ -543,19 +543,19 @@ been created yet.
         </div>
       </div>
 
-      <div id="method-M000271" class="method-detail">
-        <a name="M000271"></a>
+      <div id="method-M000337" class="method-detail">
+        <a name="M000337"></a>
 
         <div class="method-heading">
-          <a href="#M000271" class="method-signature">
+          <a href="#M000337" class="method-signature">
           <span class="method-name">new</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000271-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000271-source">
+            onclick="toggleCode('M000337-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000337-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 156</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
@@ -591,23 +591,23 @@ been created yet.
         </div>
       </div>
 
-      <div id="method-M000270" class="method-detail">
-        <a name="M000270"></a>
+      <div id="method-M000336" class="method-detail">
+        <a name="M000336"></a>
 
         <div class="method-heading">
-          <a href="#M000270" class="method-signature">
+          <a href="#M000336" class="method-signature">
           <span class="method-name">setup</span><span class="method-args">() {|@@instance if block_given?| ...}</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Decorates the static <a href="ProjectModel.html#M000269">instance</a>
+Decorates the static <a href="ProjectModel.html#M000335">instance</a>
 method.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000270-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000270-source">
+            onclick="toggleCode('M000336-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000336-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 146</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">setup</span>
@@ -622,11 +622,11 @@ method.
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000278" class="method-detail">
-        <a name="M000278"></a>
+      <div id="method-M000344" class="method-detail">
+        <a name="M000344"></a>
 
         <div class="method-heading">
-          <a href="#M000278" class="method-signature">
+          <a href="#M000344" class="method-signature">
           <span class="method-name">controller_dir</span><span class="method-args">()</span>
           </a>
         </div>
@@ -640,8 +640,8 @@ Simple MVC helper for project-wide views if your project is called
   SomeProject/src/someproject/controllers
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000278-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000278-source">
+            onclick="toggleCode('M000344-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000344-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 225</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">controller_dir</span>
@@ -655,19 +655,19 @@ Simple MVC helper for project-wide views if your project is called
         </div>
       </div>
 
-      <div id="method-M000277" class="method-detail">
-        <a name="M000277"></a>
+      <div id="method-M000343" class="method-detail">
+        <a name="M000343"></a>
 
         <div class="method-heading">
-          <a href="#M000277" class="method-signature">
+          <a href="#M000343" class="method-signature">
           <span class="method-name">controller_dir=</span><span class="method-args">(dir)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000277-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000277-source">
+            onclick="toggleCode('M000343-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000343-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 218</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">controller_dir=</span>(<span class="ruby-identifier">dir</span>)
@@ -678,11 +678,11 @@ Simple MVC helper for project-wide views if your project is called
         </div>
       </div>
 
-      <div id="method-M000274" class="method-detail">
-        <a name="M000274"></a>
+      <div id="method-M000340" class="method-detail">
+        <a name="M000340"></a>
 
         <div class="method-heading">
-          <a href="#M000274" class="method-signature">
+          <a href="#M000340" class="method-signature">
           <span class="method-name">model_dir</span><span class="method-args">()</span>
           </a>
         </div>
@@ -696,8 +696,8 @@ Simple MVC helper for project-wide models if your project is called
   SomeProject/src/someproject/models
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000274-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000274-source">
+            onclick="toggleCode('M000340-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000340-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 197</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">model_dir</span>
@@ -711,19 +711,19 @@ Simple MVC helper for project-wide models if your project is called
         </div>
       </div>
 
-      <div id="method-M000273" class="method-detail">
-        <a name="M000273"></a>
+      <div id="method-M000339" class="method-detail">
+        <a name="M000339"></a>
 
         <div class="method-heading">
-          <a href="#M000273" class="method-signature">
+          <a href="#M000339" class="method-signature">
           <span class="method-name">model_dir=</span><span class="method-args">(dir)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000273-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000273-source">
+            onclick="toggleCode('M000339-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000339-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 190</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">model_dir=</span>(<span class="ruby-identifier">dir</span>)
@@ -734,19 +734,19 @@ Simple MVC helper for project-wide models if your project is called
         </div>
       </div>
 
-      <div id="method-M000280" class="method-detail">
-        <a name="M000280"></a>
+      <div id="method-M000346" class="method-detail">
+        <a name="M000346"></a>
 
         <div class="method-heading">
-          <a href="#M000280" class="method-signature">
+          <a href="#M000346" class="method-signature">
           <span class="method-name">name</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000280-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000280-source">
+            onclick="toggleCode('M000346-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000346-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 237</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">name</span>
@@ -757,11 +757,11 @@ Simple MVC helper for project-wide models if your project is called
         </div>
       </div>
 
-      <div id="method-M000279" class="method-detail">
-        <a name="M000279"></a>
+      <div id="method-M000345" class="method-detail">
+        <a name="M000345"></a>
 
         <div class="method-heading">
-          <a href="#M000279" class="method-signature">
+          <a href="#M000345" class="method-signature">
           <span class="method-name">name=</span><span class="method-args">(name)</span>
           </a>
         </div>
@@ -771,8 +771,8 @@ Simple MVC helper for project-wide models if your project is called
 Alias for project_name
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000279-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000279-source">
+            onclick="toggleCode('M000345-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000345-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 233</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">name=</span>(<span class="ruby-identifier">name</span>)
@@ -783,11 +783,11 @@ Alias for project_name
         </div>
       </div>
 
-      <div id="method-M000272" class="method-detail">
-        <a name="M000272"></a>
+      <div id="method-M000338" class="method-detail">
+        <a name="M000338"></a>
 
         <div class="method-heading">
-          <a href="#M000272" class="method-signature">
+          <a href="#M000338" class="method-signature">
           <span class="method-name">project_path</span><span class="method-args">()</span>
           </a>
         </div>
@@ -797,8 +797,8 @@ Alias for project_name
 Path to the project directory from which all other paths are created
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000272-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000272-source">
+            onclick="toggleCode('M000338-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000338-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 186</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">project_path</span>
@@ -809,19 +809,19 @@ Path to the project directory from which all other paths are created
         </div>
       </div>
 
-      <div id="method-M000281" class="method-detail">
-        <a name="M000281"></a>
+      <div id="method-M000347" class="method-detail">
+        <a name="M000347"></a>
 
         <div class="method-heading">
-          <a href="#M000281" class="method-signature">
+          <a href="#M000347" class="method-signature">
           <span class="method-name">to_s</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000281-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000281-source">
+            onclick="toggleCode('M000347-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000347-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 241</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
@@ -832,11 +832,11 @@ Path to the project directory from which all other paths are created
         </div>
       </div>
 
-      <div id="method-M000276" class="method-detail">
-        <a name="M000276"></a>
+      <div id="method-M000342" class="method-detail">
+        <a name="M000342"></a>
 
         <div class="method-heading">
-          <a href="#M000276" class="method-signature">
+          <a href="#M000342" class="method-signature">
           <span class="method-name">view_dir</span><span class="method-args">()</span>
           </a>
         </div>
@@ -850,8 +850,8 @@ Simple MVC helper for project-wide views if your project is called
   SomeProject/src/someproject/views
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000276-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000276-source">
+            onclick="toggleCode('M000342-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000342-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 211</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">view_dir</span>
@@ -865,19 +865,19 @@ Simple MVC helper for project-wide views if your project is called
         </div>
       </div>
 
-      <div id="method-M000275" class="method-detail">
-        <a name="M000275"></a>
+      <div id="method-M000341" class="method-detail">
+        <a name="M000341"></a>
 
         <div class="method-heading">
-          <a href="#M000275" class="method-signature">
+          <a href="#M000341" class="method-signature">
           <span class="method-name">view_dir=</span><span class="method-args">(dir)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000275-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000275-source">
+            onclick="toggleCode('M000341-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000341-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 204</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">view_dir=</span>(<span class="ruby-identifier">dir</span>)
@@ -890,19 +890,19 @@ Simple MVC helper for project-wide views if your project is called
 
       <h3 class="section-bar">Protected Instance methods</h3>
 
-      <div id="method-M000282" class="method-detail">
-        <a name="M000282"></a>
+      <div id="method-M000348" class="method-detail">
+        <a name="M000348"></a>
 
         <div class="method-heading">
-          <a href="#M000282" class="method-signature">
+          <a href="#M000348" class="method-signature">
           <span class="method-name">method_missing</span><span class="method-args">(method_name, *args)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000282-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000282-source">
+            onclick="toggleCode('M000348-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000348-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/project_model.rb, line 247</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">method_name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)

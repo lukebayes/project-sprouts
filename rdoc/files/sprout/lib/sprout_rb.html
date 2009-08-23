@@ -56,7 +56,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Fri Apr 17 17:39:38 -0700 2009</td>
+      <td>Sat Aug 22 18:22:18 -0700 2009</td>
     </tr>
     </table>
   </div>
@@ -82,8 +82,9 @@
       sprout/log&nbsp;&nbsp;
       sprout/user&nbsp;&nbsp;
       sprout/zip_util&nbsp;&nbsp;
-      sprout/remote_file_target&nbsp;&nbsp;
       sprout/remote_file_loader&nbsp;&nbsp;
+      sprout/archive_unpacker&nbsp;&nbsp;
+      sprout/remote_file_target&nbsp;&nbsp;
       sprout/simple_resolver&nbsp;&nbsp;
       sprout/template_resolver&nbsp;&nbsp;
       rubygems/installer&nbsp;&nbsp;
@@ -150,7 +151,7 @@ gem can use this method as follows:
             onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000008-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 464</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 488</span>
 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set_sources</span>(<span class="ruby-identifier">sources</span>)
   <span class="ruby-constant">Sprout</span><span class="ruby-operator">::</span><span class="ruby-constant">Sprout</span>.<span class="ruby-identifier">gem_sources</span> = <span class="ruby-identifier">sources</span>
 <span class="ruby-keyword kw">end</span>
@@ -177,7 +178,7 @@ version
             onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000009-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 469</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 493</span>
 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sprout</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">version</span>=<span class="ruby-keyword kw">nil</span>)
   <span class="ruby-constant">Sprout</span><span class="ruby-operator">::</span><span class="ruby-constant">Sprout</span>.<span class="ruby-identifier">sprout</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">version</span>)
 <span class="ruby-keyword kw">end</span>

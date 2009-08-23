@@ -86,9 +86,9 @@ Linux.
 </p>
 <p>
 Simply send the rake task the <tt><a
-href="FlashPlayerTask.html#M000305">swf</a></tt> you&#8216;d like to launch
+href="FlashPlayerTask.html#M000278">swf</a></tt> you&#8216;d like to launch
 either indirectly as a rake dependency or directly as the <tt><a
-href="FlashPlayerTask.html#M000305">swf</a></tt> property of this task.
+href="FlashPlayerTask.html#M000278">swf</a></tt> property of this task.
 </p>
 <pre>
   flashplayer :run =&gt; 'bin/SomeProject.swf'
@@ -111,30 +111,29 @@ Or you could:
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000316">close</a>&nbsp;&nbsp;
-      <a href="#M000300">define_task</a>&nbsp;&nbsp;
-      <a href="#M000307">do_not_focus</a>&nbsp;&nbsp;
-      <a href="#M000306">do_not_focus=</a>&nbsp;&nbsp;
-      <a href="#M000322">examine_test_result</a>&nbsp;&nbsp;
-      <a href="#M000315">execute</a>&nbsp;&nbsp;
-      <a href="#M000318">focus_player_on_mac</a>&nbsp;&nbsp;
-      <a href="#M000311">gem_name</a>&nbsp;&nbsp;
-      <a href="#M000310">gem_name=</a>&nbsp;&nbsp;
-      <a href="#M000309">gem_version</a>&nbsp;&nbsp;
-      <a href="#M000308">gem_version=</a>&nbsp;&nbsp;
-      <a href="#M000302">home</a>&nbsp;&nbsp;
-      <a href="#M000303">home_paths</a>&nbsp;&nbsp;
-      <a href="#M000299">new</a>&nbsp;&nbsp;
-      <a href="#M000320">parse_test_result</a>&nbsp;&nbsp;
-      <a href="#M000319">read_log</a>&nbsp;&nbsp;
-      <a href="#M000317">run</a>&nbsp;&nbsp;
-      <a href="#M000305">swf</a>&nbsp;&nbsp;
-      <a href="#M000304">swf=</a>&nbsp;&nbsp;
-      <a href="#M000314">test_result</a>&nbsp;&nbsp;
-      <a href="#M000313">test_result_file</a>&nbsp;&nbsp;
-      <a href="#M000312">test_result_file=</a>&nbsp;&nbsp;
-      <a href="#M000301">trust</a>&nbsp;&nbsp;
-      <a href="#M000321">write_test_result</a>&nbsp;&nbsp;
+      <a href="#M000290">close</a>&nbsp;&nbsp;
+      <a href="#M000273">define_task</a>&nbsp;&nbsp;
+      <a href="#M000280">do_not_focus</a>&nbsp;&nbsp;
+      <a href="#M000279">do_not_focus=</a>&nbsp;&nbsp;
+      <a href="#M000294">examine_test_result</a>&nbsp;&nbsp;
+      <a href="#M000288">execute</a>&nbsp;&nbsp;
+      <a href="#M000284">gem_name</a>&nbsp;&nbsp;
+      <a href="#M000283">gem_name=</a>&nbsp;&nbsp;
+      <a href="#M000282">gem_version</a>&nbsp;&nbsp;
+      <a href="#M000281">gem_version=</a>&nbsp;&nbsp;
+      <a href="#M000275">home</a>&nbsp;&nbsp;
+      <a href="#M000276">home_paths</a>&nbsp;&nbsp;
+      <a href="#M000272">new</a>&nbsp;&nbsp;
+      <a href="#M000292">parse_test_result</a>&nbsp;&nbsp;
+      <a href="#M000291">read_log</a>&nbsp;&nbsp;
+      <a href="#M000289">run</a>&nbsp;&nbsp;
+      <a href="#M000278">swf</a>&nbsp;&nbsp;
+      <a href="#M000277">swf=</a>&nbsp;&nbsp;
+      <a href="#M000287">test_result</a>&nbsp;&nbsp;
+      <a href="#M000286">test_result_file</a>&nbsp;&nbsp;
+      <a href="#M000285">test_result_file=</a>&nbsp;&nbsp;
+      <a href="#M000274">trust</a>&nbsp;&nbsp;
+      <a href="#M000293">write_test_result</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -156,21 +155,21 @@ Or you could:
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000300" class="method-detail">
-        <a name="M000300"></a>
+      <div id="method-M000273" class="method-detail">
+        <a name="M000273"></a>
 
         <div class="method-heading">
-          <a href="#M000300" class="method-signature">
+          <a href="#M000273" class="method-signature">
           <span class="method-name">define_task</span><span class="method-args">(args) {|t if block_given?| ...}</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000300-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000300-source">
+            onclick="toggleCode('M000273-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000273-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 72</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 73</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">define_task</span>(<span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
       <span class="ruby-identifier">t</span> = <span class="ruby-keyword kw">super</span>
       <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">t</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
@@ -181,11 +180,11 @@ Or you could:
         </div>
       </div>
 
-      <div id="method-M000302" class="method-detail">
-        <a name="M000302"></a>
+      <div id="method-M000275" class="method-detail">
+        <a name="M000275"></a>
 
         <div class="method-heading">
-          <a href="#M000302" class="method-signature">
+          <a href="#M000275" class="method-signature">
           <span class="method-name">home</span><span class="method-args">()</span>
           </a>
         </div>
@@ -193,13 +192,13 @@ Or you could:
         <div class="method-description">
           <p>
 Local system path to where the Flash Player stores trace output logs and <a
-href="FlashPlayerTask.html#M000301">trust</a> files
+href="FlashPlayerTask.html#M000274">trust</a> files
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000302-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000302-source">
+            onclick="toggleCode('M000275-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000275-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 88</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 89</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-constant">FlashPlayerTask</span>.<span class="ruby-identifier">home</span>
       <span class="ruby-keyword kw">if</span>(<span class="ruby-ivar">@@home</span>)
         <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@@home</span>
@@ -221,11 +220,11 @@ href="FlashPlayerTask.html#M000301">trust</a> files
         </div>
       </div>
 
-      <div id="method-M000303" class="method-detail">
-        <a name="M000303"></a>
+      <div id="method-M000276" class="method-detail">
+        <a name="M000276"></a>
 
         <div class="method-heading">
-          <a href="#M000303" class="method-signature">
+          <a href="#M000276" class="method-signature">
           <span class="method-name">home_paths</span><span class="method-args">()</span>
           </a>
         </div>
@@ -236,10 +235,10 @@ Collection of the potential locations of the Flash Player Home For each
 supported Platform, the first existing location will be used.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000303-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000303-source">
+            onclick="toggleCode('M000276-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000276-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 108</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 109</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-constant">FlashPlayerTask</span>.<span class="ruby-identifier">home_paths</span>
       <span class="ruby-keyword kw">return</span> [<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">User</span>.<span class="ruby-identifier">library</span>, <span class="ruby-value str">'Preferences'</span>, <span class="ruby-value str">'Macromedia'</span>, <span class="ruby-value str">'Flash Player'</span>),
               <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">User</span>.<span class="ruby-identifier">library</span>, <span class="ruby-value str">'Application Support'</span>, <span class="ruby-value str">'Macromedia'</span>),
@@ -251,24 +250,25 @@ supported Platform, the first existing location will be used.
         </div>
       </div>
 
-      <div id="method-M000299" class="method-detail">
-        <a name="M000299"></a>
+      <div id="method-M000272" class="method-detail">
+        <a name="M000272"></a>
 
         <div class="method-heading">
-          <a href="#M000299" class="method-signature">
+          <a href="#M000272" class="method-signature">
           <span class="method-name">new</span><span class="method-args">(task_name, app)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000299-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000299-source">
+            onclick="toggleCode('M000272-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000272-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 65</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">task_name</span>, <span class="ruby-identifier">app</span>)
       <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">task_name</span>, <span class="ruby-identifier">app</span>)
       <span class="ruby-ivar">@default_gem_name</span> = <span class="ruby-value str">'sprout-flashplayer-tool'</span>
+      <span class="ruby-ivar">@default_gem_version</span> = <span class="ruby-value str">'10.22.0'</span>
       <span class="ruby-ivar">@default_result_file</span> = <span class="ruby-value str">'AsUnitResults.xml'</span>
       <span class="ruby-ivar">@inside_test_result</span> = <span class="ruby-keyword kw">false</span>
     <span class="ruby-keyword kw">end</span>
@@ -277,11 +277,11 @@ supported Platform, the first existing location will be used.
         </div>
       </div>
 
-      <div id="method-M000301" class="method-detail">
-        <a name="M000301"></a>
+      <div id="method-M000274" class="method-detail">
+        <a name="M000274"></a>
 
         <div class="method-heading">
-          <a href="#M000301" class="method-signature">
+          <a href="#M000274" class="method-signature">
           <span class="method-name">trust</span><span class="method-args">()</span>
           </a>
         </div>
@@ -291,10 +291,10 @@ supported Platform, the first existing location will be used.
 Local system path to the Flash Player Trust file
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000301-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000301-source">
+            onclick="toggleCode('M000274-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000274-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 79</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 80</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-constant">FlashPlayerTask</span>.<span class="ruby-identifier">trust</span>
       <span class="ruby-keyword kw">if</span>(<span class="ruby-ivar">@@trust</span>)
         <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@@trust</span>
@@ -309,24 +309,27 @@ Local system path to the Flash Player Trust file
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000316" class="method-detail">
-        <a name="M000316"></a>
+      <div id="method-M000290" class="method-detail">
+        <a name="M000290"></a>
 
         <div class="method-heading">
-          <a href="#M000316" class="method-signature">
+          <a href="#M000290" class="method-signature">
           <span class="method-name">close</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000316-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000316-source">
+            onclick="toggleCode('M000290-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000290-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 237</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 268</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">close</span>
-      <span class="ruby-keyword kw">if</span>(<span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>().<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WinUser</span>))
+      <span class="ruby-identifier">usr</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">usr</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WinUser</span>))
         <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">kill</span>(<span class="ruby-ivar">@thread</span>)
+      <span class="ruby-keyword kw">elsif</span>(<span class="ruby-identifier">usr</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">OSXUser</span>))
+        <span class="ruby-ivar">@clix_player</span>.<span class="ruby-identifier">kill</span>
       <span class="ruby-keyword kw">else</span>
         <span class="ruby-constant">Process</span>.<span class="ruby-identifier">kill</span>(<span class="ruby-value str">&quot;SIGALRM&quot;</span>, <span class="ruby-ivar">@player_pid</span>)
       <span class="ruby-keyword kw">end</span>
@@ -336,21 +339,21 @@ Local system path to the Flash Player Trust file
         </div>
       </div>
 
-      <div id="method-M000307" class="method-detail">
-        <a name="M000307"></a>
+      <div id="method-M000280" class="method-detail">
+        <a name="M000280"></a>
 
         <div class="method-heading">
-          <a href="#M000307" class="method-signature">
+          <a href="#M000280" class="method-signature">
           <span class="method-name">do_not_focus</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000307-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000307-source">
+            onclick="toggleCode('M000280-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000280-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 152</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 156</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">do_not_focus</span>
       <span class="ruby-ivar">@do_not_focus</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">nil</span>
     <span class="ruby-keyword kw">end</span>
@@ -359,11 +362,11 @@ Local system path to the Flash Player Trust file
         </div>
       </div>
 
-      <div id="method-M000306" class="method-detail">
-        <a name="M000306"></a>
+      <div id="method-M000279" class="method-detail">
+        <a name="M000279"></a>
 
         <div class="method-heading">
-          <a href="#M000306" class="method-signature">
+          <a href="#M000279" class="method-signature">
           <span class="method-name">do_not_focus=</span><span class="method-args">(focus)</span>
           </a>
         </div>
@@ -377,34 +380,39 @@ instances of the Player being instantiated. In the case of running a test
 harness, this is absolutely not desirable, so we had expose a parameter
 that allows us to prevent auto-focus of the player.
 </p>
+<p>
+This feature is deprecated in current versions of the <a
+href="FlashPlayerTask.html">FlashPlayerTask</a>
+</p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000306-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000306-source">
+            onclick="toggleCode('M000279-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000279-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 148</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 151</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">do_not_focus=</span>(<span class="ruby-identifier">focus</span>)
       <span class="ruby-ivar">@do_not_focus</span> = <span class="ruby-identifier">focus</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;[WARNING] Thanks to fixes in the FlashPlayer task, do_not_focus is deprecated and no longer needs to be used&quot;</span>
     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000322" class="method-detail">
-        <a name="M000322"></a>
+      <div id="method-M000294" class="method-detail">
+        <a name="M000294"></a>
 
         <div class="method-heading">
-          <a href="#M000322" class="method-signature">
+          <a href="#M000294" class="method-signature">
           <span class="method-name">examine_test_result</span><span class="method-args">(result)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000322-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000322-source">
+            onclick="toggleCode('M000294-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000294-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 332</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 333</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">examine_test_result</span>(<span class="ruby-identifier">result</span>)
       <span class="ruby-identifier">require</span> <span class="ruby-value str">'rexml/document'</span>
       <span class="ruby-identifier">doc</span> = <span class="ruby-keyword kw">nil</span>
@@ -435,21 +443,21 @@ that allows us to prevent auto-focus of the player.
         </div>
       </div>
 
-      <div id="method-M000315" class="method-detail">
-        <a name="M000315"></a>
+      <div id="method-M000288" class="method-detail">
+        <a name="M000288"></a>
 
         <div class="method-heading">
-          <a href="#M000315" class="method-signature">
+          <a href="#M000288" class="method-signature">
           <span class="method-name">execute</span><span class="method-args">(*args)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000315-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000315-source">
+            onclick="toggleCode('M000288-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000288-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 208</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 212</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">execute</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
       <span class="ruby-keyword kw">super</span>
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">FlashPlayerError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;FlashPlayer task #{name} required field swf is nil&quot;</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">swf</span>
@@ -466,10 +474,10 @@ that allows us to prevent auto-focus of the player.
             <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-value str">''</span>)
           <span class="ruby-keyword kw">end</span>
         <span class="ruby-keyword kw">else</span>
-          <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">log_file</span>))
+          <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">makedirs</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">log_file</span>))
           <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">touch</span>(<span class="ruby-identifier">log_file</span>)
         <span class="ruby-keyword kw">end</span>
-      <span class="ruby-keyword kw">rescue</span>
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">StandardError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
         <span class="ruby-identifier">puts</span> <span class="ruby-value str">'[WARNING] FlashPlayer encountered an error working with the mm.cfg log and/or editing the Trust file'</span>
       <span class="ruby-keyword kw">end</span>
       
@@ -483,52 +491,21 @@ that allows us to prevent auto-focus of the player.
         </div>
       </div>
 
-      <div id="method-M000318" class="method-detail">
-        <a name="M000318"></a>
+      <div id="method-M000284" class="method-detail">
+        <a name="M000284"></a>
 
         <div class="method-heading">
-          <a href="#M000318" class="method-signature">
-          <span class="method-name">focus_player_on_mac</span><span class="method-args">(out, exe)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000318-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000318-source">
-<pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 266</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">focus_player_on_mac</span>(<span class="ruby-identifier">out</span>, <span class="ruby-identifier">exe</span>)
-      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">do_not_focus</span>
-      <span class="ruby-keyword kw">begin</span>
-        <span class="ruby-keyword kw">if</span>(<span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">OSXUser</span>))
-          <span class="ruby-identifier">require</span> <span class="ruby-value str">'appscript'</span>
-          <span class="ruby-constant">Appscript</span>.<span class="ruby-identifier">app</span>(<span class="ruby-identifier">exe</span>).<span class="ruby-identifier">activate</span>
-        <span class="ruby-keyword kw">end</span>
-      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
-        <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;[WARNING] Cannot focus Flash Player without rb-appscript gem&quot;</span>
-      <span class="ruby-keyword kw">end</span>
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000311" class="method-detail">
-        <a name="M000311"></a>
-
-        <div class="method-heading">
-          <a href="#M000311" class="method-signature">
+          <a href="#M000284" class="method-signature">
           <span class="method-name">gem_name</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000311-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000311-source">
+            onclick="toggleCode('M000284-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000284-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 185</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 189</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gem_name</span>
       <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@gem_name</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@default_gem_name</span>
     <span class="ruby-keyword kw">end</span>
@@ -537,11 +514,11 @@ that allows us to prevent auto-focus of the player.
         </div>
       </div>
 
-      <div id="method-M000310" class="method-detail">
-        <a name="M000310"></a>
+      <div id="method-M000283" class="method-detail">
+        <a name="M000283"></a>
 
         <div class="method-heading">
-          <a href="#M000310" class="method-signature">
+          <a href="#M000283" class="method-signature">
           <span class="method-name">gem_name=</span><span class="method-args">(name)</span>
           </a>
         </div>
@@ -552,10 +529,10 @@ Full name of the sprout tool gem that this tool task will use. This
 defaults to sprout-flashplayer-tool
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000310-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000310-source">
+            onclick="toggleCode('M000283-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000283-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 181</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 185</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gem_name=</span>(<span class="ruby-identifier">name</span>)
       <span class="ruby-ivar">@gem_name</span> = <span class="ruby-identifier">name</span>
     <span class="ruby-keyword kw">end</span>
@@ -564,21 +541,21 @@ defaults to sprout-flashplayer-tool
         </div>
       </div>
 
-      <div id="method-M000309" class="method-detail">
-        <a name="M000309"></a>
+      <div id="method-M000282" class="method-detail">
+        <a name="M000282"></a>
 
         <div class="method-heading">
-          <a href="#M000309" class="method-signature">
+          <a href="#M000282" class="method-signature">
           <span class="method-name">gem_version</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000309-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000309-source">
+            onclick="toggleCode('M000282-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000282-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 175</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 179</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gem_version</span>
       <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@gem_version</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">nil</span>
     <span class="ruby-keyword kw">end</span>
@@ -587,11 +564,11 @@ defaults to sprout-flashplayer-tool
         </div>
       </div>
 
-      <div id="method-M000308" class="method-detail">
-        <a name="M000308"></a>
+      <div id="method-M000281" class="method-detail">
+        <a name="M000281"></a>
 
         <div class="method-heading">
-          <a href="#M000308" class="method-signature">
+          <a href="#M000281" class="method-signature">
           <span class="method-name">gem_version=</span><span class="method-args">(version)</span>
           </a>
         </div>
@@ -606,7 +583,7 @@ from the actual player version in that the final revision (the last of
 three numbers), is the gem version, while the first two describe the player
 version being downloaded. The exact gem version that you would like the <a
 href="ToolTask.html">ToolTask</a> to <a
-href="FlashPlayerTask.html#M000315">execute</a>. By default this value
+href="FlashPlayerTask.html#M000288">execute</a>. By default this value
 should be nil and will download the latest version of the gem that is
 available unless there is a version already installed on your system.
 </p>
@@ -618,10 +595,10 @@ project depends on. This way your team can rest assured that they are all
 working with the same tools.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000308-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000308-source">
+            onclick="toggleCode('M000281-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000281-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 171</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 175</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gem_version=</span>(<span class="ruby-identifier">version</span>)
       <span class="ruby-ivar">@gem_version</span> = <span class="ruby-identifier">version</span>
     <span class="ruby-keyword kw">end</span>
@@ -630,11 +607,11 @@ working with the same tools.
         </div>
       </div>
 
-      <div id="method-M000320" class="method-detail">
-        <a name="M000320"></a>
+      <div id="method-M000292" class="method-detail">
+        <a name="M000292"></a>
 
         <div class="method-heading">
-          <a href="#M000320" class="method-signature">
+          <a href="#M000292" class="method-signature">
           <span class="method-name">parse_test_result</span><span class="method-args">(line, thread)</span>
           </a>
         </div>
@@ -644,10 +621,10 @@ working with the same tools.
 Returns true if inside of a test result
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000320-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000320-source">
+            onclick="toggleCode('M000292-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000292-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 305</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 306</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse_test_result</span>(<span class="ruby-identifier">line</span>, <span class="ruby-identifier">thread</span>)
       <span class="ruby-keyword kw">if</span>(<span class="ruby-ivar">@inside_test_result</span>)
         <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">line</span>.<span class="ruby-identifier">index</span>(<span class="ruby-ivar">@@test_result_post_delimiter</span>))
@@ -672,21 +649,21 @@ Returns true if inside of a test result
         </div>
       </div>
 
-      <div id="method-M000319" class="method-detail">
-        <a name="M000319"></a>
+      <div id="method-M000291" class="method-detail">
+        <a name="M000291"></a>
 
         <div class="method-heading">
-          <a href="#M000319" class="method-signature">
+          <a href="#M000291" class="method-signature">
           <span class="method-name">read_log</span><span class="method-args">(thread, log_file)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000319-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000319-source">
+            onclick="toggleCode('M000291-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000291-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 278</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 279</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">read_log</span>(<span class="ruby-identifier">thread</span>, <span class="ruby-identifier">log_file</span>)
       <span class="ruby-identifier">lines_put</span> = <span class="ruby-value">0</span>
 
@@ -717,21 +694,21 @@ Returns true if inside of a test result
         </div>
       </div>
 
-      <div id="method-M000317" class="method-detail">
-        <a name="M000317"></a>
+      <div id="method-M000289" class="method-detail">
+        <a name="M000289"></a>
 
         <div class="method-heading">
-          <a href="#M000317" class="method-signature">
+          <a href="#M000289" class="method-signature">
           <span class="method-name">run</span><span class="method-args">(tool, gem_version, swf)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000317-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000317-source">
+            onclick="toggleCode('M000289-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000289-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 245</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 241</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-identifier">tool</span>, <span class="ruby-identifier">gem_version</span>, <span class="ruby-identifier">swf</span>)
       <span class="ruby-identifier">path_to_exe</span> = <span class="ruby-constant">Sprout</span>.<span class="ruby-identifier">get_executable</span>(<span class="ruby-identifier">tool</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">gem_version</span>)
       <span class="ruby-identifier">target</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">clean_path</span>(<span class="ruby-identifier">path_to_exe</span>)
@@ -740,38 +717,44 @@ Returns true if inside of a test result
       <span class="ruby-identifier">thread_out</span> = <span class="ruby-identifier">$stdout</span>
       <span class="ruby-identifier">command</span> = <span class="ruby-node">&quot;#{target} #{User.clean_path(swf)}&quot;</span>
 
-      <span class="ruby-keyword kw">return</span> <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">new</span> {
-        <span class="ruby-identifier">usr</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>()
-        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">usr</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WinUser</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">usr</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">CygwinUser</span>))
-          <span class="ruby-identifier">system</span> <span class="ruby-identifier">command</span>
-        <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">usr</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>()
+      <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">usr</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WinUser</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">usr</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">CygwinUser</span>))
+        <span class="ruby-keyword kw">return</span> <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">new</span> {
+            <span class="ruby-identifier">system</span> <span class="ruby-identifier">command</span>
+        }
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">usr</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">OSXUser</span>)
+        <span class="ruby-identifier">require</span> <span class="ruby-value str">'clix_flash_player'</span>
+        <span class="ruby-ivar">@clix_player</span> = <span class="ruby-constant">CLIXFlashPlayer</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-ivar">@clix_player</span>.<span class="ruby-identifier">execute</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">swf</span>)
+        <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@clix_player</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">new</span> {
           <span class="ruby-identifier">require</span> <span class="ruby-value str">'open4'</span>
           <span class="ruby-ivar">@player_pid</span>, <span class="ruby-identifier">stdin</span>, <span class="ruby-identifier">stdout</span>, <span class="ruby-identifier">stderr</span> = <span class="ruby-constant">Open4</span>.<span class="ruby-identifier">popen4</span>(<span class="ruby-identifier">command</span>)
-          <span class="ruby-identifier">focus_player_on_mac</span>(<span class="ruby-identifier">thread_out</span>, <span class="ruby-identifier">path_to_exe</span>)
           <span class="ruby-identifier">stdout</span>.<span class="ruby-identifier">read</span>
-        <span class="ruby-keyword kw">end</span>
-      }
+        }
+      <span class="ruby-keyword kw">end</span>
     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000305" class="method-detail">
-        <a name="M000305"></a>
+      <div id="method-M000278" class="method-detail">
+        <a name="M000278"></a>
 
         <div class="method-heading">
-          <a href="#M000305" class="method-signature">
+          <a href="#M000278" class="method-signature">
           <span class="method-name">swf</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000305-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000305-source">
+            onclick="toggleCode('M000278-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000278-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 130</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 131</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">swf</span>
       <span class="ruby-ivar">@swf</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">nil</span>
       <span class="ruby-keyword kw">if</span>(<span class="ruby-ivar">@swf</span>.<span class="ruby-identifier">nil?</span>)
@@ -789,18 +772,18 @@ Returns true if inside of a test result
         </div>
       </div>
 
-      <div id="method-M000304" class="method-detail">
-        <a name="M000304"></a>
+      <div id="method-M000277" class="method-detail">
+        <a name="M000277"></a>
 
         <div class="method-heading">
-          <a href="#M000304" class="method-signature">
+          <a href="#M000277" class="method-signature">
           <span class="method-name">swf=</span><span class="method-args">(swf)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-The <a href="FlashPlayerTask.html#M000305">swf</a> parameter can be set
+The <a href="FlashPlayerTask.html#M000278">swf</a> parameter can be set
 explicitly in the block sent to this task as in:
 </p>
 <pre>
@@ -816,10 +799,10 @@ Or it can be set implicitly as a rake prerequisite as follows:
   end
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000304-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000304-source">
+            onclick="toggleCode('M000277-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000277-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 126</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 127</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">swf=</span>(<span class="ruby-identifier">swf</span>)
       <span class="ruby-ivar">@swf</span> = <span class="ruby-identifier">swf</span>
     <span class="ruby-keyword kw">end</span>
@@ -828,21 +811,21 @@ Or it can be set implicitly as a rake prerequisite as follows:
         </div>
       </div>
 
-      <div id="method-M000314" class="method-detail">
-        <a name="M000314"></a>
+      <div id="method-M000287" class="method-detail">
+        <a name="M000287"></a>
 
         <div class="method-heading">
-          <a href="#M000314" class="method-signature">
+          <a href="#M000287" class="method-signature">
           <span class="method-name">test_result</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000314-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000314-source">
+            onclick="toggleCode('M000287-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000287-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 200</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 204</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_result</span>
       <span class="ruby-ivar">@test_result</span> <span class="ruby-operator">||=</span> <span class="ruby-value str">''</span>
     <span class="ruby-keyword kw">end</span>
@@ -851,21 +834,21 @@ Or it can be set implicitly as a rake prerequisite as follows:
         </div>
       </div>
 
-      <div id="method-M000313" class="method-detail">
-        <a name="M000313"></a>
+      <div id="method-M000286" class="method-detail">
+        <a name="M000286"></a>
 
         <div class="method-heading">
-          <a href="#M000313" class="method-signature">
+          <a href="#M000286" class="method-signature">
           <span class="method-name">test_result_file</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000313-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000313-source">
+            onclick="toggleCode('M000286-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000286-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 196</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 200</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_result_file</span>
       <span class="ruby-ivar">@test_result_file</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@default_result_file</span>
     <span class="ruby-keyword kw">end</span>
@@ -874,11 +857,11 @@ Or it can be set implicitly as a rake prerequisite as follows:
         </div>
       </div>
 
-      <div id="method-M000312" class="method-detail">
-        <a name="M000312"></a>
+      <div id="method-M000285" class="method-detail">
+        <a name="M000285"></a>
 
         <div class="method-heading">
-          <a href="#M000312" class="method-signature">
+          <a href="#M000285" class="method-signature">
           <span class="method-name">test_result_file=</span><span class="method-args">(file)</span>
           </a>
         </div>
@@ -889,10 +872,10 @@ The File where JUnit test results should be written. This value defaults to
 &#8216;AsUnitResults.xml&#8216;
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000312-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000312-source">
+            onclick="toggleCode('M000285-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000285-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 192</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 196</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_result_file=</span>(<span class="ruby-identifier">file</span>)
       <span class="ruby-ivar">@test_result_file</span> = <span class="ruby-identifier">file</span>
     <span class="ruby-keyword kw">end</span>
@@ -901,21 +884,21 @@ The File where JUnit test results should be written. This value defaults to
         </div>
       </div>
 
-      <div id="method-M000321" class="method-detail">
-        <a name="M000321"></a>
+      <div id="method-M000293" class="method-detail">
+        <a name="M000293"></a>
 
         <div class="method-heading">
-          <a href="#M000321" class="method-signature">
+          <a href="#M000293" class="method-signature">
           <span class="method-name">write_test_result</span><span class="method-args">(result)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000321-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000321-source">
+            onclick="toggleCode('M000293-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000293-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 325</span>
+<span class="ruby-comment cmt"># File bundles/flashplayer/lib/sprout/tasks/flashplayer_task.rb, line 326</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_test_result</span>(<span class="ruby-identifier">result</span>)
       <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">makedirs</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">test_result_file</span>))
       <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">test_result_file</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">CREAT</span><span class="ruby-operator">|</span><span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">TRUNC</span><span class="ruby-operator">|</span><span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">RDWR</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>

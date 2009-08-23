@@ -104,7 +104,7 @@ href="ToolTask.html">Sprout::ToolTask</a>.
 <p>
 Once installed, many Tool Sprouts are made available from your path. For
 example if you install the <a
-href="Sprout.html#M000480">sprout</a>-mtasc-tool gem, from that point
+href="Sprout.html#M000523">sprout</a>-mtasc-tool gem, from that point
 forward you can execute mtasc from the terminal as follows:
 </p>
 <pre>
@@ -131,7 +131,7 @@ libraries), and still others are made available in both forms.
 </p>
 <p>
 The <a href="LibraryTask.html">Sprout::LibraryTask</a> will download and
-copy a remote library <a href="Sprout.html#M000480">sprout</a> gem. The
+copy a remote library <a href="Sprout.html#M000523">sprout</a> gem. The
 remote archive can include (or reference) either source or a pre-compiled
 file. For ActionScript libraries, this would be a SWC file.
 </p>
@@ -144,7 +144,7 @@ will be added to the compiler directive appropriately.
 <p>
 Following is a simple example of a library task. Using only this simple
 task definition, the Adobe corelib library <a
-href="Sprout.html#M000480">sprout</a> gem will be downloaded, installed and
+href="Sprout.html#M000523">sprout</a> gem will be downloaded, installed and
 copied to your <a href="ProjectModel.html">Sprout::ProjectModel</a>
 <tt>lib_dir</tt>.
 </p>
@@ -175,7 +175,7 @@ project.
 </p>
 <p>
 You may want to refer to a library using a particular task name, but have
-it use a different library <a href="Sprout.html#M000480">sprout</a> gem.
+it use a different library <a href="Sprout.html#M000523">sprout</a> gem.
 This can be done using the gem_name parameter as follows:
 </p>
 <pre>
@@ -240,7 +240,7 @@ You can search for all available libraries as follows:
 </pre>
 <p>
 Only results that begin with &#8216;<a
-href="Sprout.html#M000480">sprout</a>-&#8217; are known, valid libraries.
+href="Sprout.html#M000523">sprout</a>-&#8217; are known, valid libraries.
 </p>
 <hr size="2"></hr><h2>Bundles</h2>
 <p>
@@ -262,7 +262,7 @@ ActionScript 3.0, MXML and AIR development
 </ul>
 <p>
 Bundles are the named entry point that the <tt><a
-href="Sprout.html#M000480">sprout</a></tt> shell tool uses to find project
+href="Sprout.html#M000523">sprout</a></tt> shell tool uses to find project
 <a href="../../files/doc/Generator.html">generators</a>.
 </p>
 <p>
@@ -270,13 +270,13 @@ Bundles should be packaged and published to the RubyForge gem repository
 with very specific names as follows:
 </p>
 <p>
-<a href="Sprout.html#M000480">sprout</a>-#{bundle_name}-bundle where
+<a href="Sprout.html#M000523">sprout</a>-#{bundle_name}-bundle where
 ${bundle_name} is what will be given to the -n parameter of the <tt><a
-href="Sprout.html#M000480">sprout</a></tt> gem.
+href="Sprout.html#M000523">sprout</a></tt> gem.
 </p>
 <p>
 The as3 bundle is released as <a
-href="Sprout.html#M000480">sprout</a>-as3-bundle on RubyForge, but we can
+href="Sprout.html#M000523">sprout</a>-as3-bundle on RubyForge, but we can
 simply enter the short name when creating new as3 projects.
 </p>
 <hr size="2"></hr><h2>Generators</h2>
@@ -304,23 +304,23 @@ within a project after calling
   script/generate
 </pre>
 <p>
-When a string is passed to the <a href="Sprout.html#M000473">generate</a>
+When a string is passed to the <a href="Sprout.html#M000516">generate</a>
 command, sprouts will look in the following locations in the following
 order with &#8216;name&#8217; being the generator name that you have
 requested:
 </p>
 <ul>
-<li>#{<a href="Sprout.html#M000489">project_path</a>}/generators/#{name}
+<li>#{<a href="Sprout.html#M000534">project_path</a>}/generators/#{name}
 
 </li>
-<li>#{<a href="Sprout.html#M000489">project_path</a>}/script/generators/#{name}
+<li>#{<a href="Sprout.html#M000534">project_path</a>}/script/generators/#{name}
 
 </li>
-<li>#{<a href="Sprout.html#M000489">project_path</a>}/vendor/generators/#{name}
+<li>#{<a href="Sprout.html#M000534">project_path</a>}/vendor/generators/#{name}
 
 </li>
 <li>#{<a
-href="Sprout.html#M000483">Sprout::Sprout.sprout_cache</a>}/generators/#{Sprout::ProjectModel.language}/#{name}
+href="Sprout.html#M000526">Sprout::Sprout.sprout_cache</a>}/generators/#{Sprout::ProjectModel.language}/#{name}
 
 </li>
 <li>All Rubygems with a name ending with &#8217;-bundle&#8217; and with
@@ -342,7 +342,7 @@ We will first look in your project for, &#8216;generators/foo&#8217;,
 <p>
 Assuming no viable generator is found in your project, we will then look in
 your <a href="Sprout.html">Sprout::Sprout</a> <a
-href="Sprout.html#M000483">sprout_cache</a> for a folder named
+href="Sprout.html#M000526">sprout_cache</a> for a folder named
 &#8216;generators/foo&#8217;.
 </p>
 <p>
@@ -451,7 +451,7 @@ functionality for each of the different types of Sprouts.
 <p>
 The <a href="Sprout.html">Sprout</a> command line tool primarily provides
 access to project generators from any <a
-href="Sprout.html#M000480">sprout</a> bundle that is available to your
+href="Sprout.html#M000523">sprout</a> bundle that is available to your
 system, either locally or from the network.
 </p>
 <p>
@@ -464,10 +464,10 @@ Following is an example:
 </pre>
 <p>
 The previous command will download and install the latest version of the <a
-href="Sprout.html#M000480">sprout</a>-as3-bundle gem and initiate the
+href="Sprout.html#M000523">sprout</a>-as3-bundle gem and initiate the
 project_generator with a single argument of &#8216;SomeProject&#8217;. If
 the string passed to the -n parameter begins with &#8216;<a
-href="Sprout.html#M000480">sprout</a>-&#8217; it will be unmodified for the
+href="Sprout.html#M000523">sprout</a>-&#8217; it will be unmodified for the
 lookup. For example:
 </p>
 <pre>
@@ -513,26 +513,28 @@ Ruby Raven (Mostly Inspiration)
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000491">child_rakefile</a>&nbsp;&nbsp;
-      <a href="#M000485">find_gem_spec</a>&nbsp;&nbsp;
-      <a href="#M000484">gem_file_cache</a>&nbsp;&nbsp;
-      <a href="#M000473">generate</a>&nbsp;&nbsp;
-      <a href="#M000479">get_executable</a>&nbsp;&nbsp;
-      <a href="#M000476">get_executable_from_path</a>&nbsp;&nbsp;
-      <a href="#M000475">get_gem_preamble</a>&nbsp;&nbsp;
-      <a href="#M000492">get_implicit_project_path</a>&nbsp;&nbsp;
-      <a href="#M000477">get_path_delimiter</a>&nbsp;&nbsp;
-      <a href="#M000482">home</a>&nbsp;&nbsp;
-      <a href="#M000487">ignore_file?</a>&nbsp;&nbsp;
-      <a href="#M000486">load_gem</a>&nbsp;&nbsp;
-      <a href="#M000488">project_name</a>&nbsp;&nbsp;
-      <a href="#M000489">project_path</a>&nbsp;&nbsp;
-      <a href="#M000490">project_rakefile</a>&nbsp;&nbsp;
-      <a href="#M000474">remove_all</a>&nbsp;&nbsp;
-      <a href="#M000478">remove_gems_confirmation</a>&nbsp;&nbsp;
-      <a href="#M000480">sprout</a>&nbsp;&nbsp;
-      <a href="#M000483">sprout_cache</a>&nbsp;&nbsp;
-      <a href="#M000481">sprout_to_gem_name</a>&nbsp;&nbsp;
+      <a href="#M000536">child_rakefile</a>&nbsp;&nbsp;
+      <a href="#M000530">find_gem_spec</a>&nbsp;&nbsp;
+      <a href="#M000529">gem_file_cache</a>&nbsp;&nbsp;
+      <a href="#M000516">generate</a>&nbsp;&nbsp;
+      <a href="#M000522">get_executable</a>&nbsp;&nbsp;
+      <a href="#M000519">get_executable_from_path</a>&nbsp;&nbsp;
+      <a href="#M000518">get_gem_preamble</a>&nbsp;&nbsp;
+      <a href="#M000537">get_implicit_project_path</a>&nbsp;&nbsp;
+      <a href="#M000520">get_path_delimiter</a>&nbsp;&nbsp;
+      <a href="#M000525">home</a>&nbsp;&nbsp;
+      <a href="#M000532">ignore_file?</a>&nbsp;&nbsp;
+      <a href="#M000528">inferred_sprout_cache</a>&nbsp;&nbsp;
+      <a href="#M000531">load_gem</a>&nbsp;&nbsp;
+      <a href="#M000533">project_name</a>&nbsp;&nbsp;
+      <a href="#M000534">project_path</a>&nbsp;&nbsp;
+      <a href="#M000535">project_rakefile</a>&nbsp;&nbsp;
+      <a href="#M000517">remove_all</a>&nbsp;&nbsp;
+      <a href="#M000521">remove_gems_confirmation</a>&nbsp;&nbsp;
+      <a href="#M000523">sprout</a>&nbsp;&nbsp;
+      <a href="#M000526">sprout_cache</a>&nbsp;&nbsp;
+      <a href="#M000527">sprout_cache=</a>&nbsp;&nbsp;
+      <a href="#M000524">sprout_to_gem_name</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -554,11 +556,11 @@ Ruby Raven (Mostly Inspiration)
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000491" class="method-detail">
-        <a name="M000491"></a>
+      <div id="method-M000536" class="method-detail">
+        <a name="M000536"></a>
 
         <div class="method-heading">
-          <a href="#M000491" class="method-signature">
+          <a href="#M000536" class="method-signature">
           <span class="method-name">child_rakefile</span><span class="method-args">(dir)</span>
           </a>
         </div>
@@ -569,10 +571,10 @@ Look in the provided <tt>dir</tt> for files that meet the criteria to be a
 valid Rakefile.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000491-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000491-source">
+            onclick="toggleCode('M000536-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000536-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 433</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 457</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">child_rakefile</span>(<span class="ruby-identifier">dir</span>)
       <span class="ruby-ivar">@@default_rakefiles</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">rake_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">file</span>)
@@ -587,11 +589,11 @@ valid Rakefile.
         </div>
       </div>
 
-      <div id="method-M000485" class="method-detail">
-        <a name="M000485"></a>
+      <div id="method-M000530" class="method-detail">
+        <a name="M000530"></a>
 
         <div class="method-heading">
-          <a href="#M000485" class="method-signature">
+          <a href="#M000530" class="method-signature">
           <span class="method-name">find_gem_spec</span><span class="method-args">(name, requirements=nil, recursed=false)</span>
           </a>
         </div>
@@ -617,10 +619,10 @@ This method will actually download and install the provided gem by
 system.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000485-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000485-source">
+            onclick="toggleCode('M000530-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000530-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 331</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 355</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">find_gem_spec</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">requirements</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">recursed</span>=<span class="ruby-keyword kw">false</span>)
       <span class="ruby-identifier">specs</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-identifier">cache</span>.<span class="ruby-identifier">sprout_search</span>(<span class="ruby-node">/.*#{name}$/</span>).<span class="ruby-identifier">reverse</span> <span class="ruby-comment cmt"># Found specs are returned in order from oldest to newest!?</span>
       <span class="ruby-identifier">requirement</span> = <span class="ruby-keyword kw">nil</span>
@@ -660,26 +662,26 @@ system.
         </div>
       </div>
 
-      <div id="method-M000484" class="method-detail">
-        <a name="M000484"></a>
+      <div id="method-M000529" class="method-detail">
+        <a name="M000529"></a>
 
         <div class="method-heading">
-          <a href="#M000484" class="method-signature">
+          <a href="#M000529" class="method-signature">
           <span class="method-name">gem_file_cache</span><span class="method-args">(name, version)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Return the <tt><a href="Sprout.html#M000483">sprout_cache</a></tt> combined
+Return the <tt><a href="Sprout.html#M000526">sprout_cache</a></tt> combined
 with the passed in <tt>name</tt> and <tt>version</tt> so that you will get
 a cache location for a specific gem.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000484-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000484-source">
+            onclick="toggleCode('M000529-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000529-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 320</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 344</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">gem_file_cache</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">version</span>)
       <span class="ruby-keyword kw">return</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">sprout_cache</span>, <span class="ruby-node">&quot;#{name}-#{version}&quot;</span>)
     <span class="ruby-keyword kw">end</span>
@@ -688,48 +690,31 @@ a cache location for a specific gem.
         </div>
       </div>
 
-      <div id="method-M000473" class="method-detail">
-        <a name="M000473"></a>
+      <div id="method-M000516" class="method-detail">
+        <a name="M000516"></a>
 
         <div class="method-heading">
-          <a href="#M000473" class="method-signature">
+          <a href="#M000516" class="method-signature">
           <span class="method-name">generate</span><span class="method-args">(sprout_name, generator_name, params, project_path=nil)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Execute a generator that is available locally or from the network.
-</p>
-<ul>
-<li><tt>sprout_name</tt> A full gem name (ex., <a
-href="Sprout.html#M000480">sprout</a>-as3-bundle) that contains a generator
-that matches <tt>generator_name</tt>
-
-</li>
-<li><tt>generator_name</tt> A string like &#8216;project&#8217; or
-&#8216;class&#8217; that maps to a generator
-
-</li>
-<li><tt>params</tt> Arbitrary parameters to pass to the generator
-
-</li>
-<li><tt><a href="Sprout.html#M000489">project_path</a></tt> Optional parameter.
-Will default to the nearest folder that contains a valid Rakefile.
-
-</li>
-</ul>
-<p>
-This Rakefile will usually be loaded by the referenced Generator, and it
-should have a configured <a href="ProjectModel.html">ProjectModel</a>
-defined in it.
+TODO: This command should accept an array of <a
+href="Sprout.html#M000523">sprout</a> names to fall back on&#8230; for
+example: <a href="Sprout.html#M000516">generate</a>([&#8216;flex4&#8217;,
+&#8216;as3&#8217;], &#8230;)
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000473-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000473-source">
+            onclick="toggleCode('M000516-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000516-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 129</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 136</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-identifier">sprout_name</span>, <span class="ruby-identifier">generator_name</span>, <span class="ruby-identifier">params</span>, <span class="ruby-identifier">project_path</span>=<span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-comment cmt"># params.each_index do |index|</span>
+      <span class="ruby-comment cmt">#   params[index] = clean_project_name(params[index])</span>
+      <span class="ruby-comment cmt"># end</span>
       <span class="ruby-constant">RubiGen</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">use_sprout_sources!</span>(<span class="ruby-identifier">sprout_name</span>, <span class="ruby-identifier">project_path</span>)
       <span class="ruby-identifier">generator</span> = <span class="ruby-constant">RubiGen</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">instance</span>(<span class="ruby-identifier">generator_name</span>, <span class="ruby-identifier">params</span>)
       <span class="ruby-identifier">generator</span>.<span class="ruby-identifier">command</span>(<span class="ruby-identifier">:create</span>).<span class="ruby-identifier">invoke!</span>
@@ -739,11 +724,11 @@ defined in it.
         </div>
       </div>
 
-      <div id="method-M000479" class="method-detail">
-        <a name="M000479"></a>
+      <div id="method-M000522" class="method-detail">
+        <a name="M000522"></a>
 
         <div class="method-heading">
-          <a href="#M000479" class="method-signature">
+          <a href="#M000522" class="method-signature">
           <span class="method-name">get_executable</span><span class="method-args">(name, archive_path=nil, version=nil)</span>
           </a>
         </div>
@@ -751,11 +736,11 @@ defined in it.
         <div class="method-description">
           <p>
 Retrieve the file target to an executable by <a
-href="Sprout.html#M000480">sprout</a> name. Usually, these are tool
+href="Sprout.html#M000523">sprout</a> name. Usually, these are tool
 sprouts.
 </p>
 <ul>
-<li><tt>name</tt> Full <a href="Sprout.html#M000480">sprout</a> gem name that
+<li><tt>name</tt> Full <a href="Sprout.html#M000523">sprout</a> gem name that
 contains an executable file
 
 </li>
@@ -766,7 +751,7 @@ one executable, or for
 </ul>
 <p>
 when you don&#8216;t want to use the default executable presented by the
-tool. For example, the Flex 2 SDK has many executables, when this method is
+tool. For example, the Flex SDK has many executables, when this method is
 called for them, one might use something like:
 </p>
 <pre>
@@ -779,10 +764,10 @@ this executable
 </li>
 </ul>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000479-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000479-source">
+            onclick="toggleCode('M000522-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000522-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 242</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 252</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">get_executable</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">archive_path</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">version</span>=<span class="ruby-keyword kw">nil</span>)
       <span class="ruby-identifier">target</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sprout</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">version</span>)
       <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">archive_path</span>)
@@ -790,7 +775,9 @@ this executable
         <span class="ruby-identifier">exe</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">target</span>.<span class="ruby-identifier">installed_path</span>, <span class="ruby-identifier">archive_path</span>)
         <span class="ruby-keyword kw">if</span>(<span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WinUser</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">archive_path</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/.exe$/</span>))
           <span class="ruby-comment cmt"># If we're on Win (even Cygwin), add .exe to support custom binaries (see sprout-flex3sdk-tool)</span>
-          <span class="ruby-identifier">exe</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'.exe'</span>
+          <span class="ruby-keyword kw">if</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">exe</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'.exe'</span>))
+            <span class="ruby-identifier">exe</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'.exe'</span>
+          <span class="ruby-keyword kw">end</span>
         <span class="ruby-keyword kw">end</span>
       <span class="ruby-keyword kw">elsif</span>(<span class="ruby-identifier">target</span>.<span class="ruby-identifier">url</span>)
         <span class="ruby-comment cmt"># Otherwise, use the default path to an executable if the RemoteFileTarget has a url prop</span>
@@ -798,6 +785,10 @@ this executable
       <span class="ruby-keyword kw">else</span>
         <span class="ruby-comment cmt"># Otherwise attempt to run the feature from the system path</span>
         <span class="ruby-identifier">exe</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">archive_path</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-keyword kw">if</span>(<span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">exe</span>))
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">UsageError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Could not retrieve requested executable from path: #{exe}&quot;</span>)
       <span class="ruby-keyword kw">end</span>
       
       <span class="ruby-keyword kw">if</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">exe</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">exe</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">stat</span>(<span class="ruby-identifier">exe</span>).<span class="ruby-identifier">executable?</span>)
@@ -811,11 +802,11 @@ this executable
         </div>
       </div>
 
-      <div id="method-M000476" class="method-detail">
-        <a name="M000476"></a>
+      <div id="method-M000519" class="method-detail">
+        <a name="M000519"></a>
 
         <div class="method-heading">
-          <a href="#M000476" class="method-signature">
+          <a href="#M000519" class="method-signature">
           <span class="method-name">get_executable_from_path</span><span class="method-args">(exe)</span>
           </a>
         </div>
@@ -826,10 +817,10 @@ Retrieve the full path to an executable that is available in the system
 path
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000476-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000476-source">
+            onclick="toggleCode('M000519-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000519-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 198</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 208</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">get_executable_from_path</span>(<span class="ruby-identifier">exe</span>)
       <span class="ruby-identifier">path</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'PATH'</span>]
       <span class="ruby-identifier">file_path</span> = <span class="ruby-keyword kw">nil</span>
@@ -848,11 +839,11 @@ path
         </div>
       </div>
 
-      <div id="method-M000475" class="method-detail">
-        <a name="M000475"></a>
+      <div id="method-M000518" class="method-detail">
+        <a name="M000518"></a>
 
         <div class="method-heading">
-          <a href="#M000475" class="method-signature">
+          <a href="#M000518" class="method-signature">
           <span class="method-name">get_gem_preamble</span><span class="method-args">()</span>
           </a>
         </div>
@@ -863,10 +854,10 @@ Build up the platform-specific preamble required to call the gem binary
 from Kernel.execute
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000475-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000475-source">
+            onclick="toggleCode('M000518-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000518-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 183</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 193</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">get_gem_preamble</span>
       <span class="ruby-identifier">usr</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>()
       <span class="ruby-keyword kw">if</span>(<span class="ruby-operator">!</span><span class="ruby-identifier">usr</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WinUser</span>))
@@ -884,21 +875,21 @@ from Kernel.execute
         </div>
       </div>
 
-      <div id="method-M000492" class="method-detail">
-        <a name="M000492"></a>
+      <div id="method-M000537" class="method-detail">
+        <a name="M000537"></a>
 
         <div class="method-heading">
-          <a href="#M000492" class="method-signature">
+          <a href="#M000537" class="method-signature">
           <span class="method-name">get_implicit_project_path</span><span class="method-args">(path)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000492-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000492-source">
+            onclick="toggleCode('M000537-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000537-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 443</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 467</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">get_implicit_project_path</span>(<span class="ruby-identifier">path</span>)
       <span class="ruby-comment cmt"># We have recursed to the root of the filesystem, return nil</span>
       <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">path</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">path</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'/'</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/[A-Z]\:\//</span>))
@@ -916,21 +907,21 @@ from Kernel.execute
         </div>
       </div>
 
-      <div id="method-M000477" class="method-detail">
-        <a name="M000477"></a>
+      <div id="method-M000520" class="method-detail">
+        <a name="M000520"></a>
 
         <div class="method-heading">
-          <a href="#M000477" class="method-signature">
+          <a href="#M000520" class="method-signature">
           <span class="method-name">get_path_delimiter</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000477-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000477-source">
+            onclick="toggleCode('M000520-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000520-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 212</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 222</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">get_path_delimiter</span>
       <span class="ruby-identifier">usr</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
       <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">usr</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WinUser</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">usr</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">CygwinUser</span>))
@@ -944,25 +935,25 @@ from Kernel.execute
         </div>
       </div>
 
-      <div id="method-M000482" class="method-detail">
-        <a name="M000482"></a>
+      <div id="method-M000525" class="method-detail">
+        <a name="M000525"></a>
 
         <div class="method-heading">
-          <a href="#M000482" class="method-signature">
+          <a href="#M000525" class="method-signature">
           <span class="method-name">home</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Return the <a href="Sprout.html#M000482">home</a> directory for this <a
+Return the <a href="Sprout.html#M000525">home</a> directory for this <a
 href="Sprout.html">Sprout</a> installation
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000482-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000482-source">
+            onclick="toggleCode('M000525-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000525-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 303</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 319</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">home</span>
       <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@@home</span>
     <span class="ruby-keyword kw">end</span>
@@ -971,11 +962,11 @@ href="Sprout.html">Sprout</a> installation
         </div>
       </div>
 
-      <div id="method-M000487" class="method-detail">
-        <a name="M000487"></a>
+      <div id="method-M000532" class="method-detail">
+        <a name="M000532"></a>
 
         <div class="method-heading">
-          <a href="#M000487" class="method-signature">
+          <a href="#M000532" class="method-signature">
           <span class="method-name">ignore_file?</span><span class="method-args">(file)</span>
           </a>
         </div>
@@ -985,10 +976,10 @@ href="Sprout.html">Sprout</a> installation
 Do not copy files found in the ignore_files list
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000487-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000487-source">
+            onclick="toggleCode('M000532-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000532-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 377</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 401</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">ignore_file?</span> <span class="ruby-identifier">file</span>
       <span class="ruby-ivar">@@COPY_IGNORE_FILES</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
         <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">file</span>)
@@ -1002,21 +993,45 @@ Do not copy files found in the ignore_files list
         </div>
       </div>
 
-      <div id="method-M000486" class="method-detail">
-        <a name="M000486"></a>
+      <div id="method-M000528" class="method-detail">
+        <a name="M000528"></a>
 
         <div class="method-heading">
-          <a href="#M000486" class="method-signature">
+          <a href="#M000528" class="method-signature">
+          <span class="method-name">inferred_sprout_cache</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000528-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000528-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 337</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">inferred_sprout_cache</span>
+      <span class="ruby-identifier">home</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">application_home</span>(<span class="ruby-ivar">@@name</span>)
+      <span class="ruby-keyword kw">return</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">home</span>, <span class="ruby-ivar">@@cache</span>, <span class="ruby-node">&quot;#{VERSION::MAJOR}.#{VERSION::MINOR}&quot;</span>)
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000531" class="method-detail">
+        <a name="M000531"></a>
+
+        <div class="method-heading">
+          <a href="#M000531" class="method-signature">
           <span class="method-name">load_gem</span><span class="method-args">(args)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000486-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000486-source">
+            onclick="toggleCode('M000531-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000531-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 366</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 390</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">load_gem</span>(<span class="ruby-identifier">args</span>)
       <span class="ruby-comment cmt"># This must use a 'system' call because RubyGems</span>
       <span class="ruby-comment cmt"># sends an 'exit'?</span>
@@ -1027,25 +1042,25 @@ Do not copy files found in the ignore_files list
         </div>
       </div>
 
-      <div id="method-M000488" class="method-detail">
-        <a name="M000488"></a>
+      <div id="method-M000533" class="method-detail">
+        <a name="M000533"></a>
 
         <div class="method-heading">
-          <a href="#M000488" class="method-signature">
+          <a href="#M000533" class="method-signature">
           <span class="method-name">project_name</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Return the current <a href="Sprout.html#M000488">project_name</a> assuming
+Return the current <a href="Sprout.html#M000533">project_name</a> assuming
 someone has already set it, otherwise return an empty string
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000488-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000488-source">
+            onclick="toggleCode('M000533-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000533-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 407</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 431</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_name</span>
       <span class="ruby-ivar">@@project_name</span> <span class="ruby-operator">||=</span> <span class="ruby-value str">''</span>
     <span class="ruby-keyword kw">end</span>
@@ -1054,27 +1069,27 @@ someone has already set it, otherwise return an empty string
         </div>
       </div>
 
-      <div id="method-M000489" class="method-detail">
-        <a name="M000489"></a>
+      <div id="method-M000534" class="method-detail">
+        <a name="M000534"></a>
 
         <div class="method-heading">
-          <a href="#M000489" class="method-signature">
+          <a href="#M000534" class="method-signature">
           <span class="method-name">project_path</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-<a href="Sprout.html#M000489">project_path</a> should step backward in the
+<a href="Sprout.html#M000534">project_path</a> should step backward in the
 file system until it encounters a rakefile. The parent directory of that
 rakefile should be returned. If no rakefile is found, it should return
 Dir.pwd
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000489-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000489-source">
+            onclick="toggleCode('M000534-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000534-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 420</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 444</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_path</span>
       <span class="ruby-ivar">@@project_path</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_path</span> = <span class="ruby-identifier">get_implicit_project_path</span>(<span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span>)
     <span class="ruby-keyword kw">end</span>
@@ -1083,11 +1098,11 @@ Dir.pwd
         </div>
       </div>
 
-      <div id="method-M000490" class="method-detail">
-        <a name="M000490"></a>
+      <div id="method-M000535" class="method-detail">
+        <a name="M000535"></a>
 
         <div class="method-heading">
-          <a href="#M000490" class="method-signature">
+          <a href="#M000535" class="method-signature">
           <span class="method-name">project_rakefile</span><span class="method-args">()</span>
           </a>
         </div>
@@ -1095,13 +1110,13 @@ Dir.pwd
         <div class="method-description">
           <p>
 Return the rakefile in the current <tt><a
-href="Sprout.html#M000489">project_path</a></tt>
+href="Sprout.html#M000534">project_path</a></tt>
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000490-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000490-source">
+            onclick="toggleCode('M000535-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000535-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 425</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 449</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">project_rakefile</span>
       <span class="ruby-keyword kw">if</span>(<span class="ruby-operator">!</span><span class="ruby-keyword kw">defined?</span>(<span class="ruby-ivar">@@project_rakefile</span>))
         <span class="ruby-identifier">path</span> = <span class="ruby-identifier">project_path</span>
@@ -1113,11 +1128,11 @@ href="Sprout.html#M000489">project_path</a></tt>
         </div>
       </div>
 
-      <div id="method-M000474" class="method-detail">
-        <a name="M000474"></a>
+      <div id="method-M000517" class="method-detail">
+        <a name="M000517"></a>
 
         <div class="method-heading">
-          <a href="#M000474" class="method-signature">
+          <a href="#M000517" class="method-signature">
           <span class="method-name">remove_all</span><span class="method-args">()</span>
           </a>
         </div>
@@ -1125,14 +1140,14 @@ href="Sprout.html#M000489">project_path</a></tt>
         <div class="method-description">
           <p>
 Remove all installed RubyGems that begin with the string &#8216;<a
-href="Sprout.html#M000480">sprout</a>&#8217; and clear the local <a
-href="Sprout.html#M000480">sprout</a> cache
+href="Sprout.html#M000523">sprout</a>&#8217; and clear the local <a
+href="Sprout.html#M000523">sprout</a> cache
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000474-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000474-source">
+            onclick="toggleCode('M000517-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000517-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 136</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 146</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">remove_all</span>
       <span class="ruby-comment cmt"># Set up sudo prefix if not on win machine</span>
       <span class="ruby-comment cmt"># Only show confirmation if there is at least one installed sprout gem</span>
@@ -1182,21 +1197,21 @@ href="Sprout.html#M000480">sprout</a> cache
         </div>
       </div>
 
-      <div id="method-M000478" class="method-detail">
-        <a name="M000478"></a>
+      <div id="method-M000521" class="method-detail">
+        <a name="M000521"></a>
 
         <div class="method-heading">
-          <a href="#M000478" class="method-signature">
+          <a href="#M000521" class="method-signature">
           <span class="method-name">remove_gems_confirmation</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000478-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000478-source">
+            onclick="toggleCode('M000521-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000521-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 221</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 231</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">remove_gems_confirmation</span>
       <span class="ruby-identifier">msg</span> =<span class="ruby-value str">&quot;About to uninstall all RubyGems that match 'sprout-'....\nAre you sure you want to do this? [Yn]\n&quot;</span> 
       <span class="ruby-identifier">puts</span> <span class="ruby-identifier">msg</span>
@@ -1211,11 +1226,11 @@ href="Sprout.html#M000480">sprout</a> cache
         </div>
       </div>
 
-      <div id="method-M000480" class="method-detail">
-        <a name="M000480"></a>
+      <div id="method-M000523" class="method-detail">
+        <a name="M000523"></a>
 
         <div class="method-heading">
-          <a href="#M000480" class="method-signature">
+          <a href="#M000523" class="method-signature">
           <span class="method-name">sprout</span><span class="method-args">(name, version=nil)</span>
           </a>
         </div>
@@ -1233,10 +1248,10 @@ file, any RemoteFileTargets will be resolved synchronously and those files
 will be available in the Sprout::Sprout.cache.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000480-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000480-source">
+            onclick="toggleCode('M000523-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000523-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 276</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 292</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sprout</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">version</span>=<span class="ruby-keyword kw">nil</span>)
       <span class="ruby-identifier">name</span> = <span class="ruby-identifier">sprout_to_gem_name</span>(<span class="ruby-identifier">name</span>)
       <span class="ruby-identifier">gem_spec</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">find_gem_spec</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">version</span>)
@@ -1258,11 +1273,11 @@ will be available in the Sprout::Sprout.cache.
         </div>
       </div>
 
-      <div id="method-M000483" class="method-detail">
-        <a name="M000483"></a>
+      <div id="method-M000526" class="method-detail">
+        <a name="M000526"></a>
 
         <div class="method-heading">
-          <a href="#M000483" class="method-signature">
+          <a href="#M000526" class="method-signature">
           <span class="method-name">sprout_cache</span><span class="method-args">()</span>
           </a>
         </div>
@@ -1287,41 +1302,63 @@ Data/Sprouts/cache/0.7
 </li>
 </ul>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000483-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000483-source">
+            onclick="toggleCode('M000526-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000526-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 313</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 329</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sprout_cache</span>
-      <span class="ruby-identifier">home</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">application_home</span>(<span class="ruby-ivar">@@name</span>)
-      <span class="ruby-keyword kw">return</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">home</span>, <span class="ruby-ivar">@@cache</span>, <span class="ruby-node">&quot;#{VERSION::MAJOR}.#{VERSION::MINOR}&quot;</span>)
+      <span class="ruby-ivar">@@sprout_cache</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">inferred_sprout_cache</span>
     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000481" class="method-detail">
-        <a name="M000481"></a>
+      <div id="method-M000527" class="method-detail">
+        <a name="M000527"></a>
 
         <div class="method-heading">
-          <a href="#M000481" class="method-signature">
+          <a href="#M000527" class="method-signature">
+          <span class="method-name">sprout_cache=</span><span class="method-args">(cache)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000527-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000527-source">
+<pre>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 333</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sprout_cache=</span>(<span class="ruby-identifier">cache</span>)
+      <span class="ruby-ivar">@@sprout_cache</span> = <span class="ruby-identifier">cache</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000524" class="method-detail">
+        <a name="M000524"></a>
+
+        <div class="method-heading">
+          <a href="#M000524" class="method-signature">
           <span class="method-name">sprout_to_gem_name</span><span class="method-args">(name)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Return <a href="Sprout.html#M000480">sprout</a>-#{name}-bundle for any name
+Return <a href="Sprout.html#M000523">sprout</a>-#{name}-bundle for any name
 that does not begin with &#8216;<a
-href="Sprout.html#M000480">sprout</a>-&#8217;. This was used early on in
+href="Sprout.html#M000523">sprout</a>-&#8217;. This was used early on in
 development but should possibly be removed as we move forward and try to
 support arbitrary RubyGems.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000481-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000481-source">
+            onclick="toggleCode('M000524-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000524-source">
 <pre>
-<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 295</span>
+<span class="ruby-comment cmt"># File sprout/lib/sprout.rb, line 311</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">sprout_to_gem_name</span>(<span class="ruby-identifier">name</span>)
       <span class="ruby-keyword kw">if</span>(<span class="ruby-operator">!</span><span class="ruby-identifier">name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/^sprout-/</span>))
         <span class="ruby-identifier">name</span> = <span class="ruby-node">&quot;sprout-#{name}-bundle&quot;</span>

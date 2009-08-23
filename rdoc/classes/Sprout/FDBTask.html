@@ -135,7 +135,7 @@ The <a href="FDBTask.html">FDBTask</a> is also the only effective way to
 execute SWF content in front of a CI (continuous integration) tool like
 Cruise Control. The biggest problem facing SWF execution for CI is uncaught
 runtime exceptions. The debug Flash Player throws uncaught exceptions up to
-the operating system GUI layer <a href="FDBTask.html#M000395">where</a> a
+the operating system GUI layer <a href="FDBTask.html#M000424">where</a> a
 user must manually dismiss a dialog. In addition to blocking the CI process
 indefinitely, these messages are also difficult to capture and log.
 </p>
@@ -219,61 +219,61 @@ SWF will not connect to the debugger properly.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000347">break</a>&nbsp;&nbsp;
-      <a href="#M000346">bt</a>&nbsp;&nbsp;
-      <a href="#M000352">c</a>&nbsp;&nbsp;
-      <a href="#M000348">cf</a>&nbsp;&nbsp;
-      <a href="#M000349">clear=</a>&nbsp;&nbsp;
-      <a href="#M000353">commands=</a>&nbsp;&nbsp;
-      <a href="#M000350">condition=</a>&nbsp;&nbsp;
-      <a href="#M000351">continue</a>&nbsp;&nbsp;
-      <a href="#M000354">delete</a>&nbsp;&nbsp;
-      <a href="#M000355">directory=</a>&nbsp;&nbsp;
-      <a href="#M000356">disable</a>&nbsp;&nbsp;
-      <a href="#M000357">disassemble</a>&nbsp;&nbsp;
-      <a href="#M000358">display=</a>&nbsp;&nbsp;
-      <a href="#M000360">e</a>&nbsp;&nbsp;
-      <a href="#M000359">enable</a>&nbsp;&nbsp;
-      <a href="#M000361">file=</a>&nbsp;&nbsp;
-      <a href="#M000363">finish</a>&nbsp;&nbsp;
-      <a href="#M000364">handle</a>&nbsp;&nbsp;
-      <a href="#M000365">home</a>&nbsp;&nbsp;
-      <a href="#M000366">info</a>&nbsp;&nbsp;
-      <a href="#M000367">info_arguments</a>&nbsp;&nbsp;
-      <a href="#M000368">info_breakpoints</a>&nbsp;&nbsp;
-      <a href="#M000369">info_display</a>&nbsp;&nbsp;
-      <a href="#M000370">info_files</a>&nbsp;&nbsp;
-      <a href="#M000371">info_functions=</a>&nbsp;&nbsp;
-      <a href="#M000372">info_handle</a>&nbsp;&nbsp;
-      <a href="#M000373">info_locals</a>&nbsp;&nbsp;
-      <a href="#M000374">info_scopechain</a>&nbsp;&nbsp;
-      <a href="#M000375">info_sources</a>&nbsp;&nbsp;
-      <a href="#M000376">info_stack</a>&nbsp;&nbsp;
-      <a href="#M000377">info_swfs</a>&nbsp;&nbsp;
-      <a href="#M000378">info_targets</a>&nbsp;&nbsp;
-      <a href="#M000379">info_variables</a>&nbsp;&nbsp;
-      <a href="#M000362">input=</a>&nbsp;&nbsp;
-      <a href="#M000380">kill</a>&nbsp;&nbsp;
-      <a href="#M000342">kill_on_fault?</a>&nbsp;&nbsp;
-      <a href="#M000381">list</a>&nbsp;&nbsp;
-      <a href="#M000382">next</a>&nbsp;&nbsp;
-      <a href="#M000383">print=</a>&nbsp;&nbsp;
-      <a href="#M000384">pwd</a>&nbsp;&nbsp;
-      <a href="#M000385">quit</a>&nbsp;&nbsp;
-      <a href="#M000386">run</a>&nbsp;&nbsp;
-      <a href="#M000387">set=</a>&nbsp;&nbsp;
-      <a href="#M000388">sleep_until</a>&nbsp;&nbsp;
-      <a href="#M000389">source=</a>&nbsp;&nbsp;
-      <a href="#M000390">step</a>&nbsp;&nbsp;
-      <a href="#M000391">terminate</a>&nbsp;&nbsp;
-      <a href="#M000345">test_result_closing</a>&nbsp;&nbsp;
-      <a href="#M000343">test_result_file</a>&nbsp;&nbsp;
-      <a href="#M000344">test_result_prelude</a>&nbsp;&nbsp;
-      <a href="#M000392">undisplay</a>&nbsp;&nbsp;
-      <a href="#M000341">validate_swf</a>&nbsp;&nbsp;
-      <a href="#M000393">viewswf</a>&nbsp;&nbsp;
-      <a href="#M000394">what=</a>&nbsp;&nbsp;
-      <a href="#M000395">where</a>&nbsp;&nbsp;
+      <a href="#M000376">break</a>&nbsp;&nbsp;
+      <a href="#M000375">bt</a>&nbsp;&nbsp;
+      <a href="#M000381">c</a>&nbsp;&nbsp;
+      <a href="#M000377">cf</a>&nbsp;&nbsp;
+      <a href="#M000378">clear=</a>&nbsp;&nbsp;
+      <a href="#M000382">commands=</a>&nbsp;&nbsp;
+      <a href="#M000379">condition=</a>&nbsp;&nbsp;
+      <a href="#M000380">continue</a>&nbsp;&nbsp;
+      <a href="#M000383">delete</a>&nbsp;&nbsp;
+      <a href="#M000384">directory=</a>&nbsp;&nbsp;
+      <a href="#M000385">disable</a>&nbsp;&nbsp;
+      <a href="#M000386">disassemble</a>&nbsp;&nbsp;
+      <a href="#M000387">display=</a>&nbsp;&nbsp;
+      <a href="#M000389">e</a>&nbsp;&nbsp;
+      <a href="#M000388">enable</a>&nbsp;&nbsp;
+      <a href="#M000390">file=</a>&nbsp;&nbsp;
+      <a href="#M000392">finish</a>&nbsp;&nbsp;
+      <a href="#M000393">handle</a>&nbsp;&nbsp;
+      <a href="#M000394">home</a>&nbsp;&nbsp;
+      <a href="#M000395">info</a>&nbsp;&nbsp;
+      <a href="#M000396">info_arguments</a>&nbsp;&nbsp;
+      <a href="#M000397">info_breakpoints</a>&nbsp;&nbsp;
+      <a href="#M000398">info_display</a>&nbsp;&nbsp;
+      <a href="#M000399">info_files</a>&nbsp;&nbsp;
+      <a href="#M000400">info_functions=</a>&nbsp;&nbsp;
+      <a href="#M000401">info_handle</a>&nbsp;&nbsp;
+      <a href="#M000402">info_locals</a>&nbsp;&nbsp;
+      <a href="#M000403">info_scopechain</a>&nbsp;&nbsp;
+      <a href="#M000404">info_sources</a>&nbsp;&nbsp;
+      <a href="#M000405">info_stack</a>&nbsp;&nbsp;
+      <a href="#M000406">info_swfs</a>&nbsp;&nbsp;
+      <a href="#M000407">info_targets</a>&nbsp;&nbsp;
+      <a href="#M000408">info_variables</a>&nbsp;&nbsp;
+      <a href="#M000391">input=</a>&nbsp;&nbsp;
+      <a href="#M000409">kill</a>&nbsp;&nbsp;
+      <a href="#M000371">kill_on_fault?</a>&nbsp;&nbsp;
+      <a href="#M000410">list</a>&nbsp;&nbsp;
+      <a href="#M000411">next</a>&nbsp;&nbsp;
+      <a href="#M000412">print=</a>&nbsp;&nbsp;
+      <a href="#M000413">pwd</a>&nbsp;&nbsp;
+      <a href="#M000414">quit</a>&nbsp;&nbsp;
+      <a href="#M000415">run</a>&nbsp;&nbsp;
+      <a href="#M000416">set=</a>&nbsp;&nbsp;
+      <a href="#M000417">sleep_until</a>&nbsp;&nbsp;
+      <a href="#M000418">source=</a>&nbsp;&nbsp;
+      <a href="#M000419">step</a>&nbsp;&nbsp;
+      <a href="#M000420">terminate</a>&nbsp;&nbsp;
+      <a href="#M000374">test_result_closing</a>&nbsp;&nbsp;
+      <a href="#M000372">test_result_file</a>&nbsp;&nbsp;
+      <a href="#M000373">test_result_prelude</a>&nbsp;&nbsp;
+      <a href="#M000421">undisplay</a>&nbsp;&nbsp;
+      <a href="#M000370">validate_swf</a>&nbsp;&nbsp;
+      <a href="#M000422">viewswf</a>&nbsp;&nbsp;
+      <a href="#M000423">what=</a>&nbsp;&nbsp;
+      <a href="#M000424">where</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -326,7 +326,7 @@ prompts for unhandled exceptions, especially when running a test harness
 under a continuous integration tool - like cruise control. If an exception
 is encountered, fdb will automatically print the exception, a full stack
 trace and all local variables in the function <a
-href="FDBTask.html#M000395">where</a> the failure occured.
+href="FDBTask.html#M000424">where</a> the failure occured.
 
 </td>
         </tr>
@@ -336,8 +336,8 @@ href="FDBTask.html#M000395">where</a> the failure occured.
           <td class="context-item-desc">
 String that indicates the closing of printable test results Default value
 is &#8217;&lt;/XMLResultPrinter&gt;&#8217; See <a
-href="FDBTask.html#M000344">test_result_prelude</a> for more <a
-href="FDBTask.html#M000366">info</a>.
+href="FDBTask.html#M000373">test_result_prelude</a> for more <a
+href="FDBTask.html#M000395">info</a>.
 
 </td>
         </tr>
@@ -345,17 +345,17 @@ href="FDBTask.html#M000366">info</a>.
           <td class="context-item-name">test_result_file</td>
           <td class="context-item-value">&nbsp;[W]&nbsp;</td>
           <td class="context-item-desc">
-Relative or absolute path to <a href="FDBTask.html#M000395">where</a> unit
+Relative or absolute path to <a href="FDBTask.html#M000424">where</a> unit
 test results should be written to disk. This field can be used in
 conjunction with the AsUnit XMLResultPrinter which will trace out JUnit
 style XML test results. By telling fdb <a
-href="FDBTask.html#M000395">where</a> to write those test results, it will
+href="FDBTask.html#M000424">where</a> to write those test results, it will
 scan the trace output stream looking for <tt><a
-href="FDBTask.html#M000344">test_result_prelude</a></tt>, and <tt><a
-href="FDBTask.html#M000345">test_result_closing</a></tt>. Once the closing
+href="FDBTask.html#M000373">test_result_prelude</a></tt>, and <tt><a
+href="FDBTask.html#M000374">test_result_closing</a></tt>. Once the closing
 is encountered, the prelude and closing (and everything in between) will be
 written to disk in the file identified by <tt><a
-href="FDBTask.html#M000343">test_result_file</a></tt>, and fdb will be
+href="FDBTask.html#M000372">test_result_file</a></tt>, and fdb will be
 closed down.
 
 </td>
@@ -379,11 +379,11 @@ is &#8217;&lt;XMLResultPrinter&gt;&#8217;
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000347" class="method-detail">
-        <a name="M000347"></a>
+      <div id="method-M000376" class="method-detail">
+        <a name="M000376"></a>
 
         <div class="method-heading">
-          <a href="#M000347" class="method-signature">
+          <a href="#M000376" class="method-signature">
           <span class="method-name">break</span><span class="method-args">(=(point))</span>
           </a>
         </div>
@@ -393,8 +393,8 @@ is &#8217;&lt;XMLResultPrinter&gt;&#8217;
 Set breakpoint at specified line or function
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000347-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000347-source">
+            onclick="toggleCode('M000376-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000376-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 246</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">break</span>=(<span class="ruby-identifier">point</span>)
@@ -405,11 +405,11 @@ Set breakpoint at specified line or function
         </div>
       </div>
 
-      <div id="method-M000346" class="method-detail">
-        <a name="M000346"></a>
+      <div id="method-M000375" class="method-detail">
+        <a name="M000375"></a>
 
         <div class="method-heading">
-          <a href="#M000346" class="method-signature">
+          <a href="#M000375" class="method-signature">
           <span class="method-name">bt</span><span class="method-args">()</span>
           </a>
         </div>
@@ -419,8 +419,8 @@ Set breakpoint at specified line or function
 Print backtrace of all stack frames
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000346-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000346-source">
+            onclick="toggleCode('M000375-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000375-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 241</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">bt</span>
@@ -431,22 +431,22 @@ Print backtrace of all stack frames
         </div>
       </div>
 
-      <div id="method-M000352" class="method-detail">
-        <a name="M000352"></a>
+      <div id="method-M000381" class="method-detail">
+        <a name="M000381"></a>
 
         <div class="method-heading">
-          <a href="#M000352" class="method-signature">
+          <a href="#M000381" class="method-signature">
           <span class="method-name">c</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Alias for <a href="FDBTask.html#M000351">continue</a>
+Alias for <a href="FDBTask.html#M000380">continue</a>
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000352-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000352-source">
+            onclick="toggleCode('M000381-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000381-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 271</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">c</span>
@@ -457,11 +457,11 @@ Alias for <a href="FDBTask.html#M000351">continue</a>
         </div>
       </div>
 
-      <div id="method-M000348" class="method-detail">
-        <a name="M000348"></a>
+      <div id="method-M000377" class="method-detail">
+        <a name="M000377"></a>
 
         <div class="method-heading">
-          <a href="#M000348" class="method-signature">
+          <a href="#M000377" class="method-signature">
           <span class="method-name">cf</span><span class="method-args">()</span>
           </a>
         </div>
@@ -471,8 +471,8 @@ Alias for <a href="FDBTask.html#M000351">continue</a>
 Display the name and number of the current file
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000348-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000348-source">
+            onclick="toggleCode('M000377-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000377-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 251</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cf</span>
@@ -483,11 +483,11 @@ Display the name and number of the current file
         </div>
       </div>
 
-      <div id="method-M000349" class="method-detail">
-        <a name="M000349"></a>
+      <div id="method-M000378" class="method-detail">
+        <a name="M000378"></a>
 
         <div class="method-heading">
-          <a href="#M000349" class="method-signature">
+          <a href="#M000378" class="method-signature">
           <span class="method-name">clear=</span><span class="method-args">(point)</span>
           </a>
         </div>
@@ -497,8 +497,8 @@ Display the name and number of the current file
 Clear breakpoint at specified line or function
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000349-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000349-source">
+            onclick="toggleCode('M000378-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000378-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 256</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear=</span>(<span class="ruby-identifier">point</span>)
@@ -509,11 +509,11 @@ Clear breakpoint at specified line or function
         </div>
       </div>
 
-      <div id="method-M000353" class="method-detail">
-        <a name="M000353"></a>
+      <div id="method-M000382" class="method-detail">
+        <a name="M000382"></a>
 
         <div class="method-heading">
-          <a href="#M000353" class="method-signature">
+          <a href="#M000382" class="method-signature">
           <span class="method-name">commands=</span><span class="method-args">(cmd)</span>
           </a>
         </div>
@@ -523,8 +523,8 @@ Clear breakpoint at specified line or function
 Sets commands to execute when breakpoint hit
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000353-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000353-source">
+            onclick="toggleCode('M000382-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000382-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 276</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">commands=</span>(<span class="ruby-identifier">cmd</span>)
@@ -535,11 +535,11 @@ Sets commands to execute when breakpoint hit
         </div>
       </div>
 
-      <div id="method-M000350" class="method-detail">
-        <a name="M000350"></a>
+      <div id="method-M000379" class="method-detail">
+        <a name="M000379"></a>
 
         <div class="method-heading">
-          <a href="#M000350" class="method-signature">
+          <a href="#M000379" class="method-signature">
           <span class="method-name">condition=</span><span class="method-args">(cond)</span>
           </a>
         </div>
@@ -549,8 +549,8 @@ Sets commands to execute when breakpoint hit
 Apply/remove conditional expression to a breakpoint
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000350-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000350-source">
+            onclick="toggleCode('M000379-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000379-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 261</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">condition=</span>(<span class="ruby-identifier">cond</span>)
@@ -561,11 +561,11 @@ Apply/remove conditional expression to a breakpoint
         </div>
       </div>
 
-      <div id="method-M000351" class="method-detail">
-        <a name="M000351"></a>
+      <div id="method-M000380" class="method-detail">
+        <a name="M000380"></a>
 
         <div class="method-heading">
-          <a href="#M000351" class="method-signature">
+          <a href="#M000380" class="method-signature">
           <span class="method-name">continue</span><span class="method-args">()</span>
           </a>
         </div>
@@ -575,8 +575,8 @@ Apply/remove conditional expression to a breakpoint
 Continue execution after stopping at breakpoint
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000351-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000351-source">
+            onclick="toggleCode('M000380-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000380-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 266</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">continue</span>
@@ -587,11 +587,11 @@ Continue execution after stopping at breakpoint
         </div>
       </div>
 
-      <div id="method-M000354" class="method-detail">
-        <a name="M000354"></a>
+      <div id="method-M000383" class="method-detail">
+        <a name="M000383"></a>
 
         <div class="method-heading">
-          <a href="#M000354" class="method-signature">
+          <a href="#M000383" class="method-signature">
           <span class="method-name">delete</span><span class="method-args">()</span>
           </a>
         </div>
@@ -601,8 +601,8 @@ Continue execution after stopping at breakpoint
 Delete breakpoints or auto-display expressions
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000354-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000354-source">
+            onclick="toggleCode('M000383-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000383-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 281</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete</span>
@@ -613,11 +613,11 @@ Delete breakpoints or auto-display expressions
         </div>
       </div>
 
-      <div id="method-M000355" class="method-detail">
-        <a name="M000355"></a>
+      <div id="method-M000384" class="method-detail">
+        <a name="M000384"></a>
 
         <div class="method-heading">
-          <a href="#M000355" class="method-signature">
+          <a href="#M000384" class="method-signature">
           <span class="method-name">directory=</span><span class="method-args">(dir)</span>
           </a>
         </div>
@@ -627,8 +627,8 @@ Delete breakpoints or auto-display expressions
 Add a directory to the search path for source files
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000355-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000355-source">
+            onclick="toggleCode('M000384-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000384-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 286</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">directory=</span>(<span class="ruby-identifier">dir</span>)
@@ -639,11 +639,11 @@ Add a directory to the search path for source files
         </div>
       </div>
 
-      <div id="method-M000356" class="method-detail">
-        <a name="M000356"></a>
+      <div id="method-M000385" class="method-detail">
+        <a name="M000385"></a>
 
         <div class="method-heading">
-          <a href="#M000356" class="method-signature">
+          <a href="#M000385" class="method-signature">
           <span class="method-name">disable</span><span class="method-args">()</span>
           </a>
         </div>
@@ -653,8 +653,8 @@ Add a directory to the search path for source files
 Disable breakpoints or auto-display expressions
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000356-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000356-source">
+            onclick="toggleCode('M000385-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000385-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 291</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">disable</span>
@@ -665,11 +665,11 @@ Disable breakpoints or auto-display expressions
         </div>
       </div>
 
-      <div id="method-M000357" class="method-detail">
-        <a name="M000357"></a>
+      <div id="method-M000386" class="method-detail">
+        <a name="M000386"></a>
 
         <div class="method-heading">
-          <a href="#M000357" class="method-signature">
+          <a href="#M000386" class="method-signature">
           <span class="method-name">disassemble</span><span class="method-args">()</span>
           </a>
         </div>
@@ -679,8 +679,8 @@ Disable breakpoints or auto-display expressions
 Disassemble source lines or functions
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000357-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000357-source">
+            onclick="toggleCode('M000386-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000386-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 296</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">disassemble</span>
@@ -691,11 +691,11 @@ Disassemble source lines or functions
         </div>
       </div>
 
-      <div id="method-M000358" class="method-detail">
-        <a name="M000358"></a>
+      <div id="method-M000387" class="method-detail">
+        <a name="M000387"></a>
 
         <div class="method-heading">
-          <a href="#M000358" class="method-signature">
+          <a href="#M000387" class="method-signature">
           <span class="method-name">display=</span><span class="method-args">(disp)</span>
           </a>
         </div>
@@ -705,8 +705,8 @@ Disassemble source lines or functions
 Add an auto-display expressions
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000358-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000358-source">
+            onclick="toggleCode('M000387-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000387-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 301</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">display=</span>(<span class="ruby-identifier">disp</span>)
@@ -717,11 +717,11 @@ Add an auto-display expressions
         </div>
       </div>
 
-      <div id="method-M000360" class="method-detail">
-        <a name="M000360"></a>
+      <div id="method-M000389" class="method-detail">
+        <a name="M000389"></a>
 
         <div class="method-heading">
-          <a href="#M000360" class="method-signature">
+          <a href="#M000389" class="method-signature">
           <span class="method-name">e</span><span class="method-args">()</span>
           </a>
         </div>
@@ -731,8 +731,8 @@ Add an auto-display expressions
 Enable breakpoints or auto-display expressions
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000360-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000360-source">
+            onclick="toggleCode('M000389-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000389-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 311</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">e</span>
@@ -743,11 +743,11 @@ Enable breakpoints or auto-display expressions
         </div>
       </div>
 
-      <div id="method-M000359" class="method-detail">
-        <a name="M000359"></a>
+      <div id="method-M000388" class="method-detail">
+        <a name="M000388"></a>
 
         <div class="method-heading">
-          <a href="#M000359" class="method-signature">
+          <a href="#M000388" class="method-signature">
           <span class="method-name">enable</span><span class="method-args">()</span>
           </a>
         </div>
@@ -757,8 +757,8 @@ Enable breakpoints or auto-display expressions
 Enable breakpoints or auto-display expressions
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000359-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000359-source">
+            onclick="toggleCode('M000388-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000388-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 306</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">enable</span>
@@ -769,11 +769,11 @@ Enable breakpoints or auto-display expressions
         </div>
       </div>
 
-      <div id="method-M000361" class="method-detail">
-        <a name="M000361"></a>
+      <div id="method-M000390" class="method-detail">
+        <a name="M000390"></a>
 
         <div class="method-heading">
-          <a href="#M000361" class="method-signature">
+          <a href="#M000390" class="method-signature">
           <span class="method-name">file=</span><span class="method-args">(file)</span>
           </a>
         </div>
@@ -783,8 +783,8 @@ Enable breakpoints or auto-display expressions
 Specify application to be debugged.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000361-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000361-source">
+            onclick="toggleCode('M000390-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000390-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 316</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file=</span>(<span class="ruby-identifier">file</span>)
@@ -797,11 +797,11 @@ Specify application to be debugged.
         </div>
       </div>
 
-      <div id="method-M000363" class="method-detail">
-        <a name="M000363"></a>
+      <div id="method-M000392" class="method-detail">
+        <a name="M000392"></a>
 
         <div class="method-heading">
-          <a href="#M000363" class="method-signature">
+          <a href="#M000392" class="method-signature">
           <span class="method-name">finish</span><span class="method-args">()</span>
           </a>
         </div>
@@ -811,8 +811,8 @@ Specify application to be debugged.
 Execute until current function returns
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000363-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000363-source">
+            onclick="toggleCode('M000392-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000392-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 328</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finish</span>
@@ -823,22 +823,22 @@ Execute until current function returns
         </div>
       </div>
 
-      <div id="method-M000364" class="method-detail">
-        <a name="M000364"></a>
+      <div id="method-M000393" class="method-detail">
+        <a name="M000393"></a>
 
         <div class="method-heading">
-          <a href="#M000364" class="method-signature">
+          <a href="#M000393" class="method-signature">
           <span class="method-name">handle</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Specify how to <a href="FDBTask.html#M000364">handle</a> a fault
+Specify how to <a href="FDBTask.html#M000393">handle</a> a fault
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000364-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000364-source">
+            onclick="toggleCode('M000393-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000393-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 333</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle</span>
@@ -849,23 +849,23 @@ Specify how to <a href="FDBTask.html#M000364">handle</a> a fault
         </div>
       </div>
 
-      <div id="method-M000365" class="method-detail">
-        <a name="M000365"></a>
+      <div id="method-M000394" class="method-detail">
+        <a name="M000394"></a>
 
         <div class="method-heading">
-          <a href="#M000365" class="method-signature">
+          <a href="#M000394" class="method-signature">
           <span class="method-name">home</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Set listing location to <a href="FDBTask.html#M000395">where</a> execution
+Set listing location to <a href="FDBTask.html#M000424">where</a> execution
 is halted
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000365-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000365-source">
+            onclick="toggleCode('M000394-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000394-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 338</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">home</span>
@@ -876,11 +876,11 @@ is halted
         </div>
       </div>
 
-      <div id="method-M000366" class="method-detail">
-        <a name="M000366"></a>
+      <div id="method-M000395" class="method-detail">
+        <a name="M000395"></a>
 
         <div class="method-heading">
-          <a href="#M000366" class="method-signature">
+          <a href="#M000395" class="method-signature">
           <span class="method-name">info</span><span class="method-args">()</span>
           </a>
         </div>
@@ -890,8 +890,8 @@ is halted
 Display information about the program being debugged
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000366-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000366-source">
+            onclick="toggleCode('M000395-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000395-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 343</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info</span>
@@ -902,11 +902,11 @@ Display information about the program being debugged
         </div>
       </div>
 
-      <div id="method-M000367" class="method-detail">
-        <a name="M000367"></a>
+      <div id="method-M000396" class="method-detail">
+        <a name="M000396"></a>
 
         <div class="method-heading">
-          <a href="#M000367" class="method-signature">
+          <a href="#M000396" class="method-signature">
           <span class="method-name">info_arguments</span><span class="method-args">()</span>
           </a>
         </div>
@@ -916,8 +916,8 @@ Display information about the program being debugged
 Argument variables of current stack frame
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000367-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000367-source">
+            onclick="toggleCode('M000396-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000396-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 348</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_arguments</span>
@@ -928,11 +928,11 @@ Argument variables of current stack frame
         </div>
       </div>
 
-      <div id="method-M000368" class="method-detail">
-        <a name="M000368"></a>
+      <div id="method-M000397" class="method-detail">
+        <a name="M000397"></a>
 
         <div class="method-heading">
-          <a href="#M000368" class="method-signature">
+          <a href="#M000397" class="method-signature">
           <span class="method-name">info_breakpoints</span><span class="method-args">()</span>
           </a>
         </div>
@@ -942,8 +942,8 @@ Argument variables of current stack frame
 Status of user-settable breakpoints
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000368-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000368-source">
+            onclick="toggleCode('M000397-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000397-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 353</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_breakpoints</span>
@@ -954,22 +954,22 @@ Status of user-settable breakpoints
         </div>
       </div>
 
-      <div id="method-M000369" class="method-detail">
-        <a name="M000369"></a>
+      <div id="method-M000398" class="method-detail">
+        <a name="M000398"></a>
 
         <div class="method-heading">
-          <a href="#M000369" class="method-signature">
+          <a href="#M000398" class="method-signature">
           <span class="method-name">info_display</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Display <a href="FDBTask.html#M000381">list</a> of auto-display expressions
+Display <a href="FDBTask.html#M000410">list</a> of auto-display expressions
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000369-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000369-source">
+            onclick="toggleCode('M000398-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000398-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 358</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_display</span>
@@ -980,11 +980,11 @@ Display <a href="FDBTask.html#M000381">list</a> of auto-display expressions
         </div>
       </div>
 
-      <div id="method-M000370" class="method-detail">
-        <a name="M000370"></a>
+      <div id="method-M000399" class="method-detail">
+        <a name="M000399"></a>
 
         <div class="method-heading">
-          <a href="#M000370" class="method-signature">
+          <a href="#M000399" class="method-signature">
           <span class="method-name">info_files</span><span class="method-args">()</span>
           </a>
         </div>
@@ -994,12 +994,298 @@ Display <a href="FDBTask.html#M000381">list</a> of auto-display expressions
 Names of targets and files being debugged
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000370-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000370-source">
+            onclick="toggleCode('M000399-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000399-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 363</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_files</span>
       <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i f&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000400" class="method-detail">
+        <a name="M000400"></a>
+
+        <div class="method-heading">
+          <a href="#M000400" class="method-signature">
+          <span class="method-name">info_functions=</span><span class="method-args">(value)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+All function names
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000400-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000400-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 368</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_functions=</span>(<span class="ruby-identifier">value</span>)
+      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;i fu #{value}&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000401" class="method-detail">
+        <a name="M000401"></a>
+
+        <div class="method-heading">
+          <a href="#M000401" class="method-signature">
+          <span class="method-name">info_handle</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+How to <a href="FDBTask.html#M000393">handle</a> a fault
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000401-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000401-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 373</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_handle</span>
+      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i h&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000402" class="method-detail">
+        <a name="M000402"></a>
+
+        <div class="method-heading">
+          <a href="#M000402" class="method-signature">
+          <span class="method-name">info_locals</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Local variables of current stack frame
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000402-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000402-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 378</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_locals</span>
+      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i l&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000403" class="method-detail">
+        <a name="M000403"></a>
+
+        <div class="method-heading">
+          <a href="#M000403" class="method-signature">
+          <span class="method-name">info_scopechain</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Scope chain of current stack frame
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000403-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000403-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 383</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_scopechain</span>
+      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i sc&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000404" class="method-detail">
+        <a name="M000404"></a>
+
+        <div class="method-heading">
+          <a href="#M000404" class="method-signature">
+          <span class="method-name">info_sources</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Source files in the program
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000404-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000404-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 388</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_sources</span>
+      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i so&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000405" class="method-detail">
+        <a name="M000405"></a>
+
+        <div class="method-heading">
+          <a href="#M000405" class="method-signature">
+          <span class="method-name">info_stack</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Backtrace of the stack
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000405-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000405-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 393</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_stack</span>
+      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i s&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000406" class="method-detail">
+        <a name="M000406"></a>
+
+        <div class="method-heading">
+          <a href="#M000406" class="method-signature">
+          <span class="method-name">info_swfs</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+List of swfs in this session
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000406-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000406-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 398</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_swfs</span>
+      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i sw&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000407" class="method-detail">
+        <a name="M000407"></a>
+
+        <div class="method-heading">
+          <a href="#M000407" class="method-signature">
+          <span class="method-name">info_targets</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Application being debugged
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000407-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000407-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 403</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_targets</span>
+      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i t&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000408" class="method-detail">
+        <a name="M000408"></a>
+
+        <div class="method-heading">
+          <a href="#M000408" class="method-signature">
+          <span class="method-name">info_variables</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+All global and static variable names
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000408-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000408-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 408</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_variables</span>
+      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i v&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000391" class="method-detail">
+        <a name="M000391"></a>
+
+        <div class="method-heading">
+          <a href="#M000391" class="method-signature">
+          <span class="method-name">input=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+alias for self.file=
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000391-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000391-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 323</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">input=</span>(<span class="ruby-identifier">file</span>)
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">file</span> = <span class="ruby-identifier">file</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000409" class="method-detail">
+        <a name="M000409"></a>
+
+        <div class="method-heading">
+          <a href="#M000409" class="method-signature">
+          <span class="method-name">kill</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Kill execution of program being debugged
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000409-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000409-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 413</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">kill</span>
+      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;kill&quot;</span>
     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
@@ -1011,300 +1297,14 @@ Names of targets and files being debugged
 
         <div class="method-heading">
           <a href="#M000371" class="method-signature">
-          <span class="method-name">info_functions=</span><span class="method-args">(value)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-All function names
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000371-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000371-source">
-<pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 368</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_functions=</span>(<span class="ruby-identifier">value</span>)
-      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;i fu #{value}&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000372" class="method-detail">
-        <a name="M000372"></a>
-
-        <div class="method-heading">
-          <a href="#M000372" class="method-signature">
-          <span class="method-name">info_handle</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-How to <a href="FDBTask.html#M000364">handle</a> a fault
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000372-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000372-source">
-<pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 373</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_handle</span>
-      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i h&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000373" class="method-detail">
-        <a name="M000373"></a>
-
-        <div class="method-heading">
-          <a href="#M000373" class="method-signature">
-          <span class="method-name">info_locals</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Local variables of current stack frame
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000373-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000373-source">
-<pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 378</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_locals</span>
-      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i l&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000374" class="method-detail">
-        <a name="M000374"></a>
-
-        <div class="method-heading">
-          <a href="#M000374" class="method-signature">
-          <span class="method-name">info_scopechain</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Scope chain of current stack frame
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000374-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000374-source">
-<pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 383</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_scopechain</span>
-      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i sc&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000375" class="method-detail">
-        <a name="M000375"></a>
-
-        <div class="method-heading">
-          <a href="#M000375" class="method-signature">
-          <span class="method-name">info_sources</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Source files in the program
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000375-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000375-source">
-<pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 388</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_sources</span>
-      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i so&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000376" class="method-detail">
-        <a name="M000376"></a>
-
-        <div class="method-heading">
-          <a href="#M000376" class="method-signature">
-          <span class="method-name">info_stack</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Backtrace of the stack
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000376-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000376-source">
-<pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 393</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_stack</span>
-      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i s&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000377" class="method-detail">
-        <a name="M000377"></a>
-
-        <div class="method-heading">
-          <a href="#M000377" class="method-signature">
-          <span class="method-name">info_swfs</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-List of swfs in this session
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000377-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000377-source">
-<pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 398</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_swfs</span>
-      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i sw&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000378" class="method-detail">
-        <a name="M000378"></a>
-
-        <div class="method-heading">
-          <a href="#M000378" class="method-signature">
-          <span class="method-name">info_targets</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Application being debugged
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000378-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000378-source">
-<pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 403</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_targets</span>
-      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i t&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000379" class="method-detail">
-        <a name="M000379"></a>
-
-        <div class="method-heading">
-          <a href="#M000379" class="method-signature">
-          <span class="method-name">info_variables</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-All global and static variable names
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000379-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000379-source">
-<pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 408</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_variables</span>
-      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;i v&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000362" class="method-detail">
-        <a name="M000362"></a>
-
-        <div class="method-heading">
-          <a href="#M000362" class="method-signature">
-          <span class="method-name">input=</span><span class="method-args">(file)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-alias for self.file=
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000362-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000362-source">
-<pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 323</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">input=</span>(<span class="ruby-identifier">file</span>)
-      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">file</span> = <span class="ruby-identifier">file</span>
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000380" class="method-detail">
-        <a name="M000380"></a>
-
-        <div class="method-heading">
-          <a href="#M000380" class="method-signature">
-          <span class="method-name">kill</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Kill execution of program being debugged
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000380-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000380-source">
-<pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 413</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">kill</span>
-      <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;kill&quot;</span>
-    <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000342" class="method-detail">
-        <a name="M000342"></a>
-
-        <div class="method-heading">
-          <a href="#M000342" class="method-signature">
           <span class="method-name">kill_on_fault?</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000342-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000342-source">
+            onclick="toggleCode('M000371-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000371-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 224</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">kill_on_fault?</span>
@@ -1315,11 +1315,11 @@ Kill execution of program being debugged
         </div>
       </div>
 
-      <div id="method-M000381" class="method-detail">
-        <a name="M000381"></a>
+      <div id="method-M000410" class="method-detail">
+        <a name="M000410"></a>
 
         <div class="method-heading">
-          <a href="#M000381" class="method-signature">
+          <a href="#M000410" class="method-signature">
           <span class="method-name">list</span><span class="method-args">()</span>
           </a>
         </div>
@@ -1329,8 +1329,8 @@ Kill execution of program being debugged
 List specified function or line
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000381-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000381-source">
+            onclick="toggleCode('M000410-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000410-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 418</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">list</span>
@@ -1341,11 +1341,11 @@ List specified function or line
         </div>
       </div>
 
-      <div id="method-M000382" class="method-detail">
-        <a name="M000382"></a>
+      <div id="method-M000411" class="method-detail">
+        <a name="M000411"></a>
 
         <div class="method-heading">
-          <a href="#M000382" class="method-signature">
+          <a href="#M000411" class="method-signature">
           <span class="method-name">next</span><span class="method-args">()</span>
           </a>
         </div>
@@ -1355,8 +1355,8 @@ List specified function or line
 Step program
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000382-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000382-source">
+            onclick="toggleCode('M000411-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000411-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 423</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">next</span>
@@ -1367,11 +1367,11 @@ Step program
         </div>
       </div>
 
-      <div id="method-M000383" class="method-detail">
-        <a name="M000383"></a>
+      <div id="method-M000412" class="method-detail">
+        <a name="M000412"></a>
 
         <div class="method-heading">
-          <a href="#M000383" class="method-signature">
+          <a href="#M000412" class="method-signature">
           <span class="method-name">print=</span><span class="method-args">(msg)</span>
           </a>
         </div>
@@ -1381,8 +1381,8 @@ Step program
 Print value of variable EXP
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000383-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000383-source">
+            onclick="toggleCode('M000412-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000412-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 428</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">print=</span>(<span class="ruby-identifier">msg</span>)
@@ -1393,11 +1393,11 @@ Print value of variable EXP
         </div>
       </div>
 
-      <div id="method-M000384" class="method-detail">
-        <a name="M000384"></a>
+      <div id="method-M000413" class="method-detail">
+        <a name="M000413"></a>
 
         <div class="method-heading">
-          <a href="#M000384" class="method-signature">
+          <a href="#M000413" class="method-signature">
           <span class="method-name">pwd</span><span class="method-args">()</span>
           </a>
         </div>
@@ -1407,8 +1407,8 @@ Print value of variable EXP
 Print working directory
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000384-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000384-source">
+            onclick="toggleCode('M000413-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000413-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 433</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pwd</span>
@@ -1419,11 +1419,11 @@ Print working directory
         </div>
       </div>
 
-      <div id="method-M000385" class="method-detail">
-        <a name="M000385"></a>
+      <div id="method-M000414" class="method-detail">
+        <a name="M000414"></a>
 
         <div class="method-heading">
-          <a href="#M000385" class="method-signature">
+          <a href="#M000414" class="method-signature">
           <span class="method-name">quit</span><span class="method-args">()</span>
           </a>
         </div>
@@ -1433,8 +1433,8 @@ Print working directory
 Exit fdb
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000385-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000385-source">
+            onclick="toggleCode('M000414-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000414-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 438</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quit</span>
@@ -1447,11 +1447,11 @@ Exit fdb
         </div>
       </div>
 
-      <div id="method-M000386" class="method-detail">
-        <a name="M000386"></a>
+      <div id="method-M000415" class="method-detail">
+        <a name="M000415"></a>
 
         <div class="method-heading">
-          <a href="#M000386" class="method-signature">
+          <a href="#M000415" class="method-signature">
           <span class="method-name">run</span><span class="method-args">()</span>
           </a>
         </div>
@@ -1461,8 +1461,8 @@ Exit fdb
 Start debugged program
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000386-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000386-source">
+            onclick="toggleCode('M000415-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000415-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 445</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>
@@ -1473,11 +1473,11 @@ Start debugged program
         </div>
       </div>
 
-      <div id="method-M000387" class="method-detail">
-        <a name="M000387"></a>
+      <div id="method-M000416" class="method-detail">
+        <a name="M000416"></a>
 
         <div class="method-heading">
-          <a href="#M000387" class="method-signature">
+          <a href="#M000416" class="method-signature">
           <span class="method-name">set=</span><span class="method-args">(value)</span>
           </a>
         </div>
@@ -1487,8 +1487,8 @@ Start debugged program
 Set the value of a variable
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000387-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000387-source">
+            onclick="toggleCode('M000416-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000416-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 450</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set=</span>(<span class="ruby-identifier">value</span>)
@@ -1499,11 +1499,11 @@ Set the value of a variable
         </div>
       </div>
 
-      <div id="method-M000388" class="method-detail">
-        <a name="M000388"></a>
+      <div id="method-M000417" class="method-detail">
+        <a name="M000417"></a>
 
         <div class="method-heading">
-          <a href="#M000388" class="method-signature">
+          <a href="#M000417" class="method-signature">
           <span class="method-name">sleep_until</span><span class="method-args">(str)</span>
           </a>
         </div>
@@ -1513,8 +1513,8 @@ Set the value of a variable
 Sleep until some &#8216;str&#8217; String is sent to the output,
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000388-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000388-source">
+            onclick="toggleCode('M000417-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000417-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 455</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sleep_until</span>(<span class="ruby-identifier">str</span>)
@@ -1525,11 +1525,11 @@ Sleep until some &#8216;str&#8217; String is sent to the output,
         </div>
       </div>
 
-      <div id="method-M000389" class="method-detail">
-        <a name="M000389"></a>
+      <div id="method-M000418" class="method-detail">
+        <a name="M000418"></a>
 
         <div class="method-heading">
-          <a href="#M000389" class="method-signature">
+          <a href="#M000418" class="method-signature">
           <span class="method-name">source=</span><span class="method-args">(file)</span>
           </a>
         </div>
@@ -1539,8 +1539,8 @@ Sleep until some &#8216;str&#8217; String is sent to the output,
 Read fdb commands from a file
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000389-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000389-source">
+            onclick="toggleCode('M000418-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000418-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 460</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">source=</span>(<span class="ruby-identifier">file</span>)
@@ -1551,11 +1551,11 @@ Read fdb commands from a file
         </div>
       </div>
 
-      <div id="method-M000390" class="method-detail">
-        <a name="M000390"></a>
+      <div id="method-M000419" class="method-detail">
+        <a name="M000419"></a>
 
         <div class="method-heading">
-          <a href="#M000390" class="method-signature">
+          <a href="#M000419" class="method-signature">
           <span class="method-name">step</span><span class="method-args">()</span>
           </a>
         </div>
@@ -1565,8 +1565,8 @@ Read fdb commands from a file
 Step program until it reaches a different source line
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000390-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000390-source">
+            onclick="toggleCode('M000419-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000419-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 465</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">step</span>
@@ -1577,11 +1577,11 @@ Step program until it reaches a different source line
         </div>
       </div>
 
-      <div id="method-M000391" class="method-detail">
-        <a name="M000391"></a>
+      <div id="method-M000420" class="method-detail">
+        <a name="M000420"></a>
 
         <div class="method-heading">
-          <a href="#M000391" class="method-signature">
+          <a href="#M000420" class="method-signature">
           <span class="method-name">terminate</span><span class="method-args">()</span>
           </a>
         </div>
@@ -1591,8 +1591,8 @@ Step program until it reaches a different source line
 Force the Flash Debugger and running SWF to close
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000391-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000391-source">
+            onclick="toggleCode('M000420-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000420-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 470</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">terminate</span>
@@ -1603,19 +1603,19 @@ Force the Flash Debugger and running SWF to close
         </div>
       </div>
 
-      <div id="method-M000345" class="method-detail">
-        <a name="M000345"></a>
+      <div id="method-M000374" class="method-detail">
+        <a name="M000374"></a>
 
         <div class="method-heading">
-          <a href="#M000345" class="method-signature">
+          <a href="#M000374" class="method-signature">
           <span class="method-name">test_result_closing</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000345-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000345-source">
+            onclick="toggleCode('M000374-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000374-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 236</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_result_closing</span>
@@ -1626,19 +1626,19 @@ Force the Flash Debugger and running SWF to close
         </div>
       </div>
 
-      <div id="method-M000343" class="method-detail">
-        <a name="M000343"></a>
+      <div id="method-M000372" class="method-detail">
+        <a name="M000372"></a>
 
         <div class="method-heading">
-          <a href="#M000343" class="method-signature">
+          <a href="#M000372" class="method-signature">
           <span class="method-name">test_result_file</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000343-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000343-source">
+            onclick="toggleCode('M000372-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000372-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 228</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_result_file</span>
@@ -1649,19 +1649,19 @@ Force the Flash Debugger and running SWF to close
         </div>
       </div>
 
-      <div id="method-M000344" class="method-detail">
-        <a name="M000344"></a>
+      <div id="method-M000373" class="method-detail">
+        <a name="M000373"></a>
 
         <div class="method-heading">
-          <a href="#M000344" class="method-signature">
+          <a href="#M000373" class="method-signature">
           <span class="method-name">test_result_prelude</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000344-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000344-source">
+            onclick="toggleCode('M000373-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000373-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 232</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_result_prelude</span>
@@ -1672,11 +1672,11 @@ Force the Flash Debugger and running SWF to close
         </div>
       </div>
 
-      <div id="method-M000392" class="method-detail">
-        <a name="M000392"></a>
+      <div id="method-M000421" class="method-detail">
+        <a name="M000421"></a>
 
         <div class="method-heading">
-          <a href="#M000392" class="method-signature">
+          <a href="#M000421" class="method-signature">
           <span class="method-name">undisplay</span><span class="method-args">()</span>
           </a>
         </div>
@@ -1686,8 +1686,8 @@ Force the Flash Debugger and running SWF to close
 Remove an auto-display expression
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000392-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000392-source">
+            onclick="toggleCode('M000421-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000421-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 475</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">undisplay</span>
@@ -1698,19 +1698,19 @@ Remove an auto-display expression
         </div>
       </div>
 
-      <div id="method-M000341" class="method-detail">
-        <a name="M000341"></a>
+      <div id="method-M000370" class="method-detail">
+        <a name="M000370"></a>
 
         <div class="method-heading">
-          <a href="#M000341" class="method-signature">
+          <a href="#M000370" class="method-signature">
           <span class="method-name">validate_swf</span><span class="method-args">(swf)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000341-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000341-source">
+            onclick="toggleCode('M000370-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000370-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 166</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_swf</span>(<span class="ruby-identifier">swf</span>)
@@ -1725,11 +1725,11 @@ Remove an auto-display expression
         </div>
       </div>
 
-      <div id="method-M000393" class="method-detail">
-        <a name="M000393"></a>
+      <div id="method-M000422" class="method-detail">
+        <a name="M000422"></a>
 
         <div class="method-heading">
-          <a href="#M000393" class="method-signature">
+          <a href="#M000422" class="method-signature">
           <span class="method-name">viewswf</span><span class="method-args">()</span>
           </a>
         </div>
@@ -1739,8 +1739,8 @@ Remove an auto-display expression
 Set or clear filter for file listing based on swf
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000393-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000393-source">
+            onclick="toggleCode('M000422-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000422-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 480</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">viewswf</span>
@@ -1751,11 +1751,11 @@ Set or clear filter for file listing based on swf
         </div>
       </div>
 
-      <div id="method-M000394" class="method-detail">
-        <a name="M000394"></a>
+      <div id="method-M000423" class="method-detail">
+        <a name="M000423"></a>
 
         <div class="method-heading">
-          <a href="#M000394" class="method-signature">
+          <a href="#M000423" class="method-signature">
           <span class="method-name">what=</span><span class="method-args">(value)</span>
           </a>
         </div>
@@ -1765,8 +1765,8 @@ Set or clear filter for file listing based on swf
 Displays the context of a variable
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000394-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000394-source">
+            onclick="toggleCode('M000423-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000423-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 485</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">what=</span>(<span class="ruby-identifier">value</span>)
@@ -1777,22 +1777,22 @@ Displays the context of a variable
         </div>
       </div>
 
-      <div id="method-M000395" class="method-detail">
-        <a name="M000395"></a>
+      <div id="method-M000424" class="method-detail">
+        <a name="M000424"></a>
 
         <div class="method-heading">
-          <a href="#M000395" class="method-signature">
+          <a href="#M000424" class="method-signature">
           <span class="method-name">where</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Same as <a href="FDBTask.html#M000346">bt</a>
+Same as <a href="FDBTask.html#M000375">bt</a>
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000395-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000395-source">
+            onclick="toggleCode('M000424-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000424-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/fdb_task.rb, line 490</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">where</span>

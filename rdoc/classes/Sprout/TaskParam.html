@@ -106,30 +106,30 @@ writing rake tasks for Command Line Interface (CLI) compilers.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000532">cleaned_preprocessed_path</a>&nbsp;&nbsp;
-      <a href="#M000525">delimiter</a>&nbsp;&nbsp;
-      <a href="#M000520">hidden_name?</a>&nbsp;&nbsp;
-      <a href="#M000521">hidden_value?</a>&nbsp;&nbsp;
-      <a href="#M000514">init</a>&nbsp;&nbsp;
-      <a href="#M000522">prefix</a>&nbsp;&nbsp;
-      <a href="#M000518">prepare</a>&nbsp;&nbsp;
-      <a href="#M000534">prepare_preprocessor_file</a>&nbsp;&nbsp;
-      <a href="#M000531">prepare_preprocessor_files</a>&nbsp;&nbsp;
-      <a href="#M000533">prepare_preprocessor_path</a>&nbsp;&nbsp;
-      <a href="#M000530">prepare_preprocessor_paths</a>&nbsp;&nbsp;
-      <a href="#M000519">prepare_prerequisites</a>&nbsp;&nbsp;
-      <a href="#M000537">preprocess_content</a>&nbsp;&nbsp;
-      <a href="#M000516">required?</a>&nbsp;&nbsp;
-      <a href="#M000536">setup_preprocessing_file_tasks</a>&nbsp;&nbsp;
-      <a href="#M000526">shell_name</a>&nbsp;&nbsp;
-      <a href="#M000524">shell_value</a>&nbsp;&nbsp;
-      <a href="#M000529">should_preprocess?</a>&nbsp;&nbsp;
-      <a href="#M000535">text_file?</a>&nbsp;&nbsp;
-      <a href="#M000528">to_rdoc</a>&nbsp;&nbsp;
-      <a href="#M000527">to_shell</a>&nbsp;&nbsp;
-      <a href="#M000517">validate</a>&nbsp;&nbsp;
-      <a href="#M000523">value</a>&nbsp;&nbsp;
-      <a href="#M000515">visible?</a>&nbsp;&nbsp;
+      <a href="#M000141">cleaned_preprocessed_path</a>&nbsp;&nbsp;
+      <a href="#M000134">delimiter</a>&nbsp;&nbsp;
+      <a href="#M000129">hidden_name?</a>&nbsp;&nbsp;
+      <a href="#M000130">hidden_value?</a>&nbsp;&nbsp;
+      <a href="#M000123">init</a>&nbsp;&nbsp;
+      <a href="#M000131">prefix</a>&nbsp;&nbsp;
+      <a href="#M000127">prepare</a>&nbsp;&nbsp;
+      <a href="#M000143">prepare_preprocessor_file</a>&nbsp;&nbsp;
+      <a href="#M000140">prepare_preprocessor_files</a>&nbsp;&nbsp;
+      <a href="#M000142">prepare_preprocessor_path</a>&nbsp;&nbsp;
+      <a href="#M000139">prepare_preprocessor_paths</a>&nbsp;&nbsp;
+      <a href="#M000128">prepare_prerequisites</a>&nbsp;&nbsp;
+      <a href="#M000146">preprocess_content</a>&nbsp;&nbsp;
+      <a href="#M000125">required?</a>&nbsp;&nbsp;
+      <a href="#M000145">setup_preprocessing_file_tasks</a>&nbsp;&nbsp;
+      <a href="#M000135">shell_name</a>&nbsp;&nbsp;
+      <a href="#M000133">shell_value</a>&nbsp;&nbsp;
+      <a href="#M000138">should_preprocess?</a>&nbsp;&nbsp;
+      <a href="#M000144">text_file?</a>&nbsp;&nbsp;
+      <a href="#M000137">to_rdoc</a>&nbsp;&nbsp;
+      <a href="#M000136">to_shell</a>&nbsp;&nbsp;
+      <a href="#M000126">validate</a>&nbsp;&nbsp;
+      <a href="#M000132">value</a>&nbsp;&nbsp;
+      <a href="#M000124">visible?</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -173,7 +173,7 @@ prerequisites FileList.
 
 <p>
 Defaults to parent <a
-href="ToolTask.html#M000116">ToolTask.default_file_expression</a>
+href="ToolTask.html#M000173">ToolTask.default_file_expression</a>
 </p>
 </td>
         </tr>
@@ -242,11 +242,11 @@ href="ToolTask.html#M000116">ToolTask.default_file_expression</a>
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000525" class="method-detail">
-        <a name="M000525"></a>
+      <div id="method-M000134" class="method-detail">
+        <a name="M000134"></a>
 
         <div class="method-heading">
-          <a href="#M000525" class="method-signature">
+          <a href="#M000134" class="method-signature">
           <span class="method-name">delimiter</span><span class="method-args">()</span>
           </a>
         </div>
@@ -257,8 +257,8 @@ ToolParams join their name/value pair with an equals sign by default, this
 can be modified To a space or whatever you wish
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000525-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000525-source">
+            onclick="toggleCode('M000134-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000134-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 487</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delimiter</span>
@@ -269,11 +269,11 @@ can be modified To a space or whatever you wish
         </div>
       </div>
 
-      <div id="method-M000520" class="method-detail">
-        <a name="M000520"></a>
+      <div id="method-M000129" class="method-detail">
+        <a name="M000129"></a>
 
         <div class="method-heading">
-          <a href="#M000520" class="method-signature">
+          <a href="#M000129" class="method-signature">
           <span class="method-name">hidden_name?</span><span class="method-args">()</span>
           </a>
         </div>
@@ -284,8 +284,8 @@ Should the param name be hidden from the shell? Used for params like
 &#8216;input&#8217; on mxmlc
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000520-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000520-source">
+            onclick="toggleCode('M000129-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000129-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 454</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">hidden_name?</span>
@@ -296,23 +296,23 @@ Should the param name be hidden from the shell? Used for params like
         </div>
       </div>
 
-      <div id="method-M000521" class="method-detail">
-        <a name="M000521"></a>
+      <div id="method-M000130" class="method-detail">
+        <a name="M000130"></a>
 
         <div class="method-heading">
-          <a href="#M000521" class="method-signature">
+          <a href="#M000130" class="method-signature">
           <span class="method-name">hidden_value?</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Should the param <a href="TaskParam.html#M000523">value</a> be hidden from
+Should the param <a href="TaskParam.html#M000132">value</a> be hidden from
 the shell? Usually used for Boolean toggles like &#8217;-debug&#8216;
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000521-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000521-source">
+            onclick="toggleCode('M000130-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000130-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 460</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">hidden_value?</span>
@@ -323,19 +323,19 @@ the shell? Usually used for Boolean toggles like &#8217;-debug&#8216;
         </div>
       </div>
 
-      <div id="method-M000514" class="method-detail">
-        <a name="M000514"></a>
+      <div id="method-M000123" class="method-detail">
+        <a name="M000123"></a>
 
         <div class="method-heading">
-          <a href="#M000514" class="method-signature">
+          <a href="#M000123" class="method-signature">
           <span class="method-name">init</span><span class="method-args">() {|self if block_given?| ...}</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000514-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000514-source">
+            onclick="toggleCode('M000123-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000123-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 425</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">init</span>
@@ -346,11 +346,11 @@ the shell? Usually used for Boolean toggles like &#8217;-debug&#8216;
         </div>
       </div>
 
-      <div id="method-M000522" class="method-detail">
-        <a name="M000522"></a>
+      <div id="method-M000131" class="method-detail">
+        <a name="M000131"></a>
 
         <div class="method-heading">
-          <a href="#M000522" class="method-signature">
+          <a href="#M000131" class="method-signature">
           <span class="method-name">prefix</span><span class="method-args">()</span>
           </a>
         </div>
@@ -362,8 +362,8 @@ other times it&#8216;s a double dash &#8217;&#8212;&#8217; but usually
 it&#8216;s just a single dash &#8217;-&#8217;
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000522-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000522-source">
+            onclick="toggleCode('M000131-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000131-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 468</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prefix</span>
@@ -374,19 +374,19 @@ it&#8216;s just a single dash &#8217;-&#8217;
         </div>
       </div>
 
-      <div id="method-M000518" class="method-detail">
-        <a name="M000518"></a>
+      <div id="method-M000127" class="method-detail">
+        <a name="M000127"></a>
 
         <div class="method-heading">
-          <a href="#M000518" class="method-signature">
+          <a href="#M000127" class="method-signature">
           <span class="method-name">prepare</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000518-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000518-source">
+            onclick="toggleCode('M000127-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000127-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 445</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
@@ -397,19 +397,19 @@ it&#8216;s just a single dash &#8217;-&#8217;
         </div>
       </div>
 
-      <div id="method-M000519" class="method-detail">
-        <a name="M000519"></a>
+      <div id="method-M000128" class="method-detail">
+        <a name="M000128"></a>
 
         <div class="method-heading">
-          <a href="#M000519" class="method-signature">
+          <a href="#M000128" class="method-signature">
           <span class="method-name">prepare_prerequisites</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000519-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000519-source">
+            onclick="toggleCode('M000128-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000128-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 449</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare_prerequisites</span>
@@ -419,19 +419,19 @@ it&#8216;s just a single dash &#8217;-&#8217;
         </div>
       </div>
 
-      <div id="method-M000516" class="method-detail">
-        <a name="M000516"></a>
+      <div id="method-M000125" class="method-detail">
+        <a name="M000125"></a>
 
         <div class="method-heading">
-          <a href="#M000516" class="method-signature">
+          <a href="#M000125" class="method-signature">
           <span class="method-name">required?</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000516-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000516-source">
+            onclick="toggleCode('M000125-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000125-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 435</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">required?</span>
@@ -442,11 +442,11 @@ it&#8216;s just a single dash &#8217;-&#8217;
         </div>
       </div>
 
-      <div id="method-M000526" class="method-detail">
-        <a name="M000526"></a>
+      <div id="method-M000135" class="method-detail">
+        <a name="M000135"></a>
 
         <div class="method-heading">
-          <a href="#M000526" class="method-signature">
+          <a href="#M000135" class="method-signature">
           <span class="method-name">shell_name</span><span class="method-args">()</span>
           </a>
         </div>
@@ -457,8 +457,8 @@ Return the name with a single leading dash and underscores replaced with
 dashes
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000526-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000526-source">
+            onclick="toggleCode('M000135-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000135-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 493</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">shell_name</span>
@@ -469,19 +469,19 @@ dashes
         </div>
       </div>
 
-      <div id="method-M000524" class="method-detail">
-        <a name="M000524"></a>
+      <div id="method-M000133" class="method-detail">
+        <a name="M000133"></a>
 
         <div class="method-heading">
-          <a href="#M000524" class="method-signature">
+          <a href="#M000133" class="method-signature">
           <span class="method-name">shell_value</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000524-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000524-source">
+            onclick="toggleCode('M000133-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000133-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 476</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">shell_value</span>
@@ -492,11 +492,11 @@ dashes
         </div>
       </div>
 
-      <div id="method-M000528" class="method-detail">
-        <a name="M000528"></a>
+      <div id="method-M000137" class="method-detail">
+        <a name="M000137"></a>
 
         <div class="method-heading">
-          <a href="#M000528" class="method-signature">
+          <a href="#M000137" class="method-signature">
           <span class="method-name">to_rdoc</span><span class="method-args">()</span>
           </a>
         </div>
@@ -508,8 +508,8 @@ describe the customized or generated task using param name, type and
 description
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000528-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000528-source">
+            onclick="toggleCode('M000137-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000137-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 511</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_rdoc</span>
@@ -524,19 +524,19 @@ description
         </div>
       </div>
 
-      <div id="method-M000527" class="method-detail">
-        <a name="M000527"></a>
+      <div id="method-M000136" class="method-detail">
+        <a name="M000136"></a>
 
         <div class="method-heading">
-          <a href="#M000527" class="method-signature">
+          <a href="#M000136" class="method-signature">
           <span class="method-name">to_shell</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000527-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000527-source">
+            onclick="toggleCode('M000136-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000136-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 497</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_shell</span>
@@ -553,19 +553,19 @@ description
         </div>
       </div>
 
-      <div id="method-M000517" class="method-detail">
-        <a name="M000517"></a>
+      <div id="method-M000126" class="method-detail">
+        <a name="M000126"></a>
 
         <div class="method-heading">
-          <a href="#M000517" class="method-signature">
+          <a href="#M000126" class="method-signature">
           <span class="method-name">validate</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000517-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000517-source">
+            onclick="toggleCode('M000126-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000126-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 439</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate</span>
@@ -578,19 +578,19 @@ description
         </div>
       </div>
 
-      <div id="method-M000523" class="method-detail">
-        <a name="M000523"></a>
+      <div id="method-M000132" class="method-detail">
+        <a name="M000132"></a>
 
         <div class="method-heading">
-          <a href="#M000523" class="method-signature">
+          <a href="#M000132" class="method-signature">
           <span class="method-name">value</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000523-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000523-source">
+            onclick="toggleCode('M000132-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000132-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 472</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">value</span>
@@ -601,11 +601,11 @@ description
         </div>
       </div>
 
-      <div id="method-M000515" class="method-detail">
-        <a name="M000515"></a>
+      <div id="method-M000124" class="method-detail">
+        <a name="M000124"></a>
 
         <div class="method-heading">
-          <a href="#M000515" class="method-signature">
+          <a href="#M000124" class="method-signature">
           <span class="method-name">visible?</span><span class="method-args">()</span>
           </a>
         </div>
@@ -616,8 +616,8 @@ By default, ToolParams only appear in the shell output when they are not
 nil
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000515-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000515-source">
+            onclick="toggleCode('M000124-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000124-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 431</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">visible?</span>
@@ -630,19 +630,19 @@ nil
 
       <h3 class="section-bar">Protected Instance methods</h3>
 
-      <div id="method-M000532" class="method-detail">
-        <a name="M000532"></a>
+      <div id="method-M000141" class="method-detail">
+        <a name="M000141"></a>
 
         <div class="method-heading">
-          <a href="#M000532" class="method-signature">
+          <a href="#M000141" class="method-signature">
           <span class="method-name">cleaned_preprocessed_path</span><span class="method-args">(path)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000532-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000532-source">
+            onclick="toggleCode('M000141-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000141-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 541</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cleaned_preprocessed_path</span>(<span class="ruby-identifier">path</span>)
@@ -653,19 +653,19 @@ nil
         </div>
       </div>
 
-      <div id="method-M000534" class="method-detail">
-        <a name="M000534"></a>
+      <div id="method-M000143" class="method-detail">
+        <a name="M000143"></a>
 
         <div class="method-heading">
-          <a href="#M000534" class="method-signature">
+          <a href="#M000143" class="method-signature">
           <span class="method-name">prepare_preprocessor_file</span><span class="method-args">(input_file)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000534-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000534-source">
+            onclick="toggleCode('M000143-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000143-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 556</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare_preprocessor_file</span>(<span class="ruby-identifier">input_file</span>)
@@ -678,19 +678,19 @@ nil
         </div>
       </div>
 
-      <div id="method-M000531" class="method-detail">
-        <a name="M000531"></a>
+      <div id="method-M000140" class="method-detail">
+        <a name="M000140"></a>
 
         <div class="method-heading">
-          <a href="#M000531" class="method-signature">
+          <a href="#M000140" class="method-signature">
           <span class="method-name">prepare_preprocessor_files</span><span class="method-args">(files)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000531-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000531-source">
+            onclick="toggleCode('M000140-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000140-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 533</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare_preprocessor_files</span>(<span class="ruby-identifier">files</span>)
@@ -705,19 +705,19 @@ nil
         </div>
       </div>
 
-      <div id="method-M000533" class="method-detail">
-        <a name="M000533"></a>
+      <div id="method-M000142" class="method-detail">
+        <a name="M000142"></a>
 
         <div class="method-heading">
-          <a href="#M000533" class="method-signature">
+          <a href="#M000142" class="method-signature">
           <span class="method-name">prepare_preprocessor_path</span><span class="method-args">(path)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000533-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000533-source">
+            onclick="toggleCode('M000142-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000142-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 545</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare_preprocessor_path</span>(<span class="ruby-identifier">path</span>)
@@ -735,19 +735,19 @@ nil
         </div>
       </div>
 
-      <div id="method-M000530" class="method-detail">
-        <a name="M000530"></a>
+      <div id="method-M000139" class="method-detail">
+        <a name="M000139"></a>
 
         <div class="method-heading">
-          <a href="#M000530" class="method-signature">
+          <a href="#M000139" class="method-signature">
           <span class="method-name">prepare_preprocessor_paths</span><span class="method-args">(paths)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000530-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000530-source">
+            onclick="toggleCode('M000139-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000139-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 525</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare_preprocessor_paths</span>(<span class="ruby-identifier">paths</span>)
@@ -762,19 +762,19 @@ nil
         </div>
       </div>
 
-      <div id="method-M000537" class="method-detail">
-        <a name="M000537"></a>
+      <div id="method-M000146" class="method-detail">
+        <a name="M000146"></a>
 
         <div class="method-heading">
-          <a href="#M000537" class="method-signature">
+          <a href="#M000146" class="method-signature">
           <span class="method-name">preprocess_content</span><span class="method-args">(content, statement, file_name)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000537-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000537-source">
+            onclick="toggleCode('M000146-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000146-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 609</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">preprocess_content</span>(<span class="ruby-identifier">content</span>, <span class="ruby-identifier">statement</span>, <span class="ruby-identifier">file_name</span>)
@@ -797,19 +797,19 @@ nil
         </div>
       </div>
 
-      <div id="method-M000536" class="method-detail">
-        <a name="M000536"></a>
+      <div id="method-M000145" class="method-detail">
+        <a name="M000145"></a>
 
         <div class="method-heading">
-          <a href="#M000536" class="method-signature">
+          <a href="#M000145" class="method-signature">
           <span class="method-name">setup_preprocessing_file_tasks</span><span class="method-args">(input_file, output_file)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000536-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000536-source">
+            onclick="toggleCode('M000145-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000145-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 570</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup_preprocessing_file_tasks</span>(<span class="ruby-identifier">input_file</span>, <span class="ruby-identifier">output_file</span>)
@@ -855,19 +855,19 @@ nil
         </div>
       </div>
 
-      <div id="method-M000529" class="method-detail">
-        <a name="M000529"></a>
+      <div id="method-M000138" class="method-detail">
+        <a name="M000138"></a>
 
         <div class="method-heading">
-          <a href="#M000529" class="method-signature">
+          <a href="#M000138" class="method-signature">
           <span class="method-name">should_preprocess?</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000529-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000529-source">
+            onclick="toggleCode('M000138-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000138-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 521</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">should_preprocess?</span>
@@ -878,27 +878,27 @@ nil
         </div>
       </div>
 
-      <div id="method-M000535" class="method-detail">
-        <a name="M000535"></a>
+      <div id="method-M000144" class="method-detail">
+        <a name="M000144"></a>
 
         <div class="method-heading">
-          <a href="#M000535" class="method-signature">
+          <a href="#M000144" class="method-signature">
           <span class="method-name">text_file?</span><span class="method-args">(file_name)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000535-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000535-source">
+            onclick="toggleCode('M000144-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000144-source">
 <pre>
 <span class="ruby-comment cmt"># File sprout/lib/sprout/tasks/tool_task.rb, line 562</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">text_file?</span>(<span class="ruby-identifier">file_name</span>)
-      [<span class="ruby-regexp re">/\.as$/</span>, <span class="ruby-regexp re">/\.txt$/</span>, <span class="ruby-regexp re">/\.mxml$/</span>, <span class="ruby-regexp re">/\.xml$/</span>, <span class="ruby-regexp re">/\.js$/</span>, <span class="ruby-regexp re">/\.html$/</span>, <span class="ruby-regexp re">/\.htm$/</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">regex</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">file_name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">regex</span>))
+      [<span class="ruby-regexp re">/\.as$/</span>, <span class="ruby-regexp re">/\.txt$/</span>, <span class="ruby-regexp re">/\.mxml$/</span>, <span class="ruby-regexp re">/\.xml$/</span>, <span class="ruby-regexp re">/\.js$/</span>, <span class="ruby-regexp re">/\.html$/</span>, <span class="ruby-regexp re">/\.htm$/</span>].<span class="ruby-identifier">select</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">regex</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">if</span> (<span class="ruby-identifier">file_name</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">regex</span>))
           <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
         <span class="ruby-keyword kw">end</span>
-      }.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-keyword kw">end</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>

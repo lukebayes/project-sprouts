@@ -55,6 +55,10 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
+                <a href="../../files/bundles/as3/lib/sprout/tasks/asdoc_documentation_rb.html">
+                bundles/as3/lib/sprout/tasks/asdoc_documentation.rb
+                </a>
+        <br />
                 <a href="../../files/bundles/as3/lib/sprout/tasks/asdoc_task_rb.html">
                 bundles/as3/lib/sprout/tasks/asdoc_task.rb
                 </a>
@@ -146,16 +150,37 @@ href="http://livedocs.adobe.com/flex/201/html/wwhelp/wwhimpl/common/html/wwhelp.
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000079">apply_exclusions_from_expression</a>&nbsp;&nbsp;
-      <a href="#M000073">exclude_expressions</a>&nbsp;&nbsp;
-      <a href="#M000076">execute</a>&nbsp;&nbsp;
-      <a href="#M000081">filename_to_import_class</a>&nbsp;&nbsp;
-      <a href="#M000072">initialize_task</a>&nbsp;&nbsp;
-      <a href="#M000074">prepare</a>&nbsp;&nbsp;
-      <a href="#M000080">remove_source_path_from_file_path</a>&nbsp;&nbsp;
-      <a href="#M000078">resolve_library</a>&nbsp;&nbsp;
-      <a href="#M000077">update_helper_mode</a>&nbsp;&nbsp;
-      <a href="#M000075">validate_templates</a>&nbsp;&nbsp;
+      <a href="#M000074">actionscript_file_encoding=</a>&nbsp;&nbsp;
+      <a href="#M000102">apply_exclusions_from_expression</a>&nbsp;&nbsp;
+      <a href="#M000075">benchmark=</a>&nbsp;&nbsp;
+      <a href="#M000076">doc_classes=</a>&nbsp;&nbsp;
+      <a href="#M000077">doc_namespaces=</a>&nbsp;&nbsp;
+      <a href="#M000078">doc_sources=</a>&nbsp;&nbsp;
+      <a href="#M000079">examples_path=</a>&nbsp;&nbsp;
+      <a href="#M000080">exclude_classes=</a>&nbsp;&nbsp;
+      <a href="#M000081">exclude_dependencies=</a>&nbsp;&nbsp;
+      <a href="#M000096">exclude_expressions</a>&nbsp;&nbsp;
+      <a href="#M000099">execute</a>&nbsp;&nbsp;
+      <a href="#M000104">filename_to_import_class</a>&nbsp;&nbsp;
+      <a href="#M000082">footer=</a>&nbsp;&nbsp;
+      <a href="#M000095">initialize_task</a>&nbsp;&nbsp;
+      <a href="#M000083">left_frameset_width=</a>&nbsp;&nbsp;
+      <a href="#M000084">library_path=</a>&nbsp;&nbsp;
+      <a href="#M000085">load_config=</a>&nbsp;&nbsp;
+      <a href="#M000086">main_title=</a>&nbsp;&nbsp;
+      <a href="#M000087">namespace=</a>&nbsp;&nbsp;
+      <a href="#M000088">output=</a>&nbsp;&nbsp;
+      <a href="#M000089">package=</a>&nbsp;&nbsp;
+      <a href="#M000097">prepare</a>&nbsp;&nbsp;
+      <a href="#M000103">remove_source_path_from_file_path</a>&nbsp;&nbsp;
+      <a href="#M000101">resolve_library</a>&nbsp;&nbsp;
+      <a href="#M000090">source_path=</a>&nbsp;&nbsp;
+      <a href="#M000091">strict=</a>&nbsp;&nbsp;
+      <a href="#M000092">templates_path=</a>&nbsp;&nbsp;
+      <a href="#M000100">update_helper_mode</a>&nbsp;&nbsp;
+      <a href="#M000098">validate_templates</a>&nbsp;&nbsp;
+      <a href="#M000093">warnings=</a>&nbsp;&nbsp;
+      <a href="#M000094">window_title=</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -177,21 +202,270 @@ href="http://livedocs.adobe.com/flex/201/html/wwhelp/wwhimpl/common/html/wwhelp.
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000073" class="method-detail">
-        <a name="M000073"></a>
+      <div id="method-M000074" class="method-detail">
+        <a name="M000074"></a>
 
         <div class="method-heading">
-          <a href="#M000073" class="method-signature">
+          <a href="#M000074" class="method-signature">
+          <span class="method-name">actionscript_file_encoding=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets the file encoding for ActionScript files. For more information see: <a
+href="http://livedocs.adobe.com/flex/2/docs/00001503.html#149244">livedocs.adobe.com/flex/2/docs/00001503.html#149244</a>
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000074-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000074-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 4</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">actionscript_file_encoding=</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-ivar">@actionscript_file_encoding</span> = <span class="ruby-identifier">string</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000075" class="method-detail">
+        <a name="M000075"></a>
+
+        <div class="method-heading">
+          <a href="#M000075" class="method-signature">
+          <span class="method-name">benchmark=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Prints detailed compile times to the standard output. The default value is
+true.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000075-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000075-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 9</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">benchmark=</span>(<span class="ruby-identifier">boolean</span>)
+  <span class="ruby-ivar">@benchmark</span> = <span class="ruby-identifier">boolean</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000076" class="method-detail">
+        <a name="M000076"></a>
+
+        <div class="method-heading">
+          <a href="#M000076" class="method-signature">
+          <span class="method-name">doc_classes=</span><span class="method-args">(strings)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A list of classes to document. These classes must be in the source path.
+This is the default option.
+</p>
+<p>
+This option works the same way as does the -include-classes option for the
+compc component compiler. For more information, see Using the component
+compiler (<a
+href="http://livedocs.adobe.com/flex/201/html/compilers_123_31.html#162910">livedocs.adobe.com/flex/201/html/compilers_123_31.html#162910</a>).
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000076-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000076-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 16</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">doc_classes=</span>(<span class="ruby-identifier">strings</span>)
+  <span class="ruby-ivar">@doc_classes</span> = <span class="ruby-identifier">strings</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000077" class="method-detail">
+        <a name="M000077"></a>
+
+        <div class="method-heading">
+          <a href="#M000077" class="method-signature">
+          <span class="method-name">doc_namespaces=</span><span class="method-args">(strings)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A list of URIs whose classes should be documented. The classes must be in
+the source path.
+</p>
+<p>
+You must include a URI and the location of the manifest file that defines
+the contents of this namespace.
+</p>
+<p>
+This option works the same way as does the -include-namespaces option for
+the compc component compiler. For more information, see Using the component
+compiler. (<a
+href="http://livedocs.adobe.com/flex/201/html/compilers_123_31.html#162910">livedocs.adobe.com/flex/201/html/compilers_123_31.html#162910</a>)
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000077-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000077-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 25</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">doc_namespaces=</span>(<span class="ruby-identifier">strings</span>)
+  <span class="ruby-ivar">@doc_namespaces</span> = <span class="ruby-identifier">strings</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000078" class="method-detail">
+        <a name="M000078"></a>
+
+        <div class="method-heading">
+          <a href="#M000078" class="method-signature">
+          <span class="method-name">doc_sources=</span><span class="method-args">(paths)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A list of files that should be documented. If a directory name is in the
+list, it is recursively searched.
+</p>
+<p>
+This option works the same way as does the -include-sources option for the
+compc component compiler. For more information, see Using the component
+compiler (<a
+href="http://livedocs.adobe.com/flex/201/html/compilers_123_31.html#162910">livedocs.adobe.com/flex/201/html/compilers_123_31.html#162910</a>).
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000078-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000078-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 32</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">doc_sources=</span>(<span class="ruby-identifier">paths</span>)
+  <span class="ruby-ivar">@doc_sources</span> = <span class="ruby-identifier">paths</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000079" class="method-detail">
+        <a name="M000079"></a>
+
+        <div class="method-heading">
+          <a href="#M000079" class="method-signature">
+          <span class="method-name">examples_path=</span><span class="method-args">(paths)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A collection of paths that asdoc will use to look for example files that
+were included using @includeExample.
+</p>
+<p>
+This is an undocumented feature, but does seem to work.
+</p>
+<p>
+More info: <a
+href="http://bugs.adobe.com/jira/browse/FLEXDOCS-476">bugs.adobe.com/jira/browse/FLEXDOCS-476</a>
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000079-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000079-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 42</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">examples_path=</span>(<span class="ruby-identifier">paths</span>)
+  <span class="ruby-ivar">@examples_path</span> = <span class="ruby-identifier">paths</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000080" class="method-detail">
+        <a name="M000080"></a>
+
+        <div class="method-heading">
+          <a href="#M000080" class="method-signature">
+          <span class="method-name">exclude_classes=</span><span class="method-args">(strings)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A list of classes that should not be documented. You must specify
+individual class names. Alternatively, if the ASDoc comment for the class
+contains the @private tag, is not documented.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000080-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000080-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 47</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exclude_classes=</span>(<span class="ruby-identifier">strings</span>)
+  <span class="ruby-ivar">@exclude_classes</span> = <span class="ruby-identifier">strings</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000081" class="method-detail">
+        <a name="M000081"></a>
+
+        <div class="method-heading">
+          <a href="#M000081" class="method-signature">
+          <span class="method-name">exclude_dependencies=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Whether all dependencies found by the compiler are documented. If true, the
+dependencies of the input classes are not documented.
+</p>
+<p>
+The default value is false.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000081-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000081-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 54</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exclude_dependencies=</span>(<span class="ruby-identifier">boolean</span>)
+  <span class="ruby-ivar">@exclude_dependencies</span> = <span class="ruby-identifier">boolean</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000096" class="method-detail">
+        <a name="M000096"></a>
+
+        <div class="method-heading">
+          <a href="#M000096" class="method-signature">
           <span class="method-name">exclude_expressions</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000073-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000073-source">
+            onclick="toggleCode('M000096-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000096-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 250</span>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 262</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exclude_expressions</span>
       <span class="ruby-ivar">@exclude_expressions</span> <span class="ruby-operator">||=</span> []
     <span class="ruby-keyword kw">end</span>
@@ -200,19 +474,46 @@ href="http://livedocs.adobe.com/flex/201/html/wwhelp/wwhimpl/common/html/wwhelp.
         </div>
       </div>
 
-      <div id="method-M000072" class="method-detail">
-        <a name="M000072"></a>
+      <div id="method-M000082" class="method-detail">
+        <a name="M000082"></a>
 
         <div class="method-heading">
-          <a href="#M000072" class="method-signature">
+          <a href="#M000082" class="method-signature">
+          <span class="method-name">footer=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The text that appears at the bottom of the HTML pages in the output
+documentation.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000082-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000082-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 59</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">footer=</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-ivar">@footer</span> = <span class="ruby-identifier">string</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000095" class="method-detail">
+        <a name="M000095"></a>
+
+        <div class="method-heading">
+          <a href="#M000095" class="method-signature">
           <span class="method-name">initialize_task</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000072-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000072-source">
+            onclick="toggleCode('M000095-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000095-source">
 <pre>
 <span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 51</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_task</span>
@@ -241,6 +542,10 @@ href="http://livedocs.adobe.com/flex/201/html/wwhelp/wwhimpl/common/html/wwhelp.
       <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:doc_sources</span>, <span class="ruby-identifier">:paths</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">p</span>.<span class="ruby-identifier">preprocessable</span> = <span class="ruby-keyword kw">true</span>
         <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;A list of files that should be documented. If a directory name is in the list, it is recursively searched.\n\nThis option works the same way as does the -include-sources option for the compc component compiler. For more information, see Using the component compiler (http://livedocs.adobe.com/flex/201/html/compilers_123_31.html#162910).\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      
+      <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:examples_path</span>, <span class="ruby-identifier">:paths</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span> =<span class="ruby-value str">&quot;A collection of paths that asdoc will use to look for example files that were included using @includeExample.\n\nThis is an undocumented feature, but does seem to work.\n\nMore info:\nhttp://bugs.adobe.com/jira/browse/FLEXDOCS-476\n&quot;</span>
       <span class="ruby-keyword kw">end</span>
 
       <span class="ruby-identifier">add_param</span>(<span class="ruby-identifier">:exclude_classes</span>, <span class="ruby-identifier">:strings</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
@@ -313,21 +618,262 @@ href="http://livedocs.adobe.com/flex/201/html/wwhelp/wwhimpl/common/html/wwhelp.
         </div>
       </div>
 
-      <div id="method-M000074" class="method-detail">
-        <a name="M000074"></a>
+      <div id="method-M000083" class="method-detail">
+        <a name="M000083"></a>
 
         <div class="method-heading">
-          <a href="#M000074" class="method-signature">
+          <a href="#M000083" class="method-signature">
+          <span class="method-name">left_frameset_width=</span><span class="method-args">(number)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+An integer that changes the width of the left frameset of the
+documentation. You can change this size to accommodate the length of your
+package names.
+</p>
+<p>
+The default value is 210 pixels.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000083-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000083-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 66</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">left_frameset_width=</span>(<span class="ruby-identifier">number</span>)
+  <span class="ruby-ivar">@left_frameset_width</span> = <span class="ruby-identifier">number</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000084" class="method-detail">
+        <a name="M000084"></a>
+
+        <div class="method-heading">
+          <a href="#M000084" class="method-signature">
+          <span class="method-name">library_path=</span><span class="method-args">(files)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Links SWC files to the resulting application SWF file. The compiler only
+links in those classes for the SWC file that are required.
+</p>
+<p>
+The default value of the library-path option includes all SWC files in the
+libs directory and the current locale. These are required.
+</p>
+<p>
+To point to individual classes or packages rather than entire SWC files,
+use the source-path option.
+</p>
+<p>
+If you set the value of the library-path as an option of the command-line
+compiler, you must also explicitly add the framework.swc and locale SWC
+files. Your new entry is not appended to the library-path but replaces it.
+</p>
+<p>
+You can use the += operator to append the new argument to the list of
+existing SWC files.
+</p>
+<p>
+In a configuration file, you can set the append attribute of the
+library-path tag to true to indicate that the values should be appended to
+the library path rather than replace it.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000084-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000084-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 81</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">library_path=</span>(<span class="ruby-identifier">files</span>)
+  <span class="ruby-ivar">@library_path</span> = <span class="ruby-identifier">files</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000085" class="method-detail">
+        <a name="M000085"></a>
+
+        <div class="method-heading">
+          <a href="#M000085" class="method-signature">
+          <span class="method-name">load_config=</span><span class="method-args">(file)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Specifies the location of the configuration file that defines compiler
+options.
+</p>
+<p>
+If you specify a configuration file, you can override individual options by
+setting them on the command line.
+</p>
+<p>
+All relative paths in the configuration file are relative to the location
+of the configuration file itself.
+</p>
+<p>
+Use the += operator to chain this configuration file to other configuration
+files.
+</p>
+<p>
+For more information on using configuration files to provide options to the
+command-line compilers, see About configuration files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001490.html#138195">livedocs.adobe.com/flex/2/docs/00001490.html#138195</a>).
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000085-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000085-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 94</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load_config=</span>(<span class="ruby-identifier">file</span>)
+  <span class="ruby-ivar">@load_config</span> = <span class="ruby-identifier">file</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000086" class="method-detail">
+        <a name="M000086"></a>
+
+        <div class="method-heading">
+          <a href="#M000086" class="method-signature">
+          <span class="method-name">main_title=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The text that appears at the top of the HTML pages in the output
+documentation.
+</p>
+<p>
+The default value is &quot;API Documentation&quot;.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000086-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000086-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 101</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">main_title=</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-ivar">@main_title</span> = <span class="ruby-identifier">string</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000087" class="method-detail">
+        <a name="M000087"></a>
+
+        <div class="method-heading">
+          <a href="#M000087" class="method-signature">
+          <span class="method-name">namespace=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Not sure about this option, it was in the CLI help, but not documented on
+the Adobe site
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000087-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000087-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 106</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">namespace=</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-ivar">@namespace</span> = <span class="ruby-identifier">string</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000088" class="method-detail">
+        <a name="M000088"></a>
+
+        <div class="method-heading">
+          <a href="#M000088" class="method-signature">
+          <span class="method-name">output=</span><span class="method-args">(path)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The output directory for the generated documentation. The default value is
+&quot;doc&quot;.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000088-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000088-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 111</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">output=</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-ivar">@output</span> = <span class="ruby-identifier">path</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000089" class="method-detail">
+        <a name="M000089"></a>
+
+        <div class="method-heading">
+          <a href="#M000089" class="method-signature">
+          <span class="method-name">package=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The descriptions to use when describing a package in the documentation. You
+can specify more than one package option.
+</p>
+<p>
+The following example adds two package descriptions to the output: asdoc
+-doc-sources my_dir -output myDoc -package com.my.business &quot;Contains
+business classes and interfaces&quot; -package com.my.commands
+&quot;Contains command base classes and interfaces&quot;
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000089-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000089-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 119</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">package=</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-ivar">@package</span> = <span class="ruby-identifier">string</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000097" class="method-detail">
+        <a name="M000097"></a>
+
+        <div class="method-heading">
+          <a href="#M000097" class="method-signature">
           <span class="method-name">prepare</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000074-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000074-source">
+            onclick="toggleCode('M000097-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000097-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 262</span>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 274</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare</span>
       <span class="ruby-keyword kw">super</span>
       <span class="ruby-identifier">prerequisite</span> = <span class="ruby-keyword kw">nil</span>
@@ -348,27 +894,195 @@ href="http://livedocs.adobe.com/flex/201/html/wwhelp/wwhimpl/common/html/wwhelp.
         </div>
       </div>
 
-      <h3 class="section-bar">Protected Instance methods</h3>
-
-      <div id="method-M000079" class="method-detail">
-        <a name="M000079"></a>
+      <div id="method-M000090" class="method-detail">
+        <a name="M000090"></a>
 
         <div class="method-heading">
-          <a href="#M000079" class="method-signature">
+          <a href="#M000090" class="method-signature">
+          <span class="method-name">source_path=</span><span class="method-args">(paths)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Adds directories or files to the source path. The Flex compiler searches
+directories in the source path for MXML or AS source files that are used in
+your Flex applications and includes those that are required at compile
+time.
+</p>
+<p>
+You can use wildcards to include all files and subdirectories of a
+directory.
+</p>
+<p>
+To link an entire library SWC file and not individual classes or
+directories, use the library-path option.
+</p>
+<p>
+The source path is also used as the search path for the component
+compiler&#8216;s include-classes and include-resource-bundles options.
+</p>
+<p>
+You can also use the += operator to append the new argument to the list of
+existing source path entries.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000090-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000090-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 132</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">source_path=</span>(<span class="ruby-identifier">paths</span>)
+  <span class="ruby-ivar">@source_path</span> = <span class="ruby-identifier">paths</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000091" class="method-detail">
+        <a name="M000091"></a>
+
+        <div class="method-heading">
+          <a href="#M000091" class="method-signature">
+          <span class="method-name">strict=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Prints undefined property and function calls; also performs compile-time
+type checking on assignments and options supplied to method calls.
+</p>
+<p>
+The default value is true.
+</p>
+<p>
+For more information about viewing warnings and errors, see Viewing
+warnings and errors (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001517.html#182413">livedocs.adobe.com/flex/2/docs/00001517.html#182413</a>).
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000091-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000091-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 141</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">strict=</span>(<span class="ruby-identifier">boolean</span>)
+  <span class="ruby-ivar">@strict</span> = <span class="ruby-identifier">boolean</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000092" class="method-detail">
+        <a name="M000092"></a>
+
+        <div class="method-heading">
+          <a href="#M000092" class="method-signature">
+          <span class="method-name">templates_path=</span><span class="method-args">(paths)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The path to the ASDoc template directory. The default is the
+asdoc/templates directory in the ASDoc installation directory. This
+directory contains all the HTML, CSS, XSL, and image files used for
+generating the output.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000092-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000092-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 146</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">templates_path=</span>(<span class="ruby-identifier">paths</span>)
+  <span class="ruby-ivar">@templates_path</span> = <span class="ruby-identifier">paths</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000093" class="method-detail">
+        <a name="M000093"></a>
+
+        <div class="method-heading">
+          <a href="#M000093" class="method-signature">
+          <span class="method-name">warnings=</span><span class="method-args">(boolean)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Enables all warnings. Set to false to disable all warnings. This option
+overrides the warn-warning_type options.
+</p>
+<p>
+The default value is true.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000093-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000093-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 153</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">warnings=</span>(<span class="ruby-identifier">boolean</span>)
+  <span class="ruby-ivar">@warnings</span> = <span class="ruby-identifier">boolean</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000094" class="method-detail">
+        <a name="M000094"></a>
+
+        <div class="method-heading">
+          <a href="#M000094" class="method-signature">
+          <span class="method-name">window_title=</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The text that appears in the browser window in the output documentation.
+</p>
+<p>
+The default value is &quot;API Documentation&quot;.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000094-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000094-source">
+<pre>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_documentation.rb, line 160</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">window_title=</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-ivar">@window_title</span> = <span class="ruby-identifier">string</span>
+<span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000102" class="method-detail">
+        <a name="M000102"></a>
+
+        <div class="method-heading">
+          <a href="#M000102" class="method-signature">
           <span class="method-name">apply_exclusions_from_expression</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Requires that @<a href="AsDocTask.html#M000073">exclude_expressions</a> is
+Requires that @<a href="AsDocTask.html#M000096">exclude_expressions</a> is
 not nil.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000079-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000079-source">
+            onclick="toggleCode('M000102-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000102-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 321</span>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 333</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">apply_exclusions_from_expression</span>
       <span class="ruby-constant">FileList</span>[<span class="ruby-ivar">@exclude_expressions</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file_path</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">import_file</span> = <span class="ruby-identifier">remove_source_path_from_file_path</span>(<span class="ruby-identifier">file_path</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">file_path</span>
@@ -382,21 +1096,21 @@ not nil.
         </div>
       </div>
 
-      <div id="method-M000076" class="method-detail">
-        <a name="M000076"></a>
+      <div id="method-M000099" class="method-detail">
+        <a name="M000099"></a>
 
         <div class="method-heading">
-          <a href="#M000076" class="method-signature">
+          <a href="#M000099" class="method-signature">
           <span class="method-name">execute</span><span class="method-args">(*args)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000076-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000076-source">
+            onclick="toggleCode('M000099-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000099-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 288</span>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 300</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">execute</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
       <span class="ruby-identifier">update_helper_mode</span>
       <span class="ruby-keyword kw">begin</span>
@@ -415,21 +1129,21 @@ not nil.
         </div>
       </div>
 
-      <div id="method-M000081" class="method-detail">
-        <a name="M000081"></a>
+      <div id="method-M000104" class="method-detail">
+        <a name="M000104"></a>
 
         <div class="method-heading">
-          <a href="#M000081" class="method-signature">
+          <a href="#M000104" class="method-signature">
           <span class="method-name">filename_to_import_class</span><span class="method-args">(filename)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000081-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000081-source">
+            onclick="toggleCode('M000104-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000104-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 339</span>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 351</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">filename_to_import_class</span>(<span class="ruby-identifier">filename</span>)
       <span class="ruby-identifier">name</span> = <span class="ruby-identifier">filename</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp re">/\w+/</span>)
       <span class="ruby-comment cmt"># Ignore the AS file extension.</span>
@@ -440,21 +1154,21 @@ not nil.
         </div>
       </div>
 
-      <div id="method-M000080" class="method-detail">
-        <a name="M000080"></a>
+      <div id="method-M000103" class="method-detail">
+        <a name="M000103"></a>
 
         <div class="method-heading">
-          <a href="#M000080" class="method-signature">
+          <a href="#M000103" class="method-signature">
           <span class="method-name">remove_source_path_from_file_path</span><span class="method-args">(file)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000080-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000080-source">
+            onclick="toggleCode('M000103-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000103-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 330</span>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 342</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_source_path_from_file_path</span>(<span class="ruby-identifier">file</span>)
         <span class="ruby-identifier">source_path</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">source_dir</span><span class="ruby-operator">|</span>
           <span class="ruby-identifier">import_file</span> = <span class="ruby-identifier">file</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;^#{source_dir}&quot;</span>),<span class="ruby-value str">&quot;&quot;</span>)
@@ -468,21 +1182,21 @@ not nil.
         </div>
       </div>
 
-      <div id="method-M000078" class="method-detail">
-        <a name="M000078"></a>
+      <div id="method-M000101" class="method-detail">
+        <a name="M000101"></a>
 
         <div class="method-heading">
-          <a href="#M000078" class="method-signature">
+          <a href="#M000101" class="method-signature">
           <span class="method-name">resolve_library</span><span class="method-args">(library_task)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000078-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000078-source">
+            onclick="toggleCode('M000101-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000101-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 309</span>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 321</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">resolve_library</span>(<span class="ruby-identifier">library_task</span>)
       <span class="ruby-comment cmt">#TODO: Add support for libraries that don't get</span>
       <span class="ruby-comment cmt"># copied into the project</span>
@@ -498,11 +1212,11 @@ not nil.
         </div>
       </div>
 
-      <div id="method-M000077" class="method-detail">
-        <a name="M000077"></a>
+      <div id="method-M000100" class="method-detail">
+        <a name="M000100"></a>
 
         <div class="method-heading">
-          <a href="#M000077" class="method-signature">
+          <a href="#M000100" class="method-signature">
           <span class="method-name">update_helper_mode</span><span class="method-args">()</span>
           </a>
         </div>
@@ -514,10 +1228,10 @@ without the executable flag, calling Sprout::get_executable with this
 target will automatically chmod it to 744.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000077-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000077-source">
+            onclick="toggleCode('M000100-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000100-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 305</span>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 317</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_helper_mode</span>
       <span class="ruby-identifier">exe</span> = <span class="ruby-constant">Sprout</span>.<span class="ruby-identifier">get_executable</span>(<span class="ruby-identifier">gem_name</span>, <span class="ruby-value str">'asdoc/templates/asDocHelper'</span>, <span class="ruby-identifier">gem_version</span>)
     <span class="ruby-keyword kw">end</span>
@@ -526,21 +1240,21 @@ target will automatically chmod it to 744.
         </div>
       </div>
 
-      <div id="method-M000075" class="method-detail">
-        <a name="M000075"></a>
+      <div id="method-M000098" class="method-detail">
+        <a name="M000098"></a>
 
         <div class="method-heading">
-          <a href="#M000075" class="method-signature">
+          <a href="#M000098" class="method-signature">
           <span class="method-name">validate_templates</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000075-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000075-source">
+            onclick="toggleCode('M000098-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000098-source">
 <pre>
-<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 280</span>
+<span class="ruby-comment cmt"># File bundles/as3/lib/sprout/tasks/asdoc_task.rb, line 292</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_templates</span>
       <span class="ruby-keyword kw">if</span>(<span class="ruby-identifier">templates_path</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>)
         <span class="ruby-identifier">templates_dir</span> = <span class="ruby-constant">Sprout</span>.<span class="ruby-identifier">get_executable</span>(<span class="ruby-identifier">gem_name</span>, <span class="ruby-value str">'asdoc/templates'</span>, <span class="ruby-identifier">gem_version</span>)
