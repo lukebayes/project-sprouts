@@ -58,6 +58,7 @@ def apply_shared_spec(s)
     s.add_dependency('rubigen', '= 1.3.3')
     s.add_dependency('net-sftp')
     s.add_dependency('net-ssh')
+    s.add_dependency('rake')
 end
 
 osx_spec = Gem::Specification.new do |s|
