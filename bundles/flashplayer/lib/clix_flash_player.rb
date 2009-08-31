@@ -28,18 +28,19 @@ class CLIXFlashPlayer
     end
 
     setup_trap
-    
+
     @thread = Thread.new {
       @player_pid = open4.popen4("#{player.split(' ').join('\ ')}")[0]
       begin
         raise "clix_wrapper.rb could not be found at: #{wrapper}" if !File.exists?($CLIX_WRAPPER_TARGET)
         command = "ruby #{$CLIX_WRAPPER_TARGET} '#{player}' '#{swf}'"
         @activate_pid, stdin, stdout, stderr = open4.popen4(command)
-        puts stdout.read
+        $stdout.puts stdout.read
         error = stderr.read
         raise error if !error.nil? && error != ''
         Process.wait(@player_pid)
       rescue StandardError => e
+        $stdout.puts e.to_s
         kill
         raise e
       end

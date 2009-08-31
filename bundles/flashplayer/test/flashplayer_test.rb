@@ -7,7 +7,8 @@ class FlashPlayerTest <  Test::Unit::TestCase
     @start                  = Dir.pwd
     fixture                 = File.join(fixtures, 'flashplayer')
     @swf                    = 'Runner.swf'
-    @some_project           = 'SomeProject-debug.swf'
+    @some_project_debug     = 'SomeProject-debug.swf'
+    @some_project           = 'SomeProject.swf'
     @test_result            = 'Result.xml'
     @failure_result_file    = 'ResultFailure.xml'
     @error_result_file      = 'ResultError.xml'
@@ -70,8 +71,21 @@ class FlashPlayerTest <  Test::Unit::TestCase
     t.kill
   end
   
+  def test_launch_swf
+    flashplayer :run_project do |t|
+      t.swf = @some_project
+    end
+    t = Thread.new {
+      run_task(:run_project)
+    }
+    player = get_task(:run_project)
+    sleep(4.0)
+    player.close
+    t.kill
+  end
+  
   # def test_use_fdb
-  #   flashplayer :run => @some_project do |t|
+  #   flashplayer :run => @some_project_debug do |t|
   #     t.use_fdb = true
   #   end
   #   
