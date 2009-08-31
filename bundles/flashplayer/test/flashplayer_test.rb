@@ -68,7 +68,6 @@ class FlashPlayerTest <  Test::Unit::TestCase
     player = get_task(:run_broken)
     sleep(4.0)
     player.close
-    t.kill
   end
   
   def test_launch_swf

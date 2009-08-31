@@ -270,7 +270,7 @@ module Sprout
       if(usr.is_a?(WinUser))
         Thread.kill(@thread)
       elsif(usr.is_a?(OSXUser))
-        @clix_player.kill
+        @clix_player.kill unless @clix_player.nil?
       else
         Process.kill("SIGALRM", @player_pid)
       end
