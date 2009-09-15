@@ -209,8 +209,8 @@ module Sprout
       tool = clean_path(tool)
       runner = get_process_runner("#{tool} #{options}")
 
-      result = runner.read
       error = runner.read_err
+      result = runner.read
 
       if(result.size > 0)
         Log.puts result
