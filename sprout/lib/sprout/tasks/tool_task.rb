@@ -626,7 +626,10 @@ module Sprout
 
   # Concrete param object for :string values
   class StringParam < TaskParam # :nodoc:
-    
+
+    def shell_value
+      value.gsub(/ /, "\ ")
+    end
   end
 
   # Concrete param object for :symbol values

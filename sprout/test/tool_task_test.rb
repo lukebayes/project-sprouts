@@ -98,7 +98,7 @@ class ToolTaskTest <  Test::Unit::TestCase
   def test_string_param_with_spaces
     @task.default_size = '500 600'
     result = @task.to_shell
-    assert_equal("-default-size 500 600", result)
+    assert_equal("-default-size 500\ 600", result)
   end
   
   def test_files_param_prerequisites
