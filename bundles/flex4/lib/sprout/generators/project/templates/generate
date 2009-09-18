@@ -19,7 +19,7 @@ end
 # script/generate test utils.MathUtilTest
 
 begin
-  Sprout::Sprout.generate('flex4', ARGV.first, ARGV, File.dirname(File.dirname(__FILE__)))
+  Sprout::Sprout.generate('flex4', ARGV.shift, ARGV, File.dirname(File.dirname(__FILE__)))
 rescue RubiGen::GeneratorError => e
-  Sprout::Sprout.generate('as3', ARGV.first, ARGV, File.dirname(File.dirname(__FILE__)))
+  Sprout::Sprout.generate('as3', ARGV.shift, ARGV, File.dirname(File.dirname(__FILE__)))
 end
