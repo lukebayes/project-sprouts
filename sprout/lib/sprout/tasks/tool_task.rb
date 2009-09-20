@@ -18,7 +18,12 @@ module Sprout
   #   mxmlc 'bin/SomeProject.swf' => :corelib do |t|
   #     t.input                     = 'src/SomeProject.as'
   #     t.default_size              = '800 600'
+  #     t.namespace = "my_namespace://path\ " + File.expand_path("~/Desktop/SomeProject/build/main.xml") 
   #   end
+  #   
+  # If you don't put a "\ " for the space in the "t.namespace" directive, you'll get this:
+  # rake aborted!
+  # [ERROR] command line: Error: default arguments may not be interspersed with other options 
   #
   # In general, a tool task will only be executed if it's output file (name) does not exist or
   # if the output file is older than any file identified as a prerequisite.
@@ -307,7 +312,8 @@ module Sprout
       name = name.to_s
 
       # First ensure the named accessor doesn't yet exist...
-      if(param_hash[name])
+      # BUT, namespace is a reserved word, so override that 
+      if(!name == "namespace" and param_hash[name]) 
         raise ToolTaskError.new("TaskBase.add_param called with existing parameter name: #{name}")
       end
 

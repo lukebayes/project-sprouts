@@ -499,6 +499,11 @@ EOF
         p.description = "Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380)."
       end
       
+      add_param(:namespace, :string) do |p|
+        p.delimiter = ' ' 
+        p.description = "Adds component manifest to flex project." 
+      end 
+      
       add_param(:namespaces_namespace, :string) do |p|
         p.description =<<EOF
 Specifies a namespace for the MXML file. You must include a URI and the location of the manifest file that defines the contents of this namespace. This path is relative to the MXML file.
