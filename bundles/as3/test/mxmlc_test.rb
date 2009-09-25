@@ -83,6 +83,13 @@ class MXMLCTest <  Test::Unit::TestCase
     assert_equal('-define+=CONFIG::debug,true -define+=CONFIG::release,false', some_task.to_shell)
   end
   
+  def test_keep_as3_metadata
+    some_task = Sprout::MXMLCTask.new(:some_task, Rake::application)
+    some_task.keep_as3_metadata << 'Orange'
+    some_task.keep_as3_metadata << 'Lemon'
+    assert_equal('-keep-as3-metdata+=Orange -keep-as3-metdata+=Lemon', some_task.to_shell)
+  end
+  
   def test_use_network_false
     some_task = Sprout::MXMLCTask.new(:some_task, Rake::application)
     some_task.use_network = false

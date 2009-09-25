@@ -362,6 +362,28 @@ This option is true by default for the Flex Builder application compiler. For th
 EOF
       end
       
+      add_param(:keep_as3_metadata, :symbols) do |p|
+        p.description =<<EOF
+Keep the specified metadata in the SWF (advanced, repeatable).
+
+Example:
+
+Rakefile:
+
+mxmlc 'bin/SomeProject.swf' do |t|
+  t.keep_as3_metadata << 'Orange'
+end
+
+Source Code:
+
+[Orange(isTasty=true)]
+public function eatOranges():void {
+  // do something
+}
+        
+EOF
+      end
+      
       add_param(:keep_generated_actionscript, :boolean) do |p|
         p.description =<<EOF
 Determines whether to keep the generated ActionScript class files.
