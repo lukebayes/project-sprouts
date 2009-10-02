@@ -143,8 +143,12 @@ module Sprout
       if(@home)
         return @home
       end
-
-      ["HOME", "USERPROFILE"].each do |homekey|
+      
+      # Original implementation:
+      #["HOME", "USERPROFILE"].each do |homekey|
+      # Change submitted by Michael Fleet (dissinovate)
+      # Does this work for everyone on Windows?
+      ["USERPROFILE", "HOME"].each do |homekey|
         return @home = ENV[homekey] if ENV[homekey]
       end
 
