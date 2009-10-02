@@ -5,7 +5,7 @@
 name = File.basename(__FILE__).split('.').shift
 
 gem_wrap name do |t|
-  t.version       = '2.2.1'
+  t.version       = '2.2.2'
   t.summary       = "AsUnit25 is an ActionScript unit test framework for Flash Player 7 and 8 projects"
   t.author        = "Luke Bayes and Ali Mills"
   t.email         = "projectsprouts@googlegroups.com"
@@ -13,7 +13,7 @@ gem_wrap name do |t|
   t.sprout_spec   =<<EOF
 - !ruby/object:Sprout::RemoteFileTarget 
   platform: universal
-  url: http://projectsprouts.googlecode.com/files/asunit25-1.3.zip
-  archive_path: ''
+  md5: 243c963f4d7191081ae200600aa698cb
+  archive_path: 'lukebayes-asunit-e2af845/as25/src'
 EOF
 end
