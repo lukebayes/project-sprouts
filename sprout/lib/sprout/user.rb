@@ -146,7 +146,7 @@ module Sprout
       
       # Original implementation:
       #["HOME", "USERPROFILE"].each do |homekey|
-      # Change submitted by Michael Fleet (dissinovate)
+      # Change submitted by Michael Fleet (disinovate)
       # Does this work for everyone on Windows?
       ["USERPROFILE", "HOME"].each do |homekey|
         return @home = ENV[homekey] if ENV[homekey]
