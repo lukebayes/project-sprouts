@@ -820,11 +820,13 @@ EOF
     
     def execute(*args)
       begin
+        start = Time.now.to_i
         if(@use_fcsh)
           execute_with_fcsh(to_shell)
         else
           super
         end
+        puts "mxmlc finished compiling #{name} in #{Time.now.to_i - start} seconds"
       rescue ExecutionError => e
         if(e.message.index('Warning:'))
           # MXMLC sends warnings to stderr....
