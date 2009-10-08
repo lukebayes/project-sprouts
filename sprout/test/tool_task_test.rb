@@ -95,6 +95,12 @@ class ToolTaskTest <  Test::Unit::TestCase
     assert_equal('-as3=false', result)
   end
   
+  def test_custom_to_shell_proc
+    @task.custom_to_shell << 'hello'
+    @task.custom_to_shell << 'world'
+    assert_equal("saying: hello world", @task.to_shell)
+  end
+  
   def test_string_param_with_spaces
     @task.default_size = '500 600'
     result = @task.to_shell

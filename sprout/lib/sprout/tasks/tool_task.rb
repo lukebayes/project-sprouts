@@ -205,6 +205,8 @@ module Sprout
     
     # Create a string that represents this configured tool for shell execution
     def to_shell
+      return @to_shell_proc.call(self) if(!@to_shell_proc.nil?)
+
       result = []
       result << @prepended_args unless @prepended_args.nil?
       params.each do |param|
@@ -415,6 +417,7 @@ module Sprout
     attr_writer   :value
     attr_writer   :delimiter
     attr_writer   :shell_name
+    attr_writer   :to_shell_proc
 
     # Set the file_expression (blob) to append to each path
     # in order to build the prerequisites FileList.
@@ -495,7 +498,9 @@ module Sprout
     end
 
     def to_shell
-      if(hidden_name?)
+      if(!@to_shell_proc.nil?)
+        return @to_shell_proc.call(self)
+      elsif(hidden_name?)
         return shell_value
       elsif(hidden_value?)
         return shell_name
@@ -721,6 +726,8 @@ module Sprout
     
     # Returns a shell formatted string of the collection
     def to_shell
+      return @to_shell_proc.call(self) if(!@to_shell_proc.nil?)
+
       result = []
       value.each do |str|
         result << "#{shell_name}#{delimiter}#{str}"
