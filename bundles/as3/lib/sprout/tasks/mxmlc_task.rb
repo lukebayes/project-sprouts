@@ -826,7 +826,7 @@ EOF
         else
           super
         end
-        puts "mxmlc finished compiling #{name} in #{Time.now.to_i - start} seconds"
+        Log.puts "mxmlc finished compiling #{name} in #{Time.now.to_i - start} seconds"
       rescue ExecutionError => e
         if(e.message.index('Warning:'))
           # MXMLC sends warnings to stderr....

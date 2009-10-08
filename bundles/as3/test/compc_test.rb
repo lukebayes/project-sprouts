@@ -28,6 +28,18 @@ class COMPCTest <  Test::Unit::TestCase
     Dir.chdir(@start)
   end
   
+  def test_include_classes
+    compiler = compc @compc_output do |t|
+      t.input = @compc_input
+      t.source_path << @src
+      t.source_path << @test
+      t.include_classes << 'SomeProject'
+      t.include_classes << 'display.OrangeBox'
+    end
+    assert_equal '-output=bin/COMPC.swc -source-path+=src -source-path+=test -include-classes SomeProject display.OrangeBox SomeProject', compiler.to_shell
+    run_task @compc_output
+  end
+  
   def test_basic_compilation
     
     compiler = compc @compc_output do |t|
