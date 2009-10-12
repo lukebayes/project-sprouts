@@ -307,7 +307,7 @@ task :remove_all do |t|
 end
 
 # Add required support for remove_all task
-gem 'rubigen', '= 1.3.3'
+gem 'rubigen'
 require 'rubigen'
 
 module RubiGen
