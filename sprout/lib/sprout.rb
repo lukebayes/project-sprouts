@@ -14,6 +14,7 @@ if(Gem::Version.new(Gem::RubyGemsVersion) != Gem::Version.new('1.0.1'))
 end
 
 $:.push(File.dirname(__FILE__))
+require 'sprout/dynamic_accessors'
 require 'progress_bar'
 require 'sprout/log'
 require 'sprout/user'
