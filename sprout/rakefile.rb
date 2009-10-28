@@ -12,12 +12,27 @@ require 'lib/sprout/version'
 
 PROJECT                 = "sprout"
 NAME                    = "sprout"
-SUMMARY                 = "Sprouts is an open-source, cross-platform project generation, configuration and build tool."
+SUMMARY                 = "Sprout is an open-source, cross-platform project generation, configuration and build tool, that currently suports ActionScript 2, ActionScript 3, Flex and AIR development."
 GEM_VERSION             = Sprout::VERSION::STRING
 AUTHOR                  = "Luke Bayes"
 EMAIL                   = "projectsprouts@googlegroups.com"
 HOMEPAGE                = "http://www.projectsprouts.org"
-DESCRIPTION             = "Sprouts take the tedium and frustration out of creating new programming projects by automatically installing and configuring external tools, libraries, commands and build tasks."
+DESCRIPTION             =<<EOF
+Sprout takes the tedium and frustration out of creating new programming projects by automatically installing and configuring external tools, libraries, commands and build tasks. The current version of Sprout supports ActionScript 2, ActionScript 3, Flex and AIR development.
+
+To find out what bundles are available, run:
+
+gem list -r sprout.*bundle
+
+To create a project from a particular bundle, simply run:
+
+sprout -n [bundle name] [Project Name]
+
+For a new ActionScript 3 project named, SomeProject, the command would look like this:
+
+sprout -n as3 SomeProject
+
+EOF
 HOMEPATH                = "http://#{PROJECT}.rubyforge.org"
 RELEASE_TYPES           = ["gem"]
 PKG_LIST                = FileList['[a-zA-Z]*',
