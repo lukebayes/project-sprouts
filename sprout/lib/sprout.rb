@@ -34,6 +34,7 @@ require 'sprout/project_model'
 require 'sprout/builder'
 require 'sprout/version'
 require 'sprout/tasks/tool_task'
+require 'sprout/tasks/erb_resolver'
 require 'sprout/general_tasks'
 require 'sprout/generator'
 

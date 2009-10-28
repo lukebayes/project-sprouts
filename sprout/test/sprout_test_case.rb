@@ -41,4 +41,13 @@ module SproutTestCase  # :nodoc:[all]
     assert(File.exists?(path), message)
   end
   
+  def assert_matches(expression, string)
+    if(expression.is_a?(String))
+      expresion = /#{expression}/
+    end
+    if(!string.match(expression))
+      fail "'#{string}' should include '#{expression}'"
+    end
+  end
+  
 end
