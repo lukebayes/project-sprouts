@@ -293,10 +293,42 @@ ssh :clear_rdoc do |t|
 end
 =end
 
-desc "Release to RubyForge and ProjectSprouts"
-task :release => [:update_gem_index, :release_to_rubyforge]
+# desc "Release to RubyForge and ProjectSprouts"
+# task :release => [:update_gem_index, :release_to_rubyforge]
 
 ##########################
+
+def gem_files
+  FileList['pkg/*.gem'].each do |name|
+    yield name if block_given?
+  end
+end
+
+desc "Migrate gems from RubyForge to GemCutter"
+task :migrate do
+  gem_files.each do |file|
+    name = name.gsub(/.gem$/, '')
+    name = name.gsub(/-\d.*$/, '')
+    name = name.gsub(/^pkg\//, '')
+    begin
+      puts "Migrating: #{name}"
+      sh "gem migrate #{name}"
+    rescue
+      puts ">> [ERROR] There was a problem migrating: #{name}"
+    end
+  end
+end
+
+desc "Release gems to gemcutter.org"
+task :release do
+  gem_files.each do |file|
+    begin
+      sh "gem push #{file}"
+    rescue
+      puts ">> [ERROR] There was a problem pushing #{name}"
+    end
+  end
+end
 
 desc "Remove all gems that begin with 'sprout-'"
 task :remove_all do |t|

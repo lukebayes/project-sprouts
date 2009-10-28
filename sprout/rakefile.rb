@@ -12,12 +12,14 @@ require 'lib/sprout/version'
 
 PROJECT                 = "sprout"
 NAME                    = "sprout"
-SUMMARY                 = "Sprouts is an open-source, cross-platform project generation, configuration and build tool."
+SUMMARY                 = "Sprout is an open-source, cross-platform project generation, configuration and build tool, that currently suports ActionScript 2, ActionScript 3, Flex and AIR development."
 GEM_VERSION             = Sprout::VERSION::STRING
 AUTHOR                  = "Luke Bayes"
 EMAIL                   = "projectsprouts@googlegroups.com"
 HOMEPAGE                = "http://www.projectsprouts.org"
-DESCRIPTION             = "Sprouts take the tedium and frustration out of creating new programming projects by automatically installing and configuring external tools, libraries, commands and build tasks."
+DESCRIPTION             =<<EOF
+Sprout is a modular set of tools that take the tedium and frustration out of creating and managing programming projects by automatically installing and configuring external tools, libraries, commands and build tasks. Bundles are currently available to support ActionScript 2, ActionScript 3, Flex and AIR development.
+EOF
 HOMEPATH                = "http://#{PROJECT}.rubyforge.org"
 RELEASE_TYPES           = ["gem"]
 PKG_LIST                = FileList['[a-zA-Z]*',
@@ -71,6 +73,17 @@ osx_spec = Gem::Specification.new do |s|
   s.add_dependency('open4', '>= 0.9.6')
 end
 
+osx_snow_leopard_spec = Gem::Specification.new do |s|
+  apply_shared_spec(s)
+  s.platform = 'x86-darwin-10'
+  # Add snow-leopard-specific dependencies here
+
+  # Can't really depend on rb-appscript b/c this requires OS X dev-tool disk
+  #s.add_dependency('rb-appscript', '>= 0.5.0')
+  s.add_dependency('open4', '>= 0.9.6')
+end
+
+
 nix_spec = Gem::Specification.new do |s|
   apply_shared_spec(s)
   s.platform = 'x86-linux'
@@ -92,6 +105,9 @@ ruby_spec = Gem::Specification.new do |s|
 end
 
 Rake::GemPackageTask.new(osx_spec) do |pkg|
+end
+
+Rake::GemPackageTask.new(osx_snow_leopard_spec) do |pkg|
 end
 
 Rake::GemPackageTask.new(nix_spec) do |pkg|

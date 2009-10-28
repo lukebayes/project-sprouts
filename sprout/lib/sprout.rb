@@ -14,6 +14,7 @@ if(Gem::Version.new(Gem::RubyGemsVersion) != Gem::Version.new('1.0.1'))
 end
 
 $:.push(File.dirname(__FILE__))
+require 'sprout/dynamic_accessors'
 require 'progress_bar'
 require 'sprout/log'
 require 'sprout/user'
@@ -33,6 +34,7 @@ require 'sprout/project_model'
 require 'sprout/builder'
 require 'sprout/version'
 require 'sprout/tasks/tool_task'
+require 'sprout/tasks/erb_resolver'
 require 'sprout/general_tasks'
 require 'sprout/generator'
 
