@@ -18,20 +18,7 @@ AUTHOR                  = "Luke Bayes"
 EMAIL                   = "projectsprouts@googlegroups.com"
 HOMEPAGE                = "http://www.projectsprouts.org"
 DESCRIPTION             =<<EOF
-Sprout takes the tedium and frustration out of creating new programming projects by automatically installing and configuring external tools, libraries, commands and build tasks. The current version of Sprout supports ActionScript 2, ActionScript 3, Flex and AIR development.
-
-To find out what bundles are available, run:
-
-gem list -r sprout.*bundle
-
-To create a project from a particular bundle, simply run:
-
-sprout -n [bundle name] [Project Name]
-
-For a new ActionScript 3 project named, SomeProject, the command would look like this:
-
-sprout -n as3 SomeProject
-
+Sprout is a modular set of tools that take the tedium and frustration out of creating and managing programming projects by automatically installing and configuring external tools, libraries, commands and build tasks. Bundles are currently available to support ActionScript 2, ActionScript 3, Flex and AIR development.
 EOF
 HOMEPATH                = "http://#{PROJECT}.rubyforge.org"
 RELEASE_TYPES           = ["gem"]
@@ -86,6 +73,17 @@ osx_spec = Gem::Specification.new do |s|
   s.add_dependency('open4', '>= 0.9.6')
 end
 
+osx_snow_leopard_spec = Gem::Specification.new do |s|
+  apply_shared_spec(s)
+  s.platform = 'x86-darwin-10'
+  # Add snow-leopard-specific dependencies here
+
+  # Can't really depend on rb-appscript b/c this requires OS X dev-tool disk
+  #s.add_dependency('rb-appscript', '>= 0.5.0')
+  s.add_dependency('open4', '>= 0.9.6')
+end
+
+
 nix_spec = Gem::Specification.new do |s|
   apply_shared_spec(s)
   s.platform = 'x86-linux'
@@ -107,6 +105,9 @@ ruby_spec = Gem::Specification.new do |s|
 end
 
 Rake::GemPackageTask.new(osx_spec) do |pkg|
+end
+
+Rake::GemPackageTask.new(osx_snow_leopard_spec) do |pkg|
 end
 
 Rake::GemPackageTask.new(nix_spec) do |pkg|
