@@ -36,6 +36,8 @@ class ADLTest <  Test::Unit::TestCase
 
     # If you'd like to see the application run, you'll need something like this:
     # runtime = ENV['FLEX_HOME'] + "/runtimes/air/mac/Adobe AIR.framework/Adobe AIR"
+    # or on my machine:
+    # runtime = '/Users/lbayes/Library/Sprouts/cache/0.7/sprout-flex3sdk-tool-3.3.1/archive/runtimes/air/mac/Adobe\ AIR.framework/Adobe\ AIR/Versions/1.0/Adobe\ AIR'
 
     launcher = adl :test_adl do |t|
       t.runtime = runtime
@@ -48,6 +50,9 @@ class ADLTest <  Test::Unit::TestCase
     
     command = "-runtime #{runtime} -nodebug -pubid THEPUBID src/SomeProject-app.xml #{@root_directory} -- arg1 arg2"
     assert_equal command, launcher.to_shell      
+
+    # TODO: Get this working too?
+    # launcher.invoke
   end
   
 end

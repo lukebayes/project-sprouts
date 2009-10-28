@@ -19,7 +19,6 @@ class SuiteGeneratorTest < Test::Unit::TestCase
   end
 
   def test_generator
-    puts
     run_generator('as3', 'suite', [''], @local_generators)
 
     assert_file @test_suite
