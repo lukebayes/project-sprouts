@@ -62,40 +62,41 @@ Following are some simple examples of the Rake tasks that Sprouts provides:
 
 _ActionScript 3 and MXML Projects:_
 <pre><code>mxmlc :debug do |t|
-	t.input = 'src/SomeProject.as'
-	t.output = 'bin/SomeProject.swf'
+  t.input = 'src/SomeProject.as'
+  t.output = 'bin/SomeProject.swf'
 end
 
 compc :deploy do |t|
-	t.input = 'src/SomeProject.as'
-	t.output = 'bin/SomeProject.swc'
+  t.input = 'src/SomeProject.as'
+  t.output = 'bin/SomeProject.swc'
 end
 
 asdoc :doc do |t|
-	t.doc_classes = 'SomeProject'
-	t.source_path = 'src'
+  t.doc_classes = 'SomeProject'
+  t.source_path = 'src'
 end
 
 flashplayer :run do |t|
-	t.swf = 'bin/SomeProject.swf'
+  t.swf = 'bin/SomeProject.swf'
 end
 </code></pre>
 
 _ActionScript 2 Projects:_
+
 <code><pre>mtasc :debug do |t|
-	t.main = true
-	t.header = '800:600:24'
-	t.input = 'src/SomeProject.as'
-	t.output = 'bin/SomeProject.swf'
+  t.main = true
+  t.header = '800:600:24'
+  t.input = 'src/SomeProject.as'
+  t.output = 'bin/SomeProject.swf'
 end
 
 swfmill :skin do |t|
-	t.input = 'assets/skins/SomeProjectSkin'
-	t.output = 'assets/skins/SomeProjectSkin.swf'
+  t.input = 'assets/skins/SomeProjectSkin'
+  t.output = 'assets/skins/SomeProjectSkin.swf'
 end
 
 flashplayer :run do |t|
-	t.swf = 'bin/SomeProject.swf'
+  t.swf = 'bin/SomeProject.swf'
 end
 </code></pre>
 
