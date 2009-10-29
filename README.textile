@@ -86,16 +86,16 @@ end
 _ActionScript 2 Projects:_
 
 <pre><code>
-mtasc :debug do |t|
+swfmill :skin do |t|
+  t.input = 'assets/skins/SomeProjectSkin'
+  t.output = 'assets/skins/SomeProjectSkin.swf'
+end
+
+mtasc :debug => :skin do |t|
   t.main = true
   t.header = '800:600:24'
   t.input = 'src/SomeProject.as'
   t.output = 'bin/SomeProject.swf'
-end
-
-swfmill :skin do |t|
-  t.input = 'assets/skins/SomeProjectSkin'
-  t.output = 'assets/skins/SomeProjectSkin.swf'
 end
 
 flashplayer :run do |t|
