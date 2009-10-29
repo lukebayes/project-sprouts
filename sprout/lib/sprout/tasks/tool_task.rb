@@ -98,6 +98,12 @@ module Sprout
       return @gem_path ||= @default_gem_path
     end
     
+    def each_param
+      params.each do |param|
+        yield param if block_given?
+      end
+    end
+    
     # Create a string that can be turned into a file
     # that rdoc can parse to describe the customized
     # or generated task using param name, type and

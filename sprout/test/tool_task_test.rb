@@ -218,8 +218,14 @@ class ToolTaskTest <  Test::Unit::TestCase
     assert_file_contains('_preprocessed/src/ProcessMe.txt', 'foobar')
   end
   
-  def test_environment_variable
-    
+  def test_each_param
+    mock = Sprout::MockTool.new(:mock)
+    expected_names = [:debug, :source_path, :input]
+    found_names = []
+    mock.each_param do |param|
+      found_names << param.name.to_sym
+    end
+    assert_equal expected_names, found_names
   end
   
 end
