@@ -62,7 +62,8 @@ Following are some simple examples of the Rake tasks that Sprouts provides:
 
 _ActionScript 3 and MXML Projects:_
 
-<code>mxmlc :debug do |t|
+<code>
+mxmlc :debug do |t|
   t.input = 'src/SomeProject.as'
   t.output = 'bin/SomeProject.swf'
 end
@@ -84,7 +85,8 @@ end
 
 _ActionScript 2 Projects:_
 
-<code>mtasc :debug do |t|
+<code>
+mtasc :debug do |t|
   t.main = true
   t.header = '800:600:24'
   t.input = 'src/SomeProject.as'
