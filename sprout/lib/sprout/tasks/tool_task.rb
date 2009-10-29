@@ -56,6 +56,7 @@ module Sprout
     def self.define_task(args, &block)
       t = super
       if(t.is_a?(ToolTask))
+        t.find_and_resolve_model
         yield t if block_given?
         t.define
         t.prepare
@@ -204,7 +205,6 @@ module Sprout
     
     def execute(*args)
       display_preprocess_message
-      #puts ">> Executing #{File.basename(exe)} #{to_shell}"
       exe = Sprout.get_executable(gem_name, gem_path, gem_version)
       User.execute(exe, to_shell)
     end
@@ -236,14 +236,30 @@ module Sprout
       params.each do |param|
         param.prepare
       end
+      prepare_prerequisites
+    end
+    
+    def prepare_prerequisites
       # Ensure there are no duplicates in the prerequisite collection
       @prerequisites = prerequisites.uniq
     end
-
+    
     def define
       resolve_libraries(prerequisites)
     end
     
+    # Look for a ToolTaskModel in the list
+    # of prerequisites. If found, apply
+    # any applicable params to self...
+    def find_and_resolve_model
+      prerequisites.each do |prereq|
+        instance = Rake::application[prereq]
+        if(instance.is_a?(ToolTaskModel))
+          resolve_model(instance)
+        end
+      end
+    end
+
     # The default file expression to append to each PathParam
     # in order to build file change prerequisites.
     # 
@@ -253,7 +269,7 @@ module Sprout
       @default_file_expression ||= '/**/**/*'
     end
     
-    protected 
+    protected
     
     def initialize_task
     end
@@ -323,8 +339,6 @@ module Sprout
       end
     end
 
-    protected
-
     def create_param(type)
       return eval("#{type.to_s.capitalize}Param.new")
     end
@@ -336,7 +350,7 @@ module Sprout
     def respond_to?(name)
       result = super
       if(!result)
-        result = param_hash.has_key? name
+        result = param_hash.has_key? name.to_s
       end
       return result
     end
@@ -345,7 +359,7 @@ module Sprout
       name.gsub(/=$/, '')
     end
 
-    def method_missing(name,*args)
+    def method_missing(name, *args)
       name = name.to_s
       cleaned = clean_name(name)
       if(!respond_to?(cleaned))
@@ -379,6 +393,14 @@ module Sprout
     # Concrete ToolTasks should override this method
     # and add any dependent libraries appropriately
     def resolve_library(library_task)
+    end
+    
+    def resolve_model(model)
+      model.each_attribute do |key, value|
+        if(respond_to? key)
+          self.send("#{key}=", value)
+        end
+      end
     end
     
     # If the provided path contains spaces, wrap it in quotes so that

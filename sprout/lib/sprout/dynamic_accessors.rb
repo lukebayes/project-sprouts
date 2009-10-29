@@ -21,6 +21,12 @@ module DynamicAccessors
     super
     @missing_params_hash = Hash.new
   end
+  
+  def each_attribute
+    @missing_params_hash.each do |param|
+      yield param if block_given?
+    end
+  end
 
   def method_missing(method, *params, &block)
     if(method.to_s.match(/=$/))
