@@ -83,7 +83,7 @@ end
 
 _ActionScript 2 Projects:_
 
-<code><pre>mtasc :debug do |t|
+<pre><code>mtasc :debug do |t|
   t.main = true
   t.header = '800:600:24'
   t.input = 'src/SomeProject.as'
