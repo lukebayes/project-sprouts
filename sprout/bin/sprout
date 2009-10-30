@@ -43,6 +43,9 @@ Create a new ActionScript 3.0 project named 'SomeProject':
 Create a new ActionScript 2.0 project named 'OtherProject':
   #{File.basename($0)} -n as2 OtherProject
 
+Create a new MXML project named 'SomeProject':
+  #{File.basename($0)} -n mxml SomeProject
+
 Remove all Sprout gems and cached files:
   #{File.basename($0)} -R
 
@@ -88,6 +91,8 @@ BANNER
       OPTIONS[:project_name] = ARGV.pop
       if(OPTIONS[:project_name] == "=")
         fail_with(opts, "Invalid project name #{OPTIONS[:project_name]}")
+      elsif(OPTIONS[:project_name] =~ /Test$/)
+        fail_with(opts, "Your project name should not match /Test$/ as this will quickly cause problems when generating test cases and test suites")
       end
     else
       fail_with(opts, "You must provide a sprout name argument such as, '-n as2' or '-n as3'")

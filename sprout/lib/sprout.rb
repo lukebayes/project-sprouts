@@ -426,14 +426,7 @@ EOF
     end
 
     def self.project_name=(name) # :nodoc:
-      validate_name(name)
       @@project_name = name
-    end
-    
-    def self.validate_name(name)
-      if(name =~ /Test$/)
-        raise UsageError.new('Your project name should not include Test as this will cause problems when generating test cases and test suites')
-      end
     end
     
     # Return the current project_name assuming someone has already set it, otherwise return an empty string
