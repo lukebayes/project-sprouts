@@ -44,6 +44,17 @@ class SproutTest <  Test::Unit::TestCase
     assert_equal("foo", Sprout::ProjectModel.instance.test_dir)
   end
   
+  def test_project_name
+    Sprout::Sprout.project_name = 'SomeProject'
+    assert_equal 'SomeProject', Sprout::Sprout.project_name
+  end
+  
+  def test_bad_project_name
+    assert_raises Sprout::UsageError do
+      Sprout::Sprout.project_name = 'SomeTest'
+    end
+  end
+  
 #  def test_generate
 #    sprout('as3')
 #    Sprout::Sprout.generate(:project, [@project_name])
