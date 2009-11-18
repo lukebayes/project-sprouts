@@ -29,59 +29,57 @@ class FDBTest <  Test::Unit::TestCase
     return [process, output, buffer]
   end
 
-  def test_instantiated
-    debugger = fdb :debug
-    assert debugger.is_a?(Sprout::FDBTask)
-  end
+  # def test_instantiated
+  #   debugger = fdb :debug
+  #   assert debugger.is_a?(Sprout::FDBTask)
+  # end
+  # 
+  # def test_simple_buffer
+  #   str = "Adobe"
+  #   process, output, buffer = create_buffer(str)
+  #   
+  #   sleep(1.8)
+  #   
+  #   assert_equal(str, output)
+  #   
+  # end
+  # 
+  # def test_fdb_buffer
+  #   str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
+  #   str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
+  #   str << "(fdb) "
+  #   
+  #   process, output, buffer = create_buffer str
+  #   assert_equal(str, output)
+  # end
+  # 
+  # def test_fdb_buffer_wait_for_prompt
+  #   str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
+  #   str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
+  #   str << "(fdb) "
+  # 
+  #   process, output, buffer = create_buffer
+  #   process.print str
+  # 
+  #   timeout 1 do
+  #     buffer.wait_for_prompt
+  #   end
+  # end
+  # 
+  # def test_fdb_confirmation_prompt
+  #   str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
+  #   str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
+  #   str << "The program is running.  Exit anyway? (y or n) "
+  # 
+  #   process, output, buffer = create_buffer
+  #   process.print str
+  # 
+  #   timeout 1 do
+  #     buffer.wait_for_prompt
+  #   end
+  #   
+  # end
   
-  def test_simple_buffer
-    str = "Adobe"
-    process, output, buffer = create_buffer(str)
-    
-    sleep(1.8)
-    
-    assert_equal(str, output)
-    
-  end
-  
-  def test_fdb_buffer
-    str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
-    str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
-    str << "(fdb) "
-    
-    process, output, buffer = create_buffer str
-    assert_equal(str, output)
-  end
-  
-  def test_fdb_buffer_wait_for_prompt
-    str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
-    str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
-    str << "(fdb) "
-  
-    process, output, buffer = create_buffer
-    process.print str
-  
-    timeout 1 do
-      buffer.wait_for_prompt
-    end
-  end
-  
-  def test_fdb_confirmation_prompt
-    str = "Adobe fdb (Flash Player Debugger) [build 3.0.0.477]\n"
-    str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
-    str << "The program is running.  Exit anyway? (y or n) "
-  
-    process, output, buffer = create_buffer
-    process.print str
-  
-    timeout 1 do
-      buffer.wait_for_prompt
-    end
-    
-  end
-  
-=begin
-
   # These tests only work well when executed
   # individually. Otherwise they junk up output
   # and don't seem to clean up the Flash Player
@@ -95,40 +93,42 @@ class FDBTest <  Test::Unit::TestCase
       t.continue
     end
     
-    debugger.execute
-  end
-  
-  def test_close_after_unit_tests
-    debugger = fdb :debugger do |t|
-      t.kill_on_fault = true
-      t.file = @runner_swf
-      t.run
-      t.continue
+    assert_raises Sprout::FDBTaskError do
+      debugger.invoke
     end
     
-    debugger.execute
   end
 
-  def test_launch_player
-    debugger = fdb :debug do |t|
-      t.file = @swf
-      t.run
-      t.break = "SomeProject.as#4"
-#      t.continue
-#      t.sleep_until('SomeProject instantiated!')
-#      t.continue
-#      t.quit
-#      t.pwd
-#      t.continue
-#      t.info
-#      t.continue
-#      t.quit
-#      t.info_variables
-    end
-    
-    debugger.invoke
-  end
-=end
+  # def test_close_after_unit_tests
+  #   debugger = fdb :debugger do |t|
+  #     t.kill_on_fault = true
+  #     t.file = @runner_swf
+  #     t.run
+  #     t.continue
+  #   end
+  #   
+  #   debugger.execute
+  # end
+# 
+#   def test_launch_player
+#     debugger = fdb :debug do |t|
+#       t.file = @swf
+#       t.run
+#       t.break = "SomeProject.as#4"
+# #      t.continue
+# #      t.sleep_until('SomeProject instantiated!')
+# #      t.continue
+# #      t.quit
+# #      t.pwd
+# #      t.continue
+# #      t.info
+# #      t.continue
+# #      t.quit
+# #      t.info_variables
+#     end
+#     
+#     debugger.invoke
+#   end
 
 end
 
