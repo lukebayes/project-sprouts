@@ -24,6 +24,13 @@ class AsDocTest <  Test::Unit::TestCase
     remove_file @doc
     Dir.chdir(@start)
   end
+  
+  def test_deprecation_warnings_should_not_explode
+    fake_runner = FakeProcessRunner.new
+    Sprout::ProcessRunner.stubs(:new).returns(fake_runner)
+    
+    
+  end
 
   def test_configure_directly
     t = asdoc :docs do |t|
@@ -33,6 +40,9 @@ class AsDocTest <  Test::Unit::TestCase
       # Need to force templates_path so that these tests run on different machines
       t.templates_path << 'foo'
     end
+
+    # Comment out the templates path to 
+    # t.invoke
 
     assert_equal('-doc-sources+=lib/asunit -doc-sources+=src -doc-sources+=test -output=doc -templates-path+=foo', t.to_shell)
   end
@@ -85,3 +95,11 @@ class AsDocTest <  Test::Unit::TestCase
     assert_equal("-doc-sources+=src -exclude-classes=#{excluded_classes} -output=doc -source-path+=lib/asunit -source-path+=src -source-path+=test -templates-path+=foo", t.to_shell)
   end
 end
+
+class FakeProcessRunner
+  
+  def initialize(*command)
+    puts ">> FAKE PROCESS RUNNER INITIALIZED WITH: #{command}"
+  end
+end
+

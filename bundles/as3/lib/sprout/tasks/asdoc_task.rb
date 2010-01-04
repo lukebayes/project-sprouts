@@ -283,7 +283,7 @@ EOF
       begin
         super
       rescue ExecutionError => e
-        if(e.message.index('Warning:'))
+        if(e.message.index('Warning:') || e.message.index('[Deprecated]'))
           # MXMLC sends warnings to stderr....
           Log.puts(e.message.gsub('[ERROR]', '[WARNING]'))
         else
