@@ -50,7 +50,7 @@ spec = Gem::Specification.new do |s|
 
   s.add_dependency('sprout', '>= 0.7.211')
   s.add_dependency('sprout-as3-bundle', '>= 1.0.28')
-  s.add_dependency('sprout-flex4sdk-tool', '>= 4.1.60109')
+  s.add_dependency('sprout-flex4sdk-tool', '>= 4.2.10')
 end
 
 Rake::GemPackageTask.new(spec) do |p|
