@@ -8,9 +8,9 @@
   platform: win32
   url: http://download.macromedia.com/pub/flashplayer/updaters/10/flashplayer_10_sa_debug.exe
   archive_path: flashplayer_10_sa_debug.exe
-  md5: 3c81a1606b11614d23af1c53a9ab72bb
+  md5: 10a7eaf12664f175d1fa913f0716f2b3 
 - !ruby/object:Sprout::RemoteFileTarget
   platform: linux
   url: http://download.macromedia.com/pub/flashplayer/updaters/10/flash_player_10_linux_dev.tar.gz
   archive_path: flash_player_10_linux_dev/standalone/debugger/flashplayer
-  md5: 5cdc90a1b1dcda0ae5a87aae0a8fdd7b
+  md5: 5ade3e2da573296197d53082740b39ab
