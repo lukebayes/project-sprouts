@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:Application 
-	xmlns:fx="http://ns.adobe.com/mxml/2009" 
-	xmlns:s="library://ns.adobe.com/flex/spark" 
-	xmlns:mx="library://ns.adobe.com/flex/halo" 
-	xmlns:local="*"
-	creationComplete="creationCompleteHandler(event)"
-	>
+<s:Application 	xmlns:fx="http://ns.adobe.com/mxml/2009"
+				xmlns:mx="library://ns.adobe.com/flex/halo"
+				xmlns:s="library://ns.adobe.com/flex/spark"
+				backgroundColor="#FFFFFF"
+				creationComplete="creationCompleteHandler(event)" >
+
+	<s:layout>
+		<s:VerticalLayout />
+	</s:layout>
+
+	<!-- StyleSheets -->
+	<fx:Style source="<%= project_name %>Skin.css" />
+
+	<!-- Scripts -->
 	<fx:Script>
+
 		<![CDATA[
-			private function creationCompleteHandler(event:Event):void {
+
+			
+			private function creationCompleteHandler(event:Event):void 
+			{
 				trace(">> CreationComplete");
 			}
+		
 		]]>
+
 	</fx:Script>
-	<!-- Import StyleSheet -->
-	<fx:Style source="<%= project_name %>Skin.css" />
-	<mx:Container styleName="SproutLogo" width="100%" height="100%" />
 </s:Application>
