@@ -3,7 +3,7 @@ module Sprout
     module VERSION #:nodoc:
       MAJOR = 10
       MINOR = 22
-      TINY  = 6
+      TINY  = 7
 
       STRING = [MAJOR, MINOR, TINY].join('.')
       MAJOR_MINOR = [MAJOR, MINOR].join('.')
