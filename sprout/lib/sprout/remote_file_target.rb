@@ -48,9 +48,6 @@ module Sprout
     # Filename for the downloaded file. Introduced to fix railsy URL issues.
     attr_accessor :filename
 
-    # Filename for the downloaded file. Introduced to fix railsy URL issues.
-    attr_accessor :filename
-
     # Relative path within the archive to the executable or binary of interest
     def archive_path
       @archive_path ||= ''
@@ -110,20 +107,6 @@ module Sprout
     # Base file name represented by the provided +url+
     # Will strip off any ? arguments and trailing slashes. May not play nice with Rails URLS,
     # We expect archive file name suffixes like, zip, gzip, tar.gz, dmg, etc.
-<<<<<<< HEAD
-    def file_name
-      #check if there is a filename given, if not try to create it
-      if(!filename)
-        if(url.split('').last == '/')
-          return name
-        end
-        file = url.split('/').pop
-        file = file.split('?').shift
-      #if there is a filename given, the downloaded file should be in the archive directory
-      else
-        file = "archive/"+filename
-      end
-=======
     def file_name(url=nil)
       return @filename if(@filename)
 
@@ -141,7 +124,6 @@ module Sprout
         file << ".#{archive_type.to_s}"
       end
       
->>>>>>> 362a0ec096b00eac7505d96b8320614fc8e8b5c2
       return file
     end
     

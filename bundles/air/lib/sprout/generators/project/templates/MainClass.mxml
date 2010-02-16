@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+                       xmlns:s="library://ns.adobe.com/flex/spark"
+                       xmlns:mx="library://ns.adobe.com/flex/halo"
+    xmlns:local="*"
+    creationComplete="creationCompleteHandler(event)"
+    >
+    <fx:Script>
+        <![CDATA[
+            private function creationCompleteHandler(event:Event):void {
+                trace(">> CreationComplete");
+            }
+        ]]>
+    </fx:Script>
+    <!-- Import StyleSheet -->
+    <fx:Style source="<%= project_name %>Skin.css" />
+
+    <fx:Declarations>
+        <!-- Place non-visual elements (e.g., services, value objects) here -->
+    </fx:Declarations>
+
+    <mx:VBox id="mainBox" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
+        <mx:Image autoLoad="true" source="@Embed(source='assets/skins/<%= project_name %>/ProjectSprouts.png')"/>
+        <mx:Label id="lLabel" text="...is good at air too!"/>
+    </mx:VBox>
+</s:WindowedApplication>
+

@@ -1,0 +1,23 @@
+-------------------------------------
+Adobe AIR bundle for Project Sprout
+-------------------------------------
+
+In order to create a project call:
+
+sprout -n air ProjectName
+
+After that, cd into the created directory. There you may edit the application description files (copyright or app id...).
+
+The following rake tasks are available:
+
+*   rake debug
+*   rake run
+*   rake certificate (creates an certificate; have a look at the task in the rakefile and change the password if you want)
+*   rake package
+*   rake doc
+
+The following items are on the todo list:
+
+*   integrate testing with flexunit 4 or whatever
+*   integrate ci testing
+*   integrate testing for the bundle
