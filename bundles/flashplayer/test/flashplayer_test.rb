@@ -119,7 +119,7 @@ class FlashPlayerTest <  Test::Unit::TestCase
     content = File.read @blank_trust_file
     assert_match /#{@some_project}/, content
   end
-  
+
   private
 
   def create_empty_file(path)
