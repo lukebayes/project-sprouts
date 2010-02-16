@@ -1,6 +1,7 @@
 require 'test/unit'
 require 'rubygems'
 require 'rake'
+require 'mocha'
 
 # If this is running within the directory structure found in
 # svn, there is no need for an ENV, if this project is running

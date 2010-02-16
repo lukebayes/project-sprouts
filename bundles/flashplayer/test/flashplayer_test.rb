@@ -13,6 +13,8 @@ class FlashPlayerTest <  Test::Unit::TestCase
     @failure_result_file    = 'ResultFailure.xml'
     @error_result_file      = 'ResultError.xml'
     @exception_swf          = 'InstantRuntimeException.swf'
+    @mm_cfg                 = File.join(fixture, 'mm.cfg')
+    @blank_mm_cfg           = File.join(fixture, 'blank-mm.cfg')
     
     @generated_results      = 'AsUnitResults.xml'
     Dir.chdir fixture
@@ -21,6 +23,8 @@ class FlashPlayerTest <  Test::Unit::TestCase
   def teardown
     remove_file @test_result
     remove_file @generated_results
+    remove_file @mm_cfg
+    remove_file @blank_mm_cfg
     Dir.chdir @start
     clear_tasks
   end
@@ -81,6 +85,32 @@ class FlashPlayerTest <  Test::Unit::TestCase
     sleep(4.0)
     player.close
     t.kill
+  end
+
+  def test_mm_config_missing
+    config = Sprout::FlashPlayerConfig.new
+    config.stubs(:config_path).returns(@mm_cfg)
+    config.stubs(:user_confirmation?).returns true
+    path = config.create_config_file
+    assert_file path
+    content = File.read path
+    assert_matches /TraceOutputFileName=#{path}/, content
+  end
+
+
+  def test_mm_config_blank
+    File.open(@blank_mm_cfg, 'w+') do |f|
+      f.write ''
+    end
+    assert_file @blank_mm_cfg
+
+    config = Sprout::FlashPlayerConfig.new
+    config.stubs(:config_path).returns @blank_mm_cfg
+    config.expects(:user_confirmation?).returns true
+    path = config.create_config_file
+    assert_file path
+    content = File.read path
+    assert_matches /TraceOutputFileName=#{path}/, content
   end
   
   # def test_use_fdb

@@ -217,7 +217,8 @@ module Sprout
 
       # Don't let trust or log file failures break other features...
       begin
-        log_file = FlashPlayerConfig.new().log
+        config = FlashPlayerConfig.new
+        log_file = config.log_file
         FlashPlayerTrust.new(File.expand_path(File.dirname(swf)))
 
         if(File.exists?(log_file))
@@ -365,20 +366,8 @@ module Sprout
 
     @@file_name = 'mm.cfg'
 
-    def initialize
-      osx_fp9 = File.join(User.library, 'Application Support', 'Macromedia')
-      if(FlashPlayerTask.home == osx_fp9)
-        @config = File.join(osx_fp9, @@file_name)
-      else
-        @config = File.join(User.home, @@file_name)
-      end
-      
-      if(!File.exists?(@config))
-        write_config(@config, content)
-      end
-    end
-
-    def log
+    def log_file
+      create_config_file
       path = File.join(FlashPlayerTask.home, 'Logs', 'flashlog.txt')
       if(User.new().is_a?(CygwinUser))
         parts = path.split("/")
@@ -395,17 +384,42 @@ module Sprout
       return path
     end
 
-    def content
+    def content(file)
       return <<EOF
 ErrorReportingEnable=1
 MaxWarnings=0
 TraceOutputEnable=1
-TraceOutputFileName=#{log}
+TraceOutputFileName=#{file}
 EOF
     end
 
+    def create_config_file
+      path = config_path 
+
+      if(file_blank?(path))
+        write_config(path, content(path))
+      end
+
+      path
+    end
+
     private
-    def write_config(location, content)
+
+    def file_blank?(file)
+      !File.exists?(file) || File.read(file).empty?
+    end
+
+    def config_path
+      osx_fp9 = File.join(User.library, 'Application Support', 'Macromedia')
+      if(FlashPlayerTask.home == osx_fp9)
+        path = File.join(osx_fp9, @@file_name)
+      else
+        path = File.join(User.home, @@file_name)
+      end
+      path
+    end
+
+    def user_confirmation?(location)
       puts <<EOF
 
 Correctly configured mm.cfg file not found at: #{location}
@@ -416,7 +430,11 @@ Would you like this file created automatically? [Yn]
 
 EOF
       answer = $stdin.gets.chomp.downcase
-      if(answer == 'y' || answer == '')
+      return (answer == 'y' || answer == '')
+    end
+
+    def write_config(location, content)
+      if(user_confirmation?(location))
         File.open(location, 'w') do |f|
           f.write(content)
         end
