@@ -15,6 +15,7 @@ class FlashPlayerTest <  Test::Unit::TestCase
     @exception_swf          = 'InstantRuntimeException.swf'
     @mm_cfg                 = File.join(fixture, 'mm.cfg')
     @blank_mm_cfg           = File.join(fixture, 'blank-mm.cfg')
+    @blank_trust_file       = File.join(fixture, 'blank-trust.cfg')
     
     @generated_results      = 'AsUnitResults.xml'
     Dir.chdir fixture
@@ -99,10 +100,7 @@ class FlashPlayerTest <  Test::Unit::TestCase
 
 
   def test_mm_config_blank
-    File.open(@blank_mm_cfg, 'w+') do |f|
-      f.write ''
-    end
-    assert_file @blank_mm_cfg
+    create_empty_file @blank_mm_cfg
 
     config = Sprout::FlashPlayerConfig.new
     config.stubs(:config_path).returns @blank_mm_cfg
@@ -112,7 +110,25 @@ class FlashPlayerTest <  Test::Unit::TestCase
     content = File.read path
     assert_matches /TraceOutputFileName=#{path}/, content
   end
+
+  def test_trust_file
+    create_empty_file @blank_trust_file
+    Sprout::FlashPlayerTask.stubs(:trust).returns @blank_trust_file
+    Sprout::FlashPlayerTrust.new(@some_project)
+
+    content = File.read @blank_trust_file
+    assert_match /#{@some_project}/, content
+  end
   
+  private
+
+  def create_empty_file(path)
+    File.open(path, 'w+') do |f|
+      f.write ''
+    end
+    assert_file path
+  end
+
   # def test_use_fdb
   #   flashplayer :run => @some_project_debug do |t|
   #     t.use_fdb = true
