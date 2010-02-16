@@ -95,10 +95,16 @@ class ToolTaskTest <  Test::Unit::TestCase
     assert_equal('-as3=false', result)
   end
   
+  def test_custom_to_shell_proc
+    @task.custom_to_shell << 'hello'
+    @task.custom_to_shell << 'world'
+    assert_equal("saying: hello world", @task.to_shell)
+  end
+  
   def test_string_param_with_spaces
     @task.default_size = '500 600'
     result = @task.to_shell
-    assert_equal("-default-size 500 600", result)
+    assert_equal("-default-size 500\ 600", result)
   end
   
   def test_files_param_prerequisites
@@ -210,6 +216,16 @@ class ToolTaskTest <  Test::Unit::TestCase
     end
     run_task(:fake_task)
     assert_file_contains('_preprocessed/src/ProcessMe.txt', 'foobar')
+  end
+  
+  def test_each_param
+    mock = Sprout::MockTool.new(:mock)
+    expected_names = [:debug, :source_path, :input]
+    found_names = []
+    mock.each_param do |param|
+      found_names << param.name.to_sym
+    end
+    assert_equal expected_names, found_names
   end
   
 end

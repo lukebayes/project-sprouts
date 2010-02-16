@@ -89,6 +89,17 @@ A list of files that should be documented. If a directory name is in the list, i
 This option works the same way as does the -include-sources option for the compc component compiler. For more information, see Using the component compiler (http://livedocs.adobe.com/flex/201/html/compilers_123_31.html#162910).
 EOF
       end
+      
+      add_param(:examples_path, :paths) do |p|
+        p.description =<<EOF
+A collection of paths that asdoc will use to look for example files that were included using @includeExample.
+
+This is an undocumented feature, but does seem to work.
+
+More info:
+http://bugs.adobe.com/jira/browse/FLEXDOCS-476
+EOF
+      end
 
       add_param(:exclude_classes, :strings) do |p|
         p.delimiter = '='
@@ -272,7 +283,7 @@ EOF
       begin
         super
       rescue ExecutionError => e
-        if(e.message.index('Warning:'))
+        if(e.message.index('Warning:') || e.message.index('[Deprecated]'))
           # MXMLC sends warnings to stderr....
           Log.puts(e.message.gsub('[ERROR]', '[WARNING]'))
         else

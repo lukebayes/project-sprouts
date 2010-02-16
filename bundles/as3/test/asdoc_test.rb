@@ -24,7 +24,7 @@ class AsDocTest <  Test::Unit::TestCase
     remove_file @doc
     Dir.chdir(@start)
   end
-
+  
   def test_configure_directly
     t = asdoc :docs do |t|
       t.doc_sources << @asunit
@@ -33,6 +33,9 @@ class AsDocTest <  Test::Unit::TestCase
       # Need to force templates_path so that these tests run on different machines
       t.templates_path << 'foo'
     end
+
+    # Comment out the templates path to 
+    # t.invoke
 
     assert_equal('-doc-sources+=lib/asunit -doc-sources+=src -doc-sources+=test -output=doc -templates-path+=foo', t.to_shell)
   end
@@ -59,7 +62,7 @@ class AsDocTest <  Test::Unit::TestCase
       t.source_path << 'src'
     end
     
-    assert_equal("-output=doc -source-path+=src -templates-path+=#{ENV['HOME']}/Library/Sprouts/cache/0.7/sprout-flex3sdk-tool-3.2.0/archive/asdoc/templates", t.to_shell)
+    assert_equal("-output=doc -source-path+=src -templates-path+=#{ENV['HOME']}/Library/Sprouts/cache/0.7/sprout-flex3sdk-tool-3.3.1/archive/asdoc/templates", t.to_shell)
   end
   
   def test_automatic_template_path

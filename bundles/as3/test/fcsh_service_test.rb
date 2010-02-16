@@ -52,7 +52,7 @@ class FCSHServiceTest <  Test::Unit::TestCase
     assert_file_exists('bin/SomeProjectWarning.swf')
 
     match_data = result =~ /Warning\:/
-    assert_equal(4, match_data.size)
+    assert_equal(8, match_data.size, result)
     assert(match_data, "Compilation with Warnings should return and describe the warnings(s):\n#{result}")
   end
 

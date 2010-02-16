@@ -1,13 +1,14 @@
 require 'test/unit'
 require 'rubygems'
 require 'rake'
+require 'mocha'
 
 # If this is running within the directory structure found in
 # svn, there is no need for an ENV, if this project is running
 # indiidually, SPROUT_HOME should be a system or vm var and set 
 # Your local path where you've checked out the following branch:
 # https://projectsprouts.googlecode.com/svn/branches/rubygems/sprouts/sprout
-SPROUT_HOME = ENV['SPROUT_HOME']
+SPROUT_HOME = ENV['SPROUT_HOME'] || File.dirname(__FILE__) + '/../../../'
 $:.push(SPROUT_HOME + '/sprout/lib')
 $:.push(SPROUT_HOME + '/sprout/test')
 

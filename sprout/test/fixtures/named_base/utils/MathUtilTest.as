@@ -6,7 +6,7 @@ package utils {
 		private var mathUtil:MathUtil;
 
 		public function MathUtilTest(methodName:String=null) {
-			super(methodName)
+			super(methodName);
 		}
 
 		override protected function setUp():void {

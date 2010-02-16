@@ -1,30 +1,30 @@
-package <%= package_name %> {
 
-	import asunit.framework.TestCase;
+import asunit.framework.TestCase;
+import <%=  full_class_name %>;
 
-	public class <%= test_case_name  %> extends TestCase {
-		private var <%= instance_name %>:<%= class_name %>;
+class <%= full_test_case_name %> extends TestCase {
+	private var className:String = "<%= package_name %>.<%= test_case_name %>";
+	private var <%= instance_name %>:<%= class_name %>;
 
-		public function <%= test_case_name %>(methodName:String=null) {
-			super(methodName)
-		}
+	public function <%= test_case_name %>(testMethod:String) {
+		super(testMethod);
+	}
 
-		override protected function setUp():void {
-			super.setUp();
-			<%= instance_name %> = new <%= class_name %>();
-		}
+	public function setUp():Void {
+		super.setUp();
+		<%= instance_name %> = new <%= class_name %>();
+	}
 
-		override protected function tearDown():void {
-			super.tearDown();
-			<%= instance_name %> = null;
-		}
+	public function tearDown():Void {
+		super.tearDown();
+		delete <%= instance_name %>;
+	}
 
-		public function testInstantiated():void {
-			assertTrue("<%= instance_name %> is <%= class_name %>", <%= instance_name %> is <%= class_name %>);
-		}
+	public function testInstantiated():Void {
+		assertTrue("<%= instance_name %> instanceof <%= class_name %>", <%= instance_name %> instanceof <%= class_name %>);
+	}
 
-		public function testFailure():void {
-			assertTrue("Failing test", false);
-		}
+	public function testFailure():Void {
+		assertTrue("Failing test", false);
 	}
 }

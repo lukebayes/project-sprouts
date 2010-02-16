@@ -55,7 +55,7 @@ module Sprout
     # this parameter.
     attr_writer :output
     
-    def self.define_task(args, &block) # :nodoc:
+    def self.define_task(*args, &block) # :nodoc:
       t = super
       yield t if block_given?
       t.define
@@ -153,6 +153,6 @@ module Sprout
   end
 end
 
-def zip(args, &block)
+def zip(*args, &block)
   Sprout::ZipTask.define_task(args, &block)
 end

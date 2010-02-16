@@ -7,6 +7,9 @@ module Sprout
 
     attr_writer   :archive_path
     
+    # The string environment variable name to check before downloading anything.
+    attr_accessor :environment
+    
     # The user path where this gem will download and install files
     # This value is set by the Sprout::Builder that creates this RemoteFileTarget
     attr_accessor :install_path
@@ -29,6 +32,21 @@ module Sprout
 
     # URL where Sprouts can go to download the RemoteFileTarget archive
     attr_accessor :url
+    
+    # If the archive type cannot be assumed from the returned file name,
+    # it must be provided as one of the following:
+    #   :exe
+    #   :zip
+    #   :targz
+    #   :gzip
+    #   :swc
+    #   :rb
+    #   :dmg
+    # @see ArchiveUnpacker
+    attr_accessor :archive_type
+
+    # Filename for the downloaded file. Introduced to fix railsy URL issues.
+    attr_accessor :filename
 
     # Filename for the downloaded file. Introduced to fix railsy URL issues.
     attr_accessor :filename
@@ -39,18 +57,30 @@ module Sprout
     end
 
     # Resolve this RemoteFileTarget now. This method is called by the Sprout::Builder
-    # and will download, install and unpack the described archive
+    # and will download, install and unpack the described archive, unless it is
+    # already installed
     def resolve(update=false)
-      if(url)
-        @loader = RemoteFileLoader.new
-        if(url && (update || !File.exists?(downloaded_path)))
-          download(url, downloaded_path, update)
+      # Wanted to raise, but it seems we support RemoteFileTargets that are actually self-installed binaries...
+      # like SWFMill on Linux. @see the BuilderTest.test_build_no_install for more info.
+      # raise RemoteFileTargetError.new('Cannot retrieve a RemoteFileTarget without a url') if url.nil?
+      return if url.nil?
+      
+      if(filename)
+        self.downloaded_path = File.join(File.dirname(downloaded_path), filename)
+      end
+      
+      if(url && (update || !File.exists?(downloaded_path)))
+        content = download(url, update)
+        FileUtils.makedirs(File.dirname(downloaded_path))
+        FileUtils.touch(downloaded_path)
+        File.open(downloaded_path, 'rb+') do |file|
+          file.write(content)
         end
+      end
 
-        if(!File.exists?(installed_path) || !File.exists?(File.join(installed_path, archive_path) ))
-          archive_root = File.join(install_path, 'archive')
-          install(downloaded_path, archive_root)
-        end
+      if(!File.exists?(installed_path) || !File.exists?(File.join(installed_path, archive_path) ))
+        archive_root = File.join(install_path, 'archive')
+        install(downloaded_path, archive_root, update, archive_type)
       end
     end
     
@@ -62,20 +92,25 @@ module Sprout
     # The root path to the unpacked archive files. This is the base path that will be added to any
     # +archive_path+ relative paths
     def installed_path
-      @installed_path ||= File.join(install_path, 'archive')
+      @installed_path ||= inferred_installed_path
       return @installed_path
+    end
+    
+    def downloaded_path=(path)
+      @downloaded_path = path
     end
     
     # Parent directory where archives are downloaded
     # can be something like: ~/Library/Sprouts/cache/0.7/sprout-somesprout-tool.x.x.x/
     def downloaded_path
-      @downloaded_path ||= File.join(install_path, file_name)
+      @downloaded_path ||= File.join(install_path, file_name(url))
       return @downloaded_path
     end
     
     # Base file name represented by the provided +url+
     # Will strip off any ? arguments and trailing slashes. May not play nice with Rails URLS,
     # We expect archive file name suffixes like, zip, gzip, tar.gz, dmg, etc.
+<<<<<<< HEAD
     def file_name
       #check if there is a filename given, if not try to create it
       if(!filename)
@@ -88,17 +123,46 @@ module Sprout
       else
         file = "archive/"+filename
       end
+=======
+    def file_name(url=nil)
+      return @filename if(@filename)
+
+      url ||= self.url
+      url = url.split('?').shift
+      
+      parts = url.split('/')
+      if(parts.last == '/')
+        parts.pop
+      end
+      
+      file = parts.pop
+      
+      if(!archive_type.nil? && file.match(/\.#{archive_type.to_s}$/).nil?)
+        file << ".#{archive_type.to_s}"
+      end
+      
+>>>>>>> 362a0ec096b00eac7505d96b8320614fc8e8b5c2
       return file
     end
     
     private
-    def download(url, path, update=false)
-      @loader = RemoteFileLoader.new
-      @loader.get_remote_file(url, path, update, md5)
+    
+    def inferred_installed_path
+      if(!environment.nil? && !ENV[environment].nil? && File.exists?(ENV[environment]))
+        return ENV[environment]
+      end
+      
+      return File.join(install_path, 'archive')
     end
     
-    def install(from, to)
-      @loader.unpack_downloaded_file(from, to)
+    def download(url, update=false)
+      loader = RemoteFileLoader.new
+      loader.get_remote_file(url, update, md5)
+    end
+    
+    def install(from, to, force, archive_type=nil)
+      unpacker = ArchiveUnpacker.new
+      unpacker.unpack_archive(from, to, force, archive_type)
     end
     
   end

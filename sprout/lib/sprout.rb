@@ -14,12 +14,14 @@ if(Gem::Version.new(Gem::RubyGemsVersion) != Gem::Version.new('1.0.1'))
 end
 
 $:.push(File.dirname(__FILE__))
+require 'sprout/dynamic_accessors'
 require 'progress_bar'
 require 'sprout/log'
 require 'sprout/user'
 require 'sprout/zip_util'
-require 'sprout/remote_file_target'
 require 'sprout/remote_file_loader'
+require 'sprout/archive_unpacker'
+require 'sprout/remote_file_target'
 require 'sprout/simple_resolver'
 require 'sprout/template_resolver'
 
@@ -28,16 +30,21 @@ require 'rubygems/source_info_cache'
 require 'rubygems/version'
 require 'rubygems/digest/md5'
 
+require 'sprout/tool_task_model'
 require 'sprout/project_model'
 require 'sprout/builder'
 require 'sprout/version'
 require 'sprout/tasks/tool_task'
+require 'sprout/tasks/erb_resolver'
 require 'sprout/general_tasks'
 require 'sprout/generator'
 
 module Sprout
   if(!defined? SUDO_INSTALL_GEMS)
     SUDO_INSTALL_GEMS = 'false' == ENV['SUDO_INSTALL_GEMS'] ? false : true
+  end
+
+  class UsageError < StandardError #:nodoc
   end
 
   class SproutError < StandardError #:nodoc:
@@ -126,7 +133,13 @@ module Sprout
     # * +project_path+ Optional parameter. Will default to the nearest folder that contains a valid Rakefile.
     # This Rakefile will usually be loaded by the referenced Generator, and it should have a configured ProjectModel
     # defined in it.
+    
+    # TODO: This command should accept an array of sprout names to fall back on...
+    # for example: generate(['flex4', 'as3'], ...)
     def self.generate(sprout_name, generator_name, params, project_path=nil)
+      # params.each_index do |index|
+      #   params[index] = clean_project_name(params[index])
+      # end
       RubiGen::Base.use_sprout_sources!(sprout_name, project_path)
       generator = RubiGen::Base.instance(generator_name, params)
       generator.command(:create).invoke!
@@ -234,7 +247,7 @@ EOF
     # Retrieve the file target to an executable by sprout name. Usually, these are tool sprouts.
     # * +name+ Full sprout gem name that contains an executable file
     # * +archive_path+ Optional parameter for tools that contain more than one executable, or for
-    # when you don't want to use the default executable presented by the tool. For example, the Flex 2 SDK
+    # when you don't want to use the default executable presented by the tool. For example, the Flex SDK
     # has many executables, when this method is called for them, one might use something like:
     #   Sprout::Sprout.get_executable('sprout-flex3sdk-tool', 'bin/mxmlc')
     # * +version+ Optional parameter to specify a particular gem version for this executable
@@ -245,7 +258,9 @@ EOF
         exe = File.join(target.installed_path, archive_path)
         if(User.new.is_a?(WinUser) && !archive_path.match(/.exe$/))
           # If we're on Win (even Cygwin), add .exe to support custom binaries (see sprout-flex3sdk-tool)
-          exe << '.exe'
+          if(File.exists?(exe + '.exe'))
+            exe << '.exe'
+          end
         end
       elsif(target.url)
         # Otherwise, use the default path to an executable if the RemoteFileTarget has a url prop
@@ -253,6 +268,10 @@ EOF
       else
         # Otherwise attempt to run the feature from the system path
         exe = target.archive_path
+      end
+      
+      if(!File.exists?(exe))
+        raise UsageError.new("Could not retrieve requested executable from path: #{exe}")
       end
       
       if(File.exists?(exe) && !File.directory?(exe) && File.stat(exe).executable?)
@@ -310,6 +329,14 @@ EOF
     # * +Windows+ C:/Documents And Settings/foo/Local Settings/Application Data/Sprouts/cache/0.7
     # * +Linux+ ~/.sprouts/cache/0.7
     def self.sprout_cache
+      @@sprout_cache ||= self.inferred_sprout_cache
+    end
+    
+    def self.sprout_cache=(cache)
+      @@sprout_cache = cache
+    end
+    
+    def self.inferred_sprout_cache
       home = User.application_home(@@name)
       return File.join(home, @@cache, "#{VERSION::MAJOR}.#{VERSION::MINOR}")
     end

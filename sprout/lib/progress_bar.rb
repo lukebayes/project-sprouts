@@ -15,9 +15,30 @@ require 'singleton'
 
 class ProgressBar # :nodoc:[all]
   VERSION = "0.9"
+  @@debug = false
+  @@outio = $stderr
+  
   def self.new(title, total)
     return ProgressBarManager.instance.add(title, total)
   end
+
+  def self.debug?
+    @@debug
+  end
+  
+  def self.debug=(debug)
+    @@debug = debug
+    if(debug)
+      @@outio = StringIO.new
+    else
+      @@outio = $stderr
+    end
+  end
+  
+  def self.outio
+    @@outio
+  end
+
 end
 
 class ProgressBarImpl # :nodoc:[all]
@@ -45,7 +66,7 @@ class ProgressBarImpl # :nodoc:[all]
   attr_accessor :start_time,
                 :title_width,
                 :bar_mark
-
+                
   def fmt_bar
     bar_width = do_percentage * @terminal_width / 100
     sprintf("|%s%s|", 
@@ -99,9 +120,9 @@ class ProgressBarImpl # :nodoc:[all]
     sec = t % 60
     min  = (t / 60) % 60
     hour = t / 3600
-    sprintf("%02d:%02d:%02d", hour, min, sec);
+    sprintf("%02d:%02d:%02d", hour, min, sec)
   end
-
+  
   # ETA stands for Estimated Time of Arrival.
   def eta
     if @current == 0
@@ -153,10 +174,10 @@ class ProgressBarImpl # :nodoc:[all]
   end
 
   def show
-    arguments = @format_arguments.map {|method| 
+    arguments = @format_arguments.map do |method|
       method = sprintf("fmt_%s", method)
       send(method)
-    }
+    end
     line = sprintf(@format, *arguments)
 
     width = get_width
@@ -290,7 +311,6 @@ class ProgressBarManager # :nodoc:[all]
   include Singleton
   
   def initialize
-    @outio = $stderr
     @finished = {}
     @bars = {}
     @outs = {}
@@ -308,8 +328,12 @@ class ProgressBarManager # :nodoc:[all]
     str = ''
     str += @outs[title].to_s
     str += "\r"
-    @outio.print "\r"
-    @outio.print str
+    outio.print "\r"
+    outio.print str
+  end
+  
+  def outio
+    ProgressBar.outio
   end
   
   def flush
@@ -320,7 +344,7 @@ class ProgressBarManager # :nodoc:[all]
     @bars.values.each do |bar|
       if(bar.finished?)
         print(bar.title)
-        @outio.print "\n"
+        outio.print "\n"
         @outs.delete(bar.title)
         @bars.delete(bar.title)
       end

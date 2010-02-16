@@ -48,8 +48,13 @@ class Gem::SourceIndex
         Gem::Platform.match spec.platform
       end
     end
-
-    specs.sort_by { |s| s.sort_obj }
+    
+    begin
+      specs.sort_by { |s| s.sort_obj }
+    rescue NoMethodError => e
+      puts "It looks like your RubyGems installation is not compatible with this version of Sprouts.\n\nTo update, run:\ngem update --system\n\n"
+      raise e
+    end
   end
 end
 
@@ -92,23 +97,23 @@ module RubiGen # :nodoc:[all]
 
     # Yield latest versions of generator gems.
     def each
-      Gem::cache.sprout_search(/sprout-*#{@sprout_name}-bundle$/).inject({}) { |latest, gem|
+      Gem::cache.sprout_search(/sprout-*#{@sprout_name}-bundle$/).inject({}) do |latest, gem|
         hem = latest[gem.name]
         latest[gem.name] = gem if hem.nil? or gem.version > hem.version
         latest
-      }.values.each { |gem|
+      end.values.each do |gem|
         yield Spec.new(gem.name.sub(/sprout-*#{@sprout_name}-bundle$/, ''), gem.full_gem_path, label)
-      }
+      end
     end
 
     def each_sprout
-      Gem::cache.sprout_search(/^sprout-.*/).inject({}) { |latest, gem|
+      Gem::cache.sprout_search(/^sprout-.*/).inject({}) do |latest, gem|
         hem = latest[gem.name]
         latest[gem.name] = gem if hem.nil? or gem.version > hem.version
         latest
-      }.values.each { |gem|
+      end.values.each do |gem|
         yield Spec.new(gem.name, gem.full_gem_path, label)
-      }
+      end
     end
   end
 

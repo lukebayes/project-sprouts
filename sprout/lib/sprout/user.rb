@@ -143,8 +143,12 @@ module Sprout
       if(@home)
         return @home
       end
-
-      ["HOME", "USERPROFILE"].each do |homekey|
+      
+      # Original implementation:
+      #["HOME", "USERPROFILE"].each do |homekey|
+      # Change submitted by Michael Fleet (disinovate)
+      # Does this work for everyone on Windows?
+      ["USERPROFILE", "HOME"].each do |homekey|
         return @home = ENV[homekey] if ENV[homekey]
       end
 
@@ -154,7 +158,7 @@ module Sprout
 
       begin
         return @home = File.expand_path("~")
-      rescue StandardError
+      rescue StandardError => e
         if File::ALT_SEPARATOR
           return @home = "C:\\"
         else
@@ -209,8 +213,8 @@ module Sprout
       tool = clean_path(tool)
       runner = get_process_runner("#{tool} #{options}")
 
-      result = runner.read
       error = runner.read_err
+      result = runner.read
 
       if(result.size > 0)
         Log.puts result
@@ -231,9 +235,9 @@ module Sprout
     end
 
     def execute_thread(tool, options='')
-      return Thread.new {
+      return Thread.new do
         execute(tool, options)
-      }
+      end
     end
 
     def clean_path(path)

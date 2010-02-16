@@ -4,7 +4,7 @@
 # the abstract test case didn't have any test mehods
 # or assertions
 module SproutTestCase  # :nodoc:[all]
-
+  
   def fixtures
     @fixtures ||= File.join(File.dirname(__FILE__), 'fixtures')
   end
@@ -18,6 +18,10 @@ module SproutTestCase  # :nodoc:[all]
     t = Rake.application[name]
     t.invoke
     return t
+  end
+  
+  def get_task(name)
+    return Rake.application[name]
   end
 
   def clear_tasks
@@ -35,6 +39,15 @@ module SproutTestCase  # :nodoc:[all]
   def assert_file(path, message=nil)
     message ||= "Expected file not found at #{path}"
     assert(File.exists?(path), message)
+  end
+  
+  def assert_matches(expression, string)
+    if(expression.is_a?(String))
+      expresion = /#{expression}/
+    end
+    if(!string.match(expression))
+      fail "'#{string}' should include '#{expression}'"
+    end
   end
   
 end

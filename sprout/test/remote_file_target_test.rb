@@ -4,23 +4,28 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
   include SproutTestCase
 
   def setup
-    @fixtures_path = File.join(fixtures, 'remote_file_target') 
-    @fixture_path = File.join(@fixtures_path, 'macosx')
-    @archive_folder_path = File.join(@fixtures_path, 'archive')
-    @install_path = File.join(@fixtures_path)
-    @archive_path = File.join('swfmill-0.2.12-macosx', 'swfmill')
-    @download_path = File.join(@install_path, 'swfmill-0.2.12-macosx.tar.gz')
-    @flashplayer_dir = File.join(@fixtures_path, 'flashplayer')
-    @flashplayer_gz = File.join(@fixtures_path, 'flash_player_9_linux_dev.tar.gz')
-    @flashplayer_binary = File.join(@flashplayer_dir, 'archive', 'flash_player_9_linux_dev', 'standalone', 'debugger', 'flashplayer')
-    data = nil
-    File.open(@fixture_path, 'r') do |f|
-      data = f.read
-    end
-    @target = YAML.load(data)
-    # RemoteFileTargets need an installation path to work properly
-    @target.install_path = @install_path
+    @fixtures_path       = File.join(fixtures, 'remote_file_target')
     
+    @archive_folder_path = File.join(@fixtures_path, 'archive')
+    @install_path        = File.join(@fixtures_path)
+
+    @archive_path        = File.join('swfmill-0.2.12-macosx', 'swfmill')
+    @file_name           = 'swfmill-0.2.12-macosx.tar.gz'
+    @download_path       = File.join(@install_path, @file_name)
+
+    @flashplayer_dir     = File.join(@fixtures_path, 'flashplayer')
+    @flashplayer_gz      = File.join(@fixtures_path, 'flash_player_9_linux_dev.tar.gz')
+    @flashplayer_binary  = File.join(@flashplayer_dir, 'archive', 'flash_player_9_linux_dev', 'standalone', 'debugger', 'flashplayer')
+    
+    @asunit_url          = 'http://github.com/lukebayes/asunit/zipball/4.0.0'
+    @asunit_file_name    = '4.0.0'
+    @asunit_md5          = 'dca47aa2334a3f66efd2912c208a8ef4'
+    @asunit_dir          = File.join(@fixtures_path, 'asunit')
+    @asunit_zip          = File.join(@asunit_dir, @asunit_file_name)
+    @asunit_src          = File.join(@asunit_dir, 'archive', 'lukebayes-asunit-50da476d20fa87b71f71ed01b23cd3c4030b26c6', 'as3', 'src', 'asunit', 'framework', 'TestCase.as')
+
+    ENV['SPROUT_TARGET_HOME'] = @fixtures_path
+    @target = create_target
     FileUtils.mkdir_p @flashplayer_dir
   end
   
@@ -28,11 +33,50 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     super
     remove_file @archive_folder_path
     remove_file @flashplayer_dir
+    remove_file @asunit_dir
+    ENV['SPROUT_TARGET_HOME'] = nil
+  end
+
+  # BEGIN TEST FILE NAME VARIANTS:
+  def test_file_name_zip
+    target = Sprout::RemoteFileTarget.new
+    assert_equal('foo.zip', target.file_name('http://www.foo.com/foo.zip'))
   end
   
-  def test_serialization
-    assert(@target)
+  def test_file_name_tgz
+    target = Sprout::RemoteFileTarget.new
+    assert_equal('foo.tar.gz', target.file_name('http://www.foo.com/foo.tar.gz'))
   end
+    
+  def test_file_name_trailing_slash
+    target = Sprout::RemoteFileTarget.new
+    target.archive_type = 'zip'
+    assert_equal('foo.zip', target.file_name('http://www.foo.com/foo/'))
+  end
+  
+  def test_file_name_no_extension
+    target = Sprout::RemoteFileTarget.new
+    target.archive_type = 'zip'
+    assert_equal('foo.zip', target.file_name('http://www.foo.com/foo'))
+  end
+
+  def test_file_name_get_params_and_no_extension_and_defined_archive_type
+    target = Sprout::RemoteFileTarget.new
+    target.archive_type = 'zip'
+    assert_equal('foo.zip', target.file_name('http://www.foo.com/foo?bar=1234'))
+  end
+  
+  def test_file_name_get_params_and_extension_type
+    target = Sprout::RemoteFileTarget.new
+    assert_equal('foo.tar.gz', target.file_name('http://www.foo.com/foo.tar.gz?bar=1234'))
+  end
+
+  def test_file_name_no_archive_type_or_extension
+    target = Sprout::RemoteFileTarget.new
+    assert_equal('foo', target.file_name('http://www.foo.com/foo'))
+  end
+  
+  # END TEST FILE NAME VARIANTS:
   
   # RemoteFiles should be unpacked into:
   # target.install_path + target.archive_path
@@ -45,9 +89,17 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     assert_equal(@archive_path, @target.archive_path)
   end
   
-  def test_download_path
+  def test_downloaded_path
     assert_equal(@download_path, @target.downloaded_path)
     assert(File.exists?(@target.downloaded_path))
+  end
+  
+  def test_simple_file_name
+    assert_equal(@file_name, @target.file_name)
+  end
+  
+  def test_rails_file_name
+    assert_equal(@file_name, @target.file_name)
   end
   
   def test_executable
@@ -69,6 +121,41 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     
     assert_file @flashplayer_binary
   end
+
+  # From asunit3 library gem_wrap:
+  # platform: universal
+  # archive_type: zip
+  # url: http://github.com/lukebayes/asunit/zipball/4.0.0
+  # md5: dca47aa2334a3f66efd2912c208a8ef4
+  # archive_path: 'as3/src'  
+  
+  # def test_environment_variable_fallback_to_download
+  #   ENV['SPROUT_TARGET_HOME'] = nil
+  #   file_target = Sprout::RemoteFileTarget.new
+  #   file_target.environment = 'SPROUT_TARGET_HOME' # fails
+  #   file_target.url = 'http://github.com/lukebayes/asunit/zipball/4.0.0'
+  #   file_target.install_path = @asunit_dir
+  #   file_target.downloaded_path = @asunit_zip
+  #   file_target.md5 = 'dca47aa2334a3f66efd2912c208a8ef4'
+  #   file_target.archive_path = 'lukebayes-asunit-50da476d20fa87b71f71ed01b23cd3c4030b26c6/as3/src'
+  #   file_target.filename = 'asunit3.zip'
+  #   
+  #   file_target.resolve true
+  #   assert_file file_target.installed_path
+  #   assert file_target.installed_path != ENV['SPROUT_TARGET_HOME']
+  # end
+  
+  private
+  
+  def create_target
+    target = Sprout::RemoteFileTarget.new
+    target.url = 'http://swfmill.org/releases/swfmill-0.2.12-macosx.tar.gz'
+    target.archive_path = 'swfmill-0.2.12-macosx/swfmill'
+    target.md5 = 'swfmill-0.2.12-macosx/swfmill'
+    target.install_path = @install_path
+    target
+  end
+
 end
 
 module Sprout

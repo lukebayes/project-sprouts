@@ -65,6 +65,7 @@ module Sprout
     def initialize(task_name, app)
       super(task_name, app)
       @default_gem_name = 'sprout-flashplayer-tool'
+      @default_gem_version = '10.22.0'
       @default_result_file = 'AsUnitResults.xml'
       @inside_test_result = false
     end
@@ -145,8 +146,11 @@ module Sprout
     # happen. This in turn can lead to multiple instances of the Player being instantiated.
     # In the case of running a test harness, this is absolutely not desirable, so we had
     # expose a parameter that allows us to prevent auto-focus of the player.
+    #
+    # This feature is deprecated in current versions of the FlashPlayerTask
     def do_not_focus=(focus)
       @do_not_focus = focus
+      puts "[WARNING] Thanks to fixes in the FlashPlayer task, do_not_focus is deprecated and no longer needs to be used"
     end
     
     def do_not_focus
@@ -213,7 +217,8 @@ module Sprout
 
       # Don't let trust or log file failures break other features...
       begin
-        log_file = FlashPlayerConfig.new().log
+        config = FlashPlayerConfig.new
+        log_file = config.log_file
         FlashPlayerTrust.new(File.expand_path(File.dirname(swf)))
 
         if(File.exists?(log_file))
@@ -221,10 +226,10 @@ module Sprout
             f.write('')
           end
         else
-          FileUtils.mkdir_p(File.dirname(log_file))
+          FileUtils.makedirs(File.dirname(log_file))
           FileUtils.touch(log_file)
         end
-      rescue
+      rescue StandardError => e
         puts '[WARNING] FlashPlayer encountered an error working with the mm.cfg log and/or editing the Trust file'
       end
       
@@ -232,14 +237,6 @@ module Sprout
       @thread = run(gem_name, gem_version, swf)
       read_log(@thread, log_file)
       @thread.join
-    end
-    
-    def close
-      if(User.new().is_a?(WinUser))
-        Thread.kill(@thread)
-      else
-        Process.kill("SIGALRM", @player_pid)
-      end
     end
 
     def run(tool, gem_version, swf)
@@ -250,31 +247,36 @@ module Sprout
       thread_out = $stdout
       command = "#{target} #{User.clean_path(swf)}"
 
-      return Thread.new {
-        usr = User.new()
-        if(usr.is_a?(WinUser) && !usr.is_a?(CygwinUser))
-          system command
-        else
+      usr = User.new()
+      if(usr.is_a?(WinUser) && !usr.is_a?(CygwinUser))
+        return Thread.new {
+            system command
+        }
+      elsif usr.is_a?(OSXUser)
+        require 'clix_flash_player'
+        @clix_player = CLIXFlashPlayer.new
+        @clix_player.execute(target, swf)
+        return @clix_player
+      else
+        return Thread.new {
           require 'open4'
           @player_pid, stdin, stdout, stderr = Open4.popen4(command)
-          focus_player_on_mac(thread_out, path_to_exe)
           stdout.read
-        end
-      }
-    end
-    
-    def focus_player_on_mac(out, exe)
-      return if do_not_focus
-      begin
-        if(User.new.is_a?(OSXUser))
-          require 'appscript'
-          Appscript.app(exe).activate
-        end
-      rescue LoadError => e
-        puts "[WARNING] Cannot focus Flash Player without rb-appscript gem"
+        }
       end
     end
-
+    
+    def close
+      usr = User.new
+      if(usr.is_a?(WinUser))
+        Thread.kill(@thread)
+      elsif(usr.is_a?(OSXUser))
+        @clix_player.kill unless @clix_player.nil?
+      else
+        Process.kill("SIGALRM", @player_pid)
+      end
+    end
+    
     def read_log(thread, log_file)
       lines_put = 0
 
@@ -364,20 +366,8 @@ module Sprout
 
     @@file_name = 'mm.cfg'
 
-    def initialize
-      osx_fp9 = File.join(User.library, 'Application Support', 'Macromedia')
-      if(FlashPlayerTask.home == osx_fp9)
-        @config = File.join(osx_fp9, @@file_name)
-      else
-        @config = File.join(User.home, @@file_name)
-      end
-      
-      if(!File.exists?(@config))
-        write_config(@config, content)
-      end
-    end
-
-    def log
+    def log_file
+      create_config_file
       path = File.join(FlashPlayerTask.home, 'Logs', 'flashlog.txt')
       if(User.new().is_a?(CygwinUser))
         parts = path.split("/")
@@ -394,17 +384,42 @@ module Sprout
       return path
     end
 
-    def content
+    def content(file)
       return <<EOF
 ErrorReportingEnable=1
 MaxWarnings=0
 TraceOutputEnable=1
-TraceOutputFileName=#{log}
+TraceOutputFileName=#{file}
 EOF
     end
 
+    def create_config_file
+      path = config_path 
+
+      if(file_blank?(path))
+        write_config(path, content(path))
+      end
+
+      path
+    end
+
     private
-    def write_config(location, content)
+
+    def file_blank?(file)
+      !File.exists?(file) || File.read(file).empty?
+    end
+
+    def config_path
+      osx_fp9 = File.join(User.library, 'Application Support', 'Macromedia')
+      if(FlashPlayerTask.home == osx_fp9)
+        path = File.join(osx_fp9, @@file_name)
+      else
+        path = File.join(User.home, @@file_name)
+      end
+      path
+    end
+
+    def user_confirmation?(location)
       puts <<EOF
 
 Correctly configured mm.cfg file not found at: #{location}
@@ -415,7 +430,11 @@ Would you like this file created automatically? [Yn]
 
 EOF
       answer = $stdin.gets.chomp.downcase
-      if(answer == 'y' || answer == '')
+      return (answer == 'y' || answer == '')
+    end
+
+    def write_config(location, content)
+      if(user_confirmation?(location))
         File.open(location, 'w') do |f|
           f.write(content)
         end

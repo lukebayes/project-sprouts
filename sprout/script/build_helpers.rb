@@ -80,8 +80,8 @@ task :increment_revision do
     lines << line
   end
   
-  File.open(version_file, 'w') do |file|
-    file.puts lines
+  File.open(version_file, 'w') do |f|
+    f.puts lines
   end
 end
 

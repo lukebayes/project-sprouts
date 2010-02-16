@@ -42,6 +42,12 @@ class FakeTaskBase < Sprout::ToolTask # :nodoc:[all]
     add_param(:default_size, :string) do |p|
       p.delimiter = ' '
     end
+    
+    add_param(:custom_to_shell, :symbols) do |p|
+      p.to_shell_proc = Proc.new { |param|
+        "saying: #{param.value.join(' ')}"
+      }
+    end
 
     add_param_alias(:sp, :source_path)
   end

@@ -196,8 +196,11 @@ This is an advanced option.
 EOF
       end
 
-      add_param(:define, :string) do |p|
+      add_param(:define_conditional, :strings) do |p|
+        p.shell_name = "-define"
         p.description =<<EOF
+This parameter is normally called 'define' but thanks to scoping issues with Sprouts and Rake, we needed to rename it and chose: 'define_conditional'.
+
 Define a global AS3 conditional compilation definition, e.g. -define=CONFIG::debugging,true or -define+=CONFIG::debugging,true (to append to existing definitions in flex-config.xml)  (advanced, repeatable)
 EOF
       end
@@ -344,11 +347,40 @@ To link an entire SWC file rather than individual classes, use the include-libra
 EOF
       end
       
+      add_param(:include_path, :paths) do |p|
+        p.description =<<EOF
+Define one or more directory paths for include processing. For each path that is provided, all .as and .mxml files found forward of that path will
+be included in the SWF regardless of whether they are imported or not.
+EOF
+      end
+      
       add_param(:incremental, :boolean) do |p|
         p.description =<<EOF
 Enables incremental compilation. For more information, see About incremental compilation (http://livedocs.adobe.com/flex/2/docs/00001506.html#153980).
 
 This option is true by default for the Flex Builder application compiler. For the command-line compiler, the default is false. The web-tier compiler does not support incremental compilation.
+EOF
+      end
+      
+      add_param(:keep_as3_metadata, :symbols) do |p|
+        p.description =<<EOF
+Keep the specified metadata in the SWF (advanced, repeatable).
+
+Example:
+
+Rakefile:
+
+mxmlc 'bin/SomeProject.swf' do |t|
+  t.keep_as3_metadata << 'Orange'
+end
+
+Source Code:
+
+[Orange(isTasty=true)]
+public function eatOranges():void {
+  // do something
+}
+        
 EOF
       end
       
@@ -696,6 +728,14 @@ EOF
         source_path << File.dirname(input)
       end
       
+      if(include_path)
+        include_path.each do |path|
+          process_include_path(path) if(File.directory?(path))
+        end
+      end
+      
+      self.include_path = []
+      
       if(link_report)
         CLEAN.add(link_report)
       end
@@ -712,6 +752,24 @@ EOF
     end
     
     protected 
+    
+    def process_include_path(path)
+      symbols = []
+      FileList["#{path}/**/*[.as|.mxml]"].each do |file|
+        next if File.directory?(file)
+        file.gsub!(path, '')
+        file.gsub!(/^\//, '')
+        file.gsub!('/', '.')
+        file.gsub!(/.as$/, '')
+        file.gsub!(/.mxml$/, '')
+        file.gsub!(/.css$/, '')
+        symbols << file
+      end
+      
+      symbols.each do |symbol|
+        self.includes << symbol
+      end
+    end
     
     def clean_nested_source_paths(paths)
       results = []
@@ -755,17 +813,20 @@ EOF
       rescue FCSHError => fcsh_error
         raise fcsh_error
       rescue StandardError => std_error
+        # TODO: Capture a more concrete error here...
         raise MXMLCError.new("[ERROR] There was a problem connecting to the Flex Compiler SHell, run 'rake fcsh:start' in another terminal.")
       end
     end
     
     def execute(*args)
       begin
+        start = Time.now.to_i
         if(@use_fcsh)
           execute_with_fcsh(to_shell)
         else
           super
         end
+        Log.puts "mxmlc finished compiling #{name} in #{Time.now.to_i - start} seconds"
       rescue ExecutionError => e
         if(e.message.index('Warning:'))
           # MXMLC sends warnings to stderr....

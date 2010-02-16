@@ -58,6 +58,15 @@ EOF
       end
 
       add_param(:include_classes, :symbols) do |p|
+        p.to_shell_proc = Proc.new {|param|
+          return if(param.value.nil?)
+          
+          if(param.value.is_a? Array)
+            "-include-classes #{param.value.join(' ')}"
+          else
+            "-include-classes #{param.value}"
+          end
+        }
         p.description =<<EOF
 Specifies classes to include in the SWC file. You provide the class name (for example, MyClass) rather than the file name (for example, MyClass.as) to the file for this option. As a result, all classes specified with this option must be in the compiler's source path. You specify this by using the source-path compiler option.
 
@@ -116,6 +125,19 @@ EOF
 Not sure about this option, it was in the CLI help, but not documented on the Adobe site
 EOF
       end
+
+      # Move the input param to the end of the stack:
+      input_param = nil
+      params.each_index do |index|
+        param = params[index]
+        if(param.name == 'input')
+          input_param = param
+          params.slice!(index, 1)
+          break
+        end
+      end
+      params << input_param unless input_param.nil?
+
     end
 
   end

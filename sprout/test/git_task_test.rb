@@ -5,13 +5,14 @@ class GitTaskTest < GitTestCase
 
   def setup
     super
+    Sprout::GitTask.any_instance.stubs(:commit).returns(nil)
+    Sprout::GitTask.any_instance.stubs(:push).returns(nil)
     @task = nil
     @version = setup_version_file
   end
   
   def test_version_file_loaded
     @task = git :task1 do |t|
-      t.scm = GitStub.new
       t.version_file = @version_file
     end
     
@@ -20,26 +21,9 @@ class GitTaskTest < GitTestCase
   
   def test_increment_revision
     git :task1 do |t|
-      t.scm = GitStub.new
       t.version_file = @version_file
     end
-
+  
     run_task :task1
-  end
-end
-
-class GitStub
-  
-  def tags
-    []
-  end
-  
-  def add_tag(name)
-  end
-  
-  def pull
-  end
-  
-  def push(remote, branch, tags)
   end
 end

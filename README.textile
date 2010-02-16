@@ -61,55 +61,59 @@ Sprouts brings the power of the "Rake":http://martinfowler.com/articles/rake.htm
 Following are some simple examples of the Rake tasks that Sprouts provides:
 
 _ActionScript 3 and MXML Projects:_
-<pre><code>mxmlc :debug do |t|
-	t.input = 'src/SomeProject.as'
-	t.output = 'bin/SomeProject.swf'
+
+<pre><code>
+mxmlc :debug do |t|
+  t.input = 'src/SomeProject.as'
+  t.output = 'bin/SomeProject.swf'
 end
 
 compc :deploy do |t|
-	t.input = 'src/SomeProject.as'
-	t.output = 'bin/SomeProject.swc'
+  t.input = 'src/SomeProject.as'
+  t.output = 'bin/SomeProject.swc'
 end
 
 asdoc :doc do |t|
-	t.doc_classes = 'SomeProject'
-	t.source_path = 'src'
+  t.doc_classes = 'SomeProject'
+  t.source_path = 'src'
 end
 
 flashplayer :run do |t|
-	t.swf = 'bin/SomeProject.swf'
+  t.swf = 'bin/SomeProject.swf'
 end
 </code></pre>
 
 _ActionScript 2 Projects:_
-<code><pre>mtasc :debug do |t|
-	t.main = true
-	t.header = '800:600:24'
-	t.input = 'src/SomeProject.as'
-	t.output = 'bin/SomeProject.swf'
+
+<pre><code>
+swfmill :skin do |t|
+  t.input = 'assets/skins/SomeProjectSkin'
+  t.output = 'assets/skins/SomeProjectSkin.swf'
 end
 
-swfmill :skin do |t|
-	t.input = 'assets/skins/SomeProjectSkin'
-	t.output = 'assets/skins/SomeProjectSkin.swf'
+mtasc :debug => :skin do |t|
+  t.main = true
+  t.header = '800:600:24'
+  t.input = 'src/SomeProject.as'
+  t.output = 'bin/SomeProject.swf'
 end
 
 flashplayer :run do |t|
-	t.swf = 'bin/SomeProject.swf'
+  t.swf = 'bin/SomeProject.swf'
 end
 </code></pre>
 
 h3. Some Links
 
-* "Web Site":http://www.projectsprouts.org
-* "File a Bug":http://code.google.com/p/projectsprouts/issues
-* "See the Documentation":http://www.projectsprouts.org/rdoc
+* "Web Site":http://projectsprouts.org
+* "File a Bug":http://github.com/lukebayes/project-sprouts/issues
+* "See the Documentation":http://projectsprouts.org/rdoc
 * "Meet the Community":http://groups.google.com/group/projectsprouts
 
 h3. MIT License
 
 <pre>
-Copyright (c) 2007, 2008 Pattern Park
+Copyright (c) 2007, 2008, 2009 Pattern Park
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

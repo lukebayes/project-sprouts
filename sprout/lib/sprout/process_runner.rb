@@ -27,10 +27,26 @@ module Sprout #:nodoc:
           require 'open4'
           @pid, @w, @r, @e = open4.popen4(*@command)
         end
+      rescue Errno::EACCES => e
+        update_executable_mode(*@command)
+        @pid, @w, @r, @e = open4.popen4(*@command)
       rescue Errno::ENOENT => e
         @alive = false
         part = command[0].split(' ').shift
         raise ProcessRunnerError.new("The expected executable was not found for command [#{part}], please check your system path and/or sprout definition")
+      end
+    end
+    
+    def update_executable_mode(*command)
+      parts = command.join(' ').split(' ')
+      str = parts.shift
+      while(parts.size > 0)
+        if(File.exists?(str))
+          FileUtils.chmod(744, str)
+          return
+        else
+          str << " #{parts.shift}"
+        end
       end
     end
     

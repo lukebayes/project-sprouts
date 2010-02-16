@@ -7,10 +7,15 @@ class FlashPlayerTest <  Test::Unit::TestCase
     @start                  = Dir.pwd
     fixture                 = File.join(fixtures, 'flashplayer')
     @swf                    = 'Runner.swf'
-    @some_project           = 'SomeProject-debug.swf'
+    @some_project_debug     = 'SomeProject-debug.swf'
+    @some_project           = 'SomeProject.swf'
     @test_result            = 'Result.xml'
     @failure_result_file    = 'ResultFailure.xml'
     @error_result_file      = 'ResultError.xml'
+    @exception_swf          = 'InstantRuntimeException.swf'
+    @mm_cfg                 = File.join(fixture, 'mm.cfg')
+    @blank_mm_cfg           = File.join(fixture, 'blank-mm.cfg')
+    @blank_trust_file       = File.join(fixture, 'blank-trust.cfg')
     
     @generated_results      = 'AsUnitResults.xml'
     Dir.chdir fixture
@@ -19,17 +24,19 @@ class FlashPlayerTest <  Test::Unit::TestCase
   def teardown
     remove_file @test_result
     remove_file @generated_results
+    remove_file @mm_cfg
+    remove_file @blank_mm_cfg
     Dir.chdir @start
     clear_tasks
   end
   
-  def test_compilation
+  def test_asunit_result_file
     flashplayer :run => @swf do |t|
       t.test_result_file = @test_result
-      t.do_not_focus = true
     end
-
+  
     run_task(:run)
+    
     assert_file(@test_result)
   end
   
@@ -56,12 +63,74 @@ class FlashPlayerTest <  Test::Unit::TestCase
       player_task = Sprout::FlashPlayerTask.new(:test_asunit_error, Rake::application)
       player_task.examine_test_result(error_result)
     end
-    
+  end
+  
+  def test_instant_runtime_exception
+    flashplayer :run_broken => @exception_swf
+    t = Thread.new {
+      run_task(:run_broken)
+    }
+    player = get_task(:run_broken)
+    sleep(4.0)
+    player.close
+  end
+  
+  def test_launch_swf
+    flashplayer :run_project do |t|
+      t.swf = @some_project
+    end
+    t = Thread.new {
+      run_task(:run_project)
+    }
+    player = get_task(:run_project)
+    sleep(4.0)
+    player.close
+    t.kill
+  end
+
+  def test_mm_config_missing
+    config = Sprout::FlashPlayerConfig.new
+    config.stubs(:config_path).returns(@mm_cfg)
+    config.stubs(:user_confirmation?).returns true
+    path = config.create_config_file
+    assert_file path
+    content = File.read path
+    assert_matches /TraceOutputFileName=#{path}/, content
   end
 
 
+  def test_mm_config_blank
+    create_empty_file @blank_mm_cfg
+
+    config = Sprout::FlashPlayerConfig.new
+    config.stubs(:config_path).returns @blank_mm_cfg
+    config.expects(:user_confirmation?).returns true
+    path = config.create_config_file
+    assert_file path
+    content = File.read path
+    assert_matches /TraceOutputFileName=#{path}/, content
+  end
+
+  def test_trust_file
+    create_empty_file @blank_trust_file
+    Sprout::FlashPlayerTask.stubs(:trust).returns @blank_trust_file
+    Sprout::FlashPlayerTrust.new(@some_project)
+
+    content = File.read @blank_trust_file
+    assert_match /#{@some_project}/, content
+  end
+
+  private
+
+  def create_empty_file(path)
+    File.open(path, 'w+') do |f|
+      f.write ''
+    end
+    assert_file path
+  end
+
   # def test_use_fdb
-  #   flashplayer :run => @some_project do |t|
+  #   flashplayer :run => @some_project_debug do |t|
   #     t.use_fdb = true
   #   end
   #   

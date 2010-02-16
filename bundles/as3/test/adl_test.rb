@@ -5,7 +5,7 @@ class ADLTest <  Test::Unit::TestCase
   
   def setup
     @start        = Dir.pwd
-    fixture      = File.join(fixtures, 'adl')
+    fixture      = File.join(fixtures, 'air')
     
     @root_directory = fixture
     @application_descriptor = "src/SomeProject-app.xml"
@@ -30,8 +30,17 @@ class ADLTest <  Test::Unit::TestCase
   
   # Test launcher task
   def test_launcher
+
+    # This won't actually run:
+    runtime = 'Adobe AIR'
+
+    # If you'd like to see the application run, you'll need something like this:
+    # runtime = ENV['FLEX_HOME'] + "/runtimes/air/mac/Adobe AIR.framework/Adobe AIR"
+    # or on my machine:
+    # runtime = '/Users/lbayes/Library/Sprouts/cache/0.7/sprout-flex3sdk-tool-3.3.1/archive/runtimes/air/mac/Adobe\ AIR.framework/Adobe\ AIR/Versions/1.0/Adobe\ AIR'
+
     launcher = adl :test_adl do |t|
-      t.runtime = "~/Projects/airsdk/runtime/"
+      t.runtime = runtime
       t.nodebug = true
       t.pubid = "THEPUBID"
       t.root_directory = @root_directory
@@ -39,9 +48,11 @@ class ADLTest <  Test::Unit::TestCase
       t.arguments = "arg1 arg2"
     end
     
-    command = "-runtime ~/Projects/airsdk/runtime/ -nodebug -pubid THEPUBID src/SomeProject-app.xml #{@root_directory} -- arg1 arg2"
-    
+    command = "-runtime #{runtime} -nodebug -pubid THEPUBID src/SomeProject-app.xml #{@root_directory} -- arg1 arg2"
     assert_equal command, launcher.to_shell      
+
+    # TODO: Get this working too?
+    # launcher.invoke
   end
   
 end

@@ -56,6 +56,7 @@ module Sprout
     def self.define_task(args, &block)
       t = super
       if(t.is_a?(ToolTask))
+        t.find_and_resolve_model
         yield t if block_given?
         t.define
         t.prepare
@@ -96,6 +97,12 @@ module Sprout
     # value is 'bin/mxmlc'.
     def gem_path
       return @gem_path ||= @default_gem_path
+    end
+    
+    def each_param
+      params.each do |param|
+        yield param if block_given?
+      end
     end
     
     # Create a string that can be turned into a file
@@ -198,13 +205,14 @@ module Sprout
     
     def execute(*args)
       display_preprocess_message
-      #puts ">> Executing #{File.basename(exe)} #{to_shell}"
       exe = Sprout.get_executable(gem_name, gem_path, gem_version)
       User.execute(exe, to_shell)
     end
     
     # Create a string that represents this configured tool for shell execution
     def to_shell
+      return @to_shell_proc.call(self) if(!@to_shell_proc.nil?)
+
       result = []
       result << @prepended_args unless @prepended_args.nil?
       params.each do |param|
@@ -228,14 +236,30 @@ module Sprout
       params.each do |param|
         param.prepare
       end
+      prepare_prerequisites
+    end
+    
+    def prepare_prerequisites
       # Ensure there are no duplicates in the prerequisite collection
       @prerequisites = prerequisites.uniq
     end
-
+    
     def define
       resolve_libraries(prerequisites)
     end
     
+    # Look for a ToolTaskModel in the list
+    # of prerequisites. If found, apply
+    # any applicable params to self...
+    def find_and_resolve_model
+      prerequisites.each do |prereq|
+        instance = Rake::application[prereq]
+        if(instance.is_a?(ToolTaskModel))
+          resolve_model(instance)
+        end
+      end
+    end
+
     # The default file expression to append to each PathParam
     # in order to build file change prerequisites.
     # 
@@ -245,7 +269,7 @@ module Sprout
       @default_file_expression ||= '/**/**/*'
     end
     
-    protected 
+    protected
     
     def initialize_task
     end
@@ -315,8 +339,6 @@ module Sprout
       end
     end
 
-    protected
-
     def create_param(type)
       return eval("#{type.to_s.capitalize}Param.new")
     end
@@ -328,7 +350,7 @@ module Sprout
     def respond_to?(name)
       result = super
       if(!result)
-        result = param_hash.has_key? name
+        result = param_hash.has_key? name.to_s
       end
       return result
     end
@@ -337,11 +359,11 @@ module Sprout
       name.gsub(/=$/, '')
     end
 
-    def method_missing(name,*args)
+    def method_missing(name, *args)
       name = name.to_s
       cleaned = clean_name(name)
       if(!respond_to?(cleaned))
-        raise NoMethodError.new("undefined method '#{name}' for #{self.class}")
+        raise NoMethodError.new("undefined method '#{name}' for #{self.class}", name)
       end
       param = param_hash[cleaned]
 
@@ -371,6 +393,14 @@ module Sprout
     # Concrete ToolTasks should override this method
     # and add any dependent libraries appropriately
     def resolve_library(library_task)
+    end
+    
+    def resolve_model(model)
+      model.each_attribute do |key, value|
+        if(respond_to? key)
+          self.send("#{key}=", value)
+        end
+      end
     end
     
     # If the provided path contains spaces, wrap it in quotes so that
@@ -415,6 +445,7 @@ module Sprout
     attr_writer   :value
     attr_writer   :delimiter
     attr_writer   :shell_name
+    attr_writer   :to_shell_proc
 
     # Set the file_expression (blob) to append to each path
     # in order to build the prerequisites FileList.
@@ -495,7 +526,9 @@ module Sprout
     end
 
     def to_shell
-      if(hidden_name?)
+      if(!@to_shell_proc.nil?)
+        return @to_shell_proc.call(self)
+      elsif(hidden_name?)
         return shell_value
       elsif(hidden_value?)
         return shell_name
@@ -560,11 +593,11 @@ module Sprout
     end
     
     def text_file?(file_name)
-      [/\.as$/, /\.txt$/, /\.mxml$/, /\.xml$/, /\.js$/, /\.html$/, /\.htm$/].select { |regex|
-        if(file_name.match(regex))
+      [/\.as$/, /\.txt$/, /\.mxml$/, /\.xml$/, /\.js$/, /\.html$/, /\.htm$/].select do |regex|
+        if (file_name.match(regex))
           return true
         end
-      }.size > 0
+      end.size > 0
     end
     
     def setup_preprocessing_file_tasks(input_file, output_file)
@@ -626,7 +659,10 @@ module Sprout
 
   # Concrete param object for :string values
   class StringParam < TaskParam # :nodoc:
-    
+
+    def shell_value
+      value.gsub(/ /, "\ ")
+    end
   end
 
   # Concrete param object for :symbol values
@@ -718,6 +754,8 @@ module Sprout
     
     # Returns a shell formatted string of the collection
     def to_shell
+      return @to_shell_proc.call(self) if(!@to_shell_proc.nil?)
+
       result = []
       value.each do |str|
         result << "#{shell_name}#{delimiter}#{str}"

@@ -63,8 +63,8 @@ spec = Gem::Specification.new do |s|
   s.rdoc_options        << '-i'             << '.'
   s.files               = PKG_LIST.to_a
 
-  s.add_dependency('sprout', '>= 0.7.205')
-  s.add_dependency('sprout-flashplayer-bundle', '>= 9.151.1')
+  s.add_dependency('sprout', '>= 0.7.215')
+  s.add_dependency('sprout-flashplayer-bundle', '>= 10.22.0')
   s.add_dependency('sprout-asunit3-library', '>= 3.2.6')
 end
 

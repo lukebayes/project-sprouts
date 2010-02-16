@@ -144,7 +144,7 @@ module Sprout
       # Glob that is used to search for test cases and build 
       # up the test suites
       def test_glob
-        return @test_glob ||= '**/**/*Test.as'
+        return @test_glob ||= '**/**/?*Test.as'
       end
       
       def test_glob=(glob)

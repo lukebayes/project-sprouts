@@ -105,10 +105,18 @@ module Sprout
           s.email         = @email
           s.homepage      = @homepage
           s.rubyforge_project = 'sprout'
-          s.requirements << {'sprout', '>= 0.7.1'}
           gem_dependencies.each do |dep|
             s.requirements << dep
           end
+          
+          sprout_requirement = s.requirements.collect do |req|
+            (req[0] == 'sprout')
+          end
+          
+          if(!sprout_requirement)
+            s.add_dependency('sprout', '>= 0.7.209')
+          end
+
           if(File.exists?('sprout.spec'))
             files << 'sprout.spec'
           end
@@ -167,9 +175,9 @@ module Sprout
           full = File.expand_path(ext)
           t = nil
 
-          zip full do |t|
-            t.input = full
-            t.output = File.join(gem_name, 'ext', File.basename(full) + '.zip')
+          zip full do |z|
+            z.input = full
+            z.output = File.join(gem_name, 'ext', File.basename(full) + '.zip')
           end
           puts "pwd: #{Dir.pwd} out #{t.output}"
           zipped_extensions << File.expand_path(t.output)
