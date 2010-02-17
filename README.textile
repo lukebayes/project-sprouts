@@ -14,7 +14,7 @@ h3. Installation
 # "Install RubyGems":http://rubyforge.org/frs/?group_id=126
 # Install the Sprout gem:
 
-<code><pre>gem install sprout</pre></code>
+<pre><code>gem install sprout</code></pre>
 _(If prompted, select the appropriate gem for your platform.)_
 
 h3. Getting Started
@@ -60,10 +60,13 @@ Sprouts brings the power of the "Rake":http://martinfowler.com/articles/rake.htm
 
 Following are some simple examples of the Rake tasks that Sprouts provides:
 
+_"The Default Rakefile - Expanded":http://gist.github.com/221569_
+
+_"An example of the erb_resolver Rake task":http://gist.github.com/306334_
+
 _ActionScript 3 and MXML Projects:_
 
-<pre><code>
-mxmlc :debug do |t|
+<pre><code>mxmlc :debug do |t|
   t.input = 'src/SomeProject.as'
   t.output = 'bin/SomeProject.swf'
 end
@@ -85,8 +88,7 @@ end
 
 _ActionScript 2 Projects:_
 
-<pre><code>
-swfmill :skin do |t|
+<pre><code>swfmill :skin do |t|
   t.input = 'assets/skins/SomeProjectSkin'
   t.output = 'assets/skins/SomeProjectSkin.swf'
 end
