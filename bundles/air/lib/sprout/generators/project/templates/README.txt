@@ -16,41 +16,30 @@ http://projectsprouts.org/rdoc
 Using your favorite terminal, cd to this directory have fun!
 
 ########################################
-To create a new ActionScript class, TestCase and rebuild all project TestSuites:
-
-script/generate class -s utils.MathUtil
-
-########################################
-To create a new Interface begin the name with I + Capital letter (eg: ISomeName)
-or end the name with 'able'
-
-Name begins with Capital 'I' followed by another capital letter
-script/generate class utils.ISomeName 
-
-or
-
-Name ends with 'able'
-script/generate class utils.Observable
-
-or
-
-Explicitly identify interface creation
-script/generate interface utils.SomeInterface
-
-########################################
-To create a new TestCase only, enter the following:
-
-script/generate test utils.SomeTest
-
-########################################
-To compile and launch your application:
+To compile and debug your application:
 
 rake
+or
+rake debug
 
 ########################################
-To compile and launch your test suites:
+To compile and run your application:
 
-rake test
+rake run
+
+########################################
+To create a certificate:
+
+rake certificate
+
+If you use another certificate you have
+to modify the rakefile and the following package task.
+
+########################################
+To package your application:
+
+rake package
+
 
 ########################################
 To see all available rake tasks:
