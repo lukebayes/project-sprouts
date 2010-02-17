@@ -149,7 +149,7 @@ end
 # http://projectsprouts.org/rdoc/classes/Sprout/ADTTask.html
 
 desc 'Rake task package an .air file'
-adt :package => [:compile, :certificate ] do |t|
+adt :package => [:compile ] do |t|
   t.storetype               = "PKCS12"
   #change keystore and storepass if you use your own key
   t.keystore                = "cert/cert.p12"
