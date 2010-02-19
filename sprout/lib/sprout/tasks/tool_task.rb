@@ -367,7 +367,8 @@ module Sprout
       end
       param = param_hash[cleaned]
 
-      if(name =~ /=$/)
+      matched = name =~ /=$/
+      if(matched)
         param.value = args.shift
       elsif(param)
         param.value

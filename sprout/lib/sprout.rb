@@ -157,7 +157,8 @@ module Sprout
         command = "#{get_gem_preamble} uninstall -x -a -q #{sprout.name}"
 
         if(!confirmation)
-          break unless confirmation = remove_gems_confirmation
+          confirmation = remove_gems_confirmation
+          break unless confirmation
         end
         puts "executing #{command}"
         raise ">> Exited with errors: #{$?}" unless system(command)
