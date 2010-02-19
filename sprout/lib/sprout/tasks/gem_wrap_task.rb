@@ -55,9 +55,9 @@ module Sprout
     # Homepage where users can learn more about this gem
     attr_writer :homepage
     # A string remote file specification usually something like:
-    # 
+    #
     #   t.sprout_spec   =<<EOF
-    #   - !ruby/object:Sprout::RemoteFileTarget 
+    #   - !ruby/object:Sprout::RemoteFileTarget
     #     platform: universal
     #     url: http://as3flickrlib.googlecode.com/files/flickr-.87.zip
     #     archive_path: flickr-.87/src
@@ -83,7 +83,7 @@ module Sprout
       @email          = "projectsprouts@googlegroups.com"
       @homepage       = "http://www.projectsprouts.org"
     end
-  
+
     def execute(*args) # :nodoc:
       super
       raise GemWrapError.new("A version must be provided to produce a Gem!") unless @version
@@ -94,7 +94,7 @@ module Sprout
 #      render_extensions(gem_package, extensions) if extensions.size
 
       Dir.chdir(gem_package) do
-  
+
         spec = Gem::Specification.new do |s|
           files           = []
           s.platform      = Gem::Platform::RUBY
@@ -104,15 +104,17 @@ module Sprout
           s.name          = @gem_name
           s.email         = @email
           s.homepage      = @homepage
+          # added in order to avoid the lib not found error
+          s.require_path  = "sprout.spec"
           s.rubyforge_project = 'sprout'
           gem_dependencies.each do |dep|
             s.requirements << dep
           end
-          
+
           sprout_requirement = s.requirements.collect do |req|
             (req[0] == 'sprout')
           end
-          
+
           if(!sprout_requirement)
             s.add_dependency('sprout', '>= 0.7.209')
           end
@@ -131,13 +133,13 @@ module Sprout
         Gem::Builder.new(spec).build
       end
 
-      FileUtils.mv("#{gem_package}/#{@gem_name}-#{@version}.gem", @package)  
+      FileUtils.mv("#{gem_package}/#{@gem_name}-#{@version}.gem", @package)
       FileUtils.rm_rf(gem_package)
     end
-    
+
     # Add a gem dependency either with only the gem name
     # or with a full name and version hash like:
-    # 
+    #
     #   t.add_dependency('sprout-flashplayer-tool')
     # or
     #   t.add_dependency('sprout-flashplayer-tool' => '9.115.0')
@@ -149,12 +151,12 @@ module Sprout
     def gem_dependencies
       return @gem_dependencies ||= []
     end
-    
+
     # Add files to include in the gem/ext folder
     def extensions
       return @extensions ||= []
     end
-    
+
     private
 
     def gem_package
