@@ -27,7 +27,7 @@ module Sprout
 
   # :include: ../../../doc/Library
   class LibraryTask < Rake::Task
-    
+
     # The RubyGems gem version string for this library (e.g., +version = '0.0.1'+)
     attr_accessor :version
 
@@ -44,22 +44,22 @@ module Sprout
     def gem_name
       @gem_name ||= "sprout-#{clean_name}-library"
     end
-    
+
     # Ensure that namespaced rake tasks only use
     # the final part for name-based features
     def clean_name
       return name.split(':').pop
     end
-    
+
     # The path to the library source or swc that will be copied into your project.
     # This can actually be any full or relative path on your system, but should almost
     # always be left alone for automatic resolution.
     def library_path
       @library_path ||= nil
     end
-    
+
     # Override the the project folder where the library will be installed.
-    # 
+    #
     # By default, libraries are installed into Sprout::ProjectModel +lib_dir+.
     def project_lib
       if(library_path.index('.swc'))
@@ -68,18 +68,18 @@ module Sprout
         @project_lib ||= ProjectModel.instance.lib_dir
       end
     end
-    
-    # Unlike other rake tasks, Library tasks are actually 
+
+    # Unlike other rake tasks, Library tasks are actually
     # resolved at 'define' time. This allows the tool tasks
     # to build their own dependencies (like file deps)
-    #   (I'm sure there's a better way to do this, if you know how to fix this, 
+    #   (I'm sure there's a better way to do this, if you know how to fix this,
     # and would like to contribute to sprouts, this might be a good spot for it)
     def define
       @file_target = sprout(gem_name, version)
       @library_path = File.join(@file_target.installed_path, @file_target.archive_path)
       define_file_task(library_path, project_path)
     end
-    
+
     def execute(*args) # :nodoc:
       super
     end
@@ -94,13 +94,13 @@ module Sprout
         File.join(project_lib, File.basename(@file_target.archive_path))
       end
     end
-    
+
     private
-    
+
     def define_file_task(source, destination)
       file destination do |t|
         lib_path = library_path
-        FileUtils.makedirs(destination)
+        #FileUtils.makedirs(destination)
         if(File.directory?(lib_path))
           lib_path = "#{lib_path}/."
         end
@@ -108,7 +108,7 @@ module Sprout
       end
       prerequisites << destination
     end
-    
+
   end
 end
 
