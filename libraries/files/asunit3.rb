@@ -5,7 +5,7 @@
 name = File.basename(__FILE__).split('.').shift
 
 gem_wrap name do |t|
-  t.version       = '4.0.14'
+  t.version       = '4.0.15'
   t.summary       = "AsUnit3 is an ActionScript unit test framework for AIR, Flex 2/3 and ActionScript 3 projects"
   t.author        = "Luke Bayes and Ali Mills"
   t.email         = "projectsprouts@googlegroups.com"
