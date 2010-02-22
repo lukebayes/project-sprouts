@@ -6,7 +6,7 @@ module Sprout
   # Unpack downloaded files from a variety of common archive types.
   # This library should efficiently extract archived files
   # on OS X, Win XP, Vista, DOS, Cygwin, and Linux.
-  # 
+  #
   # It will attempt to infer the archive type by standard mime-type file
   # extensions, but if there is a file with no extension, the unpack_archive
   # method can be provided with an @archive_type symbol argument that is one
@@ -20,16 +20,16 @@ module Sprout
   #   :dmg
   class ArchiveUnpacker #:nodoc:
     include Archive::Tar
-    
+
     def unpack_archive(file_name, dir, force=false, archive_type=nil)
       archive_type ||= inferred_archive_type(file_name)
       suffix = suffix_for_archive_type(archive_type)
-      
+
       unpacked = unpacked_file_name(file_name, dir, suffix)
       if(File.exists?(unpacked) && force)
         FileUtils.rm_rf(unpacked)
       end
-      
+
       if(!File.exists?(unpacked))
         case archive_type.to_s
           when 'zip'
@@ -41,14 +41,17 @@ module Sprout
           when 'exe'
             FileUtils.mkdir_p(dir)
             File.mv(file_name, dir)
-          when 'swc' || 'rb'
+          when 'swc'
+            FileUtils.mkdir_p(dir)
+            File.mv(file_name, dir)
+          when 'rb'
             return
           else
             raise ArchiveUnpackerError.new("ArchiveUnpacker does not know how to unpack files of type: #{archive_type} for file_name: #{file_name}")
         end
       end
     end
-    
+
     def unpack_zip(zip_file, dir)
       # Avoid the rubyzip Segmentation Fault bug
       # at least on os x...
@@ -70,12 +73,12 @@ module Sprout
               FileUtils.mkdir_p(File.dirname(fpath))
               # Disgusting, Gross Hack to fix DOS/Ruby Bug
               # That makes the zip library throw a ZipDestinationFileExistsError
-              # When the zip archive includes two files whose names 
+              # When the zip archive includes two files whose names
               # differ only by extension.
               # This bug actually appears in the File.exists? implementation
               # throwing false positives!
               # If you're going to use this code, be sure you extract
-              # into a new, empty directory as existing files will be 
+              # into a new, empty directory as existing files will be
               # clobbered...
               begin
                 if(File.exists?(fpath) && !File.directory?(fpath))
@@ -101,30 +104,30 @@ module Sprout
         end
       end
     end
-    
+
     def unpacked_file_name(file, dir, suffix=nil)
       basename = File.basename(file, suffix)
       path = File.expand_path(dir)
       return File.join(path, basename)
     end
-    
+
     def unpack_targz(tgz_file, dir)
       if(!File.exists?(dir))
         FileUtils.makedirs(dir)
       end
       tar = Zlib::GzipReader.new(File.open(tgz_file, 'rb'))
       Minitar.unpack(tar, dir)
-      
-      # Recurse and unpack gzipped children (Adobe did this double 
+
+      # Recurse and unpack gzipped children (Adobe did this double
       # gzip with the Linux FlashPlayer for some reason)
       Dir.glob("#{dir}/**/*.tar.gz").each do |child|
         if(child != tgz_file)
           unpack_targz(child, File.dirname(child))
         end
       end
-      
+
     end
-    
+
     # This is actually not unpacking the FlashPlayer
     # Binary file as expected...
     # OSX is treated the player binary as if it is
@@ -141,10 +144,10 @@ module Sprout
       if(!File.exists?(full_mounted_path))
         system("hdiutil mount #{dmg_file}")
       end
-      
+
       begin
         mounted_target = File.join(full_mounted_path, extracted_file)
-  
+
         # Copy the DMG contents using system copy rather than ruby utils
         # Because OS X does something special with .app files that the
         # Ruby FileUtils and File classes break...
@@ -152,7 +155,7 @@ module Sprout
 #        from = File.join(full_mounted_path, extracted_file)
         to = File.join(@user.downloads, @name.to_s, extracted_file)
         FileUtils.makedirs(File.dirname(to))
-        
+
         if(File.exists?(from))
           `ditto '#{from}' '#{to}'`
         end
@@ -162,7 +165,7 @@ module Sprout
         end
       end
     end
-    
+
     def suffix_for_archive_type(type)
       if(type == :targz)
         return '.tar.gz'
@@ -170,7 +173,7 @@ module Sprout
         return ".#{type.to_s}"
       end
     end
-    
+
     def inferred_archive_type(file_name)
       if is_zip?(file_name)
         return :zip
@@ -189,34 +192,34 @@ module Sprout
       else
         return nil
       end
-      
+
     end
-    
+
     def is_zip?(file)
       return (file.split('.').pop == 'zip')
     end
-    
+
     def is_targz?(file)
       parts = file.split('.')
       part = parts.pop
       return (part == 'tgz' || part == 'gz' && parts.pop == 'tar')
     end
-    
+
     def is_gzip?(file)
       return (file.split('.').pop == 'gz')
     end
-    
+
     def is_swc?(file)
       return (file.split('.').pop == 'swc')
     end
-    
+
     def is_rb?(file)
       return (file.split('.').pop == 'rb')
     end
-    
+
     def is_dmg?(file)
       return (file.split('.').pop == 'dmg')
-    end    
+    end
 
     def is_exe?(file)
       return (file.split('.').pop == 'exe')
