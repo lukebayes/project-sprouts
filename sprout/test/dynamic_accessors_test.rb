@@ -41,8 +41,9 @@ class DyanamicAccessorsTest <  Test::Unit::TestCase
       found_keys << key
       found_values << value
     end
-    assert_equal expected_keys, found_keys
-    assert_equal expected_values, found_values
+    sorted_keys = found_keys.collect { |item| item.to_s }.sort.collect { |item| item.to_sym }
+    assert_equal expected_keys, sorted_keys
+    assert_equal expected_values, found_values.sort
   end
 end
 

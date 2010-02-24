@@ -23,7 +23,7 @@ require 'sprout/remote_file_loader'
 require 'sprout/archive_unpacker'
 require 'sprout/remote_file_target'
 require 'sprout/simple_resolver'
-require 'sprout/template_resolver'
+# require 'sprout/template_resolver'
 
 require 'rubygems/installer'
 require 'rubygems/source_info_cache'
