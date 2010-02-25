@@ -7,8 +7,8 @@ require 'rake/gempackagetask'
 require 'rake/rdoctask'
 require 'rake/contrib/rubyforgepublisher'
 require 'fileutils'
-require 'lib/sprout'
-require 'lib/sprout/version'
+require File.dirname(__FILE__) + '/lib/sprout'
+require File.dirname(__FILE__) + '/lib/sprout/version'
 
 PROJECT                 = "sprout"
 NAME                    = "sprout"

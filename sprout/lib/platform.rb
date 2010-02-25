@@ -54,6 +54,9 @@ module Platform #:nodoc:
    elsif RUBY_PLATFORM =~ /netbsd/i
       os = :unix
       impl = :netbsd
+   elsif RUBY_PLATFORM =~ /solaris/i
+      os = :unix
+      impl = :solaris
    elsif RUBY_PLATFORM =~ /vista/i
       os = :win32
       impl = :vista
@@ -84,6 +87,7 @@ module Platform #:nodoc:
    end
    
    # whither AIX, SOLARIS, and the other unixen?
+   # i386-solaris2.11
    
    if RUBY_PLATFORM =~ /(i\d86)/i
       arch = :x86

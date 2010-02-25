@@ -30,7 +30,7 @@ module Sprout
           return target
         end
       end
-      raise BuilderError.new("Sprout::Builder.build failed, unsupported platform or unexpected yaml")
+      raise BuilderError.new("Sprout::Builder.build failed, unsupported platform [#{platform}] or unexpected yaml")
     end
     
     private
