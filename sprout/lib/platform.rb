@@ -54,7 +54,7 @@ module Platform #:nodoc:
    elsif RUBY_PLATFORM =~ /netbsd/i
       os = :unix
       impl = :netbsd
-  elsif RUBY_PLATFORM =~ /solaris/i
+   elsif RUBY_PLATFORM =~ /solaris/i
       os = :unix
       impl = :solaris
    elsif RUBY_PLATFORM =~ /vista/i
