@@ -139,7 +139,7 @@ def fix_x86_mswin
   files.each do |name|
     new_name = name.gsub('-x86', '')
     puts "Renaming x86-mswin gem from #{name} to #{new_name}"
-    File.mv(name, new_name)
+    File.move(name, new_name)
   end
 end
 
