@@ -56,7 +56,7 @@ module Platform #:nodoc:
       impl = :netbsd
    elsif RUBY_PLATFORM =~ /solaris/i
       os = :unix
-      impl = :solaris
+      impl = :linux # Our platform checks currently examine 'impl' instead of 'os'
    elsif RUBY_PLATFORM =~ /vista/i
       os = :win32
       impl = :vista
