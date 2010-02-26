@@ -6,7 +6,7 @@ Project Sprouts provides everything you need to get up and running with SWF deve
 
 Sprouts includes support for project and code templates, automated build scripts, remote managed libraries, and automatic installation of dependencies like the Flash VM and a variety of compilers and tools.
 
-Sprouts works on OS X, Windows XP, Windows Vista and many flavors of Linux.
+Sprouts works on OS X, Windows XP, Windows Vista and many flavors of *nix (including Solaris thanks to lots of patience from Armaghan Chaudhary).
 
 h3. Installation
 
