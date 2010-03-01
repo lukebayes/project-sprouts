@@ -5,6 +5,10 @@ module Sprout
 
   class RemoteFileTarget # :nodoc:
 
+
+    attr_accessor :gem_name
+    attr_accessor :gem_version
+
     attr_writer   :archive_path
     
     # The string environment variable name to check before downloading anything.
@@ -75,7 +79,7 @@ module Sprout
         end
       end
 
-      if(!File.exists?(installed_path) || !File.exists?(File.join(installed_path, archive_path) ))
+      if(!File.exists?(installed_path) && !File.exists?(File.join(installed_path, archive_path) ))
         archive_root = File.join(install_path, 'archive')
         install(downloaded_path, archive_root, update, archive_type)
       end
@@ -130,13 +134,33 @@ module Sprout
     private
     
     def inferred_installed_path
-      if(!environment.nil? && !ENV[environment].nil? && File.exists?(ENV[environment]))
-        return ENV[environment]
-      end
-      
-      return File.join(install_path, 'archive')
+      return environment_path || File.join(install_path, 'archive')
     end
     
+    def environment_path
+      path_for_environmental_name(inferred_env_name_with_version) || path_for_environmental_name(inferred_env_name) || path_for_environmental_name(environment)
+    end
+
+    def path_for_environmental_name(name)
+      if(name && ENV[name])
+        if(!File.exist?(ENV[name]))
+          raise UsageError.new("Found Environmental variable at: #{name} but no files found at: #{ENV[name]}")
+        end
+        ENV[name]
+      end
+    end
+
+    def inferred_env_name_with_version
+      return nil if (gem_version.nil? || gem_name.nil?)
+      version = gem_version.to_s.gsub('.', '_')
+      "#{inferred_env_name}_#{version}"
+    end
+
+    def inferred_env_name
+      return nil if gem_name.nil?
+      return gem_name.gsub('-', '_').upcase
+    end
+
     def download(url, update=false)
       loader = RemoteFileLoader.new
       loader.get_remote_file(url, update, md5)

@@ -303,7 +303,7 @@ EOF
       end
       if(File.exists?(sprout_spec_path))
         # Ensure the requisite files get downloaded and unpacked
-        Builder.build(sprout_spec_path, gem_file_cache(gem_spec.name, gem_spec.version))
+        Builder.build(sprout_spec_path, gem_spec.name, gem_spec.version)
       else
         return gem_spec
       end

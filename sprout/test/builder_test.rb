@@ -17,13 +17,15 @@ class BuilderTest <  Test::Unit::TestCase
   end
   
   def test_build
-    Sprout::Builder.build(@auto_spec, @fixture)
+    Sprout::Builder.stubs(:gem_file_cache).returns @fixture
+    Sprout::Builder.build(@auto_spec)
     assert_file(File.join(@fixture, 'mtasc-1.13-osx.zip'))
   end
   
   # Ensure we support platform-specific self-install binaries, like swfmill on Linux
   def test_build_no_install
-    result = Sprout::Builder.build(@manual_spec, @fixture)
+    Sprout::Builder.stubs(:gem_file_cache).returns @fixture
+    result = Sprout::Builder.build(@manual_spec)
     assert_equal('swfmill', result.executable)
   end
   

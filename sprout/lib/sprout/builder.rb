@@ -9,7 +9,8 @@ module Sprout
   # archives that are identified in the spec
   class Builder # :nodoc:
     
-    def self.build(file_targets_yaml, destination)
+    def self.build(file_targets_yaml, gem_name=nil, gem_version=nil)
+      destination = Builder.gem_file_cache(gem_name, gem_version)
       data = nil
       
       File.open(file_targets_yaml, 'r') do |f|
@@ -24,6 +25,8 @@ module Sprout
         # When authoring a sprout.spec for libraries or tools,
         # put the most specific RemoteFileTargets first, then
         # universals to catch unexpected platforms.
+        target.gem_name = gem_name
+        target.gem_version = gem_version
         if(target.platform == platform || target.platform == 'universal')
           target.install_path = FileUtils.mkdir_p(destination)
           target.resolve
@@ -34,6 +37,10 @@ module Sprout
     end
     
     private
+
+    def self.gem_file_cache(gem_name, gem_version)
+      Sprout.gem_file_cache(gem_name, gem_version)
+    end
     
     def self.platform
       @@platform ||= User.new.platform.to_s
