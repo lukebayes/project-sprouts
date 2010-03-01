@@ -25,7 +25,7 @@ class SproutTest <  Test::Unit::TestCase
     assert(path)
     assert_equal(expanded_expected, expanded_result)
   end
-  
+
   def test_get_executable
     exe = Sprout::Sprout.get_executable('sprout-mtasc-tool')
     assert_file(exe)
