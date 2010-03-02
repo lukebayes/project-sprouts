@@ -8,6 +8,7 @@ class ToolTest < Test::Unit::TestCase
 
       setup do
         @expected_exe = fixtures + '/tool_test/flex3sdk/bin/mxmlc' 
+        File.chmod 0644, @expected_exe
         @cached_exe = Sprout::Sprout.sprout_cache + '/sprout-flex3sdk-tool-3.3.1/archive/bin/mxmlc'
       end
 
@@ -40,6 +41,14 @@ class ToolTest < Test::Unit::TestCase
         assert_raises Sprout::UsageError do
           tool = Sprout::Sprout.get_executable('sprout-flex3sdk-tool', 'bin/mxmlc', '3.3.1')
         end
+      end
+
+      should "chmod files that are not executable" do
+        ENV['SPROUT_FLEX3SDK_TOOL'] = fixtures + '/tool_test/flex3sdk'
+        tool = Sprout::Sprout.get_executable('sprout-flex3sdk-tool', 'bin/mxmlc')
+        assert_equal @expected_exe, tool
+        status = File.stat(@expected_exe)
+        assert status.executable?, "Should be executable but was: #{sprintf("%o", status.mode)}"
       end
 
     end
