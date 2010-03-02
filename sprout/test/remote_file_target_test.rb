@@ -106,6 +106,8 @@ class RemoteFileTargetTest <  Test::Unit::TestCase
     assert_equal('swfmill', @target.executable)
   end
   
+  # TODO: This test started forcing a download
+  # after changes in this revision: c9ac8d328d96c3a86d086b63c28a7ba8134d887f
   #def test_resolve
   #  @target.resolve
   #  assert("Archive should be expanded", File.exists?(@archive_folder_path))
