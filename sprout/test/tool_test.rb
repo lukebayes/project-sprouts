@@ -9,7 +9,8 @@ class ToolTest < Test::Unit::TestCase
       setup do
         @expected_exe = fixtures + '/tool_test/flex3sdk/bin/mxmlc' 
         File.chmod 0644, @expected_exe
-        @cached_exe = Sprout::Sprout.sprout_cache + '/sprout-flex3sdk-tool-3.3.1/archive/bin/mxmlc'
+        @stub_cache = fixtures + '/tool_test/cached'
+        @cached_exe = @stub_cache + '/sprout-flex3sdk-tool-3.3.1/archive/bin/mxmlc'
       end
 
       teardown do
@@ -18,6 +19,7 @@ class ToolTest < Test::Unit::TestCase
       end
 
       should "use the gem cache if no environment variables are found" do
+        Sprout::Sprout.stubs(:sprout_cache).returns @stub_cache
         Sprout::RemoteFileTarget.any_instance.stubs(:resolve)
         Sprout::RemoteFileTarget.any_instance.expects(:resolve)
         tool = Sprout::Sprout.get_executable('sprout-flex3sdk-tool', 'bin/mxmlc', '3.3.1')

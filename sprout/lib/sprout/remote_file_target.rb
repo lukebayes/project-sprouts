@@ -70,7 +70,7 @@ module Sprout
         self.downloaded_path = File.join(File.dirname(downloaded_path), filename)
       end
       
-      if(url && (update || !File.exists?(downloaded_path)))
+      if(url && (update || !File.exists?(installed_path)))
         content = download(url, update)
         FileUtils.makedirs(File.dirname(downloaded_path))
         FileUtils.touch(downloaded_path)
