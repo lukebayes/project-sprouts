@@ -58,8 +58,8 @@ def apply_shared_spec(s)
     s.add_dependency('rubyzip', '>= 0.9.1')
     s.add_dependency('archive-tar-minitar', '>= 0.5.1')
     s.add_dependency('rubigen', '1.5.2')
-    s.add_dependency('net-sftp')
-    s.add_dependency('net-ssh')
+    s.add_dependency('net-sftp', '>= 2.0.4')
+    s.add_dependency('net-ssh', '>= 2.0.19')
     s.add_dependency('rake')
 end
 
@@ -83,7 +83,6 @@ osx_snow_leopard_spec = Gem::Specification.new do |s|
   s.add_dependency('open4', '>= 0.9.6')
 end
 
-
 nix_spec = Gem::Specification.new do |s|
   apply_shared_spec(s)
   s.platform = 'x86-linux'
@@ -96,6 +95,10 @@ win_spec = Gem::Specification.new do |s|
   s.platform = 'mswin32'
   # Add win-specific dependencies here
   s.add_dependency('win32-open3', '0.2.5')
+  # Added again here b/c win users report
+  # having to install these manually:
+  s.add_dependency('net-sftp', '>= 2.0.4')
+  s.add_dependency('net-ssh', '>= 2.0.19')
 end
 
 ruby_spec = Gem::Specification.new do |s|
