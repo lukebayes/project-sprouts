@@ -57,7 +57,7 @@ def apply_shared_spec(s)
 
     s.add_dependency('rubyzip', '>= 0.9.1')
     s.add_dependency('archive-tar-minitar', '>= 0.5.1')
-    s.add_dependency('rubigen', '1.5.2')
+    s.add_dependency('rubigen', '1.5.4')
     s.add_dependency('net-sftp', '>= 2.0.4')
     s.add_dependency('net-ssh', '>= 2.0.19')
     s.add_dependency('rake')
@@ -150,4 +150,13 @@ task :package do
   fix_x86_mswin
 end
 
-#task :release => :release_rubyforge
+task :release_to_gemcutter do
+  files = FileList.new('pkg/*.gem')
+  files.each do |file|
+    sh "gem push #{file}"
+  end
+end
+
+desc 'Clean, Package and Release gems to Gemcutter'
+task :release => [:clean, :package, :release_to_gemcutter]
+
