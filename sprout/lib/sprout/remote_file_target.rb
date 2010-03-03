@@ -69,8 +69,10 @@ module Sprout
       if(filename)
         self.downloaded_path = File.join(File.dirname(downloaded_path), filename)
       end
-      
-      if(url && (update || !File.exists?(installed_path)))
+
+      should_download = ( url && !File.exists?(installed_path) && !File.exists?(downloaded_path) )
+
+      if(should_download)
         content = download(url, update)
         FileUtils.makedirs(File.dirname(downloaded_path))
         FileUtils.touch(downloaded_path)
@@ -79,7 +81,7 @@ module Sprout
         end
       end
 
-      if(!File.exists?(installed_path) && !File.exists?(File.join(installed_path, archive_path) ))
+      if(!File.exists?(installed_path) && !File.exists?(File.join(installed_path, archive_path)) )
         archive_root = File.join(install_path, 'archive')
         install(downloaded_path, archive_root, update, archive_type)
       end
@@ -168,6 +170,7 @@ module Sprout
     
     def install(from, to, force, archive_type=nil)
       unpacker = ArchiveUnpacker.new
+      #puts "Unpacking from: #{from} to: #{to} force: #{force} type: #{archive_type}"
       unpacker.unpack_archive(from, to, force, archive_type)
     end
     
