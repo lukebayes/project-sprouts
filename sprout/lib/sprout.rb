@@ -474,13 +474,14 @@ EOF
 
     def self.get_implicit_project_path(path)
       # We have recursed to the root of the filesystem, return nil
-      if(path.nil? || path == '/' || path.match(/[A-Z]\:\//))
+      if(path.nil? || File.dirname(path) == path || path == '/' || path.match(/^\w\:\/$/))
         return Dir.pwd
       end
       # Look for a rakefile as a child of the current path
       if(child_rakefile(path))
         return path
       end
+
       # No rakefile and no root found, check in parent dir
       return Sprout.get_implicit_project_path(File.dirname(path))
     end
