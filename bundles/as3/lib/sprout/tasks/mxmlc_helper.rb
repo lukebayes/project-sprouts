@@ -64,7 +64,7 @@ module Sprout # :nodoc:
       compiler.preprocessed_path = model.preprocessed_path if !model.preprocessed_path.nil?
 
       # Set up library deps
-      model.libraries.each do |lib|
+      Resolver.resolve_libraries(model.libraries).each do |lib|
         begin
           t = Rake::application[lib]
         rescue StandardError => e
