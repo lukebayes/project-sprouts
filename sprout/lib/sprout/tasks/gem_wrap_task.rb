@@ -63,6 +63,10 @@ module Sprout
     #     archive_path: flickr-.87/src
     #   EOF
     attr_writer :sprout_spec
+    # An array of library names this sprout depends on.
+    # Each will be expanded to sprout-[library-name]-library
+    # and resolved at compile stage
+    attr_writer :libraries
 
     def self.define_task(args, &block)
       t = super
@@ -110,6 +114,10 @@ module Sprout
           gem_dependencies.each do |dep|
             s.requirements << dep
           end
+          libraries.each do |l|
+            puts "Adding #{l} to gem dependencies"
+            s.add_dependency("sprout-#{l}-library", ">= 0.0.0")
+          end
 
           sprout_requirement = s.requirements.collect do |req|
             (req[0] == 'sprout')
@@ -155,6 +163,10 @@ module Sprout
     # Add files to include in the gem/ext folder
     def extensions
       return @extensions ||= []
+    end
+
+    def libraries
+      @libraries ||= []
     end
 
     private
