@@ -6,3 +6,8 @@ This bundle remains incomplete and needs (at least) the following before being p
 * Complete set of generators
 * Tool task for the HaXe compiler
 
+For a personal project, I renamed and copied this lib folder to:
+
+    [project]/vendor/sprout-haxe-bundle/lib
+    
+And used "this Rakefile":http://gist.github.com/326914 to build.    
