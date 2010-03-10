@@ -1,3 +1,4 @@
 - !ruby/object:Sprout::RemoteFileTarget 
   platform: universal
-  url: http://fpdownload.adobe.com/pub/flex/sdk/builds/flex4/flex_sdk_4.0.0.10485.zip
+  url: http://download.macromedia.com/pub/labs/flex/4/flex4sdk_b2_100509.zip
+  md5: 6a0838c5cb33145fe88933778ddb966d
