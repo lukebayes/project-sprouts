@@ -150,6 +150,7 @@ task :package do
   fix_x86_mswin
 end
 
+desc "Release to GemCutter"
 task :release_to_gemcutter do
   files = FileList.new('pkg/*.gem')
   files.each do |file|
