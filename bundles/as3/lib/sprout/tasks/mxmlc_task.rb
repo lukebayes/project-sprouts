@@ -453,7 +453,7 @@ This is an advanced option.
 EOF
       end
       
-      add_param(:load_config, :file) do |p|
+      add_param(:load_config, :files) do |p|
         p.description =<<EOF
 Specifies the location of the configuration file that defines compiler options.
 
