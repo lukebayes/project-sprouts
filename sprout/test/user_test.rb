@@ -5,10 +5,16 @@ class UserTest <  Test::Unit::TestCase
   
   def setup
     super
+
+    @fixture = File.expand_path(File.join(fixtures, 'user'))
+    @mxmlc_crlf = File.join(@fixture, 'mxmlc_crlf')
+    @mxmlc = File.join(@fixture, 'mxmlc')
+    FileUtils.cp(@mxmlc_crlf, @mxmlc);
   end
 
   def teardown
     super
+    remove_file @mxmlc
   end
   
   # TODO: We have a problem with ProcessRunner in the Flex 3 SDK run from a DOS Shell
@@ -23,6 +29,13 @@ class UserTest <  Test::Unit::TestCase
     assert user
     
 #    user.execute('')
+  end
+
+  def test_fix_crlf_for_unix_users
+    user = Sprout::UnixUser.new
+    output = user.execute @mxmlc
+    assert_not_nil output, "Output should not be nil"
+    assert output.match(/success/)
   end
   
 end

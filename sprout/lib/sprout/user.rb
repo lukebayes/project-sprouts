@@ -223,6 +223,8 @@ module Sprout
       if(error.size > 0)
         raise ExecutionError.new("[ERROR] #{error}")
       end
+
+      result || error
     end
 
     # Creates and returns the process without
@@ -240,7 +242,24 @@ module Sprout
       end
     end
 
+    def repair_executable(path)
+      # Repair Windows Line endings
+      # found in non-windows executables
+      # (Flex SDK is regularly published
+      # with broken CRLFs)
+
+      content = File.read(path)
+      if(content.match(/\r\n/))
+        content.gsub!(/\r\n/, "\n")
+        File.open(path, 'w+') do |f|
+          f.write content
+        end
+      end
+    end
+
     def clean_path(path)
+      repair_executable path
+
       if(path.index(' '))
         # Changed 2/26/2008 in attempt to support 
         # ToolTask.PathsParam s that have spaces in the values
@@ -311,6 +330,12 @@ module Sprout
       else
         return super
       end
+    end
+
+    # Override from UnixUser and 
+    # block behavior.
+    # I know this is smelly... Fixes?
+    def repair_executable(path)
     end
 
     def clean_path(path)
