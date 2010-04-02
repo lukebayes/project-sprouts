@@ -242,11 +242,12 @@ module Sprout
       end
     end
 
+    # Repair Windows Line endings
+    # found in non-windows executables
+    # (Flex SDK is regularly published
+    # with broken CRLFs)
     def repair_executable(path)
-      # Repair Windows Line endings
-      # found in non-windows executables
-      # (Flex SDK is regularly published
-      # with broken CRLFs)
+      return unless should_repair_executable(path)
 
       content = File.read(path)
       if(content.match(/\r\n/))
@@ -255,6 +256,10 @@ module Sprout
           f.write content
         end
       end
+    end
+
+    def should_repair_executable(path)
+      return (File.exists?(path) && !File.directory?(path) && File.read(path).match(/^\#\!/))
     end
 
     def clean_path(path)
@@ -335,7 +340,8 @@ module Sprout
     # Override from UnixUser and 
     # block behavior.
     # I know this is smelly... Fixes?
-    def repair_executable(path)
+    def should_repair_executable(path)
+      false
     end
 
     def clean_path(path)
@@ -406,3 +412,4 @@ module Sprout
     end
   end
 end
+
