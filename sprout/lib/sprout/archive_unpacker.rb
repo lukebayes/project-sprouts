@@ -40,7 +40,7 @@ module Sprout
             unpack_dmg(file_name, dir)
           when 'exe'
             FileUtils.mkdir_p(dir)
-            File.mv(file_name, dir)
+            File.move(file_name, dir)
           when 'swc' || 'rb'
             return
           else
