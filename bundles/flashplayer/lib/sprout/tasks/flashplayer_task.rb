@@ -235,7 +235,7 @@ module Sprout
       
       @running_process = nil
       @thread = run(gem_name, gem_version, swf)
-      read_log(@thread, log_file)
+      read_log(@thread, log_file) unless log_file.nil?
       @thread.join
     end
 
@@ -280,6 +280,9 @@ module Sprout
     def read_log(thread, log_file)
       lines_put = 0
 
+      if(log_file.nil?)
+        log_file = 'nil'
+      end
       if(!File.exists?(log_file))
         raise FlashPlayerError.new('[ERROR] Unable to find the trace output log file in the expected location: ' + log_file)
       end
@@ -482,3 +485,4 @@ end
 def flashplayer(args, &block)
   Sprout::FlashPlayerTask.define_task(args, &block)
 end
+
