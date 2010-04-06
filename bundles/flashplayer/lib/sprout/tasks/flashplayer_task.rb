@@ -110,6 +110,7 @@ module Sprout
       return [File.join(User.library, 'Preferences', 'Macromedia', 'Flash Player'),
               File.join(User.library, 'Application Support', 'Macromedia'),
               File.join(User.home, 'Application Data', 'Macromedia', 'Flash Player'),
+              File.join(User.home, 'AppData', 'Roaming', 'Macromedia', 'Flash Player'),
               File.join(User.home, '.macromedia', 'Flash_Player')]
     end
 
