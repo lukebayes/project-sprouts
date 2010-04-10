@@ -46,6 +46,12 @@ class ToolTaskTest <  Test::Unit::TestCase
       @task.unknown = true
     end
   end
+
+  def test_assign_string_when_expecting_array
+    assert_raises(Sprout::ToolTaskError) do
+      @task.source_path = 'src'
+    end
+  end
   
   def test_array_accessor
     @task.source_path << 'src'

@@ -502,7 +502,7 @@ module Sprout
     end
     
     def value
-      @value ||= nil
+      @value
     end
 
     def shell_value
@@ -734,6 +734,14 @@ module Sprout
 
   # Concrete param object for collections of strings
   class StringsParam < TaskParam # :nodoc:
+
+    def value=(val)
+      if(val.is_a?(String))
+        message = "The #{name} property is an Array, not a String. It looks like you may have used the assignment operator (=) where the append operator (<<) was expected."
+        raise ToolTaskError.new(message)
+      end
+      @value = val
+    end
 
     # Files lists are initialized to an empty array by default
     def value
