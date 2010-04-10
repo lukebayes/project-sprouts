@@ -282,8 +282,9 @@ module Sprout
       lines_put = 0
 
       if(log_file.nil?)
-        log_file = 'nil'
+        raise FlashPlayerError.new('[ERROR] Unable to find the trace output log file because the expected location was nil')
       end
+
       if(!File.exists?(log_file))
         raise FlashPlayerError.new('[ERROR] Unable to find the trace output log file in the expected location: ' + log_file)
       end
