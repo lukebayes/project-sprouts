@@ -1,4 +1,4 @@
-/Users/lbayes/Projects/SproutsBundler/lib/sprout/log.rb
+
 module Sprout #:nodoc:
   
   class Log #:nodoc:
