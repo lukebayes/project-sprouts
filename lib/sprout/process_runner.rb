@@ -107,10 +107,10 @@ module Sprout #:nodoc:
       gem 'win32-open3', '0.2.5'
       require 'win32/open3'
       Open3.popen3(*command) do |w, r, e, p|
+            pid   = p
             write = w
-            read = r
+            read  = r
             error = e
-            pid = p
       end
       [pid, write, read, error]
     end

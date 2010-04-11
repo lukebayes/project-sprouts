@@ -42,7 +42,8 @@ class ProcessRunnerTest < Test::Unit::TestCase
           FileUtils.chmod(0644, @script)
           FileUtils.chmod(0644, @script_with_spaces)
           # Raise the Errno::EACCESS (Bad File Mode) error
-          # On the first call
+          # On the first call only - this should trigger the
+          # File mode update, when encountered
           @runner.stubs(:open4_popen4_block).once.raises Errno::EACCES
         end
 
