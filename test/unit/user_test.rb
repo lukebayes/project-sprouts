@@ -18,18 +18,18 @@ class UserTest <  Test::Unit::TestCase
 
     # Add tests for each supported platform:
     [
-      {:os => :win32, :impl => :vista, :user => Sprout::VistaUser},
-      {:os => :win32, :impl => :cygwin, :user => Sprout::CygwinUser},
-      {:os => :win32, :impl => :unknown, :user => Sprout::WinUser},
-      {:os => :win32, :impl => :windows7, :user => Sprout::WinUser},
-      {:os => :unix, :impl => :macosx, :user => Sprout::OSXUser},
-      {:os => :unix, :impl => :solaris, :user => Sprout::UnixUser},
-      {:os => :unix, :impl => :freebsd, :user => Sprout::UnixUser},
-      {:os => :unknown, :impl => :unknown, :user => Sprout::UnixUser}
+      {:os => :win32,   :impl => :vista,    :user => Sprout::VistaUser},
+      {:os => :win32,   :impl => :cygwin,   :user => Sprout::CygwinUser},
+      {:os => :win32,   :impl => :unknown,  :user => Sprout::WinUser},
+      {:os => :win32,   :impl => :windows7, :user => Sprout::WinUser},
+      {:os => :unix,    :impl => :macosx,   :user => Sprout::OSXUser},
+      {:os => :unix,    :impl => :solaris,  :user => Sprout::UnixUser},
+      {:os => :unix,    :impl => :freebsd,  :user => Sprout::UnixUser},
+      {:os => :unknown, :impl => :unknown,  :user => Sprout::UnixUser}
     ].each do |platform|
       context "a new #{platform[:os]}/#{platform[:impl]} user" do
 
-        should "be instantiable" do
+        should "create the correct user based on platform" do
           user = Sprout::User.new platform[:os], platform[:impl]
           assert_not_nil user
           assert_equal platform[:user], user.class
