@@ -1,3 +1,8 @@
+require 'rake'
+require 'platform'
+require 'sprout/log'
+require 'sprout/user'
+require 'sprout/process_runner'
 
 module Sprout
 
@@ -5,6 +10,9 @@ module Sprout
   end
 
   class SproutError < StandardError #:nodoc:
+  end
+
+  class ExecutionError < StandardError # :nodoc:
   end
 
   class Base

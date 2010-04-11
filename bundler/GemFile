@@ -9,6 +9,16 @@ gem "rubyzip",             ">= 0.9.1"
 
 gem "rake"
 
+if RUBY_PLATFORM =~ /mswin/i
+  # Win32 only:
+  gem "win32-open3", "0.2.5"
+  gem "net-sftp", ">= 2.0.4"
+  gem "net-ssh", ">= 2.0.19"
+else
+  # Darwin and Nix only:
+  gem "open4", ">= 0.9.6"
+end
+
 group :test do
   gem "thoughtbot-shoulda"
   gem "mocha"

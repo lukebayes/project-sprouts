@@ -9,7 +9,6 @@ require 'rake/testtask'
 require 'rcov/rcovtask'
 
 namespace :test do
- 
   Rake::TestTask.new(:units) do |t|
     t.libs << "test/unit"
     t.test_files = FileList["test/unit/*_test.rb"]
@@ -43,7 +42,6 @@ end
 task :test => 'test:units'
 
 namespace :torture do
-
   desc "Flog the Sprouts"
   task :flog do
     sh "find lib -name \**/*.rb | xargs flog"
