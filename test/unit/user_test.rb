@@ -15,6 +15,26 @@ class UserTest <  Test::Unit::TestCase
     teardown do
       remove_file @mxmlc
     end
+
+    # Add tests for each supported platform:
+    [
+      {:os => :win32, :impl => :vista},
+      {:os => :win32, :impl => :cygwin},
+      {:os => :win32, :impl => :unknown},
+      {:os => :win32, :impl => :windows7},
+      {:os => :unix, :impl => :macosx},
+      {:os => :unix, :impl => :solaris},
+      {:os => :unix, :impl => :freebsd},
+      {:os => :unknown, :impl => :unknown}
+    ].each do |platform|
+      context "a new #{platform[:os]}/#{platform[:impl]} user" do
+        should "be instantiable" do
+          user = Sprout::User.new platform[:os], platform[:impl]
+          assert_not_nil user
+        end
+
+      end
+    end
     
     # TODO: We have a problem with ProcessRunner in the Flex 3 SDK run from a DOS Shell
     # when the compiled input is a .CSS document and there are compilation errors.
