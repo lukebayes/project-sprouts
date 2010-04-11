@@ -43,7 +43,7 @@ namespace :test do
     task :flog do
       puts "--------------------------"
       puts "Flog Report:"
-      sh "find lib -name \**/*.rb | xargs flog"
+      sh "find lib -name '*.rb' | xargs flog"
     end
 
     desc "Flay the Sprouts"
