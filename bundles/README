@@ -1,7 +1,0 @@
--------------------------
-BUNDLES
--------------------------
-
-A Sprout bundle is a rubygem that contains generators and rake tasks that are related in some way. By convention, this relationship is based on a particular technology like ActionScript 2.0, ActionScript 3.0 or Haxe. If your organization needs to make changes to the functionality provided by these gems, you can create your own custom bundle and either share it with us (and everyone) or host it on your own gem server (private or public).
-
-One bundle that we would like to create sooner rather than later, is the sprout-developer-bundle. Ideally, this would include code generators and supporting tasks for creating new bundles, libraries and tools!
