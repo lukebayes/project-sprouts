@@ -37,21 +37,30 @@ namespace :test do
     end
     task :coverage => "test:coverage:#{target}"
   end
+
+  namespace :torture do
+    desc "Flog the Sprouts"
+    task :flog do
+      puts "--------------------------"
+      puts "Flog Report:"
+      sh "find lib -name \**/*.rb | xargs flog"
+    end
+
+    desc "Flay the Sprouts"
+    task :flay do
+      puts "--------------------------"
+      puts "Flay Report:"
+      sh "flay lib/**/*.rb"
+    end
+  end
+
+  desc "Run all tortuous reports"
+  task :torture => ['torture:flog', 'torture:flay']
+
 end
 
 task :test => 'test:units'
 
-namespace :torture do
-  desc "Flog the Sprouts"
-  task :flog do
-    sh "find lib -name \**/*.rb | xargs flog"
-  end
-
-  desc "Flay the Sprouts"
-  task :flay do
-    sh "flay lib/**/*.rb"
-  end
-end
-
-task :torture => ['torture:flog', 'torture:flay']
+desc "Run all tests and reports"
+task :cruise => [:test, 'test:coverage', 'test:torture']
 
