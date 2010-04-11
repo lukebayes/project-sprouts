@@ -24,7 +24,7 @@ module Sprout #:nodoc:
     # *nix variants (including OS X).
     def execute_open4 *command
       execute_with_block *command do
-        open4_popen4_block *command
+        @pid, @w, @r, @e = open4_popen4_block *command
       end
     end
     
@@ -33,7 +33,7 @@ module Sprout #:nodoc:
     # Windows installations.
     def execute_win32(*command)
       execute_with_block *command do
-        win32_open3_block *command
+        @pid, @w, @r, @e = win32_open3_block *command
       end
     end
 
@@ -99,18 +99,20 @@ module Sprout #:nodoc:
 
     def open4_popen4_block *command
       require 'open4'
-      @pid, @w, @r, @e = open4.popen4(*command)
+      open4.popen4(*command)
     end
 
     def win32_open3_block *command
+      write, read, error, pid = nil
       gem 'win32-open3', '0.2.5'
       require 'win32/open3'
-      Open3.popen3(*command) do |w, r, e, pid|
-            @w = w
-            @r = r
-            @e = e
-            @pid = pid
+      Open3.popen3(*command) do |w, r, e, p|
+            write = w
+            read = r
+            error = e
+            pid = p
       end
+      [pid, write, read, error]
     end
 
     def execute_with_block *command

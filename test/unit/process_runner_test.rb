@@ -6,9 +6,17 @@ class ProcessRunnerTest < Test::Unit::TestCase
   context "process runner" do
 
     setup do
-      @fixture = File.expand_path File.join(fixtures, 'process_runner')
-      @script = File.join @fixture, 'chmod_script.sh'
+      @fixture            = File.expand_path File.join(fixtures, 'process_runner')
+      @script             = File.join @fixture, 'chmod_script.sh'
       @script_with_spaces = File.join @fixture, 'dir with spaces', 'chmod_script.sh'
+
+      pid                 = nil
+      write               = FakeIO.new
+      read                = FakeIO.new "Hello World"
+      error               = FakeIO.new
+
+      @runner             = Sprout::ProcessRunner.new
+      @runner.stubs(:open4_popen4_block).returns( [pid, write, read, error] )
     end
 
     teardown do
@@ -20,21 +28,22 @@ class ProcessRunnerTest < Test::Unit::TestCase
     context "on nix" do 
 
       should "accept and forward multiple arguments" do
-        runner = Sprout::ProcessRunner.new
-        runner.expects(:execute_with_block).once.with("ls", "-la").returns nil
-        runner.execute_open4 "ls", "-la"
+        @runner.expects(:execute_with_block).once.with("ls", "-la").returns nil
+        @runner.execute_open4 "ls", "-la"
       end
 
       should "accept and forward no arguments" do
-        runner = Sprout::ProcessRunner.new
-        runner.expects(:execute_with_block).once.with("ls").returns nil
-        runner.execute_open4 "ls"
+        @runner.expects(:execute_with_block).once.with("ls").returns nil
+        @runner.execute_open4 "ls"
       end
 
       context "with invalid executable mode" do
         setup do
           FileUtils.chmod(0644, @script)
           FileUtils.chmod(0644, @script_with_spaces)
+          # Raise the Errno::EACCESS (Bad File Mode) error
+          # On the first call
+          @runner.stubs(:open4_popen4_block).once.raises Errno::EACCES
         end
 
         context "and arguments" do
@@ -61,9 +70,8 @@ class ProcessRunnerTest < Test::Unit::TestCase
     #--------------------------------------------------
     context "on win32" do
       should "accept and forward multiple arguments" do
-        runner = Sprout::ProcessRunner.new
-        runner.expects(:execute_with_block).once.with("ls", "-la").returns nil
-        runner.execute_win32("ls", "-la")
+        @runner.expects(:execute_with_block).once.with("ls", "-la").returns nil
+        @runner.execute_win32("ls", "-la")
       end
 
     end
@@ -71,8 +79,8 @@ class ProcessRunnerTest < Test::Unit::TestCase
     context "an unknown process" do
       should "raise an exception if the executable doesn't exist" do
         assert_raise Sprout::ProcessRunnerError do 
-          runner = Sprout::ProcessRunner.new
-          runner.execute_open4('SomeUnknownExecutableThatCantBeInYourPath', '--some-arg true --other-arg false')
+          @runner.stubs(:open4_popen4_block).raises Errno::ENOENT
+          @runner.execute_open4('SomeUnknownExecutableThatCantBeInYourPath', '--some-arg true --other-arg false')
         end
       end
     end
@@ -81,12 +89,22 @@ class ProcessRunnerTest < Test::Unit::TestCase
 
   private
   
-  def execute_with_open4_and_bad_mode(*command)
-    FileUtils.chmod(0644, @script)
-    runner = Sprout::ProcessRunner.new
-    runner.execute_open4 *command
-    assert_matches /^Hello World/, runner.read
+  def execute_with_open4_and_bad_mode(command, options="")
+    @runner.execute_open4 command, options
+    assert_equal 33252, File.stat(command).mode
+    assert_matches /^Hello World/, @runner.read
   end
 
 end
 
+
+class FakeIO
+
+  def initialize(value=nil)
+    @value = value
+  end
+
+  def read
+    @value
+  end
+end
