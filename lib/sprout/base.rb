@@ -1,8 +1,8 @@
 require 'rake'
 require 'platform'
 require 'sprout/log'
-require 'sprout/user'
 require 'sprout/process_runner'
+require 'sprout/user'
 
 module Sprout
 

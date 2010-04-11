@@ -197,8 +197,10 @@ module Sprout
       end
     end
 
-    def get_process_runner(command)
-      return ProcessRunner.new(command)
+    def get_process_runner(*command)
+      runner = ProcessRunner.new
+      runner.execute_open4 *command
+      return runner
     end
 
     # Creates a new process, executes the command
@@ -207,7 +209,7 @@ module Sprout
     def execute(tool, options='')
       Log.puts(">> Execute: #{File.basename(tool)} #{options}")
       tool = clean_path(tool)
-      runner = get_process_runner("#{tool} #{options}")
+      runner = get_process_runner(tool, options)
 
       error = runner.read_err
       result = runner.read
@@ -229,7 +231,7 @@ module Sprout
     # long-lived CLI processes like FCSH or FDB.
     def execute_silent(tool, options='')
       tool = clean_path(tool)
-      return get_process_runner("#{tool} #{options}")
+      return get_process_runner(tool, options)
     end
 
     def execute_thread(tool, options='')
@@ -351,6 +353,13 @@ module Sprout
     def format_application_name(name)
       return name.capitalize
     end
+
+    def get_process_runner(*command)
+      runner = ProcessRunner.new
+      runner.execute_win32 *command
+      return runner
+    end
+
   end
 
   class CygwinUser < WinUser # :nodoc:
@@ -387,7 +396,13 @@ module Sprout
         path = parts.shift().downcase + "/" + parts.join("/")
         @home = "/cygdrive/" + path
       end
-    return @home
+      return @home
+    end
+
+    def get_process_runner(*command)
+      runner = ProcessRunner.new
+      runner.execute_open4 *command
+      return runner
     end
 
   end

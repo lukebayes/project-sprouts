@@ -1,6 +1,8 @@
 require "rubygems"
 require "bundler"
 Bundler.setup(:default, :test)
+
+require 'mocha'
 require 'shoulda'
 
 require File.dirname(__FILE__) + '/../../lib/sprout'
