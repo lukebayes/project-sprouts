@@ -2,42 +2,41 @@ require File.dirname(__FILE__) + '/test_helper'
 
 class UserTest <  Test::Unit::TestCase
   include SproutTestCase
-  
-  def setup
-    super
 
-    @fixture = File.expand_path(File.join(fixtures, 'user'))
-    @mxmlc_crlf = File.join(@fixture, 'mxmlc_crlf')
-    @mxmlc = File.join(@fixture, 'mxmlc')
-    FileUtils.cp(@mxmlc_crlf, @mxmlc);
-  end
-
-  def teardown
-    super
-    remove_file @mxmlc
-  end
-  
-  # TODO: We have a problem with ProcessRunner in the Flex 3 SDK run from a DOS Shell
-  # when the compiled input is a .CSS document and there are compilation errors.
-  # The ProcessRunner is blocked trying to read stdout, but the compiler has only written
-  # to stderr.
-  def test_execute_error
-    runner = ProcessRunnerStub.new('some command')
-    runner.error = "[MOCK ERROR]"
-
-    user = UserStub.new(runner)
-    assert user
+  context "a user" do
     
-#    user.execute('')
-  end
+    setup do
+      @fixture = File.expand_path(File.join(fixtures, 'user'))
+      @mxmlc_crlf = File.join(@fixture, 'mxmlc_crlf')
+      @mxmlc = File.join(@fixture, 'mxmlc')
+      FileUtils.cp(@mxmlc_crlf, @mxmlc);
+    end
 
-  def test_fix_crlf_for_unix_users
-    user = Sprout::UnixUser.new
-    output = user.execute @mxmlc
-    assert_not_nil output, "Output should not be nil"
-    assert output.match(/success/)
+    teardown do
+      remove_file @mxmlc
+    end
+    
+    # TODO: We have a problem with ProcessRunner in the Flex 3 SDK run from a DOS Shell
+    # when the compiled input is a .CSS document and there are compilation errors.
+    # The ProcessRunner is blocked trying to read stdout, but the compiler has only written
+    # to stderr.
+    should "execute without error" do
+      runner = ProcessRunnerStub.new('some command')
+      runner.error = "[MOCK ERROR]"
+
+      user = UserStub.new(runner)
+      assert user
+      
+  #    user.execute('')
+    end
+
+    should "fix crlf (Windows) line endings in an executable for nix users" do
+      user = Sprout::UnixUser.new
+      output = user.execute @mxmlc
+      assert_not_nil output, "Output should not be nil"
+      assert output.match(/success/)
+    end
   end
-  
 end
 
 class UserStub < Sprout::UnixUser #:nodoc:
