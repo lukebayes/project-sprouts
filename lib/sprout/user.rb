@@ -208,10 +208,9 @@ module Sprout
     # writes to stderr
     def execute(tool, options='')
       Log.puts(">> Execute: #{File.basename(tool)} #{options}")
-      tool = clean_path(tool)
+      tool   = clean_path(tool)
       runner = get_process_runner(tool, options)
-
-      error = runner.read_err
+      error  = runner.read_err
       result = runner.read
 
       if(result.size > 0)
@@ -390,10 +389,10 @@ module Sprout
 
     def home
       if(@home.nil?)
-        path = win_home.split('\\').join("/")
-        path = path.split(":").join("")
+        path  = win_home.split('\\').join("/")
+        path  = path.split(":").join("")
         parts = path.split("/")
-        path = parts.shift().downcase + "/" + parts.join("/")
+        path  = parts.shift().downcase + "/" + parts.join("/")
         @home = "/cygdrive/" + path
       end
       return @home
