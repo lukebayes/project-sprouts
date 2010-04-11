@@ -24,12 +24,14 @@ namespace :test do
   desc "Aggregate code coverage for unit, functional and integration tests"
   task :coverage => "test:coverage:clean"
 
-  %w[unit functional integration].each do |target|
+  # Hold collection in case we need it:
+  #%w[unit functional integration].each do |target|
+  %w[unit].each do |target|
     namespace :coverage do
       Rcov::RcovTask.new(target) do |t|
         t.libs = ["lib", "test"]
         t.test_files = FileList["test/#{target}/**/*_test.rb"]
-        t.output_dir = "test/coverage/#{target}"
+        t.output_dir = ".coverage/#{target}"
         t.verbose = true
         t.rcov_opts << "--aggregate coverage.data --exclude .bundle"
       end
