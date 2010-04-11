@@ -1,1 +1,3 @@
 .bundle
+coverage.data
+test/coverage
