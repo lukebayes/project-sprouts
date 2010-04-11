@@ -44,12 +44,12 @@ namespace :torture do
 
   desc "Flog the Sprouts"
   task :flog do
-    sh "find lib -name \*.rb | xargs flog"
+    sh "find lib -name \**/*.rb | xargs flog"
   end
 
   desc "Flay the Sprouts"
   task :flay do
-    sh "flay lib/*.rb"
+    sh "flay lib/**/*.rb"
   end
 end
 
