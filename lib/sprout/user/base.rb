@@ -1,6 +1,13 @@
 
 module Sprout::User
 
+  # The abstract base class for all supported user/platform types.
+  # In general, users are created by calling:
+  #     
+  #     User.create
+  #
+  # Assuming you call the create method, you should wind up with
+  # a concrete user that matches your system.
   class Base
 
     attr_accessor :home

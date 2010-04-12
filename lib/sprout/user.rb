@@ -8,6 +8,16 @@ require 'sprout/user/vista'
 
 module Sprout
 
+  # This is the factory that one should
+  # generally use to create new, concrete
+  # User objects.
+  #
+  # A typical use case follows:
+  #
+  #     user = User.create
+  #     Dir.chdir user.home
+  #     user.execute "pwd" # /Users/foo
+  #
   module User
 
     def self.create
