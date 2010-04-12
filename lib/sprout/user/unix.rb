@@ -17,38 +17,8 @@ module Sprout::User
       @home ||= find_home
     end
 
-    def get_exe_path(executable)
-      paths = get_paths
-      file = nil
-      paths.each do |path|
-        file = File.join(path, executable)
-        if(File.exists?(file))
-          return file
-        end
-      end
-      return nil
-    end
-
-    def in_path?(executable)
-      return !get_exe_path(executable).nil?
-    end
-
-    def get_paths
-      return ENV['PATH'].split(':')
-    end
-
     def library
       return home
-    end
-
-    def platform
-      if(Platform::OS == :win32)
-        return :win32
-      elsif(Platform::IMPL == :macosx)
-        return :macosx
-      else
-        return Platform::IMPL
-      end
     end
 
     def get_process_runner(*command)
@@ -187,4 +157,29 @@ module Sprout::User
     end
   end
 end
+
+
+=begin
+  # Possibly not used?
+    def get_exe_path(executable)
+      paths = get_paths
+      file = nil
+      paths.each do |path|
+        file = File.join(path, executable)
+        if(File.exists?(file))
+          return file
+        end
+      end
+      return nil
+    end
+
+    def in_path?(executable)
+      return !get_exe_path(executable).nil?
+    end
+
+    def get_paths
+      return ENV['PATH'].split(':')
+    end
+
+=end
 

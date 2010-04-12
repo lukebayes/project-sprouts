@@ -57,51 +57,66 @@ class UserTest < Test::Unit::TestCase
 
     setup do
       @user = Sprout::User::Unix.new
-      # Block all of the automatic path introspection:
-      [
-        :env_userprofile, 
-        :env_home, 
-        :env_homedrive, 
-        :env_homepath, 
-        :tilde_home, 
-        :alt_separator?
-      ].each do |accessor|
-        @user.stubs(accessor).returns nil
+    end
+
+    context "library path" do
+
+      should "match the home path" do
+        assert_not_nil @user.library
+        assert_equal @user.home, @user.library
       end
     end
 
-    should "find the env home" do
-      @user.expects(:env_home).returns "abc"
-      assert_equal 'abc', @user.home
+    context "home path" do
+
+      setup do
+        # Block all of the automatic path introspection:
+        [
+          :env_userprofile, 
+          :env_home, 
+          :env_homedrive, 
+          :env_homepath, 
+          :tilde_home, 
+          :alt_separator?
+        ].each do |accessor|
+          @user.stubs(accessor).returns nil
+        end
+      end
+
+      should "use env HOME" do
+        @user.expects(:env_home).returns "abc"
+        assert_equal 'abc', @user.home
+      end
+
+      should "use the env USERPROFILE" do
+        @user.expects(:env_userprofile).returns "abc"
+        assert_equal 'abc', @user.home
+      end
+
+      should "use the env HOMEPATH" do
+        @user.expects(:env_homedrive).returns "c"
+        @user.expects(:env_homepath).returns "abc"
+        assert_equal 'c:abc', @user.home
+      end
+
+      should "use ~" do
+        @user.expects(:tilde_home).returns "abc"
+        assert_equal 'abc', @user.home
+      end
+
+      should "fallback to C drive" do
+        @user.expects(:tilde_home).raises StandardError.new
+        @user.expects(:alt_separator?).returns true
+        assert_equal "C:\\", @user.home
+      end
+
+      should "fallback to unix root" do
+        @user.expects(:tilde_home).raises StandardError.new
+        @user.expects(:alt_separator?).returns false
+        assert_equal "/", @user.home
+      end
     end
 
-    should "find the env userprofile" do
-      @user.expects(:env_userprofile).returns "abc"
-      assert_equal 'abc', @user.home
-    end
-
-    should "find the env homepath" do
-      @user.expects(:env_homedrive).returns "c"
-      @user.expects(:env_homepath).returns "abc"
-      assert_equal 'c:abc', @user.home
-    end
-
-    should "attempt to use ~" do
-      @user.expects(:tilde_home).returns "abc"
-      assert_equal 'abc', @user.home
-    end
-
-    should "fallback to C drive" do
-      @user.expects(:tilde_home).raises StandardError.new
-      @user.expects(:alt_separator?).returns true
-      assert_equal "C:\\", @user.home
-    end
-
-    should "fallback to unix root" do
-      @user.expects(:tilde_home).raises StandardError.new
-      @user.expects(:alt_separator?).returns false
-      assert_equal "/", @user.home
-    end
   end
 
 end
