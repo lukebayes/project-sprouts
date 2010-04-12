@@ -6,7 +6,7 @@
 module SproutTestCase # :nodoc:[all]
   
   def fixtures
-    @fixtures ||= File.join(File.dirname(__FILE__), 'fixtures')
+    @fixtures ||= File.join(File.dirname(__FILE__), '/../fixtures')
   end
 
   def setup

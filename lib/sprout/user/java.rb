@@ -1,7 +1,7 @@
 
 module Sprout::User
 
-  class Java < Unix
+  class Java < Base
   end
 end
 

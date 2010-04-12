@@ -32,9 +32,19 @@ class UserTest < Test::Unit::TestCase
 
   ['solaris', 'redhat', 'ubuntu'].each do |variant|
     context variant do
+       
+      setup do
+        @user = Sprout::User::Unix.new
+        @user.stubs(:get_process_runner).returns FakeProcessRunner.new
+      end
+      
       should "create a Unix User" do
         Sprout::Platform.any_instance.stubs(:ruby_platform).returns variant
         assert Sprout::User.create.is_a?(Sprout::User::Unix)
+      end
+      
+      should "execute external processes" do
+        #@user.execute 'abcd'
       end
     end
   end

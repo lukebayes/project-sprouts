@@ -98,14 +98,3 @@ class ProcessRunnerTest < Test::Unit::TestCase
 
 end
 
-
-class FakeIO
-
-  def initialize(value=nil)
-    @value = value
-  end
-
-  def read
-    @value
-  end
-end

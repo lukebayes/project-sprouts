@@ -1,7 +1,7 @@
 
 module Sprout::User
 
-  class Win < Unix
+  class Win < Base
   end
 end
 

@@ -6,7 +6,11 @@ require 'mocha'
 require 'shoulda'
 
 require File.dirname(__FILE__) + '/../../lib/sprout'
-require File.dirname(__FILE__) + '/../sprout_test_case'
+
+$:.push File.dirname(__FILE__)
+require 'fake_io'
+require 'fake_process_runner'
+require 'sprout_test_case'
 
 # Prevent log messages from interrupting the test output:
 Sprout::Log.debug = true

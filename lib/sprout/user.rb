@@ -1,3 +1,4 @@
+require 'sprout/user/base'
 require 'sprout/user/unix'
 require 'sprout/user/java'
 require 'sprout/user/osx'
