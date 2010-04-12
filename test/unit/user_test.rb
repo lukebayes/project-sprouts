@@ -3,7 +3,6 @@ require File.dirname(__FILE__) + '/test_helper'
 class UserTest < Test::Unit::TestCase
   include SproutTestCase
 
-
   ['vista', 'mswin', 'wince', 'emx'].each do |variant|
     context variant do
       should "create a Win User" do
@@ -54,27 +53,57 @@ class UserTest < Test::Unit::TestCase
     end
   end
 
-  # vista
-  #
-  # darwin
-  #
-  # java
-
-  context "the user module" do
+  context "any user" do
 
     setup do
-      Sprout::Platform.any_instance.stubs(:ruby_platform).returns "darwin"
+      @user = Sprout::User::Unix.new
+      # Block all of the automatic path introspection:
+      [
+        :env_userprofile, 
+        :env_home, 
+        :env_homedrive, 
+        :env_homepath, 
+        :tilde_home, 
+        :alt_separator?
+      ].each do |accessor|
+        @user.stubs(accessor).returns nil
+      end
     end
 
-    should "return the platform" do
-      assert_not_nil Sprout::User.platform
-      assert Sprout::User.platform.mac?
+    should "find the env home" do
+      @user.expects(:env_home).returns "abc"
+      assert_equal 'abc', @user.home
     end
 
-    should "return the expected instance" do
-      assert_not_nil Sprout::User.create
+    should "find the env userprofile" do
+      @user.expects(:env_userprofile).returns "abc"
+      assert_equal 'abc', @user.home
+    end
+
+    should "find the env homepath" do
+      @user.expects(:env_homedrive).returns "c"
+      @user.expects(:env_homepath).returns "abc"
+      assert_equal 'c:abc', @user.home
+    end
+
+    should "attempt to use ~" do
+      @user.expects(:tilde_home).returns "abc"
+      assert_equal 'abc', @user.home
+    end
+
+    should "fallback to C drive" do
+      @user.expects(:tilde_home).raises StandardError.new
+      @user.expects(:alt_separator?).returns true
+      assert_equal "C:\\", @user.home
+    end
+
+    should "fallback to unix root" do
+      @user.expects(:tilde_home).raises StandardError.new
+      @user.expects(:alt_separator?).returns false
+      assert_equal "/", @user.home
     end
   end
+
 end
 
 

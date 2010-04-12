@@ -10,17 +10,13 @@ module Sprout
   module User
 
     def self.create
-      p = platform
+      p = Platform.new
       return Vista.new  if p.vista?
       return WinNix.new if p.windows_nix?
       return Win.new    if p.windows?
       return Java.new   if p.java?
       return OSX.new    if p.mac?
       return Unix.new 
-    end
-
-    def self.platform
-      @platform ||= Platform.new
     end
 
   end
