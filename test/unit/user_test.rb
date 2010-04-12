@@ -44,7 +44,7 @@ class UserTest < Test::Unit::TestCase
       end
       
       should "execute external processes" do
-        #@user.execute 'abcd'
+        @user.execute 'abcd'
       end
     end
   end

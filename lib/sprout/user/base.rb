@@ -21,10 +21,14 @@ module Sprout::User
       return home
     end
 
-    def get_process_runner(*command)
-      runner = ProcessRunner.new
-      runner.execute_open4 *command
-      return runner
+    def get_process_runner
+      Sprout::ProcessRunner.new
+    end
+
+    def get_and_execute_process_runner tool, options=nil
+      runner = get_process_runner
+      runner.execute_open4 tool, options
+      runner
     end
 
     # Creates a new process, executes the command
@@ -33,12 +37,12 @@ module Sprout::User
     def execute(tool, options='')
       Sprout::Log.puts(">> Execute: #{File.basename(tool)} #{options}")
       tool   = clean_path(tool)
-      runner = get_process_runner(tool, options)
+      runner = get_and_execute_process_runner(tool, options)
       error  = runner.read_err
       result = runner.read
 
       if(result.size > 0)
-        Log.puts result
+        Sprout::Log.puts result
       end
 
       if(error.size > 0)
@@ -54,7 +58,7 @@ module Sprout::User
     # long-lived CLI processes like FCSH or FDB.
     def execute_silent(tool, options='')
       tool = clean_path(tool)
-      return get_process_runner(tool, options)
+      return get_and_execute_process_runner(tool, options)
     end
 
     def execute_thread(tool, options='')

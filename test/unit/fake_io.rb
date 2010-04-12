@@ -1,20 +1,25 @@
 
-class FakeIO
+class FakeIO < String
 
-  def initialize(value=nil)
-    @value = value || ""
+  def initialize(value="")
+    super
+    @value = value
   end
 
   def read
-    @value || ""
+    @value ||= ""
   end
 
   def write value
-    @value << value
+    read << value
   end
 
   def size
     read.size
+  end
+
+  def to_s
+    read
   end
 
 end

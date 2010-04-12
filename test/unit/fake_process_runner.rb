@@ -5,21 +5,21 @@ class FakeProcessRunner
 
   def execute_open4 *command
     @command = command
-    @r = FakeIO.new command
-    @w = FakeIO.new command
-    @e = FakeIO.new command
+    @r = FakeIO.new
+    @w = FakeIO.new
+    @e = FakeIO.new
   end
 
   def read
     @r
   end
 
-  def write value
-    @w.write value
-  end
-
   def read_err
     @e
+  end
+
+  def write value
+    @w.write value
   end
 
 end
