@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class UserTest <  Test::Unit::TestCase
+class UserTest < Test::Unit::TestCase
   include SproutTestCase
 
   context "a user" do
@@ -16,7 +16,6 @@ class UserTest <  Test::Unit::TestCase
       remove_file @mxmlc
     end
 
-    # Add tests for each supported platform:
     [
       {:os => :win32,   :impl => :vista,    :user => Sprout::VistaUser},
       {:os => :win32,   :impl => :cygwin,   :user => Sprout::CygwinUser},
@@ -27,17 +26,31 @@ class UserTest <  Test::Unit::TestCase
       {:os => :unix,    :impl => :freebsd,  :user => Sprout::UnixUser},
       {:os => :unknown, :impl => :unknown,  :user => Sprout::UnixUser}
     ].each do |platform|
-      context "a new #{platform[:os]}/#{platform[:impl]} user" do
+      context "Instantiating a user with OS: #{platform[:os]} and impl: #{platform[:impl]}" do
 
-        should "create the correct user based on platform" do
+        should "create the correct user type" do
           user = Sprout::User.new platform[:os], platform[:impl]
           assert_not_nil user
           assert_equal platform[:user], user.class
         end
 
+        should "use the values from Platform" do
+          Platform::OS = platform[:os]
+          Platform::IMPL = platform[:impl]
+
+          user = Sprout::User.new # no args
+          assert_equal platform[:user], user.class
+        end
+
       end
     end
-    
+
+    should "allow default user to be assigned" do
+      Sprout::User.user = FakeUser.new
+      user = Sprout::User.new
+      assert_equal FakeUser, user.class
+    end
+
     should "fix crlf (Windows) line endings in an executable for nix users" do
       user = Sprout::UnixUser.new
       output = user.execute @mxmlc
@@ -47,3 +60,4 @@ class UserTest <  Test::Unit::TestCase
   end
 end
 
+class FakeUser; end

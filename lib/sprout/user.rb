@@ -1,6 +1,3 @@
-require 'platform'
-require 'sprout/log'
-require 'sprout/process_runner'
 
 module Sprout
 
@@ -15,12 +12,13 @@ module Sprout
         if(os.nil? && impl.nil? && @@user)
           return @@user
         end
-        if(os.nil?)
-          os = Platform::OS
+
+        if(os.nil? || impl.nil?)
+          platform = Platform.new
+          os   ||= platform.os
+          impl ||= platform.impl
         end
-        if(impl.nil?)
-          impl = Platform::IMPL
-        end
+
         if(os == :win32 && impl == :vista)
           @@user = VistaUser.new
         elsif(os == :win32 && impl == :cygwin)
