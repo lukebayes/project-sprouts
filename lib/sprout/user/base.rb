@@ -46,7 +46,7 @@ module Sprout::User
       end
 
       if(error.size > 0)
-        raise ExecutionError.new("[ERROR] #{error}")
+        raise Sprout::ExecutionError.new("[ERROR] #{error}")
       end
 
       result || error

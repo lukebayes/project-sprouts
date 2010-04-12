@@ -3,11 +3,14 @@ class FakeProcessRunner
 
   attr_accessor :command
 
-  def execute_open4 *command
-    @command = command
+  def initialize
     @r = FakeIO.new
     @w = FakeIO.new
     @e = FakeIO.new
+  end
+
+  def execute_open4 *command
+    @command = command
   end
 
   def read

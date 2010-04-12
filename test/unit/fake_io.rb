@@ -1,13 +1,12 @@
 
-class FakeIO < String
+class FakeIO
 
   def initialize(value="")
-    super
     @value = value
   end
 
   def read
-    @value ||= ""
+    @value
   end
 
   def write value

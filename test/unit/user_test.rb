@@ -35,7 +35,8 @@ class UserTest < Test::Unit::TestCase
        
       setup do
         @user = Sprout::User::Unix.new
-        @user.stubs(:get_process_runner).returns FakeProcessRunner.new
+        @process = FakeProcessRunner.new
+        @user.stubs(:get_process_runner).returns @process
       end
       
       should "create a Unix User" do
@@ -44,7 +45,11 @@ class UserTest < Test::Unit::TestCase
       end
       
       should "execute external processes" do
-        @user.execute 'abcd'
+        # Write to the error stream:
+        @process.read_err.write "Forced Error For test"
+        assert_raises Sprout::ExecutionError do
+          @user.execute 'abcd'
+        end
       end
     end
   end
