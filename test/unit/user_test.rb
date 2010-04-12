@@ -3,6 +3,83 @@ require File.dirname(__FILE__) + '/test_helper'
 class UserTest < Test::Unit::TestCase
   include SproutTestCase
 
+
+  ['vista', 'mswin', 'wince', 'emx'].each do |variant|
+    context variant do
+      should "create a Win User" do
+        Sprout::Platform.any_instance.stubs(:ruby_platform).returns variant
+        assert Sprout::User.create.is_a?(Sprout::User::Win)
+      end
+    end
+  end
+  
+  ['cygwin', 'mingw', 'bccwin'].each do |variant|
+    context variant do
+      should "create a WinNix User" do
+        Sprout::Platform.any_instance.stubs(:ruby_platform).returns variant
+        assert Sprout::User.create.is_a?(Sprout::User::WinNix)
+        assert Sprout::User.create.is_a?(Sprout::User::Win)
+      end
+    end
+  end
+
+  context "vista" do
+    should "create a Vista User" do
+      Sprout::Platform.any_instance.stubs(:ruby_platform).returns "vista"
+      assert Sprout::User.create.is_a?(Sprout::User::Vista)
+      assert Sprout::User.create.is_a?(Sprout::User::Win)
+    end
+  end
+
+  ['solaris', 'redhat', 'ubuntu'].each do |variant|
+    context variant do
+      should "create a Unix User" do
+        Sprout::Platform.any_instance.stubs(:ruby_platform).returns variant
+        assert Sprout::User.create.is_a?(Sprout::User::Unix)
+      end
+    end
+  end
+
+  context "osx" do
+    should "create an OSX User" do
+      Sprout::Platform.any_instance.stubs(:ruby_platform).returns "darwin"
+      assert Sprout::User.create.is_a?(Sprout::User::OSX)
+    end
+  end
+
+  context "java" do
+    should "create a Java User" do
+      Sprout::Platform.any_instance.stubs(:ruby_platform).returns "java"
+      assert Sprout::User.create.is_a?(Sprout::User::Java)
+    end
+  end
+
+  # vista
+  #
+  # darwin
+  #
+  # java
+
+  context "the user module" do
+
+    setup do
+      Sprout::Platform.any_instance.stubs(:ruby_platform).returns "darwin"
+    end
+
+    should "return the platform" do
+      assert_not_nil Sprout::User.platform
+      assert Sprout::User.platform.mac?
+    end
+
+    should "return the expected instance" do
+      assert_not_nil Sprout::User.create
+    end
+  end
+end
+
+
+
+=begin
   context "a user" do
     
     setup do
@@ -61,3 +138,5 @@ class UserTest < Test::Unit::TestCase
 end
 
 class FakeUser; end
+=end
+

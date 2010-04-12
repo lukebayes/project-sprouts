@@ -3,14 +3,18 @@ module Sprout
 
   # Determine what environment we're in so that we
   # can play nice with libraries, processes, executables, etc.
-  module Platform
+  class Platform
 
     def ruby_platform
       RUBY_PLATFORM
     end
 
     def windows?
-      (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ ruby_platform) != nil
+      (/cygwin|mswin|mingw|bccwin|wince|emx|vista/ =~ ruby_platform) != nil
+    end
+
+    def vista?
+      (/vista/ =~ ruby_platform) != nil
     end
 
     def windows_nix?
@@ -22,11 +26,15 @@ module Sprout
     end
 
     def unix?
-      !windows?
+      not windows? and not java?
     end
 
     def linux?
       unix? and not mac?
+    end
+
+    def java?
+      (/java/ =~ ruby_platform) != nil
     end
   end
 end

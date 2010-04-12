@@ -10,7 +10,7 @@ module SproutTestCase # :nodoc:[all]
   end
 
   def setup
-    Sprout::User.user = nil
+    #Sprout::User.user = nil
   end
 
   def teardown
