@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Write to stderr:
+echo 1>&2 "Failure"
+

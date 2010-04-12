@@ -34,8 +34,11 @@ class UserTest < Test::Unit::TestCase
     context variant do
        
       setup do
+        @success_exec = File.join(fixtures, 'process_runner', 'success')
+        @failure_exec = File.join(fixtures, 'process_runner', 'failure')
         @user = Sprout::User::Unix.new
         @process = FakeProcessRunner.new
+        # Allows this test to run on Windows:
         @user.stubs(:get_process_runner).returns @process
       end
       
@@ -45,10 +48,14 @@ class UserTest < Test::Unit::TestCase
       end
       
       should "execute external processes" do
-        # Write to the error stream:
+        @user.execute @success_exec
+      end
+
+      should "handle execution errors" do
+        # Write to the fake error stream:
         @process.read_err.write "Forced Error For test"
         assert_raises Sprout::ExecutionError do
-          @user.execute 'abcd'
+          @user.execute @failure_exec
         end
       end
     end
