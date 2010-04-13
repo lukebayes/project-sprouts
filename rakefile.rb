@@ -6,7 +6,6 @@ Bundler.setup
 require 'rake'
 require 'rake/clean'
 require 'rake/testtask'
-require 'rcov/rcovtask'
 
 namespace :test do
   Rake::TestTask.new(:units) do |t|
@@ -20,22 +19,34 @@ namespace :test do
     task(:clean) { rm_f "coverage.data" }
   end
 
-  desc "Aggregate code coverage for unit, functional and integration tests"
-  task :coverage => "test:coverage:clean"
+  # Apparently, rcov does not work on Windows.
+  # Hide these tasks so that we can at least
+  # run the others...
+  if(!(RUBY_PLATFORM =~ /mswin/i))
+    require 'rcov/rcovtask'
 
-  # Hold collection in case we need it:
-  #%w[unit functional integration].each do |target|
-  %w[unit].each do |target|
     namespace :coverage do
-      Rcov::RcovTask.new(target) do |t|
-        t.libs = ["lib", "test"]
-        t.test_files = FileList["test/#{target}/**/*_test.rb"]
-        t.output_dir = ".coverage/#{target}"
-        t.verbose = true
-        t.rcov_opts << "--aggregate coverage.data --exclude .bundle"
-      end
+      desc "Delete aggregate coverage data."
+      task(:clean) { rm_f "coverage.data" }
     end
-    task :coverage => "test:coverage:#{target}"
+  
+    desc "Aggregate code coverage for unit, functional and integration tests"
+    task :coverage => "test:coverage:clean"
+  
+    # Hold collection in case we need it:
+    #%w[unit functional integration].each do |target|
+    %w[unit].each do |target|
+      namespace :coverage do
+        Rcov::RcovTask.new(target) do |t|
+          t.libs = ["lib", "test"]
+          t.test_files = FileList["test/#{target}/**/*_test.rb"]
+          t.output_dir = ".coverage/#{target}"
+          t.verbose = true
+          t.rcov_opts << "--aggregate coverage.data --exclude .bundle"
+        end
+      end
+      task :coverage => "test:coverage:#{target}"
+    end
   end
 
   namespace :torture do

@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem "rake"
-gem "rubyzip",             "0.9.4"
+gem "rubyzip", "0.9.4"
 
 if RUBY_PLATFORM =~ /mswin/i
   # Win32 only:
@@ -12,7 +12,7 @@ else
 end
 
 group :test do
-  gem "thoughtbot-shoulda"
+  gem "shoulda"
   gem "mocha"
   gem "flay"
   gem "flog"

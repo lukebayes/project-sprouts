@@ -12,14 +12,15 @@ module Sprout
       validate_archive(archive)
       validate_destination(destination)
 
-      return unpack_zip archive, destination, clobber if is_zip?(archive)
+      return unpack_zip(archive, destination, clobber) if is_zip?(archive)
 
-      raise ArchiveUnpackerError.new "Unsupported or unknown archive type encountered with: #{archive}"
+      raise ArchiveUnpackerError.new("Unsupported or unknown archive type encountered with: #{archive}")
     end
 
     def unpack_zip archive, destination, clobber=nil
       Zip::ZipFile.open archive do |zipfile|
         zipfile.each do |entry|
+          next if entry.name =~ /__MACOSX/ or entry.name =~ /\.DS_Store/
           unpack_zip_entry entry, destination, clobber
         end
       end
@@ -43,14 +44,24 @@ module Sprout
 
     def unpack_zip_entry entry, destination, clobber
       # Ensure hidden mac files don't get written to disk:
-      return if entry.name =~ /__MACOSX/ or entry.name =~ /\.DS_Store/
       path = File.join destination, entry.name
 
       if entry.directory?
+        # If an archive has empty directories:
         FileUtils.mkdir_p path
       elsif entry.file?
-        entry.extract path do |failed_entry, failed_dest|
-          FileUtils.rm_rf failed_dest if clobber == :clobber
+        # On Windows, we don't get the entry for
+        # each parent directory:
+        FileUtils.mkdir_p File.dirname(path)
+        begin
+          entry.extract path
+        rescue Zip::ZipDestinationFileExistsError => zip_dest_error
+          if(clobber == :clobber)
+            FileUtils.rm_rf path
+            entry.extract path
+          else
+            raise zip_dest_error
+          end
         end
       end
     end

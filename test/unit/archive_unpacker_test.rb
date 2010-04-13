@@ -50,6 +50,15 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
       assert_matches /hello world/, File.read(expected_file)
     end
 
+    should "not clobber if not told to do so" do
+      expected_file = File.join temp_path, 'some_file.rb'
+      FileUtils.touch expected_file
+
+      assert_raises Zip::ZipDestinationFileExistsError do
+        @unpacker.unpack_zip @some_file, temp_path, :no_clobber
+      end
+    end
+
     should "unpack a nested, zipped file" do
       expected_file = File.join temp_path, 'some folder', 'child folder', 'child child folder', 'some_file.rb'
 
