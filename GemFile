@@ -9,6 +9,10 @@ if RUBY_PLATFORM =~ /mswin/i
 else
   # Darwin and Nix only:
   gem "open4", ">= 0.9.6"
+
+  group :test do
+    gem "rcov"
+  end
 end
 
 group :test do
@@ -17,6 +21,5 @@ group :test do
   gem "flay"
   gem "flog"
   gem "heckle"
-  gem "rcov"
 end
 
