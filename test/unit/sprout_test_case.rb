@@ -6,7 +6,7 @@
 module SproutTestCase # :nodoc:[all]
 
   def fixtures
-    @fixtures ||= File.join(File.dirname(__FILE__), '/../fixtures')
+    @fixtures ||= File.expand_path(File.join(File.dirname(__FILE__), '/../fixtures'))
   end
 
   def setup
@@ -16,6 +16,21 @@ module SproutTestCase # :nodoc:[all]
   def teardown
     clear_tasks
     #Sprout::ProjectModel.destroy
+    if(@temp_path && File.exists?(@temp_path))
+      FileUtils.rm_rf(@temp_path)
+    end
+  end
+
+  def temp_path
+    @temp_path ||= make_temp_folder
+  end
+
+  def make_temp_folder
+    path = File.expand_path( File.dirname(__FILE__) + '/../tmp' )
+    if(!File.exists?(path))
+      FileUtils.mkdir_p path
+    end
+    path
   end
   
   def run_task(name)

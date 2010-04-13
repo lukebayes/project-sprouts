@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.summary     = "Flash development evolved"
   s.description = "Project Sprouts gives you access to simple generators with custom templates, beautiful build scripts, distributed libraries and automated system configuration"
 
-  s.required_rubygems_version = ">= 0.8.0"
+  s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "sprout" 
 
   s.add_development_dependency "shoulda"

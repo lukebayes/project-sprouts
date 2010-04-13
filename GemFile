@@ -1,19 +1,11 @@
-
 source "http://rubygems.org"
 
-gem "archive-tar-minitar", ">= 0.5.1"
-gem "net-sftp",            ">= 2.0.4"
-gem "net-ssh",             ">= 2.0.19"
-gem "rubigen",             "1.5.4"
-gem "rubyzip",             ">= 0.9.1"
-
 gem "rake"
+gem "rubyzip",             "0.9.4"
 
 if RUBY_PLATFORM =~ /mswin/i
   # Win32 only:
   gem "win32-open3", "0.2.5"
-  gem "net-sftp", ">= 2.0.4"
-  gem "net-ssh", ">= 2.0.19"
 else
   # Darwin and Nix only:
   gem "open4", ">= 0.9.6"

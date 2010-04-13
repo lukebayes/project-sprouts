@@ -1,8 +1,13 @@
 require 'rake'
+
+# Core, Crossplatform support:
 require 'sprout/log'
 require 'sprout/platform'
 require 'sprout/process_runner'
 require 'sprout/user'
+
+# File, Archive and Network support:
+require 'sprout/archive_unpacker'
 
 module Sprout
 
