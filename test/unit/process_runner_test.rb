@@ -91,8 +91,9 @@ class ProcessRunnerTest < Test::Unit::TestCase
   private
   
   def execute_with_open4_and_bad_mode(command, options="")
+    assert !File.stat(command).executable?, "File should not be executable to begin"
     @runner.execute_open4 command, options
-    assert_equal 33252, File.stat(command).mode
+    assert File.stat(command).executable?, "File should be converted to become executable"
     assert_matches /^Hello World/, @runner.read
   end
 
