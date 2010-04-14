@@ -1,2 +1,0 @@
-
-model = Sprout::ProjectModel.instance
