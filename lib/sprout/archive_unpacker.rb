@@ -1,8 +1,10 @@
 require 'zip/zip'
+require 'archive/tar/minitar'
 
 module Sprout
 
   class ArchiveUnpackerError < StandardError; end #:nodoc:
+
 
   # Given a source, destination and type (or ability to infer it),
   # unpack downloaded archives.
@@ -13,6 +15,7 @@ module Sprout
       validate_destination(destination)
 
       return unpack_zip(archive, destination, clobber) if is_zip?(archive)
+      return unpack_tgz(archive, destination, clobber) if is_tgz?(archive)
 
       raise ArchiveUnpackerError.new("Unsupported or unknown archive type encountered with: #{archive}")
     end
@@ -26,8 +29,27 @@ module Sprout
       end
     end
 
+    def unpack_tgz archive, destination, clobber=nil
+      tar = Zlib::GzipReader.new(File.open(archive, 'rb'))
+      Archive::Tar::Minitar.unpack(tar, destination)
+      
+      # Recurse and unpack gzipped children (Adobe did this double 
+      # gzip with the Linux FlashPlayer for some reason)
+      ["#{destination}/**/*.tgz", "#{destination}/**/*.tar.gz"].each do |pattern|
+        Dir.glob(pattern).each do |child|
+          if(child != archive && dir != File.dirname(child))
+            unpack_tgz(child, File.dirname(child))
+          end
+        end
+      end
+    end
+
     def is_zip? archive 
       !archive.match(/\.zip$/).nil?
+    end
+
+    def is_tgz? archive
+      !archive.match(/\.tgz$/).nil? || !archive.match(/\.tar.gz$/).nil?
     end
 
     private
