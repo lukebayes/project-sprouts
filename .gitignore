@@ -8,3 +8,6 @@ bundles/as3/samples/mxmlc/bin/*.swf
 bundles/as3/samples/mxmlc/doc
 bundles/as3/samples/mxmlc/bin/*.swc
 media
+.bundle
+.coverage
+coverage.data
