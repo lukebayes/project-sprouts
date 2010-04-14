@@ -9,8 +9,7 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
     @zip_file   = File.join fixture, 'zip', 'some_file.zip'
     @zip_folder = File.join fixture, 'zip', 'some folder.zip'
     
-    #@tgz_file   = File.join fixture, 'tgz', 'some_file.tgz'
-    @tgz_file   = File.join fixture, 'tgz', 'haproxy-1.4.4.tar.gz'
+    @tgz_file   = File.join fixture, 'tgz', 'some_file.tgz'
     @tgz_folder = File.join fixture, 'tgz', 'some folder.tgz'
 
     @file_name  = 'some_file.rb'
