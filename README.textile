@@ -118,7 +118,6 @@ h3. Some Links
 * "File a Bug":http://github.com/lukebayes/project-sprouts/issues
 * "See the Documentation":http://projectsprouts.org/rdoc
 * "Meet the Community":http://groups.google.com/group/projectsprouts
-* 
 
 h3. MIT License
 
