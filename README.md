@@ -1,2 +1,0 @@
-## Sprout : Flash development evolved
-

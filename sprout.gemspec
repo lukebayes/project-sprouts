@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "shoulda"
 
-  s.files        = Dir.glob("{bin,lib}/**/*") + %w(MIT-LICENSE README.md CHANGELOG.md)
+  s.files        = Dir.glob("{bin,lib}/**/*") + %w(MIT-LICENSE README.textile CHANGELOG.md)
   s.executables  = ['sprout']
   s.require_path = 'lib'
 end
