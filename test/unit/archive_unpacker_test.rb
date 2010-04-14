@@ -6,8 +6,8 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
   def setup
     super
     fixture      = File.join fixtures, 'archive_unpacker'
-    @some_file   = File.join fixture, 'some_file.zip'
-    @some_folder = File.join fixture, 'some folder.zip'
+    @zip_file    = File.join fixture, 'zip', 'some_file.zip'
+    @zip_folder  = File.join fixture, 'zip', 'some folder.zip'
   end
 
   context "a zip archive" do
@@ -29,14 +29,14 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
 
     should "fail with invalid destination" do
       assert_raises Sprout::ArchiveUnpackerError do
-        @unpacker.unpack @some_file, "SomeInvalidDestination"
+        @unpacker.unpack @zip_file, "SomeInvalidDestination"
       end
     end
 
     should "unpack a single zipped file" do
       expected_file = File.join temp_path, 'some_file.rb'
 
-      @unpacker.unpack @some_file, temp_path
+      @unpacker.unpack @zip_file, temp_path
       assert_file expected_file
       assert_matches /hello world/, File.read(expected_file)
     end
@@ -45,7 +45,7 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
       expected_file = File.join temp_path, 'some_file.rb'
       FileUtils.touch expected_file
 
-      @unpacker.unpack_zip @some_file, temp_path, :clobber
+      @unpacker.unpack_zip @zip_file, temp_path, :clobber
       assert_file expected_file
       assert_matches /hello world/, File.read(expected_file)
     end
@@ -55,14 +55,14 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
       FileUtils.touch expected_file
 
       assert_raises Zip::ZipDestinationFileExistsError do
-        @unpacker.unpack_zip @some_file, temp_path, :no_clobber
+        @unpacker.unpack_zip @zip_file, temp_path, :no_clobber
       end
     end
 
     should "unpack a nested, zipped file" do
       expected_file = File.join temp_path, 'some folder', 'child folder', 'child child folder', 'some_file.rb'
 
-      @unpacker.unpack @some_folder, temp_path
+      @unpacker.unpack @zip_folder, temp_path
       assert_file expected_file
       assert_matches /hello world/, File.read(expected_file)
     end
