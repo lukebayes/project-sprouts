@@ -9,7 +9,7 @@ if RUBY_PLATFORM =~ /mswin/i
   gem "win32-open3", "0.2.5"
 elsif RUBY_PLATFORM =~ /darwin/i
   # Darwin and Nix only:
-  gem "open4", "0.9.6"
+  gem "open4", ">= 0.9.6"
 
   group :test do
     gem "rcov"
