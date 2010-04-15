@@ -20,6 +20,14 @@ module Sprout
   # Sprouts was unable to accomplish the request.
   class ExecutionError < SproutError; end
 
+  # There was a problem with the requested
+  # unpack operation.
+  class ArchiveUnpackerError < SproutError; end
+
+  # The unpacked file was already found in the destination
+  # directory and the ArchiveUnpacker was not asked to clobber.
+  class DestinationExistsError < ArchiveUnpackerError; end
+
   class Base; end
 end
 

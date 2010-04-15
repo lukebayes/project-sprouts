@@ -3,9 +3,6 @@ require 'archive/tar/minitar'
 
 module Sprout
 
-  class ArchiveUnpackerError < StandardError; end #:nodoc:
-
-
   # Given a source, destination and type (or ability to infer it),
   # unpack downloaded archives.
   class ArchiveUnpacker
@@ -31,8 +28,12 @@ module Sprout
 
     def unpack_tgz archive, destination, clobber=nil
       tar = Zlib::GzipReader.new(File.open(archive, 'rb'))
+      if(!should_unpack_tgz?(destination, clobber))
+        raise DestinationExistsError.new "Unable to unpack #{archive} into #{destination} without explicit :clobber argument"
+      end
+
       Archive::Tar::Minitar.unpack(tar, destination)
-      
+
       # Recurse and unpack gzipped children (Adobe did this double 
       # gzip with the Linux FlashPlayer for some reason)
       ["#{destination}/**/*.tgz", "#{destination}/**/*.tar.gz"].each do |pattern|
@@ -53,6 +54,15 @@ module Sprout
     end
 
     private
+
+    def should_unpack_tgz? dir, clobber=nil
+      return !directory_has_children?(dir) || clobber == :clobber
+
+    end
+
+    def directory_has_children? dir
+      (Dir.entries(dir) - ['.', '..']).size > 0
+    end
 
     def validate_archive archive
       message = "Archive could not be found at: #{archive}"
@@ -82,7 +92,7 @@ module Sprout
             FileUtils.rm_rf path
             entry.extract path
           else
-            raise zip_dest_error
+            raise DestinationExistsError.new zip_dest_error.message
           end
         end
       end

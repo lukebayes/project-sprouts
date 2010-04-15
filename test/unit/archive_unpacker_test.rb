@@ -29,7 +29,7 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
       assert !@unpacker.is_tgz?("foo"), "not tgz"
     end
 
-    ['zip'].each do |format|
+    ['zip', 'tgz'].each do |format|
 
       context "with a #{format} archive" do
 
@@ -62,7 +62,7 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
           expected_file = File.join temp_path, @file_name
           FileUtils.touch expected_file
 
-          @unpacker.unpack_zip @archive_file, temp_path, :clobber
+          @unpacker.unpack @archive_file, temp_path, :clobber
           assert_file expected_file
           assert_matches /hello world/, File.read(expected_file)
         end
@@ -71,8 +71,8 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
           expected_file = File.join temp_path, @file_name
           FileUtils.touch expected_file
 
-          assert_raises Zip::ZipDestinationFileExistsError do
-            @unpacker.unpack_zip @archive_file, temp_path, :no_clobber
+          assert_raises Sprout::DestinationExistsError do
+            @unpacker.unpack @archive_file, temp_path, :no_clobber
           end
         end
 
