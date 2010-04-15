@@ -7,17 +7,20 @@ module Sprout
   # unpack downloaded archives.
   class ArchiveUnpacker
 
+    # Figure out what kind of archive you have from the file name,
+    # and unpack it using the appropriate scheme.
     def unpack archive, destination, clobber=nil
-      validate_archive(archive)
-      validate_destination(destination)
-
       return unpack_zip(archive, destination, clobber) if is_zip?(archive)
       return unpack_tgz(archive, destination, clobber) if is_tgz?(archive)
+      return copy_file(archive, destination, clobber)  if is_copyable?(archive)
 
       raise ArchiveUnpackerError.new("Unsupported or unknown archive type encountered with: #{archive}")
     end
 
+    # Unpack zip archives on any platform.
     def unpack_zip archive, destination, clobber=nil
+      validate archive, destination
+
       Zip::ZipFile.open archive do |zipfile|
         zipfile.each do |entry|
           next if entry.name =~ /__MACOSX/ or entry.name =~ /\.DS_Store/
@@ -26,7 +29,10 @@ module Sprout
       end
     end
 
+    # Unpack tar.gz or .tgz files on any platform.
     def unpack_tgz archive, destination, clobber=nil
+      validate archive, destination
+
       tar = Zlib::GzipReader.new(File.open(archive, 'rb'))
       if(!should_unpack_tgz?(destination, clobber))
         raise DestinationExistsError.new "Unable to unpack #{archive} into #{destination} without explicit :clobber argument"
@@ -35,7 +41,7 @@ module Sprout
       Archive::Tar::Minitar.unpack(tar, destination)
 
       # Recurse and unpack gzipped children (Adobe did this double 
-      # gzip with the Linux FlashPlayer for some reason)
+      # gzip with the Linux FlashPlayer for some weird reason)
       ["#{destination}/**/*.tgz", "#{destination}/**/*.tar.gz"].each do |pattern|
         Dir.glob(pattern).each do |child|
           if(child != archive && dir != File.dirname(child))
@@ -45,15 +51,47 @@ module Sprout
       end
     end
 
+    # Rather than unpacking, safely copy the file from one location
+    # to another.
+    def copy_file file, destination, clobber=nil
+      validate file, destination
+      target = File.expand_path( File.join(destination, File.basename(file)) )
+      if(File.exists?(target) && clobber != :clobber)
+        raise DestinationExistsError.new "Unable to copy #{file} to #{target} because target already exists and we were not asked to :clobber it"
+      end
+      FileUtils.mkdir_p destination
+      FileUtils.cp_r file, destination
+
+      destination
+    end
+
+    # Return true if the provided file name looks like a zip file.
     def is_zip? archive 
       !archive.match(/\.zip$/).nil?
     end
 
+    # Return true if the provided file name looks like a tar.gz file.
     def is_tgz? archive
       !archive.match(/\.tgz$/).nil? || !archive.match(/\.tar.gz$/).nil?
     end
 
+    def is_exe? archive
+      !archive.match(/\.exe$/).nil?
+    end
+    
+    def is_swc? archive
+      !archive.match(/\.swc$/).nil?
+    end
+
+    def is_rb? archive
+      !archive.match(/\.rb$/).nil?
+    end
+
     private
+
+    def is_copyable? archive
+      (is_exe?(archive) || is_swc?(archive) || is_rb?(archive))
+    end
 
     def should_unpack_tgz? dir, clobber=nil
       return !directory_has_children?(dir) || clobber == :clobber
@@ -62,6 +100,11 @@ module Sprout
 
     def directory_has_children? dir
       (Dir.entries(dir) - ['.', '..']).size > 0
+    end
+
+    def validate archive, destination
+      validate_archive archive
+      validate_destination destination
     end
 
     def validate_archive archive

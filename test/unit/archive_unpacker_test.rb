@@ -12,6 +12,10 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
     @tgz_file   = File.join fixture, 'tgz', 'some_file.tgz'
     @tgz_folder = File.join fixture, 'tgz', 'some folder.tgz'
 
+    @exe_file   = File.join fixture, 'copyable', 'some_file.exe'
+    @swc_file   = File.join fixture, 'copyable', 'some_file.swc'
+    @rb_file    = File.join fixture, 'copyable', 'some_file.rb'
+
     @file_name  = 'some_file.rb'
 
     @unpacker = Sprout::ArchiveUnpacker.new
@@ -29,6 +33,20 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
       assert !@unpacker.is_tgz?("foo"), "not tgz"
     end
 
+    should "raise on unknown file types" do
+      assert_raises Sprout::ArchiveUnpackerError do
+        @unpacker.unpack 'SomeUnknowFileType', temp_path
+      end
+    end
+
+    ['exe', 'swc', 'rb'].each do |format|
+      should "copy #{format} files" do
+        file = eval("@#{format}_file")
+        assert @unpacker.unpack file, temp_path
+        assert_file File.join(temp_path, File.basename(file))
+      end
+    end
+
     ['zip', 'tgz'].each do |format|
 
       context "with a #{format} archive" do
@@ -38,13 +56,13 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
           @archive_folder = eval("@#{format.gsub(/\./, '')}_folder")
         end
 
-        should "fail with unknown file" do
+        should "fail with missing file" do
           assert_raises Sprout::ArchiveUnpackerError do
             @unpacker.unpack "SomeUnknownFile.#{format}", temp_path
           end
         end
 
-        should "fail with invalid destination" do
+        should "fail with missing destination" do
           assert_raises Sprout::ArchiveUnpackerError do
             @unpacker.unpack @archive_file, "SomeInvalidDestination"
           end
