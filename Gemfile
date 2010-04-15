@@ -7,13 +7,8 @@ gem "archive-tar-minitar", "0.5.2"
 if RUBY_PLATFORM =~ /mswin/i
   # Win32 only:
   gem "win32-open3", "0.2.5"
-elsif RUBY_PLATFORM =~ /darwin/i
-  # Darwin and Nix only:
+else
   gem "open4", ">= 0.9.6"
-
-  group :test do
-    gem "rcov"
-  end
 end
 
 group :test do
@@ -22,5 +17,11 @@ group :test do
   gem "flay"
   gem "flog"
   gem "heckle"
+  
+  # rcov doesn't appear to install on
+  # debian. Boo. Ideas?
+  if RUBY_PLATFORM =~ /darwin/i
+    gem "rcov"
+  end
 end
 
