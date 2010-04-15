@@ -11,16 +11,15 @@ require 'sprout/archive_unpacker'
 
 module Sprout
 
-  class UsageError < StandardError #:nodoc
-  end
+  # A general Sprout Error was encountered.
+  class SproutError < StandardError; end
 
-  class SproutError < StandardError #:nodoc:
-  end
+  # An unexpected input was used or method was called.
+  class UsageError < SproutError; end
 
-  class ExecutionError < StandardError # :nodoc:
-  end
+  # Sprouts was unable to accomplish the request.
+  class ExecutionError < SproutError; end
 
-  class Base
-  end
+  class Base; end
 end
 
