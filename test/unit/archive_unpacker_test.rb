@@ -34,7 +34,7 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
     end
 
     should "raise on unknown file types" do
-      assert_raises Sprout::ArchiveUnpackerError do
+      assert_raises Sprout::UnknownArchiveType do
         @unpacker.unpack 'SomeUnknowFileType', temp_path
       end
     end

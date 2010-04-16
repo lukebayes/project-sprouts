@@ -12,9 +12,14 @@ module Sprout
     def unpack archive, destination, clobber=nil
       return unpack_zip(archive, destination, clobber) if is_zip?(archive)
       return unpack_tgz(archive, destination, clobber) if is_tgz?(archive)
+
+      # This is definitely debatable, should we copy the file even if it's
+      # not an archive that we're about to unpack?
+      # If so, why would we only do this with some subset of file types?
+      # Opinions welcome here...
       return copy_file(archive, destination, clobber)  if is_copyable?(archive)
 
-      raise ArchiveUnpackerError.new("Unsupported or unknown archive type encountered with: #{archive}")
+      raise UnknownArchiveType.new("Unsupported or unknown archive type encountered with: #{archive}")
     end
 
     # Unpack zip archives on any platform.

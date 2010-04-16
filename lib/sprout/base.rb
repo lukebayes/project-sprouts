@@ -24,6 +24,10 @@ module Sprout
   # unpack operation.
   class ArchiveUnpackerError < SproutError; end
 
+  # Can't figure out how to unpack this type of file.
+  # Try again with a .zip, .tgz, or .tar.gz
+  class UnknownArchiveType < SproutError; end
+
   # The unpacked file was already found in the destination
   # directory and the ArchiveUnpacker was not asked to clobber.
   class DestinationExistsError < ArchiveUnpackerError; end
