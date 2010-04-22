@@ -25,7 +25,7 @@ module Sprout # :nodoc:
       asdoc task_name do |t|
         configure_mxmlc(t, true)
         t.output = model.doc_dir
-        t.doc_classes = input
+        t.doc_classes << input
         t.main_title = model.project_name
         yield t if block_given?
       end
