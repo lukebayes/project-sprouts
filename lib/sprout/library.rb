@@ -1,36 +1,38 @@
 
 module Sprout
-
   module Library
 
-    module ClassMethods
+    #http://rubygems.rubyforge.org/rdoc/Gem/Specification.html
+    #included_files = FileList["**/*"].exclude /.DS_Store|generated|.svn|.git|airglobal.swc|airframework.swc/
+    class Specification < Gem::Specification
 
-      def add_file_target platform
-        target = FileTarget.new(platform)
-        begin
-          yield target if block_given?
-        rescue NoMethodError => no_method_error
-          raise UsageError.new "There was a MethodError while loading a tool or library: #{no_method_error.message}"
-        rescue ArgumentError => argument_error
-          raise UsageError.new "There was an ArgumentError while loading a tool or library: #{argument_error.message}"
-        end
+      required_attribute :file_target
+
+      def assign_defaults
+        # Maybe add a closure here?:
+        # Gem.post_install_hooks
+        #
+        # Also check here:
+        # Gem.pre_install_hooks
+
+        Gem.pre_install_hooks << proc {
+          puts "Gem PRE INSTALL HOOK"
+        }
         
-        @file_targets ||= []
-        @file_targets << target
-
-        target
+        Gem.post_install_hooks << proc {
+          puts "Gem POST INSTALL HOOK"
+        }
+        
+        self.rubyforge_project = 'sprout'
+        super
       end
 
-      def file_targets
-        @file_targets.dup
+      def file_target=(file)
+        @file_target = file
+        self.files << file
       end
 
     end
-
-    def self.included klass
-      klass.extend ClassMethods
-    end
-    
   end
 end
 

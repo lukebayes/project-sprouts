@@ -1,46 +1,29 @@
 require File.dirname(__FILE__) + '/test_helper'
 
+require 'rubygems/installer'
+
 class LibraryTest < Test::Unit::TestCase
   include SproutTestCase
 
   context "a new embedded library" do
+
     setup do
-      asunit = File.join(fixtures, 'library', 'asunit.rb')
-      require asunit
+      @asunit_gemspec = File.join(fixtures, 'library', 'asunit.gemspec')
     end
 
-    should "raise on unexpected args" do
-      assert_raises Sprout::UsageError do
-        class FooClass
-          include Sprout::Library
-          add_file_target :universal do |t|
-            t.add_file_target :a, :b, :c
-          end
-        end
-      end
-    end
+    should "still work with Gem::Builder" do
+      spec = Gem::Specification.load @asunit_gemspec
 
-    should "raise on unknown method" do
-      assert_raises Sprout::UsageError do
-        class FooClass
-          include Sprout::Library
-          add_file_target :universal do |t|
-            t.unknown_method_call
-          end
-        end
-      end
-    end
+      #builder = Gem::Builder.new spec
+      #file = builder.build
 
-    should "have exactly one file_target" do
-      assert_equal 1, FakeAsUnit.file_targets.size
-    end
+      #installer = Gem::Installer.new(file)
+      #installed_spec = installer.install
 
-    should "have exactly two libraries" do
-      target = FakeAsUnit.file_targets.first
-      assert_equal 2, target.libraries.size
+      #uninstaller = Gem::Uninstaller.new(file)
+      #uninstaller.uninstall
     end
 
   end
-
 end
 
