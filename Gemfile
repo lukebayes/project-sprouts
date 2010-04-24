@@ -19,7 +19,7 @@ group :test do
   gem "heckle"
   
   # rcov doesn't appear to install on
-  # debian. Boo. Ideas?
+  # debian/ubuntu. Boo. Ideas?
   if RUBY_PLATFORM =~ /darwin/i
     gem "rcov"
   end

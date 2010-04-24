@@ -7,6 +7,17 @@ require 'rake'
 require 'rake/clean'
 require 'rake/testtask'
 
+require 'rake/rdoctask'
+
+Rake::RDocTask.new do |rdoc|
+  rdoc.title = "Project Sprouts"
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.main = "Sprout::Sprout"
+  rdoc.rdoc_files.include("README.textile", "lib/**/*.rb")
+end
+
+CLEAN.add('rdoc')
+
 namespace :test do
   Rake::TestTask.new(:units) do |t|
     t.libs << "test/unit"
