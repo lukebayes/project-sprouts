@@ -4,13 +4,13 @@ class SproutTest < Test::Unit::TestCase
 
   context "usage error" do
     should "be instantiable" do
-      Sprout::UsageError.new
+      Sprout::Errors::UsageError.new
     end
   end
 
   context "standard error" do
     should "be instantiable" do
-      Sprout::SproutError.new
+      Sprout::Errors::SproutError.new
     end
   end
 

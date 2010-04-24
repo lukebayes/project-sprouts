@@ -54,7 +54,7 @@ class UserTest < Test::Unit::TestCase
       should "handle execution errors" do
         # Write to the fake error stream:
         @process.read_err.write "Forced Error For test"
-        assert_raises Sprout::ExecutionError do
+        assert_raises Sprout::Errors::ExecutionError do
           @user.execute @failure_exec
         end
       end

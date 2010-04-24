@@ -34,7 +34,7 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
     end
 
     should "raise on unknown file types" do
-      assert_raises Sprout::UnknownArchiveType do
+      assert_raises Sprout::Errors::UnknownArchiveType do
         @unpacker.unpack 'SomeUnknowFileType', temp_path
       end
     end
@@ -57,13 +57,13 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
         end
 
         should "fail with missing file" do
-          assert_raises Sprout::ArchiveUnpackerError do
+          assert_raises Sprout::Errors::ArchiveUnpackerError do
             @unpacker.unpack "SomeUnknownFile.#{format}", temp_path
           end
         end
 
         should "fail with missing destination" do
-          assert_raises Sprout::ArchiveUnpackerError do
+          assert_raises Sprout::Errors::ArchiveUnpackerError do
             @unpacker.unpack @archive_file, "SomeInvalidDestination"
           end
         end
@@ -89,7 +89,7 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
           expected_file = File.join temp_path, @file_name
           FileUtils.touch expected_file
 
-          assert_raises Sprout::DestinationExistsError do
+          assert_raises Sprout::Errors::DestinationExistsError do
             @unpacker.unpack @archive_file, temp_path, :no_clobber
           end
         end

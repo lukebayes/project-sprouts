@@ -19,7 +19,7 @@ module Sprout
       # Opinions welcome here...
       return copy_file(archive, destination, clobber)  if is_copyable?(archive)
 
-      raise UnknownArchiveType.new("Unsupported or unknown archive type encountered with: #{archive}")
+      raise Sprout::Errors::UnknownArchiveType.new("Unsupported or unknown archive type encountered with: #{archive}")
     end
 
     # Unpack zip archives on any platform.
@@ -40,7 +40,7 @@ module Sprout
 
       tar = Zlib::GzipReader.new(File.open(archive, 'rb'))
       if(!should_unpack_tgz?(destination, clobber))
-        raise DestinationExistsError.new "Unable to unpack #{archive} into #{destination} without explicit :clobber argument"
+        raise Sprout::Errors::DestinationExistsError.new "Unable to unpack #{archive} into #{destination} without explicit :clobber argument"
       end
 
       Archive::Tar::Minitar.unpack(tar, destination)
@@ -62,7 +62,7 @@ module Sprout
       validate file, destination
       target = File.expand_path( File.join(destination, File.basename(file)) )
       if(File.exists?(target) && clobber != :clobber)
-        raise DestinationExistsError.new "Unable to copy #{file} to #{target} because target already exists and we were not asked to :clobber it"
+        raise Sprout::Errors::DestinationExistsError.new "Unable to copy #{file} to #{target} because target already exists and we were not asked to :clobber it"
       end
       FileUtils.mkdir_p destination
       FileUtils.cp_r file, destination
@@ -114,12 +114,12 @@ module Sprout
 
     def validate_archive archive
       message = "Archive could not be found at: #{archive}"
-      raise ArchiveUnpackerError.new(message) if archive.nil? || !File.exists?(archive)
+      raise Sprout::Errors::ArchiveUnpackerError.new(message) if archive.nil? || !File.exists?(archive)
     end
 
     def validate_destination path
       message = "Archive destination could not be found at: #{path}"
-      raise ArchiveUnpackerError.new(message) if path.nil? || !File.exists?(path)
+      raise Sprout::Errors::ArchiveUnpackerError.new(message) if path.nil? || !File.exists?(path)
     end
 
     def unpack_zip_entry entry, destination, clobber
@@ -140,7 +140,7 @@ module Sprout
             FileUtils.rm_rf path
             entry.extract path
           else
-            raise DestinationExistsError.new zip_dest_error.message
+            raise Sprout::Errors::DestinationExistsError.new zip_dest_error.message
           end
         end
       end
