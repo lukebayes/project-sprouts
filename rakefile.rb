@@ -6,11 +6,12 @@ Bundler.setup
 require 'rake'
 require 'rake/clean'
 require 'rake/testtask'
-
 require 'rake/rdoctask'
 
+require File.dirname(__FILE__) + '/lib/sprout/version'
+
 Rake::RDocTask.new do |rdoc|
-  rdoc.title = "Project Sprouts"
+  rdoc.title = "Project Sprouts v.#{Sprout::VERSION}"
   rdoc.rdoc_dir = 'rdoc'
   rdoc.main = "Sprout::Sprout"
   rdoc.rdoc_files.include("README.textile", "lib/**/*.rb")

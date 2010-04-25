@@ -1,15 +1,26 @@
 
+require 'rubygems/installer'
+require 'fixtures/mock_gem_ui'
+
 # Had to make this a module instead of a base class
 # because the ruby test suite kept complaining that 
 # the abstract test case didn't have any test mehods
 # or assertions
 module SproutTestCase # :nodoc:[all]
 
+  # Gives us the ability to hide RubyGem output from
+  # our test results...
+  include Gem::DefaultUserInteraction
+
   def fixtures
     @fixtures ||= File.expand_path(File.join(File.dirname(__FILE__), '/../fixtures'))
   end
 
   def setup
+    @mock_gem_ui = MockGemUi.new
+    @start_path = Dir.pwd
+    temp_path # Call before someone can Dir.chdir...
+
     #Sprout::User.user = nil
   end
 
@@ -18,6 +29,10 @@ module SproutTestCase # :nodoc:[all]
     #Sprout::ProjectModel.destroy
     if(@temp_path && File.exists?(@temp_path))
       FileUtils.rm_rf(@temp_path)
+    end
+
+    if(Dir.pwd != @start_path)
+      Dir.chdir @start_path
     end
   end
 

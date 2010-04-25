@@ -12,7 +12,7 @@ require 'sprout/archive_unpacker'
 require 'sprout/file_target'
 
 # External Packager support:
-require 'sprout/library'
+require 'sprout/specification'
 require 'sprout/tool'
 
 module Sprout

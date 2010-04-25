@@ -6,6 +6,7 @@ require 'mocha'
 require 'shoulda'
 
 require File.dirname(__FILE__) + '/../../lib/sprout'
+$:.push File.dirname(__FILE__) + '/../'
 
 $:.push File.dirname(__FILE__)
 require 'fake_io'
