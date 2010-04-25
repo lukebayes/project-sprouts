@@ -8,8 +8,8 @@ module Sprout
   # precompiled libraries, and remote executables. It does all of 
   # this by (ab)using RubyGems.
   #
-  # It just so happens that RubyGems gives us the ability to
-  # version-manage, and distribute arbitrary payloads.
+  # RubyGems gives us the ability to version-manage, and distribute 
+  # arbitrary text and binary payloads.
   #
   # In order to support Flash development, we have one major problem
   # that RubyGems does not solve for us. This is the fact that 
@@ -19,22 +19,14 @@ module Sprout
   # has a license that restricts our ability to redistribute it.
   #
   # This restriction means that many of our tools and dependencies cannot be 
-  # packaged and distributed _directly_ within a RubyGem.
+  # packaged and distributed _directly_ within a RubyGem (or from
+  # any server other than Adobe's as a matter of fact).
   #
   # In order to overcome this restriction, we have introduced
-  # a new 
-  #
-  #
-  #
-  #
-  # In order to create the RubyGem, one would simply cd to the
-  # folder that has this specification file, and run:
-  #
-  #     gem build asunit4.gemspec
-  #
-  # Then, to release the gem to the public, simply run:
-  #
-  #     gem push asunit4-4.2.pre.gem
+  # a new Specification format that delegates most of it's work
+  # to RubyGem's Gem::Specification, but adds some features
+  # that make it possible for us to refer directly to bundled
+  # content, and refer to remote packages of content.
   #
   # To learn more about packaging RubyGems:
   #

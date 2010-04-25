@@ -1,6 +1,4 @@
 
-require File.dirname(__FILE__) + '/../../../lib/sprout/specification'
-
 Sprout::Specification.new do |s|
   s.name        = "asunit"
   s.version     = "4.2.pre"

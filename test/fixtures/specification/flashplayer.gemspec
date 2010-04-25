@@ -1,6 +1,4 @@
 
-require File.dirname(__FILE__) + '/../../../lib/sprout/library/specification'
-
 Sprout::Specification.new do |s|
   s.name        = "flashplayer"
   s.version     = "10.1.pre"
