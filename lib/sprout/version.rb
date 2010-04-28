@@ -1,5 +1,5 @@
 
 module Sprout
-  VERSION = "0.8.pre"
+  VERSION = "1.0.pre"
 end
 
