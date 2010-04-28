@@ -14,13 +14,13 @@ Gem::Specification.new do |s|
   s.summary     = "Flash development evolved"
   s.description = "Project Sprouts gives you access to simple generators with custom templates, beautiful build scripts, distributed libraries and automated system configuration"
   
-  s.post_install_message = "[add content here]"
+  s.post_install_message = "Welcome to Project Sprouts!\n\nIf you have any questions, or issues at all, please email us at: "
 
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "sprout" 
 
-  s.files        = Dir.glob("{bin,lib,test}/**/*") + %w(MIT-LICENSE README.textile CHANGELOG.md)
-  s.executables  = ['sprout']
+  s.files        = Dir.glob("{lib,test}/**/*") + %w(MIT-LICENSE README.textile CHANGELOG.md)
+  #s.executables  = ['sprout']
   s.require_path = 'lib'
 end
 
