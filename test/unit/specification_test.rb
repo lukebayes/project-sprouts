@@ -30,6 +30,9 @@ class SpecificationTest < Test::Unit::TestCase
           assert_file @asunit_gem
       end
 
+      should "include sprout.spec" do
+      end
+
       # TODO: unpack and verify contents of gem archive
       #should "include specified contents at ext/AsUnit.swc" do
       #end

@@ -3,7 +3,7 @@ Sprout::Specification.new do |s|
   s.name        = "flex4sdk"
   s.version     = "4.0.pre"
   s.author      = "Adobe, Inc."
-  s.email       = ["projectsprouts@googlegroups.com"]
+  s.email       = "projectsprouts@googlegroups.com"
   s.homepage    = "http://www.adobe.com/products/flex"
   s.summary     = "Adobe Flex 4 SDK including mxmlc, compc, asdoc, adl, adt, optimizer and fdb"
   s.description = "The Flex 4 SDK Rubygem is brought to you by Project Sprouts (http://projectsprouts.org)"
@@ -40,4 +40,5 @@ Sprout::Specification.new do |s|
     t.add_executable :optimizer, "bin/optimizer"
   end
 end
+
 
