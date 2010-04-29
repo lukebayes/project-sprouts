@@ -9,7 +9,7 @@ class SpecificationTest < Test::Unit::TestCase
       @fixture = File.expand_path(File.join(fixtures, 'specification'))
 
       @asunit_gemspec = File.join(@fixture, 'asunit4.gemspec')
-      @asunit_gem = File.join(@fixture, "asunit-4.2.pre.gem")
+      @asunit_gem = File.join(@fixture, "asunit4-4.2.pre.gem")
 
       @flexsdk_gemspec = File.join(@fixture, 'flex4sdk.gemspec')
       @flexsdk_gem = File.join(@fixture, 'flex4sdk-4.0.pre.gem')
@@ -20,6 +20,19 @@ class SpecificationTest < Test::Unit::TestCase
     teardown do
       remove_file @asunit_gem
       remove_file @flexsdk_gem
+    end
+
+    should "depend on sprout-1.0.pre" do
+      spec = Gem::Specification.load @asunit_gemspec
+      assert_equal 1, spec.runtime_dependencies.size
+      dependency = spec.runtime_dependencies[0]
+      assert_equal 'sprout', dependency.name
+      assert_equal '>= 1.0.pre', dependency.requirement.to_s
+    end
+
+    should "have the added files" do
+      spec = Gem::Specification.load @asunit_gemspec
+      assert_equal 1, spec.files.size
     end
 
     context "that is packaged with rubygems" do

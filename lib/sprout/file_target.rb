@@ -10,14 +10,18 @@ module Sprout
   #
   class FileTarget
 
-    attr_accessor :type
     attr_accessor :files
     attr_accessor :platform
+    attr_accessor :type
 
     def initialize
+      @files    = []
       @platform = :universal
-      @files = []
       yield self if block_given?
+    end
+
+    def to_s
+      "[FileTarget type=#{type} platform=#{platform} files=#{files.inspect}]"
     end
 
   end

@@ -1,6 +1,10 @@
+# -*- encoding: utf-8 -*-
+require 'rubygems'
+gem 'sprout', '>= 1.0.pre'
+require 'sprout'
 
 Sprout::Specification.new do |s|
-  s.name        = "asunit"
+  s.name        = "asunit4"
   s.version     = "4.2.pre"
   s.authors     = ["Luke Bayes", "Ali Mills", "Robert Penner"]
   s.email       = "asunit-users@lists.sourceforge.net"
@@ -12,7 +16,7 @@ Sprout::Specification.new do |s|
     t.type  = :swc
     # Array of relative paths to the files
     # that should be included:
-    t.files  = ["bin/AsUnit-4.1.pre.swc"]
+    t.files  = ["ext/AsUnit-4.1.pre.swc"]
   end
 
 end

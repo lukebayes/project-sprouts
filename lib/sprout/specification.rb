@@ -1,4 +1,3 @@
-
 require 'delegate'
 
 module Sprout
@@ -88,11 +87,10 @@ module Sprout
     #
     def initialize
       initialize_members
-      super(@gem_specification)
-      @gem_specification.required_rubygems_version = '>= 1.3.6'
+      super(@gem_spec)
+      initialize_gem_spec_members
       yield self if block_given?
-      # TODO: the included 'files' should get modified by the following expressions:
-      #included_files = FileList["**/*"].exclude /.DS_Store|generated|.svn|.git|airglobal.swc|airframework.swc/
+      post_initialize
     end
 
     # Add a remote file target to this RubyGem so that when it
@@ -120,7 +118,9 @@ module Sprout
     #     end
     #
     def add_file_target
-      @file_targets << FileTarget.new
+      @file_targets << FileTarget.new do |f|
+        yield f if block_given?
+      end
     end
 
     private
@@ -128,7 +128,23 @@ module Sprout
     def initialize_members
       @file_targets        = []
       @remote_file_targets = []
-      @gem_specification   = Gem::Specification.new
+      @gem_spec            = Gem::Specification.new
+    end
+
+    def initialize_gem_spec_members
+      self.rubyforge_project = 'sprout'
+      self.add_dependency 'sprout', '>= 1.0.pre'
+    end
+
+    def post_initialize
+      # TODO: the included 'files' should get modified by the following expressions:
+      #included_files = FileList["**/*"].exclude /.DS_Store|generated|.svn|.git|airglobal.swc|airframework.swc/
+      added = []
+      @file_targets.each do |target|
+        added << target.files
+      end
+      added.flatten!
+      self.files = added
     end
 
   end
