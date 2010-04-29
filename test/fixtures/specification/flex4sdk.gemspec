@@ -10,8 +10,12 @@ Sprout::Specification.new do |s|
 
   # TODO: Add license agreement to post_install hook
 
-  s.files       = FileList["flex4sdk/**/*"]
-
+  # Windows users need to reference a different set
+  # of executables from everyone else (.exe):
+  #
+  # This declaration needs to be before the :universal
+  # platform support, because the first viable match
+  # will be used.
   s.add_remote_file_target do |t|
     t.platform     = :win32
     t.archive_type = :zip
@@ -26,6 +30,8 @@ Sprout::Specification.new do |s|
     t.add_executable :optimizer, "bin/optimizer.exe"
   end
 
+  # All other platforms will simply refer to the 
+  # non-exe binaries:
   s.add_remote_file_target do |t|
     t.platform     = :universal
     t.archive_type = :zip
@@ -40,5 +46,4 @@ Sprout::Specification.new do |s|
     t.add_executable :optimizer, "bin/optimizer"
   end
 end
-
 

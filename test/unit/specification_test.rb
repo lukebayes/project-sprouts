@@ -7,13 +7,19 @@ class SpecificationTest < Test::Unit::TestCase
 
     setup do
       @fixture = File.expand_path(File.join(fixtures, 'specification'))
-      @asunit_gemspec = File.join(@fixture, 'asunit.gemspec')
+
+      @asunit_gemspec = File.join(@fixture, 'asunit4.gemspec')
       @asunit_gem = File.join(@fixture, "asunit-4.2.pre.gem")
+
+      @flexsdk_gemspec = File.join(@fixture, 'flex4sdk.gemspec')
+      @flexsdk_gem = File.join(@fixture, 'flex4sdk-4.0.pre.gem')
+
       Dir.chdir @fixture
     end
 
     teardown do
       remove_file @asunit_gem
+      remove_file @flexsdk_gem
     end
 
     context "that is packaged with rubygems" do
@@ -23,14 +29,16 @@ class SpecificationTest < Test::Unit::TestCase
           spec    = Gem::Specification.load @asunit_gemspec
           builder = Gem::Builder.new spec
           builder.build
+
+          spec    = Gem::Specification.load @flexsdk_gemspec
+          builder = Gem::Builder.new spec
+          builder.build
         end
       end
 
       should "build the gem archive" do
-          assert_file @asunit_gem
-      end
-
-      should "include sprout.spec" do
+        assert_file @asunit_gem
+        assert_file @flexsdk_gem
       end
 
       # TODO: unpack and verify contents of gem archive
