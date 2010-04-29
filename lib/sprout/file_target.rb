@@ -1,4 +1,3 @@
-require 'yaml'
 
 module Sprout
 
@@ -11,14 +10,16 @@ module Sprout
   #
   class FileTarget
 
-    attr_accessor :name
+    attr_accessor :type
     attr_accessor :files
     attr_accessor :platform
 
     def initialize
+      @platform = :universal
       @files = []
       yield self if block_given?
     end
- end
+
+  end
 end
 

@@ -9,7 +9,7 @@ Sprout::Specification.new do |s|
   s.description = "AsUnit is the only ActionScript unit test framework that supports every development and runtime environment that is currently available. This includes Flex 2, 3, 4, AIR 1 and 2, Flash Lite, and of course the Flash Authoring tool"
 
   s.add_file_target do |t|
-    t.name  = :swc
+    t.type  = :swc
     # Array of relative paths to the files
     # that should be included:
     t.files  = ["bin/AsUnit-4.1.pre.swc"]

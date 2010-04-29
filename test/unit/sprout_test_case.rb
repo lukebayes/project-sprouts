@@ -31,7 +31,7 @@ module SproutTestCase # :nodoc:[all]
       FileUtils.rm_rf(@temp_path)
     end
 
-    if(Dir.pwd != @start_path)
+    if(@start_path && Dir.pwd != @start_path)
       Dir.chdir @start_path
     end
   end
