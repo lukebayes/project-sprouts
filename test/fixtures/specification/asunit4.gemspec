@@ -1,7 +1,4 @@
 # -*- encoding: utf-8 -*-
-require 'rubygems'
-gem 'sprout', '>= 1.0.pre'
-require 'sprout'
 
 Sprout::Specification.new do |s|
   s.name        = "asunit4"
