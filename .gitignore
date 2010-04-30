@@ -1,5 +1,6 @@
 .svn
 .DS_Store
+*.gem
 pkg
 rdoc
 rdoc/**/**/*
