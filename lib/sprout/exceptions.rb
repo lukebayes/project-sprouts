@@ -32,6 +32,11 @@ module Sprout
     # The unpacked file was already found in the destination
     # directory and the ArchiveUnpacker was not asked to clobber.
     class DestinationExistsError < ArchiveUnpackerError; end
-    end
+
+    ##
+    # There was an error in ProcessRunner
+    class ProcessRunnerError < SproutError; end
+
+  end
 end
 

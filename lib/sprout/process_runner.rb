@@ -1,9 +1,6 @@
 
 module Sprout #:nodoc:
 
-  class ProcessRunnerError < StandardError # :nodoc:
-  end
-  
   # The ProcessRunner is a cross-platform wrapper for executing
   # external executable processes.
   #

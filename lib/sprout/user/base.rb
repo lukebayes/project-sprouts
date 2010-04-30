@@ -253,7 +253,7 @@ module Sprout::User
 
       begin
         return tilde_home
-      rescue StandardError => e
+      rescue StandardError
         worst_case_home
       end
     end

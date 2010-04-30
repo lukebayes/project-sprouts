@@ -132,8 +132,8 @@ module Sprout
     end
 
     def initialize_gem_spec_members
-      self.rubyforge_project = 'sprout'
-      self.add_dependency 'sprout', '>= 1.0.pre'
+      @gem_spec.rubyforge_project = 'sprout'
+      @gem_spec.add_dependency 'sprout', '>= 1.0.pre'
     end
 
     def post_initialize
