@@ -1,6 +1,7 @@
 require 'rake'
 
 # Core, Crossplatform support:
+require 'sprout/concern'
 require 'sprout/log'
 require 'sprout/exceptions'
 require 'sprout/platform'
