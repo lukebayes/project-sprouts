@@ -114,8 +114,12 @@ module Sprout::User
     # Threads are complicated - use with caution...
     #
     def execute_thread(tool, options='')
-      return Thread.new do
-        execute(tool, options)
+      if(Log.debug)
+         return ThreadMock.new
+      else
+        return Thread.new do
+          execute(tool, options)
+        end
       end
     end
 
@@ -204,6 +208,12 @@ module Sprout::User
       rescue StandardError
         worst_case_home
       end
+    end
+  end
+
+  class ThreadMock # :nodoc:
+    def alive?
+      return false
     end
   end
 end
