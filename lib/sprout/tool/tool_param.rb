@@ -55,8 +55,14 @@ module Sprout
     # Set the file_expression (blob) to append to each path
     # in order to build the prerequisites FileList.
     #
-    # Defaults to parent ToolTask.default_file_expression
+    # Defaults to parent Tool.default_file_expression
+    #
+    # NOTE: We should add support for file_expressionS
+    # since these are really just blobs that are sent
+    # to the FileList[expr] and that interface accepts
+    # an array.
     attr_writer :file_expression
+    
 
     # By default, ToolParams only appear in the shell
     # output when they are not nil
@@ -114,7 +120,7 @@ module Sprout
       value.to_s
     end
 
-    def file_expression # :nodoc:
+    def file_expression
       @file_expression ||= belongs_to.default_file_expression
     end
 
@@ -240,7 +246,9 @@ module Sprout
             writable.write(content)
           end
 
-          ToolTask::add_preprocessed_task(output_file)
+          # COMMENTED on: Sunday, May 2nd 2010:
+          # TODO: need to figure out preprocessing again:
+          #ToolTask::add_preprocessed_task(output_file)
         end
       end
       

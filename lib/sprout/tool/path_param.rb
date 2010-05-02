@@ -8,8 +8,11 @@ module Sprout
         if should_preprocess?
           @value = prepare_preprocessor_path(value)
         else
-          file value
-          belongs_to.prerequisites << value
+          files = FileList[value + file_expression]
+          files.each do |f|
+            file f
+            belongs_to.prerequisites << f
+          end
         end
       end
     end

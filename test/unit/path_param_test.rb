@@ -1,41 +1,37 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class PathsParamTest < Test::Unit::TestCase
+class PathParamTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "a new PathsParam" do
+  context "a new PathParam" do
 
     setup do
       @path1 = File.join(fixtures, 'tool', 'paths', 'folder1')
-      @path2 = File.join(fixtures, 'tool', 'paths', 'folder2')
-      @path3 = File.join(fixtures, 'tool', 'paths', 'folder3')
 
-      @param = Sprout::PathsParam.new
+      @param = Sprout::PathParam.new
       @param.belongs_to = FakeTool.new
-      @param.name = 'paths'
+      @param.name = 'path'
     end
 
     should "accept a collection of paths" do
-      @param.value << @path1
-      @param.value << @path2
-      @param.value << @path3
+      @param.value = @path1
 
-      assert_equal "-paths+=#{@path1} -paths+=#{@path2} -paths+=#{@path3}", @param.to_shell
+      assert_equal "-path=#{@path1}", @param.to_shell
       # All child files have been added as prerequisites:
-      assert_equal 6, @param.belongs_to.prerequisites.size
+      assert_equal 3, @param.belongs_to.prerequisites.size
     end
 
     should "accept a custom file expression" do
       @param.file_expression = "file2"
-      @param.value << @path1
-      assert_equal "-paths+=#{@path1}", @param.to_shell
+      @param.value = @path1
+      assert_equal "-path=#{@path1}", @param.to_shell
       # All child files have been added as prerequisites:
       assert_equal 1, @param.belongs_to.prerequisites.size
     end
 
     should "accept hidden_name parameter" do
       @param.hidden_name = true
-      @param.value << @path1
+      @param.value = @path1
       assert_equal @path1, @param.to_shell
       # All child files have been added as prerequisites:
       assert_equal 3, @param.belongs_to.prerequisites.size
@@ -43,4 +39,5 @@ class PathsParamTest < Test::Unit::TestCase
 
   end
 end
+
 
