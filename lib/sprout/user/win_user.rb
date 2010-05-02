@@ -10,15 +10,15 @@ module Sprout::User
     APPLICATION_DATA = "Application\ Data"
 
     def home
-      usr = super
-      if(usr.index "My Documents")
-        usr = File.dirname(usr)
+      path = super
+      if(path.include? "My Documents")
+        path = File.dirname(path)
       end
-      return usr
+      return path
     end
 
     def get_paths
-      return ENV['PATH'].split(';')
+      return env_path.split(';')
     end
 
     def library
@@ -42,6 +42,13 @@ module Sprout::User
     def format_application_name(name)
       return name.capitalize
     end
+
+    private
+
+    def env_path
+      ENV['PATH']
+    end
+
   end
 end
 
