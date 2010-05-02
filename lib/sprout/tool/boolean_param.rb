@@ -1,6 +1,6 @@
 module Sprout
   # Concrete param object for :boolean values
-  class BooleanParam < TaskParam # :nodoc:
+  class BooleanParam < ToolParam # :nodoc:
     attr_writer :show_on_false
     
     def visible?

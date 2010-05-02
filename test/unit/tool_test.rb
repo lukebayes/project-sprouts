@@ -52,7 +52,6 @@ class FakeTool
   add_param :string_param, :string
   add_param :strings_param, :strings 
   add_param :symbols_param, :symbols
-  add_param :task_param, :task
   add_param :urls_param, :urls
 
 end

@@ -16,7 +16,7 @@ module Sprout
   # their values as file task prerequisites. This is especially helpful when writing
   # rake tasks for Command Line Interface (CLI) compilers.
   #
-  class TaskParam
+  class ToolParam
     attr_accessor :belongs_to
     attr_accessor :description
     attr_accessor :hidden_name

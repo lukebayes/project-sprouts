@@ -1,7 +1,7 @@
 module Sprout
 
   # Concrete param object for :path values
-  class PathParam < TaskParam # :nodoc:
+  class PathParam < ToolParam # :nodoc:
 
     def prepare_prerequisites
       if(value && value != belongs_to.name.to_s)

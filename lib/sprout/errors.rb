@@ -38,8 +38,8 @@ module Sprout
     class ProcessRunnerError < SproutError; end
 
     ##
-    # An error in the ToolTask was encountered
-    class ToolTaskError < SproutError; end
+    # An error in the Tool was encountered
+    class ToolError < SproutError; end
   end
 end
 

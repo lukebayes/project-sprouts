@@ -1,6 +1,6 @@
 module Sprout
   # Concrete param object for collections of strings
-  class StringsParam < TaskParam # :nodoc:
+  class StringsParam < ToolParam # :nodoc:
 
     def value=(val)
       if(val.is_a?(String))
