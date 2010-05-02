@@ -2,8 +2,11 @@ require "rubygems"
 require "bundler"
 Bundler.setup(:default, :test)
 
-require 'mocha'
+# These require statments *must* be in this order:
+# http://bit.ly/bCC0Ew
+# Somewhat surprised they're not being required by Bundler...
 require 'shoulda'
+require 'mocha'
 
 require File.dirname(__FILE__) + '/../../lib/sprout'
 $:.push File.dirname(__FILE__) + '/../'

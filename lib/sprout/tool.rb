@@ -1,3 +1,5 @@
+require 'sprout/tool/parameter_factory'
+require 'sprout/tool/collection_param'
 require 'sprout/tool/tool_param'
 require 'sprout/tool/boolean_param'
 require 'sprout/tool/string_param'
@@ -133,26 +135,22 @@ module Sprout
         name = name.to_s
 
         # First ensure the named accessor doesn't yet exist...
-        if(param_hash[name])
+        if(parameter_hash_includes? name)
           raise Sprout::Errors::ToolError.new("Tool.add_param called with existing parameter name: #{name}")
         end
 
-        param = instantiate_parameter(type)
-
-        param.init do |p|
+        param = ParameterFactory.create type do |p|
           p.belongs_to = self
           p.name = name
           p.type = type
 
+          # Forward the parameter to the provided
+          # closure:
           block.call p unless block.nil?
         end
 
         param_hash[name] = param
         params << param
-      end
-
-      def instantiate_parameter type
-        return eval("#{type.to_s.capitalize}Param.new")
       end
 
       def parameter_hash_includes? name

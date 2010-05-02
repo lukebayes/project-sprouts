@@ -16,6 +16,24 @@ module Sprout
   # their values as file task prerequisites. This is especially helpful when writing
   # rake tasks for Command Line Interface (CLI) compilers.
   #
+  # ToolParams have a template method lifecycle that one should become
+  # familiar with before working with them directly.
+  #
+  # Depending on what you may do in subclasses, the lifecycle methods 
+  # should be called in the following order:
+  # 
+  # # initialize
+  # 
+  # # prepare
+  #
+  # # prepare_prerequisites
+  #
+  # # validate
+  #
+  # # visible?
+  #
+  # # to_shell
+  # 
   class ToolParam
     attr_accessor :belongs_to
     attr_accessor :description
@@ -40,14 +58,10 @@ module Sprout
     # Defaults to parent ToolTask.default_file_expression
     attr_writer :file_expression
 
-    def init
-      yield self if block_given?
-    end
-    
     # By default, ToolParams only appear in the shell
     # output when they are not nil
     def visible?
-      @visible ||= value
+      @visible ||= !value.nil?
     end
     
     def required?
@@ -56,7 +70,7 @@ module Sprout
     
     def validate
       if(required? && !visible?)
-        raise ToolTaskError.new("#{name} is required and must not be nil")
+        raise Sprout::Errors::ToolError.new("#{name} is required and must not be nil")
       end
     end
     
@@ -109,10 +123,14 @@ module Sprout
     # Return the name with a single leading dash
     # and underscores replaced with dashes
     def shell_name
-      @shell_name ||= prefix + name.split('_').join('-')
+      @shell_name ||= prefix + name.to_s.split('_').join('-')
     end
 
     def to_shell
+      validate
+
+      return '' if !visible?
+
       if(!@to_shell_proc.nil?)
         return @to_shell_proc.call(self)
       elsif(hidden_name?)
@@ -137,6 +155,10 @@ module Sprout
     end
 
     protected
+
+    def clean_path path
+      Sprout::User.create.clean_path path
+    end
     
     def should_preprocess?
       return preprocessable && !belongs_to.preprocessor.nil?
@@ -235,7 +257,7 @@ module Sprout
       if(error.size > 0)
         belongs_to.display_preprocess_message
         FileUtils.rm_rf(belongs_to.preprocessed_path)
-        raise ExecutionError.new("[ERROR] Preprocessor failed on file #{file_name} #{error}")
+        raise Sprout::Errors::ExecutionError.new("[ERROR] Preprocessor failed on file #{file_name} #{error}")
       end
       process.kill
       Log.puts ">> Preprocessed and created: #{belongs_to.preprocessed_path}/#{file_name}"

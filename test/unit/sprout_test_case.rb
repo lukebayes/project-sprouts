@@ -1,6 +1,7 @@
 
 require 'rubygems/installer'
 require 'fixtures/mock_gem_ui'
+require 'test/unit/fake_tool'
 
 # Had to make this a module instead of a base class
 # because the ruby test suite kept complaining that 
@@ -17,14 +18,14 @@ module SproutTestCase # :nodoc:[all]
   end
 
   def setup
+    super
     @mock_gem_ui = MockGemUi.new
     @start_path = Dir.pwd
     temp_path # Call before someone can Dir.chdir...
-
-    #Sprout::User.user = nil
   end
 
   def teardown
+    super
     clear_tasks
     #Sprout::ProjectModel.destroy
     if(@temp_path && File.exists?(@temp_path))
@@ -46,6 +47,11 @@ module SproutTestCase # :nodoc:[all]
       FileUtils.mkdir_p path
     end
     path
+  end
+
+  def as_a_unix_user
+    Sprout::User.stubs(:create).returns Sprout::User::Unix.new
+    yield if block_given?
   end
   
   def run_task(name)

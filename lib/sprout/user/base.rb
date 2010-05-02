@@ -172,15 +172,6 @@ module Sprout::User
     # system.
     #
     def clean_path(path)
-      repair_executable path
-
-      if(path.index(' '))
-        # Changed 2/26/2008 in attempt to support 
-        # ToolTask.PathsParam s that have spaces in the values
-        return path.split(' ').join('\ ')
-#        return %{'#{path}'}
-      end
-      return path
     end
 
     ##

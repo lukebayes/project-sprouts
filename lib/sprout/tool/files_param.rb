@@ -1,15 +1,17 @@
 module Sprout
 
   # Concrete param object for collections of files
-  class FilesParam < StringsParam # :nodoc:
+  class FilesParam < ToolParam
+    include CollectionParam
 
+    # The prepare method should be called
+    # after a parameter instance has been created,
+    # and configured, but before
+    # prepare_prerequisites and before to_shell
     def prepare
       super
-      usr = User.new
-      path = nil
-      value.each_index do |index|
-        path = value[index]
-        value[index] = usr.clean_path path
+      value.collect! do |path|
+        clean_path path
       end
     end
 
