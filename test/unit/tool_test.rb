@@ -9,28 +9,34 @@ class ToolTest < Test::Unit::TestCase
       @tool = FakeTool.new
     end
 
+    # TODO: Test each parameter type:
+
     should "accept boolean param" do
-      @tool.debug = true
-      assert @tool.debug
+      @tool.boolean_param = true
+      assert @tool.boolean_param
+      assert_equal "-boolean-param=true", @tool.to_shell
     end
 
     should "accept a string param" do
-      @tool.str = "abcd"
-      assert_equal "abcd", @tool.str
-      assert_equal "-str=abcd", @tool.to_shell
+      @tool.string_param = "string1"
+      assert_equal "string1", @tool.string_param
+      assert_equal "-string-param=string1", @tool.to_shell
     end
 
     should "accept strings param" do
-      @tool.strs << 'abcd'
-      @tool.strs << 'efgh'
-      @tool.source_path << 'lib'
+      @tool.strings_param << 'string1'
+      @tool.strings_param << 'string2'
 
-      assert_equal ['abcd', 'efgh'], @tool.strs
-      assert_equal "-str=abcd -strs+=abcd -strs+=efgh -debug=true -source-path+=lib", @tool.to_shell
+      assert_equal ['string1', 'string2'], @tool.strings_param
+      assert_equal "-strings-param+=string1 -strings-param+=string2", @tool.to_shell
     end
 
-    should "raise helpful error when treating collections like singles" do
-    end
+    # TODO: Ensure that file, files, path and paths
+    # validate the existence of the references.
+
+    # TODO: Ensure that a helpful error message is thrown
+    # when assignment operator is used on collection params
+
   end
 
 end
@@ -38,16 +44,16 @@ end
 class FakeTool
   include Sprout::Tool
 
-  add_param :str, :string
-  add_param :strs, :strings
-
-  add_param :debug, :boolean do |p|
-    p.description = "Set the debug flag"
-  end
-
-  add_param :source_path, :files do |p|
-    p.description = "Add files to the source path"
-  end
+  add_param :boolean_param, :boolean
+  add_param :file_param, :file
+  add_param :files_param, :files
+  add_param :path_param, :path
+  add_param :paths_param, :paths
+  add_param :string_param, :string
+  add_param :strings_param, :strings 
+  add_param :symbols_param, :symbols
+  add_param :task_param, :task
+  add_param :urls_param, :urls
 
 end
 

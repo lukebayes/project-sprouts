@@ -43,42 +43,19 @@ module Sprout
       # added using +add_param+.
       #
       def add_param(name, type, &block) # :yields: Sprout::TaskParam
-        name = name.to_s
-
-        # First ensure the named accessor doesn't yet exist...
-        if(param_hash[name])
-          raise Sprout::Errors::ToolTaskError.new("TaskBase.add_param called with existing parameter name: #{name}")
-        end
-
-        param = create_param(type)
-
-        param.init do |p|
-          p.belongs_to = self
-          p.name = name
-          p.type = type
-          yield p if block_given?
-        end
-
-        param_hash[name] = param
-        params << param
+        parameter_definitions << { :name => name, :type => type, :block => block }
       end
 
-      def param_hash
-        @param_hash ||= {}
-      end
-
-      # An Array of all parameters that have been added to this Tool.
-      def params
-        @params ||= []
-      end
-
-      def create_param(type)
-        return eval("#{type.to_s.capitalize}Param.new")
+      def parameter_definitions
+        @parameter_definitions ||= []
       end
       
     end
 
     module InstanceMethods
+
+      attr_reader :param_hash
+      attr_reader :params
 
       def initialize
         super
@@ -87,6 +64,9 @@ module Sprout
         @appended_args     = nil
         @default_gem_name  = nil
         @default_gem_path  = nil
+        @param_hash        = {}
+        @params            = []
+        initialize_parameters
         initialize_task
       end
 
@@ -96,7 +76,7 @@ module Sprout
 
         result = []
         result << @prepended_args unless @prepended_args.nil?
-        self.class.params.each do |param|
+        params.each do |param|
           if(param.visible?)
             result << param.to_shell
           end
@@ -112,7 +92,7 @@ module Sprout
       def respond_to?(name)
         result = super
         if(!result)
-          result = self.class.param_hash.has_key? name.to_s
+          result = parameter_hash_includes?(name)
         end
         return result
       end
@@ -125,7 +105,7 @@ module Sprout
           raise NoMethodError.new("undefined method '#{name}' for #{self.class}", name)
         end
 
-        param = self.class.param_hash[cleaned]
+        param = parameter_by_name(cleaned)
 
         matched = name =~ /=$/
         if(matched)
@@ -142,8 +122,52 @@ module Sprout
       def initialize_task
       end
 
+      def initialize_parameters
+        self.class.parameter_definitions.each do |options|
+          create_parameter options
+        end
+      end
+
+      def create_parameter(options)
+        name = options[:name]
+        type = options[:type]
+        block = options[:block]
+
+        name = name.to_s
+
+        # First ensure the named accessor doesn't yet exist...
+        if(param_hash[name])
+          raise Sprout::Errors::ToolTaskError.new("TaskBase.add_param called with existing parameter name: #{name}")
+        end
+
+        param = instantiate_parameter(type)
+
+        param.init do |p|
+          p.belongs_to = self
+          p.name = name
+          p.type = type
+
+          block.call p unless block.nil?
+        end
+
+        param_hash[name] = param
+        params << param
+      end
+
+      def instantiate_parameter(type)
+        return eval("#{type.to_s.capitalize}Param.new")
+      end
+
+      def parameter_hash_includes? name
+        param_hash.has_key? name.to_s
+      end
+
+      def parameter_by_name name
+        param_hash[name]
+      end
+
       def validate
-        self.class.params.each do |param|
+        params.each do |param|
           param.validate
         end
       end
