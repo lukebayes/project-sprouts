@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/test_helper'
 class WinNixUserTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "new windows xp user" do
+  context "new windows nix (cygwin/mingw) user" do
 
     setup do
       @user = Sprout::User::WinNixUser.new
