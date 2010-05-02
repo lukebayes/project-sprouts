@@ -13,18 +13,6 @@ module Sprout::User
   #
   class BaseUser
 
-    def initialize
-      setup_user
-      @home = nil
-    end
-    
-    ##
-    # A template method that subclasses can use to configure
-    # default values during instantiation.
-    #
-    def setup_user
-    end
-
     ##
     # Get the home path for a user on a particular operating system.
     #
@@ -90,7 +78,7 @@ module Sprout::User
     # Raises a +Sprout::Errors::ExecutionError+ if the process writes to stderr
     #
     def execute(tool, options='')
-      Sprout::Log.puts(">> Execute: #{File.basename(tool)} #{options}")
+      Sprout::Log.puts(">> Execute: #{tool} #{options}")
       tool   = clean_path(tool)
       runner = get_and_execute_process_runner(tool, options)
       error  = runner.read_err
@@ -132,34 +120,6 @@ module Sprout::User
     end
 
     ##
-    # Repair Windows Line endings
-    # found in non-windows executables
-    # (Flex SDK is regularly published
-    # with broken CRLFs)
-    #
-    # +path+ String path to the executable file.
-    #
-    def repair_executable(path)
-      return unless should_repair_executable(path)
-
-      content = File.read(path)
-      if(content.match(/\r\n/))
-        content.gsub!(/\r\n/, "\n")
-        File.open(path, 'w+') do |f|
-          f.write content
-        end
-      end
-    end
-
-    ##
-    # Determine if we should call +repair_executable+
-    # for the file at the provided +path+ String.
-    #
-    def should_repair_executable(path)
-      return (File.exists?(path) && !File.directory?(path) && File.read(path).match(/^\#\!/))
-    end
-
-    ##
     # Clean the provided +path+ String for the current
     # operating system.
     #
@@ -189,14 +149,11 @@ module Sprout::User
     end
 
     ##
-    # Ensure Application +name+ String begins with a dot (.), and does
-    # not include spaces.
+    # Template method that should be overridden by
+    # subclasses.
     #
     def format_application_name(name)
-      if(name.index('.') != 0)
-        name = '.' + name
-      end
-      return name.split(" ").join("_").downcase
+      name
     end
 
     protected
@@ -250,30 +207,4 @@ module Sprout::User
     end
   end
 end
-
-
-=begin
-  # Possibly not used?
-    def get_exe_path(executable)
-      paths = get_paths
-      file = nil
-      paths.each do |path|
-        file = File.join(path, executable)
-        if(File.exists?(file))
-          return file
-        end
-      end
-      return nil
-    end
-
-    def in_path?(executable)
-      return !get_exe_path(executable).nil?
-    end
-
-    def get_paths
-      return ENV['PATH'].split(':')
-    end
-
-=end
-
 

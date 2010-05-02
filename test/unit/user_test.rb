@@ -140,6 +140,5 @@ class UserTest < Test::Unit::TestCase
     end
 
   end
-
 end
 
