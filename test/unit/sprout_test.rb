@@ -2,21 +2,29 @@ require File.dirname(__FILE__) + '/test_helper'
 
 class SproutTest < Test::Unit::TestCase
 
-  context "usage error" do
-    should "be instantiable" do
-      Sprout::Errors::UsageError.new
+  context "With Sprout Errors" do
+    include Sprout::Errors
+
+    [
+      ArchiveUnpackerError,
+      DestinationExistsError,
+      ExecutionError, 
+      ProcessRunnerError,
+      SproutError, 
+      ToolError,
+      UnknownArchiveType,
+      UsageError 
+    ].each do |error|
+
+      should "be able to instiate a #{error.to_s}" do
+        error.new
+      end
     end
   end
 
-  context "standard error" do
-    should "be instantiable" do
-      Sprout::Errors::SproutError.new
-    end
-  end
-
-  context "base" do
-    should "be instantiable" do
-      Sprout::Base.new
+  context "With Sprout base" do
+    should "be able to instantiate it" do
+      base = Sprout::Base.new
     end
   end
 

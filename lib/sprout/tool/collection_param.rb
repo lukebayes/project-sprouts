@@ -12,7 +12,7 @@ module Sprout
 
     # Assign the value and raise if 
     def value=(val)
-      if(!val.is_a?(Enumerable))
+      if(val.is_a?(String) || !val.is_a?(Enumerable))
         message = "The #{name} property is an Enumerable. It looks like you may have used the assignment operator (=) where the append operator (<<) was expected."
         raise Sprout::Errors::ToolError.new(message)
       end
