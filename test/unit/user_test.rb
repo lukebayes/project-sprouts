@@ -7,7 +7,7 @@ class UserTest < Test::Unit::TestCase
     context variant do
       should "create a Win User" do
         Sprout::Platform.any_instance.stubs(:ruby_platform).returns variant
-        assert Sprout::User.create.is_a?(Sprout::User::Win)
+        assert Sprout::User.create.is_a?(Sprout::User::WinUser)
       end
     end
   end
@@ -16,8 +16,8 @@ class UserTest < Test::Unit::TestCase
     context variant do
       should "create a WinNix User" do
         Sprout::Platform.any_instance.stubs(:ruby_platform).returns variant
-        assert Sprout::User.create.is_a?(Sprout::User::WinNix)
-        assert Sprout::User.create.is_a?(Sprout::User::Win)
+        assert Sprout::User.create.is_a?(Sprout::User::WinNixUser)
+        assert Sprout::User.create.is_a?(Sprout::User::WinUser)
       end
     end
   end
@@ -25,8 +25,8 @@ class UserTest < Test::Unit::TestCase
   context "vista" do
     should "create a Vista User" do
       Sprout::Platform.any_instance.stubs(:ruby_platform).returns "vista"
-      assert Sprout::User.create.is_a?(Sprout::User::Vista)
-      assert Sprout::User.create.is_a?(Sprout::User::Win)
+      assert Sprout::User.create.is_a?(Sprout::User::VistaUser)
+      assert Sprout::User.create.is_a?(Sprout::User::WinUser)
     end
   end
 
@@ -36,7 +36,7 @@ class UserTest < Test::Unit::TestCase
       setup do
         @success_exec = File.join(fixtures, 'process_runner', 'success')
         @failure_exec = File.join(fixtures, 'process_runner', 'failure')
-        @user = Sprout::User::Unix.new
+        @user = Sprout::User::UnixUser.new
         @process = FakeProcessRunner.new
         # Allows this test to run on Windows:
         @user.stubs(:get_process_runner).returns @process
@@ -44,7 +44,7 @@ class UserTest < Test::Unit::TestCase
       
       should "create a Unix User" do
         Sprout::Platform.any_instance.stubs(:ruby_platform).returns variant
-        assert Sprout::User.create.is_a?(Sprout::User::Unix)
+        assert Sprout::User.create.is_a?(Sprout::User::UnixUser)
       end
       
       should "execute external processes" do
@@ -64,21 +64,21 @@ class UserTest < Test::Unit::TestCase
   context "osx" do
     should "create an OSX User" do
       Sprout::Platform.any_instance.stubs(:ruby_platform).returns "darwin"
-      assert Sprout::User.create.is_a?(Sprout::User::OSX)
+      assert Sprout::User.create.is_a?(Sprout::User::OSXUser)
     end
   end
 
   context "java" do
     should "create a Java User" do
       Sprout::Platform.any_instance.stubs(:ruby_platform).returns "java"
-      assert Sprout::User.create.is_a?(Sprout::User::Java)
+      assert Sprout::User.create.is_a?(Sprout::User::JavaUser)
     end
   end
 
   context "any user" do
 
     setup do
-      @user = Sprout::User::Unix.new
+      @user = Sprout::User::UnixUser.new
     end
 
     context "library path" do

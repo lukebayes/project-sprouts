@@ -11,7 +11,7 @@ module Sprout::User
   # a concrete user that matches your system, and these concrete
   # users will generally be derived from this base class.
   #
-  class Base
+  class BaseUser
 
     def initialize
       setup_user

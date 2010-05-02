@@ -10,7 +10,7 @@ module Sprout::User
   # is that we get to use real processes,
   # rather than the broken processes that
   # windows normally offers.
-  class WinNix < Win
+  class WinNixUser < WinUser
   end
 end
 

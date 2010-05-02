@@ -1,10 +1,10 @@
-require 'sprout/user/base'
-require 'sprout/user/unix'
-require 'sprout/user/java'
-require 'sprout/user/osx'
-require 'sprout/user/win'
-require 'sprout/user/win_nix'
-require 'sprout/user/vista'
+require 'sprout/user/base_user'
+require 'sprout/user/unix_user'
+require 'sprout/user/java_user'
+require 'sprout/user/osx_user'
+require 'sprout/user/win_user'
+require 'sprout/user/win_nix_user'
+require 'sprout/user/vista_user'
 
 module Sprout
 
@@ -22,12 +22,12 @@ module Sprout
     #
     def self.create
       p = Platform.new
-      return Vista.new  if p.vista?
-      return WinNix.new if p.windows_nix?
-      return Win.new    if p.windows?
-      return Java.new   if p.java?
-      return OSX.new    if p.mac?
-      return Unix.new 
+      return VistaUser.new  if p.vista?
+      return WinNixUser.new if p.windows_nix?
+      return WinUser.new    if p.windows?
+      return JavaUser.new   if p.java?
+      return OSXUser.new    if p.mac?
+      return UnixUser.new 
     end
 
   end

@@ -50,7 +50,7 @@ module SproutTestCase # :nodoc:[all]
   end
 
   def as_a_unix_user
-    Sprout::User.stubs(:create).returns Sprout::User::Unix.new
+    Sprout::User.stubs(:create).returns Sprout::User::UnixUser.new
     yield if block_given?
   end
   

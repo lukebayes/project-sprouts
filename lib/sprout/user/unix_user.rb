@@ -1,7 +1,7 @@
 
 module Sprout::User
 
-  class Unix < Base
+  class UnixUser < BaseUser
 
     def clean_path path
       repair_executable path

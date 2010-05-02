@@ -1,7 +1,7 @@
 
 module Sprout::User
 
-  class OSX < Unix
+  class OSXUser < UnixUser
 
   end
 end

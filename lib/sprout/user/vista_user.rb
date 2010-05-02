@@ -1,7 +1,7 @@
 
 module Sprout::User
 
-  class Vista < Win
+  class VistaUser < WinUser
   end
 end
 
