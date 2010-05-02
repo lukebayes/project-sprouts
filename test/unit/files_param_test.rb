@@ -36,17 +36,19 @@ class FilesParamTest < Test::Unit::TestCase
       @param.value << @input3
       @param.value << @input2
       @param.value << @input1
-      @param.prepare
       
       assert_equal "-inputs+=#{@input3} -inputs+=#{@input2} -inputs+=#{@input1}", @param.to_shell
     end
 
     should "defer to to_shell_proc if provided" do
       @param.to_shell_proc = Proc.new { |param|
-        "proc:#{param.name}"
+        "proc:#{param.name}:#{param.value.shift}"
       }
 
-      assert_equal 'proc:inputs', @param.to_shell
+      @param.value << 'abcd'
+
+      assert "Should be visible", @param.visible?
+      assert_equal 'proc:inputs:abcd', @param.to_shell
     end
 
   end

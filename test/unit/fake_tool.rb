@@ -7,6 +7,10 @@ class FakeTool
     @name = 'fake_tool'
   end
 
+  def default_file_expression
+    @default_file_expression ||= '/**/**/*'
+  end
+
   def prerequisites
     @prerequisites ||= []
   end

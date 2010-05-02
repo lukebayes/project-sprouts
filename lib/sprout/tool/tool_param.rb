@@ -61,7 +61,7 @@ module Sprout
     # By default, ToolParams only appear in the shell
     # output when they are not nil
     def visible?
-      @visible ||= !value.nil?
+      !value.nil?
     end
     
     def required?
@@ -76,6 +76,11 @@ module Sprout
     
     def prepare
       prepare_prerequisites
+      @prepared = true
+    end
+
+    def prepared?
+      @prepared
     end
     
     def prepare_prerequisites
@@ -127,19 +132,13 @@ module Sprout
     end
 
     def to_shell
+      prepare if !prepared?
       validate
-
       return '' if !visible?
-
-      if(!@to_shell_proc.nil?)
-        return @to_shell_proc.call(self)
-      elsif(hidden_name?)
-        return shell_value
-      elsif(hidden_value?)
-        return shell_name
-      else
-        return "#{shell_name}#{delimiter}#{shell_value}"
-      end
+      return @to_shell_proc.call(self) unless @to_shell_proc.nil?
+      return shell_value if hidden_name?
+      return shell_name if hidden_value?
+      return "#{shell_name}#{delimiter}#{shell_value}"
     end
     
     # Create a string that can be turned into a file

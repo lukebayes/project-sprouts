@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/test_helper'
 class FileParamTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "a new, simple FileParam" do
+  context "a new FileParam" do
 
     setup do
       @input_with_spaces = File.join(fixtures, "tool", "path with spaces", "input.as")
@@ -40,11 +40,25 @@ class FileParamTest < Test::Unit::TestCase
       assert_equal 1, @tool.prerequisites.size
     end
 
+    should "not add prerequisite that matches name of parent" do
+      @tool.name = :abcd
+      @param.value = "abcd"
+      @param.prepare
+      assert_equal 0, @tool.prerequisites.size
+    end
+
     should "raise if the file doesn't exist when asked for output" do
       @param.value = 'unknown file'
       assert_raises Sprout::Errors::ToolError do
         @param.to_shell
       end
+    end
+
+    should "preprocess if necessary" do
+      @param.stubs(:should_preprocess?).returns true
+      @param.stubs(:validate).returns nil
+      @param.expects(:prepare_preprocessor_file).returns 'abcd'
+      assert_equal '-input=abcd', @param.to_shell
     end
   end
 end

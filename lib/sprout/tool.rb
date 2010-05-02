@@ -14,6 +14,8 @@ require 'sprout/tool/urls_param'
 module Sprout
 
   module Tool
+    DEFAULT_FILE_EXPRESSION = '/**/**/*'
+
     extend Concern
 
     module ClassMethods
@@ -117,6 +119,10 @@ module Sprout
         else
           raise Sprout::Errors::ToolError.new("method_missing called with undefined parameter [#{name}]")
         end
+      end
+
+      def default_file_expression
+        @default_file_expression ||= Sprout::Tool::DEFAULT_FILE_EXPRESSION
       end
 
       protected

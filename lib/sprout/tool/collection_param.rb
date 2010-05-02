@@ -27,8 +27,7 @@ module Sprout
     # Hide the collection param if no items
     # have been added to it.
     def visible?
-      return false if value.size == 0
-      super
+      (!value.nil? && value.size > 0)
     end
 
     # Default delimiter is +=
@@ -40,11 +39,14 @@ module Sprout
     
     # Returns a shell formatted string of the collection
     def to_shell
-      return @to_shell_proc.call(self) if(!@to_shell_proc.nil?)
-
-      value.collect { |val|
-        "#{shell_name}#{delimiter}#{val}"
-      }.join(' ')
+      prepare if !prepared?
+      validate
+      return '' if !visible?
+      return @to_shell_proc.call(self) unless @to_shell_proc.nil?
+      return value.join(' ') if hidden_name?
+      return value.collect { |val|
+          "#{shell_name}#{delimiter}#{val}"
+        }.join(' ')
     end
   end
 end
