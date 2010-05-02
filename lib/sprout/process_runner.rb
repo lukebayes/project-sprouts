@@ -122,7 +122,7 @@ module Sprout #:nodoc:
       rescue Errno::ENOENT => e
         @alive = false
         part = command[0].split(' ').shift
-        raise ProcessRunnerError.new("The expected executable was not found for command [#{part}], please check your system path and/or sprout definition")
+        raise Sprout::Errors::ProcessRunnerError.new("The expected executable was not found for command [#{part}], please check your system path and/or sprout definition")
       end
     end
 

@@ -37,6 +37,9 @@ module Sprout
     # There was an error in ProcessRunner
     class ProcessRunnerError < SproutError; end
 
+    ##
+    # An error in the ToolTask was encountered
+    class ToolTaskError < SproutError; end
   end
 end
 

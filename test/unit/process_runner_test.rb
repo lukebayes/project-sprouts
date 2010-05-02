@@ -79,7 +79,7 @@ class ProcessRunnerTest < Test::Unit::TestCase
 
     context "an unknown process" do
       should "raise an exception if the executable doesn't exist" do
-        assert_raise Sprout::ProcessRunnerError do 
+        assert_raise Sprout::Errors::ProcessRunnerError do 
           @runner.stubs(:open4_popen4_block).raises Errno::ENOENT
           @runner.execute_open4('SomeUnknownExecutableThatCantBeInYourPath', '--some-arg true --other-arg false')
         end
