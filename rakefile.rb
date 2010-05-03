@@ -66,6 +66,21 @@ namespace :test do
     task :flog do
       puts "--------------------------"
       puts "Flog Report:"
+      message =<<EOM
+According to Jake Scruggs at: http://bit.ly/3QrvW
+
+Score of    Means
+0-10        Awesome
+11-20       Good enough
+21-40       Might need refactoring
+41-60       Possible to justify
+61-100      Danger
+100-200     Whoop, whoop, whoop
+200 +       Someone please think of the children
+EOM
+      puts message
+      puts ""
+
       sh "find lib -name '*.rb' | xargs flog"
     end
 
