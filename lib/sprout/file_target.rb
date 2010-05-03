@@ -6,7 +6,8 @@ module Sprout
   # File targets are files that are embedded into (or referred to by) a RubyGem in such a way 
   # that Sprouts can use them as a library or executable.
   #
-  # File targets can be universally useful, or they can be configured for a particular platform.
+  # A given FileTarget may be configured to work on a specific platform, or it may be
+  # universal.
   #
   class FileTarget
 
@@ -25,11 +26,28 @@ module Sprout
       @files       = cleanup_files @files
     end
 
+    ##
+    # Add a library to the RubyGem package.
+    # 
+    # @name Symbol that will be used to retrieve this library later.
+    # @target File or Array of files that will be associated with this
+    # library and copied to the target lib.
+    #
+    # If the target is a directory, all files forward of that directory
+    # will be copied into the RubyGem.
+    # 
     def add_library name, target
       libraries << { :name => name, :target => target }
       files << target
     end
 
+    ##
+    # Add an executable to the RubyGem package.
+    #
+    # @name Symbol that will be used to retrieve this executable later.
+    # @target The relative path to the executable that will be associated
+    # with this name.
+    #
     def add_executable name, target
       executables << { :name => name, :target => target }
       files << target

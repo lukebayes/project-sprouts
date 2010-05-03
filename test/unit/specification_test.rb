@@ -32,7 +32,11 @@ class SpecificationTest < Test::Unit::TestCase
 
     should "have the added files" do
       spec = Gem::Specification.load @asunit_spec
-      assert_equal 3, spec.files.size
+      files = spec.files.dup
+      assert_equal 3, files.size
+      assert_equal 'src/AsUnit.as', files.shift
+      assert_equal 'lib/as3reflection/Reflection.as', files.shift
+      assert_equal 'ext/AsUnit-4.1.pre.swc', files.shift
     end
 
     context "that is packaged with rubygems" do
