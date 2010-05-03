@@ -8,10 +8,10 @@ class SpecificationTest < Test::Unit::TestCase
     setup do
       @fixture = File.expand_path(File.join(fixtures, 'specification'))
 
-      @asunit_gemspec = File.join(@fixture, 'asunit4.gemspec')
+      @asunit_spec = File.join(@fixture, 'asunit4.spec')
       @asunit_gem = File.join(@fixture, "asunit4-4.2.pre.gem")
 
-      @flexsdk_gemspec = File.join(@fixture, 'flex4sdk.gemspec')
+      @flexsdk_spec = File.join(@fixture, 'flex4sdk.spec')
       @flexsdk_gem = File.join(@fixture, 'flex4sdk-4.0.pre.gem')
 
       Dir.chdir @fixture
@@ -23,7 +23,7 @@ class SpecificationTest < Test::Unit::TestCase
     end
 
     should "depend on sprout-1.0.pre" do
-      spec = Gem::Specification.load @asunit_gemspec
+      spec = Gem::Specification.load @asunit_spec
       assert_equal 1, spec.runtime_dependencies.size
       dependency = spec.runtime_dependencies[0]
       assert_equal 'sprout', dependency.name
@@ -31,7 +31,7 @@ class SpecificationTest < Test::Unit::TestCase
     end
 
     should "have the added files" do
-      spec = Gem::Specification.load @asunit_gemspec
+      spec = Gem::Specification.load @asunit_spec
       assert_equal 1, spec.files.size
     end
 
@@ -39,11 +39,11 @@ class SpecificationTest < Test::Unit::TestCase
 
       setup do
         use_ui @mock_gem_ui do
-          spec    = Gem::Specification.load @asunit_gemspec
+          spec    = Gem::Specification.load @asunit_spec
           builder = Gem::Builder.new spec
           builder.build
 
-          spec    = Gem::Specification.load @flexsdk_gemspec
+          spec    = Gem::Specification.load @flexsdk_spec
           builder = Gem::Builder.new spec
           builder.build
         end

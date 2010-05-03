@@ -38,28 +38,28 @@ module Sprout
   # http://rubygems.org/pages/gem_docs
   #
   # To package a SWC library into a Sprout RubyGem, you would create a file (usually)
-  # named [project_name.gemspec] in the root of the project.
+  # named [project_name.spec] in the root of the project.
   #
   # == Example: Include a file directly in the RubyGem
   #
-  # In the case of AsUnit, this file would be named asunit4.gemspec and it's contents
+  # In the case of AsUnit, this file would be named asunit4.spec and it's contents
   # are as follows:
   #
-  #    :include:../../test/fixtures/specification/asunit4.gemspec
+  #    :include:../../test/fixtures/specification/asunit4.spec
   #
   # == Example: Refer to files that are not in the RubyGem
   #
   # For projects like the Flex SDK, we can't distribute many of the required files,
   # so we can refer to these files in our Sprout::Specification as +remote_file_targets+.
   #
-  #    :include:../../test/fixtures/specification/flex4sdk.gemspec
+  #    :include:../../test/fixtures/specification/flex4sdk.spec
   #
   # == Example: Create custom downloads for each supported platform
   #
   # For projects like the Flash Player itself, we need to refer to different 
   # downloadable content for each supported platform.
   #
-  #    :include:../../test/fixtures/specification/flashplayer.gemspec
+  #    :include:../../test/fixtures/specification/flashplayer.spec
   #
   #
   # == Packaging and Sharing
@@ -69,10 +69,10 @@ module Sprout
   # If you create a Sprout::Specification, you can build a
   # gem and push it to any gem host (by default rubygems.org).
   #
-  # Assuming you have a gemspec named, +asunit4.gemspec+, you could
+  # Assuming you have a spec named, +asunit4.spec+, you could
   # do the following to package and publish that RubyGem:
   #
-  #    gem build asunit4.gemspec # The file you write
+  #    gem build asunit4.spec # The file you write
   #    gem push asunit4-4.1.pre.gem # The file that was built
   #
   class Specification < DelegateClass(Gem::Specification)
@@ -100,7 +100,9 @@ module Sprout
     # the provided block and added to a collection for packaging.
     #
     def add_remote_file_target
-      @remote_file_targets << RemoteFileTarget.new
+      @remote_file_targets << RemoteFileTarget.new do |r|
+        yield r if block_given?
+      end
     end
 
     # Add a file to the RubyGem itself. This is a great way to package smallish libraries in either

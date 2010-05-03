@@ -7,16 +7,15 @@ module Sprout
     attr_accessor :url
     attr_accessor :md5
 
-    attr_reader :resources
+    attr_reader :executables
 
     def initialize
-      @resources = []
+      @executables = []
       super
    end
 
-    def add_resource name, target
-      puts "add resource: #{name} target: #{target}"
-      resources << { :name => name, :target => target }
+    def add_executable name, target
+      executables << { :name => name, :target => target }
     end
   end
 end

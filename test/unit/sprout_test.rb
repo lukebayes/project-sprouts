@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/test_helper'
 
 class SproutTest < Test::Unit::TestCase
 
-  context "With Sprout Errors" do
+  context "Ensure each error can be instantiated" do
     include Sprout::Errors
 
     [
@@ -19,12 +19,6 @@ class SproutTest < Test::Unit::TestCase
       should "be able to instiate a #{error.to_s}" do
         error.new
       end
-    end
-  end
-
-  context "With Sprout base" do
-    should "be able to instantiate it" do
-      base = Sprout::Base.new
     end
   end
 
