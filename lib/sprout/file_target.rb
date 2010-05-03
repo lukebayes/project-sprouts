@@ -10,18 +10,48 @@ module Sprout
   #
   class FileTarget
 
-    attr_accessor :files
     attr_accessor :platform
-    attr_accessor :type
+    attr_accessor :files
+
+    attr_reader :executables
+    attr_reader :libraries
 
     def initialize
-      @files    = []
-      @platform = :universal
+      @executables = []
+      @libraries   = []
+      @files       = []
+      @platform    = :universal
       yield self if block_given?
+      @files       = cleanup_files @files
+    end
+
+    def add_library name, target
+      libraries << { :name => name, :target => target }
+      files << target
+    end
+
+    def add_executable name, target
+      executables << { :name => name, :target => target }
+      files << target
     end
 
     def to_s
       "[FileTarget type=#{type} platform=#{platform} files=#{files.inspect}]"
+    end
+
+    private
+
+    def cleanup_files files
+      new_files = []
+      updated = files.flatten
+      updated.each do |file|
+        if(File.directory?(file))
+          new_files.concat FileList["#{file}/**/*"].to_a
+        else
+          new_files << file
+        end
+      end
+      new_files
     end
 
   end

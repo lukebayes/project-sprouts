@@ -32,7 +32,7 @@ class SpecificationTest < Test::Unit::TestCase
 
     should "have the added files" do
       spec = Gem::Specification.load @asunit_spec
-      assert_equal 1, spec.files.size
+      assert_equal 3, spec.files.size
     end
 
     context "that is packaged with rubygems" do

@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 
 Sprout::Specification.new do |s|
   s.name        = "asunit4"
@@ -15,10 +14,8 @@ Sprout::Specification.new do |s|
 EOS
 
   s.add_file_target do |t|
-    t.type  = :swc
-    # Array of relative paths to the files
-    # that should be included:
-    t.files  = ["ext/AsUnit-4.1.pre.swc"]
+    t.add_library :src, ['src', 'lib/as3reflection']
+    t.add_library :swc, 'ext/AsUnit-4.1.pre.swc'
   end
 
 end

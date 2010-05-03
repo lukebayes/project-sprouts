@@ -24,8 +24,8 @@ module Sprout
 
     module ClassMethods
 
-      def get_executable file_target, gem_name, gem_version=nil
-        puts "exe: #{exe}"
+      def get_executable name, gem_name, gem_version=nil
+        puts "get_executable with name: #{name} gem_name: #{gem_name} gem_version: #{gem_version}"
       end
     end
 
