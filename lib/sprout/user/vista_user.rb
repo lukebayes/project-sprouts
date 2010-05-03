@@ -4,10 +4,7 @@ module Sprout::User
   class VistaUser < WinUser
 
     def home
-      profile = env_userprofile
-      if(profile)
-        return profile
-      end
+      return env_userprofile unless env_userprofile.nil?
       return super
     end
 
