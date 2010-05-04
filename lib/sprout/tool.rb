@@ -49,8 +49,19 @@ module Sprout
       # Parameters will be sent to the commandline tool in the order they are
       # added using +add_param+.
       #
-      def add_param(name, type, &block) # :yields: Sprout::ToolParam
-        parameter_declarations << { :name => name, :type => type, :block => block }
+      def add_param(name, options=nil) # :yields: Sprout::ToolParam
+        if(block_given?)
+          raise Sprout::Errors::UsageError.new("[DEPRECATED] add_param no longer uses closures, you can provide the same values as a hash in the optional last argument.")
+        end
+
+        if(options.is_a?(Symbol))
+          options = { :type => options }
+        end
+
+        options ||= {}
+        options[:name] = name
+
+        parameter_declarations << options
 
         # define the setter:
         define_method("#{name.to_s}=") do |value|
@@ -122,22 +133,24 @@ module Sprout
         return result.join(' ')
       end
 
-      private
-
+      ##
+      # Called by Parameters like :path and :paths
+      #
       def default_file_expression
         @default_file_expression ||= Sprout::Tool::DEFAULT_FILE_EXPRESSION
       end
 
+      private
+
       def initialize_parameters
-        self.class.parameter_declarations.each do |options|
-          create_parameter options
+        self.class.parameter_declarations.each do |declaration|
+          create_parameter declaration
         end
       end
 
-      def create_parameter options
-        name = options[:name]
-        type = options[:type]
-        block = options[:block]
+      def create_parameter declaration
+        name    = declaration[:name]
+        type    = declaration[:type]
 
         name_s = name.to_s
 
@@ -148,12 +161,14 @@ module Sprout
 
         param = ParameterFactory.create type do |p|
           p.belongs_to = self
-          p.name = name_s
-          p.type = type
-
-          # Forward the parameter to the provided
-          # closure:
-          block.call p unless block.nil?
+          
+          declaration.each_pair do |key, value|
+            begin
+              p.send "#{key}=", value
+            rescue ArgumentError
+              raise Sprout::Errors::UsageError.new "Unexpected parameter option encountered with: #{key} and value: #{value}"
+            end
+          end
         end
 
         param_hash[param.name.to_sym] = param

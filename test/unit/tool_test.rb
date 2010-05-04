@@ -108,6 +108,13 @@ class ToolTest < Test::Unit::TestCase
         t.source_path << 'src'
       end
     end
+
+    should "to_shell input" do
+      @tool.debug = true
+      @tool.source_path << "test/fixtures/tool/src"
+      assert_equal "-debug -source-path+=test/fixtures/tool/src", @tool.to_shell
+    end
+
   end
 end
 
