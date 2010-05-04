@@ -2,6 +2,7 @@
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
+require 'bundler'
 require 'sprout/version'
 
 Gem::Specification.new do |s|
@@ -18,6 +19,17 @@ Gem::Specification.new do |s|
   s.rubyforge_project         = "sprout" 
 
   s.add_dependency "bundler", ">= 0.9.19"
+
+  bundle = Bundler::Definition.from_gemfile('Gemfile')
+  bundle.dependencies.each do |dep|
+    if dep.groups.include?(:default)
+      puts ">> adding: #{dep.name}"
+      s.add_dependency(dep.name, dep.requirement.to_s)
+    elsif dep.groups.include?(:development)
+    puts ">> adding: #{dep.name}"
+      s.add_development_dependency(dep.name, dep.requirement.to_s)
+    end
+  end
 
   s.files        = Dir.glob("{lib,test}/**/*") + %w(MIT-LICENSE README.textile CHANGELOG.md)
 

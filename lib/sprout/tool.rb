@@ -2,6 +2,7 @@ require 'sprout/tool/parameter_factory'
 require 'sprout/tool/collection_param'
 require 'sprout/tool/tool_param'
 require 'sprout/tool/boolean_param'
+require 'sprout/tool/number_param'
 require 'sprout/tool/string_param'
 require 'sprout/tool/strings_param'
 require 'sprout/tool/file_param'
@@ -9,6 +10,7 @@ require 'sprout/tool/files_param'
 require 'sprout/tool/path_param'
 require 'sprout/tool/paths_param'
 require 'sprout/tool/symbols_param'
+require 'sprout/tool/url_param'
 require 'sprout/tool/urls_param'
 
 module Sprout
@@ -83,17 +85,26 @@ module Sprout
 
       attr_reader :param_hash
       attr_reader :params
+      attr_reader :name
+      attr_reader :preprocessor
+      attr_reader :prerequisites
 
       def initialize
         super
-        @preprocessed_path = nil
-        @prepended_args    = nil
         @appended_args     = nil
         @default_gem_name  = nil
         @default_gem_path  = nil
+        @prepended_args    = nil
+        @preprocessed_path = nil
+
         @param_hash        = {}
         @params            = []
+        @prerequisites     = []
         initialize_parameters
+      end
+
+      def execute
+        puts ">> Sprout::Tool.execute called!"
       end
 
       # Create a string that represents this configured tool for shell execution
@@ -111,11 +122,11 @@ module Sprout
         return result.join(' ')
       end
 
+      private
+
       def default_file_expression
         @default_file_expression ||= Sprout::Tool::DEFAULT_FILE_EXPRESSION
       end
-
-      private
 
       def initialize_parameters
         self.class.parameter_declarations.each do |options|

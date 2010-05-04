@@ -17,11 +17,13 @@ module Sprout
         return BooleanParam.new if type == :boolean
         return FileParam.new    if type == :file
         return FilesParam.new   if type == :files
+        return NumberParam.new  if type == :number
         return PathParam.new    if type == :path
         return PathsParam.new   if type == :paths
         return StringParam.new  if type == :string
         return StringsParam.new if type == :strings
         return SymbolsParam.new if type == :symbols
+        return UrlParam.new    if type == :url
         return UrlsParam.new    if type == :urls
 
         param = resolve_parameter(type.to_s)

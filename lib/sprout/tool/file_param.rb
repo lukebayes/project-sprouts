@@ -1,7 +1,7 @@
 
 module Sprout
   # Concrete param object for :file values
-  class FileParam < ToolParam # :nodoc:
+  class FileParam < ToolParam 
 
     def prepare
       super

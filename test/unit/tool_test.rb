@@ -1,5 +1,7 @@
 require File.dirname(__FILE__) + '/test_helper'
 
+require 'test/fixtures/tool/mxmlc_task'
+
 class ToolTest < Test::Unit::TestCase
   include SproutTestCase
 
@@ -29,6 +31,11 @@ class ToolTest < Test::Unit::TestCase
 
       assert_equal ['string1', 'string2'], @tool.strings_param
       assert_equal "-strings-param+=string1 -strings-param+=string2", @tool.to_shell
+    end
+
+    should "accept number param" do
+      @tool.number_param = 1234
+      assert_equal 1234, @tool.number_param
     end
 
     should "accept parameter alias" do
@@ -84,6 +91,24 @@ class ToolTest < Test::Unit::TestCase
     # when assignment operator is used on collection params
   end
 
+  context "a new mxmlc task" do
+
+    setup do
+      @tool = Sprout::MXMLCTask.new
+    end
+
+    should "accept input" do
+      @tool.input = "test/fixtures/tool/src/Main.as"
+      assert_equal "test/fixtures/tool/src/Main.as", @tool.input
+      assert_equal "test/fixtures/tool/src/Main.as", @tool.to_shell
+    end
+
+    should "accept configuratin" do
+      t = mxmlc 'bin/SomeFile.swf' do |t|
+        t.source_path << 'src'
+      end
+    end
+  end
 end
 
 class CustomParam < Sprout::ToolParam; end
@@ -94,6 +119,7 @@ class FakeTool
   add_param :boolean_param, :boolean
   add_param :file_param,    :file
   add_param :files_param,   :files
+  add_param :number_param,  :number
   add_param :path_param,    :path
   add_param :paths_param,   :paths
   add_param :string_param,  :string
