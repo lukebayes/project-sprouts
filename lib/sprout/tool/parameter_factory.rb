@@ -21,6 +21,7 @@ module Sprout
       return StringsParam.new if type == :strings
       return SymbolsParam.new if type == :symbols
       return UrlsParam.new    if type == :urls
+      raise Sprout::Errors::UsageError.new "ParameterFactory.create called with unknown type: #{type}"
     end
   end
 end

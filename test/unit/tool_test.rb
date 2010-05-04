@@ -31,12 +31,23 @@ class ToolTest < Test::Unit::TestCase
       assert_equal "-strings-param+=string1 -strings-param+=string2", @tool.to_shell
     end
 
+    should "raise UsageError with unknown type" do
+
+      assert_raises Sprout::Errors::UsageError do
+        class BrokenTool
+          include Sprout::Tool
+          add_param :broken_param, :unknown_type
+        end
+
+        tool = BrokenTool.new
+      end
+    end
+
     # TODO: Ensure that file, files, path and paths
     # validate the existence of the references.
 
     # TODO: Ensure that a helpful error message is thrown
     # when assignment operator is used on collection params
-
   end
 
 end
@@ -45,14 +56,14 @@ class FakeTool
   include Sprout::Tool
 
   add_param :boolean_param, :boolean
-  add_param :file_param, :file
-  add_param :files_param, :files
-  add_param :path_param, :path
-  add_param :paths_param, :paths
-  add_param :string_param, :string
+  add_param :file_param,    :file
+  add_param :files_param,   :files
+  add_param :path_param,    :path
+  add_param :paths_param,   :paths
+  add_param :string_param,  :string
   add_param :strings_param, :strings 
   add_param :symbols_param, :symbols
-  add_param :urls_param, :urls
+  add_param :urls_param,    :urls
 
 end
 
