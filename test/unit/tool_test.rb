@@ -43,6 +43,15 @@ class ToolTest < Test::Unit::TestCase
       end
     end
 
+    context "with a custom param (defined below)" do
+      should "attempt to instantiate by adding _param to the end" do
+        assert_not_nil Sprout::ParameterFactory.create :custom
+      end
+      should "attempt to instantiate an unknown type before failing" do
+        assert_not_nil Sprout::ParameterFactory.create :custom_param
+      end
+    end
+
     # TODO: Ensure that file, files, path and paths
     # validate the existence of the references.
 
@@ -51,6 +60,8 @@ class ToolTest < Test::Unit::TestCase
   end
 
 end
+
+class CustomParam < Sprout::ToolParam; end
 
 class FakeTool
   include Sprout::Tool
