@@ -10,6 +10,12 @@ module Sprout
   #
   module CollectionParam
 
+    def initialize
+      super
+      @value = []
+      @delimiter = "+="
+    end
+
     # Assign the value and raise if 
     def value=(val)
       if(val.is_a?(String) || !val.is_a?(Enumerable))
@@ -19,24 +25,12 @@ module Sprout
       @value = val
     end
 
-    # Collection values are initialized to an empty array by default
-    def value
-      @value ||= []
-    end
-
     # Hide the collection param if no items
     # have been added to it.
     def visible?
       (!value.nil? && value.size > 0)
     end
 
-    # Default delimiter is +=
-    # This is what will appear between each name/value pair as in:
-    # "source_path+=src source_path+=test source_path+=lib"
-    def delimiter
-      @delimiter ||= "+="
-    end
-    
     # Returns a shell formatted string of the collection
     def to_shell
       prepare if !prepared?

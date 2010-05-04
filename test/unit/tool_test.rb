@@ -43,6 +43,23 @@ class ToolTest < Test::Unit::TestCase
       end
     end
 
+    should "define a new method" do
+
+      class WorkingTool
+        include Sprout::Tool
+        add_param :custom_name, :string
+      end
+
+      tool1 = WorkingTool.new
+      tool1.custom_name = "Foo Bar"
+      assert_equal "Foo Bar", tool1.custom_name
+
+      tool2 = WorkingTool.new
+      tool2.custom_name = "Bar Baz"
+      assert_equal "Bar Baz", tool2.custom_name
+
+    end
+
     context "with a custom param (defined below)" do
       should "attempt to instantiate by adding _param to the end" do
         assert_not_nil Sprout::ParameterFactory.create :custom

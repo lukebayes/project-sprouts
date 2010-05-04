@@ -48,13 +48,22 @@ module Sprout
       # added using +add_param+.
       #
       def add_param(name, type, &block) # :yields: Sprout::ToolParam
-        parameter_definitions << { :name => name, :type => type, :block => block }
+        parameter_declarations << { :name => name, :type => type, :block => block }
+
+        # define the setter:
+        define_method("#{name.to_s}=") do |value|
+          param_hash[name].value = value
+        end
+
+        # define the getter:
+        define_method(name) do     
+          param_hash[name].value
+        end
       end
 
-      def parameter_definitions
-        @parameter_definitions ||= []
+      def parameter_declarations
+        @parameter_declarations ||= []
       end
-      
     end
 
     module InstanceMethods
@@ -89,65 +98,33 @@ module Sprout
         return result.join(' ')
       end
 
-      def clean_name(name)
-        name.gsub(/=$/, '')
-      end
-
-      def respond_to?(name)
-        result = super
-        if(!result)
-          result = parameter_hash_includes?(name)
-        end
-        return result
-      end
-
-      def method_missing(name, *args)
-        name = name.to_s
-        cleaned = clean_name(name)
-
-        if(!respond_to?(cleaned))
-          raise NoMethodError.new("undefined method '#{name}' for #{self.class}", name)
-        end
-
-        param = parameter_by_name(cleaned)
-
-        matched = name =~ /=$/
-        if(matched)
-          param.value = args.shift
-        elsif(param)
-          param.value
-        else
-          raise Sprout::Errors::ToolError.new("method_missing called with undefined parameter [#{name}]")
-        end
-      end
-
       def default_file_expression
         @default_file_expression ||= Sprout::Tool::DEFAULT_FILE_EXPRESSION
       end
 
-      protected
+      private
 
       def initialize_parameters
-        self.class.parameter_definitions.each do |options|
+        self.class.parameter_declarations.each do |options|
           create_parameter options
         end
       end
 
-      def create_parameter(options)
+      def create_parameter options
         name = options[:name]
         type = options[:type]
         block = options[:block]
 
-        name = name.to_s
+        name_s = name.to_s
 
         # First ensure the named accessor doesn't yet exist...
         if(parameter_hash_includes? name)
-          raise Sprout::Errors::ToolError.new("Tool.add_param called with existing parameter name: #{name}")
+          raise Sprout::Errors::ToolError.new("Tool.add_param called with existing parameter name: #{name_s}")
         end
 
         param = ParameterFactory.create type do |p|
           p.belongs_to = self
-          p.name = name
+          p.name = name_s
           p.type = type
 
           # Forward the parameter to the provided
@@ -155,16 +132,12 @@ module Sprout
           block.call p unless block.nil?
         end
 
-        param_hash[name] = param
+        param_hash[param.name.to_sym] = param
         params << param
       end
 
       def parameter_hash_includes? name
-        param_hash.has_key? name.to_s
-      end
-
-      def parameter_by_name name
-        param_hash[name]
+        param_hash.has_key? name.to_sym
       end
 
       def validate

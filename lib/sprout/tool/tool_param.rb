@@ -40,17 +40,21 @@ module Sprout
     attr_accessor :hidden_name
     attr_accessor :hidden_value
     attr_accessor :name
+    attr_accessor :prefix
     attr_accessor :preprocessable
     attr_accessor :required
+    attr_accessor :to_shell_proc
     attr_accessor :type
     attr_accessor :validator
+    attr_accessor :value
     attr_accessor :visible
 
-    attr_writer   :prefix
-    attr_writer   :value
-    attr_writer   :delimiter
-    attr_writer   :shell_name
-    attr_writer   :to_shell_proc
+    # ToolParams join their name/value pair with an
+    # equals sign by default, this can be modified 
+    # To a space or whatever you wish
+    # Return the name with a single leading dash
+    # and underscores replaced with dashes
+    attr_accessor   :delimiter
 
     # Set the file_expression (blob) to append to each path
     # in order to build the prerequisites FileList.
@@ -62,7 +66,13 @@ module Sprout
     # to the FileList[expr] and that interface accepts
     # an array.
     attr_writer :file_expression
-    
+
+    attr_writer   :shell_name
+
+    def initialize
+      @prefix = '-'
+      @delimiter = '='
+    end
 
     # By default, ToolParams only appear in the shell
     # output when they are not nil
@@ -112,10 +122,6 @@ module Sprout
       @prefix ||= '-'
     end
     
-    def value
-      @value
-    end
-
     def shell_value
       value.to_s
     end
@@ -124,15 +130,6 @@ module Sprout
       @file_expression ||= belongs_to.default_file_expression
     end
 
-    # ToolParams join their name/value pair with an
-    # equals sign by default, this can be modified 
-    # To a space or whatever you wish
-    def delimiter
-      @delimiter ||= '='
-    end
-    
-    # Return the name with a single leading dash
-    # and underscores replaced with dashes
     def shell_name
       @shell_name ||= prefix + name.to_s.split('_').join('-')
     end
