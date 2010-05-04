@@ -1,6 +1,7 @@
 require 'rake'
 
 # Core, Process and Platform support:
+require 'sprout/string'
 require 'sprout/concern'
 require 'sprout/log'
 require 'sprout/errors'
