@@ -119,6 +119,14 @@ h3. Some Links
 * "See the Documentation":http://projectsprouts.org/rdoc
 * "Meet the Community":http://groups.google.com/group/projectsprouts
 
+h1. Contributing
+
+* Fork this git repository
+* Clone your forked version with write-access
+* cd to your local copy
+* Run "bundle install"
+* Run "rake test"
+
 h3. MIT License
 
 <pre>
