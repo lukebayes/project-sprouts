@@ -31,6 +31,14 @@ class ToolTest < Test::Unit::TestCase
       assert_equal "-strings-param+=string1 -strings-param+=string2", @tool.to_shell
     end
 
+    should "accept parameter alias" do
+      @tool.strings_param << "a"
+      @tool.sp << "b"
+
+      assert_equal ["a", "b"], @tool.sp
+
+    end
+
     should "raise UsageError with unknown type" do
 
       assert_raises Sprout::Errors::UsageError do
@@ -93,6 +101,7 @@ class FakeTool
   add_param :symbols_param, :symbols
   add_param :urls_param,    :urls
 
+  add_param_alias :sp, :strings_param
 end
 
 

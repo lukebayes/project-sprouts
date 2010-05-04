@@ -60,6 +60,19 @@ module Sprout
           param_hash[name].value
         end
       end
+      
+      def add_param_alias new_name, old_name
+
+        # define the setter:
+        define_method("#{new_name.to_s}=") do |value|
+          param_hash[old_name].value = value
+        end
+
+        # define the getter:
+        define_method(new_name) do     
+          param_hash[old_name].value
+        end
+      end
 
       def parameter_declarations
         @parameter_declarations ||= []
