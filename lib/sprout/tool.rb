@@ -63,33 +63,33 @@ module Sprout
 
         parameter_declarations << options
 
-        # define the setter:
-        define_method("#{name.to_s}=") do |value|
-          param_hash[name].value = value
-        end
-
-        # define the getter:
-        define_method(name) do     
-          param_hash[name].value
-        end
+        define_accessors_for name
       end
       
       def add_param_alias new_name, old_name
-
-        # define the setter:
-        define_method("#{new_name.to_s}=") do |value|
-          param_hash[old_name].value = value
-        end
-
-        # define the getter:
-        define_method(new_name) do     
-          param_hash[old_name].value
-        end
+        define_accessors_for new_name, old_name
       end
 
       def parameter_declarations
         @parameter_declarations ||= []
       end
+
+      private
+
+      def define_accessors_for name, real_name=nil
+        real_name ||= name
+
+        # define the setter:
+        define_method("#{name.to_s}=") do |value|
+          param_hash[real_name].value = value
+        end
+
+        # define the getter:
+        define_method(name) do     
+          param_hash[real_name].value
+        end
+      end
+
     end
 
     module InstanceMethods
@@ -156,11 +156,11 @@ module Sprout
 
       def initialize_parameters
         self.class.parameter_declarations.each do |declaration|
-          create_parameter declaration
+          initialize_parameter declaration
         end
       end
 
-      def create_parameter declaration
+      def initialize_parameter declaration
         name    = declaration[:name]
         type    = declaration[:type]
 
@@ -171,7 +171,11 @@ module Sprout
           raise Sprout::Errors::ToolError.new("Tool.add_param called with existing parameter name: #{name_s}")
         end
 
-        param = ParameterFactory.create type do |p|
+        create_parameter declaration
+      end
+
+      def create_parameter declaration
+        param = ParameterFactory.create declaration[:type] do |p|
           p.belongs_to = self
           
           declaration.each_pair do |key, value|
