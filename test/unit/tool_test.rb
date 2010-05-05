@@ -103,10 +103,13 @@ class ToolTest < Test::Unit::TestCase
       assert_equal "test/fixtures/tool/src/Main.as", @tool.to_shell
     end
 
-    should "accept configuratin" do
-      t = mxmlc 'bin/SomeFile.swf' do |t|
-        t.source_path << 'src'
+    should "accept configuratin as a file task" do
+      mxmlc 'bin/SomeFile.swf' do |t|
+        t.source_path << 'test/fixtures/tool/src'
+        t.input = 'test/fixtures/tool/src/Main.as'
+        @tool = t # Hold onto the MXMLCTask reference...
       end
+      assert_equal "-source-path+=test/fixtures/tool/src test/fixtures/tool/src/Main.as", @tool.to_shell
     end
 
     should "to_shell input" do

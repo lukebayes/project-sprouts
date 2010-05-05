@@ -114,7 +114,19 @@ module Sprout
         initialize_parameters
       end
 
-      def execute
+      ##
+      # Called from enclosing Rake::Task after
+      # initialization and before any tasks are
+      # executed.
+      #
+      # It is within this function that we can
+      # define other, new Tasks and/or manipulate
+      # our prerequisites.
+      #
+      def define
+      end
+
+      def execute *args
         puts ">> Sprout::Tool.execute called!"
       end
 
