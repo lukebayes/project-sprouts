@@ -130,8 +130,6 @@ class ToolTest < Test::Unit::TestCase
       assert_equal :compc, @tool.executable
     end
 
-
-
     should "accept configuratin as a file task" do
       mxmlc 'bin/SomeFile.swf' do |t|
         t.source_path << 'test/fixtures/tool/src'

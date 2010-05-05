@@ -1,17 +1,4 @@
 require 'sprout/tool/parameter_factory'
-require 'sprout/tool/collection_param'
-require 'sprout/tool/tool_param'
-require 'sprout/tool/boolean_param'
-require 'sprout/tool/number_param'
-require 'sprout/tool/string_param'
-require 'sprout/tool/strings_param'
-require 'sprout/tool/file_param'
-require 'sprout/tool/files_param'
-require 'sprout/tool/path_param'
-require 'sprout/tool/paths_param'
-require 'sprout/tool/symbols_param'
-require 'sprout/tool/url_param'
-require 'sprout/tool/urls_param'
 
 module Sprout
 
