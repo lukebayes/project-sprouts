@@ -41,6 +41,12 @@ module Sprout
     attr_accessor :hidden_value
     attr_accessor :name
     attr_accessor :prefix
+
+    ##
+    # This parameter value can or should be handed to any declared preprocessor.
+    #
+    # Generally, this parameter is set to true for files and paths.
+    #
     attr_accessor :preprocessable
     attr_accessor :required
     attr_accessor :to_shell_proc
@@ -163,6 +169,16 @@ module Sprout
     end
     
     def should_preprocess?
+      false
+    end
+    
+=begin
+
+    # This is the preprocessor implementation from Sprout 0.7
+    # We need to make time to refactor this into a new / separate 
+    # set of modules or find some way to extract it from here and test it.
+
+    def should_preprocess?
       return preprocessable && !belongs_to.preprocessor.nil?
     end
     
@@ -267,7 +283,8 @@ module Sprout
       Log.puts ">> Preprocessed and created: #{belongs_to.preprocessed_path}/#{file_name}"
       return result
     end
-    
+=end
+
   end
 end
 

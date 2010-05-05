@@ -673,7 +673,6 @@ module Sprout
   end
 end
 
-
 =begin
     def define # :nodoc:
       super

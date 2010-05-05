@@ -97,7 +97,7 @@ module Sprout
       attr_reader :param_hash
       attr_reader :params
       attr_reader :name
-      attr_reader :preprocessor
+      # attr_reader :preprocessor
       attr_reader :prerequisites
 
       def initialize
@@ -106,7 +106,7 @@ module Sprout
         @default_gem_name  = nil
         @default_gem_path  = nil
         @prepended_args    = nil
-        @preprocessed_path = nil
+        # @preprocessed_path = nil
 
         @param_hash        = {}
         @params            = []
