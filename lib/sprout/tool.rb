@@ -50,44 +50,24 @@ module Sprout
 
         parameter_declarations << options
 
-        define_accessors_for name
+        parameter_accessors name
       end
       
       def add_param_alias new_name, old_name
-        define_accessors_for new_name, old_name
+        parameter_accessors new_name, old_name
       end
 
       def parameter_declarations
         @parameter_declarations ||= []
       end
 
-      def set_gem_name name
-        @gem_name = name
-      end
-
-      def set_gem_version version
-        @gem_version = version
-      end
-
-      def set_executable exe
-        @executable = exe
-      end
-
-      def gem_name
-        @gem_name
-      end
-
-      def gem_version
-        @gem_version
-      end
-
-      def executable
-        @executable
+      def set name, value
+        instance_accessors name, value
       end
 
       private
 
-      def define_accessors_for name, real_name=nil
+      def parameter_accessors name, real_name=nil
         real_name ||= name
 
         # define the setter:
@@ -98,6 +78,16 @@ module Sprout
         # define the getter:
         define_method(name) do     
           param_hash[real_name].value
+        end
+      end
+
+      def instance_accessors name, default
+        define_method("#{name.to_s}=") do |value|
+          param_hash[name] = value
+        end
+
+        define_method(name) do
+          param_hash[name] ||= default
         end
       end
 
@@ -167,20 +157,17 @@ module Sprout
       # Classes that include the Tool can set the default value for this property
       # at the class level with:
       #
-      #     set_gem_name 'sprout-sometoolname'
+      #     set :gem_name, 'sprout-sometoolname'
       #
       # But that value can be overridden on each instance like:
       #
       #     tool = SomeTool.new
       #     tool.gem_name = 'sprout-othertoolname'
       #
-      def gem_name= name
-        @gem_name = name
-      end
-
-      def gem_name
-        @gem_name ||= self.class.gem_name
-      end
+      # This parameter is required - either from the including class or instance
+      # configuration.
+      #
+      attr_accessor :gem_name
 
       ##
       # The default RubyGem version that we will use when requesting our executable.
@@ -188,20 +175,17 @@ module Sprout
       # Classes that include the Tool can set the default value for this property
       # at the class level with:
       #
-      #     set_gem_version '>= 1.0.3'
+      #     set :gem_version, '>= 1.0.3'
       #
       # But that value can be overriden on each instance like:
       #
       #     tool = SomeTool.new
       #     too.gem_version = '>= 2.0.0'
       #
-      def gem_version= version
-        @gem_version = version
-      end
-
-      def gem_version
-        @gem_version ||= self.class.gem_version
-      end
+      # This parameter is required - either from the including class or instance
+      # configuration.
+      #
+      attr_accessor :gem_version
 
       ##
       # The default Sprout executable that we will use for this tool.
@@ -209,20 +193,17 @@ module Sprout
       # Classes that include the Tool can set the default value for this property
       # at the class level with:
       #
-      #     set_executable :mxmlc
+      #     set :executable, :mxmlc
       #
       # But that value can be overriden on each instance like:
       #
       #     tool = SomeTool.new
       #     too.executable :compc
       #
-      def executable= symbol
-        @executable = symbol
-      end
-
-      def executable
-        @executable ||= self.class.executable
-      end
+      # This parameter is required - either from the including class or instance
+      # configuration.
+      #
+      attr_accessor :executable
 
       private
 

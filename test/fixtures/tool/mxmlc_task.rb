@@ -36,6 +36,9 @@ module Sprout
   #
   # Note: Be sure to check out the features of the ToolTask to learn more about gem_version and preprocessor
   #
+  # Interface and descriptions found here:
+  # http://livedocs.adobe.com/flex/2/docs/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&file=00001481.html
+  #
   class MXMLCTask
     include Sprout::Tool
     
@@ -654,37 +657,18 @@ module Sprout
     ##
     # The default gem name is sprout-flex3sdk
     #
-    set_gem_name 'sprout-flex3sdk'
+    set :gem_name, 'sprout-flex3sdk'
 
     ##
     # The default gem version
     #
-    set_gem_version '>= 1.0.pre'
+    set :gem_version, '>= 1.0.pre'
     
     ##
     # The default executable target
     #
-    set_executable :mxmlc
+    set :executable, :mxmlc
 
-    # Use a running instance of the FCSH command shell to speed up compilation.
-    # You need to run 'rake fcsh:start' in another terminal before turning on 
-    # this flag and compiling.
-    def use_fcsh=(use)
-      @use_fcsh = use
-    end
-
-    def use_fcsh
-      @use_fcsh
-    end
-
-    # Interface and descriptions found here:
-    # http://livedocs.adobe.com/flex/2/docs/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&file=00001481.html
-    def initialize
-      super
-      @default_gem_name = 'sprout-flex3sdk-tool'
-      @default_gem_path = 'bin/mxmlc'
-    end
-    
   end
 end
 

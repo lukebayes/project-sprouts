@@ -22,5 +22,20 @@ class SproutTest < Test::Unit::TestCase
     end
   end
 
+  context "requesting an executable" do
+
+    should "fail if the tool has not yet registered" do
+      assert_raises Sprout::Errors::ToolError do
+        exe = Sprout.get_executable :mxmlc, 'flex3sdk'
+      end
+    end
+
+    should "succeed if the tool has been registered" do
+      target = 'test/fixtures/process_runner/chmod_script.sh'
+      Sprout.add_executable :mxmlc, 'flex3sdk', target
+      assert_equal target, Sprout.get_executable(:mxmlc, 'flex3sdk')
+    end
+  end
+
 end
 
