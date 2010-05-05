@@ -651,6 +651,21 @@ module Sprout
     # This must be the last item in this list
     add_param :input, { :type => :file, :required => true, :preprocessable => true, :hidden_name => true }
 
+    ##
+    # The default gem name is sprout-flex3sdk
+    #
+    set_gem_name 'sprout-flex3sdk'
+
+    ##
+    # The default gem version
+    #
+    set_gem_version '>= 1.0.pre'
+    
+    ##
+    # The default executable target
+    #
+    set_executable :mxmlc
+
     # Use a running instance of the FCSH command shell to speed up compilation.
     # You need to run 'rake fcsh:start' in another terminal before turning on 
     # this flag and compiling.

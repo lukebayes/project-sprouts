@@ -74,6 +74,30 @@ module Sprout
         @parameter_declarations ||= []
       end
 
+      def set_gem_name name
+        @gem_name = name
+      end
+
+      def set_gem_version version
+        @gem_version = version
+      end
+
+      def set_executable exe
+        @executable = exe
+      end
+
+      def gem_name
+        @gem_name
+      end
+
+      def gem_version
+        @gem_version
+      end
+
+      def executable
+        @executable
+      end
+
       private
 
       def define_accessors_for name, real_name=nil
@@ -103,8 +127,6 @@ module Sprout
       def initialize
         super
         @appended_args     = nil
-        @default_gem_name  = nil
-        @default_gem_path  = nil
         @prepended_args    = nil
         # @preprocessed_path = nil
 
@@ -150,6 +172,69 @@ module Sprout
       #
       def default_file_expression
         @default_file_expression ||= Sprout::Tool::DEFAULT_FILE_EXPRESSION
+      end
+
+      ##
+      # The default RubyGem that we will use when requesting our executable.
+      #
+      # Classes that include the Tool can set the default value for this property
+      # at the class level with:
+      #
+      #     set_gem_name 'sprout-sometoolname'
+      #
+      # But that value can be overridden on each instance like:
+      #
+      #     tool = SomeTool.new
+      #     tool.gem_name = 'sprout-othertoolname'
+      #
+      def gem_name= name
+        @gem_name = name
+      end
+
+      def gem_name
+        @gem_name ||= self.class.gem_name
+      end
+
+      ##
+      # The default RubyGem version that we will use when requesting our executable.
+      #
+      # Classes that include the Tool can set the default value for this property
+      # at the class level with:
+      #
+      #     set_gem_version '>= 1.0.3'
+      #
+      # But that value can be overriden on each instance like:
+      #
+      #     tool = SomeTool.new
+      #     too.gem_version = '>= 2.0.0'
+      #
+      def gem_version= version
+        @gem_version = version
+      end
+
+      def gem_version
+        @gem_version ||= self.class.gem_version
+      end
+
+      ##
+      # The default Sprout executable that we will use for this tool.
+      #
+      # Classes that include the Tool can set the default value for this property
+      # at the class level with:
+      #
+      #     set_executable :mxmlc
+      #
+      # But that value can be overriden on each instance like:
+      #
+      #     tool = SomeTool.new
+      #     too.executable :compc
+      #
+      def executable= symbol
+        @executable = symbol
+      end
+
+      def executable
+        @executable ||= self.class.executable
       end
 
       private

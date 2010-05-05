@@ -103,6 +103,35 @@ class ToolTest < Test::Unit::TestCase
       assert_equal "test/fixtures/tool/src/Main.as", @tool.to_shell
     end
 
+    should "accept default gem name" do
+      assert_equal 'sprout-flex3sdk', @tool.gem_name
+    end
+
+    should "override default gem name" do
+      @tool.gem_name = 'sprout-flex4sdk'
+      assert_equal 'sprout-flex4sdk', @tool.gem_name
+    end
+
+    should "accept default gem version" do
+      assert_equal '>= 1.0.pre', @tool.gem_version
+    end
+
+    should "override default gem version" do
+      @tool.gem_version = '1.1.pre'
+      assert_equal '1.1.pre', @tool.gem_version
+    end
+
+    should "accept default gem executable" do
+      assert_equal :mxmlc, @tool.executable
+    end
+
+    should "override default gem executable" do
+      @tool.executable = :compc
+      assert_equal :compc, @tool.executable
+    end
+
+
+
     should "accept configuratin as a file task" do
       mxmlc 'bin/SomeFile.swf' do |t|
         t.source_path << 'test/fixtures/tool/src'
