@@ -39,25 +39,6 @@ module Sprout
   class MXMLCTask
     include Sprout::Tool
     
-    # Use a running instance of the FCSH command shell to speed up compilation.
-    # You need to run 'rake fcsh:start' in another terminal before turning on 
-    # this flag and compiling.
-    def use_fcsh=(use)
-      @use_fcsh = use
-    end
-
-    def use_fcsh
-      @use_fcsh
-    end
-
-    # Interface and descriptions found here:
-    # http://livedocs.adobe.com/flex/2/docs/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&file=00001481.html
-    def initialize
-      super
-      @default_gem_name = 'sprout-flex3sdk-tool'
-      @default_gem_path = 'bin/mxmlc'
-    end
-    
     ##
     # Enables accessibility features when compiling the Flex application or SWC file. The default value is false.
     #
@@ -670,6 +651,25 @@ module Sprout
     # This must be the last item in this list
     add_param :input, { :type => :file, :required => true, :preprocessable => true, :hidden_name => true }
 
+    # Use a running instance of the FCSH command shell to speed up compilation.
+    # You need to run 'rake fcsh:start' in another terminal before turning on 
+    # this flag and compiling.
+    def use_fcsh=(use)
+      @use_fcsh = use
+    end
+
+    def use_fcsh
+      @use_fcsh
+    end
+
+    # Interface and descriptions found here:
+    # http://livedocs.adobe.com/flex/2/docs/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&file=00001481.html
+    def initialize
+      super
+      @default_gem_name = 'sprout-flex3sdk-tool'
+      @default_gem_path = 'bin/mxmlc'
+    end
+    
   end
 end
 
