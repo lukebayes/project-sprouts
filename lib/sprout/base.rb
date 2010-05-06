@@ -53,7 +53,7 @@ module Sprout
       #
       def get_executable name, gem_name, gem_version=nil
         # puts "get_executable with name: #{name} gem_name: #{gem_name} gem_version: #{gem_version}"
-        require_executable_gem gem_name
+        require_gem_for_executable gem_name
         begin
           ensure_version_requirement executables["#{name}-#{gem_name}"], gem_version
         rescue NoMethodError => e
@@ -69,7 +69,7 @@ module Sprout
         if(req_version.satisfied_by? exe_version)
           exe[:path]
         else
-          raise Sprout::Errors::VersionRequirementNotMetError.new "Could not meet the version requirement of (#{version}) with #{exe[:gem_name]} #{exe[:gem_version]}. \n\nYou probably need to update your Gemfile and run 'bundle install' to update your local gems."
+          raise Sprout::Errors::VersionRequirementNotMetError.new "Could not meet the version requirement of (#{version}) with (#{exe[:gem_name]} #{exe[:gem_version]}). \n\nYou probably need to update your Gemfile and run 'bundle install' to update your local gems."
         end
       end
 
@@ -77,8 +77,12 @@ module Sprout
         @executables ||= {}
       end
 
-      def require_executable_gem name
-        #require name
+      def require_gem_for_executable name
+        begin
+          require name
+        rescue LoadError => e
+          raise Sprout::Errors::MissingExecutableError.new "Could not load the required file (#{name}) - Do you need to run 'bundle install'?"
+        end
       end
 
     end
