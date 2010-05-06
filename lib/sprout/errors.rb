@@ -43,11 +43,15 @@ module Sprout
 
     ##
     # Could not find requested Executable
-    class MissingExecutableError < SproutError; end
+    class MissingExecutableError < ToolError; end
 
     ##
     # Could not meet the requested version requirement.
-    class VersionRequirementNotMetError < SproutError; end
+    class VersionRequirementNotMetError < ToolError; end
+
+    ##
+    # Error when registering executables.
+    class ExecutableRegistrationError < ToolError; end
   end
 end
 

@@ -30,9 +30,17 @@ module Sprout
       # so that Tasks can later call +get_executable+ to retrieve the path to 
       # the actual executable file.
       #
-      def register_executable name, gem_name, path, gem_version
+      def register_executable name, gem_name, gem_version, path
         key = "#{name}-#{gem_name}"
-        executables[key] = { :name => name, :gem_name => gem_name, :path => path, :gem_version => gem_version }
+        if(executables.has_key?(key) && executables[key][:gem_version] != gem_version)
+          raise Sprout::Errors::ExecutableRegistrationError.new "Cannot register an executable with the same name (#{name}) and different versions (#{gem_version}) vs (#{executables[key][:gem_version]})."
+        end
+        executables[key] = { 
+                             :name        => name,
+                             :gem_name    => gem_name,
+                             :gem_version => gem_version,
+                             :path        => path
+                           }
       end
 
       ##
@@ -61,7 +69,7 @@ module Sprout
         if(req_version.satisfied_by? exe_version)
           exe[:path]
         else
-          raise Sprout::Errors::VersionRequirementNotMetError.new "Could not meet the version requirement of (#{version}) with #{exe[:gem_name]} #{exe[:gem_version]}"
+          raise Sprout::Errors::VersionRequirementNotMetError.new "Could not meet the version requirement of (#{version}) with #{exe[:gem_name]} #{exe[:gem_version]}. \n\nYou probably need to update your Gemfile and run 'bundle install' to update your local gems."
         end
       end
 

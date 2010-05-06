@@ -27,6 +27,7 @@ module SproutTestCase # :nodoc:[all]
   def teardown
     super
     clear_tasks
+    Sprout.clear_executables!
     #Sprout::ProjectModel.destroy
     if(@temp_path && File.exists?(@temp_path))
       FileUtils.rm_rf(@temp_path)
@@ -90,5 +91,11 @@ module SproutTestCase # :nodoc:[all]
     end
   end
   
+end
+
+module Sprout
+  def self.clear_executables!
+    executables.delete_if { |a,b| true }
+  end
 end
 
