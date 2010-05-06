@@ -25,13 +25,12 @@ module Sprout
 
     module ClassMethods
 
-
       ##
       # Tool Specifications should register their executables with this method
       # so that Tasks can later call +get_executable+ to retrieve the path to 
       # the actual executable file.
       #
-      def add_executable name, gem_name, path, gem_version=nil
+      def register_executable name, gem_name, path, gem_version
         key = "#{name}-#{gem_name}"
         executables[key] = { :name => name, :gem_name => gem_name, :path => path, :gem_version => gem_version }
       end
@@ -46,21 +45,35 @@ module Sprout
       #
       def get_executable name, gem_name, gem_version=nil
         # puts "get_executable with name: #{name} gem_name: #{gem_name} gem_version: #{gem_version}"
-        key = "#{name}-#{gem_name}"
-        if(executables.has_key? key)
-          return executables[key][:path]
+        require_executable_gem gem_name
+        begin
+          ensure_version_requirement executables["#{name}-#{gem_name}"], gem_version
+        rescue NoMethodError => e
+          raise Sprout::Errors::MissingExecutableError.new "The requested executable (#{name}) in gem (#{gem_name}) and version (#{gem_version}) does not appear to be loaded."
         end
-        raise Sprout::Errors::ToolError.new "The requested executable (#{name}) in gem (#{gem_name}) and version (#{gem_version}) does not appear to be loaded."
       end
 
       private
+
+      def ensure_version_requirement exe, version
+        exe_version = Gem::Version.create exe[:gem_version]
+        req_version = Gem::Requirement.create version
+        if(req_version.satisfied_by? exe_version)
+          exe[:path]
+        else
+          raise Sprout::Errors::VersionRequirementNotMetError.new "Could not meet the version requirement of (#{version}) with #{exe[:gem_name]} #{exe[:gem_version]}"
+        end
+      end
 
       def executables
         @executables ||= {}
       end
 
-    end
+      def require_executable_gem name
+        #require name
+      end
 
+    end
   end
 end
 

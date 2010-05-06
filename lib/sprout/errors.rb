@@ -40,6 +40,14 @@ module Sprout
     ##
     # An error in the Tool was encountered
     class ToolError < SproutError; end
+
+    ##
+    # Could not find requested Executable
+    class MissingExecutableError < SproutError; end
+
+    ##
+    # Could not meet the requested version requirement.
+    class VersionRequirementNotMetError < SproutError; end
   end
 end
 
