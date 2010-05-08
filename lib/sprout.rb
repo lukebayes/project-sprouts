@@ -1,5 +1,9 @@
-require "rubygems"
-require "bundler"
+begin
+  require 'bundler'
+rescue LoadError => e
+  puts File.read('rubygems/rubygems_message')
+  raise e
+end
 
 Bundler.setup(:default)
 $:.push File.dirname(__FILE__)

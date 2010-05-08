@@ -1,5 +1,5 @@
-require "rubygems"
-require "bundler"
+require File.dirname(__FILE__) + '/../../lib/sprout'
+
 Bundler.setup(:default, :test)
 
 # These require statments *must* be in this order:
@@ -8,7 +8,6 @@ Bundler.setup(:default, :test)
 require 'shoulda'
 require 'mocha'
 
-require File.dirname(__FILE__) + '/../../lib/sprout'
 $:.unshift File.dirname(__FILE__) + '/../'
 $:.unshift File.dirname(__FILE__)
 

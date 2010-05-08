@@ -1,5 +1,9 @@
-require 'rubygems'
-require 'bundler'
+begin
+  require 'bundler'
+rescue LoadError => e
+  puts File.read('lib/rubygems/rubygems_message')
+  raise e
+end
 
 Bundler.setup
 

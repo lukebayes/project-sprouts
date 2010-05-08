@@ -9,7 +9,7 @@ class ToolGeneratorTest < Test::Unit::TestCase
       context "with #{input} app root" do
 
         setup do
-          @app_root = File.join(@tmp_root, input)
+          @app_root = File.join(tmp_root, input)
         end
 
         should "use #{input}" do
