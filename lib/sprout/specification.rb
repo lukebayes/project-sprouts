@@ -99,10 +99,8 @@ module Sprout
     # Each time this method is called, a new Sprout::RemoteFiletarget instance will be yielded to
     # the provided block and added to a collection for packaging.
     #
-    def add_remote_file_target
-      @remote_file_targets << RemoteFileTarget.new do |r|
-        yield r if block_given?
-      end
+    def add_remote_file_target &block
+      @remote_file_targets << RemoteFileTarget.new(&block)
     end
 
     # Add a file to the RubyGem itself. This is a great way to package smallish libraries in either
@@ -119,10 +117,8 @@ module Sprout
     #        end
     #     end
     #
-    def add_file_target
-      @file_targets << FileTarget.new do |f|
-        yield f if block_given?
-      end
+    def add_file_target &block
+      @file_targets << FileTarget.new(&block)
     end
 
     private

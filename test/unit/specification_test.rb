@@ -30,6 +30,16 @@ class SpecificationTest < Test::Unit::TestCase
       assert_equal '>= 1.0.pre', dependency.requirement.to_s
     end
 
+    should "fail with unexpected configuration param" do
+      assert_raises NoMethodError do
+        Sprout::Specification.new do |s|
+          s.add_file_target do |t|
+            t.unknown_parameter = 'bad value'
+          end
+        end
+      end
+    end
+
     should "have the added files" do
       spec = Gem::Specification.load @asunit_spec
       files = spec.files.dup
@@ -50,6 +60,16 @@ class SpecificationTest < Test::Unit::TestCase
           spec    = Gem::Specification.load @flexsdk_spec
           builder = Gem::Builder.new spec
           builder.build
+        end
+      end
+
+      should "fail with unexpected configuration param" do
+        assert_raises NoMethodError do
+          Sprout::Specification.new do |s|
+            s.add_remote_file_target do |t|
+              t.unknown_parameter = 'bad value'
+            end
+          end
         end
       end
 
