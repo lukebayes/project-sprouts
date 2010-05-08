@@ -25,6 +25,7 @@ class ToolGenerator < RubiGen::Base
 
       m.template 'rakefile.rb', 'rakefile.rb'
       m.template 'Gemfile', 'Gemfile'
+      m.template 'tool.gemspec', "#{name}.gemspec"
 
       # Create stubs
       # m.template "template.rb",  "some_file_after_erb.rb"
