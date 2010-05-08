@@ -31,10 +31,11 @@ Gem::Specification.new do |s|
     end
   end
 
-  s.files        = Dir.glob("{lib,test}/**/*") + %w(MIT-LICENSE README.textile CHANGELOG.md)
+  s.files        = Dir.glob("{app_generators,bin,lib,test}/**/*") + %w(MIT-LICENSE README.textile CHANGELOG.md)
 
   # TODO: Bring this back:
   #s.executables  = ['sprout']
+  s.executables  = ['sprout-tool']
   s.require_path = 'lib'
 end
 

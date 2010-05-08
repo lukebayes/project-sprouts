@@ -95,6 +95,7 @@ class ToolTest < Test::Unit::TestCase
 
     setup do
       @tool = Sprout::MXMLCTask.new
+      @mxmlc_executable = File.join(fixtures, 'tool', 'flex3sdk_gem', 'mxmlc')
     end
 
     should "accept input" do
@@ -143,6 +144,24 @@ class ToolTest < Test::Unit::TestCase
       @tool.debug = true
       @tool.source_path << "test/fixtures/tool/src"
       assert_equal "-debug -source-path+=test/fixtures/tool/src", @tool.to_shell
+    end
+
+    should "execute the registered executable" do
+      # Configure stub tool:
+      @tool.input = 'test/fixtures/tool/src/Main.as'
+      @tool.source_path << 'test/fixtures/tool/src'
+      @tool.debug = true
+      Sprout.expects(:get_executable).with(:mxmlc, 'sprout-flex3sdk', '>= 1.0.pre').returns @mxmlc_executable
+
+      # Ensure the exe file mode is NOT valid:
+      File.chmod 0644, @mxmlc_executable
+      first = File.stat(@mxmlc_executable).mode
+
+      # Execute the stub tool:
+      @tool.execute
+
+      # Ensure the file mode was updated:
+      assert "non-executable file mode should be updated by execute", first != File.stat(@mxmlc_executable).mode
     end
 
   end

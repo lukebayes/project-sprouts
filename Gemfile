@@ -3,13 +3,13 @@ source "http://rubygems.org"
 gem "bundler", ">= 0.9.19"
 gem "rake"
 gem "rubyzip", "0.9.4"
+gem "rubigen", ">= 1.5.4"
 gem "archive-tar-minitar", "0.5.2"
 
 if RUBY_PLATFORM =~ /mswin/i
-  # Win32 only:
-  gem "win32-open3", "0.2.5"
+  gem "win32-open3", "0.2.5" # Win32 only
 else
-  gem "open4", ">= 0.9.6"
+  gem "open4", ">= 0.9.6" # All others
 end
 
 group :test do

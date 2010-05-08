@@ -125,8 +125,12 @@ module Sprout
       def define
       end
 
+      ##
+      # Actually call the provided executable.
+      #
       def execute *args
-        puts ">> Sprout::Tool.execute called!"
+        exe = Sprout.get_executable executable, gem_name, gem_version
+        User.create.execute exe
       end
 
       # Create a string that represents this configured tool for shell execution
@@ -253,8 +257,8 @@ module Sprout
           param.validate
         end
       end
-
     end
+
   end
 end
 

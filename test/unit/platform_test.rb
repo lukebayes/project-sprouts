@@ -11,7 +11,7 @@ class PlatformTest < Test::Unit::TestCase
 
     ['cygwin', 'mingw', 'bccwin'].each do |variant|
       context variant do
-        should "should know if they're windows nix" do
+        should "know if they're windows nix" do
           @platform.stubs(:ruby_platform).returns variant
           assert @platform.windows?, "Windows?"
           assert @platform.windows_nix?, "Windows Nix?"
