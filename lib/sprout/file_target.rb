@@ -11,8 +11,12 @@ module Sprout
   #
   class FileTarget
 
-    attr_accessor :platform
+    # TODO: I think files is going away now that we're not
+    # delegating to the Gem::Specification
     attr_accessor :files
+    attr_accessor :pkg_name
+    attr_accessor :pkg_version
+    attr_accessor :platform
 
     attr_reader :executables
     attr_reader :libraries
@@ -55,6 +59,14 @@ module Sprout
 
     def to_s
       "[FileTarget type=#{type} platform=#{platform} files=#{files.inspect}]"
+    end
+
+    def validate
+      raise Sprout::Errors::UsageError.new "FileTarget.pkg_name is required" if pkg_name.nil?
+      raise Sprout::Errors::UsageError.new "FileTarget.pkg_version is required" if pkg_version.nil?
+    end
+
+    def resolve
     end
 
     private

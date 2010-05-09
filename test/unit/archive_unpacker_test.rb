@@ -80,7 +80,7 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
           expected_file = File.join temp_path, @file_name
           FileUtils.touch expected_file
 
-          @unpacker.unpack @archive_file, temp_path, :clobber
+          @unpacker.unpack @archive_file, temp_path, nil, :clobber
           assert_file expected_file
           assert_matches /hello world/, File.read(expected_file)
         end
@@ -90,7 +90,7 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
           FileUtils.touch expected_file
 
           assert_raises Sprout::Errors::DestinationExistsError do
-            @unpacker.unpack @archive_file, temp_path, :no_clobber
+            @unpacker.unpack @archive_file, temp_path, nil, :no_clobber
           end
         end
 

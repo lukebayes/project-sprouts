@@ -9,9 +9,9 @@ module Sprout
 
     # Figure out what kind of archive you have from the file name,
     # and unpack it using the appropriate scheme.
-    def unpack archive, destination, clobber=nil
-      return unpack_zip(archive, destination, clobber) if is_zip?(archive)
-      return unpack_tgz(archive, destination, clobber) if is_tgz?(archive)
+    def unpack archive, destination, type=nil, clobber=nil
+      return unpack_zip(archive, destination, clobber) if is_zip?(archive, type)
+      return unpack_tgz(archive, destination, clobber) if is_tgz?(archive, type)
 
       # This is definitely debatable, should we copy the file even if it's
       # not an archive that we're about to unpack?
@@ -71,25 +71,25 @@ module Sprout
     end
 
     # Return true if the provided file name looks like a zip file.
-    def is_zip? archive 
-      !archive.match(/\.zip$/).nil?
+    def is_zip? archive, type=nil
+      type == :zip || !archive.match(/\.zip$/).nil?
     end
 
     # Return true if the provided file name looks like a tar.gz file.
-    def is_tgz? archive
-      !archive.match(/\.tgz$/).nil? || !archive.match(/\.tar.gz$/).nil?
+    def is_tgz? archive, type=nil
+      type == :tgz || !archive.match(/\.tgz$/).nil? || !archive.match(/\.tar.gz$/).nil?
     end
 
-    def is_exe? archive
-      !archive.match(/\.exe$/).nil?
+    def is_exe? archive, type=nil
+      type == :exe || !archive.match(/\.exe$/).nil?
     end
     
-    def is_swc? archive
-      !archive.match(/\.swc$/).nil?
+    def is_swc? archive, type=nil
+      type == :swc || !archive.match(/\.swc$/).nil?
     end
 
-    def is_rb? archive
-      !archive.match(/\.rb$/).nil?
+    def is_rb? archive, type=nil
+      type == :rb || !archive.match(/\.rb$/).nil?
     end
 
     private

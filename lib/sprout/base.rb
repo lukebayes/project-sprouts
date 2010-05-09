@@ -4,6 +4,8 @@ require 'delegate'
 
 # Core, Process and Platform support:
 require 'sprout/version'
+require 'sprout/constants'
+require 'sprout/progress_bar'
 require 'sprout/string'
 require 'sprout/concern'
 require 'sprout/log'
@@ -12,9 +14,21 @@ require 'sprout/platform'
 require 'sprout/process_runner'
 require 'sprout/user'
 
+# This is a fix for Issue #106
+# http://code.google.com/p/projectsprouts/issues/detail?id=106
+# Which is created because the new version (1.0.1) of RubyGems
+# includes open-uri, while older versions do not.
+# When open-uri is included twice, we get a bunch of nasty
+# warnings because constants are being overwritten.
+gem_version = Gem::Version.new(Gem::RubyGemsVersion) 
+if(gem_version != Gem::Version.new('1.0.1')) 
+  require 'open-uri'
+end
+
 # File, Archive and Network support:
 require 'sprout/archive_unpacker'
 require 'sprout/file_target'
+require 'sprout/remote_file_loader'
 require 'sprout/remote_file_target'
 
 # External Packaging and distribution support:
@@ -71,6 +85,14 @@ module Sprout
 
       def executables
         @executables ||= {}
+      end
+
+      def cache
+        File.join(current_user.application_home('sprout'), 'cache', Sprout::VERSION::MAJOR_MINOR)
+      end
+
+      def current_user
+        User.create
       end
 
       private

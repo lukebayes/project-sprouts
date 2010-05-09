@@ -160,22 +160,38 @@ module Sprout
 
     def register_file_targets
       file_targets.each do |target|
+        target.pkg_name    = name
+        target.pkg_version = version
         register_file_target target
       end
     end
 
     def register_remote_file_targets
       #puts "resolve remotes: #{remote_file_targets.size}"
+      remote_file_targets.each do |target|
+        target.pkg_name    = name
+        target.pkg_version = version
+        #target.resolve
+        #register_file_target target
+      end
     end
 
-    def register_file_target t
-      t.executables.each do |exe|
+    def register_file_target target
+      target.executables.each do |exe|
         register_executable exe
+      end
+
+      target.libraries.each do |lib|
+        # register_library lib
       end
     end
 
     def register_executable exe
       Sprout.register_executable exe[:name], self.name, self.version, exe[:target]
+    end
+
+    def register_library lib
+      # Sprout.register_library lib
     end
 
   end

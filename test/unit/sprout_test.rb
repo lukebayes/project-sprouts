@@ -27,6 +27,30 @@ class SproutTest < Test::Unit::TestCase
     end
   end
 
+  context "cache" do
+    setup do
+      @library = File.join(fixtures, 'sprout')
+    end
+
+    should "find library from user" do
+      user = Sprout::User::OSXUser.new
+      user.stubs(:library).returns @library
+      Sprout.stubs(:current_user).returns user
+
+      expected_cache = File.join(@library, 'Sprout', 'cache', Sprout::VERSION::MAJOR_MINOR)
+      assert_equal expected_cache, Sprout.cache
+    end
+
+    should "find library for unix user" do
+      user = Sprout::User::UnixUser.new
+      user.stubs(:library).returns @library
+      Sprout.stubs(:current_user).returns user
+
+      expected_cache = File.join(@library, '.sprout', 'cache', Sprout::VERSION::MAJOR_MINOR)
+      assert_equal expected_cache, Sprout.cache
+    end
+  end
+
   context "Executables" do
 
     context "with a sandboxed load path" do

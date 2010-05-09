@@ -52,6 +52,16 @@ module Sprout
     ##
     # Error when registering executables.
     class ExecutableRegistrationError < ToolError; end
+
+    ##
+    # Error when a feature is not in a valid state
+    class ValidationError < SproutError; end
+
+    ##
+    # Error on remote file download
+    class RemoteFileLoaderError < StandardError #:nodoc:
+  end
+
   end
 end
 

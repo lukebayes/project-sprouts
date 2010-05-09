@@ -11,7 +11,7 @@ module Sprout
   module User
 
     # This is the factory that one should
-    # generally use to create new, concrete
+    # generally be used to create new, concrete
     # User objects.
     #
     # A typical example follows:

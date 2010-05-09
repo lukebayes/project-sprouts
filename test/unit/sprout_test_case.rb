@@ -29,13 +29,14 @@ module SproutTestCase # :nodoc:[all]
     clear_tasks
     Sprout.clear_executables!
     #Sprout::ProjectModel.destroy
-    if(@temp_path && File.exists?(@temp_path))
-      FileUtils.rm_rf(@temp_path)
-    end
+
+    remove_file @temp_path
+    remove_file @temp_cache
 
     if(@start_path && Dir.pwd != @start_path)
       Dir.chdir @start_path
     end
+
   end
 
   def temp_path
@@ -71,6 +72,12 @@ module SproutTestCase # :nodoc:[all]
     Rake.application.clear
   end
 
+  def create_file path
+    dir = File.dirname path
+    FileUtils.mkdir_p dir
+    FileUtils.touch path
+  end
+
   def remove_file(path=nil)
     if(path && File.exists?(path))
       FileUtils.rm_rf(path)
@@ -81,6 +88,13 @@ module SproutTestCase # :nodoc:[all]
     message ||= "Expected file not found at #{path}"
     assert(File.exists?(path), message)
   end
+
+  def assert_not_empty(path, message=nil)
+    assert_file path, message
+    files = FileList["#{path}/*"]
+    message ||= " - Expected #{path} to not be empty, but it was"
+    assert files.size > 0, message
+  end
   
   def assert_matches(expression, string, message='')
     if(expression.is_a?(String))
@@ -89,6 +103,10 @@ module SproutTestCase # :nodoc:[all]
     if(!string.match(expression))
       fail "#{message} - '#{string}' should include '#{expression}'"
     end
+  end
+
+  def temp_cache
+    @temp_cache ||= File.join(fixtures, 'sprout', 'cache')
   end
   
 end
