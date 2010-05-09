@@ -1,6 +1,6 @@
 module Sprout
   # Concrete param object for collections of strings
-  class StringsParam < ToolParam # :nodoc:
+  class StringsParam < Tool::Param
     include CollectionParam
 
   end

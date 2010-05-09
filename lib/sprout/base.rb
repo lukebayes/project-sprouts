@@ -19,7 +19,8 @@ require 'sprout/remote_file_target'
 
 # External Packaging and distribution support:
 require 'sprout/specification'
-require 'sprout/tool_task'
+require 'sprout/tool'
+require 'sprout/tool/task'
 
 module Sprout
 
@@ -30,10 +31,14 @@ module Sprout
 
       ##
       # Tool Specifications should register their executables with this method
-      # so that Tasks can later call +get_executable+ to retrieve the path to 
+      # so that Tasks can later call +load_executable+ to retrieve the path to 
       # the actual executable file.
       #
       def register_executable name, gem_name, gem_version, path
+        path = File.expand_path path
+        if(!File.exists? path )
+            raise Sprout::Errors::UsageError.new "Cannot find registered executable at: #{path}. Looks like there's a problem with a #{name}.sproutspec."
+        end
         key = "#{name}-#{gem_name}"
         if(executables.has_key?(key) && executables[key][:gem_version] != gem_version)
           raise Sprout::Errors::ExecutableRegistrationError.new "Cannot register an executable with the same name (#{name}) and different versions (#{gem_version}) vs (#{executables[key][:gem_version]})."
@@ -54,14 +59,18 @@ module Sprout
       # In order to get the correct tools to register, you should probably
       # ensure they are added to your project Gemfile.
       #
-      def get_executable name, gem_name, gem_version=nil
-        # puts "get_executable with name: #{name} gem_name: #{gem_name} gem_version: #{gem_version}"
+      def load_executable name, gem_name, gem_version=nil
+        # puts "load_executable with name: #{name} gem_name: #{gem_name} gem_version: #{gem_version}"
         require_gem_for_executable gem_name
         begin
           ensure_version_requirement executables["#{name}-#{gem_name}"], gem_version
         rescue NoMethodError => e
           raise Sprout::Errors::MissingExecutableError.new "The requested executable (#{name}) in gem (#{gem_name}) and version (#{gem_version}) does not appear to be loaded."
         end
+      end
+
+      def executables
+        @executables ||= {}
       end
 
       private
@@ -74,10 +83,6 @@ module Sprout
         else
           raise Sprout::Errors::VersionRequirementNotMetError.new "Could not meet the version requirement of (#{version}) with (#{exe[:gem_name]} #{exe[:gem_version]}). \n\nYou probably need to update your Gemfile and run 'bundle install' to update your local gems."
         end
-      end
-
-      def executables
-        @executables ||= {}
       end
 
       def require_gem_for_executable name

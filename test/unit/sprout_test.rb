@@ -41,7 +41,7 @@ class SproutTest < Test::Unit::TestCase
       end
 
       should "fine requested executables" do
-        Sprout.get_executable :mxmlc, 'flex3sdk', '>= 3.0.0'
+        Sprout.load_executable :mxmlc, 'flex3sdk', '>= 3.0.0'
       end
     end
     
@@ -80,16 +80,16 @@ class SproutTest < Test::Unit::TestCase
           end
 
           should "succeed if the tool is available and no version specified" do
-            assert_equal @target, Sprout.get_executable(:mxmlc, 'flex3sdk')
+            assert_equal File.expand_path(@target), Sprout.load_executable(:mxmlc, 'flex3sdk')
           end
 
           should "succeed if version requirement is met" do
-            assert_equal @target, Sprout.get_executable(:mxmlc, 'flex3sdk', '>= 1.0.pre')
+            assert_equal File.expand_path(@target), Sprout.load_executable(:mxmlc, 'flex3sdk', '>= 1.0.pre')
           end
 
           should "fail if version requirement is not met" do
             assert_raises Sprout::Errors::VersionRequirementNotMetError do
-              exe = Sprout.get_executable :mxmlc, 'flex3sdk', '>= 1.1.0'
+              exe = Sprout.load_executable :mxmlc, 'flex3sdk', '>= 1.1.0'
             end
           end
 
@@ -99,7 +99,7 @@ class SproutTest < Test::Unit::TestCase
       context "that are not registered" do
         should "fail when requested" do
           assert_raises Sprout::Errors::MissingExecutableError do
-            exe = Sprout.get_executable :mxmlc, 'flex3sdk'
+            exe = Sprout.load_executable :mxmlc, 'flex3sdk'
           end
         end
       end

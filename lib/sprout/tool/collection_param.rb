@@ -6,7 +6,7 @@ module Sprout
   # value.
   # 
   # Should only be included by classes that 
-  # extend Sprout::ToolParam.
+  # extend Sprout::Tool::Param.
   #
   module CollectionParam
 

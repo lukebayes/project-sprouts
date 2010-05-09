@@ -1,7 +1,7 @@
 module Sprout
 
   # Concrete param object for collections of files
-  class FilesParam < ToolParam
+  class FilesParam < Tool::Param
     include CollectionParam
 
     # The prepare method should be called

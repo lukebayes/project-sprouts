@@ -25,7 +25,7 @@ module Sprout
   #
   # Whenever a rake build task (Sprout::Tool) or library task,
   # (Sprout::Library) is encountered, it will call
-  # Sprout.get_executable or Sprout.get_library (respectively).
+  # Sprout.load_executable or Sprout.get_library (respectively).
   #
   # These methods will attempt to +require+ the provided
   # specification and - if it's in your load path - the specification
@@ -152,13 +152,30 @@ module Sprout
     def post_initialize
       # TODO: the included 'files' should get modified by the following expressions:
       #included_files = FileList["**/*"].exclude /.DS_Store|generated|.svn|.git|airglobal.swc|airframework.swc/
-      resolve_remote_file_targets
+      register_file_targets
+      register_remote_file_targets
     end
 
     private
 
-    def resolve_remote_file_targets
-      puts "resolve remotes: #{remote_file_targets.size}"
+    def register_file_targets
+      file_targets.each do |target|
+        register_file_target target
+      end
+    end
+
+    def register_remote_file_targets
+      #puts "resolve remotes: #{remote_file_targets.size}"
+    end
+
+    def register_file_target t
+      t.executables.each do |exe|
+        register_executable exe
+      end
+    end
+
+    def register_executable exe
+      Sprout.register_executable exe[:name], self.name, self.version, exe[:target]
     end
 
   end

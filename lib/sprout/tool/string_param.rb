@@ -2,7 +2,7 @@
 module Sprout
 
   # Concrete param object for :string values
-  class StringParam < ToolParam
+  class StringParam < Tool::Param
 
     def shell_value
       value.gsub(/ /, '\ ')

@@ -5,7 +5,7 @@ require 'test/fixtures/tool/mxmlc_task'
 class ToolTaskTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "a new tool" do
+  context "a new tool task" do
 
     setup do
       @tool = FakeToolTask.new
@@ -50,7 +50,7 @@ class ToolTaskTest < Test::Unit::TestCase
 
       assert_raises Sprout::Errors::UsageError do
         class BrokenTool
-          include Sprout::ToolTask
+          include Sprout::Tool::Task
           add_param :broken_param, :unknown_type
         end
 
@@ -61,7 +61,7 @@ class ToolTaskTest < Test::Unit::TestCase
     should "define a new method" do
 
       class WorkingTool
-        include Sprout::ToolTask
+        include Sprout::Tool::Task
         add_param :custom_name, :string
       end
 
@@ -77,10 +77,10 @@ class ToolTaskTest < Test::Unit::TestCase
 
     context "with a custom param (defined below)" do
       should "attempt to instantiate by adding _param to the end" do
-        assert_not_nil Sprout::ParameterFactory.create :custom
+        assert_not_nil Sprout::Tool::ParameterFactory.create :custom
       end
       should "attempt to instantiate an unknown type before failing" do
-        assert_not_nil Sprout::ParameterFactory.create :custom_param
+        assert_not_nil Sprout::Tool::ParameterFactory.create :custom_param
       end
     end
 
@@ -151,7 +151,7 @@ class ToolTaskTest < Test::Unit::TestCase
       @tool.input = 'test/fixtures/tool/src/Main.as'
       @tool.source_path << 'test/fixtures/tool/src'
       @tool.debug = true
-      Sprout.expects(:get_executable).with(:mxmlc, 'sprout-flex3sdk', '>= 1.0.pre').returns @mxmlc_executable
+      Sprout.expects(:load_executable).with(:mxmlc, 'sprout-flex3sdk', '>= 1.0.pre').returns @mxmlc_executable
 
       # Ensure the exe file mode is NOT valid:
       File.chmod 0644, @mxmlc_executable
@@ -167,10 +167,10 @@ class ToolTaskTest < Test::Unit::TestCase
   end
 end
 
-class CustomParam < Sprout::ToolParam; end
+class CustomParam < Sprout::Tool::Param; end
 
 class FakeToolTask
-  include Sprout::ToolTask
+  include Sprout::Tool::Task
 
   add_param :boolean_param, :boolean
   add_param :file_param,    :file
