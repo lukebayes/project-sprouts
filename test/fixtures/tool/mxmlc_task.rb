@@ -40,7 +40,7 @@ module Sprout
   # http://livedocs.adobe.com/flex/2/docs/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&file=00001481.html
   #
   class MXMLCTask
-    include Sprout::Tool
+    include Sprout::ToolTask
     
     ##
     # Enables accessibility features when compiling the Flex application or SWC file. The default value is false.

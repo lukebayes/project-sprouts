@@ -2,14 +2,14 @@ require 'sprout/tool/parameter_factory'
 
 module Sprout
 
-  module Tool
+  module ToolTask
     DEFAULT_FILE_EXPRESSION = '/**/**/*'
 
     extend Concern
 
     module ClassMethods
 
-      # +add_param+ is the workhorse of the Tool support.
+      # +add_param+ is the workhorse of the ToolTask.
       # This method is used to add new shell parameters to the tool interface.
       #
       # +name+ is a symbol or string that represents the parameter that you would like to add
@@ -152,20 +152,20 @@ module Sprout
       # Called by Parameters like :path and :paths
       #
       def default_file_expression
-        @default_file_expression ||= Sprout::Tool::DEFAULT_FILE_EXPRESSION
+        @default_file_expression ||= Sprout::ToolTask::DEFAULT_FILE_EXPRESSION
       end
 
       ##
       # The default RubyGem that we will use when requesting our executable.
       #
-      # Classes that include the Tool can set the default value for this property
+      # Classes that include the ToolTask can set the default value for this property
       # at the class level with:
       #
       #     set :gem_name, 'sprout-sometoolname'
       #
       # But that value can be overridden on each instance like:
       #
-      #     tool = SomeTool.new
+      #     tool = SomeToolTask.new
       #     tool.gem_name = 'sprout-othertoolname'
       #
       # This parameter is required - either from the including class or instance
@@ -176,14 +176,14 @@ module Sprout
       ##
       # The default RubyGem version that we will use when requesting our executable.
       #
-      # Classes that include the Tool can set the default value for this property
+      # Classes that include the ToolTask can set the default value for this property
       # at the class level with:
       #
       #     set :gem_version, '>= 1.0.3'
       #
       # But that value can be overriden on each instance like:
       #
-      #     tool = SomeTool.new
+      #     tool = SomeToolTask.new
       #     too.gem_version = '>= 2.0.0'
       #
       # This parameter is required - either from the including class or instance
@@ -194,14 +194,14 @@ module Sprout
       ##
       # The default Sprout executable that we will use for this tool.
       #
-      # Classes that include the Tool can set the default value for this property
+      # Classes that include the ToolTask can set the default value for this property
       # at the class level with:
       #
       #     set :executable, :mxmlc
       #
       # But that value can be overriden on each instance like:
       #
-      #     tool = SomeTool.new
+      #     tool = SomeToolTask.new
       #     too.executable :compc
       #
       # This parameter is required - either from the including class or instance
@@ -225,7 +225,7 @@ module Sprout
 
         # First ensure the named accessor doesn't yet exist...
         if(parameter_hash_includes? name)
-          raise Sprout::Errors::ToolError.new("Tool.add_param called with existing parameter name: #{name_s}")
+          raise Sprout::Errors::ToolError.new("ToolTask.add_param called with existing parameter name: #{name_s}")
         end
 
         create_parameter declaration

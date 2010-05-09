@@ -2,13 +2,13 @@ require File.dirname(__FILE__) + '/test_helper'
 
 require 'test/fixtures/tool/mxmlc_task'
 
-class ToolTest < Test::Unit::TestCase
+class ToolTaskTest < Test::Unit::TestCase
   include SproutTestCase
 
   context "a new tool" do
 
     setup do
-      @tool = FakeTool.new
+      @tool = FakeToolTask.new
     end
 
     # TODO: Test each parameter type:
@@ -50,7 +50,7 @@ class ToolTest < Test::Unit::TestCase
 
       assert_raises Sprout::Errors::UsageError do
         class BrokenTool
-          include Sprout::Tool
+          include Sprout::ToolTask
           add_param :broken_param, :unknown_type
         end
 
@@ -61,7 +61,7 @@ class ToolTest < Test::Unit::TestCase
     should "define a new method" do
 
       class WorkingTool
-        include Sprout::Tool
+        include Sprout::ToolTask
         add_param :custom_name, :string
       end
 
@@ -169,8 +169,8 @@ end
 
 class CustomParam < Sprout::ToolParam; end
 
-class FakeTool
-  include Sprout::Tool
+class FakeToolTask
+  include Sprout::ToolTask
 
   add_param :boolean_param, :boolean
   add_param :file_param,    :file

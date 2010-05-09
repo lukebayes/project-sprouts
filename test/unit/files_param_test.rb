@@ -12,7 +12,7 @@ class FilesParamTest < Test::Unit::TestCase
 
       @param = Sprout::FilesParam.new
       @param.name = 'inputs'
-      @param.belongs_to = FakeTool.new
+      @param.belongs_to = FakeToolTask.new
     end
 
     ['abcd', 1234, true].each do |value|

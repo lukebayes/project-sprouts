@@ -84,6 +84,8 @@ module Sprout
     # Class Methods:
     class << self
 
+      # Load an arbitrary file with a single
+      # Sprout::Specification declared in it.
       def load filename
         data = File.read filename
         eval data, nil, filename
@@ -150,12 +152,13 @@ module Sprout
     def post_initialize
       # TODO: the included 'files' should get modified by the following expressions:
       #included_files = FileList["**/*"].exclude /.DS_Store|generated|.svn|.git|airglobal.swc|airframework.swc/
-      added = []
-      @file_targets.each do |target|
-        added << target.files
-      end
-      added.flatten!
-      self.files = added
+      resolve_remote_file_targets
+    end
+
+    private
+
+    def resolve_remote_file_targets
+      puts "resolve remotes: #{remote_file_targets.size}"
     end
 
   end
