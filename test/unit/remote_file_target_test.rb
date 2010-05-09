@@ -7,11 +7,11 @@ class RemoteFileTargetTest < Test::Unit::TestCase
 
     setup do
       @target = Sprout::RemoteFileTarget.new
-      @target.platform = :universal
-      @target.add_executable :mxmlc, 'bin/mxmlc'
-      @target.add_library :flexsdk, 'lib/flexsdk.swc'
-      @target.add_library :airglobals, 'lib/airglobals.swc'
-      @target.add_library :playerglobal, 'lib/playerglobals.swc'
+      @target.platform =     :universal
+      @target.add_executable :mxmlc,        'bin/mxmlc'
+      @target.add_library    :flexsdk,      'lib/flexsdk.swc'
+      @target.add_library    :airglobals,   'lib/airglobals.swc'
+      @target.add_library    :playerglobal, 'lib/playerglobals.swc'
     end
 
     should "have assigned executable" do

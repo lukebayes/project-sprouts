@@ -19,15 +19,27 @@ module Sprout
   # any server other than Adobe's as a matter of fact).
   #
   # In order to overcome this restriction, we have introduced
-  # a new Specification format that delegates most of its work
-  # to RubyGem's {Gem::Specification}[http://rubygems.rubyforge.org/rdoc/Gem/Specification.html], 
-  # but adds some features that make it possible for us to refer 
-  # directly to bundled content, and refer to remote packages of content.
+  # a Sprout::Specification. This is a regular Ruby file with regular
+  # Ruby code in it. The main idea behind this file, is that it
+  # needs to be given a name and available in your load path.
+  #
+  # Whenever a rake build task (Sprout::Tool) or library task,
+  # (Sprout::Library) is encountered, it will call
+  # Sprout.get_executable or Sprout.get_library (respectively).
+  #
+  # These methods will attempt to +require+ the provided
+  # specification and - if it's in your load path - the specification
+  # will be loaded, and any relevant file targets will be returned.
+  #
+  # There are many ways to get Ruby code into your load path.
+  # One of the easiest to package it up in a RubyGem and
+  # configure the +require_paths+ parameter of  your Gem::Specification.
+  #
+  # http://docs.rubygems.org/read/chapter/20#require_paths
   #
   # To learn more about packaging RubyGems:
   #
   # http://docs.rubygems.org/read/chapter/20#page85
-  #
   # http://rubygems.rubyforge.org/rdoc/Gem/Specification.html
   #
   # To learn more about published RubyGems:
@@ -37,42 +49,53 @@ module Sprout
   # To package a SWC library into a Sprout RubyGem, you would create a file (usually)
   # named [project_name.spec] in the root of the project.
   #
+  # This is your Gem::Specification.
+  #
+  # You would also create a file named [projet_name.sproutspec] and put that
+  # into the root of the project or some other folder that you have added to 
+  # the Gem::Specification.require_paths parameter.
+  #
   # == Example: Include a file directly in the RubyGem
   #
-  # In the case of AsUnit, this file would be named asunit4.spec and it's contents
+  # In the case of AsUnit, this file would be named asunit4.sproutspec and it's contents
   # are as follows:
   #
-  #    :include:../../test/fixtures/specification/asunit4.spec
+  #    :include:../../test/fixtures/specification/asunit4.sproutspec
   #
   # == Example: Refer to files that are not in the RubyGem
   #
   # For projects like the Flex SDK, we can't distribute many of the required files,
   # so we can refer to these files in our Sprout::Specification as +remote_file_targets+.
   #
-  #    :include:../../test/fixtures/specification/flex4sdk.spec
+  #    :include:../../test/fixtures/specification/flex4sdk.sproutspec
   #
   # == Example: Create custom downloads for each supported platform
   #
   # For projects like the Flash Player itself, we need to refer to different 
   # downloadable content for each supported platform.
   #
-  #    :include:../../test/fixtures/specification/flashplayer.spec
-  #
+  #    :include:../../test/fixtures/specification/flashplayer.sproutspec
   #
   # == Packaging and Sharing
   #
   # Public RubyGems are hosted at http://rubygems.org. 
-  #
-  # If you create a Sprout::Specification, you can build a
-  # gem and push it to any gem host (by default rubygems.org).
-  #
-  # Assuming you have a spec named, +asunit4.spec+, you could
-  # do the following to package and publish that RubyGem:
-  #
-  #    gem build asunit4.spec # The file you write
-  #    gem push asunit4-4.1.pre.gem # The file that was built
-  #
-  class Specification < DelegateClass(Gem::Specification)
+  class Specification
+
+    # Class Methods:
+    class << self
+
+      def load filename
+        data = File.read filename
+        eval data, nil, filename
+      end
+    end
+
+    attr_accessor :name
+    attr_accessor :version
+    attr_accessor :files
+
+    attr_reader :remote_file_targets
+    attr_reader :file_targets
 
     # Create a new Sprout::Specification.
     #
@@ -84,8 +107,6 @@ module Sprout
     #
     def initialize
       initialize_members
-      super(@gem_spec)
-      initialize_gem_spec_members
       yield self if block_given?
       post_initialize
     end
@@ -121,14 +142,9 @@ module Sprout
     private
 
     def initialize_members
+      @files               = []
       @file_targets        = []
       @remote_file_targets = []
-      @gem_spec            = Gem::Specification.new
-    end
-
-    def initialize_gem_spec_members
-      @gem_spec.rubyforge_project = 'sprout'
-      @gem_spec.add_dependency 'sprout', '>= 1.0.pre'
     end
 
     def post_initialize

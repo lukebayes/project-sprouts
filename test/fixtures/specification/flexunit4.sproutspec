@@ -1,0 +1,17 @@
+
+Sprout::Specification.new do |s|
+  s.name = "flexunit4"
+  s.version = "4.0.pre"
+
+  s.add_remote_file_target do |t|
+    t.platform     = :universal
+    t.archive_type = :zip
+    t.url          = "http://digitalprimate.com/flexunit.zip"
+    t.md5          = "abcd"
+
+    t.add_library :swc, "primates/bin/FlexUnit.swc"
+    t.add_library :src, "primates/dist" 
+  end
+
+end
+

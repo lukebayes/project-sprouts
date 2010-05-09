@@ -2,11 +2,6 @@
 Sprout::Specification.new do |s|
   s.name        = "flashplayer"
   s.version     = "10.1.pre"
-  s.authors     = ["Luke Bayes"]
-  s.email       = ["projectsprouts@googlegroups.com"]
-  s.homepage    = "http://www.adobe.com/support/flashplayer/downloads.html"
-  s.summary     = "The Adobe Flash Player"
-  s.description = "Flash Player is a cross-platform browser plug-in that delivers breakthrough Web experiences to over 99% of Internet users."
 
   s.add_remote_file_target do |t|
     t.platform     = :macosx
