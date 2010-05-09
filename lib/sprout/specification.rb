@@ -1,4 +1,3 @@
-require 'delegate'
 
 module Sprout
 
@@ -12,10 +11,8 @@ module Sprout
   #
   # In order to support Flash development, we have one major problem
   # that RubyGems does not solve for us. This is the fact that 
-  # many elements of our tool chain are not open-source.
-  #
-  # Even the Flex SDK (as of version 4.x) which you may have heard is, "Open Source",
-  # has a license that restricts our ability to redistribute it.
+  # many elements of our tool chain are not open-source, and we do
+  # not have the rights to directly distribute them.
   #
   # This restriction means that many of our tools and dependencies cannot be 
   # packaged and distributed _directly_ within a RubyGem (or from
@@ -23,9 +20,9 @@ module Sprout
   #
   # In order to overcome this restriction, we have introduced
   # a new Specification format that delegates most of its work
-  # to RubyGem's {Gem::Specification}[http://rubygems.rubyforge.org/rdoc/Gem/Specification.html], but adds some features
-  # that make it possible for us to refer directly to bundled
-  # content, and refer to remote packages of content.
+  # to RubyGem's {Gem::Specification}[http://rubygems.rubyforge.org/rdoc/Gem/Specification.html], 
+  # but adds some features that make it possible for us to refer 
+  # directly to bundled content, and refer to remote packages of content.
   #
   # To learn more about packaging RubyGems:
   #

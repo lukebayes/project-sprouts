@@ -1,4 +1,6 @@
+# External tools and std libs:
 require 'rake'
+require 'delegate'
 
 # Core, Process and Platform support:
 require 'sprout/version'
