@@ -5,16 +5,16 @@
 name = File.basename(__FILE__).split('.').shift
 
 gem_wrap name do |t|
-  t.version       = '4.0.16'
-  t.summary       = "AsUnit3 is an ActionScript unit test framework for AIR, Flex 2/3 and ActionScript 3 projects"
+  t.version       = '4.0.1'
+  t.summary       = "AsUnit4 is an ActionScript unit test framework for AIR, Flex 2/3 and ActionScript 3 projects"
   t.author        = "Luke Bayes and Ali Mills"
   t.email         = "projectsprouts@googlegroups.com"
   t.homepage      = "http://asunit.org"
   t.sprout_spec   =<<EOF
 - !ruby/object:Sprout::RemoteFileTarget 
   platform: universal
-  filename: asunit3.zip
-  library_path: asunit3
+  filename: asunit4.zip
+  library_path: asunit4
   archive_type: zip
   url: http://github.com/lukebayes/asunit/zipball/4.0.3
   md5: 51fa35e79e2d4349d0e0d44652fb00cb
