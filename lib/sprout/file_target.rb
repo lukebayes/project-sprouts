@@ -11,9 +11,6 @@ module Sprout
   #
   class FileTarget
 
-    # TODO: I think files is going away now that we're not
-    # delegating to the Gem::Specification
-    attr_accessor :files
     attr_accessor :pkg_name
     attr_accessor :pkg_version
     attr_accessor :platform
@@ -24,10 +21,8 @@ module Sprout
     def initialize
       @executables = []
       @libraries   = []
-      @files       = []
       @platform    = :universal
       yield self if block_given?
-      @files       = cleanup_files @files
     end
 
     ##
@@ -42,7 +37,6 @@ module Sprout
     # 
     def add_library name, target
       libraries << { :name => name, :target => target }
-      files << target
     end
 
     ##
@@ -52,13 +46,12 @@ module Sprout
     # @target The relative path to the executable that will be associated
     # with this name.
     #
-    def add_executable name, target
-      executables << { :name => name, :target => target }
-      files << target
+    def add_executable name, path
+      executables << Sprout::Executable.new( :name => name, :path => path, :file_target => self )
     end
 
     def to_s
-      "[FileTarget type=#{type} platform=#{platform} files=#{files.inspect}]"
+      "[FileTarget type=#{type} platform=#{platform}]"
     end
 
     def validate
@@ -71,6 +64,11 @@ module Sprout
 
     private
 
+=begin
+    # Removed the 'files' list when we stopped
+    # delegating to the Gem::Specification,
+    # files should be included from gems or 
+    # whatever means of packaging you have...
     def cleanup_files files
       new_files = []
       updated = files.flatten
@@ -83,6 +81,7 @@ module Sprout
       end
       new_files
     end
+=end
 
   end
 end

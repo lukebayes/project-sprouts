@@ -55,6 +55,12 @@ module SproutTestCase # :nodoc:[all]
     Sprout::User.stubs(:create).returns Sprout::User::UnixUser.new
     yield if block_given?
   end
+
+  def as_a_mac_user
+    Sprout::User.stubs(:create).returns Sprout::User::OSXUser.new
+    yield if block_given?
+  end
+  
   
   def run_task(name)
     t = Rake.application[name]

@@ -49,6 +49,7 @@ class SpecificationTest < Test::Unit::TestCase
 
     should "load a complex configuration without error" do
       spec = Sprout::Specification.load @flexsdk_spec
+      spec.stubs(:register_remote_file_targest)
       assert spec.is_a?(Sprout::Specification)
       assert_equal 'flex4sdk', spec.name
       assert_equal '4.0.pre', spec.version

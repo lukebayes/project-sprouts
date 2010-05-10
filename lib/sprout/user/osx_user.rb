@@ -17,6 +17,10 @@ module Sprout::User
       return name.capitalize
     end
 
+    def can_execute? platform
+      platform == :mac || platform == :osx || platform == :macosx || platform == :darwin || super
+    end
+
   end
 end
 

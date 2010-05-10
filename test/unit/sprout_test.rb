@@ -64,55 +64,61 @@ class SproutTest < Test::Unit::TestCase
         $:.shift
       end
 
-      should "fine requested executables" do
-        Sprout.load_executable :mxmlc, 'flex3sdk', '>= 3.0.0'
+      should "find requested executables" do
+        as_a_mac_user do
+          Sprout.load_executable :mxmlc, 'flex3sdk', '>= 3.0.0'
+        end
       end
     end
     
     context "with a stubbed load path" do
 
-      setup do
-        Sprout.stubs(:require_gem_for_executable).returns true
-        @target = 'test/fixtures/process_runner/chmod_script.sh'
+      def register_executable name, pkg_name, pkg_version, path, platform=:macosx
+        exe = Sprout::Executable.new({
+          :name => name,
+          :path => path,
+          :pkg_name => pkg_name,
+          :pkg_version => pkg_version,
+          :platform => platform
+        })
+        Sprout.register_executable exe
       end
 
-      should "fail when registered with same name and different versions" do
-        Sprout.register_executable :mxmlc, 'flex3sdk', '1.0.0', @target
-        assert_raises Sprout::Errors::ExecutableRegistrationError do
-          Sprout.register_executable :mxmlc, 'flex3sdk', '1.0.pre', @target
-        end
+      setup do
+        Sprout.stubs(:require_rb_for_executable).returns true
+        @path = 'test/fixtures/process_runner/chmod_script.sh'
       end
 
       should "work when registered with different gem names" do
-        Sprout.register_executable :mxmlc, 'flex3sdk', '1.0.pre', @target
-        Sprout.register_executable :mxmlc, 'flex4sdk', '1.0.pre', @target
+        register_executable :mxmlc, 'flex3sdk', '1.0.pre', @path
+        register_executable :mxmlc, 'flex4sdk', '1.0.pre', @path
       end
 
       should "work when registered with different exe names" do
-        Sprout.register_executable :mxmlc, 'flex3sdk', '1.0.pre', @target
-        Sprout.register_executable :compc, 'flex3sdk', '1.0.pre', @target
+        register_executable :mxmlc, 'flex3sdk', '1.0.pre', @path
+        register_executable :compc, 'flex3sdk', '1.0.pre', @path
       end
 
       context "that are registered" do
         should "work the first time" do
-          Sprout.register_executable :mxmlc, 'flex3sdk', '1.0.pre', @target
+          register_executable :mxmlc, 'flex3sdk', '1.0.pre', @path
         end
 
         context "and then requested" do
           setup do
-            Sprout.register_executable :mxmlc, 'flex3sdk', '1.0.pre', @target
+            register_executable :mxmlc, 'flex3sdk', '1.0.pre', @path
           end
 
           should "succeed if the tool is available and no version specified" do
-            assert_equal File.expand_path(@target), Sprout.load_executable(:mxmlc, 'flex3sdk')
+            assert_equal @path, Sprout.load_executable(:mxmlc, 'flex3sdk')
           end
 
           should "succeed if version requirement is met" do
-            assert_equal File.expand_path(@target), Sprout.load_executable(:mxmlc, 'flex3sdk', '>= 1.0.pre')
+            assert_equal @path, Sprout.load_executable(:mxmlc, 'flex3sdk', '>= 1.0.pre')
           end
 
           should "fail if version requirement is not met" do
-            assert_raises Sprout::Errors::VersionRequirementNotMetError do
+            assert_raises Sprout::Errors::MissingExecutableError do
               exe = Sprout.load_executable :mxmlc, 'flex3sdk', '>= 1.1.0'
             end
           end

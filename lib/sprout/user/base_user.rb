@@ -71,6 +71,10 @@ module Sprout::User
       runner
     end
 
+    def can_execute? platform
+      platform == :universal
+    end
+
     ##
     # Creates a new process, executes the command
     # and returns whatever the process wrote to stdout, or stderr.

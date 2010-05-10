@@ -23,6 +23,10 @@ module Sprout::User
       return name.split(" ").join("_").downcase
     end
 
+    def can_execute? platform
+      platform == :unix || platform == :linux || super
+    end
+
     ##
     # Repair Windows Line endings
     # found in non-windows executables

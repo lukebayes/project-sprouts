@@ -27,6 +27,7 @@ end
 
 # File, Archive and Network support:
 require 'sprout/archive_unpacker'
+require 'sprout/executable'
 require 'sprout/file_target'
 require 'sprout/remote_file_loader'
 require 'sprout/remote_file_target'
@@ -48,21 +49,9 @@ module Sprout
       # so that Tasks can later call +load_executable+ to retrieve the path to 
       # the actual executable file.
       #
-      def register_executable name, gem_name, gem_version, path
-        path = File.expand_path path
-        if(!File.exists? path )
-            raise Sprout::Errors::UsageError.new "Cannot find registered executable at: #{path}. Looks like there's a problem with a #{name}.sproutspec."
-        end
-        key = "#{name}-#{gem_name}"
-        if(executables.has_key?(key) && executables[key][:gem_version] != gem_version)
-          raise Sprout::Errors::ExecutableRegistrationError.new "Cannot register an executable with the same name (#{name}) and different versions (#{gem_version}) vs (#{executables[key][:gem_version]})."
-        end
-        executables[key] = { 
-                             :name        => name,
-                             :gem_name    => gem_name,
-                             :gem_version => gem_version,
-                             :path        => path
-                           }
+      def register_executable executable
+        executables << executable
+        executable
       end
 
       ##
@@ -73,18 +62,21 @@ module Sprout
       # In order to get the correct tools to register, you should probably
       # ensure they are added to your project Gemfile.
       #
-      def load_executable name, gem_name, gem_version=nil
-        # puts "load_executable with name: #{name} gem_name: #{gem_name} gem_version: #{gem_version}"
-        require_gem_for_executable gem_name
-        begin
-          ensure_version_requirement executables["#{name}-#{gem_name}"], gem_version
-        rescue NoMethodError => e
-          raise Sprout::Errors::MissingExecutableError.new "The requested executable (#{name}) in gem (#{gem_name}) and version (#{gem_version}) does not appear to be loaded."
+      def load_executable name, pkg_name, version_requirement=nil
+        # puts "load_executable with name: #{name} pkg_name: #{pkg_name} pkg_version: #{pkg_version}"
+        require_rb_for_executable pkg_name
+        executable = executable_for(current_user, pkg_name, name, version_requirement)
+        if(executable.nil?)
+          message = "The requested executable: (#{name}) from: (#{pkg_name}) and version: "
+          message << "(#{version_requirement}) does not appear to be loaded."
+          message << "\n\nYou probably need to update your Gemfile and run 'bundle install' to update your local gems."
+          raise Sprout::Errors::MissingExecutableError.new message
         end
+        executable.path
       end
 
       def executables
-        @executables ||= {}
+        @executables ||= []
       end
 
       def cache
@@ -97,17 +89,24 @@ module Sprout
 
       private
 
-      def ensure_version_requirement exe, version
-        exe_version = Gem::Version.create exe[:gem_version]
-        req_version = Gem::Requirement.create version
-        if(req_version.satisfied_by? exe_version)
-          exe[:path]
-        else
-          raise Sprout::Errors::VersionRequirementNotMetError.new "Could not meet the version requirement of (#{version}) with (#{exe[:gem_name]} #{exe[:gem_version]}). \n\nYou probably need to update your Gemfile and run 'bundle install' to update your local gems."
-        end
+      def executable_for user, pkg, name, version_requirement
+        executables.select do |exe|
+          user.can_execute?(exe.platform) && 
+            exe.pkg_name == pkg && 
+            exe.name == name && 
+            requirement_satisfied_by?( exe.pkg_version, version_requirement )
+        end.first
       end
 
-      def require_gem_for_executable name
+      def requirement_satisfied_by? version, version_requirement=nil
+        return true if version_requirement.nil?
+
+        exe_version = Gem::Version.create version
+        req_version = Gem::Requirement.create version_requirement
+        req_version.satisfied_by?(exe_version)
+      end
+
+      def require_rb_for_executable name
         begin
           require name
         rescue LoadError => e

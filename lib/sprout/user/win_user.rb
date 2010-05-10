@@ -43,6 +43,10 @@ module Sprout::User
       return name.capitalize
     end
 
+    def can_execute? platform
+      platform == :windows || platform == :win32 || super
+    end
+
     private
 
     def env_path
