@@ -774,6 +774,7 @@ EOF
     def clean_nested_source_paths(paths)
       results = []
       paths.each do |path|
+        # TODO: This should only happen if: allow_source_path_overlap != true
         if(check_nested_source_path(results, path))
           results << path
         end
