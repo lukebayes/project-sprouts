@@ -11,7 +11,7 @@ require 'rake/rdoctask'
 require File.dirname(__FILE__) + '/lib/sprout/version'
 
 Rake::RDocTask.new do |rdoc|
-  rdoc.title = "Project Sprouts v.#{Sprout::VERSION}"
+  rdoc.title = "Project Sprouts v.#{Sprout::VERSION::STRING}"
   rdoc.rdoc_dir = 'rdoc'
   rdoc.main = "Sprout::Sprout"
   rdoc.rdoc_files.include("README.textile", "lib/**/*.rb")

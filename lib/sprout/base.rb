@@ -69,7 +69,8 @@ module Sprout
         if(executable.nil?)
           message = "The requested executable: (#{name}) from: (#{pkg_name}) and version: "
           message << "(#{version_requirement}) does not appear to be loaded."
-          message << "\n\nYou probably need to update your Gemfile and run 'bundle install' to update your local gems."
+          message << "\n\nYou probably need to update your Gemfile and run 'bundle install' "
+          message << "to update your local gems."
           raise Sprout::Errors::MissingExecutableError.new message
         end
         executable.path

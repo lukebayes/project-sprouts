@@ -7,7 +7,7 @@ require 'sprout/version'
 
 Gem::Specification.new do |s|
   s.name                      = "sprout"
-  s.version                   = Sprout::VERSION
+  s.version                   = Sprout::VERSION::STRING
   s.platform                  = Gem::Platform::RUBY
   s.authors                   = ["Luke Bayes"]
   s.email                     = ["lbayes@patternpark.com"]

@@ -10,6 +10,7 @@ module Sprout
       options ||= {}
       @name        = options[:name]
       @path        = options[:path]
+      @file_target = Sprout::FileTarget.new
       
       # You can provide a file_target OR all optional params.
       # kind of smelly...
