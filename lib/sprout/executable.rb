@@ -35,6 +35,13 @@ module Sprout
     def resolve
       file_target.resolve unless file_target.nil?
     end
+
+    def satisfies_requirement? version_requirement
+        return true if version_requirement.nil?
+        exe_version = Gem::Version.create pkg_version
+        req_version = Gem::Requirement.create version_requirement
+        req_version.satisfied_by?(exe_version)
+    end
   end
 
 end

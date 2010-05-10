@@ -94,16 +94,8 @@ module Sprout
           user.can_execute?(exe.platform) && 
             exe.pkg_name == pkg && 
             exe.name == name && 
-            requirement_satisfied_by?( exe.pkg_version, version_requirement )
+            exe.satisfies_requirement?(version_requirement)
         end.first
-      end
-
-      def requirement_satisfied_by? version, version_requirement=nil
-        return true if version_requirement.nil?
-
-        exe_version = Gem::Version.create version
-        req_version = Gem::Requirement.create version_requirement
-        req_version.satisfied_by?(exe_version)
       end
 
       def require_rb_for_executable name
