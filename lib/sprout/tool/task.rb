@@ -46,17 +46,17 @@ module Sprout::Tool::Task
       options ||= {}
       options[:name] = name
 
-      parameter_declarations << options
+      class_declarations << options
 
-      parameter_accessors name
+      create_class_accessors name
     end
     
     def add_param_alias new_name, old_name
-      parameter_accessors new_name, old_name
+      create_class_accessors new_name, old_name
     end
 
-    def parameter_declarations
-      @parameter_declarations ||= []
+    def class_declarations
+      @class_declarations ||= []
     end
 
     def set name, value
@@ -65,7 +65,7 @@ module Sprout::Tool::Task
 
     private
 
-    def parameter_accessors name, real_name=nil
+    def create_class_accessors name, real_name=nil
       real_name ||= name
 
       # define the setter:
@@ -101,13 +101,13 @@ module Sprout::Tool::Task
 
     def initialize
       super
-      @appended_args     = nil
-      @prepended_args    = nil
+      @appended_args  = nil
+      @prepended_args = nil
       # @preprocessed_path = nil
 
-      @param_hash        = {}
-      @params            = []
-      @prerequisites     = []
+      @param_hash     = {}
+      @params         = []
+      @prerequisites  = []
       initialize_parameters
     end
 
@@ -128,7 +128,7 @@ module Sprout::Tool::Task
     #
     def execute *args
       exe = Sprout.load_executable executable, gem_name, gem_version
-      Sprout::User.create.execute exe
+      Sprout.current_user.execute exe
     end
 
     # Create a string that represents this configured tool for shell execution
@@ -210,7 +210,7 @@ module Sprout::Tool::Task
     private
 
     def initialize_parameters
-      self.class.parameter_declarations.each do |declaration|
+      self.class.class_declarations.each do |declaration|
         initialize_parameter declaration
       end
     end
