@@ -29,16 +29,8 @@ module Sprout::Tool
       if(!File.exists?(filename))
         return load_spec_from_parent dir, name
       end
-      content = File.read filename
-      #TODO: 
-      # This doesn't feel right - can't we get the working dir some other way?
-      start = Dir.pwd
-      begin
-        Dir.chdir dir
-        eval( content, binding, name )
-      ensure
-        Dir.chdir start
-      end
+
+      Sprout::Specification.load filename
     end
 
     def load_spec_from_parent dir, name

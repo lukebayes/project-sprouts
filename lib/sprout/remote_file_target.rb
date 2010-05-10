@@ -20,6 +20,16 @@ module Sprout
       self
     end
 
+    protected
+
+    def expand_executable_path path
+      super
+      # TODO: This is failing b/c it gets called before
+      # we can set pkg_name and pkg_version - so join 
+      # raises null pointer error.
+      #File.join unpacked_file, path
+    end
+
     private
 
     def downloaded_file
@@ -40,8 +50,7 @@ module Sprout
     end
 
     def download_archive
-      puts "resolving #{url} to: #{Sprout.cache}"
-      #bytes = Sprout::RemoteFileLoader.load(url, md5, pkg_name)
+      Sprout::RemoteFileLoader.load(url, md5, pkg_name)
     end
 
     def write_archive bytes

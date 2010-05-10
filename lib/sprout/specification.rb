@@ -88,7 +88,12 @@ module Sprout
       # Sprout::Specification declared in it.
       def load filename
         data = File.read filename
+        @current_context = File.dirname(filename)
         eval data, nil, filename
+      end
+
+      def current_context
+        @current_context ||= ''
       end
     end
 
@@ -110,7 +115,7 @@ module Sprout
     def initialize
       initialize_members
       yield self if block_given?
-      post_initialize
+      register
     end
 
     # Add a remote file target to this RubyGem so that when it
@@ -143,20 +148,18 @@ module Sprout
 
     private
 
-    def initialize_members
-      @files               = []
-      @file_targets        = []
-      @remote_file_targets = []
-    end
-
-    def post_initialize
+    def register
       # TODO: the included 'files' should get modified by the following expressions:
       #included_files = FileList["**/*"].exclude /.DS_Store|generated|.svn|.git|airglobal.swc|airframework.swc/
       register_file_targets
       register_remote_file_targets
     end
 
-    private
+    def initialize_members
+      @files               = []
+      @file_targets        = []
+      @remote_file_targets = []
+    end
 
     def register_file_targets
       file_targets.each do |target|

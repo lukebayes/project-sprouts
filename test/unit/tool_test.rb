@@ -11,8 +11,8 @@ class ToolTest < Test::Unit::TestCase
 
     should "require the sproutspec" do
       assert_equal 0, Sprout.executables.size
-      require @echo_chamber
-      assert_equal 1, Sprout.executables.size
+      path = Sprout.load_executable :echos, @echo_chamber
+      assert_matches /fixtures\/.*echochamber.sh/, path
     end
   end
 end

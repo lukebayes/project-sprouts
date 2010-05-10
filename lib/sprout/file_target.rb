@@ -47,6 +47,7 @@ module Sprout
     # with this name.
     #
     def add_executable name, path
+      path = expand_executable_path path
       executables << Sprout::Executable.new( :name => name, :path => path, :file_target => self )
     end
 
@@ -60,6 +61,10 @@ module Sprout
     end
 
     def resolve
+    end
+
+    def expand_executable_path path
+      File.join Sprout::Specification.current_context, path
     end
 
     private

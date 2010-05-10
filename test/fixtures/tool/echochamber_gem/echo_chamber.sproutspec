@@ -1,6 +1,6 @@
 
 Sprout::Specification.new do |s|
-  s.name = 'echo-chamber'
+  s.name = 'echo_chamber'
   s.version = '1.0.pre'
 
   s.add_file_target do |t|

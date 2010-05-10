@@ -93,7 +93,7 @@ module Sprout
       def executable_for user, pkg, name, version_requirement
         executables.select do |exe|
           user.can_execute?(exe.platform) && 
-            exe.pkg_name == pkg && 
+            exe.includes_package_name?(pkg) &&
             exe.name == name && 
             exe.satisfies_requirement?(version_requirement)
         end.first

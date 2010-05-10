@@ -10,15 +10,15 @@ module Sprout
       options ||= {}
       @name        = options[:name]
       @path        = options[:path]
-      @file_target = Sprout::FileTarget.new
-      
+
       # You can provide a file_target OR all optional params.
       # kind of smelly...
-      @file_target = options[:file_target] unless !options.has_key? :file_target
+      @file_target = options[:file_target] if options.has_key? :file_target
+
       # Optional params:
-      @pkg_name    = options[:pkg_name] unless !options.has_key? :pkg_name
-      @pkg_version = options[:pkg_version] unless !options.has_key? :pkg_version
-      @platform    = options[:platform] unless !options.has_key? :platform
+      @pkg_name    = options[:pkg_name] if options.has_key? :pkg_name
+      @pkg_version = options[:pkg_version] if options.has_key? :pkg_version
+      @platform    = options[:platform] if options.has_key? :platform
     end
 
     def pkg_name
@@ -37,13 +37,23 @@ module Sprout
       file_target.resolve unless file_target.nil?
     end
 
+    def includes_package_name? name
+      name.include? pkg_name
+    end
+
     def satisfies_requirement? version_requirement
         return true if version_requirement.nil?
         exe_version = Gem::Version.create pkg_version
         req_version = Gem::Requirement.create version_requirement
         req_version.satisfied_by?(exe_version)
     end
-  end
 
+    private
+
+    def file_target
+      @file_target ||= Sprout::FileTarget.new
+    end
+
+  end
 end
 
