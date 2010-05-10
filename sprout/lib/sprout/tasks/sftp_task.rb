@@ -125,7 +125,7 @@ module Sprout
       if(get_confirmation)
         puts ">> Connecting to Remote Server: #{@username}@#{@host}:#{@remote_path}"
         
-        Net::SFTP.start(@host, @username, @password) do |sftp|
+        Net::SFTP.start(@host, @username, :password => @password, :keys => []) do |sftp|
           begin
             dir = sftp.opendir(@remote_path)
           rescue Net::SFTP::Operations::StatusException
