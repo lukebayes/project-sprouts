@@ -335,7 +335,7 @@ module Sprout
       if(param_hash.has_key? other_param.to_s)
         param_hash[name.to_s] = param_hash[other_param.to_s]
       else
-        raise ToolTaskError.new("TaskBase.add_param_alis called with")
+        raise ToolTaskError.new("TaskBase.add_param_alias called with")
       end
     end
 
