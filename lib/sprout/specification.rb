@@ -81,28 +81,13 @@ module Sprout
   # Public RubyGems are hosted at http://rubygems.org. 
   class Specification
 
-    # Class Methods:
-    class << self
-
-      # Load an arbitrary file with a single
-      # Sprout::Specification declared in it.
-      def load filename
-        data = File.read filename
-        @current_context = File.dirname(filename)
-        eval data, nil, filename
-      end
-
-      def current_context
-        @current_context ||= ''
-      end
-    end
-
     attr_accessor :name
     attr_accessor :version
-    attr_accessor :files
 
     attr_reader :file_targets
+    attr_reader :load_path
 
+    ##
     # Create a new Sprout::Specification.
     #
     # This method will yield the new Sprout::Specification to the provided block,
@@ -112,19 +97,47 @@ module Sprout
     # check out RubyGems documentation for their {Gem::Specification}[http://rubygems.rubyforge.org/rdoc/Gem/Specification.html].
     #
     def initialize
-      initialize_members
+      @load_path, @name = directory_and_file_name_from caller.first
       yield self if block_given?
-      register
     end
 
+    ##
     # Add a remote file target to this RubyGem so that when it
-    # is installed, Sprouts will go fetch this file from the network.
+    # is loaded, Sprouts will go fetch this file from the network.
     #
     # Each time this method is called, a new Sprout::RemoteFiletarget instance will be yielded to
-    # the provided block and added to a collection for packaging.
+    # the provided block and resolved after the block completes.
     #
+    # After this block is evaluated, Sprouts will first check the collection
+    # of env_names to see if the expected paths are available. If a valid
+    # env_name is found, Sprouts will return the path to the requested
+    # executable from the environment variable.
+    #
+    # If no env_names are set, or the requested executable is not found within
+    # any that are identified, Sprouts will check to see if the archive
+    # has already been unpacked into the expected location:
+    # 
+    #     #{SPROUT_HOME}/cache/#{SPROUT_VERSION}/flex4sdk/#{md5}/4.0.pre
+    #
+    # If the archive been unpacked, Sprouts will return the path to the 
+    # requested executable.
+    #
+    # If the archive has not been unpacked, Sprouts will check to see if the
+    # archive has been downloaded to:
+    #
+    #     #{SPROUT_HOME}/cache/#{SPROUT_VERSION}/flex4sdk/#{md5}.zip
+    #
+    # If the archive has been downloaded, it will be unpacked and the path
+    # to the requested executable will be returned.
+    #
+    # If the archive has not been downloaded, it will be downloaded, unpacked
+    # and the path to the requested executable will be returned.
     def add_remote_file_target &block
-      @file_targets << RemoteFileTarget.new(&block)
+      target = RemoteFileTarget.new do |t|
+        configure_target t, &block
+      end
+      target.resolve
+      register_file_target target
     end
 
     # Add a file to the RubyGem itself. This is a great way to package smallish libraries in either
@@ -136,54 +149,43 @@ module Sprout
     #     Sprout::Specification.new do |s|
     #        ...
     #        s.add_file_target do |t|
-    #            t.name = :swc
-    #            t.files = ["bin/AsUnit-4.1.pre.swc"]
+    #           t.platform = :universal
+    #           t.add_executable :asdoc, 'bin/asdoc'
     #        end
     #     end
     #
     def add_file_target &block
-      @file_targets << FileTarget.new(&block)
+      target = FileTarget.new do |t|
+        configure_target t, &block
+      end
+      register_file_target target
     end
 
     private
 
-    def register
-      # TODO: the included 'files' should get modified by the following expressions:
-      #included_files = FileList["**/*"].exclude /.DS_Store|generated|.svn|.git|airglobal.swc|airframework.swc/
-      register_file_targets
+    def configure_target t, &block
+      t.load_path   = load_path
+      t.pkg_name    = name
+      t.pkg_version = version
+      yield t if block_given?
     end
 
-    def initialize_members
-      @files               = []
-      @file_targets        = []
-    end
-
-    def register_file_targets
-      file_targets.each do |target|
-        target.pkg_name    = name
-        target.pkg_version = version
-        register_file_target target
-      end
+    def directory_and_file_name_from first_caller
+      filename = first_caller.split(':').shift
+      parts    = filename.split File::SEPARATOR
+      filename = parts.pop.gsub('.rb', '')
+      dir      = parts.join File::SEPARATOR
+      [dir, filename]
     end
 
     def register_file_target target
-      target.pkg_name    = name
-      target.pkg_version = version
       target.executables.each do |exe|
-        register_executable exe
+        Sprout.register_executable exe
       end
 
       target.libraries.each do |lib|
-        # register_library lib
+        # Sprout.register_library lib
       end
-    end
-
-    def register_executable exe
-      Sprout.register_executable exe
-    end
-
-    def register_library lib
-      # Sprout.register_library lib
     end
 
   end

@@ -111,3 +111,6 @@ module Sprout
   end
 end
 
+# TODO: the included 'files' should get modified by the following expressions:
+      #included_files = FileList["**/*"].exclude /.DS_Store|generated|.svn|.git|airglobal.swc|airframework.swc/
+

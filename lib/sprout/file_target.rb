@@ -11,6 +11,7 @@ module Sprout
   #
   class FileTarget
 
+    attr_accessor :load_path
     attr_accessor :pkg_name
     attr_accessor :pkg_version
     attr_accessor :platform
@@ -21,6 +22,7 @@ module Sprout
     def initialize
       @executables = []
       @libraries   = []
+      @load_path   = ''
       @platform    = :universal
       yield self if block_given?
     end
@@ -60,33 +62,9 @@ module Sprout
       raise Sprout::Errors::UsageError.new "FileTarget.pkg_version is required" if pkg_version.nil?
     end
 
-    def resolve
-    end
-
     def expand_executable_path path
-      File.join Sprout::Specification.current_context, path
+      File.join load_path, path
     end
-
-    private
-
-=begin
-    # Removed the 'files' list when we stopped
-    # delegating to the Gem::Specification,
-    # files should be included from gems or 
-    # whatever means of packaging you have...
-    def cleanup_files files
-      new_files = []
-      updated = files.flatten
-      updated.each do |file|
-        if(File.directory?(file))
-          new_files.concat FileList["#{file}/**/*"].to_a
-        else
-          new_files << file
-        end
-      end
-      new_files
-    end
-=end
 
   end
 end

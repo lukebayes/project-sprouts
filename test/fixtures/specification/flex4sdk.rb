@@ -1,20 +1,23 @@
-
-# Create the Sprout Specification:
+# This is a sample Sprout Specification.
+#
+# This document describes the Flex 4 SDK in terms of the libraries and executables
+# that is provides.
+#
+# Whenever this file is loaded (required) by a Ruby application that has already loaded
+# the core sprout files, the remote_file_target will be downloaded and installed,
+# and each executable and library will be available to any interested rake
+# tasks.
+#
+# An example of how one might retrieve a path to the downloaded MXMLC executable is
+# as follows:
+#
+#     Sprout.get_executable :mxmlc, 'flex4sdk', '>= 4.0.pre'
+#
 Sprout::Specification.new do |s|
-  s.name        = "flex4sdk"
-  s.version     = "4.0.pre"
-  #s.author      = "Adobe, Inc."
-  #s.email       = "projectsprouts@googlegroups.com"
-  #s.homepage    = "http://www.adobe.com/products/flex"
-  #s.summary     = "Adobe Flex 4 SDK including mxmlc, compc, asdoc, adl, adt, optimizer and fdb"
-  #s.description = "The Flex 4 SDK Rubygem is brought to you by Project Sprouts (http://projectsprouts.org)"
 
-  # Windows users need to reference a different set
-  # of executables from everyone else (.exe):
-  #
-  # This declaration needs to be before the :universal
-  # platform support, because the first viable match
-  # will be used.
+  s.name    = 'flex4sdk'
+  s.version = '4.0.pre'
+
   s.add_remote_file_target do |t|
     # Apply the windows-specific configuration:
     t.platform = :universal

@@ -4,6 +4,9 @@ module Sprout::User
   class UnixUser < BaseUser
 
     def clean_path path
+      if(path.include? '../')
+        path = File.expand_path path
+      end
       repair_executable path
 
       if(path.index(' '))

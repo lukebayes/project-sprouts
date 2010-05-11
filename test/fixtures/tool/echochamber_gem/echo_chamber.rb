@@ -4,7 +4,7 @@ Sprout::Specification.new do |s|
   s.version = '1.0.pre'
 
   s.add_file_target do |t|
-    t.add_executable :echos, 'bin/echochamber.sh'
+    t.add_executable :echos, 'bin/echochamber'
   end
 end
 

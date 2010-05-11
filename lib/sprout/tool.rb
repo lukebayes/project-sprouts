@@ -30,7 +30,7 @@ module Sprout::Tool
         return load_spec_from_parent dir, name
       end
 
-      Sprout::Specification.load filename
+      #Sprout::Specification.load filename
     end
 
     def load_spec_from_parent dir, name

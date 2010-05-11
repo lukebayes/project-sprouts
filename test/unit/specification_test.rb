@@ -3,60 +3,68 @@ require File.dirname(__FILE__) + '/test_helper'
 class SpecificationTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "a new specification" do
+  context "a newly defined specification" do
+    setup do
+      @spec = Sprout::Specification.new do |s|
+        s.version = '1.0.pre'
+      end
+    end
+
+    should "have a default name" do
+      assert_equal 'specification_test', @spec.name
+    end
+
+    should "accept the version" do
+      assert_equal '1.0.pre', @spec.version
+    end
+
+    context "with a new name" do
+      setup do
+        @spec.name = 'fake_spec'
+      end
+
+      should "register executables" do
+        @spec.add_file_target do |t|
+          t.add_executable :foo, 'bar'
+        end
+
+        assert_equal 1, Sprout.executables.size
+      end
+
+    end
+  end
+
+  context "a newly loaded specification" do
 
     setup do
       @fixture = File.expand_path(File.join(fixtures, 'specification'))
-      @asunit_spec = File.join @fixture, 'asunit4.sproutspec'
-      @flexsdk_spec = File.join @fixture, 'flex4sdk.sproutspec'
+      @flexsdk_spec = File.join @fixture, 'flex4sdk.rb'
     end
 
-    context "with unexpected configuration param" do
-      context "on spec" do
-        should "fail" do
-          assert_raises NoMethodError do
-            Sprout::Specification.new do |s|
-              s.unknown_parameter = 'bad value'
-            end
-          end
-        end
-      end
-
-      context "on file_target" do
-        should "fail " do
-          assert_raises NoMethodError do
-            Sprout::Specification.new do |s|
-              s.add_file_target do |t|
-                t.unknown_parameter = 'bad value'
-              end
-            end
-          end
-        end
-      end
-
-      context "on remote_file_target" do
-        should "fail " do
-          assert_raises NoMethodError do
-            Sprout::Specification.new do |s|
-              s.add_remote_file_target do |t|
-                t.unknown_parameter = 'bad value'
-              end
-            end
-          end
-        end
-      end
+    should "update Sprout.executables" do
+      load @flexsdk_spec
+      assert_equal 13, Sprout.executables.size
     end
 
-    should "load a complex configuration without error" do
-      spec = Sprout::Specification.load @flexsdk_spec
-      spec.stubs(:register_remote_file_targest)
-      assert spec.is_a?(Sprout::Specification)
-      assert_equal 'flex4sdk', spec.name
-      assert_equal '4.0.pre', spec.version
-      assert_equal 1, spec.file_targets.size, "Both file targets have been added"
-      assert_equal 13, Sprout.executables.size, "All of the executables have been registered"
+  end
+
+  context "a newly included tool" do
+
+    setup do
+      @echo_chamber = File.join fixtures, 'tool', 'echochamber_gem', 'echo_chamber'
     end
 
+    should "require the sproutspec" do
+      assert_equal 0, Sprout.executables.size
+      path = Sprout.load_executable :echos, @echo_chamber
+      assert_matches /fixtures\/.*echochamber/, path
+      assert_file path
+
+      # TODO: We should be able to execute
+      # the provided executable!
+      #response = Sprout::User.create.execute path
+      #assert_equal 'ECHO ECHO ECHO', response
+    end
   end
 end
 
