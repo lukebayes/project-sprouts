@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/test_helper'
 
 require 'test/fixtures/tool/mxmlc_task'
 
-class ToolTaskTest < Test::Unit::TestCase
+class ToolTest < Test::Unit::TestCase
   include SproutTestCase
 
   context "a new tool task" do
