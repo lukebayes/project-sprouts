@@ -24,8 +24,6 @@ Sprout::Specification.new do |s|
     t.url          = "http://download.macromedia.com/pub/labs/flex/4/flex4sdk_b2_100509.zip"
     t.md5          = "6a0838c5cb33145fe88933778ddb966d"
 
-    exe_suffix = (add_suffix) ? '.exe' : ''
-
     # Executables: (add .exe suffix if it was passed in)
     t.add_executable :aasdoc,     "bin/aasdoc"
     t.add_executable :acompc,     "bin/acompc"

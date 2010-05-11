@@ -13,7 +13,7 @@ class SpecificationTest < Test::Unit::TestCase
 
     context "with unexpected configuration param" do
       context "on spec" do
-        should "fail " do
+        should "fail" do
           assert_raises NoMethodError do
             Sprout::Specification.new do |s|
               s.unknown_parameter = 'bad value'
@@ -53,7 +53,8 @@ class SpecificationTest < Test::Unit::TestCase
       assert spec.is_a?(Sprout::Specification)
       assert_equal 'flex4sdk', spec.name
       assert_equal '4.0.pre', spec.version
-      assert_equal 2, spec.remote_file_targets.size
+      assert_equal 1, spec.file_targets.size, "Both file targets have been added"
+      assert_equal 13, Sprout.executables.size, "All of the executables have been registered"
     end
 
   end

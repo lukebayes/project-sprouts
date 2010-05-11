@@ -101,7 +101,6 @@ module Sprout
     attr_accessor :version
     attr_accessor :files
 
-    attr_reader :remote_file_targets
     attr_reader :file_targets
 
     # Create a new Sprout::Specification.
@@ -125,7 +124,7 @@ module Sprout
     # the provided block and added to a collection for packaging.
     #
     def add_remote_file_target &block
-      @remote_file_targets << RemoteFileTarget.new(&block)
+      @file_targets << RemoteFileTarget.new(&block)
     end
 
     # Add a file to the RubyGem itself. This is a great way to package smallish libraries in either
@@ -152,13 +151,11 @@ module Sprout
       # TODO: the included 'files' should get modified by the following expressions:
       #included_files = FileList["**/*"].exclude /.DS_Store|generated|.svn|.git|airglobal.swc|airframework.swc/
       register_file_targets
-      register_remote_file_targets
     end
 
     def initialize_members
       @files               = []
       @file_targets        = []
-      @remote_file_targets = []
     end
 
     def register_file_targets
@@ -169,21 +166,9 @@ module Sprout
       end
     end
 
-    def register_remote_file_targets
-      #puts "resolve remotes: #{remote_file_targets.size}"
-      remote_file_targets.each do |target|
-        register_remote_file_target target
-      end
-    end
-
-    def register_remote_file_target target
+    def register_file_target target
       target.pkg_name    = name
       target.pkg_version = version
-      #target.resolve
-      #register_file_target target
-    end
-
-    def register_file_target target
       target.executables.each do |exe|
         register_executable exe
       end
