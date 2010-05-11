@@ -74,17 +74,6 @@ class SproutTest < Test::Unit::TestCase
     
     context "with a stubbed load path" do
 
-      def register_executable name, pkg_name, pkg_version, path, platform=:macosx
-        exe = Sprout::Executable.new({
-          :name => name,
-          :path => path,
-          :pkg_name => pkg_name,
-          :pkg_version => pkg_version,
-          :platform => platform
-        })
-        Sprout.register_executable exe
-      end
-
       setup do
         Sprout.stubs(:require_rb_for_executable).returns true
         @path = 'test/fixtures/process_runner/chmod_script.sh'
@@ -137,6 +126,18 @@ class SproutTest < Test::Unit::TestCase
 
     end
   end
+
+  def register_executable name, pkg_name, pkg_version, path, platform=:macosx
+    exe = Sprout::Executable.new({
+      :name => name,
+      :path => path,
+      :pkg_name => pkg_name,
+      :pkg_version => pkg_version,
+      :platform => platform
+    })
+    Sprout.register_executable exe
+  end
+
 end
 
 
