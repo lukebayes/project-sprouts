@@ -18,5 +18,5 @@ require 'sprout_test_case'
 
 # Prevent log messages from interrupting the test output:
 Sprout::Log.debug = true
-Sprout::ProgressBar.debug = true
+#Sprout::ProgressBar.debug = true
 

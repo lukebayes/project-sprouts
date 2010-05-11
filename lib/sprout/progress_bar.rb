@@ -1,4 +1,3 @@
-
 # Ruby/ProgressBar - a text progress bar library
 #
 # Copyright (C) 2001-2005 Satoru Takabayashi <satoru@namazu.org>
@@ -9,8 +8,8 @@
 # of Ruby's license.
 #
 # Modified by Luke Bayes to support progress display on 
-# multiple simultaneous connections
-
+# multiple simultaneous connections, and to silence output
+# during test runs.
 require 'singleton'
 
 module Sprout
@@ -263,20 +262,6 @@ module Sprout
 
     def inspect
       "#<ProgressBar:#{@current}/#{@total}>"
-    end
-  end
-
-  # Used instead of $stderr when Log.debug == true
-  # This helps keep us from junking up unit test
-  # output with download status messages
-  class MockOutput  # :nodoc:[all]
-    def print(str)
-    end
-    
-    def puts(str)
-    end
-
-    def flush
     end
   end
 
