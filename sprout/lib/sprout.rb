@@ -34,7 +34,7 @@ require 'sprout/bundle_resolver'
 require 'rubygems/installer'
 require 'rubygems/source_info_cache'
 require 'rubygems/version'
-require 'rubygems/digest/md5'
+require 'digest/md5'
 
 require 'sprout/tool_task_model'
 require 'sprout/project_model'
