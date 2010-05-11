@@ -32,7 +32,7 @@ module Sprout
     private
 
     def downloaded_file
-      @downloaded_file ||= File.join(Sprout.cache, pkg_name, md5)
+      @downloaded_file ||= File.join(Sprout.cache, pkg_name, "#{md5}.#{archive_type}")
     end
 
     def unpacked_file
