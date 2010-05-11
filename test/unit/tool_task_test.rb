@@ -50,7 +50,7 @@ class ToolTaskTest < Test::Unit::TestCase
 
       assert_raises Sprout::Errors::UsageError do
         class BrokenTool
-          include Sprout::Tool::Task
+          include Sprout::Tool
           add_param :broken_param, :unknown_type
         end
 
@@ -61,7 +61,7 @@ class ToolTaskTest < Test::Unit::TestCase
     should "define a new method" do
 
       class WorkingTool
-        include Sprout::Tool::Task
+        include Sprout::Tool
         add_param :custom_name, :string
       end
 
@@ -170,7 +170,7 @@ end
 class CustomParam < Sprout::Tool::Param; end
 
 class FakeToolTask
-  include Sprout::Tool::Task
+  include Sprout::Tool
 
   add_param :boolean_param, :boolean
   add_param :file_param,    :file

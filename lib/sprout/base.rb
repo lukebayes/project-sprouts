@@ -35,7 +35,6 @@ require 'sprout/remote_file_target'
 # External Packaging and distribution support:
 require 'sprout/specification'
 require 'sprout/tool'
-require 'sprout/tool/task'
 
 module Sprout
 
