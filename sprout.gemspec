@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.authors                   = ["Luke Bayes"]
   s.email                     = ["lbayes@patternpark.com"]
   s.homepage                  = "http://projectsprouts.org"
-  s.summary                   = "Flash development evolved"
+  s.summary                   = "Software development - evolved"
   s.description               = "Project Sprouts gives you access to simple generators with custom templates, beautiful build scripts, distributed libraries and automated system configuration"
   s.post_install_message      = File.read 'POSTINSTALL.rdoc'
   s.required_rubygems_version = ">= 1.3.6"
@@ -21,21 +21,22 @@ Gem::Specification.new do |s|
   s.add_dependency "bundler", ">= 0.9.19"
 
   bundle = Bundler::Definition.from_gemfile('Gemfile')
+
   bundle.dependencies.each do |dep|
     if dep.groups.include?(:default)
-      puts ">> adding: #{dep.name}"
+      puts ">> Bundler.add_dependency: #{dep.name}"
       s.add_dependency(dep.name, dep.requirement.to_s)
     elsif dep.groups.include?(:development)
-    puts ">> adding: #{dep.name}"
+      puts ">> Bundler.add_development_dependency: #{dep.name}"
       s.add_development_dependency(dep.name, dep.requirement.to_s)
     end
   end
 
-  s.files        = Dir.glob("{app_generators,bin,lib,test}/**/*") + %w(MIT-LICENSE README.textile CHANGELOG.md)
+  s.files = Dir.glob("{app_generators,bin,lib,test}/**/*") + %w(MIT-LICENSE README.textile CHANGELOG.md)
 
   # TODO: Bring this back:
   #s.executables  = ['sprout']
   s.executables  = ['sprout-tool']
-  s.require_path = 'lib'
+  s.require_path = ['lib', 'test']
 end
 

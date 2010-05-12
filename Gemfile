@@ -12,7 +12,7 @@ else
   gem "open4", ">= 0.9.6" # All others
 end
 
-group :test do
+group :development do
   gem "shoulda"
   gem "mocha"
   gem "flay"

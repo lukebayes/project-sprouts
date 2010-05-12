@@ -47,6 +47,17 @@ module Sprout::User
       platform == :windows || platform == :win32 || super
     end
 
+    protected
+
+    ##
+    # Gets the process runner and calls
+    # platform-specific execute method
+    def get_and_execute_process_runner tool, options=nil
+      runner = get_process_runner
+      runner.execute_win32 tool, options
+      runner
+    end
+
     private
 
     def env_path

@@ -57,20 +57,6 @@ module Sprout::User
       Sprout::ProcessRunner.new
     end
 
-    ##
-    # Get a process runner and execute the provided +tool+,
-    # with the provided +options+.
-    #
-    # +tool+ String path to the external executable file.
-    #
-    # +options+ String commandline options to send to the +tool+.
-    #
-    def get_and_execute_process_runner tool, options=nil
-      runner = get_process_runner
-      runner.execute_open4 tool, options
-      runner
-    end
-
     def can_execute? platform
       platform == :universal
     end
@@ -213,6 +199,23 @@ module Sprout::User
         worst_case_home
       end
     end
+
+    protected
+
+    ##
+    # Get a process runner and execute the provided +tool+,
+    # with the provided +options+.
+    #
+    # +tool+ String path to the external executable file.
+    #
+    # +options+ String commandline options to send to the +tool+.
+    #
+    def get_and_execute_process_runner tool, options=nil
+      runner = get_process_runner
+      runner.execute_open4 tool, options
+      runner
+    end
+
   end
 
   class ThreadMock # :nodoc:

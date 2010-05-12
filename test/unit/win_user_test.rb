@@ -19,6 +19,18 @@ class WinUserTest < Test::Unit::TestCase
       assert_equal ['a', 'b', 'c'], @user.get_paths
     end
 
+    should "execute with correct implementation" do
+      @echochamber = File.join fixtures, 'remote_file_target', 'bin', 'echochamber.sh'
+      # Don't actually call the win32 execute function:
+      r = StringIO.new
+      w = StringIO.new
+      e = StringIO.new
+      pid = nil
+      Sprout::ProcessRunner.any_instance.expects(:win32_open3_block).returns([pid, w, r, e])
+      @user.stubs(:clean_path).returns @echochamber
+      @user.execute @echochamber
+    end
+
     context "with home already set" do
 
       setup do
