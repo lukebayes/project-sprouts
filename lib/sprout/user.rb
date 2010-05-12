@@ -21,7 +21,7 @@ module Sprout
     #     user.execute "pwd" # /home/yourusername
     #
     def self.create
-      p = Platform.new
+      p = Sprout::Platform.new
       return VistaUser.new  if p.vista?
       return WinNixUser.new if p.windows_nix?
       return WinUser.new    if p.windows?

@@ -11,7 +11,7 @@ class VistaUserTest < Test::Unit::TestCase
 
     should "work when env_userprofile isn't found" do
       @user.stubs(:find_home).returns 'C:\Documents and Settings\Some User'
-      assert_equal 'C:\Documents and Settings\Some User', @user.library
+      assert_equal 'C:\Documents and Settings\Some User/Local Settings/Application Data', @user.library
     end
 
     context "with a valid userprofile" do

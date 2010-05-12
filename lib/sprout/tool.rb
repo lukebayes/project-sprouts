@@ -127,7 +127,7 @@ module Sprout::Tool
     # Actually call the provided executable.
     #
     def execute *args
-      exe = Sprout.load_executable executable, gem_name, gem_version
+      exe = Sprout.load_executable executable, pkg_name, pkg_version
       Sprout.current_user.execute exe
     end
 
@@ -159,17 +159,17 @@ module Sprout::Tool
     # Classes that include the Tool can set the default value for this property
     # at the class level with:
     #
-    #     set :gem_name, 'sprout-sometoolname'
+    #     set :pkg_name, 'sprout-sometoolname'
     #
     # But that value can be overridden on each instance like:
     #
     #     tool = SomeToolTask.new
-    #     tool.gem_name = 'sprout-othertoolname'
+    #     tool.pkg_name = 'sprout-othertoolname'
     #
     # This parameter is required - either from the including class or instance
     # configuration.
     #
-    attr_accessor :gem_name
+    attr_accessor :pkg_name
 
     ##
     # The default RubyGem version that we will use when requesting our executable.
@@ -177,17 +177,17 @@ module Sprout::Tool
     # Classes that include the Task can set the default value for this property
     # at the class level with:
     #
-    #     set :gem_version, '>= 1.0.3'
+    #     set :pkg_version, '>= 1.0.3'
     #
     # But that value can be overriden on each instance like:
     #
     #     tool = SomeToolTask.new
-    #     too.gem_version = '>= 2.0.0'
+    #     too.pkg_version = '>= 2.0.0'
     #
     # This parameter is required - either from the including class or instance
     # configuration.
     #
-    attr_accessor :gem_version
+    attr_accessor :pkg_version
 
     ##
     # The default Sprout executable that we will use for this tool.

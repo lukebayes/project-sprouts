@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/test_helper'
 
 class UserTest < Test::Unit::TestCase
-  include SproutTestCase
+  #include SproutTestCase
 
   ['vista', 'mswin', 'wince', 'emx'].each do |variant|
     context variant do
@@ -11,7 +11,9 @@ class UserTest < Test::Unit::TestCase
       end
     end
   end
-  
+
+=begin 
+
   ['cygwin', 'mingw', 'bccwin'].each do |variant|
     context variant do
       should "create a WinNix User" do
@@ -140,5 +142,6 @@ class UserTest < Test::Unit::TestCase
     end
 
   end
+=end
 end
 

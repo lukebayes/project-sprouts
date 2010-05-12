@@ -105,21 +105,21 @@ class ToolTest < Test::Unit::TestCase
     end
 
     should "accept default gem name" do
-      assert_equal 'sprout-flex3sdk', @tool.gem_name
+      assert_equal 'flex4sdk', @tool.pkg_name
     end
 
     should "override default gem name" do
-      @tool.gem_name = 'sprout-flex4sdk'
-      assert_equal 'sprout-flex4sdk', @tool.gem_name
+      @tool.pkg_name = 'flex5sdk'
+      assert_equal 'flex5sdk', @tool.pkg_name
     end
 
     should "accept default gem version" do
-      assert_equal '>= 1.0.pre', @tool.gem_version
+      assert_equal '>= 1.0.pre', @tool.pkg_version
     end
 
     should "override default gem version" do
-      @tool.gem_version = '1.1.pre'
-      assert_equal '1.1.pre', @tool.gem_version
+      @tool.pkg_version = '1.1.pre'
+      assert_equal '1.1.pre', @tool.pkg_version
     end
 
     should "accept default gem executable" do
@@ -151,7 +151,7 @@ class ToolTest < Test::Unit::TestCase
       @tool.input = 'test/fixtures/tool/src/Main.as'
       @tool.source_path << 'test/fixtures/tool/src'
       @tool.debug = true
-      Sprout.expects(:load_executable).with(:mxmlc, 'sprout-flex3sdk', '>= 1.0.pre').returns @mxmlc_executable
+      Sprout.expects(:load_executable).with(:mxmlc, 'flex4sdk', '>= 1.0.pre').returns @mxmlc_executable
 
       # Ensure the exe file mode is NOT valid:
       File.chmod 0644, @mxmlc_executable

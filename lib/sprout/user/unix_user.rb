@@ -7,7 +7,7 @@ module Sprout::User
       if(path.include? '../')
         path = File.expand_path path
       end
-      repair_executable path
+      #repair_executable path
 
       if(path.index(' '))
         return path.split(' ').join('\ ')

@@ -4,9 +4,6 @@ module Sprout
   class MXMLCError < Sprout::Errors::SproutError #:nodoc:
   end
   
-  class ExecutionError < Sprout::Errors::SproutError #:nodoc:
-  end
-  
   # The MXMLC task provides a rake front end to the Flex MXMLC command line compiler.
   # This task is integrated with the LibraryTask so that if any dependencies are
   # library tasks, they will be automatically added to the library_path or source_path
@@ -657,12 +654,12 @@ module Sprout
     ##
     # The default gem name is sprout-flex3sdk
     #
-    set :gem_name, 'sprout-flex3sdk'
+    set :pkg_name, 'flex4sdk'
 
     ##
     # The default gem version
     #
-    set :gem_version, '>= 1.0.pre'
+    set :pkg_version, '>= 1.0.pre'
     
     ##
     # The default executable target
