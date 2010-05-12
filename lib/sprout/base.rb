@@ -81,7 +81,7 @@ module Sprout
       end
 
       def cache
-        File.join(current_user.application_home('sprout'), 'cache', Sprout::VERSION::MAJOR_MINOR)
+        File.join(current_user.application_home('sprouts'), 'cache', Sprout::VERSION::MAJOR_MINOR)
       end
 
       def current_user
