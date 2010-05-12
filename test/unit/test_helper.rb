@@ -1,6 +1,6 @@
 require "rubygems"
 require "bundler"
-Bundler.setup(:default, :test)
+Bundler.setup(:default, :development)
 
 # These require statments *must* be in this order:
 # http://bit.ly/bCC0Ew
