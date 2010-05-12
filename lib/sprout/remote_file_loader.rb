@@ -1,4 +1,4 @@
-require 'rubygems/digest/md5'
+require 'digest/md5'
 
 module Sprout
 
