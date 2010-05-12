@@ -1,5 +1,6 @@
 require "rubygems"
 require "bundler"
+
 Bundler.require :default, :development
 
 # These require statments *must* be in this order:

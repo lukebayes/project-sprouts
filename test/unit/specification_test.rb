@@ -34,6 +34,7 @@ class SpecificationTest < Test::Unit::TestCase
     end
   end
 
+=begin
   context "a newly loaded specification" do
 
     setup do
@@ -49,6 +50,7 @@ class SpecificationTest < Test::Unit::TestCase
     end
 
   end
+=end
 
   context "a newly included tool" do
 
