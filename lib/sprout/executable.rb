@@ -38,7 +38,7 @@ module Sprout
     end
 
     def includes_package_name? name
-      name.include? pkg_name
+      name.to_s.include? pkg_name.to_s
     end
 
     def satisfies_requirement? version_requirement
