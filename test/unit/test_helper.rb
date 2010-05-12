@@ -12,7 +12,6 @@ require File.dirname(__FILE__) + '/../../lib/sprout'
 $:.unshift File.dirname(__FILE__) + '/../'
 $:.unshift File.dirname(__FILE__)
 
-require 'fake_io'
 require 'fake_process_runner'
 require 'test/unit/fake_tool'
 require 'sprout_test_case'

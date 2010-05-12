@@ -51,6 +51,10 @@ module SproutTestCase # :nodoc:[all]
     path
   end
 
+=begin
+ THESE DON'T WORK! 
+ They both introduced interacting, broken tests...
+
   def as_a_unix_user
     Sprout::User.stubs(:create).returns Sprout::User::UnixUser.new
     yield if block_given?
@@ -60,7 +64,7 @@ module SproutTestCase # :nodoc:[all]
     Sprout::User.stubs(:create).returns Sprout::User::OSXUser.new
     yield if block_given?
   end
-  
+=end 
   
   def run_task(name)
     t = Rake.application[name]

@@ -11,9 +11,9 @@ class ProcessRunnerTest < Test::Unit::TestCase
       @script_with_spaces = File.join @fixture, 'dir with spaces', 'chmod_script.sh'
 
       pid                 = nil
-      write               = FakeIO.new
-      read                = FakeIO.new "Hello World"
-      error               = FakeIO.new
+      write               = StringIO.new
+      read                = StringIO.new "Hello World"
+      error               = StringIO.new
 
       @runner             = Sprout::ProcessRunner.new
       @runner.stubs(:open4_popen4_block).returns( [pid, write, read, error] )
