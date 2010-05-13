@@ -43,11 +43,11 @@ class Sprout::Tool::ParameterFactory
 
     def resolve_sprout_parameter type_str
       type_str = "#{type_str}_param"
-      attempt_to_instantiate Sprout, type_str
+      attempt_to_instantiate Sprout::Tool, type_str
     end
 
     def resolve_unknown_parameter type_str
-      [type_str, type_str + "_param"].each do |type|
+      [type_str, "#{type_str}_param"].each do |type|
         instance = attempt_to_instantiate Object, type
         return instance unless instance.nil?
       end

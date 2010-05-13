@@ -14,7 +14,7 @@ class FileParamTest < Test::Unit::TestCase
 
       @tool = FakeToolTask.new
 
-      @param = Sprout::FileParam.new
+      @param = Sprout::Tool::FileParam.new
       @param.belongs_to = @tool
       @param.name = 'input'
       @param.value = @input

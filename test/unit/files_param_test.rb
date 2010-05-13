@@ -10,7 +10,7 @@ class FilesParamTest < Test::Unit::TestCase
       @input2 = File.join(fixtures, "tool", "params", "input2.as")
       @input3 = File.join(fixtures, "tool", "params", "input3.as")
 
-      @param = Sprout::FilesParam.new
+      @param = Sprout::Tool::FilesParam.new
       @param.name = 'inputs'
       @param.belongs_to = FakeToolTask.new
     end

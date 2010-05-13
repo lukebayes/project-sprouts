@@ -1,38 +1,40 @@
-
 module Sprout
-  # Concrete param object for :file values
-  class FileParam < Tool::Param 
 
-    def prepare
-      super
-      self.value = clean_path value
-    end
+  module Tool
+    # Concrete param object for :file values
+    class FileParam < Param 
 
-    def prepare_prerequisites
-      if(prerequisite?(value))
-        if(should_preprocess?)
-          @value = prepare_preprocessor_file(value)
-        else
-          file value
-          belongs_to.prerequisites << value
+      def prepare
+        super
+        self.value = clean_path value
+      end
+
+      def prepare_prerequisites
+        if(prerequisite?(value))
+          if(should_preprocess?)
+            @value = prepare_preprocessor_file(value)
+          else
+            file value
+            belongs_to.prerequisites << value
+          end
         end
       end
-    end
 
-    def validate
-      super
+      def validate
+        super
 
-      if(!File.exists?(value))
-        raise Sprout::Errors::ToolError.new "No such file or directory - #{value}"
+        if(!File.exists?(value))
+          raise Sprout::Errors::ToolError.new "No such file or directory - #{value}"
+        end
       end
+
+      private
+
+      def prerequisite?(file)
+        (file && file != belongs_to.name.to_s)
+      end
+
     end
-
-    private
-
-    def prerequisite?(file)
-      (file && file != belongs_to.name.to_s)
-    end
-
   end
 end
 

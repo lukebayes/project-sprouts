@@ -10,7 +10,7 @@ class PathsParamTest < Test::Unit::TestCase
       @path2 = File.join(fixtures, 'tool', 'paths', 'folder2')
       @path3 = File.join(fixtures, 'tool', 'paths', 'folder3')
 
-      @param = Sprout::PathsParam.new
+      @param = Sprout::Tool::PathsParam.new
       @param.belongs_to = FakeToolTask.new
       @param.name = 'paths'
     end
