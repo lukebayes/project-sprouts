@@ -149,7 +149,7 @@ module Sprout
         return @to_shell_proc.call(self) unless @to_shell_proc.nil?
         return shell_value if hidden_name?
         return shell_name if hidden_value?
-        return "#{shell_name}#{delimiter}#{shell_value}"
+        return [shell_name, delimiter, shell_value].join
       end
       
       # Create a string that can be turned into a file

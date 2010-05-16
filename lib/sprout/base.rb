@@ -20,8 +20,8 @@ require 'sprout/user'
 # includes open-uri, while older versions do not.
 # When open-uri is included twice, we get a bunch of nasty
 # warnings because constants are being overwritten.
-gem_version = Gem::Version.new(Gem::RubyGemsVersion) 
-if(gem_version != Gem::Version.new('1.0.1')) 
+gem_version = Gem::Version.new(Gem::RubyGemsVersion)
+if(gem_version != Gem::Version.new('1.0.1'))
   require 'open-uri'
 end
 

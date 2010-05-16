@@ -1,7 +1,7 @@
-
 require 'rubygems/installer'
 require 'fixtures/mock_gem_ui'
-require 'test/unit/fake_tool'
+require 'unit/fake_tool'
+require 'pathname'
 
 # Had to make this a module instead of a base class
 # because the ruby test suite kept complaining that 
@@ -9,19 +9,21 @@ require 'test/unit/fake_tool'
 # or assertions
 module SproutTestCase # :nodoc:[all]
 
+  FIXTURES_NAME = 'fixtures'
+
   # Gives us the ability to hide RubyGem output from
   # our test results...
   include Gem::DefaultUserInteraction
 
-  def fixtures
-    @fixtures ||= File.expand_path(File.join(File.dirname(__FILE__), '/../fixtures'))
+  def fixtures from=nil
+    @fixtures ||= find_fixtures(from || caller.first.split(':').first)
   end
 
   def setup
     super
     @mock_gem_ui = MockGemUi.new
     @start_path = Dir.pwd
-    temp_path # Call before someone can Dir.chdir...
+    #temp_path # Call before someone can Dir.chdir...
   end
 
   def teardown
@@ -40,11 +42,11 @@ module SproutTestCase # :nodoc:[all]
   end
 
   def temp_path
-    @temp_path ||= make_temp_folder
+    @temp_path ||= make_temp_folder(caller.first.split(':').first)
   end
 
-  def make_temp_folder
-    path = File.expand_path( File.dirname(__FILE__) + '/../tmp' )
+  def make_temp_folder from=nil
+    path = File.join(fixtures(from), 'tmp')
     if(!File.exists?(path))
       FileUtils.mkdir_p path
     end
@@ -116,9 +118,24 @@ module SproutTestCase # :nodoc:[all]
   end
 
   def temp_cache
-    @temp_cache ||= File.join(fixtures, 'sprout', 'cache')
+    @temp_cache ||= File.join(fixtures(caller.first.split(':').first), 'sprout', 'cache')
   end
-  
+
+  private
+
+  # Find the nearest fixtures folder to the provided
+  # path by checking each parent directory.
+  def find_fixtures path
+    return nil if(path.nil? || !File.exists?(path))
+    path = File.dirname(path) if !File.directory? path
+
+    fixture_path = Pathname.new File.join(path, FIXTURES_NAME)
+    fixture_path = fixture_path.relative_path_from(Pathname.new(Dir.pwd)).to_s
+    return fixture_path if File.directory? fixture_path
+
+    return find_fixtures File.dirname(path)
+  end
+
 end
 
 module Sprout

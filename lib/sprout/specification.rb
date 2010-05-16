@@ -97,7 +97,9 @@ module Sprout
     # check out RubyGems documentation for their {Gem::Specification}[http://rubygems.rubyforge.org/rdoc/Gem/Specification.html].
     #
     def initialize
-      @load_path, @name = directory_and_file_name_from caller.first
+      filename   = file_from_caller_string caller.first
+      @load_path = File.dirname filename
+      @name      = File.basename(filename).gsub('.rb', '')
       yield self if block_given?
     end
 
@@ -170,12 +172,8 @@ module Sprout
       yield t if block_given?
     end
 
-    def directory_and_file_name_from first_caller
-      filename = first_caller.split(':').shift
-      parts    = filename.split File::SEPARATOR
-      filename = parts.pop.gsub('.rb', '')
-      dir      = parts.join File::SEPARATOR
-      [dir, filename]
+    def file_from_caller_string first_caller
+      return first_caller.split(':').shift
     end
 
     def register_file_target target
