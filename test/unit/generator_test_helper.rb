@@ -18,7 +18,7 @@ require 'rubigen'
 #   app_root_files - put this in teardown to show files generated 
 #   by the test method (e.g. p app_root_files)
 #
-#   bare_setup - place this in setup method to create the APP_ROOT 
+#   bare_setup - place this in setup method to create the app_root 
 #   folder for each test
 #
 #   bare_teardown - place this in teardown method to destroy the 
@@ -31,8 +31,8 @@ module Sprout::GeneratorTestHelper
 
   def setup
     super
-    @tmp_root = File.expand_path(File.join(File.dirname(__FILE__), '..', 'fixtures', 'generators', 'tmp'))
-    @app_root = File.join(tmp_root, 'myproject')
+    @tmp_root = File.join 'test', 'fixtures', 'generators', 'tmp'
+    @app_root = File.join tmp_root, 'myproject'
     bare_setup
   end
 
@@ -44,7 +44,7 @@ module Sprout::GeneratorTestHelper
   protected
 
   def app_sources
-    source = File.join(File.dirname(__FILE__),'..', '..', 'app_generators')
+    source = 'app_generators'
     [RubiGen::PathSource.new(:test, source)]
   end
 
