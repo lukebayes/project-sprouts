@@ -44,8 +44,7 @@ module Sprout::GeneratorTestHelper
   protected
 
   def app_sources
-    source = 'app_generators'
-    [RubiGen::PathSource.new(:test, source)]
+    [RubiGen::PathSource.new(:test, 'app_generators')]
   end
 
   # Runs the create command (like the command line does)
