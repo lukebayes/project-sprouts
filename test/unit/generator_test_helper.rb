@@ -49,7 +49,6 @@ module Sprout::GeneratorTestHelper
 
   # Runs the create command (like the command line does)
   def run_generator(name, params, sources, options = {})
-    # TODO: Create/Configure to use tmp_dir
     generator = build_generator(name, params, sources, options)
     silence_generator do
       generator.command(:create).invoke!
