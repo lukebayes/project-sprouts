@@ -23,7 +23,7 @@ class FileParamTest < Test::Unit::TestCase
     should "clean the path for current platform" do
       #as_a_unix_user do
         @param.expects(:validate)
-        # Ensure that user.clean_path is called
+        # Ensure that system.clean_path is called
         @param.value = @input_with_spaces
         @param.prepare
         assert_equal "-input=#{@input_with_spaces_cleaned}", @param.to_shell

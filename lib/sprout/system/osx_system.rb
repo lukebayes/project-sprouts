@@ -1,7 +1,7 @@
 
-module Sprout::User
+module Sprout::System
 
-  class OSXUser < UnixUser
+  class OSXSystem < UnixSystem
     LIBRARY = 'Library'
 
     def library

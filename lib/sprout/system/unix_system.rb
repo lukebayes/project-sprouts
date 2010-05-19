@@ -1,7 +1,7 @@
 
-module Sprout::User
+module Sprout::System
 
-  class UnixUser < BaseUser
+  class UnixSystem < BaseSystem
 
     def clean_path path
       if(path.include? '../')

@@ -3,10 +3,10 @@ require File.dirname(__FILE__) + '/test_helper'
 class OSXUserTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "new osx user" do
+  context "new osx system" do
 
     setup do
-      @user = Sprout::User::OSXUser.new
+      @user = Sprout::System::OSXSystem.new
       @user.stubs(:home).returns '/Users/someone'
     end
 

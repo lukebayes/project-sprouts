@@ -3,15 +3,15 @@ require File.dirname(__FILE__) + '/test_helper'
 class VistaUserTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "new windows vista user" do
+  context "new windows vista system" do
 
     setup do
-      @user = Sprout::User::VistaUser.new
+      @user = Sprout::System::VistaSystem.new
     end
 
     should "work when env_userprofile isn't found" do
-      @user.stubs(:find_home).returns 'C:\Documents and Settings\Some User'
-      assert_equal 'C:\Documents and Settings\Some User/Local Settings/Application Data', @user.library
+      @user.stubs(:find_home).returns 'C:\Documents and Settings\Some System'
+      assert_equal 'C:\Documents and Settings\Some System/Local Settings/Application Data', @user.library
     end
 
     context "with a valid userprofile" do

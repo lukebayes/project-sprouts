@@ -3,15 +3,15 @@ require File.dirname(__FILE__) + '/test_helper'
 class WinNixUserTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "new windows nix (cygwin/mingw) user" do
+  context "new windows nix (cygwin/mingw) system" do
 
     setup do
-      @user = Sprout::User::WinNixUser.new
-      @user.stubs(:win_home).returns 'C:\Documents and Settings\Some User'
+      @user = Sprout::System::WinNixSystem.new
+      @user.stubs(:win_home).returns 'C:\Documents and Settings\Some System'
     end
 
     should "find home" do
-      assert_equal '/cygdrive/c/Documents and Settings/Some User', @user.home
+      assert_equal '/cygdrive/c/Documents and Settings/Some System', @user.home
     end
 
     should "wrap paths that have spaces with escaped quotes" do

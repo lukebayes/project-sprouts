@@ -58,12 +58,12 @@ module SproutTestCase # :nodoc:[all]
  They both introduced interacting, broken tests...
 
   def as_a_unix_user
-    Sprout::User.stubs(:create).returns Sprout::User::UnixUser.new
+    Sprout::System.stubs(:create).returns Sprout::System::UnixUser.new
     yield if block_given?
   end
 
   def as_a_mac_user
-    Sprout::User.stubs(:create).returns Sprout::User::OSXUser.new
+    Sprout::System.stubs(:create).returns Sprout::System::OSXUser.new
     yield if block_given?
   end
 =end 

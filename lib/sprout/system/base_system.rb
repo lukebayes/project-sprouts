@@ -1,22 +1,22 @@
 
-module Sprout::User
+module Sprout::System
 
-  # The abstract base class for all supported user/platform types.
+  # The abstract base class for all supported system/platform types.
   # In general, users are created by calling the +create+ factory method
-  # on the +User+ module.
+  # on the +System+ module.
   #     
-  #     User.create
+  #     System.create
   #
   # Assuming you call the create method, you should wind up with
-  # a concrete user that matches your system, and these concrete
+  # a concrete system that matches your system, and these concrete
   # users will generally be derived from this base class.
   #
-  class BaseUser
+  class BaseSystem
 
     ##
-    # Get the home path for a user on a particular operating system.
+    # Get the home path for a system on a particular operating system.
     #
-    # This path will be different, depending on which user owns
+    # This path will be different, depending on which system owns
     # the curren process, and which operating system they are on.
     #
     def home
@@ -24,10 +24,10 @@ module Sprout::User
     end
 
     ##
-    # Set the home path for a user on a particular operating system.
+    # Set the home path for a system on a particular operating system.
     # 
     # If you request the home path before setting it, we will
-    # attempt to determine the home path of the current user for
+    # attempt to determine the home path of the current system for
     # the current operating system.
     #
     # This is just a simple way to override the default behavior.
@@ -39,11 +39,11 @@ module Sprout::User
     ##
     # Some operating systems (like OS X and Windows) have a 
     # specific location where applications are expected to store
-    # files for a particular user. This location is generally
+    # files for a particular system. This location is generally
     # a subdirectory of +home+.
     # 
     # The value of this location will usually be overridden in
-    # concrete User classes.
+    # concrete System classes.
     #
     def library
       return home

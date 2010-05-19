@@ -129,7 +129,7 @@ module Sprout
       #
       def execute *args
         exe = Sprout.load_executable executable, pkg_name, pkg_version
-        Sprout.current_user.execute exe
+        Sprout.current_system.execute exe
       end
 
       # Create a string that represents this configured tool for shell execution

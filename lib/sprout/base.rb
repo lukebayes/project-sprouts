@@ -12,7 +12,7 @@ require 'sprout/log'
 require 'sprout/errors'
 require 'sprout/platform'
 require 'sprout/process_runner'
-require 'sprout/user'
+require 'sprout/system'
 
 # This is a fix for Issue #106
 # http://code.google.com/p/projectsprouts/issues/detail?id=106
@@ -64,7 +64,7 @@ module Sprout
       def load_executable name, pkg_name, version_requirement=nil
         # puts "load_executable with name: #{name} pkg_name: #{pkg_name} pkg_version: #{pkg_version}"
         require_rb_for_executable pkg_name
-        executable = executable_for(current_user, pkg_name, name, version_requirement)
+        executable = executable_for(current_system, pkg_name, name, version_requirement)
         if(executable.nil?)
           message = "The requested executable: (#{name}) from: (#{pkg_name}) and version: "
           message << "(#{version_requirement}) does not appear to be loaded."
@@ -80,18 +80,18 @@ module Sprout
       end
 
       def cache
-        File.join(current_user.application_home('sprouts'), 'cache', Sprout::VERSION::MAJOR_MINOR)
+        File.join(current_system.application_home('sprouts'), 'cache', Sprout::VERSION::MAJOR_MINOR)
       end
 
-      def current_user
-        User.create
+      def current_system
+        System.create
       end
 
       private
 
-      def executable_for user, pkg, name, version_requirement
+      def executable_for system, pkg, name, version_requirement
         executables.select do |exe|
-          user.can_execute?(exe.platform) && 
+          system.can_execute?(exe.platform) && 
             exe.includes_package_name?(pkg) &&
             exe.name == name && 
             exe.satisfies_requirement?(version_requirement)

@@ -1,7 +1,7 @@
 
-module Sprout::User
+module Sprout::System
 
-  class VistaUser < WinUser
+  class VistaSystem < WinSystem
 
     def home
       return env_userprofile unless env_userprofile.nil?

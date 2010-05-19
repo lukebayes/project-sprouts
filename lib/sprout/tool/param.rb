@@ -167,7 +167,7 @@ module Sprout
       protected
 
       def clean_path path
-        Sprout::User.create.clean_path path
+        Sprout::System.create.clean_path path
       end
       
       def should_preprocess?

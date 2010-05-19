@@ -66,7 +66,7 @@ class SpecificationTest < Test::Unit::TestCase
 
       # TODO: We should be able to execute
       # the provided executable!
-      #response = Sprout::User.create.execute path
+      #response = Sprout::System.create.execute path
       #assert_equal 'ECHO ECHO ECHO', response
     end
   end

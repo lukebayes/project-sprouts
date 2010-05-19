@@ -32,19 +32,19 @@ class SproutTest < Test::Unit::TestCase
       @library = File.join(fixtures, 'sprout')
     end
 
-    should "find library from user" do
-      user = Sprout::User::OSXUser.new
+    should "find library from system" do
+      user = Sprout::System::OSXSystem.new
       user.stubs(:library).returns @library
-      Sprout.stubs(:current_user).returns user
+      Sprout.stubs(:current_system).returns user
 
       expected_cache = File.join(@library, 'Sprouts', 'cache', Sprout::VERSION::MAJOR_MINOR)
       assert_equal expected_cache, Sprout.cache
     end
 
-    should "find library for unix user" do
-      user = Sprout::User::UnixUser.new
+    should "find library for unix system" do
+      user = Sprout::System::UnixSystem.new
       user.stubs(:library).returns @library
-      Sprout.stubs(:current_user).returns user
+      Sprout.stubs(:current_system).returns user
 
       expected_cache = File.join(@library, '.sprouts', 'cache', Sprout::VERSION::MAJOR_MINOR)
       assert_equal expected_cache, Sprout.cache

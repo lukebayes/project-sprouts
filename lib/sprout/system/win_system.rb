@@ -1,11 +1,11 @@
 
-module Sprout::User
+module Sprout::System
 
-  # The default Windows user.
-  # This is the user type for all
+  # The default Windows system.
+  # This is the system type for all
   # major versions and flavors of Windows
   # (except Cygwin and Mingw).
-  class WinUser < BaseUser
+  class WinSystem < BaseSystem
     LOCAL_SETTINGS = "Local\ Settings"
     APPLICATION_DATA = "Application\ Data"
 

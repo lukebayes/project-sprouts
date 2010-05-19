@@ -3,10 +3,10 @@ require File.dirname(__FILE__) + '/test_helper'
 class WinUserTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "new windows user" do
+  context "new windows system" do
 
     setup do
-      @user = Sprout::User::WinUser.new
+      @user = Sprout::System::WinSystem.new
     end
 
     should "not accept home path with My Documents" do
@@ -34,7 +34,7 @@ class WinUserTest < Test::Unit::TestCase
     context "with home already set" do
 
       setup do
-        @user.stubs(:home).returns 'C:\Documents and Settings\Some User'
+        @user.stubs(:home).returns 'C:\Documents and Settings\Some System'
       end
 
       should "find library" do

@@ -5,9 +5,9 @@ class UserTest < Test::Unit::TestCase
 
   ['vista', 'mswin', 'wince', 'emx'].each do |variant|
     context variant do
-      should "create a Win User" do
+      should "create a Win System" do
         Sprout::Platform.any_instance.stubs(:ruby_platform).returns variant
-        assert Sprout::User.create.is_a?(Sprout::User::WinUser)
+        assert Sprout::System.create.is_a?(Sprout::System::WinSystem)
       end
     end
   end
@@ -16,19 +16,19 @@ class UserTest < Test::Unit::TestCase
 
   ['cygwin', 'mingw', 'bccwin'].each do |variant|
     context variant do
-      should "create a WinNix User" do
+      should "create a WinNix System" do
         Sprout::Platform.any_instance.stubs(:ruby_platform).returns variant
-        assert Sprout::User.create.is_a?(Sprout::User::WinNixUser)
-        assert Sprout::User.create.is_a?(Sprout::User::WinUser)
+        assert Sprout::System.create.is_a?(Sprout::System::WinNixUser)
+        assert Sprout::System.create.is_a?(Sprout::System::WinUser)
       end
     end
   end
 
   context "vista" do
-    should "create a Vista User" do
+    should "create a Vista System" do
       Sprout::Platform.any_instance.stubs(:ruby_platform).returns "vista"
-      assert Sprout::User.create.is_a?(Sprout::User::VistaUser)
-      assert Sprout::User.create.is_a?(Sprout::User::WinUser)
+      assert Sprout::System.create.is_a?(Sprout::System::VistaUser)
+      assert Sprout::System.create.is_a?(Sprout::System::WinUser)
     end
   end
 
@@ -38,56 +38,56 @@ class UserTest < Test::Unit::TestCase
       setup do
         @success_exec = File.join(fixtures, 'process_runner', 'success')
         @failure_exec = File.join(fixtures, 'process_runner', 'failure')
-        @user = Sprout::User::UnixUser.new
+        @system = Sprout::System::UnixUser.new
         @process = FakeProcessRunner.new
         # Allows this test to run on Windows:
-        @user.stubs(:get_process_runner).returns @process
+        @system.stubs(:get_process_runner).returns @process
       end
       
-      should "create a Unix User" do
+      should "create a Unix System" do
         Sprout::Platform.any_instance.stubs(:ruby_platform).returns variant
-        assert Sprout::User.create.is_a?(Sprout::User::UnixUser)
+        assert Sprout::System.create.is_a?(Sprout::System::UnixUser)
       end
       
       should "execute external processes" do
-        @user.execute @success_exec
+        @system.execute @success_exec
       end
 
       should "handle execution errors" do
         # Write to the fake error stream:
         @process.read_err.write "Forced Error For test"
         assert_raises Sprout::Errors::ExecutionError do
-          @user.execute @failure_exec
+          @system.execute @failure_exec
         end
       end
     end
   end
 
   context "osx" do
-    should "create an OSX User" do
+    should "create an OSX System" do
       Sprout::Platform.any_instance.stubs(:ruby_platform).returns "darwin"
-      assert Sprout::User.create.is_a?(Sprout::User::OSXUser)
+      assert Sprout::System.create.is_a?(Sprout::System::OSXUser)
     end
   end
 
   context "java" do
-    should "create a Java User" do
+    should "create a Java System" do
       Sprout::Platform.any_instance.stubs(:ruby_platform).returns "java"
-      assert Sprout::User.create.is_a?(Sprout::User::JavaUser)
+      assert Sprout::System.create.is_a?(Sprout::System::JavaUser)
     end
   end
 
-  context "any user" do
+  context "any system" do
 
     setup do
-      @user = Sprout::User::UnixUser.new
+      @system = Sprout::System::UnixUser.new
     end
 
     context "library path" do
 
       should "match the home path" do
-        assert_not_nil @user.library
-        assert_equal @user.home, @user.library
+        assert_not_nil @system.library
+        assert_equal @system.home, @system.library
       end
     end
 
@@ -103,41 +103,41 @@ class UserTest < Test::Unit::TestCase
           :tilde_home, 
           :alt_separator?
         ].each do |accessor|
-          @user.stubs(accessor).returns nil
+          @system.stubs(accessor).returns nil
         end
       end
 
       should "use env HOME" do
-        @user.expects(:env_home).returns "abc"
-        assert_equal 'abc', @user.home
+        @system.expects(:env_home).returns "abc"
+        assert_equal 'abc', @system.home
       end
 
       should "use the env USERPROFILE" do
-        @user.expects(:env_userprofile).returns "abc"
-        assert_equal 'abc', @user.home
+        @system.expects(:env_userprofile).returns "abc"
+        assert_equal 'abc', @system.home
       end
 
       should "use the env HOMEPATH" do
-        @user.expects(:env_homedrive).returns "c"
-        @user.expects(:env_homepath).returns "abc"
-        assert_equal 'c:abc', @user.home
+        @system.expects(:env_homedrive).returns "c"
+        @system.expects(:env_homepath).returns "abc"
+        assert_equal 'c:abc', @system.home
       end
 
       should "use ~" do
-        @user.expects(:tilde_home).returns "abc"
-        assert_equal 'abc', @user.home
+        @system.expects(:tilde_home).returns "abc"
+        assert_equal 'abc', @system.home
       end
 
       should "fallback to C drive" do
-        @user.expects(:tilde_home).raises StandardError.new
-        @user.expects(:alt_separator?).returns true
-        assert_equal "C:\\", @user.home
+        @system.expects(:tilde_home).raises StandardError.new
+        @system.expects(:alt_separator?).returns true
+        assert_equal "C:\\", @system.home
       end
 
       should "fallback to unix root" do
-        @user.expects(:tilde_home).raises StandardError.new
-        @user.expects(:alt_separator?).returns false
-        assert_equal "/", @user.home
+        @system.expects(:tilde_home).raises StandardError.new
+        @system.expects(:alt_separator?).returns false
+        assert_equal "/", @system.home
       end
     end
 
