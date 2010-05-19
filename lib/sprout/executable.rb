@@ -11,7 +11,6 @@ require 'sprout/executable/paths_param'
 require 'sprout/executable/symbols_param'
 require 'sprout/executable/url_param'
 require 'sprout/executable/urls_param'
-require 'sprout/executable/parameter_factory'
 
 module Sprout
   module Executable
@@ -48,20 +47,19 @@ module Sprout
       # Parameters will be sent to the commandline executable in the order they are
       # added using +add_param+.
       #
-      def add_param(name, options=nil) # :yields: Sprout::Executable::Param
+      def add_param(name, type, options=nil) # :yields: Sprout::Executable::Param
         if(block_given?)
           raise Sprout::Errors::UsageError.new("[DEPRECATED] add_param no longer uses closures, you can provide the same values as a hash in the optional last argument.")
         end
 
-        if(options.is_a?(Symbol))
-          options = { :type => options }
-        end
+        raise Sprout::Errors::UsageError.new "The first parameter (name:SymbolOrString) is required" if name.nil?
+        raise Sprout::Errors::UsageError.new "The second parameter (type:Class) is required" if type.nil?
 
         options ||= {}
         options[:name] = name
+        options[:type] = type
 
         class_declarations << options
-
         create_class_accessors name
       end
       
@@ -244,17 +242,18 @@ module Sprout
       end
 
       def create_parameter declaration
-        param = Sprout::Executable::ParameterFactory.create declaration[:type] do |p|
-          p.belongs_to = self
+        param = declaration[:type].new 
+        param.belongs_to = self
           
-          declaration.each_pair do |key, value|
-            begin
-              p.send "#{key}=", value
-            rescue ArgumentError
-              raise Sprout::Errors::UsageError.new "Unexpected parameter option encountered with: #{key} and value: #{value}"
-            end
+        declaration.each_pair do |key, value|
+          begin
+            param.send "#{key}=", value
+          rescue ArgumentError
+            raise Sprout::Errors::UsageError.new "Unexpected parameter option encountered with: #{key} and value: #{value}"
           end
         end
+
+        raise Sprout::Errors::UsageError.new "Parameter name is required" if(param.name.nil?)
 
         param_hash[param.name.to_sym] = param
         params << param

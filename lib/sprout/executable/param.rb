@@ -75,7 +75,7 @@ module Sprout
       # an array.
       attr_writer :file_expression
 
-      attr_writer   :shell_name
+      attr_writer :shell_name
 
       def initialize
         @prefix = '-'

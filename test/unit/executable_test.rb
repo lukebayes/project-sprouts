@@ -1,6 +1,7 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-require 'test/fixtures/executable/mxmlc_task'
+require 'test/fixtures/executable/mxmlc'
+require 'test/unit/fake_other_executable'
 
 class ExecutableTest < Test::Unit::TestCase
   include SproutTestCase
@@ -8,7 +9,7 @@ class ExecutableTest < Test::Unit::TestCase
   context "a new executable task" do
 
     setup do
-      @tool = FakeExecutableTask.new
+      @tool = FakeOtherExecutableTask.new
     end
 
     # TODO: Test each parameter type:
@@ -51,7 +52,7 @@ class ExecutableTest < Test::Unit::TestCase
       assert_raises Sprout::Errors::UsageError do
         class BrokenTool
           include Sprout::Executable
-          add_param :broken_param, :unknown_type
+          add_param :broken_param, nil
         end
 
         tool = BrokenTool.new
@@ -62,7 +63,7 @@ class ExecutableTest < Test::Unit::TestCase
 
       class WorkingTool
         include Sprout::Executable
-        add_param :custom_name, :string
+        add_param :custom_name, StringParam
       end
 
       tool1 = WorkingTool.new
@@ -75,15 +76,6 @@ class ExecutableTest < Test::Unit::TestCase
 
     end
 
-    context "with a custom param (defined below)" do
-      should "attempt to instantiate by adding _param to the end" do
-        assert_not_nil Sprout::Executable::ParameterFactory.create :custom
-      end
-      should "attempt to instantiate an unknown type before failing" do
-        assert_not_nil Sprout::Executable::ParameterFactory.create :custom_param
-      end
-    end
-
     # TODO: Ensure that file, files, path and paths
     # validate the existence of the references.
 
@@ -94,7 +86,7 @@ class ExecutableTest < Test::Unit::TestCase
   context "a new mxmlc task" do
 
     setup do
-      @tool = Sprout::MXMLCTask.new
+      @tool = Sprout::MXMLC.new
       @mxmlc_executable = File.join(fixtures, 'executable', 'flex3sdk_gem', 'mxmlc')
     end
 
@@ -135,7 +127,7 @@ class ExecutableTest < Test::Unit::TestCase
       mxmlc 'bin/SomeFile.swf' do |t|
         t.source_path << 'test/fixtures/executable/src'
         t.input = 'test/fixtures/executable/src/Main.as'
-        @tool = t # Hold onto the MXMLCTask reference...
+        @tool = t # Hold onto the MXMLC reference...
       end
       assert_equal "-source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
     end
@@ -166,24 +158,4 @@ class ExecutableTest < Test::Unit::TestCase
 
   end
 end
-
-class CustomParam < Sprout::Executable::Param; end
-
-class FakeExecutableTask
-  include Sprout::Executable
-
-  add_param :boolean_param, :boolean
-  add_param :file_param,    :file
-  add_param :files_param,   :files
-  add_param :number_param,  :number
-  add_param :path_param,    :path
-  add_param :paths_param,   :paths
-  add_param :string_param,  :string
-  add_param :strings_param, :strings 
-  add_param :symbols_param, :symbols
-  add_param :urls_param,    :urls
-
-  add_param_alias :sp, :strings_param
-end
-
 
