@@ -11,7 +11,7 @@ module Sprout
     class SproutError < StandardError; end
 
     ##
-    # An error in the Tool was encountered
+    # An error in the Executable was encountered
     class ToolError < SproutError; end
 
 

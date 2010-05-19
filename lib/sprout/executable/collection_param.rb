@@ -1,12 +1,12 @@
 module Sprout
 
-  module Tool
+  module Executable
     # Included by any parameters that represent
     # a collection of values, rather than a single
     # value.
     # 
     # Should only be included by classes that 
-    # extend Sprout::Tool::Param.
+    # extend Sprout::Executable::Param.
     #
     module CollectionParam
 

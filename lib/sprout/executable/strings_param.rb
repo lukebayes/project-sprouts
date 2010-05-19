@@ -1,8 +1,8 @@
 module Sprout
 
-  module Tool
+  module Executable
     # Concrete param object for collections of strings
-    class StringsParam < Tool::Param
+    class StringsParam < Executable::Param
       include CollectionParam
     end
   end

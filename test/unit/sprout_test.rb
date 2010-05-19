@@ -56,7 +56,7 @@ class SproutTest < Test::Unit::TestCase
     context "with a sandboxed load path" do
 
       setup do
-        path = File.join fixtures, "tool", "flex3sdk_gem"
+        path = File.join fixtures, "executable", "flex3sdk_gem"
         $:.unshift path
       end
 
@@ -99,7 +99,7 @@ class SproutTest < Test::Unit::TestCase
             register_executable :mxmlc, 'flex3sdk', '1.0.pre', @path
           end
 
-          should "succeed if the tool is available and no version specified" do
+          should "succeed if the executable is available and no version specified" do
             assert_equal @path, Sprout.load_executable(:mxmlc, 'flex3sdk')
           end
 

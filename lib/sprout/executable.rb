@@ -1,7 +1,7 @@
-require 'sprout/tool/parameter_factory'
+require 'sprout/executable/parameter_factory'
 
 module Sprout
-  module Tool
+  module Executable
     DEFAULT_FILE_EXPRESSION = '/**/**/*'
 
     extend Sprout::Concern
@@ -9,7 +9,7 @@ module Sprout
     module ClassMethods
 
       # +add_param+ is the workhorse of the Task.
-      # This method is used to add new shell parameters to the tool interface.
+      # This method is used to add new shell parameters to the executable interface.
       #
       # +name+ is a symbol or string that represents the parameter that you would like to add
       # such as :debug or :source_path.
@@ -26,16 +26,16 @@ module Sprout
       # [:strings]  Collection of arbitrary strings
       # [:urls]     Collection of URLs
       #
-      # Be sure to check out the Sprout::Tool::Param class to learn more about
+      # Be sure to check out the Sprout::Executable::Param class to learn more about
       # block editing the parameters.
       #
       # Once parameters have been added using the +add_param+ method, clients
-      # can set and get those parameters from any newly created tool instance.
+      # can set and get those parameters from any newly created executable instance.
       #
-      # Parameters will be sent to the commandline tool in the order they are
+      # Parameters will be sent to the commandline executable in the order they are
       # added using +add_param+.
       #
-      def add_param(name, options=nil) # :yields: Sprout::Tool::Param
+      def add_param(name, options=nil) # :yields: Sprout::Executable::Param
         if(block_given?)
           raise Sprout::Errors::UsageError.new("[DEPRECATED] add_param no longer uses closures, you can provide the same values as a hash in the optional last argument.")
         end
@@ -132,7 +132,7 @@ module Sprout
         Sprout.current_system.execute exe
       end
 
-      # Create a string that represents this configured tool for shell execution
+      # Create a string that represents this configured executable for shell execution
       def to_shell
         return @to_shell_proc.call(self) if(!@to_shell_proc.nil?)
 
@@ -151,21 +151,21 @@ module Sprout
       # Called by Parameters like :path and :paths
       #
       def default_file_expression
-        @default_file_expression ||= Sprout::Tool::DEFAULT_FILE_EXPRESSION
+        @default_file_expression ||= Sprout::Executable::DEFAULT_FILE_EXPRESSION
       end
 
       ##
       # The default RubyGem that we will use when requesting our executable.
       #
-      # Classes that include the Tool can set the default value for this property
+      # Classes that include the Executable can set the default value for this property
       # at the class level with:
       #
       #     set :pkg_name, 'sprout-sometoolname'
       #
       # But that value can be overridden on each instance like:
       #
-      #     tool = SomeToolTask.new
-      #     tool.pkg_name = 'sprout-othertoolname'
+      #     executable = SomeToolTask.new
+      #     executable.pkg_name = 'sprout-othertoolname'
       #
       # This parameter is required - either from the including class or instance
       # configuration.
@@ -182,7 +182,7 @@ module Sprout
       #
       # But that value can be overriden on each instance like:
       #
-      #     tool = SomeToolTask.new
+      #     executable = SomeToolTask.new
       #     too.pkg_version = '>= 2.0.0'
       #
       # This parameter is required - either from the including class or instance
@@ -191,7 +191,7 @@ module Sprout
       attr_accessor :pkg_version
 
       ##
-      # The default Sprout executable that we will use for this tool.
+      # The default Sprout executable that we will use for this executable.
       #
       # Classes that include the Task can set the default value for this property
       # at the class level with:
@@ -200,7 +200,7 @@ module Sprout
       #
       # But that value can be overriden on each instance like:
       #
-      #     tool = SomeToolTask.new
+      #     executable = SomeToolTask.new
       #     too.executable :compc
       #
       # This parameter is required - either from the including class or instance
@@ -231,7 +231,7 @@ module Sprout
       end
 
       def create_parameter declaration
-        param = Sprout::Tool::ParameterFactory.create declaration[:type] do |p|
+        param = Sprout::Executable::ParameterFactory.create declaration[:type] do |p|
           p.belongs_to = self
           
           declaration.each_pair do |key, value|

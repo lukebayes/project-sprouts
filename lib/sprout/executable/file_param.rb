@@ -1,6 +1,6 @@
 module Sprout
 
-  module Tool
+  module Executable
     # Concrete param object for :file values
     class FileParam < Param 
 

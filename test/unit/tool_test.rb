@@ -1,11 +1,11 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-require 'test/fixtures/tool/mxmlc_task'
+require 'test/fixtures/executable/mxmlc_task'
 
 class ToolTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "a new tool task" do
+  context "a new executable task" do
 
     setup do
       @tool = FakeToolTask.new
@@ -50,7 +50,7 @@ class ToolTest < Test::Unit::TestCase
 
       assert_raises Sprout::Errors::UsageError do
         class BrokenTool
-          include Sprout::Tool
+          include Sprout::Executable
           add_param :broken_param, :unknown_type
         end
 
@@ -61,7 +61,7 @@ class ToolTest < Test::Unit::TestCase
     should "define a new method" do
 
       class WorkingTool
-        include Sprout::Tool
+        include Sprout::Executable
         add_param :custom_name, :string
       end
 
@@ -77,10 +77,10 @@ class ToolTest < Test::Unit::TestCase
 
     context "with a custom param (defined below)" do
       should "attempt to instantiate by adding _param to the end" do
-        assert_not_nil Sprout::Tool::ParameterFactory.create :custom
+        assert_not_nil Sprout::Executable::ParameterFactory.create :custom
       end
       should "attempt to instantiate an unknown type before failing" do
-        assert_not_nil Sprout::Tool::ParameterFactory.create :custom_param
+        assert_not_nil Sprout::Executable::ParameterFactory.create :custom_param
       end
     end
 
@@ -95,13 +95,13 @@ class ToolTest < Test::Unit::TestCase
 
     setup do
       @tool = Sprout::MXMLCTask.new
-      @mxmlc_executable = File.join(fixtures, 'tool', 'flex3sdk_gem', 'mxmlc')
+      @mxmlc_executable = File.join(fixtures, 'executable', 'flex3sdk_gem', 'mxmlc')
     end
 
     should "accept input" do
-      @tool.input = "test/fixtures/tool/src/Main.as"
-      assert_equal "test/fixtures/tool/src/Main.as", @tool.input
-      assert_equal "test/fixtures/tool/src/Main.as", @tool.to_shell
+      @tool.input = "test/fixtures/executable/src/Main.as"
+      assert_equal "test/fixtures/executable/src/Main.as", @tool.input
+      assert_equal "test/fixtures/executable/src/Main.as", @tool.to_shell
     end
 
     should "accept default gem name" do
@@ -133,23 +133,23 @@ class ToolTest < Test::Unit::TestCase
 
     should "accept configuratin as a file task" do
       mxmlc 'bin/SomeFile.swf' do |t|
-        t.source_path << 'test/fixtures/tool/src'
-        t.input = 'test/fixtures/tool/src/Main.as'
+        t.source_path << 'test/fixtures/executable/src'
+        t.input = 'test/fixtures/executable/src/Main.as'
         @tool = t # Hold onto the MXMLCTask reference...
       end
-      assert_equal "-source-path+=test/fixtures/tool/src test/fixtures/tool/src/Main.as", @tool.to_shell
+      assert_equal "-source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
     end
 
     should "to_shell input" do
       @tool.debug = true
-      @tool.source_path << "test/fixtures/tool/src"
-      assert_equal "-debug -source-path+=test/fixtures/tool/src", @tool.to_shell
+      @tool.source_path << "test/fixtures/executable/src"
+      assert_equal "-debug -source-path+=test/fixtures/executable/src", @tool.to_shell
     end
 
     should "execute the registered executable" do
-      # Configure stub tool:
-      @tool.input = 'test/fixtures/tool/src/Main.as'
-      @tool.source_path << 'test/fixtures/tool/src'
+      # Configure stub executable:
+      @tool.input = 'test/fixtures/executable/src/Main.as'
+      @tool.source_path << 'test/fixtures/executable/src'
       @tool.debug = true
       Sprout.expects(:load_executable).with(:mxmlc, 'flex4sdk', '>= 1.0.pre').returns @mxmlc_executable
 
@@ -157,7 +157,7 @@ class ToolTest < Test::Unit::TestCase
       File.chmod 0644, @mxmlc_executable
       first = File.stat(@mxmlc_executable).mode
 
-      # Execute the stub tool:
+      # Execute the stub executable:
       @tool.execute
 
       # Ensure the file mode was updated:
@@ -167,10 +167,10 @@ class ToolTest < Test::Unit::TestCase
   end
 end
 
-class CustomParam < Sprout::Tool::Param; end
+class CustomParam < Sprout::Executable::Param; end
 
 class FakeToolTask
-  include Sprout::Tool
+  include Sprout::Executable
 
   add_param :boolean_param, :boolean
   add_param :file_param,    :file

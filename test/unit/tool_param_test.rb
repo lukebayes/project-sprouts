@@ -3,10 +3,10 @@ require File.dirname(__FILE__) + '/test_helper'
 class ToolTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "a new, simple Tool::Param" do
+  context "a new, simple Executable::Param" do
 
     setup do 
-      @param = Sprout::Tool::Param.new
+      @param = Sprout::Executable::Param.new
     end
 
     should "be invisible until value set" do

@@ -203,12 +203,12 @@ module Sprout::System
     protected
 
     ##
-    # Get a process runner and execute the provided +tool+,
+    # Get a process runner and execute the provided +executable+,
     # with the provided +options+.
     #
-    # +tool+ String path to the external executable file.
+    # +executable+ String path to the external executable file.
     #
-    # +options+ String commandline options to send to the +tool+.
+    # +options+ String commandline options to send to the +executable+.
     #
     def get_and_execute_process_runner tool, options=nil
       runner = get_process_runner

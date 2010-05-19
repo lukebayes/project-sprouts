@@ -6,9 +6,9 @@ class PathParamTest < Test::Unit::TestCase
   context "a new PathParam" do
 
     setup do
-      @path1 = File.join(fixtures, 'tool', 'paths', 'folder1')
+      @path1 = File.join(fixtures, 'executable', 'paths', 'folder1')
 
-      @param = Sprout::Tool::PathParam.new
+      @param = Sprout::Executable::PathParam.new
       @param.belongs_to = FakeToolTask.new
       @param.name = 'path'
     end

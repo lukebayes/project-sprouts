@@ -1,6 +1,6 @@
 module Sprout
 
-  module Tool
+  module Executable
     # Concrete param object for collections of paths
     class PathsParam < FilesParam # :nodoc:
 

@@ -52,10 +52,10 @@ class SpecificationTest < Test::Unit::TestCase
   end
 =end
 
-  context "a newly included tool" do
+  context "a newly included executable" do
 
     setup do
-      @echo_chamber = File.join fixtures, 'tool', 'echochamber_gem', 'echo_chamber'
+      @echo_chamber = File.join fixtures, 'executable', 'echochamber_gem', 'echo_chamber'
     end
 
     should "require the sproutspec" do

@@ -11,7 +11,7 @@ module Sprout
   #
   # In order to support Flash development, we have one major problem
   # that RubyGems does not solve for us. This is the fact that 
-  # many elements of our tool chain are not open-source, and we do
+  # many elements of our executable chain are not open-source, and we do
   # not have the rights to directly distribute them.
   #
   # This restriction means that many of our tools and dependencies cannot be 
@@ -23,7 +23,7 @@ module Sprout
   # Ruby code in it. The main idea behind this file, is that it
   # needs to be given a name and available in your load path.
   #
-  # Whenever a rake build task (Sprout::Tool) or library task,
+  # Whenever a rake build task (Sprout::Executable) or library task,
   # (Sprout::Library) is encountered, it will call
   # Sprout.load_executable or Sprout.get_library (respectively).
   #

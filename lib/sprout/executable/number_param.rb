@@ -1,9 +1,9 @@
 
 module Sprout
   
-  module Tool
+  module Executable
     # Concrete param object for numberic values
-    class NumberParam < Tool::Param
+    class NumberParam < Executable::Param
     end
   end
 end

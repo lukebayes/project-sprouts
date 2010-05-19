@@ -1,21 +1,21 @@
-require 'sprout/tool/collection_param'
-require 'sprout/tool/param'
-require 'sprout/tool/boolean_param'
-require 'sprout/tool/number_param'
-require 'sprout/tool/string_param'
-require 'sprout/tool/strings_param'
-require 'sprout/tool/file_param'
-require 'sprout/tool/files_param'
-require 'sprout/tool/path_param'
-require 'sprout/tool/paths_param'
-require 'sprout/tool/symbols_param'
-require 'sprout/tool/url_param'
-require 'sprout/tool/urls_param'
+require 'sprout/executable/collection_param'
+require 'sprout/executable/param'
+require 'sprout/executable/boolean_param'
+require 'sprout/executable/number_param'
+require 'sprout/executable/string_param'
+require 'sprout/executable/strings_param'
+require 'sprout/executable/file_param'
+require 'sprout/executable/files_param'
+require 'sprout/executable/path_param'
+require 'sprout/executable/paths_param'
+require 'sprout/executable/symbols_param'
+require 'sprout/executable/url_param'
+require 'sprout/executable/urls_param'
 
 ##
-# Used to create new Parameter instances for Sprout::Tool.
+# Used to create new Parameter instances for Sprout::Executable.
 #
-class Sprout::Tool::ParameterFactory
+class Sprout::Executable::ParameterFactory
 
   class << self
 
@@ -43,7 +43,7 @@ class Sprout::Tool::ParameterFactory
 
     def resolve_sprout_parameter type_str
       type_str = "#{type_str}_param"
-      attempt_to_instantiate Sprout::Tool, type_str
+      attempt_to_instantiate Sprout::Executable, type_str
     end
 
     def resolve_unknown_parameter type_str

@@ -1,8 +1,8 @@
 module Sprout
 
-  module Tool
+  module Executable
     # Concrete param object for :path values
-    class PathParam < Tool::Param
+    class PathParam < Executable::Param
 
       def prepare_prerequisites
         if(value && value != belongs_to.name.to_s)

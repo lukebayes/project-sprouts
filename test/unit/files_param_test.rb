@@ -6,11 +6,11 @@ class FilesParamTest < Test::Unit::TestCase
   context "a new FilesParam" do
 
     setup do
-      @input1 = File.join(fixtures, "tool", "params", "input.as")
-      @input2 = File.join(fixtures, "tool", "params", "input2.as")
-      @input3 = File.join(fixtures, "tool", "params", "input3.as")
+      @input1 = File.join(fixtures, "executable", "params", "input.as")
+      @input2 = File.join(fixtures, "executable", "params", "input2.as")
+      @input3 = File.join(fixtures, "executable", "params", "input3.as")
 
-      @param = Sprout::Tool::FilesParam.new
+      @param = Sprout::Executable::FilesParam.new
       @param.name = 'inputs'
       @param.belongs_to = FakeToolTask.new
     end

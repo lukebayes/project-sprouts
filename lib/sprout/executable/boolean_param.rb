@@ -1,6 +1,6 @@
 module Sprout
 
-  module Tool
+  module Executable
     # Concrete param object for :boolean values
     class BooleanParam < Param
       attr_writer :show_on_false

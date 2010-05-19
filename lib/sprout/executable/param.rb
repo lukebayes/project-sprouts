@@ -16,7 +16,7 @@ module Sprout
   # their values as file task prerequisites. This is especially helpful when writing
   # rake tasks for Command Line Interface (CLI) compilers.
   #
-  # Tool::Params have a template method lifecycle that one should become
+  # Executable::Params have a template method lifecycle that one should become
   # familiar with before working with them directly.
   #
   # Depending on what you may do in subclasses, the lifecycle methods 
@@ -35,7 +35,7 @@ module Sprout
   # # to_shell
   # 
 
-  module Tool
+  module Executable
     class Param
       attr_accessor :belongs_to
       attr_accessor :description
@@ -57,7 +57,7 @@ module Sprout
       attr_accessor :value
       attr_accessor :visible
 
-      # Tool::Params join their name/value pair with an
+      # Executable::Params join their name/value pair with an
       # equals sign by default, this can be modified 
       # To a space or whatever you wish
       # Return the name with a single leading dash
@@ -67,7 +67,7 @@ module Sprout
       # Set the file_expression (blob) to append to each path
       # in order to build the prerequisites FileList.
       #
-      # Defaults to parent Tool.default_file_expression
+      # Defaults to parent Executable.default_file_expression
       #
       # NOTE: We should add support for file_expressionS
       # since these are really just blobs that are sent
@@ -82,7 +82,7 @@ module Sprout
         @delimiter = '='
       end
 
-      # By default, Tool::Params only appear in the shell
+      # By default, Executable::Params only appear in the shell
       # output when they are not nil
       def visible?
         !value.nil?

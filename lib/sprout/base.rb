@@ -34,7 +34,7 @@ require 'sprout/remote_file_target'
 
 # External Packaging and distribution support:
 require 'sprout/specification'
-require 'sprout/tool'
+require 'sprout/executable'
 
 module Sprout
 
@@ -44,7 +44,7 @@ module Sprout
     module ClassMethods
 
       ##
-      # Tool Specifications should register their executables with this method
+      # Executable Specifications should register their executables with this method
       # so that Tasks can later call +load_executable+ to retrieve the path to 
       # the actual executable file.
       #
@@ -54,7 +54,7 @@ module Sprout
       end
 
       ##
-      # This method is generally called by the Sprout::Tool,
+      # This method is generally called by the Sprout::Executable,
       # and it the idea is that we can retrive registered executables with the 
       # exe name, gem name and options gem version (or Gem::Requirement).
       #

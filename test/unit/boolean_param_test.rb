@@ -6,7 +6,7 @@ class BooleanParamTest < Test::Unit::TestCase
   context "a new, simple BooleanParam" do
 
     setup do 
-      @param = Sprout::Tool::BooleanParam.new
+      @param = Sprout::Executable::BooleanParam.new
       @param.name = 'foo'
     end
 

@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
 
   # TODO: Bring this back:
   #s.executables  = ['sprout']
-  s.executables  = ['sprout-tool']
+  s.executables  = ['sprout-executable']
   s.require_path = ['lib', 'test']
 end
 

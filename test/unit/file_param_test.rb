@@ -6,15 +6,15 @@ class FileParamTest < Test::Unit::TestCase
   context "a new FileParam" do
 
     setup do
-      @input_with_spaces = File.join(fixtures, "tool", "path with spaces", "input.as")
+      @input_with_spaces = File.join(fixtures, "executable", "path with spaces", "input.as")
       @input_with_spaces.gsub!(Dir.pwd + '/', '')
       @input_with_spaces_cleaned = @input_with_spaces.gsub(' ', '\ ')
 
-      @input = File.join(fixtures, "tool", "params", "input.as")
+      @input = File.join(fixtures, "executable", "params", "input.as")
 
       @tool = FakeToolTask.new
 
-      @param = Sprout::Tool::FileParam.new
+      @param = Sprout::Executable::FileParam.new
       @param.belongs_to = @tool
       @param.name = 'input'
       @param.value = @input

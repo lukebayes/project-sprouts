@@ -31,13 +31,13 @@ module Sprout
   #     t.default_background_color  = "#FFFFFF"
   #   end
   #
-  # Note: Be sure to check out the features of the Tool to learn more about gem_version and preprocessor
+  # Note: Be sure to check out the features of the Executable to learn more about gem_version and preprocessor
   #
   # Interface and descriptions found here:
   # http://livedocs.adobe.com/flex/2/docs/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&file=00001481.html
   #
   class MXMLCTask
-    include Sprout::Tool
+    include Sprout::Executable
     
     ##
     # Enables accessibility features when compiling the Flex application or SWC file. The default value is false.

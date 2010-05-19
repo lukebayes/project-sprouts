@@ -12,7 +12,7 @@ Sprout::Specification.new do |s|
  #AsUnit is the only ActionScript unit test framework that
  #supports every development and runtime environment that is currently available. 
  #This includes Flex 2, 3, 4, AIR 1 and 2, Flash Lite, and of course the 
- #Flash Authoring tool.
+ #Flash Authoring executable.
 #EOS
 
   s.add_file_target do |t|
