@@ -1,5 +1,5 @@
 
-exe = Sprout::Executable.new({
+exe = Sprout::ExecutableTarget.new({
                               :name => :mxmlc, 
                               :pkg_name => 'flex3sdk', 
                               :pkg_version => '3.0.0', 

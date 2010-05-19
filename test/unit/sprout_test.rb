@@ -130,7 +130,7 @@ class SproutTest < Test::Unit::TestCase
   private
 
   def register_executable name, pkg_name, pkg_version, path, platform=:macosx
-    exe = Sprout::Executable.new({
+    exe = Sprout::ExecutableTarget.new({
       :name => name,
       :path => path,
       :pkg_name => pkg_name,

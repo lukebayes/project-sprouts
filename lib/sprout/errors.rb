@@ -35,7 +35,7 @@ module Sprout
     class ExecutableRegistrationError < ToolError; end
 
     ##
-    # Could not find requested Executable
+    # Could not find requested ExecutableTarget
     class MissingExecutableError < ToolError; end
 
     ##

@@ -1,7 +1,7 @@
 
 module Sprout
 
-  class Executable
+  class ExecutableTarget
 
     attr_reader :name
     attr_reader :path

@@ -6,7 +6,7 @@ class SproutTest < Test::Unit::TestCase
   context "a new executable with version" do
 
     setup do
-      @executable = Sprout::Executable.new :pkg_version => '1.0.0'
+      @executable = Sprout::ExecutableTarget.new :pkg_version => '1.0.0'
     end
 
     should "fail for lesser versions" do
@@ -29,7 +29,7 @@ class SproutTest < Test::Unit::TestCase
   context "a new executable with pkg_name" do
 
     setup do
-      @executable = Sprout::Executable.new :pkg_name => 'echomaker'
+      @executable = Sprout::ExecutableTarget.new :pkg_name => 'echomaker'
     end
 
     should "fail for non-match" do

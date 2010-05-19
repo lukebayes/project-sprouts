@@ -50,7 +50,7 @@ module Sprout
     #
     def add_executable name, path
       path = expand_executable_path path
-      executables << Sprout::Executable.new( :name => name, :path => path, :file_target => self )
+      executables << Sprout::ExecutableTarget.new( :name => name, :path => path, :file_target => self )
     end
 
     def to_s
