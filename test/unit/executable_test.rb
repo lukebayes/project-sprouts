@@ -53,6 +53,7 @@ class ExecutableTest < Test::Unit::TestCase
         class BrokenTool
           include Sprout::Executable
           add_param :broken_param, nil
+    # 
         end
 
         tool = BrokenTool.new

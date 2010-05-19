@@ -1,5 +1,5 @@
-require 'sprout/executable/collection_param'
 require 'sprout/executable/param'
+require 'sprout/executable/collection_param'
 require 'sprout/executable/boolean_param'
 require 'sprout/executable/number_param'
 require 'sprout/executable/string_param'
@@ -14,6 +14,7 @@ require 'sprout/executable/urls_param'
 
 module Sprout
   module Executable
+
     DEFAULT_FILE_EXPRESSION = '/**/**/*'
 
     extend Sprout::Concern
