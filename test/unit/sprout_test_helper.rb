@@ -1,7 +1,7 @@
 require "rubygems"
 require "bundler"
 
-Bundler.require :default, :development
+Bundler.setup :default, :development
 
 # These require statments *must* be in this order:
 # http://bit.ly/bCC0Ew
@@ -14,7 +14,7 @@ $:.unshift File.dirname(__FILE__) + '/../'
 #$:.unshift File.dirname(__FILE__)
 
 require 'unit/fake_process_runner'
-require 'unit/fake_tool'
+require 'unit/fake_executable_task'
 require 'unit/sprout_test_case'
 
 # Prevent log messages from interrupting the test output:

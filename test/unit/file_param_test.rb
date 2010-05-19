@@ -12,7 +12,7 @@ class FileParamTest < Test::Unit::TestCase
 
       @input = File.join(fixtures, "executable", "params", "input.as")
 
-      @tool = FakeToolTask.new
+      @tool = FakeExecutableTask.new
 
       @param = Sprout::Executable::FileParam.new
       @param.belongs_to = @tool

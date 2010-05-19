@@ -5,7 +5,7 @@ module Sprout::System
 
     def home
       return env_userprofile unless env_userprofile.nil?
-      return super
+      super
     end
 
     def env_userprofile

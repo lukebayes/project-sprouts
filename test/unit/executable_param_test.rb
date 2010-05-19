@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class ToolTest < Test::Unit::TestCase
+class ExecutableParamTest < Test::Unit::TestCase
   include SproutTestCase
 
   context "a new, simple Executable::Param" do

@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class WinNixUserTest < Test::Unit::TestCase
+class WinNixSystemTest < Test::Unit::TestCase
   include SproutTestCase
 
   context "new windows nix (cygwin/mingw) system" do

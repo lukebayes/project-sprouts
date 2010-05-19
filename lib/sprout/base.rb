@@ -84,7 +84,7 @@ module Sprout
       end
 
       def current_system
-        System.create
+        Sprout::System.create
       end
 
       private

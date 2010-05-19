@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class OSXUserTest < Test::Unit::TestCase
+class OSXSystemTest < Test::Unit::TestCase
   include SproutTestCase
 
   context "new osx system" do

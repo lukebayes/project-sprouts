@@ -1,5 +1,5 @@
 
-class FakeToolTask
+class FakeExecutableTask
   attr_accessor :name
 
   def initialize

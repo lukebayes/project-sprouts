@@ -1,6 +1,6 @@
 require 'rubygems/installer'
 require 'fixtures/mock_gem_ui'
-require 'unit/fake_tool'
+require 'unit/fake_executable_task'
 require 'pathname'
 
 # Had to make this a module instead of a base class
@@ -8,7 +8,6 @@ require 'pathname'
 # the abstract test case didn't have any test mehods
 # or assertions
 module SproutTestCase # :nodoc:[all]
-
   FIXTURES_NAME = 'fixtures'
 
   # Gives us the ability to hide RubyGem output from

@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class WinUserTest < Test::Unit::TestCase
+class WinSystemTest < Test::Unit::TestCase
   include SproutTestCase
 
   context "new windows system" do
