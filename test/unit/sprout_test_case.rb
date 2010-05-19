@@ -126,13 +126,15 @@ module SproutTestCase # :nodoc:[all]
   # Find the nearest fixtures folder to the provided
   # path by checking each parent directory.
   def find_fixtures path
+    # Return nil if path is nil or is not a file:
     return nil if(path.nil? || !File.exists?(path))
+    # Get the parent directory if path is a file:
     path = File.dirname(path) if !File.directory? path
-
-    fixture_path = Pathname.new File.join(path, FIXTURES_NAME)
-    fixture_path = fixture_path.relative_path_from(Pathname.new(Dir.pwd)).to_s
+    # Check for a folder at "#{path}/fixtures":
+    fixture_path = File.join(path, FIXTURES_NAME)
+    # Return the fixtures folder if found:
     return fixture_path if File.directory? fixture_path
-
+    # Move up one directory and try again:
     return find_fixtures File.dirname(path)
   end
 
