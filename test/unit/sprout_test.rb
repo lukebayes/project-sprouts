@@ -15,7 +15,6 @@ class SproutTest < Test::Unit::TestCase
       ProcessRunnerError,
       SproutError, 
       ToolError,
-      ToolError,
       UnknownArchiveType,
       UsageError,
       VersionRequirementNotMetError
