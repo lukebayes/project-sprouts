@@ -6,7 +6,16 @@ require 'test/unit/fake_other_executable'
 class ExecutableTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "a new executable task" do
+  context "a new executable" do
+    setup do
+      @tool = FakeOtherExecutableTask.new
+    end
+
+    should "clean commandline options" do
+    end
+  end
+
+  context "a new executable delegate" do
 
     setup do
       @tool = FakeOtherExecutableTask.new

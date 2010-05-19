@@ -1,3 +1,4 @@
+require 'sprout/executable/parser'
 require 'sprout/executable/param'
 require 'sprout/executable/collection_param'
 require 'sprout/executable/boolean_param'
@@ -124,6 +125,9 @@ module Sprout
         initialize_parameters
       end
 
+      def parse options
+      end
+
       ##
       # Called from enclosing Rake::Task after
       # initialization and before any tasks are
@@ -246,12 +250,12 @@ module Sprout
         param = declaration[:type].new 
         param.belongs_to = self
           
-        declaration.each_pair do |key, value|
-          begin
+        begin
+          declaration.each_pair do |key, value|
             param.send "#{key}=", value
-          rescue ArgumentError
-            raise Sprout::Errors::UsageError.new "Unexpected parameter option encountered with: #{key} and value: #{value}"
           end
+        rescue ArgumentError
+          raise Sprout::Errors::UsageError.new "Unexpected parameter option encountered with: #{key} and value: #{value}"
         end
 
         raise Sprout::Errors::UsageError.new "Parameter name is required" if(param.name.nil?)

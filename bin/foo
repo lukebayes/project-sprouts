@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+
+puts "---------------------"
+puts "ARGV: #{ARGV.inspect}"
+ARGV.each do |arg|
+  puts "arg: #{arg} class: #{arg.class}"
+end
+
