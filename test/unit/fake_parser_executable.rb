@@ -1,7 +1,7 @@
 
-class CustomFakeParam < Sprout::Executable::StringParam; end
+class CustomParam < Sprout::Executable::Param; end
 
-class FakeOtherExecutableTask
+class FakeParserExecutable
   include Sprout::Executable
 
   add_param :boolean_param, BooleanParam
@@ -15,6 +15,8 @@ class FakeOtherExecutableTask
   add_param :strings_param, StringsParam 
   add_param :symbols_param, SymbolsParam
   add_param :urls_param,    UrlsParam
+
+  add_param :input,         FileParam, { :required => true }
 
   add_param_alias :sp, :strings_param
 end

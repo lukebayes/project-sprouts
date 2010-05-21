@@ -1,4 +1,3 @@
-require 'sprout/executable/parser'
 require 'sprout/executable/param'
 require 'sprout/executable/collection_param'
 require 'sprout/executable/boolean_param'
@@ -15,6 +14,7 @@ require 'sprout/executable/urls_param'
 
 module Sprout
   module Executable
+
 
     DEFAULT_FILE_EXPRESSION = '/**/**/*'
 
@@ -61,7 +61,7 @@ module Sprout
         options[:name] = name
         options[:type] = type
 
-        class_declarations << options
+        static_parameter_declarations << options
         create_class_accessors name
       end
       
@@ -69,8 +69,8 @@ module Sprout
         create_class_accessors new_name, old_name
       end
 
-      def class_declarations
-        @class_declarations ||= []
+      def static_parameter_declarations
+        @static_parameter_declarations ||= []
       end
 
       def set name, value
@@ -125,7 +125,8 @@ module Sprout
         initialize_parameters
       end
 
-      def parse options
+      def parse commandline_options
+        option_parser.parse commandline_options
       end
 
       ##
@@ -227,8 +228,23 @@ module Sprout
       private
 
       def initialize_parameters
-        self.class.class_declarations.each do |declaration|
-          initialize_parameter declaration
+        parser = option_parser
+        self.class.static_parameter_declarations.each do |declaration|
+          param = initialize_parameter declaration
+
+          short       = param.short_name
+          long        = param.option_parser_name
+          description = param.description
+          delimiter   = param.delimiter
+          type        = param.option_parser_type_output
+
+          parser.on short, "#{long}#{delimiter}#{type}", description do |value|
+            if(param.is_a?(CollectionParam) && delimiter == '+=')
+              eval "self.#{param.name} << '#{value}'"
+            else
+              self.send "#{param.name}=", value
+            end
+          end
         end
       end
 
@@ -262,6 +278,11 @@ module Sprout
 
         param_hash[param.name.to_sym] = param
         params << param
+
+        # Expose this parameter to commandline arguments:
+        #add_commandline_param param
+
+        param
       end
 
       def parameter_hash_includes? name
@@ -273,8 +294,12 @@ module Sprout
           param.validate
         end
       end
-    end
 
+      def option_parser
+        @option_parser ||= OptionParser.new
+      end
+
+    end
   end
 end
 

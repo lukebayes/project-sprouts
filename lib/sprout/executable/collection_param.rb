@@ -19,7 +19,7 @@ module Sprout
       # Assign the value and raise if 
       def value=(val)
         if(val.is_a?(String) || !val.is_a?(Enumerable))
-          message = "The #{name} property is an Enumerable. It looks like you may have used the assignment operator (=) where the append operator (<<) was expected."
+          message = "The #{name} property is an Enumerable. It looks like you may have used the assignment operator (=) with (#{value.inspect}) where the append operator (<<) was expected."
           raise Sprout::Errors::ToolError.new(message)
         end
         @value = val
@@ -39,8 +39,8 @@ module Sprout
         return @to_shell_proc.call(self) unless @to_shell_proc.nil?
         return value.join(' ') if hidden_name?
         return value.collect { |val|
-            "#{shell_name}#{delimiter}#{val}"
-          }.join(' ')
+          "#{shell_name}#{delimiter}#{val}"
+        }.join(' ')
       end
     end
   end

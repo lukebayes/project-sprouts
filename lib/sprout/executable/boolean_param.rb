@@ -14,6 +14,10 @@ module Sprout
         end
       end
 
+      def option_parser_type_name
+        'BOOL'
+      end
+
       def show_on_false
         @show_on_false ||= false
       end

@@ -130,6 +130,27 @@ module Sprout
         @prefix ||= '-'
       end
       
+      def option_parser_name
+        "--#{name.to_s.gsub('_', '-')}"
+      end
+
+      def option_parser_type_name
+        'STRING'
+      end
+
+      def option_parser_type_output
+        type = hidden_value? ? '' : option_parser_type_name
+        required? ? type : "[#{type}]"
+      end
+
+      def short_name
+        "-#{name.to_s.split('').shift}"
+      end
+
+      def description
+        "Generic Description"
+      end
+
       def shell_value
         value.to_s
       end
