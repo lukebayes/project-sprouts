@@ -45,23 +45,42 @@ class ExecutableTest < Test::Unit::TestCase
     end
 
     should "raise UsageError with unknown type" do
-
       assert_raises Sprout::Errors::UsageError do
-        class BrokenTool
+        class BrokenExecutable
           include Sprout::Executable
           add_param :broken_param, nil
         end
 
-        tool = BrokenTool.new
+        tool = BrokenExecutable.new
+      end
+    end
+
+    should "raise Error if type is not a Class" do
+      assert_raises Sprout::Errors::UsageError do
+        class BrokenExecutable2
+          include Sprout::Executable
+          add_param :some_name, :string
+        end
       end
     end
 
     should "raise Error when requested param name already exists" do
-      assert_raises Sprout::Errors::UsageError do
-        class AnotherBrokenTool
+      assert_raises Sprout::Errors::DuplicateMemberError do
+        class BrokenExecutable3
           include Sprout::Executable
           attr_accessor :existing_method
           add_param :existing_method, StringParam
+        end
+      end
+    end
+
+    should "raise Error if a block is provided to add_param" do
+      assert_raises Sprout::Errors::UsageError do
+        class BrokenExecutable4
+          include Sprout::Executable
+          add_param :name, StringParam do
+            # this is no longer how it's done...
+          end
         end
       end
     end

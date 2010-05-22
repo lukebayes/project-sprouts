@@ -50,13 +50,10 @@ module Sprout
       # added using +add_param+.
       #
       def add_param(name, type, options=nil) # :yields: Sprout::Executable::Param
-        if(block_given?)
-          raise Sprout::Errors::UsageError.new("[DEPRECATED] add_param no longer uses closures, you can provide the same values as a hash in the optional last argument.")
-        end
-
+        raise Sprout::Errors::UsageError.new("[DEPRECATED] add_param no longer uses closures, you can provide the same values as a hash in the optional last argument.") if block_given?
         raise Sprout::Errors::UsageError.new "The first parameter (name:SymbolOrString) is required" if name.nil?
         raise Sprout::Errors::UsageError.new "The second parameter (type:Class) is required" if type.nil?
-        #raise Sprout::Errors::UsageError.new "The type parameter must be a Class by reference" if !type.is_a?(Class)
+        raise Sprout::Errors::UsageError.new "The type parameter must be a Class by reference" if !type.is_a?(Class)
 
         options ||= {}
         options[:name] = name
@@ -87,7 +84,7 @@ module Sprout
 
       def accessor_can_be_defined_at name
         if(instance_defines? name)
-          raise Sprout::Errors::UsageError.new("add_param called with a name that is already in use (#{name}=) on (#{self.class})")
+          raise Sprout::Errors::DuplicateMemberError.new("add_param called with a name that is already in use (#{name}=) on (#{self.class})")
         end
       end
 

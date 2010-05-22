@@ -31,6 +31,10 @@ module Sprout
     class ExecutionError < SproutError; end
 
     ##
+    # Requested parameter or accessor already exists.
+    class DuplicateMemberError < ExecutableError; end
+
+    ##
     # Error when registering executables.
     class ExecutableRegistrationError < ExecutableError; end
 
