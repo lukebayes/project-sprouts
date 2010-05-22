@@ -56,6 +56,16 @@ class ExecutableTest < Test::Unit::TestCase
       end
     end
 
+    should "raise Error when requested param name already exists" do
+      assert_raises Sprout::Errors::UsageError do
+        class AnotherBrokenTool
+          include Sprout::Executable
+          attr_accessor :existing_method
+          add_param :existing_method, StringParam
+        end
+      end
+    end
+
     should "define a new method" do
 
       class WorkingTool

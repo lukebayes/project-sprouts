@@ -1,5 +1,4 @@
 require File.dirname(__FILE__) + '/test_helper'
-require File.dirname(__FILE__) + '/fake_parser_executable'
 
 class ExecutableParserTest < Test::Unit::TestCase
   include SproutTestCase

@@ -56,34 +56,47 @@ module Sprout
 
         raise Sprout::Errors::UsageError.new "The first parameter (name:SymbolOrString) is required" if name.nil?
         raise Sprout::Errors::UsageError.new "The second parameter (type:Class) is required" if type.nil?
+        #raise Sprout::Errors::UsageError.new "The type parameter must be a Class by reference" if !type.is_a?(Class)
 
         options ||= {}
         options[:name] = name
         options[:type] = type
 
-        static_parameter_declarations << options
-        create_class_accessors name
+        create_param_accessors name
+        static_parameter_collection << options
+        options
       end
       
       def add_param_alias new_name, old_name
-        create_class_accessors new_name, old_name
+        create_param_accessors new_name, old_name
       end
 
-      def static_parameter_declarations
-        @static_parameter_declarations ||= []
+      def static_parameter_collection
+        @static_parameter_collection ||= []
+      end
+
+      def static_default_value_collection
+        @static_default_value_collection ||= {}
       end
 
       def set name, value
-        instance_accessors name, value
+        set_default_value name, value
       end
 
       private
 
-      def create_class_accessors name, real_name=nil
+      def accessor_can_be_defined_at name
+        if(instance_defines? name)
+          raise Sprout::Errors::UsageError.new("add_param called with a name that is already in use (#{name}=) on (#{self.class})")
+        end
+      end
+
+      def create_param_accessors name, real_name=nil
         real_name ||= name
+        accessor_can_be_defined_at name
 
         # define the setter:
-        define_method("#{name.to_s}=") do |value|
+        define_method("#{name}=") do |value|
           param_hash[real_name].value = value
         end
 
@@ -93,14 +106,15 @@ module Sprout
         end
       end
 
-      def instance_accessors name, default
-        define_method("#{name.to_s}=") do |value|
-          param_hash[name] = value
-        end
+      def instance_defines? name
+        self.instance_methods.include? name
+      end
 
-        define_method(name) do
-          param_hash[name] ||= default
+      def set_default_value name, value
+        if(!instance_defines? name)
+          raise Sprout::Errors::UsageError.new("Cannot set default value (#{value}) for unknown parameter (#{name})")
         end
+        static_default_value_collection[name] = value
       end
 
     end
@@ -123,6 +137,7 @@ module Sprout
         @prerequisites  = []
         @option_parser  = OptionParser.new
         initialize_parameters
+        initialize_defaults
       end
 
       def parse commandline_options
@@ -237,7 +252,7 @@ module Sprout
       private
 
       def initialize_parameters
-        self.class.static_parameter_declarations.each do |declaration|
+        self.class.static_parameter_collection.each do |declaration|
           param = initialize_parameter declaration
 
           short       = param.short_name
@@ -254,11 +269,12 @@ module Sprout
             end
           end
         end
+
       end
 
       def initialize_parameter declaration
-        name    = declaration[:name]
-        type    = declaration[:type]
+        name   = declaration[:name]
+        type   = declaration[:type]
 
         name_s = name.to_s
 
@@ -291,6 +307,12 @@ module Sprout
         #add_commandline_param param
 
         param
+      end
+
+      def initialize_defaults
+        self.class.static_default_value_collection.each_pair do |name, value|
+          self.send "#{name}=", value
+        end
       end
 
       def parameter_hash_includes? name
