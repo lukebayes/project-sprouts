@@ -2,13 +2,8 @@ module Sprout
 
   module Executable
 
-    ##
-    # Define a cleaner class name for use
-    # in add_param calls
-    class Boolean; end
-
     # Concrete param object for :boolean values
-    class BooleanParam < Param
+    class Boolean < Param
       attr_writer :show_on_false
       
       def visible?

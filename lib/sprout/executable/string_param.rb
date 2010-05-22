@@ -1,6 +1,7 @@
 module Sprout
 
   module Executable
+
     # Concrete param object for :string values
     class StringParam < Executable::Param
 

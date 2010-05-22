@@ -2,11 +2,9 @@ module Sprout
 
   module Executable
 
-    class Path; end
-
     ##
     # Concrete param object for :path values
-    class PathParam < Executable::Param
+    class Path < Executable::Param
 
       def prepare_prerequisites
         if(value && value != belongs_to.name.to_s)

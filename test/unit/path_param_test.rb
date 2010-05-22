@@ -8,7 +8,7 @@ class PathParamTest < Test::Unit::TestCase
     setup do
       @path1 = File.join(fixtures, 'executable', 'paths', 'folder1')
 
-      @param = Sprout::Executable::PathParam.new
+      @param = Sprout::Executable::Path.new
       @param.belongs_to = FakeExecutableTask.new
       @param.name = 'path'
     end

@@ -3,13 +3,8 @@ module Sprout
   module Executable
 
     ##
-    # Define a cleaner class name for use
-    # in add_param calls
-    class Files; end
-
-    ##
     # Concrete param object for collections of files
-    class FilesParam < Executable::Param
+    class Files < Executable::Param
       include CollectionParam
 
       # The prepare method should be called

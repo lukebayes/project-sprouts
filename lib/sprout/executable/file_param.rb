@@ -1,7 +1,16 @@
 module Sprout
 
   module Executable
+
+    ##
     # Concrete param object for :file values
+    #
+    # This class is actually referenced in Excecutables with:
+    #
+    #   add_param :some_name, File
+    #
+    # @see Sprout::Executable::ParameterFactory
+    #
     class FileParam < Param 
 
       def prepare

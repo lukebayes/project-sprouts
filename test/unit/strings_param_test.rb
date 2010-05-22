@@ -6,7 +6,7 @@ class StringsParamTest < Test::Unit::TestCase
   context "a new StringsParam" do
 
     setup do
-      @param = Sprout::Executable::StringsParam.new
+      @param = Sprout::Executable::Strings.new
       @param.name = "strings"
     end
 

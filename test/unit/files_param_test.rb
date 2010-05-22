@@ -10,7 +10,7 @@ class FilesParamTest < Test::Unit::TestCase
       @input2 = File.join(fixtures, "executable", "params", "input2.as")
       @input3 = File.join(fixtures, "executable", "params", "input3.as")
 
-      @param = Sprout::Executable::FilesParam.new
+      @param = Sprout::Executable::Files.new
       @param.name = 'inputs'
       @param.belongs_to = FakeExecutableTask.new
     end

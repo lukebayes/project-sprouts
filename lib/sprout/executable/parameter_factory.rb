@@ -14,16 +14,12 @@ module Sprout::Executable
     class << self
 
       def create type
+        # Didn't want to clobber the stdlib references
+        # to these two important data types...
+        # But wanted to keep the add_param interface
+        # clean and simple.
         return StringParam.new if type == String
-        return StringsParam.new if type == Strings
-        return BooleanParam.new if type == Boolean
         return FileParam.new if type == File
-        return FilesParam.new if type == Files
-        return PathParam.new if type == Path
-        return PathsParam.new if type == Paths
-        return NumberParam.new if type == Number
-        return UrlsParam.new if type == Urls
-        return UrlParam.new if type == Url
         type.new
       end
     end
