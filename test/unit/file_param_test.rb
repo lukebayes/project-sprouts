@@ -54,12 +54,13 @@ class FileParamTest < Test::Unit::TestCase
       end
     end
 
-    should "preprocess if necessary" do
-      @param.stubs(:should_preprocess?).returns true
-      @param.stubs(:validate).returns nil
-      @param.expects(:prepare_preprocessor_file).returns 'abcd'
-      assert_equal '-input=abcd', @param.to_shell
-    end
+    # TODO: Look into this again if we turn on preprocessors...
+    #should "preprocess if necessary" do
+      #@param.stubs(:should_preprocess?).returns true
+      #@param.stubs(:validate).returns nil
+      #@param.expects(:prepare_preprocessor_file).returns 'abcd'
+      #assert_equal '-input=abcd', @param.to_shell
+    #end
   end
 end
 

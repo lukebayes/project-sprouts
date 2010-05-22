@@ -11,12 +11,12 @@ module Sprout
 
       def prepare_prerequisites
         if(prerequisite?(value))
-          if(should_preprocess?)
-            @value = prepare_preprocessor_file(value)
-          else
+          #if(should_preprocess?)
+            #@value = prepare_preprocessor_file(value)
+          #else
             file value
             belongs_to.prerequisites << value
-          end
+          #end
         end
       end
 
