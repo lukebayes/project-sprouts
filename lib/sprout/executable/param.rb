@@ -97,6 +97,15 @@ module Sprout
           raise Sprout::Errors::MissingArgumentError.new("#{name} is required and must not be nil")
         end
       end
+
+      def default=(value)
+        self.value = value
+        @default = value
+      end
+
+      def default
+        @default
+      end
       
       def prepare
         prepare_prerequisites

@@ -57,12 +57,12 @@ module Sprout
     # The default value is true. If you set this value to false, you must set the es option to true.
     #
     # This is an advanced option.
-    add_param :as3, BooleanParam, { :value => true, :show_on_false => true }
+    add_param :as3, BooleanParam, { :default => true, :show_on_false => true }
     
     ##
     # Prints detailed compile times to the standard output. The default value is true.
     #
-    add_param :benchmark, BooleanParam, { :value => true, :show_on_false => true }
+    add_param :benchmark, BooleanParam, { :default => true, :show_on_false => true }
     
     ##
     # Sets the value of the {context.root} token in channel definitions in the flex-services.xml file. If you do not specify the value of this option, Flex uses an empty string.
@@ -533,7 +533,7 @@ module Sprout
     #
     # For more information about viewing warnings and errors, see Viewing warnings and errors (http://livedocs.adobe.com/flex/2/docs/00001517.html#182413).
     #
-    add_param :show_actionscript_warnings, BooleanParam, { :value => true, :show_on_false => true }
+    add_param :show_actionscript_warnings, BooleanParam, { :default => true, :show_on_false => true }
 
     ##
     # Shows a warning when Flash Player cannot detect changes to a bound property.
@@ -542,7 +542,7 @@ module Sprout
     #
     # For more information about compiler warnings, see Using SWC files (http://livedocs.adobe.com/flex/2/docs/00001505.html#158337).
     #
-    add_param :show_binding_warnings, BooleanParam, { :value => true, :show_on_false => true }
+    add_param :show_binding_warnings, BooleanParam, { :default => true, :show_on_false => true }
     
     ##
     # Shows deprecation warnings for Flex components. To see warnings for ActionScript classes, use the show-actionscript-warnings option.
@@ -551,7 +551,7 @@ module Sprout
     #
     # For more information about viewing warnings and errors, see Viewing warnings and errors.
     #
-    add_param :show_deprecation_warnings, BooleanParam, { :value => true, :show_on_false => true }
+    add_param :show_deprecation_warnings, BooleanParam, { :default => true, :show_on_false => true }
     
     ##
     # Adds directories or files to the source path. The Flex compiler searches directories in the source path for MXML or AS source files that are used in your Flex applications and includes those that are required at compile time.
@@ -587,7 +587,7 @@ module Sprout
     #
     # For more information about viewing warnings and errors, see Viewing warnings and errors (http://livedocs.adobe.com/flex/2/docs/00001517.html#182413).
     #
-    add_param :strict, BooleanParam, { :value => true, :show_on_false => true }
+    add_param :strict, BooleanParam, { :default => true, :show_on_false => true }
     
     ##
     # Specifies the version of the player the application is targeting.
@@ -617,7 +617,7 @@ module Sprout
     #
     # For more information about the use-network property, see Applying Flex Security (http://livedocs.adobe.com/flex/2/docs/00001328.html#137544).
     #
-    add_param :use_network, BooleanParam, { :value => true, :show_on_false => true }
+    add_param :use_network, BooleanParam, { :default => true, :show_on_false => true }
     
     ##
     # Generates source code that includes line numbers. When a run-time error occurs, the stacktrace shows these line numbers.

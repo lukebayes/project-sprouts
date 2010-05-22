@@ -6,22 +6,11 @@ require 'test/unit/fake_other_executable'
 class ExecutableTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "a new executable" do
-    setup do
-      @tool = FakeOtherExecutableTask.new
-    end
-
-    should "clean commandline options" do
-    end
-  end
-
   context "a new executable delegate" do
 
     setup do
       @tool = FakeOtherExecutableTask.new
     end
-
-    # TODO: Test each parameter type:
 
     should "accept boolean param" do
       @tool.boolean_param = true
@@ -53,7 +42,6 @@ class ExecutableTest < Test::Unit::TestCase
       @tool.sp << "b"
 
       assert_equal ["a", "b"], @tool.sp
-
     end
 
     should "raise UsageError with unknown type" do
@@ -62,7 +50,6 @@ class ExecutableTest < Test::Unit::TestCase
         class BrokenTool
           include Sprout::Executable
           add_param :broken_param, nil
-    # 
         end
 
         tool = BrokenTool.new
