@@ -19,7 +19,7 @@ class ExecutableParamTest < Test::Unit::TestCase
 
     should "raise if required and nil" do
       @param.required = true
-      assert_raises Sprout::Errors::ToolError do
+      assert_raises Sprout::Errors::MissingArgumentError do
         @param.to_shell
       end
     end

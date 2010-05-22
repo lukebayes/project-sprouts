@@ -23,8 +23,8 @@ module Sprout
       def validate
         super
 
-        if(!File.exists?(value))
-          raise Sprout::Errors::ToolError.new "No such file or directory - #{value}"
+        if(!value.nil? && !File.exists?(value))
+          raise Sprout::Errors::InvalidArgumentError.new "No such file or directory - #{value}"
         end
       end
 

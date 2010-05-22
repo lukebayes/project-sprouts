@@ -17,7 +17,7 @@ class FilesParamTest < Test::Unit::TestCase
 
     ['abcd', 1234, true].each do |value|
       should "throw with non-enumerable assignment of #{value}" do
-        assert_raises Sprout::Errors::ToolError do
+        assert_raises Sprout::Errors::ExecutableError do
           @param.value = value
         end
       end

@@ -49,7 +49,7 @@ class FileParamTest < Test::Unit::TestCase
 
     should "raise if the file doesn't exist when asked for output" do
       @param.value = 'unknown file'
-      assert_raises Sprout::Errors::ToolError do
+      assert_raises Sprout::Errors::InvalidArgumentError do
         @param.to_shell
       end
     end

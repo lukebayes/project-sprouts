@@ -93,8 +93,8 @@ module Sprout
       end
       
       def validate
-        if(required? && !visible?)
-          raise Sprout::Errors::ToolError.new("#{name} is required and must not be nil")
+        if(required? && value.nil?)
+          raise Sprout::Errors::MissingArgumentError.new("#{name} is required and must not be nil")
         end
       end
       

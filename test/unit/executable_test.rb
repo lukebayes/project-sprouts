@@ -160,7 +160,7 @@ class ExecutableTest < Test::Unit::TestCase
       first = File.stat(@mxmlc_executable).mode
 
       # Execute the stub executable:
-      @tool.execute
+      @tool.execute_delegate
 
       # Ensure the file mode was updated:
       assert "non-executable file mode should be updated by execute", first != File.stat(@mxmlc_executable).mode

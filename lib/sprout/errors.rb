@@ -12,7 +12,7 @@ module Sprout
 
     ##
     # An error in the Executable was encountered
-    class ToolError < SproutError; end
+    class ExecutableError < SproutError; end
 
 
 
@@ -32,11 +32,19 @@ module Sprout
 
     ##
     # Error when registering executables.
-    class ExecutableRegistrationError < ToolError; end
+    class ExecutableRegistrationError < ExecutableError; end
 
     ##
     # Could not find requested ExecutableTarget
-    class MissingExecutableError < ToolError; end
+    class MissingExecutableError < ExecutableError; end
+
+    ##
+    # Required argument was not provided
+    class MissingArgumentError < ExecutableError; end
+
+    ##
+    # An argument was provided that was not valid
+    class InvalidArgumentError < ExecutableError; end
 
     ##
     # There was an error in ProcessRunner

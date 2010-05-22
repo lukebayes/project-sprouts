@@ -118,15 +118,16 @@ module Sprout
         @appended_args  = nil
         @prepended_args = nil
         # @preprocessed_path = nil
-
         @param_hash     = {}
         @params         = []
         @prerequisites  = []
+        @option_parser  = OptionParser.new
         initialize_parameters
       end
 
       def parse commandline_options
         option_parser.parse commandline_options
+        validate
       end
 
       ##
@@ -142,9 +143,17 @@ module Sprout
       end
 
       ##
-      # Actually call the provided executable.
+      # Execute the feature after calling parse
+      # with commandline arguments.
+      def execute
+      end
+
+      ##
+      # Call the provided executable delegate.
       #
-      def execute *args
+      # This method is most often used from Rake task wrappers.
+      #
+      def execute_delegate
         exe = Sprout.load_executable executable, pkg_name, pkg_version
         Sprout.current_system.execute exe
       end
@@ -228,7 +237,6 @@ module Sprout
       private
 
       def initialize_parameters
-        parser = option_parser
         self.class.static_parameter_declarations.each do |declaration|
           param = initialize_parameter declaration
 
@@ -238,7 +246,7 @@ module Sprout
           delimiter   = param.delimiter
           type        = param.option_parser_type_output
 
-          parser.on short, "#{long}#{delimiter}#{type}", description do |value|
+          option_parser.on short, "#{long}#{delimiter}#{type}", description do |value|
             if(param.is_a?(CollectionParam) && delimiter == '+=')
               eval "self.#{param.name} << '#{value}'"
             else
@@ -256,7 +264,7 @@ module Sprout
 
         # First ensure the named accessor doesn't yet exist...
         if(parameter_hash_includes? name)
-          raise Sprout::Errors::ToolError.new("ToolTask.add_param called with existing parameter name: #{name_s}")
+          raise Sprout::Errors::ExecutableError.new("ToolTask.add_param called with existing parameter name: #{name_s}")
         end
 
         create_parameter declaration
@@ -296,7 +304,7 @@ module Sprout
       end
 
       def option_parser
-        @option_parser ||= OptionParser.new
+        @option_parser
       end
 
     end
