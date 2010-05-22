@@ -69,7 +69,7 @@ class ExecutableTest < Test::Unit::TestCase
         class BrokenExecutable3
           include Sprout::Executable
           attr_accessor :existing_method
-          add_param :existing_method, StringParam
+          add_param :existing_method, String
         end
       end
     end
@@ -78,7 +78,7 @@ class ExecutableTest < Test::Unit::TestCase
       assert_raises Sprout::Errors::UsageError do
         class BrokenExecutable4
           include Sprout::Executable
-          add_param :name, StringParam do
+          add_param :name, String do
             # this is no longer how it's done...
           end
         end
@@ -89,7 +89,7 @@ class ExecutableTest < Test::Unit::TestCase
 
       class WorkingTool
         include Sprout::Executable
-        add_param :custom_name, StringParam
+        add_param :custom_name, String
       end
 
       tool1 = WorkingTool.new

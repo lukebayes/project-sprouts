@@ -8,9 +8,9 @@ require 'sprout/executable/file_param'
 require 'sprout/executable/files_param'
 require 'sprout/executable/path_param'
 require 'sprout/executable/paths_param'
-require 'sprout/executable/symbols_param'
 require 'sprout/executable/url_param'
 require 'sprout/executable/urls_param'
+require 'sprout/executable/parameter_factory'
 
 module Sprout
   module Executable
@@ -284,7 +284,7 @@ module Sprout
       end
 
       def create_parameter declaration
-        param = declaration[:type].new 
+        param = ParameterFactory.create declaration[:type]
         param.belongs_to = self
           
         begin

@@ -1,6 +1,10 @@
 module Sprout
 
   module Executable
+
+    class Path; end
+
+    ##
     # Concrete param object for :path values
     class PathParam < Executable::Param
 
