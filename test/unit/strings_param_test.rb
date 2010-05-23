@@ -20,7 +20,7 @@ class StringsParamTest < Test::Unit::TestCase
 
     should "not escape spaces" do
       @param.value << "a b c"
-      assert_equal '-strings+=a b c', @param.to_shell
+      assert_equal '--strings+=a b c', @param.to_shell
     end
   end
 end

@@ -21,7 +21,7 @@ class BooleanParamTest < Test::Unit::TestCase
 
     should "show on true" do
       @param.value = true
-      assert_equal '-foo=true', @param.to_shell
+      assert_equal '--foo=true', @param.to_shell
     end
   end
 end

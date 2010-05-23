@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class ExecutableParserTest < Test::Unit::TestCase
+class ExecutableOptionParserTest < Test::Unit::TestCase
   include SproutTestCase
 
   context "a new parser" do

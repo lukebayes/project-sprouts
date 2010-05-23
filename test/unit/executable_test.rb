@@ -1,10 +1,24 @@
 require File.dirname(__FILE__) + '/test_helper'
 
 require 'test/fixtures/executable/mxmlc'
+require 'test/fixtures/examples/executable'
 require 'test/unit/fake_other_executable'
 
 class ExecutableTest < Test::Unit::TestCase
   include SproutTestCase
+
+  context "a new ruby executable" do
+    
+    setup do
+      @tool = EchoInputs.new
+    end
+
+    should "fail without required args" do
+      assert_raises Sprout::Errors::MissingArgumentError do
+        @tool.parse []
+      end
+    end
+  end
 
   context "a new executable delegate" do
 
@@ -15,13 +29,13 @@ class ExecutableTest < Test::Unit::TestCase
     should "accept boolean param" do
       @tool.boolean_param = true
       assert @tool.boolean_param
-      assert_equal "-boolean-param=true", @tool.to_shell
+      assert_equal "--boolean-param=true", @tool.to_shell
     end
 
     should "accept a string param" do
       @tool.string_param = "string1"
       assert_equal "string1", @tool.string_param
-      assert_equal "-string-param=string1", @tool.to_shell
+      assert_equal "--string-param=string1", @tool.to_shell
     end
 
     should "accept strings param" do
@@ -29,7 +43,7 @@ class ExecutableTest < Test::Unit::TestCase
       @tool.strings_param << 'string2'
 
       assert_equal ['string1', 'string2'], @tool.strings_param
-      assert_equal "-strings-param+=string1 -strings-param+=string2", @tool.to_shell
+      assert_equal "--strings-param+=string1 --strings-param+=string2", @tool.to_shell
     end
 
     should "accept number param" do
@@ -155,13 +169,13 @@ class ExecutableTest < Test::Unit::TestCase
         t.input = 'test/fixtures/executable/src/Main.as'
         @tool = t # Hold onto the MXMLC reference...
       end
-      assert_equal "-source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
+      assert_equal "--source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
     end
 
     should "to_shell input" do
       @tool.debug = true
       @tool.source_path << "test/fixtures/executable/src"
-      assert_equal "-debug -source-path+=test/fixtures/executable/src", @tool.to_shell
+      assert_equal "--debug --source-path+=test/fixtures/executable/src", @tool.to_shell
     end
 
     should "execute the registered executable" do

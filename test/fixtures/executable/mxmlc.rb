@@ -648,6 +648,8 @@ module Sprout
     # This must be the last item in this list
     add_param :input, File, { :required => true, :hidden_name => true }
 
+    set :default_prefix, '-'
+
     ##
     # The default gem name is sprout-flex3sdk
     #

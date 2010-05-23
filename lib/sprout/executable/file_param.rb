@@ -13,6 +13,11 @@ module Sprout
     #
     class FileParam < Param 
 
+      def initialize
+        super
+        @option_parser_type_name = 'FILE'
+      end
+
       def prepare
         super
         self.value = clean_path value

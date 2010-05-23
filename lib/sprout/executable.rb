@@ -1,5 +1,5 @@
 require 'sprout/executable/param'
-require 'sprout/executable/collection'
+require 'sprout/executable/collection_param'
 require 'sprout/executable/boolean'
 require 'sprout/executable/number'
 require 'sprout/executable/string_param'
@@ -26,15 +26,17 @@ module Sprout
   # Following is an example of how one could define an executable Ruby
   # application using this module:
   #
-  #   :include: executable_example_1
+  #   :include: ../../test/fixtures/examples/executable
   #
   # Following is an example of how one could delegate to an existing
   # command line application:
   #
-  #   :include: executable_example_2
+  #   :include: ../../test/fixtures/examples/executable_delegate
   #
   module Executable
     DEFAULT_FILE_EXPRESSION = '/**/**/*'
+    DEFAULT_PREFIX          = '--'
+    DEFAULT_SHORT_PREFIX    = '-'
 
     extend Sprout::Concern
 
@@ -153,12 +155,14 @@ module Sprout
 
       def initialize
         super
-        @appended_args  = nil
-        @prepended_args = nil
-        @param_hash     = {}
-        @params         = []
-        @prerequisites  = []
-        @option_parser  = OptionParser.new
+        @appended_args        = nil
+        @prepended_args       = nil
+        @param_hash           = {}
+        @params               = []
+        @prerequisites        = []
+        @option_parser        = OptionParser.new
+        @default_prefix       = DEFAULT_PREFIX
+        @default_short_prefix = DEFAULT_SHORT_PREFIX
         initialize_parameters
         initialize_defaults
       end
@@ -183,6 +187,7 @@ module Sprout
       ##
       # Execute the feature after calling parse
       # with command line arguments.
+      #
       def execute
       end
 
@@ -254,6 +259,24 @@ module Sprout
       #
       attr_accessor :pkg_version
 
+
+      ##
+      # The default command line prefix that should be used in front of parameter
+      # names.
+      #
+      # The default value for this parameter is '--', but some command line
+      # applications (like MXMLC) prefer '-'.
+      #
+      attr_accessor :default_prefix
+      
+      ##
+      # The default command line prefix for short name parameters.
+      #
+      # This value defaults to '-', but can be changed to whatever a particular
+      # tool prefers.
+      #
+      attr_accessor :default_short_prefix
+
       ##
       # The default Sprout executable that we will use for this executable.
       #
@@ -277,15 +300,12 @@ module Sprout
       def initialize_parameters
         self.class.static_parameter_collection.each do |declaration|
           param = initialize_parameter declaration
+          short = param.option_parser_short_name
 
-          short       = param.short_name
-          long        = param.option_parser_name
-          description = param.description
-          delimiter   = param.delimiter
-          type        = param.option_parser_type_output
-
-          option_parser.on short, "#{long}#{delimiter}#{type}", description do |value|
-            if(param.is_a?(CollectionParam) && delimiter == '+=')
+          option_parser.on short, 
+                           param.option_parser_declaration, 
+                           param.description do |value|
+            if(param.is_a?(CollectionParam) && param.delimiter == '+=')
               eval "self.#{param.name} << '#{value}'"
             else
               self.send "#{param.name}=", value
@@ -297,9 +317,8 @@ module Sprout
 
       def initialize_parameter declaration
         name   = declaration[:name]
-        type   = declaration[:type]
-
         name_s = name.to_s
+        type   = declaration[:type]
 
         # First ensure the named accessor doesn't yet exist...
         if(parameter_hash_includes? name)

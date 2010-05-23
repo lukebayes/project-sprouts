@@ -5,6 +5,11 @@ module Sprout
     # Concrete param object for :boolean values
     class Boolean < Param
       attr_writer :show_on_false
+
+      def initialize
+        super
+        @option_parser_type_name = 'BOOL'
+      end
       
       def visible?
         @visible ||= value
@@ -13,10 +18,6 @@ module Sprout
         else
           return @visible
         end
-      end
-
-      def option_parser_type_name
-        'BOOL'
       end
 
       def show_on_false

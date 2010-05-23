@@ -12,7 +12,7 @@ class StringParamTest < Test::Unit::TestCase
 
     should "escape spaces" do
       @param.value = "a b c"
-      assert_equal '-string=a\ b\ c', @param.to_shell
+      assert_equal '--string=a\ b\ c', @param.to_shell
     end
   end
 end

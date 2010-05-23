@@ -9,10 +9,6 @@ module Sprout
         value.gsub(/ /, '\ ')
       end
 
-      def option_parser_name
-        "--#{name.to_s.gsub('_', '-')}"
-      end
-
     end
   end
 end

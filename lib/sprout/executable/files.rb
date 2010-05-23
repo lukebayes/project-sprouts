@@ -25,10 +25,6 @@ module Sprout
         end
       end
 
-      def option_parser_type
-        'a,b,c'
-      end
-
     end
   end
 end

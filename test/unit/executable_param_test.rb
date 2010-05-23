@@ -37,17 +37,17 @@ class ExecutableParamTest < Test::Unit::TestCase
       end
 
       should "accept a name and value" do
-        assert_equal '-foo=bar', @param.to_shell
+        assert_equal '--foo=bar', @param.to_shell
       end
 
       should "accept space delimiter" do
         @param.delimiter = ' '
-        assert_equal '-foo bar', @param.to_shell
+        assert_equal '--foo bar', @param.to_shell
       end
 
       should "accept arbitrary delimiter" do
         @param.delimiter = ' ||= '
-        assert_equal '-foo ||= bar', @param.to_shell
+        assert_equal '--foo ||= bar', @param.to_shell
       end
 
       should "accept empty prefix" do
@@ -67,7 +67,7 @@ class ExecutableParamTest < Test::Unit::TestCase
 
       should "accept hidden_value attribute" do
         @param.hidden_value = true
-        assert_equal '-foo', @param.to_shell
+        assert_equal '--foo', @param.to_shell
       end
 
     end

@@ -7,6 +7,14 @@ module Sprout
     # The abstract base class for all Executable parameters.
     #
     class Param
+      DEFAULT_DELIMITER               = '='
+      DEFAULT_OPTION_PARSER_TYPE_NAME = 'STRING'
+
+      # These values should usually be pulled
+      # from the 'belongs_to' executable:
+      DEFAULT_PREFIX                  = '--'
+      DEFAULT_SHORT_PREFIX            = '-'
+
       attr_accessor :belongs_to
       attr_accessor :description
       attr_accessor :hidden_name
@@ -44,8 +52,8 @@ module Sprout
       attr_writer :shell_name
 
       def initialize
-        @prefix = '-'
-        @delimiter = '='
+        @delimiter               = DEFAULT_DELIMITER
+        @option_parser_type_name = DEFAULT_OPTION_PARSER_TYPE_NAME
       end
 
       ##
@@ -115,24 +123,27 @@ module Sprout
       # other times it's a double dash '--'
       # but usually it's just a single dash '-'
       def prefix
-        @prefix ||= '-'
+        @prefix ||= (belongs_to.nil?) ? DEFAULT_PREFIX : belongs_to.default_prefix
+      end
+
+      def short_prefix
+        @short_prefix ||= (belongs_to.nil?) ? DEFAULT_SHORT_PREFIX : belongs_to.default_short_prefix
+      end
+
+      def option_parser_declaration
+        declaration = [ prefix, option_parser_name ]
+        if(!hidden_value?)
+          declaration << delimiter << option_parser_type_output
+        end
+        declaration.join('')
+      end
+
+      def option_parser_short_name
+        [ short_prefix, short_name ].join('')
       end
       
-      def option_parser_name
-        "--#{name.to_s.gsub('_', '-')}"
-      end
-
-      def option_parser_type_name
-        'STRING'
-      end
-
-      def option_parser_type_output
-        type = hidden_value? ? '' : option_parser_type_name
-        required? ? type : "[#{type}]"
-      end
-
       def short_name
-        "-#{name.to_s.split('').shift}"
+        @short_name ||= name.to_s.split('').shift
       end
 
       def description
@@ -174,6 +185,19 @@ module Sprout
       end
 
       protected
+
+      def option_parser_name
+        name.to_s.gsub('_', '-')
+      end
+
+      def option_parser_type_name
+        @option_parser_type_name
+      end
+
+      def option_parser_type_output
+        type = hidden_value? ? '' : option_parser_type_name
+        required? ? type : "[#{type}]"
+      end
 
       def prepare_prerequisites
       end

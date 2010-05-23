@@ -14,6 +14,7 @@ module Sprout
         super
         @value = []
         @delimiter = "+="
+        @option_parser_type_name = 'a,b,c'
       end
 
       # Assign the value and raise if 
