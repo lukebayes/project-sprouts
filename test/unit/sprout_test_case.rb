@@ -78,7 +78,6 @@ module SproutTestCase # :nodoc:[all]
   end
 
   def clear_tasks
-    #Sprout::ToolTask::clear_preprocessed_tasks
     Rake::Task.clear
     Rake.application.clear
   end

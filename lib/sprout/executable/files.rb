@@ -19,19 +19,10 @@ module Sprout
       end
 
       def prepare_prerequisites
-        #if should_preprocess?
-          #@value = prepare_preprocessor_files(value)
-        #else
-          value.each do |f|
-            #TODO: Shouldn't this work with a FileList
-            #and look more like:
-            # req = FileList["#{f}/**/*"]
-            # belongs_to.prerequisites << req
-            #  Need to test...
-            file f
-            belongs_to.prerequisites << f
-          end
-        #end
+        value.each do |f|
+          file f
+          belongs_to.prerequisites << f
+        end
       end
 
       def option_parser_type

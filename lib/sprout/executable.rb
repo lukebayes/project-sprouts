@@ -149,14 +149,12 @@ module Sprout
       attr_reader :param_hash
       attr_reader :params
       attr_reader :name
-      # attr_reader :preprocessor
       attr_reader :prerequisites
 
       def initialize
         super
         @appended_args  = nil
         @prepended_args = nil
-        # @preprocessed_path = nil
         @param_hash     = {}
         @params         = []
         @prerequisites  = []
