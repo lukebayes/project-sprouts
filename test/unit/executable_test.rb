@@ -1,24 +1,9 @@
 require File.dirname(__FILE__) + '/test_helper'
-
 require 'test/fixtures/executable/mxmlc'
-require 'test/fixtures/examples/executable'
 require 'test/unit/fake_other_executable'
 
 class ExecutableTest < Test::Unit::TestCase
   include SproutTestCase
-
-  context "a new ruby executable" do
-    
-    setup do
-      @tool = EchoInputs.new
-    end
-
-    should "fail without required args" do
-      assert_raises Sprout::Errors::MissingArgumentError do
-        @tool.parse []
-      end
-    end
-  end
 
   context "a new executable delegate" do
 

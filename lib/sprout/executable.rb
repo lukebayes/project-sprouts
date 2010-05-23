@@ -148,6 +148,11 @@ module Sprout
 
     module InstanceMethods
 
+      ##
+      # Configure the executable instance to output failure messages to
+      # stderr and abort with non-zero response.
+      attr_accessor :abort_on_failure
+
       attr_reader :param_hash
       attr_reader :params
       attr_reader :name
@@ -155,6 +160,7 @@ module Sprout
 
       def initialize
         super
+        @abort_on_failure     = true
         @appended_args        = nil
         @prepended_args       = nil
         @param_hash           = {}
@@ -168,8 +174,12 @@ module Sprout
       end
 
       def parse commandline_options
-        option_parser.parse commandline_options
-        validate
+        begin
+          option_parser.parse commandline_options
+          validate
+        rescue StandardError => e
+          handle_parse_error e
+        end
       end
 
       ##
@@ -296,6 +306,20 @@ module Sprout
       attr_accessor :executable
 
       private
+
+      def handle_parse_error error
+        if(abort_on_failure)
+          parts = []
+          parts << nil
+          parts << "[ERROR - #{error.class.name}] #{error.message}"
+          parts << nil
+          parts << option_parser.to_s
+          parts << nil
+          abort parts.join("\n")
+        else
+          raise error
+        end
+      end
 
       def initialize_parameters
         self.class.static_parameter_collection.each do |declaration|

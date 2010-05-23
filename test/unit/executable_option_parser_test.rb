@@ -1,20 +1,49 @@
 require File.dirname(__FILE__) + '/test_helper'
+require 'test/fixtures/examples/echo_inputs'
 
 class ExecutableOptionParserTest < Test::Unit::TestCase
   include SproutTestCase
 
+  context "a new ruby executable" do
+    
+    setup do
+      @exe = EchoInputs.new
+      @exe.abort_on_failure = false
+      @default_input = '--input=lib/sprout.rb'
+    end
+
+    should "fail without required args" do
+      assert_raises Sprout::Errors::MissingArgumentError do
+        @exe.parse []
+      end
+    end
+
+    should "accept required args" do
+      @exe.parse [ @default_input ]
+      assert_equal 'lib/sprout.rb', @exe.input
+    end
+
+    should "accept boolean with hidden_value" do
+      assert !@exe.truthy
+      @exe.parse [ '--truthy', @default_input ]
+      assert @exe.truthy
+    end
+
+    should "explode on unknown or unexpected arguments" do
+      assert_raises OptionParser::InvalidOption do
+        @exe.parse [ '--unknown-param', @default_input ]
+      end
+    end
+
+  end
+
   context "a new parser" do
     setup do
       @exe  = FakeParserExecutable.new
+      @exe.abort_on_failure = false
     end
 
     context "with argv args" do
-
-      should "explode on unknown or unexpected arguments" do
-        assert_raises OptionParser::InvalidOption do
-          @exe.parse ['--input=lib/sprout.rb', '--unknown-param']
-        end
-      end
 
       should "accept boolean" do
         @exe.parse ['--input=lib/sprout.rb', '--boolean-param=true']
