@@ -29,8 +29,16 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
       assert @exe.truthy
     end
 
-    should "explode on unknown or unexpected arguments" do
-      assert_raises OptionParser::InvalidOption do
+    context "with an unknown option" do
+      should "throw an exception" do
+        assert_raises OptionParser::InvalidOption do
+          @exe.parse [ '--unknown-param', @default_input ]
+        end
+      end
+
+      should "abort and display help" do
+        @exe.abort_on_failure = true
+        @exe.expects :abort
         @exe.parse [ '--unknown-param', @default_input ]
       end
     end
