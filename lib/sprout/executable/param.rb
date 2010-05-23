@@ -52,6 +52,8 @@ module Sprout
       attr_writer :shell_name
 
       def initialize
+        @hidden_value            = false
+        @hidden_name             = false
         @delimiter               = DEFAULT_DELIMITER
         @option_parser_type_name = DEFAULT_OPTION_PARSER_TYPE_NAME
       end
@@ -107,14 +109,14 @@ module Sprout
       # Should the param name be hidden from the shell?
       # Used for params like 'input' on mxmlc
       def hidden_name?
-        @hidden_name ||= false
+        @hidden_name
       end
       
       ##
       # Should the param value be hidden from the shell?
       # Usually used for Boolean toggles like '-debug'
       def hidden_value?
-        @hidden_value ||= false
+        @hidden_value
       end
       
       ##

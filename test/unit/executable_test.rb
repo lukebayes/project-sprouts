@@ -14,7 +14,7 @@ class ExecutableTest < Test::Unit::TestCase
     should "accept boolean param" do
       @tool.boolean_param = true
       assert @tool.boolean_param
-      assert_equal "--boolean-param=true", @tool.to_shell
+      assert_equal "--boolean-param", @tool.to_shell
     end
 
     should "accept a string param" do

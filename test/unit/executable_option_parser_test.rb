@@ -36,6 +36,17 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
       end
     end
 
+    should "accept false boolean" do
+      assert @exe.falsey, "Should be true by default"
+      @exe.parse [@default_input, '--falsey=false']
+      assert !@exe.falsey, "Should be false"
+    end
+
+    should "accept string" do
+      @exe.parse [@default_input, '--string=abcd']
+      assert_equal 'abcd', @exe.string
+    end
+
     context "with an unknown option" do
       should "throw an exception" do
         assert_raises OptionParser::InvalidOption do
@@ -56,47 +67,34 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
     setup do
       @exe  = FakeParserExecutable.new
       @exe.abort_on_failure = false
+      @default_input = '--input=lib/sprout.rb'
     end
 
-    context "with argv args" do
+    should "accept file" do
+      @exe.parse [@default_input, '--file-param=lib/sprout.rb']
+      assert_equal 'lib/sprout.rb', @exe.file_param
+    end
 
-      should "accept boolean" do
-        @exe.parse ['--input=lib/sprout.rb', '--boolean-param=true']
-        assert @exe.boolean_param, "Should be true"
+    should "accept files" do
+      @exe.parse [@default_input, '--files-param+=lib/sprout.rb', '--files-param+=lib/sprout/log.rb']
+      assert_equal ['lib/sprout.rb', 'lib/sprout/log.rb'], @exe.files_param
+    end
+
+    should "configure required arguments" do
+      @exe.parse [@default_input, @default_input]
+      assert_equal 'lib/sprout.rb', @exe.input
+    end
+
+    should "fail without required param" do
+      assert_raises Sprout::Errors::MissingArgumentError do
+        @exe.parse []
       end
+    end
 
-      should "accept string" do
-        @exe.parse ['--input=lib/sprout.rb', '--string-param=abcd']
-        assert_equal 'abcd', @exe.string_param
+    should "fail with incorreect param" do
+      assert_raises Sprout::Errors::InvalidArgumentError do
+        @exe.parse ['--input=lib/unknown_file.rb']
       end
-
-      should "accept file" do
-        @exe.parse ['--input=lib/sprout.rb', '--file-param=lib/sprout.rb']
-        assert_equal 'lib/sprout.rb', @exe.file_param
-      end
-
-      should "accept files" do
-        @exe.parse ['--input=lib/sprout.rb', '--files-param+=lib/sprout.rb', '--files-param+=lib/sprout/log.rb']
-        assert_equal ['lib/sprout.rb', 'lib/sprout/log.rb'], @exe.files_param
-      end
-
-      should "configure required arguments" do
-        @exe.parse ['--input=lib/sprout.rb', '--input=lib/sprout.rb']
-        assert_equal 'lib/sprout.rb', @exe.input
-      end
-
-      should "fail without required param" do
-        assert_raises Sprout::Errors::MissingArgumentError do
-          @exe.parse []
-        end
-      end
-
-      should "fail with incorreect param" do
-        assert_raises Sprout::Errors::InvalidArgumentError do
-          @exe.parse ['--input=lib/unknown_file.rb']
-        end
-      end
-
     end
   end
 end

@@ -13,14 +13,14 @@ class EchoInputs
   #
   #   echo-inputs --truthy
   #
-  add_param :truthy, Boolean, { :hidden_value => true }
+  add_param :truthy, Boolean
   ##
   # A boolean parameter that defaults to true, and must be 
   # explicitly set to false in order to turn it off.
   #
   #  echo-inputs --falsey=false
   #  
-  add_param :falsey, Boolean, { :default => true, :show_on_false => true }
+  add_param :falsey, Boolean, { :default => true, :hidden_value => false, :show_on_false => true }
 
   ##
   # A file that exists at the time it is provided.

@@ -21,7 +21,17 @@ class BooleanParamTest < Test::Unit::TestCase
 
     should "show on true" do
       @param.value = true
-      assert_equal '--foo=true', @param.to_shell
+      assert_equal '--foo', @param.to_shell
+    end
+
+    context "when configuring option parser" do
+      
+      should "update correctly" do
+        @param.show_on_false = true
+        @param.default = true
+        @param.hidden_value = false
+        assert_equal "--foo [BOOL]", @param.option_parser_declaration
+      end
     end
   end
 end
