@@ -47,37 +47,14 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
       assert_equal 'abcd', @exe.string
     end
 
-    context "with an unknown option" do
-      should "throw an exception" do
-        assert_raises OptionParser::InvalidOption do
-          @exe.parse [ '--unknown-param', @default_input ]
-        end
-      end
-
-      should "abort and display help" do
-        @exe.abort_on_failure = true
-        @exe.expects :abort
-        @exe.parse [ '--unknown-param', @default_input ]
-      end
-    end
-
-  end
-
-  context "a new parser" do
-    setup do
-      @exe  = FakeParserExecutable.new
-      @exe.abort_on_failure = false
-      @default_input = '--input=lib/sprout.rb'
-    end
-
     should "accept file" do
-      @exe.parse [@default_input, '--file-param=lib/sprout.rb']
-      assert_equal 'lib/sprout.rb', @exe.file_param
+      @exe.parse [@default_input, '--file=lib/sprout.rb']
+      assert_equal 'lib/sprout.rb', @exe.file
     end
 
     should "accept files" do
-      @exe.parse [@default_input, '--files-param+=lib/sprout.rb', '--files-param+=lib/sprout/log.rb']
-      assert_equal ['lib/sprout.rb', 'lib/sprout/log.rb'], @exe.files_param
+      @exe.parse [@default_input, '--files+=lib/sprout.rb', '--files+=lib/sprout/log.rb']
+      assert_equal ['lib/sprout.rb', 'lib/sprout/log.rb'], @exe.files
     end
 
     should "configure required arguments" do
@@ -96,6 +73,21 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
         @exe.parse ['--input=lib/unknown_file.rb']
       end
     end
+
+    context "with an unknown option" do
+      should "throw an exception" do
+        assert_raises OptionParser::InvalidOption do
+          @exe.parse [ '--unknown-param', @default_input ]
+        end
+      end
+
+      should "abort and display help" do
+        @exe.abort_on_failure = true
+        @exe.expects :abort
+        @exe.parse [ '--unknown-param', @default_input ]
+      end
+    end
+
   end
 end
 
