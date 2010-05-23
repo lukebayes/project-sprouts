@@ -28,6 +28,13 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
       @exe.parse [ '--truthy', @default_input ]
       assert @exe.truthy
     end
+    
+    should "always accept help option" do
+      @exe.expects :puts
+      assert_raises SystemExit do
+        @exe.parse [ '--help' ]
+      end
+    end
 
     context "with an unknown option" do
       should "throw an exception" do

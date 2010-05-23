@@ -176,7 +176,7 @@ module Sprout
       def parse commandline_options
         begin
           option_parser.parse commandline_options
-          validate
+          validate unless help_requested? commandline_options
         rescue StandardError => e
           handle_parse_error e
         end
@@ -307,6 +307,10 @@ module Sprout
 
       private
 
+      def help_requested? options
+        options.include? '--help'
+      end
+
       def handle_parse_error error
         if(abort_on_failure)
           parts = []
@@ -322,6 +326,7 @@ module Sprout
       end
 
       def initialize_parameters
+        add_help_param
         self.class.static_parameter_collection.each do |declaration|
           param = initialize_parameter declaration
           short = param.option_parser_short_name
@@ -336,7 +341,13 @@ module Sprout
             end
           end
         end
+      end
 
+      def add_help_param
+        option_parser.on '--help', 'Display this help message' do
+          puts option_parser.to_s
+          exit
+        end
       end
 
       def initialize_parameter declaration
