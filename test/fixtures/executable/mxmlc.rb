@@ -564,7 +564,7 @@ module Sprout
     #
     # You can also use the += operator to append the new argument to the list of existing source path entries.
     #
-    add_param :source_path, Paths, { :preprocessable => true }
+    add_param :source_path, Paths
     
     add_param_alias :sp, :source_path 
 
@@ -646,7 +646,7 @@ module Sprout
     ##
     # Main source file to send compiler"
     # This must be the last item in this list
-    add_param :input, File, { :required => true, :preprocessable => true, :hidden_name => true }
+    add_param :input, File, { :required => true, :hidden_name => true }
 
     ##
     # The default gem name is sprout-flex3sdk

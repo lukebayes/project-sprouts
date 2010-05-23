@@ -51,30 +51,30 @@ module Sprout
   #
   # This is your Gem::Specification.
   #
-  # You would also create a file named [projet_name.sproutspec] and put that
+  # You would also create a file named [projet_name.rb] and put that
   # into the root of the project or some other folder that you have added to 
   # the Gem::Specification.require_paths parameter.
   #
   # == Example: Include a file directly in the RubyGem
   #
-  # In the case of AsUnit, this file would be named asunit4.sproutspec and it's contents
+  # In the case of AsUnit, this file would be named asunit4.rb and it's contents
   # are as follows:
   #
-  #    :include:../../test/fixtures/specification/asunit4.sproutspec
+  #    :include:../../test/fixtures/specification/asunit4.rb
   #
   # == Example: Refer to files that are not in the RubyGem
   #
   # For projects like the Flex SDK, we can't distribute many of the required files,
   # so we can refer to these files in our Sprout::Specification as +remote_file_targets+.
   #
-  #    :include:../../test/fixtures/specification/flex4sdk.sproutspec
+  #    :include:../../test/fixtures/specification/flex4sdk.rb
   #
   # == Example: Create custom downloads for each supported platform
   #
   # For projects like the Flash Player itself, we need to refer to different 
   # downloadable content for each supported platform.
   #
-  #    :include:../../test/fixtures/specification/flashplayer.sproutspec
+  #    :include:../../test/fixtures/specification/flashplayer.rb
   #
   # == Packaging and Sharing
   #

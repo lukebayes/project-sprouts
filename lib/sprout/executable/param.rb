@@ -1,41 +1,11 @@
 
 module Sprout
 
-  #######################################################
-  # Parameter Implementations
-  
-  # The base class for all ToolTask parameters. This class is extended by a variety
-  # of concrete implementations.
-  #
-  # At the time of this writing, only the :boolean TaskParam modifies the interface by
-  # adding the +show_on_false+ attribute.
-  #
-  # Some other helpful features are as follows:
-  #
-  # :file, :files, :path and :paths will all add any items that have been added to
-  # their values as file task prerequisites. This is especially helpful when writing
-  # rake tasks for Command Line Interface (CLI) compilers.
-  #
-  # Executable::Params have a template method lifecycle that one should become
-  # familiar with before working with them directly.
-  #
-  # Depending on what you may do in subclasses, the lifecycle methods 
-  # should be called in the following order:
-  # 
-  # # initialize
-  # 
-  # # prepare
-  #
-  # # prepare_prerequisites
-  #
-  # # validate
-  #
-  # # visible?
-  #
-  # # to_shell
-  # 
-
   module Executable
+
+    ##
+    # The abstract base class for all Executable parameters.
+    #
     class Param
       attr_accessor :belongs_to
       attr_accessor :description
@@ -43,13 +13,6 @@ module Sprout
       attr_accessor :hidden_value
       attr_accessor :name
       attr_accessor :prefix
-
-      ##
-      # This parameter value can or should be handed to any declared preprocessor.
-      #
-      # Generally, this parameter is set to true for files and paths.
-      #
-      attr_accessor :preprocessable
       attr_accessor :required
       attr_accessor :to_shell_proc
       attr_accessor :type
@@ -57,17 +20,19 @@ module Sprout
       attr_accessor :value
       attr_accessor :visible
 
+      #attr_accessor :preprocessable
+
+      ##
       # Executable::Params join their name/value pair with an
       # equals sign by default, this can be modified 
-      # To a space or whatever you wish
-      # Return the name with a single leading dash
-      # and underscores replaced with dashes
-      attr_accessor   :delimiter
+      # To a space or whatever you wish.
+      attr_accessor :delimiter
 
+      ##
       # Set the file_expression (blob) to append to each path
       # in order to build the prerequisites FileList.
       #
-      # Defaults to parent Executable.default_file_expression
+      # Defaults to the parent Executable.default_file_expression
       #
       # NOTE: We should add support for file_expressionS
       # since these are really just blobs that are sent
@@ -75,6 +40,9 @@ module Sprout
       # an array.
       attr_writer :file_expression
 
+      ##
+      # Return the name with a single leading dash
+      # and underscores replaced with dashes
       attr_writer :shell_name
 
       def initialize
@@ -82,22 +50,30 @@ module Sprout
         @delimiter = '='
       end
 
+      ##
       # By default, Executable::Params only appear in the shell
       # output when they are not nil
       def visible?
         !value.nil?
       end
       
+      ##
+      # Raise an exception if a required parameter is nil.
       def required?
         (required == true)
       end
       
+      ##
+      # Ensure this parameter is in a valid state, raise an appropriate
+      # exception if it is not.
       def validate
         if(required? && value.nil?)
           raise Sprout::Errors::MissingArgumentError.new("#{name} is required and must not be nil")
         end
       end
 
+      ##
+      # Set the default value of the parameter.
       def default=(value)
         self.value = value
         @default = value
@@ -107,30 +83,35 @@ module Sprout
         @default
       end
       
+      ##
+      # Prepare the parameter for execution or delegation, depending
+      # on what context we're in.
       def prepare
         prepare_prerequisites
         @prepared = true
       end
 
+      ##
+      # Returns true if this parameter has already been prepared.
       def prepared?
         @prepared
       end
       
-      def prepare_prerequisites
-      end
-      
+      ##
       # Should the param name be hidden from the shell?
       # Used for params like 'input' on mxmlc
       def hidden_name?
         @hidden_name ||= false
       end
       
+      ##
       # Should the param value be hidden from the shell?
       # Usually used for Boolean toggles like '-debug'
       def hidden_value?
         @hidden_value ||= false
       end
       
+      ##
       # Leading character for each parameter
       # Can sometimes be an empty string,
       # other times it's a double dash '--'
@@ -195,6 +176,9 @@ module Sprout
       end
 
       protected
+
+      def prepare_prerequisites
+      end
 
       def clean_path path
         Sprout::System.create.clean_path path

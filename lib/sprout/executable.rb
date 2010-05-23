@@ -13,41 +13,69 @@ require 'sprout/executable/urls'
 require 'sprout/executable/parameter_factory'
 
 module Sprout
+
+  ##
+  # The Sprout::Executable module is essentially a Domain Specific Language
+  # for describing Command Line Interface (CLI) applications.
+  #
+  # This module can be included by any class, and depending on how that class
+  # is used, one can either parse command line arguments into meaningful, 
+  # structured data, or delegate ruby code and configuration to an existing,
+  # external command line process.
+  #
+  # Following is an example of how one could define an executable Ruby
+  # application using this module:
+  #
+  #   :include: executable_example_1
+  #
+  # Following is an example of how one could delegate to an existing
+  # command line application:
+  #
+  #   :include: executable_example_2
+  #
   module Executable
-
-
     DEFAULT_FILE_EXPRESSION = '/**/**/*'
 
     extend Sprout::Concern
 
     module ClassMethods
 
+      ##
       # +add_param+ is the workhorse of the Task.
       # This method is used to add new shell parameters to the executable interface.
       #
       # +name+ is a symbol or string that represents the parameter that you would like to add
       # such as :debug or :source_path.
-      # +type+ is usually sent as a Ruby symbol and can be one of the following:
       #
-      # [:string]   Any string value
-      # [:boolean]  true or false
-      # [:number]   Any number
-      # [:file]     Path to a file
-      # [:url]      Basic URL
-      # [:path]     Path to a directory
-      # [:files]    Collection of files
-      # [:paths]    Collection of directories
-      # [:strings]  Collection of arbitrary strings
-      # [:urls]     Collection of URLs
+      # +type+ is a class reference of the Executable::Param that you'd like to use. 
+      # At the time of this writing, add_param will accept 2 class references that 
+      # do not extend Param - String and File. The ParameterFactory will automatically
+      # resolve these to the correct data type when they are created.
+      #
+      #   Boolean  true or false
+      #   File     Path to a file
+      #   Number   Any number
+      #   Path     Path to a directory
+      #   String   Any string value
+      #   Url      Basic URL
+      #
+      #   Files    Collection of files
+      #   Paths    Collection of directories
+      #   Strings  Collection of arbitrary strings
+      #   Urls     Collection of URLs
       #
       # Be sure to check out the Sprout::Executable::Param class to learn more about
-      # block editing the parameters.
+      # working with executable parameters.
       #
       # Once parameters have been added using the +add_param+ method, clients
-      # can set and get those parameters from any newly created executable instance.
+      # can set and get those parameters from any newly created executable instance,
+      # or from the command line.
       #
-      # Parameters will be sent to the commandline executable in the order they are
-      # added using +add_param+.
+      # In the case of an executable delegate, parameter values will be sent to the 
+      # command line executable in the order they are added using +add_param+.
+      #
+      # In the case of a Ruby executable, command line parameters will be interpreted
+      # in the order they are defined using +add_param+.
       #
       def add_param(name, type, options=nil) # :yields: Sprout::Executable::Param
         raise Sprout::Errors::UsageError.new("[DEPRECATED] add_param no longer uses closures, you can provide the same values as a hash in the optional last argument.") if block_given?
@@ -156,7 +184,7 @@ module Sprout
 
       ##
       # Execute the feature after calling parse
-      # with commandline arguments.
+      # with command line arguments.
       def execute
       end
 
@@ -300,7 +328,7 @@ module Sprout
         param_hash[param.name.to_sym] = param
         params << param
 
-        # Expose this parameter to commandline arguments:
+        # Expose this parameter to command line arguments:
         #add_commandline_param param
 
         param
