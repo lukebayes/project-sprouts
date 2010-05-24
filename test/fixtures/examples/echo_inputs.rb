@@ -119,9 +119,31 @@ class EchoInputs
   end
 end
 
+##
+# When we're the outer application,
+# run like an application:
 if($0 == __FILE__)
   exe = EchoInputs.new
   exe.parse ARGV
   exe.execute
+end
+
+##
+# Expose this application to Rake like:
+# 
+#    echo_inputs do |t|
+#      t.string = 'Foo'
+#      t.falsey = false
+#    end
+#
+def echo_inputs args
+  exe = EchoInputs.new
+  yield exe if block_given?
+  # Use 'file' task as if we were a compiler
+  # that created a file...
+  file args do
+    exe.execute
+  end
+  exe
 end
 
