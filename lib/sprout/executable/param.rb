@@ -52,6 +52,7 @@ module Sprout
       attr_writer :shell_name
 
       def initialize
+        @description             = 'Default Description'
         @hidden_value            = false
         @hidden_name             = false
         @delimiter               = DEFAULT_DELIMITER
@@ -146,10 +147,6 @@ module Sprout
       
       def short_name
         @short_name ||= name.to_s.split('').shift
-      end
-
-      def description
-        "Generic Description"
       end
 
       def shell_value
