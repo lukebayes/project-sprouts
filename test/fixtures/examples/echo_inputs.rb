@@ -1,4 +1,4 @@
-#! /usr/bin/env ruby
+# /usr/bin/env ruby
 
 require 'rubygems'
 require 'sprout'
@@ -14,6 +14,7 @@ class EchoInputs
   #   echo-inputs --truthy
   #
   add_param :truthy, Boolean
+
   ##
   # A boolean parameter that defaults to true, and must be 
   # explicitly set to false in order to turn it off.
