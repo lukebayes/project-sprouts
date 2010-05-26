@@ -37,9 +37,10 @@ project_model :model do |m|
   m.source_path             << 'src'
   m.source_path             << m.asset_dir
   m.library_path            = "lib"
-  m.air_config_file         = File.join(Sprout::Sprout.gem_file_cache('sprout-flex4sdk-tool', Sprout::Flex4SDK::VERSION::STRING), 'archive','frameworks','air-config.xml')
+  m.air_config_file         = []
+  m.air_config_file         << File.join(Sprout::Sprout.gem_file_cache('sprout-flex4sdk-tool', Sprout::Flex4SDK::VERSION::STRING), 'archive','frameworks','air-config.xml')
   #Comment out the above and uncomment the next line in order to use the flex3sdk
-#  m.air_config_file         = File.join(Sprout::Sprout.gem_file_cache('sprout-flex3sdk-tool', Sprout::Flex4SDK::VERSION::STRING), 'archive','frameworks','air-config.xml')
+#  m.air_config_file         << File.join(Sprout::Sprout.gem_file_cache('sprout-flex3sdk-tool', Sprout::Flex4SDK::VERSION::STRING), 'archive','frameworks','air-config.xml')
 end
 
 model = Sprout::ProjectModel.instance
@@ -122,7 +123,7 @@ end
 asdoc :doc => [:compile] do |t|
   t.source_path               = model.source_path
   t.library_path              << model.library_path
-  t.doc_classes               = '<%= project_name %>'
+  t.doc_classes               << '<%= project_name %>'
   t.main_title                = '<%= project_name %>'
   t.footer                    = ''
   t.load_config               = model.air_config_file
