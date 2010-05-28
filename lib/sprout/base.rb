@@ -33,6 +33,7 @@ require 'sprout/remote_file_loader'
 require 'sprout/remote_file_target'
 
 # External Packaging and distribution support:
+require 'sprout/rdoc_parser'
 require 'sprout/specification'
 require 'sprout/executable'
 

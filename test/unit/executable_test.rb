@@ -68,6 +68,7 @@ class ExecutableTest < Test::Unit::TestCase
         class BrokenExecutable3
           include Sprout::Executable
           attr_accessor :existing_method
+
           add_param :existing_method, String
         end
       end
@@ -85,7 +86,6 @@ class ExecutableTest < Test::Unit::TestCase
     end
 
     should "define a new method" do
-
       class WorkingTool
         include Sprout::Executable
         add_param :custom_name, String
@@ -98,7 +98,6 @@ class ExecutableTest < Test::Unit::TestCase
       tool2 = WorkingTool.new
       tool2.custom_name = "Bar Baz"
       assert_equal "Bar Baz", tool2.custom_name
-
     end
 
     # TODO: Ensure that file, files, path and paths

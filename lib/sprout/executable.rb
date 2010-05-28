@@ -15,7 +15,7 @@ require 'sprout/executable/parameter_factory'
 module Sprout
 
   ##
-  # The Sprout::Executable module is essentially a Domain Specific Language
+  # The Sprout::Executable module is a Domain Specific Language
   # for describing Command Line Interface (CLI) applications.
   #
   # This module can be included by any class, and depending on how that class
@@ -26,12 +26,7 @@ module Sprout
   # Following is an example of how one could define an executable Ruby
   # application using this module:
   #
-  #   :include: ../../test/fixtures/examples/executable
-  #
-  # Following is an example of how one could delegate to an existing
-  # command line application:
-  #
-  #   :include: ../../test/fixtures/examples/executable_delegate
+  #   :include: ../../test/fixtures/examples/echo_inputs.rb
   #
   module Executable
     DEFAULT_FILE_EXPRESSION = '/**/**/*'
@@ -88,6 +83,7 @@ module Sprout
         options ||= {}
         options[:name] = name
         options[:type] = type
+        #options[:description] ||= Sprout::RDocParser.description_for_caller caller.shift
 
         create_param_accessors name
         static_parameter_collection << options
@@ -134,11 +130,15 @@ module Sprout
       end
 
       def instance_defines? name
-        self.instance_methods.include? name
+        # In Ruby 1.9.1 instance_methods are symbols,
+        # In Ruby 1.8.7 instance_methods are strings.
+        # Boo.
+        self.instance_methods.include?(name.to_s) ||
+          self.instance_methods.include?(name)
       end
 
       def set_default_value name, value
-        if(!instance_defines? name)
+        if(!defined? name)
           raise Sprout::Errors::UsageError.new("Cannot set default value (#{value}) for unknown parameter (#{name})")
         end
         static_default_value_collection[name] = value
@@ -147,92 +147,6 @@ module Sprout
     end
 
     module InstanceMethods
-
-      ##
-      # Configure the executable instance to output failure messages to
-      # stderr and abort with non-zero response.
-      attr_accessor :abort_on_failure
-
-      attr_reader :param_hash
-      attr_reader :params
-      attr_reader :name
-      attr_reader :prerequisites
-
-      def initialize
-        super
-        @abort_on_failure     = true
-        @appended_args        = nil
-        @prepended_args       = nil
-        @param_hash           = {}
-        @params               = []
-        @prerequisites        = []
-        @option_parser        = OptionParser.new
-        @default_prefix       = DEFAULT_PREFIX
-        @default_short_prefix = DEFAULT_SHORT_PREFIX
-        initialize_parameters
-        initialize_defaults
-      end
-
-      def parse commandline_options
-        begin
-          option_parser.parse commandline_options
-          validate unless help_requested? commandline_options
-        rescue StandardError => e
-          handle_parse_error e
-        end
-      end
-
-      ##
-      # Called from enclosing Rake::Task after
-      # initialization and before any tasks are
-      # executed.
-      #
-      # It is within this function that we can
-      # define other, new Tasks and/or manipulate
-      # our prerequisites.
-      #
-      def define
-      end
-
-      ##
-      # Execute the feature after calling parse
-      # with command line arguments.
-      #
-      def execute
-      end
-
-      ##
-      # Call the provided executable delegate.
-      #
-      # This method is most often used from Rake task wrappers.
-      #
-      def execute_delegate
-        exe = Sprout.load_executable executable, pkg_name, pkg_version
-        Sprout.current_system.execute exe
-      end
-
-      # Create a string that represents this configured executable for shell execution
-      def to_shell
-        return @to_shell_proc.call(self) if(!@to_shell_proc.nil?)
-
-        result = []
-        result << @prepended_args unless @prepended_args.nil?
-        params.each do |param|
-          if(param.visible?)
-            result << param.to_shell
-          end
-        end
-        result << @appended_args unless @appended_args.nil?
-        return result.join(' ')
-      end
-
-      ##
-      # Called by Parameters like :path and :paths
-      #
-      def default_file_expression
-        @default_file_expression ||= Sprout::Executable::DEFAULT_FILE_EXPRESSION
-      end
-
       ##
       # The default RubyGem that we will use when requesting our executable.
       #
@@ -304,6 +218,95 @@ module Sprout
       # configuration.
       #
       attr_accessor :executable
+
+      ##
+      # Configure the executable instance to output failure messages to
+      # stderr and abort with non-zero response.
+      attr_accessor :abort_on_failure
+
+      attr_reader :param_hash
+      attr_reader :params
+      attr_reader :name
+      attr_reader :prerequisites
+
+      def initialize
+        super
+        @abort_on_failure     = true
+        @appended_args        = nil
+        @prepended_args       = nil
+        @param_hash           = {}
+        @params               = []
+        @prerequisites        = []
+        @option_parser        = OptionParser.new
+        @default_prefix       = DEFAULT_PREFIX
+        @default_short_prefix = DEFAULT_SHORT_PREFIX
+        initialize_parameters
+        initialize_defaults
+      end
+
+      def parse commandline_options
+        begin
+          option_parser.parse commandline_options
+          validate unless help_requested? commandline_options
+        rescue StandardError => e
+          handle_parse_error e
+        end
+      end
+
+      ##
+      # Called from enclosing Rake::Task after
+      # initialization and before any tasks are
+      # executed.
+      #
+      # It is within this function that we can
+      # define other, new Tasks and/or manipulate
+      # our prerequisites.
+      #
+      def define
+      end
+
+      ##
+      # Execute the feature after calling parse
+      # with command line arguments.
+      #
+      def execute
+      end
+
+      ##
+      # Call the provided executable delegate.
+      #
+      # This method is most often used from Rake task wrappers.
+      #
+      def execute_delegate
+        exe = Sprout.load_executable executable, pkg_name, pkg_version
+        Sprout.current_system.execute exe
+      end
+
+      def to_help
+        option_parser.to_s
+      end
+
+      # Create a string that represents this configured executable for shell execution
+      def to_shell
+        return @to_shell_proc.call(self) if(!@to_shell_proc.nil?)
+
+        result = []
+        result << @prepended_args unless @prepended_args.nil?
+        params.each do |param|
+          if(param.visible?)
+            result << param.to_shell
+          end
+        end
+        result << @appended_args unless @appended_args.nil?
+        return result.join(' ')
+      end
+
+      ##
+      # Called by Parameters like :path and :paths
+      #
+      def default_file_expression
+        @default_file_expression ||= Sprout::Executable::DEFAULT_FILE_EXPRESSION
+      end
 
       private
 

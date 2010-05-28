@@ -16,7 +16,8 @@ module Sprout
       end
 
       def value=(value)
-        super (value == "true" || value === true) ? true : false
+        value = (value == "true" || value === true) ? true : false 
+        super value
       end
       
       def visible?

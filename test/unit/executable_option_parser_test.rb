@@ -57,10 +57,25 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
       assert_equal ['lib/sprout.rb', 'lib/sprout/log.rb'], @exe.files
     end
 
+    should "accept files assignment" do
+      @exe.parse [@default_input, '--files=lib/sprout.rb', '--files=lib/sprout/log.rb']
+      assert_equal ['lib/sprout.rb', 'lib/sprout/log.rb'], @exe.files
+    end
+
     should "configure required arguments" do
       @exe.parse [@default_input, @default_input]
       assert_equal 'lib/sprout.rb', @exe.input
     end
+
+    # TODO: This test ensures that the commandline description
+    # is pulled from the provided RDocs - but this turns out
+    # to be more work than I'm prepared to take on at the moment.
+    #
+    #should "use rdoc to assign parameter documentation" do
+      #skip "Not yet ready to integrate rdoc comments"
+      #doc = "A boolean parameter that defaults to true, and must be explicitly set to false in order to turn it off."
+      #assert_matches /#{doc}/, @exe.to_help
+    #end
 
     should "fail without required param" do
       assert_raises Sprout::Errors::MissingArgumentError do
