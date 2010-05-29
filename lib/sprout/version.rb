@@ -1,5 +1,6 @@
 
 module Sprout
+
   if(!defined? Sprout::VERSION)
     module VERSION #:nodoc:
       MAJOR = 1

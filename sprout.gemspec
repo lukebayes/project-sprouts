@@ -1,9 +1,8 @@
 # -*- encoding: utf-8 -*-
-lib = File.expand_path('../lib/', __FILE__)
+lib = File.expand_path(File.join(File.dirname(__FILE__), 'lib'))
 $:.unshift lib unless $:.include?(lib)
 
-require 'bundler'
-require 'sprout/version'
+require 'sprout'
 
 Gem::Specification.new do |s|
   s.name                      = "sprout"
@@ -18,25 +17,15 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "sprout" 
 
-  s.add_dependency "bundler", ">= 0.9.19"
-
-  bundle = Bundler::Definition.from_gemfile('Gemfile')
-
-  bundle.dependencies.each do |dep|
-    if dep.groups.include?(:default)
-      puts ">> Bundler.add_dependency: #{dep.name}"
-      s.add_dependency(dep.name, dep.requirement.to_s)
-    elsif dep.groups.include?(:development)
-      puts ">> Bundler.add_development_dependency: #{dep.name}"
-      s.add_development_dependency(dep.name, dep.requirement.to_s)
-    end
-  end
+  ##
+  # Add the dependencies defined in the Gemfile
+  # to the packaged RubyGem.
+  Sprout.add_gemfile_dependencies s
 
   s.files = Dir.glob("{app_generators,bin,lib,test}/**/*") + %w(MIT-LICENSE README.textile CHANGELOG.md)
 
   # TODO: Bring this back:
   #s.executables  = ['sprout']
-  s.executables  = ['sprout-executable']
-  s.require_path = ['lib', 'test']
+  s.require_path = ['lib']
 end
 
