@@ -37,6 +37,9 @@ require 'sprout/rdoc_parser'
 require 'sprout/specification'
 require 'sprout/executable'
 
+# Generators
+require 'sprout/generator'
+
 module Sprout
 
   module Base

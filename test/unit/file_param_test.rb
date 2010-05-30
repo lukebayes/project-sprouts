@@ -40,8 +40,8 @@ class FileParamTest < Test::Unit::TestCase
       assert_equal 1, @tool.prerequisites.size
     end
 
-    should "not add prerequisite that matches name of parent" do
-      @tool.name = :abcd
+    should "not add prerequisite that matches output of parent" do
+      @tool.output = :abcd
       @param.value = "abcd"
       @param.prepare
       assert_equal 0, @tool.prerequisites.size

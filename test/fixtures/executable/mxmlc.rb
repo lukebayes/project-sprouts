@@ -802,6 +802,7 @@ end
 
 =end
 
+# TODO: Assign mxmlc.output = args || args.first_key
 def mxmlc args
   mxmlc_tool = Sprout::MXMLC.new
   yield mxmlc_tool if block_given?

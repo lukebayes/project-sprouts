@@ -11,7 +11,7 @@
 #
 #     sprout-generator-importer ~/Projects/SomeProject
 #
-class ProjectGenerator
+class AppGenerator
   include Sprout::Generator
 
   ##
@@ -82,7 +82,6 @@ class ProjectGenerator
   
 end
 
-
 ##
 # Defined in the imaginary base class:
 def default_project_files
@@ -94,9 +93,9 @@ def default_project_files
 end
 
 ##
-# These entities ought to also be very easy to test.
+# These directives ought to also be very easy to test.
 #
-class ProjectGeneratorTest
+class AppGeneratorTest
   include Sprout::GeneratorTestHelper
 
   context "a new generator" do

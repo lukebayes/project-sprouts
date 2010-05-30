@@ -7,7 +7,7 @@ module Sprout
     class Path < Executable::Param
 
       def prepare_prerequisites
-        if(value && value != belongs_to.name.to_s)
+        if(value && !file_is_output?(value))
           files = FileList[value + file_expression]
           files.each do |f|
             file f

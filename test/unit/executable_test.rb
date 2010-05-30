@@ -100,6 +100,14 @@ class ExecutableTest < Test::Unit::TestCase
       assert_equal "Bar Baz", tool2.custom_name
     end
 
+    should "accept custom reader" do
+      fail "add_param should accept reader"
+    end
+
+    should "accept custom writer" do
+      fail "add_param should accept writer"
+    end
+
     # TODO: Ensure that file, files, path and paths
     # validate the existence of the references.
 

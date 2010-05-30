@@ -102,8 +102,8 @@ module Sprout
         @static_default_value_collection ||= {}
       end
 
-      def set name, value
-        set_default_value name, value
+      def set key, value
+        set_default_value key, value
       end
 
       private
@@ -137,11 +137,11 @@ module Sprout
           self.instance_methods.include?(name)
       end
 
-      def set_default_value name, value
-        if(!defined? name)
-          raise Sprout::Errors::UsageError.new("Cannot set default value (#{value}) for unknown parameter (#{name})")
+      def set_default_value key, value
+        if(!defined? key)
+          raise Sprout::Errors::UsageError.new("Cannot set default value (#{value}) for unknown parameter (#{key})")
         end
-        static_default_value_collection[name] = value
+        static_default_value_collection[key] = value
       end
 
     end
@@ -226,7 +226,6 @@ module Sprout
 
       attr_reader :param_hash
       attr_reader :params
-      attr_reader :name
       attr_reader :prerequisites
 
       def initialize

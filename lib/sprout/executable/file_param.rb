@@ -41,9 +41,8 @@ module Sprout
       private
 
       def prerequisite?(file)
-        (file && file != belongs_to.name.to_s)
+        file && !file_is_output?(file)
       end
-
     end
   end
 end

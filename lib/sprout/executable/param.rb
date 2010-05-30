@@ -204,7 +204,11 @@ module Sprout
       def clean_path path
         Sprout::System.create.clean_path path
       end
-      
+
+      def file_is_output? file
+        belongs_to.respond_to?(:output) && belongs_to.output.to_s == file
+      end
+
     end
   end
 end
