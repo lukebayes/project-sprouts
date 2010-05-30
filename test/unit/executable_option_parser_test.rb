@@ -14,56 +14,58 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
 
     should "fail without required args" do
       assert_raises Sprout::Errors::MissingArgumentError do
-        @exe.parse []
+        @exe.parse! []
       end
     end
 
     should "accept required args" do
-      @exe.parse [ @default_input ]
+      @exe.parse! [ @default_input ]
       assert_equal 'lib/sprout.rb', @exe.input
     end
 
     should "accept boolean with hidden_value" do
       assert !@exe.truthy
-      @exe.parse [ '--truthy', @default_input ]
+      @exe.parse! [ '--truthy', @default_input ]
       assert @exe.truthy
     end
     
     should "always accept help option" do
       @exe.expects :puts
       assert_raises SystemExit do
-        @exe.parse [ '--help' ]
+        @exe.parse! [ '--help' ]
       end
     end
 
     should "accept false boolean" do
       assert @exe.falsey, "Should be true by default"
-      @exe.parse [@default_input, '--falsey=false']
+      @exe.parse! [@default_input, '--falsey=false']
       assert !@exe.falsey, "Should be false"
     end
 
     should "accept string" do
-      @exe.parse [@default_input, '--string=abcd']
+      @exe.parse! [@default_input, '--string=abcd']
       assert_equal 'abcd', @exe.string
     end
 
     should "accept file" do
-      @exe.parse [@default_input, '--file=lib/sprout.rb']
+      @exe.parse! [@default_input, '--file=lib/sprout.rb']
       assert_equal 'lib/sprout.rb', @exe.file
     end
 
     should "accept files" do
-      @exe.parse [@default_input, '--files+=lib/sprout.rb', '--files+=lib/sprout/log.rb']
+      @exe.parse! [@default_input, '--files+=lib/sprout.rb', '--files+=lib/sprout/log.rb']
       assert_equal ['lib/sprout.rb', 'lib/sprout/log.rb'], @exe.files
     end
 
-    should "accept files assignment" do
-      @exe.parse [@default_input, '--files=lib/sprout.rb', '--files=lib/sprout/log.rb']
+    # TODO: This might not be correct behavior...
+    should "accept files with equal sign delimiter" do
+      @exe.parse! [@default_input, '--files=lib/sprout.rb', '--files=lib/sprout/log.rb']
       assert_equal ['lib/sprout.rb', 'lib/sprout/log.rb'], @exe.files
     end
 
+    # TODO: Not sure what's going on here...
     should "configure required arguments" do
-      @exe.parse [@default_input, @default_input]
+      @exe.parse! [@default_input, @default_input]
       assert_equal 'lib/sprout.rb', @exe.input
     end
 
@@ -79,30 +81,59 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
 
     should "fail without required param" do
       assert_raises Sprout::Errors::MissingArgumentError do
-        @exe.parse []
+        @exe.parse! []
       end
     end
 
-    should "fail with incorreect param" do
+    should "fail with incorrect param" do
       assert_raises Sprout::Errors::InvalidArgumentError do
-        @exe.parse ['--input=lib/unknown_file.rb']
+        @exe.parse! ['--input=lib/unknown_file.rb']
       end
     end
 
     context "with an unknown option" do
       should "throw an exception" do
         assert_raises OptionParser::InvalidOption do
-          @exe.parse [ '--unknown-param', @default_input ]
+          @exe.parse! [ '--unknown-param', @default_input ]
         end
       end
 
       should "abort and display help" do
         @exe.abort_on_failure = true
         @exe.expects :abort
-        @exe.parse [ '--unknown-param', @default_input ]
+        @exe.parse! [ '--unknown-param', @default_input ]
       end
     end
 
+    context "with a hidden name" do
+
+      # Define the class in a place
+      # where only these tests can use it.
+      class SomeExecutable
+        include Sprout::Executable
+        add_param :debug, Boolean
+        add_param :input, String, { :hidden_name => true }
+      end
+
+      setup do
+        @exe = SomeExecutable.new
+      end
+
+      should "accept a value at the end" do
+        @exe.parse! ['--debug', 'SomeString']
+        assert @exe.debug
+        assert_equal 'SomeString', @exe.input
+      end
+
+      should "fail if multiple values provided for a singular param" do
+        skip "not yet implemented"
+      end
+
+      should "accept multiple values for collection param" do
+        skip "not yet implemented"
+      end
+
+    end
   end
 end
 

@@ -82,6 +82,7 @@ class AppGenerator
   
 end
 
+
 ##
 # Defined in the imaginary base class:
 def default_project_files

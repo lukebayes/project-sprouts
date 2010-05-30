@@ -3,10 +3,8 @@ require "bundler"
 
 Bundler.setup(:default)
 
-# This shouldn't need done here - bundler/rubygems
-# should handle getting lib into the load path...
-#
-#$:.unshift File.dirname(__FILE__)
+$:.unshift File.expand_path(File.dirname(__FILE__))
+
 require 'sprout/base'
 
 module Sprout

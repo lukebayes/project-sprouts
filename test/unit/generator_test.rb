@@ -7,22 +7,23 @@ class GeneratorTest < Test::Unit::TestCase
 
     setup do
       @fixture = File.join fixtures, 'generators'
-      @generator = FakeGenerator.new
+      @generator = Sprout::Generator.new
     end
 
     should "create foo directory" do
+      @generator.parse! ['some_project']
       @generator.execute
     end
   end
 end
 
 
-class FakeGenerator
-  include Sprout::Generator
+class FakeGenerator < Sprout::Generator
 
   def manifest
     directory 'foo'
   end
+
 end
 
 

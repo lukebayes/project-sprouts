@@ -110,7 +110,8 @@ module Sprout
 
       def accessor_can_be_defined_at name
         if(instance_defines? name)
-          raise Sprout::Errors::DuplicateMemberError.new("add_param called with a name that is already in use (#{name}=) on (#{self.class})")
+          message = "add_param called with a name that is already in use (#{name}=) on (#{self})"
+          raise Sprout::Errors::DuplicateMemberError.new(message)
         end
       end
 
@@ -252,9 +253,10 @@ module Sprout
         initialize_defaults
       end
 
-      def parse commandline_options
+      def parse! commandline_options
         begin
-          option_parser.parse commandline_options
+          option_parser.parse! commandline_options
+          parse_extra_options! commandline_options
           validate unless help_requested? commandline_options
         rescue StandardError => e
           handle_parse_error e
@@ -314,6 +316,19 @@ module Sprout
       #
       def default_file_expression
         @default_file_expression ||= Sprout::Executable::DEFAULT_FILE_EXPRESSION
+      end
+
+      protected
+
+      def parse_extra_options! options
+        options.each do |value|
+          params.each do |param|
+            if param.hidden_name?
+              self.send "#{param.name}=", value
+              break
+            end
+          end
+        end
       end
 
       private

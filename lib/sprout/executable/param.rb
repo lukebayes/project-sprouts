@@ -137,6 +137,10 @@ module Sprout
 
       def option_parser_declaration
         declaration = [ prefix, option_parser_name ]
+        # TODO: Need to figure out how to support hidden name inputs...
+        #if(hidden_name?)
+          #declaration = [option_parser_type_output]
+        #
         if(!hidden_value?)
           declaration << delimiter << option_parser_type_output
         end

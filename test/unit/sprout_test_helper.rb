@@ -10,8 +10,7 @@ require 'shoulda'
 require 'mocha'
 
 require File.dirname(__FILE__) + '/../../lib/sprout'
-$:.unshift File.dirname(__FILE__) + '/../'
-#$:.unshift File.dirname(__FILE__)
+$:.unshift File.expand_path(File.join(File.dirname(__FILE__), '..'))
 
 require 'unit/fake_process_runner'
 require 'unit/fake_executable_task'

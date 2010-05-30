@@ -101,7 +101,7 @@ class EchoInputs
   # 
   #   echo-inputs lib/sprout.rb
   #
-  add_param :input, File, { :required => true, :hidden_name => true }
+  add_param :input, File, { :required => true }
 
   def execute
     puts "--truthy=#{truthy}" if truthy
@@ -125,7 +125,7 @@ end
 # run like an application:
 if($0 == __FILE__)
   exe = EchoInputs.new
-  exe.parse ARGV
+  exe.parse! ARGV
   exe.execute
 end
 
@@ -147,4 +147,5 @@ def echo_inputs args
   end
   exe
 end
+
 
