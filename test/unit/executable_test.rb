@@ -101,11 +101,31 @@ class ExecutableTest < Test::Unit::TestCase
     end
 
     should "accept custom reader" do
-      fail "add_param should accept reader"
+      class WorkingTool
+        include Sprout::Executable
+        add_param :custom1, String, { :reader => :read_custom }
+        def read_custom
+          "#{@custom1} world"
+        end
+      end
+
+      tool = WorkingTool.new
+      tool.custom1 = 'hello'
+      assert_equal 'hello world', tool.custom1
     end
 
     should "accept custom writer" do
-      fail "add_param should accept writer"
+      class WorkingTool
+        include Sprout::Executable
+        add_param :custom2, String, { :writer => :write_custom }
+        def write_custom(value)
+          @custom2 = "#{value} world"
+        end
+      end
+
+      tool = WorkingTool.new
+      tool.custom2 = 'hello'
+      assert_equal 'hello world', tool.custom2
     end
 
     # TODO: Ensure that file, files, path and paths

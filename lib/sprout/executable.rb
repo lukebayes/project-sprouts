@@ -85,13 +85,13 @@ module Sprout
         options[:type] = type
         #options[:description] ||= Sprout::RDocParser.description_for_caller caller.shift
 
-        create_param_accessors name
+        create_param_accessors options
         static_parameter_collection << options
         options
       end
       
       def add_param_alias new_name, old_name
-        create_param_accessors new_name, old_name
+        create_param_accessors :name => new_name, :real_name => old_name
       end
 
       def static_parameter_collection
@@ -114,18 +114,27 @@ module Sprout
         end
       end
 
-      def create_param_accessors name, real_name=nil
-        real_name ||= name
+      def create_param_accessors options
+        name      = options[:name]
+        real_name = options[:real_name] || name
         accessor_can_be_defined_at name
 
-        # define the setter:
+        # define the writer:
         define_method("#{name}=") do |value|
+          if(!options[:writer].nil?)
+            value = self.send(options[:writer], value)
+          end
           param_hash[real_name].value = value
+          instance_variable_set("@#{name}", value)
         end
 
-        # define the getter:
+        # define the reader:
         define_method(name) do     
-          param_hash[real_name].value
+          if(options[:reader].nil?)
+            param_hash[real_name].value
+          else
+            self.send(options[:reader])
+          end
         end
       end
 

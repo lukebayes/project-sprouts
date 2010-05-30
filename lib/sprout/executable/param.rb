@@ -21,12 +21,14 @@ module Sprout
       attr_accessor :hidden_value
       attr_accessor :name
       attr_accessor :prefix
+      attr_accessor :reader
       attr_accessor :required
       attr_accessor :to_shell_proc
       attr_accessor :type
       attr_accessor :validator
       attr_accessor :value
       attr_accessor :visible
+      attr_accessor :writer
 
       ##
       # Executable::Params join their name/value pair with an
