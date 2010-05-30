@@ -353,7 +353,7 @@ module Sprout
 
       def initialize_parameters
         add_help_param
-        self.class.static_parameter_collection.each do |declaration|
+        assembled_parameter_collection.each do |declaration|
           param = initialize_parameter declaration
           short = param.option_parser_short_name
 
@@ -367,6 +367,18 @@ module Sprout
             end
           end
         end
+      end
+
+      def assembled_parameter_collection
+        collection = []
+        clazz = self.class
+        while clazz do
+          if(clazz.respond_to?(:static_parameter_collection))
+            collection.concat clazz.static_parameter_collection
+          end
+          clazz = clazz.superclass
+        end
+        collection
       end
 
       def add_help_param

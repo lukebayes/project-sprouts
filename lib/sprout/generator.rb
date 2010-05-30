@@ -5,7 +5,7 @@ module Sprout
 
     ##
     # The name of the application or component
-    add_param :name, String, { :reader => :get_name, :hidden_name => true, :required => true }
+    add_param :name, String, { :hidden_name => true, :required => true }
 
     def default_project_files
       directory script do
@@ -16,13 +16,13 @@ module Sprout
     end
 
     def execute
-      #puts ">> execute with: #{name}"
+      #puts ">> execute with: #{camel_cased_name}"
     end
 
     protected
 
-    def get_name
-      @name.camel_case
+    def camel_cased_name
+      self.name.camel_case
     end
   end
 end
