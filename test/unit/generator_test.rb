@@ -77,7 +77,7 @@ class GeneratorTest < Test::Unit::TestCase
       end
 
       should "not update superclass parameter collection" do
-        assert_equal 5, Sprout::Generator.static_parameter_collection.size
+        assert_equal 5, Sprout::Generator::Base.static_parameter_collection.size
       end
 
       ##
@@ -150,7 +150,7 @@ class GeneratorTest < Test::Unit::TestCase
   ##
   # This is a fake Generator that should 
   # exercise the inputs.
-  class FakeGenerator < Sprout::Generator
+  class FakeGenerator < Sprout::Generator::Base
 
     ##
     # Some argument for the Fake Generator
@@ -178,7 +178,7 @@ class GeneratorTest < Test::Unit::TestCase
   ##
   # This is a broken generator that should fail
   # with a MissingTemplateError
-  class MissingTemplateGenerator < Sprout::Generator
+  class MissingTemplateGenerator < Sprout::Generator::Base
     def manifest
       directory name do
         file 'FileWithNoTemplate'
