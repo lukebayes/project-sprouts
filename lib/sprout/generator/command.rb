@@ -36,7 +36,17 @@ module Sprout::Generator
       end
 
       def execute
-        working_dir.create
+        begin
+          working_dir.children.each do |child|
+            child.create
+          end
+        rescue StandardError => e
+          generator.say "[#{e.class}] #{e.message}"
+          working_dir.children.each do |child|
+            child.destroy
+          end
+          raise e
+        end
       end
 
       def unexecute

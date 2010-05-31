@@ -8,33 +8,50 @@ module Sprout::Generator
     end
 
     def create
-      if(!File.directory?(path))
+      if !File.directory?(path)
         FileUtils.mkdir_p path
         say "Created directory: #{path}"
+        @created = true
       else
         say "Skipped existing:  #{path}"
       end
-      children.each do |child|
-        child.create
-      end
+      create_children
     end
 
     def destroy
-      success = true
-      children.each do |child|
-        if !child.destroy
-          success = false
-        end
-      end
+      success = destroy_children
 
-      if success && File.directory?(path) && Dir.empty?(path)
-        FileUtils.rm_rf path
+      if success && can_remove?
+        FileUtils.rmdir path
         say "Removed directory: #{path}"
         true
       else
         say "Skipped remove directory: #{path}"
         false
       end
+    end
+
+    private
+
+    def can_remove?
+      File.directory?(path) && Dir.empty?(path)
+    end
+
+    def create_children
+      @created = []
+      children.select do |child|
+        success = child.create
+        if success
+          @created << child
+        end
+        success
+      end
+      (@created.size == children.size)
+    end
+
+    def destroy_children
+      destroyed = children.reverse.select { |child| child.destroy }
+      return (destroyed.size == children.size)
     end
   end
 end

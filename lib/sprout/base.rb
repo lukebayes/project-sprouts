@@ -72,20 +72,32 @@ module Sprout
       #
       def load_executable name, pkg_name, version_requirement=nil
         # puts "load_executable with name: #{name} pkg_name: #{pkg_name} pkg_version: #{pkg_version}"
-        require_rb_for_executable pkg_name
+        require_ruby_package pkg_name
         executable = executable_for(current_system, pkg_name, name, version_requirement)
         if(executable.nil?)
           message = "The requested executable: (#{name}) from: (#{pkg_name}) and version: "
           message << "(#{version_requirement}) does not appear to be loaded."
           message << "\n\nYou probably need to update your Gemfile and run 'bundle install' "
           message << "to update your local gems."
-          raise Sprout::Errors::MissingExecutableError.new message
+          raise Sprout::Errors::LoadError.new message
         end
         executable.path
       end
 
       def executables
         @executables ||= []
+      end
+
+      def register_generator generator
+        generators << generator
+        generator
+      end
+
+      def load_generator name, pkg_name, version_requirement=nil
+      end
+
+      def generators
+        @generators ||= []
       end
 
       def cache
@@ -135,11 +147,11 @@ module Sprout
         end.first
       end
 
-      def require_rb_for_executable name
+      def require_ruby_package name
         begin
           require name
         rescue LoadError => e
-          raise Sprout::Errors::MissingExecutableError.new "Could not load the required file (#{name}) - Do you need to run 'bundle install'?"
+          raise Sprout::Errors::LoadError.new "Could not load the required file (#{name}) - Do you need to run 'bundle install'?"
         end
       end
 

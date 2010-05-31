@@ -18,6 +18,11 @@ class GeneratorTest < Test::Unit::TestCase
       remove_file @fixture
     end
 
+    should "register with the Sprout gem" do
+      generator = Sprout.load_generator :application, 'fake', '>= 1.0.pre'
+      assert_not_nil generator
+    end
+
     context "that is asked to execute/create" do
       should "default path to pwd" do
         generator = FakeGenerator.new
@@ -59,11 +64,12 @@ class GeneratorTest < Test::Unit::TestCase
         assert_raises Sprout::Errors::MissingTemplateError do
           @generator.execute
         end
+
+        assert !File.exists?(File.join(@fixture, 'some_project')), "Shouldn't leave half-generated files around"
       end
 
       should "notify user of all files created" do
         @generator.name = 'some_project'
-        @string_io.expects(:puts).with('Skipped existing:  .')
         @string_io.expects(:puts).with('Created directory: ./some_project')
         @string_io.expects(:puts).with('Created file:      ./some_project/SomeFile')
         @string_io.expects(:puts).with('Created file:      ./some_project/SomeOtherFile')

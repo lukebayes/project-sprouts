@@ -4,13 +4,19 @@ module Sprout::Generator
     attr_accessor :templates
 
     def create
+      resolved = resolve_template
       File.open path, 'w+' do |file|
-        file.write resolve_template
+        file.write resolved
       end
       say "Created file:      #{path}"
+      @created = true
     end
 
     def destroy
+      if !File.exists?(path)
+        say "Skipped remove missing file: #{path}"
+        return true
+      end
       expected_content = resolve_template
       actual_content = File.read path
       if generator.force || actual_content == expected_content

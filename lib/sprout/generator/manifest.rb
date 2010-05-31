@@ -9,5 +9,9 @@ module Sprout::Generator
     def say message
       generator.say message
     end
+
+    def created?
+      @created
+    end
   end
 end

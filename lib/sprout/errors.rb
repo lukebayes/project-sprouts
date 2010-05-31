@@ -61,6 +61,10 @@ module Sprout
     class ProcessRunnerError < SproutError; end
 
     ##
+    # There was a problem requiring a requested file
+    class LoadError < SproutError; end
+
+    ##
     # Error on remote file download
     class RemoteFileLoaderError < StandardError; end
 
