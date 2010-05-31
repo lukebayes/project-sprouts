@@ -8,6 +8,15 @@ module Sprout
     add_param :path, Path, { :default => Dir.pwd }
 
     ##
+    # Force the creation of files without prompting.
+    add_param :force, Boolean
+
+    ##
+    # Run the generator in Quiet mode - do not write
+    # status to standard output.
+    add_param :quiet, Boolean
+
+    ##
     # A collection of paths to look in for named templates.
     add_param :templates, Paths
 
@@ -15,29 +24,22 @@ module Sprout
     # The name of the application or component.
     add_param :name, String, { :hidden_name => true, :required => true }
 
-    ##
-    # The folder where scripts will be created.
-    add_param :script, String, { :default => 'script' }
-
     attr_accessor :logger
 
     ##
     # Record the actions and trigger them
     def execute
-      @logger ||= $stdout
-      @command = GeneratorCommand.new self
-      manifest
-      @command.execute
+      prepare_command.execute
     end
 
     ##
     # Rollback the generator
     def unexecute
-      manifest
+      prepare_command.unexecute
     end
 
     def say message
-      logger.puts message
+      logger.puts message.gsub("#{path}", '.')
     end
 
     ##
@@ -50,21 +52,19 @@ module Sprout
 
     protected
 
+    def prepare_command
+      @logger ||= $stdout
+      @command = GeneratorCommand.new self
+      manifest
+      @command
+    end
+
     def directory name, &block
       @command.directory name, &block
     end
 
     def file name, template=nil
       @command.file name, template
-    end
-
-    ##
-    # Shared project files that can be used by everyone.
-    def create_script_dir
-      directory script do
-        file 'generate'
-        file 'destroy'
-      end
     end
 
     class Manifest
@@ -86,10 +86,32 @@ module Sprout
       end
 
       def create
-        FileUtils.mkdir_p path
-        say ">> Created directory: #{path}"
+        if(!File.directory?(path))
+          FileUtils.mkdir_p path
+          say ">> Created directory: #{path}"
+        else
+          say ">> Skipped existing:  #{path}"
+        end
         children.each do |child|
           child.create
+        end
+      end
+
+      def destroy
+        success = true
+        children.each do |child|
+          if !child.destroy
+            success = false
+          end
+        end
+
+        if success && File.directory?(path) && Dir.empty?(path)
+          FileUtils.rm_rf path
+          say ">> Removed directory: #{path}"
+          true
+        else
+          say ">> Skipped remove directory: #{path}"
+          false
         end
       end
     end
@@ -99,15 +121,31 @@ module Sprout
       attr_accessor :templates
 
       def create
-        template_content = read_template
-        content = generator.resolve_template template_content
         File.open path, 'w+' do |file|
-          file.write content
+          file.write resolve_template
         end
         say ">> Created file:      #{path}"
       end
 
+      def destroy
+        expected_content = resolve_template
+        actual_content = File.read path
+        if generator.force || actual_content == expected_content
+          FileUtils.rm path
+          say ">> Removed file: #{path}"
+          true
+        else
+          say ">> Skipped remove file: #{path}"
+          false
+        end
+      end
+
       private
+
+      def resolve_template
+        template_content = read_template
+        generator.resolve_template template_content
+      end
 
       def read_template
         templates.each do |template_path|
@@ -164,7 +202,7 @@ module Sprout
       end
 
       def unexecute
-        puts ">> Command.unexecute called"
+        working_dir.destroy
       end
     end
 

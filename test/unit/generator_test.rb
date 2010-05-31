@@ -10,79 +10,145 @@ class GeneratorTest < Test::Unit::TestCase
       @templates        = File.join fixtures, 'generators', 'templates'
       @string_io        = StringIO.new
       @generator        = configure_generator FakeGenerator.new
+
+      FileUtils.mkdir_p @fixture
     end
 
     teardown do
       remove_file @fixture
     end
 
-    should "default path to pwd" do
-      generator = FakeGenerator.new
-      assert_equal Dir.pwd, generator.path
-    end
-
-    should "create outer directory and file" do
-      @generator.name = 'some_project'
-      @generator.execute
-      assert_directory File.join(@fixture, 'some_project')
-      assert_file File.join(@fixture, 'some_project', 'SomeFile')
-      assert_directory File.join(@fixture, 'some_project', 'script')
-      assert_file File.join(@fixture, 'some_project', 'script', 'generate')
-      assert_file File.join(@fixture, 'some_project', 'script', 'destroy')
-    end
-
-    should "copy templates from the first found template path" do
-      @generator.name = 'some_project'
-      @generator.execute
-      assert_file File.join(@fixture, 'some_project', 'SomeFile') do |content|
-        assert_matches /got my Orange Crush/, content
+    context "that is asked to execute/create" do
+      should "default path to pwd" do
+        generator = FakeGenerator.new
+        assert_equal Dir.pwd, generator.path
       end
-    end
 
-    should "use concrete template when provided" do
-      @generator.name = 'some_project'
-      @generator.execute
-      assert_file File.join(@fixture, 'some_project', 'SomeOtherFile') do |content|
-        assert_matches /I've had my fun/, content
+      should "create outer directory and file" do
+        @generator.name = 'some_project'
+        @generator.execute
+        project = File.join(@fixture, 'some_project')
+        assert_directory project
+        assert_file File.join(project, 'SomeFile')
+        assert_directory File.join(project, 'src')
+        assert_file File.join(project, 'src', 'SomeProject.as') do |content|
+          assert_matches /public class SomeProject/, content
+          assert_matches /public function SomeProject/, content
+        end
       end
-    end
 
-    should "raise missing template error if expected template is not found" do
-      @generator = configure_generator MissingTemplateGenerator.new
-      assert_raises Sprout::Errors::MissingTemplateError do
+      should "copy templates from the first found template path" do
+        @generator.name = 'some_project'
+        @generator.band_name = 'R.E.M.'
+        @generator.execute
+        assert_file File.join(@fixture, 'some_project', 'SomeFile') do |content|
+          assert_matches /got my Orange Crush - R.E.M./, content
+        end
+      end
+
+      should "use concrete template when provided" do
+        @generator.name = 'some_project'
+        @generator.execute
+        assert_file File.join(@fixture, 'some_project', 'SomeOtherFile') do |content|
+          assert_matches /I've had my fun/, content
+        end
+      end
+
+      should "raise missing template error if expected template is not found" do
+        @generator = configure_generator MissingTemplateGenerator.new
+        assert_raises Sprout::Errors::MissingTemplateError do
+          @generator.execute
+        end
+      end
+
+      should "notify user of all files created" do
+        @generator.name = 'some_project'
+        @string_io.expects(:puts).with('>> Skipped existing:  .')
+        @string_io.expects(:puts).with('>> Created directory: ./some_project')
+        @string_io.expects(:puts).with('>> Created file:      ./some_project/SomeFile')
+        @string_io.expects(:puts).with('>> Created file:      ./some_project/SomeOtherFile')
+        @string_io.expects(:puts).with('>> Created directory: ./some_project/src')
+        @string_io.expects(:puts).with('>> Created file:      ./some_project/src/SomeProject.as')
         @generator.execute
       end
+
+      should "only have one param in class definition" do
+        assert_equal 2, FakeGenerator.static_parameter_collection.size
+      end
+
+      should "not update superclass parameter collection" do
+        assert_equal 5, Sprout::Generator.static_parameter_collection.size
+      end
+
+      should "prompt if requested file exists with different content" do
+        skip
+      end
+
+      should "warn/skip if identical file exists" do
+        skip
+      end
     end
 
-    should "only have one param in class definition" do
-      assert_equal 1, FakeGenerator.static_parameter_collection.size
+    context "that is asked to unexecute/delete" do
+      
+      setup do
+        @generator.name = 'some_project'
+        @generator.execute
+
+        @project = File.join @fixture, 'some_project'
+        @file = File.join @project, 'SomeFile'
+
+        assert_file File.join(@fixture, 'some_project')
+      end
+      
+      should "remove the expected files" do
+        @generator.unexecute
+        assert !File.exists?(@project), "Project should be deleted"
+      end
+
+      should "not remove files (or their parents) that have been edited" do
+        # Edit the file:
+        File.open @file, 'w+' do |f|
+          f.write "New Content"
+        end
+
+        @generator.unexecute
+        assert !File.exists?(File.join(@project, 'src')), "src dir should be removed"
+        assert_file @file, "Edited files should not be removed"
+      end
+
+      should "remove edited files if force is true" do
+        # Edit the file:
+        File.open @file, 'w+' do |f|
+          f.write "New Content"
+        end
+
+        @generator.force = true
+        @generator.unexecute
+        assert !File.exists?(@project), "Project dir should be removed"
+      end
+
+      should "not remove directories that have files in them" do
+        @file = File.join(@project, 'SomeNewFile.as')
+        File.open(@file, 'w+') do |f|
+          f.write 'New Content'
+        end
+
+        @generator.unexecute
+        assert_file @file, 'New file should not be removed'
+      end
     end
 
-    should "not update superclass parameter collection" do
-      assert_equal 4, Sprout::Generator.static_parameter_collection.size
-    end
+  end
 
-    should "fail if no template is found" do
-      skip
-    end
-
-    should "prompt if requested file exists with different content" do
-      skip
-    end
-
-    should "warn/skip if identical file exists" do
-      skip
-    end
-
-    private
-
-    def configure_generator generator
-      generator.name   = 'some_project'
-      generator.logger = @string_io
-      generator.path   = @fixture
-      generator.templates << @templates
-      generator
-    end
+  private
+  
+  def configure_generator generator
+    generator.name   = 'some_project'
+    generator.logger = @string_io
+    generator.path   = @fixture
+    generator.templates << @templates
+    generator
   end
 
   ##
@@ -92,13 +158,23 @@ class GeneratorTest < Test::Unit::TestCase
 
     ##
     # Some argument for the Fake Generator
-    add_param :some_other, String
+    add_param :band_name, String, { :default => 'Styx' }
+
+    ##
+    # Source path
+    add_param :src, String, { :default => 'src' }
+
+    def class_name
+      @class_name ||= name.camel_case
+    end
 
     def manifest
       directory name do
         file 'SomeFile'
         file 'SomeOtherFile', 'OtherFileTemplate'
-        create_script_dir
+        directory src do
+          file "#{class_name}.as", 'Main.as'
+        end
       end
     end
   end
@@ -113,6 +189,7 @@ class GeneratorTest < Test::Unit::TestCase
       end
     end
   end
+
 end
 
 
