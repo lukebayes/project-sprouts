@@ -63,12 +63,12 @@ class GeneratorTest < Test::Unit::TestCase
 
       should "notify user of all files created" do
         @generator.name = 'some_project'
-        @string_io.expects(:puts).with('>> Skipped existing:  .')
-        @string_io.expects(:puts).with('>> Created directory: ./some_project')
-        @string_io.expects(:puts).with('>> Created file:      ./some_project/SomeFile')
-        @string_io.expects(:puts).with('>> Created file:      ./some_project/SomeOtherFile')
-        @string_io.expects(:puts).with('>> Created directory: ./some_project/src')
-        @string_io.expects(:puts).with('>> Created file:      ./some_project/src/SomeProject.as')
+        @string_io.expects(:puts).with('Skipped existing:  .')
+        @string_io.expects(:puts).with('Created directory: ./some_project')
+        @string_io.expects(:puts).with('Created file:      ./some_project/SomeFile')
+        @string_io.expects(:puts).with('Created file:      ./some_project/SomeOtherFile')
+        @string_io.expects(:puts).with('Created directory: ./some_project/src')
+        @string_io.expects(:puts).with('Created file:      ./some_project/src/SomeProject.as')
         @generator.execute
       end
 
@@ -80,13 +80,9 @@ class GeneratorTest < Test::Unit::TestCase
         assert_equal 5, Sprout::Generator.static_parameter_collection.size
       end
 
-      should "prompt if requested file exists with different content" do
-        skip
-      end
-
-      should "warn/skip if identical file exists" do
-        skip
-      end
+      ##
+      # TODO: Add ability to prompt the user if requested files already exist,
+      # and force != true
     end
 
     context "that is asked to unexecute/delete" do

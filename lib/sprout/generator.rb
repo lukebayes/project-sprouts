@@ -88,9 +88,9 @@ module Sprout
       def create
         if(!File.directory?(path))
           FileUtils.mkdir_p path
-          say ">> Created directory: #{path}"
+          say "Created directory: #{path}"
         else
-          say ">> Skipped existing:  #{path}"
+          say "Skipped existing:  #{path}"
         end
         children.each do |child|
           child.create
@@ -107,10 +107,10 @@ module Sprout
 
         if success && File.directory?(path) && Dir.empty?(path)
           FileUtils.rm_rf path
-          say ">> Removed directory: #{path}"
+          say "Removed directory: #{path}"
           true
         else
-          say ">> Skipped remove directory: #{path}"
+          say "Skipped remove directory: #{path}"
           false
         end
       end
@@ -124,7 +124,7 @@ module Sprout
         File.open path, 'w+' do |file|
           file.write resolve_template
         end
-        say ">> Created file:      #{path}"
+        say "Created file:      #{path}"
       end
 
       def destroy
@@ -132,10 +132,10 @@ module Sprout
         actual_content = File.read path
         if generator.force || actual_content == expected_content
           FileUtils.rm path
-          say ">> Removed file: #{path}"
+          say "Removed file: #{path}"
           true
         else
-          say ">> Skipped remove file: #{path}"
+          say "Skipped remove file: #{path}"
           false
         end
       end
