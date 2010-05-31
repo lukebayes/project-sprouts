@@ -121,6 +121,15 @@ module SproutTestCase # :nodoc:[all]
     end
   end
 
+  ##
+  # Add the skip method that was introduced in Ruby 1.9.1 Test::Unit
+  if(RUBY_VERSION == '1.8.7')
+    def skip message=""
+      puts
+      puts ">> SproutTestCase.skip called from: #{caller[0]} ( #{message} )"
+    end
+  end
+
   def temp_cache
     @temp_cache ||= File.join(fixtures(caller.first.split(':').first), 'sprout', 'cache')
   end
