@@ -19,6 +19,10 @@ module Sprout
     class GeneratorError < SproutError; end
 
     ##
+    # Unable to find the expected template for a Generator.
+    class MissingTemplateError < GeneratorError; end
+
+    ##
     # There was a problem with the requested
     # unpack operation.
     class ArchiveUnpackerError < SproutError; end

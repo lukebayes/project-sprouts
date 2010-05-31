@@ -6,11 +6,10 @@ class GeneratorTest < Test::Unit::TestCase
   context "a new application generator" do
 
     setup do
-      @fixture          = File.join fixtures, 'generators'
+      @fixture          = File.join fixtures, 'generators', 'fake'
+      @templates        = File.join fixtures, 'generators', 'templates'
       @string_io        = StringIO.new
-      @generator        = FakeGenerator.new
-      @generator.logger = @string_io
-      @generator.path   = @fixture
+      @generator        = configure_generator FakeGenerator.new
     end
 
     teardown do
@@ -23,21 +22,36 @@ class GeneratorTest < Test::Unit::TestCase
     end
 
     should "create outer directory and file" do
-      @generator.parse! ['some_project']
+      @generator.name = 'some_project'
       @generator.execute
       assert_directory File.join(@fixture, 'some_project')
-      assert_file File.join(@fixture, 'some_project', 'Gemfile')
+      assert_file File.join(@fixture, 'some_project', 'SomeFile')
       assert_directory File.join(@fixture, 'some_project', 'script')
-      assert_directory File.join(@fixture, 'some_project', 'script', 'generate')
-      assert_directory File.join(@fixture, 'some_project', 'script', 'destroy')
+      assert_file File.join(@fixture, 'some_project', 'script', 'generate')
+      assert_file File.join(@fixture, 'some_project', 'script', 'destroy')
     end
 
-    should "warn if identical file exists" do
-      skip
+    should "copy templates from the first found template path" do
+      @generator.name = 'some_project'
+      @generator.execute
+      assert_file File.join(@fixture, 'some_project', 'SomeFile') do |content|
+        assert_matches /got my Orange Crush/, content
+      end
     end
 
-    should "prompt if requested file exists" do
-      skip
+    should "use concrete template when provided" do
+      @generator.name = 'some_project'
+      @generator.execute
+      assert_file File.join(@fixture, 'some_project', 'SomeOtherFile') do |content|
+        assert_matches /I've had my fun/, content
+      end
+    end
+
+    should "raise missing template error if expected template is not found" do
+      @generator = configure_generator MissingTemplateGenerator.new
+      assert_raises Sprout::Errors::MissingTemplateError do
+        @generator.execute
+      end
     end
 
     should "only have one param in class definition" do
@@ -47,8 +61,33 @@ class GeneratorTest < Test::Unit::TestCase
     should "not update superclass parameter collection" do
       assert_equal 4, Sprout::Generator.static_parameter_collection.size
     end
+
+    should "fail if no template is found" do
+      skip
+    end
+
+    should "prompt if requested file exists with different content" do
+      skip
+    end
+
+    should "warn/skip if identical file exists" do
+      skip
+    end
+
+    private
+
+    def configure_generator generator
+      generator.name   = 'some_project'
+      generator.logger = @string_io
+      generator.path   = @fixture
+      generator.templates << @templates
+      generator
+    end
   end
 
+  ##
+  # This is a fake Generator that should 
+  # exercise the inputs.
   class FakeGenerator < Sprout::Generator
 
     ##
@@ -57,11 +96,22 @@ class GeneratorTest < Test::Unit::TestCase
 
     def manifest
       directory name do
-        file 'Gemfile'
+        file 'SomeFile'
+        file 'SomeOtherFile', 'OtherFileTemplate'
         create_script_dir
       end
     end
+  end
 
+  ##
+  # This is a broken generator that should fail
+  # with a MissingTemplateError
+  class MissingTemplateGenerator < Sprout::Generator
+    def manifest
+      directory name do
+        file 'FileWithNoTemplate'
+      end
+    end
   end
 end
 

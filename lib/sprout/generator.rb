@@ -9,7 +9,7 @@ module Sprout
 
     ##
     # A collection of paths to look in for named templates.
-    add_param :template_paths, Paths
+    add_param :templates, Paths
 
     ##
     # The name of the application or component.
@@ -40,14 +40,22 @@ module Sprout
       logger.puts message
     end
 
+    ##
+    # TODO: Add support for arbitrary templating languages.
+    # For now, just support ERB...
+    def resolve_template content
+      require 'erb'
+      ERB.new(content, nil, '>').result(binding)
+    end
+
     protected
 
     def directory name, &block
       @command.directory name, &block
     end
 
-    def file name
-      @command.file name
+    def file name, template=nil
+      @command.file name, template
     end
 
     ##
@@ -56,7 +64,6 @@ module Sprout
       directory script do
         file 'generate'
         file 'destroy'
-        file 'console'
       end
     end
 
@@ -89,11 +96,31 @@ module Sprout
 
     class FileManifest < Manifest
       attr_accessor :template
-      attr_accessor :template_paths
+      attr_accessor :templates
 
       def create
-        FileUtils.touch path
+        template_content = read_template
+        content = generator.resolve_template template_content
+        File.open path, 'w+' do |file|
+          file.write content
+        end
         say ">> Created file:      #{path}"
+      end
+
+      private
+
+      def read_template
+        templates.each do |template_path|
+          path = File.join template_path, template_name
+          if File.exists?(path)
+            return File.read path
+          end
+        end
+        raise Sprout::Errors::MissingTemplateError.new "Could not find template (#{template_name}) in any of (#{templates.inspect})"
+      end
+
+      def template_name
+        template || File.basename(path)
       end
     end
 
@@ -124,11 +151,11 @@ module Sprout
 
       def file path, template=nil
         raise Sprout::Errors::GeneratorError.new "Cannot create file with nil path" if path.nil?
-        manifest                = FileManifest.new
-        manifest.generator      = generator
-        manifest.path           = File.join( working_dir.path, path )
-        manifest.template       = template
-        manifest.template_paths = generator.template_paths
+        manifest           = FileManifest.new
+        manifest.generator = generator
+        manifest.path      = File.join( working_dir.path, path )
+        manifest.template  = template
+        manifest.templates = generator.templates
         working_dir.children << manifest
       end
 

@@ -97,6 +97,7 @@ module SproutTestCase # :nodoc:[all]
   def assert_file(path, message=nil)
     message ||= "Expected file not found at #{path}"
     assert(File.exists?(path), message)
+    yield File.read(path) if block_given?
   end
 
   def assert_directory(path, message=nil)
