@@ -9,7 +9,7 @@ module Sprout::Generator
         file.write resolved
       end
       say "Created file:      #{path}"
-      @created = true
+      true
     end
 
     def destroy

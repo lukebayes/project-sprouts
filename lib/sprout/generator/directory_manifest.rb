@@ -11,7 +11,6 @@ module Sprout::Generator
       if !File.directory?(path)
         FileUtils.mkdir_p path
         say "Created directory: #{path}"
-        @created = true
       else
         say "Skipped existing:  #{path}"
       end
@@ -38,15 +37,8 @@ module Sprout::Generator
     end
 
     def create_children
-      @created = []
-      children.select do |child|
-        success = child.create
-        if success
-          @created << child
-        end
-        success
-      end
-      (@created.size == children.size)
+      created = children.select { |child| child.create }
+      return (created.size == children.size)
     end
 
     def destroy_children
