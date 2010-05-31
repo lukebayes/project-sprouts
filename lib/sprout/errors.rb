@@ -11,10 +11,12 @@ module Sprout
     class SproutError < StandardError; end
 
     ##
-    # An error in the Executable was encountered
+    # An error in the Executable was encountered.
     class ExecutableError < SproutError; end
 
-
+    ##
+    # An error in a Generator was encountered.
+    class GeneratorError < SproutError; end
 
     ##
     # There was a problem with the requested

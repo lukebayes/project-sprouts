@@ -99,6 +99,11 @@ module SproutTestCase # :nodoc:[all]
     assert(File.exists?(path), message)
   end
 
+  def assert_directory(path, message=nil)
+    message ||= "Expected directory not found at #{path}"
+    assert(File.directory?(path), message)
+  end
+
   def assert_not_empty(path, message=nil)
     assert_file path, message
     files = FileList["#{path}/*"]
