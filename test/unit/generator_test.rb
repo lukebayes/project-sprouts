@@ -72,6 +72,13 @@ class GeneratorTest < Test::Unit::TestCase
         @generator.execute
       end
 
+      should "not notify if quiet is true" do
+        @generator.name = 'some_project'
+        @generator.quiet = true
+        @string_io.expects(:puts).never
+        @generator.execute
+      end
+
       should "only have one param in class definition" do
         assert_equal 2, FakeGenerator.static_parameter_collection.size
       end

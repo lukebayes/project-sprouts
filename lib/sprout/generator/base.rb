@@ -40,7 +40,7 @@ module Sprout
       end
 
       def say message
-        logger.puts message.gsub("#{path}", '.')
+        logger.puts message.gsub("#{path}", '.') unless quiet
       end
 
       ##
