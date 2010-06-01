@@ -20,6 +20,10 @@ module Sprout
 
     ##
     # Unable to find the expected template for a Generator.
+    class MissingGeneratorError < GeneratorError; end
+
+    ##
+    # Unable to find the expected template for a Generator.
     class MissingTemplateError < GeneratorError; end
 
     ##

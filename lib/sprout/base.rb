@@ -88,18 +88,6 @@ module Sprout
         @executables ||= []
       end
 
-      def register_generator generator
-        generators << generator
-        generator
-      end
-
-      def load_generator name, pkg_name, version_requirement=nil
-      end
-
-      def generators
-        @generators ||= []
-      end
-
       def cache
         File.join(current_system.application_home('sprouts'), 'cache', Sprout::VERSION::MAJOR_MINOR)
       end
@@ -136,6 +124,14 @@ module Sprout
         end
       end
 
+      def require_ruby_package name
+        begin
+          require name
+        rescue LoadError => e
+          raise Sprout::Errors::LoadError.new "Could not load the required file (#{name}) - Do you need to run 'bundle install'?"
+        end
+      end
+
       private
 
       def executable_for system, pkg, name, version_requirement
@@ -145,14 +141,6 @@ module Sprout
             exe.name == name && 
             exe.satisfies_requirement?(version_requirement)
         end.first
-      end
-
-      def require_ruby_package name
-        begin
-          require name
-        rescue LoadError => e
-          raise Sprout::Errors::LoadError.new "Could not load the required file (#{name}) - Do you need to run 'bundle install'?"
-        end
       end
 
     end

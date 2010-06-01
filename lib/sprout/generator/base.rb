@@ -1,8 +1,56 @@
 module Sprout
   module Generator
 
+    class << self
+
+      def register generator
+        generators.unshift generator
+        generator
+      end
+
+      def load environments, pkg_name=nil, version_requirement=nil
+        Sprout.require_ruby_package pkg_name unless pkg_name.nil?
+        environments = [environments] if environments.is_a? Symbol
+        
+        generator = generator_for environments, pkg_name, version_requirement
+        if !generator
+          message = "Unable to find generator for environments: #{environments.inspect}"
+          message << " pkg_name: #{pkg_name}" unless pkg_name.nil?
+          message << " and version: #{version_requirement}" unless version_requirement.nil?
+          raise Sprout::Errors::MissingGeneratorError.new message
+        end
+        configure_instance generator
+      end
+
+      private
+
+      def configure_instance generator
+        generator
+      end
+
+      def generators
+        @generators ||= []
+      end
+
+      def generator_for environments, pkg_name, version_requirement
+        result = generators.select do |gen|
+          environments.include?(gen.environment)
+        end
+
+        if result.size > 0
+          result.first
+        else
+          nil
+        end
+      end
+    end
+
     class Base
-      include Executable
+      include Sprout::Executable
+
+      def self.inherited base
+        Sprout::Generator.register base.new
+      end
 
       ##
       # The directory where files will be created.
@@ -25,8 +73,33 @@ module Sprout
       # The name of the application or component.
       add_param :name, String, { :hidden_name => true, :required => true }
 
-      attr_accessor :logger
+      set :environment, :application
 
+      ##
+      # The symbol environment name for which this generator is most 
+      # appropriate. 
+      # This value defaults to :application so, if you're working on an
+      # application generator, you can leave it as the default.
+      #
+      # For all other generator types, you'll want to select the most
+      # general project type that this generator may be useful in.
+      #
+      # Following are some example values:
+      #
+      #     :as3, :flex3, :flex4, :air2
+      #
+      # or core libraries:
+      #
+      #     :asunit4, :flexunit4
+      #
+      # or even other libraries:
+      #
+      #     :puremvc, :robotlegs, :swizz
+      #
+      attr_accessor :environment
+
+      attr_accessor :logger
+      
       ##
       # Record the actions and trigger them
       def execute

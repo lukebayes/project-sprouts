@@ -18,11 +18,6 @@ class GeneratorTest < Test::Unit::TestCase
       remove_file @fixture
     end
 
-    should "register with the Sprout gem" do
-      generator = Sprout.load_generator :application, :fake, '>= 1.0.pre'
-      assert_not_nil generator
-    end
-
     context "that is asked to execute/create" do
       should "default path to pwd" do
         generator = FakeGenerator.new
@@ -96,10 +91,12 @@ class GeneratorTest < Test::Unit::TestCase
 
       should "only have one param in class definition" do
         assert_equal 2, FakeGenerator.static_parameter_collection.size
+        assert_equal 2, FakeGenerator.static_default_value_collection.size
       end
 
       should "not update superclass parameter collection" do
         assert_equal 5, Sprout::Generator::Base.static_parameter_collection.size
+        assert_equal 1, Sprout::Generator::Base.static_default_value_collection.size
       end
 
       ##
@@ -186,6 +183,14 @@ class GeneratorTest < Test::Unit::TestCase
     # Source path
     add_param :src, String, { :default => 'src' }
 
+    ##
+    # The package (usually Gem) name
+    set :pkg_name, 'generator_test'
+
+    ##
+    # The package version
+    set :pkg_version, '1.0.pre'
+
     def class_name
       @class_name ||= name.camel_case
     end
@@ -201,9 +206,43 @@ class GeneratorTest < Test::Unit::TestCase
     end
   end
 
+  context "an unregistered generator" do
+
+    setup do
+      @generators = File.join fixtures, 'generators'
+      @path       = File.join @generators, 'fake'
+      @project    = File.join @path, 'SomeProject'
+      $:.unshift @generators
+    end
+
+    teardown do
+      $:.shift
+    end
+
+    should "fail to find unknown generator" do
+      assert_raises Sprout::Errors::LoadError do
+        generator = Sprout::Generator.load :demo, 'unknown_file', '>= 1.0.pre'
+      end
+    end
+    
+    should "be loadable if it's in the load path" do
+      generator = Sprout::Generator.load :application, 'temp_generator', '>= 1.0.pre'
+      assert_not_nil generator
+
+      generator.path = @path
+      generator.name = 'SomeProject'
+      ##
+      # TODO: Need to integrate template folder lookup.
+      #
+      # The following is inexplicably failing on a lookup for the :source param...
+      #generator.execute
+      #assert_file @project, "Should have created project folder"
+    end
+  end
+
   class SubclassedGenerator < FakeGenerator
 
-    #add_param :new_param, String, { :default => 'Other' }
+    add_param :new_param, String, { :default => 'Other' }
 
     def manifest
       super
@@ -217,6 +256,7 @@ class GeneratorTest < Test::Unit::TestCase
   # This is a broken generator that should fail
   # with a MissingTemplateError
   class MissingTemplateGenerator < Sprout::Generator::Base
+
     def manifest
       directory name do
         file 'FileWithNoTemplate'

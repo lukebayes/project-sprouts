@@ -8,8 +8,8 @@ module Sprout
 
     def initialize options=nil
       options ||= {}
-      @name        = options[:name]
-      @path        = options[:path]
+      @name = options[:name]
+      @path = options[:path]
 
       # You can provide a file_target OR all optional params.
       # kind of smelly...

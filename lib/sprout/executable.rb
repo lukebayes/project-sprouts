@@ -98,7 +98,7 @@ module Sprout
       end
 
       def static_default_value_collection
-        @static_default_value_collection ||= {}
+        @static_default_value_collection ||= []
       end
 
       def set key, value
@@ -131,6 +131,9 @@ module Sprout
         # define the reader:
         define_method(name) do     
           if(options[:reader].nil?)
+            if(param_hash[real_name].nil?)
+              raise Sprout::Errors::UsageError.new "Unable to use requested parameter (#{real_name}) try adding it using:\n\n    add_param :#{real_name}, String\n\n"
+            end
             param_hash[real_name].value
           else
             self.send(options[:reader])
@@ -150,7 +153,7 @@ module Sprout
         if(!defined? key)
           raise Sprout::Errors::UsageError.new("Cannot set default value (#{value}) for unknown parameter (#{key})")
         end
-        static_default_value_collection[key] = value
+        static_default_value_collection << { :name => key, :value => value }
       end
     end
 
@@ -367,12 +370,26 @@ module Sprout
         end
       end
 
+      def initialize_defaults
+        assembled_default_parameter_collection.each do |option|
+          self.send "#{option[:name]}=", option[:value]
+        end
+      end
+
       def assembled_parameter_collection
+        assembled_static_collection :static_parameter_collection
+      end
+
+      def assembled_default_parameter_collection
+        assembled_static_collection :static_default_value_collection
+      end
+
+      def assembled_static_collection collection_name
         collection = []
         clazz = self.class
         while clazz do
-          if(clazz.respond_to?(:static_parameter_collection))
-            collection.concat clazz.static_parameter_collection
+          if clazz.respond_to?(collection_name)
+            collection.concat clazz.send(collection_name)
           end
           clazz = clazz.superclass
         end
@@ -420,12 +437,6 @@ module Sprout
         #add_commandline_param param
 
         param
-      end
-
-      def initialize_defaults
-        self.class.static_default_value_collection.each_pair do |name, value|
-          self.send "#{name}=", value
-        end
       end
 
       def parameter_hash_includes? name
