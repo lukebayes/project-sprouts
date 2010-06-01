@@ -14,9 +14,5 @@ $:.unshift File.expand_path(File.join(File.dirname(__FILE__), '..'))
 
 require 'unit/fake_process_runner'
 require 'unit/fake_executable_task'
-require 'unit/sprout_test_case'
-
-# Prevent log messages from interrupting the test output:
-Sprout::Log.debug = true
-Sprout::ProgressBar.debug = true
+require 'sprout/test/sprout_test_case'
 
