@@ -1,7 +1,3 @@
-require 'rubygems/installer'
-require 'fixtures/mock_gem_ui'
-require 'unit/fake_executable_task'
-require 'pathname'
 
 # Had to make this a module instead of a base class
 # because the ruby test suite kept complaining that 
@@ -20,7 +16,6 @@ module SproutTestCase # :nodoc:[all]
 
   def setup
     super
-    @mock_gem_ui = MockGemUi.new
     @start_path = Dir.pwd
     #temp_path # Call before someone can Dir.chdir...
   end
