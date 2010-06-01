@@ -5,15 +5,9 @@ class TempGenerator < Sprout::Generator::Base
 
   set :pkg_name, 'temp_generator'
 
-  set :pkg_version, '>= 1.0.pre'
+  set :pkg_version, '1.0.pre'
 
   set :environment, :demo
-
-  def initialize
-    super
-    puts "======================="
-    puts ">> INSIDE TEMP GENERATOR WITH: #{environment}"
-  end
 
   def manifest
     directory name do
@@ -22,5 +16,6 @@ class TempGenerator < Sprout::Generator::Base
       end
     end
   end
+
 end
 

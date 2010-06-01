@@ -371,7 +371,8 @@ module Sprout
       end
 
       def initialize_defaults
-        assembled_default_parameter_collection.each do |option|
+        assembled_default_parameter_collection.reverse.each do |option|
+          #puts ">> updating default on: #{self} for: #{option[:name]} with: #{option[:value]}"
           self.send "#{option[:name]}=", option[:value]
         end
       end

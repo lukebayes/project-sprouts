@@ -4,12 +4,20 @@ module Sprout
     class << self
 
       def register generator
+        #puts ">> Generator.register with: #{generator}"
         generators.unshift generator
         generator
       end
 
       def load environments, pkg_name=nil, version_requirement=nil
-        Sprout.require_ruby_package pkg_name unless pkg_name.nil?
+        unless pkg_name.nil?
+          # require any provided pkg_names, wait for any loaded generators
+          # to register and then...
+          Sprout.require_ruby_package pkg_name
+          # loop through our list and replace any Class definitions with 
+          # instances.
+          instantiate_loaded_generator_classes
+        end
         environments = [environments] if environments.is_a? Symbol
         
         generator = generator_for environments, pkg_name, version_requirement
@@ -24,6 +32,16 @@ module Sprout
 
       private
 
+      ##
+      # I know this seems weird - but we can't instantiate the classes
+      # during registration because they register before they've been fully
+      # interpreted...
+      def instantiate_loaded_generator_classes
+        @generators = generators.collect do |gen|
+          (gen.is_a?(Class)) ? gen.new : gen
+        end
+      end
+
       def configure_instance generator
         generator
       end
@@ -37,11 +55,7 @@ module Sprout
           environments.include?(gen.environment)
         end
 
-        if result.size > 0
-          result.first
-        else
-          nil
-        end
+        return (result.size > 0) ? result.first : nil
       end
     end
 
@@ -49,7 +63,13 @@ module Sprout
       include Sprout::Executable
 
       def self.inherited base
-        Sprout::Generator.register base.new
+        # NOTE: We can NOT instantiate the class here,
+        # because only it's first line has been interpreted, if we 
+        # instantiate here, none of the code declared in the class body will
+        # be associated with this instance.
+        #
+        # Go ahead and register the class and update instances afterwards.
+        Sprout::Generator.register base
       end
 
       ##
@@ -73,6 +93,9 @@ module Sprout
       # The name of the application or component.
       add_param :name, String, { :hidden_name => true, :required => true }
 
+
+      ##
+      # Set the default environment for generators.
       set :environment, :application
 
       ##

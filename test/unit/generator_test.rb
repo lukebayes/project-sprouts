@@ -226,17 +226,14 @@ class GeneratorTest < Test::Unit::TestCase
     end
     
     should "be loadable if it's in the load path" do
-      generator = Sprout::Generator.load :application, 'temp_generator', '>= 1.0.pre'
+      generator = Sprout::Generator.load :demo, 'temp_generator', '>= 1.0.pre'
       assert_not_nil generator
 
+      generator.logger = StringIO.new
       generator.path = @path
       generator.name = 'SomeProject'
-      ##
-      # TODO: Need to integrate template folder lookup.
-      #
-      # The following is inexplicably failing on a lookup for the :source param...
-      #generator.execute
-      #assert_file @project, "Should have created project folder"
+      generator.execute
+      assert_file @project, "Should have created project folder"
     end
   end
 
