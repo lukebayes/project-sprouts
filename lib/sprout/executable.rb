@@ -36,7 +36,6 @@ module Sprout
     extend Sprout::Concern
 
     module ClassMethods
-
       ##
       # +add_param+ is the workhorse of the Task.
       # This method is used to add new shell parameters to the executable interface.
@@ -153,7 +152,6 @@ module Sprout
         end
         static_default_value_collection[key] = value
       end
-
     end
 
     module InstanceMethods

@@ -19,7 +19,7 @@ class GeneratorTest < Test::Unit::TestCase
     end
 
     should "register with the Sprout gem" do
-      generator = Sprout.load_generator :application, 'fake', '>= 1.0.pre'
+      generator = Sprout.load_generator :application, :fake, '>= 1.0.pre'
       assert_not_nil generator
     end
 
@@ -48,6 +48,15 @@ class GeneratorTest < Test::Unit::TestCase
         @generator.execute
         assert_file File.join(@fixture, 'some_project', 'SomeFile') do |content|
           assert_matches /got my Orange Crush - R.E.M./, content
+        end
+      end
+
+      should "respect updates from subclasses" do
+        @generator = configure_generator SubclassedGenerator.new
+        @generator.name = 'some_project'
+        @generator.execute
+        assert_file File.join(@fixture, 'some_project', 'SomeFile') do |content|
+          assert_matches /Living Jest enough for the City and SomeProject/, content
         end
       end
 
@@ -166,6 +175,10 @@ class GeneratorTest < Test::Unit::TestCase
   class FakeGenerator < Sprout::Generator::Base
 
     ##
+    # Register this generator by name, type and version
+    #register :application, :fake, '1.0.pre'
+
+    ##
     # Some argument for the Fake Generator
     add_param :band_name, String, { :default => 'Styx' }
 
@@ -184,6 +197,18 @@ class GeneratorTest < Test::Unit::TestCase
         directory src do
           file "#{class_name}.as", 'Main.as'
         end
+      end
+    end
+  end
+
+  class SubclassedGenerator < FakeGenerator
+
+    #add_param :new_param, String, { :default => 'Other' }
+
+    def manifest
+      super
+      directory name do
+        file 'SomeFile', 'SomeSubclassFile'
       end
     end
   end

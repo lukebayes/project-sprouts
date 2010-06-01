@@ -124,6 +124,7 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
         assert @exe.debug
         assert_equal 'SomeString', @exe.input
       end
+
 =begin
 TODO: Get these passing...
 

@@ -46,6 +46,10 @@ module Sprout
       ##
       # TODO: Add support for arbitrary templating languages.
       # For now, just support ERB...
+      #
+      # TODO: This is also a possible spot where those of you that don't want
+      # to snuggle might put pretty-print code or some such
+      # modifiers...
       def resolve_template content
         require 'erb'
         ERB.new(content, nil, '>').result(binding)
@@ -67,7 +71,6 @@ module Sprout
       def file name, template=nil
         @command.file name, template
       end
-
     end
   end
 end
