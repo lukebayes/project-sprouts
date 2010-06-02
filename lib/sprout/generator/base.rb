@@ -237,6 +237,10 @@ module Sprout
         @command.file name, template
       end
 
+      def template name, template=nil
+        @command.template name, template
+      end
+
       private
 
       def self.template_from_caller caller_string

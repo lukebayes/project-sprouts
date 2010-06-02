@@ -217,10 +217,10 @@ class GeneratorTest < Test::Unit::TestCase
 
     def manifest
       directory name do
-        file 'SomeFile'
-        file 'SomeOtherFile', 'OtherFileTemplate'
+        template 'SomeFile'
+        template 'SomeOtherFile', 'OtherFileTemplate'
         directory src do
-          file "#{class_name}.as", 'Main.as'
+          template "#{class_name}.as", 'Main.as'
         end
       end
     end
@@ -265,7 +265,7 @@ class GeneratorTest < Test::Unit::TestCase
     def manifest
       super
       directory name do
-        file 'SomeFile', 'SomeSubclassFile'
+        template 'SomeFile', 'SomeSubclassFile'
       end
     end
   end
@@ -277,7 +277,7 @@ class GeneratorTest < Test::Unit::TestCase
 
     def manifest
       directory name do
-        file 'FileWithNoTemplate'
+        template 'FileWithNoTemplate'
       end
     end
   end

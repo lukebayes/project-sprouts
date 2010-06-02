@@ -12,7 +12,7 @@ class TempGenerator < Sprout::Generator::Base
   def manifest
     directory name do
       directory source do
-        file 'Main.as'
+        template 'Main.as'
       end
     end
   end

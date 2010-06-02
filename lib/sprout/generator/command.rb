@@ -25,6 +25,16 @@ module Sprout::Generator
         @working_dir = parent
       end
 
+      def template path, template=nil
+        raise Sprout::Errors::GeneratorError.new "Cannot create file with nil path" if path.nil?
+        manifest           = TemplateManifest.new
+        manifest.generator = generator
+        manifest.path      = File.join( working_dir.path, path )
+        manifest.template  = template
+        manifest.templates = generator.template_paths
+        working_dir.children << manifest
+      end
+
       def file path, template=nil
         raise Sprout::Errors::GeneratorError.new "Cannot create file with nil path" if path.nil?
         manifest           = FileManifest.new
