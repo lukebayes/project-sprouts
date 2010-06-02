@@ -3,10 +3,20 @@ module Sprout
 
     class << self
 
-      def register generator
-        #puts ">> Generator.register with: #{generator}"
-        generators.unshift generator
-        generator
+      def register generator_class, templates_path
+        #puts ">> Generator.register with: #{generator_class}"
+        generator_paths << { :class => generator_class, :templates => templates_path }
+        generators.unshift generator_class
+        generator_class
+      end
+
+      def template_folder_for clazz
+        generator_paths.each do |options|
+          if options[:class] === clazz
+            return options[:templates]
+          end
+        end
+        nil
       end
 
       def load environments, pkg_name=nil, version_requirement=nil
@@ -30,7 +40,47 @@ module Sprout
         configure_instance generator
       end
 
+      ##
+      # Returns a new collection of paths to search within for generator declarations
+      # and more importantly, folders named, 'templates'.
+      #
+      # The collection of search_paths will be a subset of the following
+      # that will include only those directories that exist:
+      #
+      #     ./config/generators
+      #     ./vendor/generators
+      #     ~/Library/Sprouts/cache/1.0/generators                    # OS X only
+      #     ~/.sprouts/cache/1.0/generators                           # Unix only
+      #     [USER_HOME]/Application Data/Sprouts/cache/1.0/generators # Windows only
+      #     ENV['SPROUT_GENERATORS']                                  # Only if defined
+      #     [Generator Declaration __FILE__]/templates
+      #
+      # When the generators attempt to resolve templates, each of the preceding
+      # folders will be scanned for a child directory named 'templates'. Within
+      # that directory, the requested template name will be scanned and the first
+      # found template file will be used. This process will be repeated for each
+      # template file that is requested. 
+      #
+      # The idea is that you may wish to override some template files that a 
+      # generator creates, but leave others unchanged.
+      #
+      def search_paths
+        # NOTE: Do not cache this list, specific generators
+        # will modify it with their own lookups
+        create_search_paths.select { |path| File.directory?(path) }
+      end
+
       private
+
+      def create_search_paths
+        paths = [
+                  File.join('config', 'generators'),
+                  File.join('vendor', 'generators'),
+                  Sprout.generator_cache
+                ]
+        paths << ENV['SPROUT_GENERATORS'] unless ENV['SPROUT_GENERATORS'].nil?
+        paths
+      end
 
       ##
       # I know this seems weird - but we can't instantiate the classes
@@ -48,6 +98,10 @@ module Sprout
 
       def generators
         @generators ||= []
+      end
+
+      def generator_paths
+        @generator_paths ||= []
       end
 
       def generator_for environments, pkg_name, version_requirement
@@ -69,7 +123,7 @@ module Sprout
         # be associated with this instance.
         #
         # Go ahead and register the class and update instances afterwards.
-        Sprout::Generator.register base
+        Sprout::Generator.register base, template_from_caller(caller.first)
       end
 
       ##
@@ -151,7 +205,22 @@ module Sprout
         ERB.new(content, nil, '>').result(binding)
       end
 
+      ##
+      # Returns a collection of templates that were provided on the 
+      # command line, followed by templates that are created by a 
+      # concrete generator, followed by the 
+      # Sprout::Generator.search_paths + 'templates' folders.
+      #
+      def template_paths
+        templates << Sprout::Generator::template_folder_for(self)
+        templates.concat default_search_paths
+      end
+
       protected
+
+      def default_search_paths
+        Sprout::Generator.search_paths.collect { |path| File.join(path, 'templates') }
+      end
 
       def prepare_command
         @logger ||= $stdout
@@ -167,6 +236,14 @@ module Sprout
       def file name, template=nil
         @command.file name, template
       end
+
+      private
+
+      def self.template_from_caller caller_string
+        file = caller_string.split(":").shift
+        File.join(File.dirname(file), 'templates')
+      end
+
     end
   end
 end

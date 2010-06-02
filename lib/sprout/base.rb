@@ -92,6 +92,10 @@ module Sprout
         File.join(current_system.application_home('sprouts'), 'cache', Sprout::VERSION::MAJOR_MINOR)
       end
 
+      def generator_cache
+        File.join cache, 'generators'
+      end
+
       def current_system
         Sprout::System.create
       end

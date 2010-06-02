@@ -31,7 +31,7 @@ module Sprout::Generator
         manifest.generator = generator
         manifest.path      = File.join( working_dir.path, path )
         manifest.template  = template
-        manifest.templates = generator.templates
+        manifest.templates = generator.template_paths
         working_dir.children << manifest
       end
 

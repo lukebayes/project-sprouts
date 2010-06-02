@@ -3,7 +3,27 @@ require File.dirname(__FILE__) + '/test_helper'
 class GeneratorTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "a new application generator" do
+  context "The Sprout::Generator" do
+
+    should "identify a default set of search paths" do
+      File.stubs(:directory?).returns true
+
+      ENV['SPROUT_GENERATORS'] = Dir.pwd
+      paths = Sprout::Generator.search_paths
+      assert_equal File.join('config', 'generators'), paths.shift
+      assert_equal File.join('vendor', 'generators'), paths.shift
+      assert_equal Sprout.generator_cache, paths.shift
+      assert_equal Dir.pwd, paths.shift
+    end
+    
+    should "return empty search paths if no defaults are found" do
+      File.stubs(:directory?).returns false
+      paths = Sprout::Generator.search_paths
+      assert_equal [], paths
+    end
+  end
+
+  context "A new application generator" do
 
     setup do
       @fixture          = File.join fixtures, 'generators', 'fake'
@@ -217,6 +237,7 @@ class GeneratorTest < Test::Unit::TestCase
 
     teardown do
       $:.shift
+      remove_file @path
     end
 
     should "fail to find unknown generator" do
