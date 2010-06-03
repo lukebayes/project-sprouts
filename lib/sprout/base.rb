@@ -47,6 +47,7 @@ require 'sprout/generator/directory_manifest'
 require 'sprout/generator/base'
 
 module Sprout
+  NAME = 'sprout'
 
   module Base
     extend Concern
@@ -99,34 +100,6 @@ module Sprout
 
       def current_system
         Sprout::System.create
-      end
-
-      ##
-      # Update the provided gem specification with
-      # dependencies from the Bundler Gemfile
-      #
-      # Within a +project.gemspec+:
-      #
-      #     Gem::Specification.new do |s|
-      #       s.name = 'foo'
-      #       s.version = '1.0.pre'
-      #
-      #       Sprout.add_gemfile_dependencies s
-      #     end
-      #
-      def add_gemfile_dependencies specification
-        specification.add_dependency "bundler", ">= 0.9.19"
-        bundle = Bundler::Definition.from_gemfile 'Gemfile'
-
-        bundle.dependencies.each do |dep|
-          if dep.groups.include?(:default)
-            puts ">> Bundler.add_dependency: #{dep.name}"
-            specification.add_dependency(dep.name, dep.requirement.to_s)
-          elsif dep.groups.include?(:development)
-            puts ">> Bundler.add_development_dependency: #{dep.name}"
-            specification.add_development_dependency(dep.name, dep.requirement.to_s)
-          end
-        end
       end
 
       def require_ruby_package name
