@@ -7,7 +7,8 @@ module Sprout::System
       if(path.include? '../')
         path = File.expand_path path
       end
-      #repair_executable path
+
+      attempt_to_repair_executable path
 
       if(path.index(' '))
         return path.split(' ').join('\ ')
@@ -38,9 +39,11 @@ module Sprout::System
     #
     # +path+ String path to the executable file.
     #
-    def repair_executable path
-      return unless should_repair_executable(path)
+    def attempt_to_repair_executable path
+      repair_executable(path) if should_repair_executable(path)
+    end
 
+    def repair_executable path
       content = File.read(path)
       if(content.match(/\r\n/))
         content.gsub!(/\r\n/, "\n")
@@ -54,6 +57,7 @@ module Sprout::System
     # Determine if we should call +repair_executable+
     # for the file at the provided +path+ String.
     #
+    # Will this corrupt binaries?
     def should_repair_executable path
       return (File.exists?(path) && !File.directory?(path) && File.read(path).match(/^\#\!/))
     end

@@ -29,6 +29,24 @@ class UnixSystemTest < Test::Unit::TestCase
     should "format application home" do
       assert_equal '/home/someone/.sprouts', @user.application_home('Sprouts')
     end
+
+    context "when fed an application with windows line endings" do
+
+      setup do
+        @source = File.join fixtures, 'executable', 'windows_line_endings'
+        @target = File.join fixtures, 'executable', 'windows_line_endings.tmp'
+        FileUtils.cp @source, @target
+      end
+
+      teardown do
+        remove_file @target
+      end
+
+      should "fix windows line endings" do
+        @user.expects :repair_executable
+        @user.clean_path @target
+      end
+    end
   end
 end
 

@@ -281,16 +281,17 @@ module Sprout
       # with command line arguments.
       #
       def execute
+        execute_delegate
       end
 
       ##
       # Call the provided executable delegate.
       #
-      # This method is most often used from Rake task wrappers.
+      # This method is generally called from Rake task wrappers.
       #
       def execute_delegate
         exe = Sprout.load_executable executable, pkg_name, pkg_version
-        Sprout.current_system.execute exe
+        Sprout.current_system.execute exe, to_shell
       end
 
       def to_help
@@ -299,7 +300,7 @@ module Sprout
 
       # Create a string that represents this configured executable for shell execution
       def to_shell
-        return @to_shell_proc.call(self) if(!@to_shell_proc.nil?)
+        return @to_shell_proc.call(self) unless @to_shell_proc.nil?
 
         result = []
         result << @prepended_args unless @prepended_args.nil?
