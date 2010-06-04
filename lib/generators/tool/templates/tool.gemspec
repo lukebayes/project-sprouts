@@ -2,6 +2,8 @@
 lib = File.expand_path File.dirname(__FILE__), 'lib'
 $:.unshift lib unless $:.include?(lib)
 
+require 'bundler'
+require 'rake'
 require '<%= name.snake_case %>'
 
 Gem::Specification.new do |s|

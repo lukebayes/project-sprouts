@@ -1,11 +1,3 @@
-require 'rubygems'
-require 'bundler'
-
-# Stinky bundler setup b/c bundler uses
-# Dir.pwd OR this ENV to search for Gemfiles - BOO
-ENV['BUNDLE_GEMFILE'] = File.expand_path(File.join(File.dirname(__FILE__), 'Gemfile'))
-Bundler.setup
-
 require 'sprout'
 
 class <%= name.camel_case %>
