@@ -31,14 +31,14 @@ module Sprout
     # Add a library to the RubyGem package.
     # 
     # @name Symbol that will be used to retrieve this library later.
-    # @target File or Array of files that will be associated with this
+    # @path File, Path or Array of files that will be associated with this
     # library and copied to the target lib.
     #
-    # If the target is a directory, all files forward of that directory
+    # If the path is a directory, all files forward of that directory
     # will be copied into the RubyGem.
     # 
-    def add_library name, target
-      libraries << { :name => name, :target => target }
+    def add_library name, path
+      libraries << { :name => name, :path => path, :file_target => self }
     end
 
     ##

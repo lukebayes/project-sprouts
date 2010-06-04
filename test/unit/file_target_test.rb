@@ -36,7 +36,7 @@ class FileTargetTest < Test::Unit::TestCase
     assert_equal 1, t.libraries.size
     library = t.libraries.first
     assert_equal :swc, library[:name]
-    assert_equal @asunit_swc, library[:target]
+    assert_equal @asunit_swc, library[:path]
   end
 
 end

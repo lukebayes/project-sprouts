@@ -24,7 +24,6 @@ module SproutTestCase # :nodoc:[all]
     super
     clear_tasks
     Sprout.clear_executables!
-    #Sprout::ProjectModel.destroy
 
     remove_file @temp_path
     remove_file @temp_cache
@@ -150,7 +149,7 @@ end
 
 module Sprout
   def self.clear_executables!
-    executables.delete_if { |a,b| true }
+    executables.delete_if { |a| true }
   end
 end
 
