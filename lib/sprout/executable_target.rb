@@ -37,10 +37,16 @@ module Sprout
       file_target.resolve unless file_target.nil?
     end
 
+    ##
+    # TODO: This should be removed when this 
+    # code has been moved to Lookup.
     def includes_package_name? name
       name.to_s.include? pkg_name.to_s
     end
 
+    ##
+    # TODO: This should be removed when this
+    # code has been moved to Lookup.
     def satisfies_requirement? version_requirement
         return true if version_requirement.nil?
         exe_version = Gem::Version.create pkg_version

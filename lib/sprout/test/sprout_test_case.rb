@@ -23,7 +23,7 @@ module SproutTestCase # :nodoc:[all]
   def teardown
     super
     clear_tasks
-    Sprout.clear_executables!
+    Sprout::Executable.clear_entities!
 
     remove_file @temp_path
     remove_file @temp_cache
@@ -46,21 +46,6 @@ module SproutTestCase # :nodoc:[all]
     path
   end
 
-=begin
- THESE DON'T WORK! 
- They both introduced interacting, broken tests...
-
-  def as_a_unix_user
-    Sprout::System.stubs(:create).returns Sprout::System::UnixUser.new
-    yield if block_given?
-  end
-
-  def as_a_mac_user
-    Sprout::System.stubs(:create).returns Sprout::System::OSXUser.new
-    yield if block_given?
-  end
-=end 
-  
   def run_task(name)
     t = Rake.application[name]
     t.invoke
@@ -117,6 +102,7 @@ module SproutTestCase # :nodoc:[all]
 
   ##
   # Add the skip method that was introduced in Ruby 1.9.1 Test::Unit
+  # This doesn't really work all that well...
   if(RUBY_VERSION == '1.8.7')
     def skip message=""
       puts
@@ -128,6 +114,21 @@ module SproutTestCase # :nodoc:[all]
     @temp_cache ||= File.join(fixtures(caller.first.split(':').first), 'sprout', 'cache')
   end
 
+=begin
+ THESE DON'T WORK! 
+ They both introduced interacting, broken tests...
+
+  def as_a_unix_user
+    Sprout::System.stubs(:create).returns Sprout::System::UnixUser.new
+    yield if block_given?
+  end
+
+  def as_a_mac_user
+    Sprout::System.stubs(:create).returns Sprout::System::OSXUser.new
+    yield if block_given?
+  end
+=end 
+  
   private
 
   # Find the nearest fixtures folder to the provided
@@ -145,12 +146,6 @@ module SproutTestCase # :nodoc:[all]
     return find_fixtures File.dirname(path)
   end
 
-end
-
-module Sprout
-  def self.clear_executables!
-    executables.delete_if { |a| true }
-  end
 end
 
   # TODO: Consider adding these:

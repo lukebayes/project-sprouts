@@ -6,7 +6,8 @@ class LibraryTest < Test::Unit::TestCase
   context "a new library" do
 
     should "be able to register" do
-      fail "Left off here"
+      lib = OpenStruct.new({ :name => :asunit4, :pkg_name => 'asunit4', :pkg_version => '4.0.pre' })
+      Sprout::Library.register lib
     end
   end
 end

@@ -29,11 +29,13 @@ module Sprout
   #   :include: ../../test/fixtures/examples/echo_inputs.rb
   #
   module Executable
+    include Lookup
+
     DEFAULT_FILE_EXPRESSION = '/**/**/*'
     DEFAULT_PREFIX          = '--'
     DEFAULT_SHORT_PREFIX    = '-'
 
-    extend Sprout::Concern
+    extend Concern
 
     module ClassMethods
       ##

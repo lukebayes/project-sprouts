@@ -14,6 +14,7 @@ require 'sprout/errors'
 require 'sprout/platform'
 require 'sprout/process_runner'
 require 'sprout/system'
+require 'sprout/lookup'
 
 # This is a fix for Issue #106
 # http://code.google.com/p/projectsprouts/issues/detail?id=106
@@ -46,6 +47,9 @@ require 'sprout/generator/template_manifest'
 require 'sprout/generator/directory_manifest'
 require 'sprout/generator/base'
 
+# Libraries
+require 'sprout/library'
+
 module Sprout
   module Base
     extend Concern
@@ -58,8 +62,7 @@ module Sprout
       # the actual executable file.
       #
       def register_executable executable
-        executables << executable
-        executable
+        Executable.register executable
       end
 
       ##
@@ -71,21 +74,7 @@ module Sprout
       # ensure they are added to your project Gemfile.
       #
       def load_executable name, pkg_name, version_requirement=nil
-        # puts "load_executable with name: #{name} pkg_name: #{pkg_name} pkg_version: #{pkg_version}"
-        require_ruby_package pkg_name
-        executable = executable_for(current_system, pkg_name, name, version_requirement)
-        if(executable.nil?)
-          message = "The requested executable: (#{name}) from: (#{pkg_name}) and version: "
-          message << "(#{version_requirement}) does not appear to be loaded."
-          message << "\n\nYou probably need to update your Gemfile and run 'bundle install' "
-          message << "to update your local gems."
-          raise Sprout::Errors::LoadError.new message
-        end
-        executable.path
-      end
-
-      def executables
-        @executables ||= []
+        return Executable.load(name, pkg_name, version_requirement).path
       end
 
       def cache
@@ -98,25 +87,6 @@ module Sprout
 
       def current_system
         Sprout::System.create
-      end
-
-      def require_ruby_package name
-        begin
-          require name
-        rescue LoadError => e
-          raise Sprout::Errors::LoadError.new "Could not load the required file (#{name}) - Do you need to run 'bundle install'?"
-        end
-      end
-
-      private
-
-      def executable_for system, pkg, name, version_requirement
-        executables.select do |exe|
-          system.can_execute?(exe.platform) && 
-            exe.includes_package_name?(pkg) &&
-            exe.name == name && 
-            exe.satisfies_requirement?(version_requirement)
-        end.first
       end
 
     end

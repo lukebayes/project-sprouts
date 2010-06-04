@@ -1,12 +1,14 @@
 module Sprout
+
   module Generator
+    include Lookup
 
     class << self
 
-      def register generator_class, templates_path
+      def register generator_class, templates_path=nil
         #puts ">> Generator.register with: #{generator_class}"
-        generator_paths << { :class => generator_class, :templates => templates_path }
-        generators.unshift generator_class
+        generator_paths << { :class => generator_class, :templates => templates_path } unless templates_path.nil?
+        super(generator_class)
         generator_class
       end
 
@@ -19,11 +21,14 @@ module Sprout
         nil
       end
 
+=begin
+# TODO: This code all gets replaced with Lookup!
+
       def load environments, pkg_name=nil, version_requirement=nil
         unless pkg_name.nil?
           # require any provided pkg_names, wait for any loaded generators
           # to register and then...
-          Sprout.require_ruby_package pkg_name
+          Executable.require_ruby_package pkg_name
           # loop through our list and replace any Class definitions with 
           # instances.
           instantiate_loaded_generator_classes
@@ -39,6 +44,15 @@ module Sprout
         end
         configure_instance generator
       end
+
+      def generator_for environments, pkg_name, version_requirement
+        result = registered_entities.select do |gen|
+          environments.include?(gen.environment)
+        end
+
+        return (result.size > 0) ? result.first : nil
+      end
+=end
 
       ##
       # Returns a new collection of paths to search within for generator declarations
@@ -86,8 +100,8 @@ module Sprout
       # I know this seems weird - but we can't instantiate the classes
       # during registration because they register before they've been fully
       # interpreted...
-      def instantiate_loaded_generator_classes
-        @generators = generators.collect do |gen|
+      def update_registered_entities
+        registered_entities.collect! do |gen|
           (gen.is_a?(Class)) ? gen.new : gen
         end
       end
@@ -96,21 +110,10 @@ module Sprout
         generator
       end
 
-      def generators
-        @generators ||= []
-      end
-
       def generator_paths
         @generator_paths ||= []
       end
 
-      def generator_for environments, pkg_name, version_requirement
-        result = generators.select do |gen|
-          environments.include?(gen.environment)
-        end
-
-        return (result.size > 0) ? result.first : nil
-      end
     end
 
     class Base
@@ -176,7 +179,9 @@ module Sprout
       attr_accessor :environment
 
       attr_accessor :logger
-      
+      attr_accessor :pkg_name
+      attr_accessor :pkg_version
+
       ##
       # Record the actions and trigger them
       def execute

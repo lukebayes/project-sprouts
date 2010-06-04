@@ -20,7 +20,7 @@ class SpecificationTest < Test::Unit::TestCase
 
     context "with a new name" do
       setup do
-        @spec.name = 'fake_spec'
+        @spec.name = 'sprout/version'
       end
 
       should "register executables" do
@@ -28,7 +28,7 @@ class SpecificationTest < Test::Unit::TestCase
           t.add_executable :foo, 'bar'
         end
 
-        assert_equal 1, Sprout.executables.size
+        assert_not_nil Sprout::Executable.load :foo, 'sprout/version', '1.0.pre'
       end
 
     end
@@ -56,11 +56,15 @@ class SpecificationTest < Test::Unit::TestCase
 
     setup do
       @echo_chamber = File.join fixtures, 'executable', 'echochamber_gem', 'echo_chamber'
+      $:.unshift File.dirname(@echo_chamber)
+    end
+
+    teardown do
+      $:.shift
     end
 
     should "require the sproutspec" do
-      assert_equal 0, Sprout.executables.size
-      path = Sprout.load_executable :echos, @echo_chamber
+      path = Sprout::Executable.load(:echos, 'echo_chamber').path
       assert_matches /fixtures\/.*echochamber/, path
       assert_file path
 

@@ -74,7 +74,7 @@ class SproutTest < Test::Unit::TestCase
     context "with a stubbed load path" do
 
       setup do
-        Sprout.stubs(:require_ruby_package).returns true
+        Sprout::Executable.stubs(:require_ruby_package).returns true
         @path = 'test/fixtures/process_runner/chmod_script.sh'
       end
 
@@ -99,16 +99,16 @@ class SproutTest < Test::Unit::TestCase
           end
 
           should "succeed if the executable is available and no version specified" do
-            assert_equal @path, Sprout.load_executable(:mxmlc, 'flex3sdk')
+            assert_equal @path, Sprout::Executable.load(:mxmlc, 'flex3sdk').path
           end
 
           should "succeed if version requirement is met" do
-            assert_equal @path, Sprout.load_executable(:mxmlc, 'flex3sdk', '>= 1.0.pre')
+            assert_equal @path, Sprout::Executable.load(:mxmlc, 'flex3sdk', '>= 1.0.pre').path
           end
 
           should "fail if version requirement is not met" do
             assert_raises Sprout::Errors::LoadError do
-              exe = Sprout.load_executable :mxmlc, 'flex3sdk', '>= 1.1.0'
+              Sprout::Executable.load :mxmlc, 'flex3sdk', '>= 1.1.0'
             end
           end
 
@@ -118,7 +118,7 @@ class SproutTest < Test::Unit::TestCase
       context "that are not registered" do
         should "fail when requested" do
           assert_raises Sprout::Errors::LoadError do
-            exe = Sprout.load_executable :mxmlc, 'flex3sdk'
+            Sprout::Executable.load :mxmlc, 'flex3sdk'
           end
         end
       end
@@ -136,7 +136,7 @@ class SproutTest < Test::Unit::TestCase
       :pkg_version => pkg_version,
       :platform => platform
     })
-    Sprout.register_executable exe
+    Sprout::Executable.register exe
   end
 
 end
