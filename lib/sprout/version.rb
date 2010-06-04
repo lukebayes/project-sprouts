@@ -1,5 +1,6 @@
 
 module Sprout
+  NAME = 'sprout'
 
   if(!defined? Sprout::VERSION)
     module VERSION #:nodoc:

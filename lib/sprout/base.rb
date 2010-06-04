@@ -47,8 +47,6 @@ require 'sprout/generator/directory_manifest'
 require 'sprout/generator/base'
 
 module Sprout
-  NAME = 'sprout'
-
   module Base
     extend Concern
 
