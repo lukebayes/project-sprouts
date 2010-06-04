@@ -9,7 +9,6 @@ module Sprout
         #puts ">> Generator.register with: #{generator_class}"
         generator_paths << { :class => generator_class, :templates => templates_path } unless templates_path.nil?
         super(generator_class)
-        generator_class
       end
 
       def template_folder_for clazz

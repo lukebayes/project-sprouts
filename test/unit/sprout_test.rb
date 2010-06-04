@@ -65,7 +65,7 @@ class SproutTest < Test::Unit::TestCase
 
       should "find requested executables" do
         #as_a_mac_user do
-          path = Sprout.load_executable :mxmlc, 'flex3sdk', '>= 3.0.0'
+          path = Sprout::Executable.load(:mxmlc, 'flex3sdk', '>= 3.0.0').path
           assert_not_nil path
         #end
       end

@@ -292,7 +292,7 @@ module Sprout
       # This method is generally called from Rake task wrappers.
       #
       def execute_delegate
-        exe = Sprout.load_executable executable, pkg_name, pkg_version
+        exe = Sprout::Executable.load(executable, pkg_name, pkg_version).path
         Sprout.current_system.execute exe, to_shell
       end
 
