@@ -43,6 +43,39 @@ class RubyFeatureTest < Test::Unit::TestCase
       FakePlugin.register OpenStruct.new({:name => :foo2})
       assert_not_nil FakePlugin.load :foo2
     end
+
+    should "allow registration and match with nil pkg_name" do
+      FakePlugin.register(create_item(:pkg_name => nil))
+      assert_not_nil FakePlugin.load :foo
+    end
+
+    should "allow registration and match with nil pkg_version" do
+      FakePlugin.register(create_item(:pkg_version => nil))
+      assert_not_nil FakePlugin.load :foo
+    end
+
+    should "allow registration and match with nil platform" do
+      FakePlugin.register(create_item(:platform => nil))
+      assert_not_nil FakePlugin.load :foo
+    end
+
+    should "not allow registration with nil name" do
+      assert_raises Sprout::Errors::UsageError do
+        FakePlugin.register(create_item(:name => nil))
+      end
+    end
+
+    should "raise on failure to find from collection" do
+      FakePlugin.register(create_item)
+      assert_raises Sprout::Errors::LoadError do
+        FakePlugin.load [:bar, :baz]
+      end
+    end
+
+    should "allow load with collection of names" do
+      FakePlugin.register(create_item)
+      assert_not_nil FakePlugin.load [:bar, :baz, :foo]
+    end
   end
 
   private

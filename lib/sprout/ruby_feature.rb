@@ -46,6 +46,7 @@ module Sprout
       ##
       # Register a new feature for future lookups
       def register entity
+        validate_registration entity
         registered_entities.unshift entity
         entity
       end
@@ -79,6 +80,12 @@ module Sprout
       end
 
       protected
+
+      def validate_registration entity
+        if(!entity.respond_to?(:name) || entity.name.nil?)
+          raise Sprout::Errors::UsageError.new "Cannot register a RubyFeature without a 'name' getter"
+        end
+      end
 
       ##
       # Used by the Generator::Base to update inputs from 
@@ -120,7 +127,7 @@ module Sprout
 
       def satisfies_platform? entity
         #puts">> satisfies platform?"
-        return true unless entity.respond_to?(:platform)
+        return true if !entity.respond_to?(:platform) || entity.platform.nil?
         #puts ">> platform: #{entity.platform}"
         Sprout.current_system.can_execute?(entity.platform)
       end
