@@ -44,7 +44,7 @@ class AppGenerator
 
   ##
   # The name of the project that should be created.
-  add_param :name, String, { :reader => :get_name }
+  add_param :input, String, { :reader => :get_input }
 
   ##
   # Prevent the creation of a lib directory.
@@ -55,12 +55,12 @@ class AppGenerator
   add_param :no_assets, Boolean
 
   def manifest
-    directory name do
+    directory input do
       file 'rakefile.rb.erb', 'rakefile.rb'
       file 'Gemfile.erb', 'Gemfile'
 
       directory src do
-        file 'Class.as.erb', "#{name}.as"
+        file 'Class.as.erb', "#{input}.as"
       end
 
       directory File.join(assets, skins) do
@@ -76,8 +76,8 @@ class AppGenerator
 
   private
 
-  def get_name
-    @name.camel_case
+  def get_input
+    @input.camel_case
   end
   
 end

@@ -1,8 +1,8 @@
 require 'sprout'
 
-class <%= name.camel_case %>
+class <%= input.camel_case %>
 
-  NAME = '<%= name.snake_case %>'
+  NAME = '<%= input.snake_case %>'
 
   module VERSION
     MAJOR = 0
@@ -13,8 +13,8 @@ class <%= name.camel_case %>
   end
 
   Sprout::Specification.new do |s|
-    s.name    = <%= name.camel_case %>::NAME
-    s.version = <%= name.camel_case %>::VERSION::STRING
+    s.name    = <%= input.camel_case %>::NAME
+    s.version = <%= input.camel_case %>::VERSION::STRING
 
     # Create an independent remote_file_target for each
     # platform that must be supported independently.

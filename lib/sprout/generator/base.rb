@@ -1,7 +1,7 @@
 module Sprout
 
   module Generator
-    include Lookup
+    include RubyFeature
 
     class << self
 
@@ -19,39 +19,6 @@ module Sprout
         end
         nil
       end
-
-=begin
-# TODO: This code all gets replaced with Lookup!
-
-      def load environments, pkg_name=nil, version_requirement=nil
-        unless pkg_name.nil?
-          # require any provided pkg_names, wait for any loaded generators
-          # to register and then...
-          Executable.require_ruby_package pkg_name
-          # loop through our list and replace any Class definitions with 
-          # instances.
-          instantiate_loaded_generator_classes
-        end
-        environments = [environments] if environments.is_a? Symbol
-        
-        generator = generator_for environments, pkg_name, version_requirement
-        if !generator
-          message = "Unable to find generator for environments: #{environments.inspect}"
-          message << " pkg_name: #{pkg_name}" unless pkg_name.nil?
-          message << " and version: #{version_requirement}" unless version_requirement.nil?
-          raise Sprout::Errors::MissingGeneratorError.new message
-        end
-        configure_instance generator
-      end
-
-      def generator_for environments, pkg_name, version_requirement
-        result = registered_entities.select do |gen|
-          environments.include?(gen.environment)
-        end
-
-        return (result.size > 0) ? result.first : nil
-      end
-=end
 
       ##
       # Returns a new collection of paths to search within for generator declarations
@@ -146,17 +113,18 @@ module Sprout
       add_param :templates, Paths
 
       ##
-      # The name of the application or component.
-      add_param :name, String, { :hidden_name => true, :required => true }
+      # The primary input for the application or component.
+      add_param :input, String, { :hidden_name => true, :required => true }
 
 
       ##
-      # Set the default environment for generators.
-      set :environment, :application
+      # Set the default name for generators.
+      set :name, :application
 
       ##
-      # The symbol environment name for which this generator is most 
+      # The symbol name for which this generator is most 
       # appropriate. 
+      #
       # This value defaults to :application so, if you're working on an
       # application generator, you can leave it as the default.
       #
@@ -175,8 +143,7 @@ module Sprout
       #
       #     :puremvc, :robotlegs, :swizz
       #
-      attr_accessor :environment
-
+      attr_accessor :name
       attr_accessor :logger
       attr_accessor :pkg_name
       attr_accessor :pkg_version

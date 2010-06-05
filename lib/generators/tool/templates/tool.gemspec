@@ -4,11 +4,11 @@ $:.unshift lib unless $:.include?(lib)
 
 require 'bundler'
 require 'rake'
-require '<%= name.snake_case %>'
+require '<%= input.snake_case %>'
 
 Gem::Specification.new do |s|
-  s.name              = <%= name.camel_case %>::NAME
-  s.version           = <%= name.camel_case %>::VERSION::STRING
+  s.name              = <%= input.camel_case %>::NAME
+  s.version           = <%= input.camel_case %>::VERSION::STRING
   s.author            = "<%= author %>"
   s.email             = "<%= email %>"
   s.homepage          = "<%= homepage %>"

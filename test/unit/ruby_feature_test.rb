@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class LookupTest < Test::Unit::TestCase
+class RubyFeatureTest < Test::Unit::TestCase
   include SproutTestCase
 
-  context "a new lookup" do
+  context "a new ruby feature" do
 
     teardown do
       FakePlugin.clear_entities!
@@ -47,11 +47,11 @@ class LookupTest < Test::Unit::TestCase
   end
 
   class FakePlugin
-    include Sprout::Lookup
+    include Sprout::RubyFeature
   end
 
   class OtherFakePlugin
-    include Sprout::Lookup
+    include Sprout::RubyFeature
   end
 end 
 

@@ -1,7 +1,7 @@
 
 module Sprout
   module Library
-    include Lookup
+    include RubyFeature
   end
 end
 

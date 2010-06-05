@@ -1,2 +1,2 @@
 
-Living Jest enough for the City and <%= name.camel_case %>.
+Living Jest enough for the City and <%= input.camel_case %>.

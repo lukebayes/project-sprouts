@@ -20,7 +20,7 @@ class ToolGeneratorTest < Test::Unit::TestCase
     end
 
     should "generate a new tool project" do
-      @generator.name = 'flex4sdk'
+      @generator.input = 'flex4sdk'
       @generator.author = 'Some Body'
       @generator.execute
 

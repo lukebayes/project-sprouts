@@ -29,7 +29,7 @@ module Sprout
   #   :include: ../../test/fixtures/examples/echo_inputs.rb
   #
   module Executable
-    include Lookup
+    include RubyFeature
 
     DEFAULT_FILE_EXPRESSION = '/**/**/*'
     DEFAULT_PREFIX          = '--'
@@ -297,7 +297,7 @@ module Sprout
       # This method is generally called from Rake task wrappers.
       #
       def execute_delegate
-        exe = Sprout::Executable.load(executable, pkg_name, pkg_version)
+        exe = Sprout::Executable.load(executable, pkg_name, pkg_version).path
         Sprout.current_system.execute exe, to_shell
       end
 

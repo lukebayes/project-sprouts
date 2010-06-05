@@ -3,12 +3,12 @@ class TempGenerator < Sprout::Generator::Base
 
   add_param :source, String, { :default => 'src' }
 
+  set :name, :demo
   set :pkg_name, 'temp_generator'
   set :pkg_version, '1.0.pre'
-  set :environment, :demo
 
   def manifest
-    directory name do
+    directory input do
       directory source do
         template 'Main.as'
       end
@@ -18,7 +18,7 @@ class TempGenerator < Sprout::Generator::Base
   private
 
   def class_name
-    name.camel_case
+    input.camel_case
   end
 end
 

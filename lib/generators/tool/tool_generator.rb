@@ -19,11 +19,17 @@ module Sprout
     add_param :url, String, { :default => 'http://github.com/downloads/lukebayes/project-sprouts/echochamber-test.zip' }
 
     def manifest
-      directory name.snake_case do
+      directory snake_input do
         template 'Gemfile'
-        template "#{name.snake_case}.gemspec", 'tool.gemspec'
-        template "#{name.snake_case}.rb", 'tool.rb'
+        template "#{snake_input}.gemspec", 'tool.gemspec'
+        template "#{snake_input}.rb", 'tool.rb'
       end
+    end
+
+    protected
+
+    def snake_input
+      input.snake_case
     end
   end
 end

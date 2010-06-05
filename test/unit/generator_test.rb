@@ -45,7 +45,7 @@ class GeneratorTest < Test::Unit::TestCase
       end
 
       should "create outer directory and file" do
-        @generator.name = 'some_project'
+        @generator.input = 'some_project'
         @generator.execute
         project = File.join(@fixture, 'some_project')
         assert_directory project
@@ -58,7 +58,7 @@ class GeneratorTest < Test::Unit::TestCase
       end
 
       should "copy templates from the first found template path" do
-        @generator.name = 'some_project'
+        @generator.input = 'some_project'
         @generator.band_name = 'R.E.M.'
         @generator.execute
         assert_file File.join(@fixture, 'some_project', 'SomeFile') do |content|
@@ -68,7 +68,7 @@ class GeneratorTest < Test::Unit::TestCase
 
       should "respect updates from subclasses" do
         @generator = configure_generator SubclassedGenerator.new
-        @generator.name = 'some_project'
+        @generator.input = 'some_project'
         @generator.execute
         assert_file File.join(@fixture, 'some_project', 'SomeFile') do |content|
           assert_matches /Living Jest enough for the City and SomeProject/, content
@@ -76,7 +76,7 @@ class GeneratorTest < Test::Unit::TestCase
       end
 
       should "use concrete template when provided" do
-        @generator.name = 'some_project'
+        @generator.input = 'some_project'
         @generator.execute
         assert_file File.join(@fixture, 'some_project', 'SomeOtherFile') do |content|
           assert_matches /I've had my fun/, content
@@ -93,7 +93,7 @@ class GeneratorTest < Test::Unit::TestCase
       end
 
       should "notify user of all files created" do
-        @generator.name = 'some_project'
+        @generator.input = 'some_project'
         @string_io.expects(:puts).with('Created directory: ./some_project')
         @string_io.expects(:puts).with('Created file:      ./some_project/SomeFile')
         @string_io.expects(:puts).with('Created file:      ./some_project/SomeOtherFile')
@@ -103,7 +103,7 @@ class GeneratorTest < Test::Unit::TestCase
       end
 
       should "not notify if quiet is true" do
-        @generator.name = 'some_project'
+        @generator.input = 'some_project'
         @generator.quiet = true
         @string_io.expects(:puts).never
         @generator.execute
@@ -127,7 +127,7 @@ class GeneratorTest < Test::Unit::TestCase
     context "that is asked to unexecute/delete" do
       
       setup do
-        @generator.name = 'some_project'
+        @generator.input = 'some_project'
         @generator.execute
 
         @project = File.join @fixture, 'some_project'
@@ -179,7 +179,7 @@ class GeneratorTest < Test::Unit::TestCase
   private
   
   def configure_generator generator
-    generator.name   = 'some_project'
+    generator.input   = 'some_project'
     generator.logger = @string_io
     generator.path   = @fixture
     generator.templates << @templates
@@ -192,7 +192,7 @@ class GeneratorTest < Test::Unit::TestCase
   class FakeGenerator < Sprout::Generator::Base
 
     ##
-    # Register this generator by name, type and version
+    # Register this generator by input, type and version
     #register :application, :fake, '1.0.pre'
 
     ##
@@ -212,11 +212,11 @@ class GeneratorTest < Test::Unit::TestCase
     set :pkg_version, '1.0.pre'
 
     def class_name
-      @class_name ||= name.camel_case
+      @class_name ||= input.camel_case
     end
 
     def manifest
-      directory name do
+      directory input do
         template 'SomeFile'
         template 'SomeOtherFile', 'OtherFileTemplate'
         directory src do
@@ -252,7 +252,7 @@ class GeneratorTest < Test::Unit::TestCase
 
       generator.logger = StringIO.new
       generator.path = @path
-      generator.name = 'SomeProject'
+      generator.input = 'SomeProject'
       generator.execute
       assert_file @project, "Should have created project folder"
     end
@@ -264,7 +264,7 @@ class GeneratorTest < Test::Unit::TestCase
 
     def manifest
       super
-      directory name do
+      directory input do
         template 'SomeFile', 'SomeSubclassFile'
       end
     end
@@ -276,7 +276,7 @@ class GeneratorTest < Test::Unit::TestCase
   class MissingTemplateGenerator < Sprout::Generator::Base
 
     def manifest
-      directory name do
+      directory input do
         template 'FileWithNoTemplate'
       end
     end

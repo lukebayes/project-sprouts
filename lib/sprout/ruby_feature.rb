@@ -2,38 +2,62 @@
 module Sprout
 
   ##
-  # This isn't the right name for this module...
-  # It's used by Executables (or Tools), Libraries
-  # and Generators. This is the way that we request
-  # a bit of functionality that's stored in an external
-  # RubyGem - but one that has already been installed.
+  # This class represents a Feature that is written in
+  # Ruby code that exists on the other side of the
+  # Ruby load path.
   #
-  # The load operation will 'require' the expected
-  # feature, which will trigger a registration when
-  # the Sprout::Specification is loaded by Ruby,
-  # and then the remaining load operation will find
-  # and return the registered entity.
+  # The idea here, is that one can +include+ the Sprout::RubyFeature
+  # module into their concrete class, and then accept
+  # requests to +register+ and +load+ from clients that
+  # are interested in pluggable features.
   #
-  # Entity, Plugin, Vine, Seed, Fruit, Plant, Tree,
-  # Root, something... It's not a 'Lookup', any ideas
-  # are welcomed!
-  module Lookup
+  # An example is as follows:
+  #
+  #     require 'sprout'
+  #
+  #     class MyClass
+  #       include Sprout::RubyFeature
+  #     end
+  #
+  # In some other Ruby file:
+  #
+  #     MyClass.load :other, 'other_gem', '>= 1.0pre'
+  #
+  # In the desired Ruby file:
+  #
+  #     class OtherClass
+  #       include Sprout::Executable
+  #
+  #       set :name, :other
+  #       set :pkg_name, 'other_gem'
+  #       set :pkg_version, '1.0.pre'
+  #
+  #       # do something...
+  #     end
+  #
+  #     MyClass.register OtherClass.new
+  #
+  module RubyFeature
 
     extend Concern
 
     module ClassMethods
 
+      ##
+      # Register a new feature for future lookups
       def register entity
         registered_entities.unshift entity
         entity
       end
 
-      def load name, pkg_name=nil, version_requirement=nil
+      ##
+      # Load a feature by name.
+      def load name_or_names, pkg_name=nil, version_requirement=nil
         require_ruby_package pkg_name unless pkg_name.nil?
         update_registered_entities
-        entity = entity_for name, pkg_name, version_requirement
+        entity = entity_for name_or_names, pkg_name, version_requirement
         if(entity.nil?)
-          message = "The requested entity: (#{name}) with pkg_name: (#{pkg_name}) and version: "
+          message = "The requested entity: (#{name_or_names}) with pkg_name: (#{pkg_name}) and version: "
           message << "(#{version_requirement}) does not appear to be loaded."
           message << "\n\nYou probably need to update your Gemfile and run 'bundle install' "
           message << "to update your local gems."
@@ -54,17 +78,19 @@ module Sprout
       def update_registered_entities
       end
 
-      def entity_for name, pkg_name, version_requirement
+      def entity_for name_or_names, pkg_name, version_requirement
+        #puts "+++++++++++++++++++++++++++"
         #puts ">> entity_for #{name} pkg_name: #{pkg_name} version: #{version_requirement}"
-        #puts ">> with: #{registered_entities.inspect}"
+        #registered_entities.each do |entity|
+          #puts ">> entity: #{entity.name} pkg_name: #{entity.pkg_name} version: #{entity.pkg_version}"
+        #end
         registered_entities.select do |entity|
+            satisfies_name?(entity, name_or_names) && 
             satisfies_platform?(entity) &&
             satisfies_pkg_name?(entity, pkg_name) &&
-            (satisfies_environment?(entity, name) || satisfies_name?(entity, name)) && 
             satisfies_version?(entity, version_requirement)
         end.first
       end
-
       def satisfies_environment? entity, environment
         #puts ">> env: #{entity.environment} vs. #{environment}"
         environment.nil? || !entity.respond_to?(:environment) || entity.environment.to_s == environment.to_s
@@ -77,7 +103,11 @@ module Sprout
 
       def satisfies_name? entity, expected
         #puts ">> name: #{entity.name} vs. #{expected}"
-        expected.nil? || !entity.respond_to?(:name) || entity.name == expected
+        return true if expected.nil? || !entity.respond_to?(:name)
+        if expected.is_a?(Array)
+          return expected.include? entity.name
+        end
+        return expected.to_s == entity.name.to_s
       end
 
       def satisfies_platform? entity

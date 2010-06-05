@@ -14,7 +14,7 @@ require 'sprout/errors'
 require 'sprout/platform'
 require 'sprout/process_runner'
 require 'sprout/system'
-require 'sprout/lookup'
+require 'sprout/ruby_feature'
 
 # This is a fix for Issue #106
 # http://code.google.com/p/projectsprouts/issues/detail?id=106
