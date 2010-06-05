@@ -7,5 +7,5 @@ exe = Sprout::ExecutableTarget.new({
                               :path => File.join(File.dirname(__FILE__), 'mxmlc')
                              })
 
-Sprout.register_executable exe
+Sprout::Executable.register exe
 

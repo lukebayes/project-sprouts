@@ -56,29 +56,12 @@ module Sprout
 
     module ClassMethods
 
-      ##
-      # Executable Specifications should register their executables with this method
-      # so that Tasks can later call +load_executable+ to retrieve the path to 
-      # the actual executable file.
-      #
-      def register_executable executable
-        Executable.register executable
-      end
-
-      ##
-      # This method is generally called by the Sprout::Executable,
-      # and it the idea is that we can retrive registered executables with the 
-      # exe name, gem name and options gem version (or Gem::Requirement).
-      #
-      # In order to get the correct tools to register, you should probably
-      # ensure they are added to your project Gemfile.
-      #
-      def load_executable name, pkg_name, version_requirement=nil
-        return Executable.load(name, pkg_name, version_requirement).path
-      end
-
       def cache
-        File.join(current_system.application_home('sprouts'), 'cache', Sprout::VERSION::MAJOR_MINOR)
+        File.join(sprout_home, 'cache')
+      end
+
+      def sprout_home
+        File.join(current_system.application_home('sprouts'), Sprout::VERSION::MAJOR_MINOR)
       end
 
       def generator_cache

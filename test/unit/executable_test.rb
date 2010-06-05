@@ -195,7 +195,7 @@ class ExecutableTest < Test::Unit::TestCase
       @tool.input = 'test/fixtures/executable/src/Main.as'
       @tool.source_path << 'test/fixtures/executable/src'
       @tool.debug = true
-      Sprout.expects(:load_executable).with(:mxmlc, 'flex4sdk', '>= 1.0.pre').returns @mxmlc_executable
+      Sprout::Executable.expects(:load).with(:mxmlc, 'flex4sdk', '>= 1.0.pre').returns @mxmlc_executable
 
       # Ensure the exe file mode is NOT valid:
       File.chmod 0644, @mxmlc_executable

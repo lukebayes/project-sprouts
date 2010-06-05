@@ -282,6 +282,11 @@ module Sprout
       # Execute the feature after calling parse
       # with command line arguments.
       #
+      # Subclasses will generally override this method
+      # if they are a Ruby executable, but if you're 
+      # just delegating to an external CLI application,
+      # calling execute will wind up executing the 
+      # external process.
       def execute
         execute_delegate
       end
@@ -292,7 +297,7 @@ module Sprout
       # This method is generally called from Rake task wrappers.
       #
       def execute_delegate
-        exe = Sprout::Executable.load(executable, pkg_name, pkg_version).path
+        exe = Sprout::Executable.load(executable, pkg_name, pkg_version)
         Sprout.current_system.execute exe, to_shell
       end
 

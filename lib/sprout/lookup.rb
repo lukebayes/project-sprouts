@@ -97,7 +97,7 @@ module Sprout
         begin
           require name
         rescue LoadError => e
-          raise Sprout::Errors::LoadError.new "Could not load the required file (#{name}) - Do you need to run 'bundle install'?"
+          raise Sprout::Errors::LoadError.new "Could not load the required file (#{name}) - Maybe you need to run 'gem install #{name}' or maybe 'bundle install'?"
         end
       end
 

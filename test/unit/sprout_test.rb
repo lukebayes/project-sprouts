@@ -36,7 +36,7 @@ class SproutTest < Test::Unit::TestCase
       user.stubs(:library).returns @library
       Sprout.stubs(:current_system).returns user
 
-      expected_cache = File.join(@library, 'Sprouts', 'cache', Sprout::VERSION::MAJOR_MINOR)
+      expected_cache = File.join(@library, 'Sprouts', Sprout::VERSION::MAJOR_MINOR, 'cache')
       assert_equal expected_cache, Sprout.cache
     end
 
@@ -45,7 +45,7 @@ class SproutTest < Test::Unit::TestCase
       user.stubs(:library).returns @library
       Sprout.stubs(:current_system).returns user
 
-      expected_cache = File.join(@library, '.sprouts', 'cache', Sprout::VERSION::MAJOR_MINOR)
+      expected_cache = File.join(@library, '.sprouts', Sprout::VERSION::MAJOR_MINOR, 'cache')
       assert_equal expected_cache, Sprout.cache
     end
   end

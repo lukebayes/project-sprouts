@@ -25,7 +25,7 @@ module Sprout
   #
   # Whenever a rake build task (Sprout::Executable) or library task,
   # (Sprout::Library) is encountered, it will call
-  # Sprout.load_executable or Sprout.get_library (respectively).
+  # Sprout::Executable.load or Sprout::Library.load (respectively).
   #
   # These methods will attempt to +require+ the provided
   # specification and - if it's in your load path - the specification
@@ -178,7 +178,7 @@ module Sprout
 
     def register_file_target target
       target.executables.each do |exe|
-        Sprout.register_executable exe
+        Sprout::Executable.register exe
       end
 
       target.libraries.each do |lib|
