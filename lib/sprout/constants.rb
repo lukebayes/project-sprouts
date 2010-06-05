@@ -1,4 +1,0 @@
-
-module Sprout
-end
-

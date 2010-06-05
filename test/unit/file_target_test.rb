@@ -8,7 +8,7 @@ class FileTargetTest < Test::Unit::TestCase
       @asunit_swc = 'bin/AsUnit4-4.1.pre.swc'
     end
 
-    context "created with a constructor block" do
+    context "that is created with a constructor block" do
       should "have the provided values" do
         target = Sprout::FileTarget.new do |t|
           t.add_library :swc, @asunit_swc
@@ -17,13 +17,14 @@ class FileTargetTest < Test::Unit::TestCase
       end
     end
 
-    context "created with no constructor block" do
+    context "that is created with no constructor block" do
       should "have the provided values" do
         target = Sprout::FileTarget.new
         target.add_library :swc, @asunit_swc
         assert_provided_values target
       end
     end
+
   end
 
   private

@@ -4,7 +4,6 @@ require 'delegate'
 
 # Core, Process and Platform support:
 require 'sprout/version'
-require 'sprout/constants'
 require 'sprout/progress_bar'
 require 'sprout/dir'
 require 'sprout/string'

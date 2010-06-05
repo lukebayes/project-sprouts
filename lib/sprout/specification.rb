@@ -172,6 +172,10 @@ module Sprout
       yield t if block_given?
     end
 
+    ##
+    # TODO: This is unlikely to work on Windows
+    # where the C:\ notation will mess up Ruby's
+    # caller delimiter...
     def file_from_caller_string first_caller
       return first_caller.split(':').shift
     end

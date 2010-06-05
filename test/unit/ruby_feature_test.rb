@@ -38,6 +38,11 @@ class RubyFeatureTest < Test::Unit::TestCase
         OtherFakePlugin.load :foo
       end
     end
+
+    should "allow registration and load without ruby package or version" do
+      FakePlugin.register OpenStruct.new({:name => :foo2})
+      assert_not_nil FakePlugin.load :foo2
+    end
   end
 
   private

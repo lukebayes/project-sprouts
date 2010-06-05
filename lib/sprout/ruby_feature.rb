@@ -63,12 +63,12 @@ module Sprout
           message = "The requested entity: (#{name_or_names}) with pkg_name: (#{pkg_name}) and version: "
           message << "(#{version_requirement}) does not appear to be loaded."
           message << "\n"
-          message << "We did find (#{registered_entities.size}) registered entities:\n"
+          message << "We did find (#{registered_entities.size}) registered entities in that package:\n\n"
           registered_entities.each do |other|
-            message << ">> name: (#{other.name}) pkg_name: (#{other.pkg_name}) pkg_version: (#{other.pkg_version})"
+            message << ">> name: (#{other.name}) pkg_name: (#{other.pkg_name}) pkg_version: (#{other.pkg_version})\n"
           end
-          message << "\n\nYou probably need to update your Gemfile and run 'bundle install' "
-          message << "to update your local gems."
+          message << "\n\nYou may need to update your Gemfile and run 'bundle install' "
+          message << "to update your local gems.\n\n"
           raise Sprout::Errors::LoadError.new message
         end
         entity

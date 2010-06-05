@@ -20,7 +20,7 @@ class SpecificationTest < Test::Unit::TestCase
 
     context "with a new name" do
       setup do
-        @spec.name = 'foo_sdk'
+        @spec.name    = 'foo_sdk'
         @spec.version = '1.0.pre'
       end
 

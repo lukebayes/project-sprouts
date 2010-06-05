@@ -38,7 +38,11 @@ module Sprout
     # will be copied into the RubyGem.
     # 
     def add_library name, path
-      path = expand_executable_path path
+      if path.is_a?(Array)
+        path = path.collect { |p| expand_executable_path(p) }
+      else
+        path = expand_executable_path path
+      end
       libraries << OpenStruct.new( :name => name, :path => path, :file_target => self )
     end
 
