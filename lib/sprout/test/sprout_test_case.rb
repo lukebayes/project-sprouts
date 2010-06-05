@@ -24,6 +24,8 @@ module SproutTestCase # :nodoc:[all]
     super
     clear_tasks
     Sprout::Executable.clear_entities!
+    Sprout::Library.clear_entities!
+    Sprout::Generator.clear_entities!
 
     remove_file @temp_path
     remove_file @temp_cache

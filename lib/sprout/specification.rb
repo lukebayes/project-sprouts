@@ -177,12 +177,15 @@ module Sprout
     end
 
     def register_file_target target
-      target.executables.each do |exe|
-        Sprout::Executable.register exe
-      end
+      register_items target.executables, Sprout::Executable, target
+      register_items target.libraries, Sprout::Library, target
+    end
 
-      target.libraries.each do |lib|
-        # Sprout.register_library lib
+    def register_items collection, source, target
+      collection.each do |item|
+        item.pkg_name    = target.pkg_name
+        item.pkg_version = target.pkg_version
+        source.register item
       end
     end
 

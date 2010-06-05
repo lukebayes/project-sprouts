@@ -13,7 +13,6 @@ class FileTargetTest < Test::Unit::TestCase
         target = Sprout::FileTarget.new do |t|
           t.add_library :swc, @asunit_swc
         end
-
         assert_provided_values target
       end
     end
@@ -22,7 +21,6 @@ class FileTargetTest < Test::Unit::TestCase
       should "have the provided values" do
         target = Sprout::FileTarget.new
         target.add_library :swc, @asunit_swc
-
         assert_provided_values target
       end
     end
@@ -35,8 +33,8 @@ class FileTargetTest < Test::Unit::TestCase
     assert_equal 0, t.executables.size
     assert_equal 1, t.libraries.size
     library = t.libraries.first
-    assert_equal :swc, library[:name]
-    assert_equal @asunit_swc, library[:path]
+    assert_equal :swc, library.name
+    assert_equal File.join('.', @asunit_swc), library.path
   end
 
 end

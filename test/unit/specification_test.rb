@@ -20,40 +20,23 @@ class SpecificationTest < Test::Unit::TestCase
 
     context "with a new name" do
       setup do
-        @spec.name = 'sprout/version'
+        @spec.name = 'foo_sdk'
+        @spec.version = '1.0.pre'
       end
 
       should "register executables" do
         @spec.add_file_target do |t|
-          t.add_executable :foo, 'bar'
+          t.add_executable :foo, 'bin/foo'
         end
 
-        assert_not_nil Sprout::Executable.load :foo, 'sprout/version', '1.0.pre'
+        Sprout::Executable.stubs :require_ruby_package
+        assert_not_nil Sprout::Executable.load :foo, 'foo_sdk', '1.0.pre'
       end
 
     end
   end
 
-=begin
-  context "a newly loaded specification" do
-
-    setup do
-      @fixture = File.expand_path(File.join(fixtures, 'specification'))
-      @flexsdk_spec = File.join @fixture, 'flex4sdk.rb'
-    end
-
-    should "update Sprout.executables" do
-      # The following lines will actually download and unpack the flex4sdk 
-      # if you don't already have it...
-      #Sprout.load_executable :mxmlc, @flexsdk_spec
-      #assert_equal 13, Sprout.executables.size
-    end
-
-  end
-=end
-
   context "a newly included executable" do
-
     setup do
       @echo_chamber = File.join fixtures, 'executable', 'echochamber_gem', 'echo_chamber'
       $:.unshift File.dirname(@echo_chamber)

@@ -29,7 +29,6 @@ end
 
 # File, Archive and Network support:
 require 'sprout/archive_unpacker'
-require 'sprout/executable_target'
 require 'sprout/file_target'
 require 'sprout/remote_file_loader'
 require 'sprout/remote_file_target'

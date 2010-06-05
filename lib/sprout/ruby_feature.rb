@@ -53,12 +53,20 @@ module Sprout
       ##
       # Load a feature by name.
       def load name_or_names, pkg_name=nil, version_requirement=nil
+        # Try to require the pkg_name:
         require_ruby_package pkg_name unless pkg_name.nil?
+        # Update any entities that registered from our require:
         update_registered_entities
+        # search for the requested entity:
         entity = entity_for name_or_names, pkg_name, version_requirement
         if(entity.nil?)
           message = "The requested entity: (#{name_or_names}) with pkg_name: (#{pkg_name}) and version: "
           message << "(#{version_requirement}) does not appear to be loaded."
+          message << "\n"
+          message << "We did find (#{registered_entities.size}) registered entities:\n"
+          registered_entities.each do |other|
+            message << ">> name: (#{other.name}) pkg_name: (#{other.pkg_name}) pkg_version: (#{other.pkg_version})"
+          end
           message << "\n\nYou probably need to update your Gemfile and run 'bundle install' "
           message << "to update your local gems."
           raise Sprout::Errors::LoadError.new message

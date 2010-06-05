@@ -22,7 +22,7 @@ module Sprout
     def initialize
       @executables = []
       @libraries   = []
-      @load_path   = ''
+      @load_path   = '.'
       @platform    = :universal
       yield self if block_given?
     end
@@ -38,7 +38,8 @@ module Sprout
     # will be copied into the RubyGem.
     # 
     def add_library name, path
-      libraries << { :name => name, :path => path, :file_target => self }
+      path = expand_executable_path path
+      libraries << OpenStruct.new( :name => name, :path => path, :file_target => self )
     end
 
     ##
@@ -50,7 +51,7 @@ module Sprout
     #
     def add_executable name, path
       path = expand_executable_path path
-      executables << Sprout::ExecutableTarget.new( :name => name, :path => path, :file_target => self )
+      executables << OpenStruct.new( :name => name, :path => path, :file_target => self )
     end
 
     def to_s
