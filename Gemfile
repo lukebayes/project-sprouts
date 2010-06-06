@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
 gem "bundler", ">= 0.9.19"
+gem "rake", ">= 0.8.7"
 gem "rdoc", ">= 2.5.8"
 gem "rubyzip", "0.9.4"
 gem "archive-tar-minitar", "0.5.2"
