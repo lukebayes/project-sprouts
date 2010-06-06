@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'sprout'
+require 'generators/generator/generator_generator'
+
+generator = Sprout::GeneratorGenerator.new
+generator.parse! ARGV
+generator.execute
+
