@@ -4,6 +4,7 @@ module Sprout::System
   class UnixSystem < BaseSystem
 
     def clean_path path
+      return if path.nil?
       if(path.include? '../')
         path = File.expand_path path
       end

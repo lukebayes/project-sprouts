@@ -10,7 +10,9 @@ class RubyFeatureTest < Test::Unit::TestCase
     end
 
     should "allow register" do
-      FakePlugin.expects :require_ruby_package
+      # Shouldn't require the package since it's already
+      # registered and available...
+      FakePlugin.expects(:require_ruby_package).never
       plugin = create_item
       FakePlugin.register plugin
       assert_equal plugin, FakePlugin.load(:foo, 'sprout/base')
@@ -63,6 +65,16 @@ class RubyFeatureTest < Test::Unit::TestCase
       assert_raises Sprout::Errors::UsageError do
         FakePlugin.register(create_item(:name => nil))
       end
+    end
+
+    should "load when request is a string" do
+      FakePlugin.register(OpenStruct.new({:name => :foo3}))
+      assert_not_nil FakePlugin.load 'foo3'
+    end
+
+    should "load when registration is a string" do
+      FakePlugin.register(OpenStruct.new({:name => :swc, :pkg_name => 'asunit4'}))
+      assert_not_nil FakePlugin.load nil, :asunit4
     end
 
     should "raise on failure to find from collection" do

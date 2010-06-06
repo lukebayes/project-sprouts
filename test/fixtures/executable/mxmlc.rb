@@ -807,6 +807,7 @@ def mxmlc args
   mxmlc_tool = Sprout::MXMLC.new
   yield mxmlc_tool if block_given?
   file args do
+    mxmlc_tool.output = args
     mxmlc_tool.execute
   end
   mxmlc_tool

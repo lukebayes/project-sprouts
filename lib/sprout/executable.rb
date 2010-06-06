@@ -267,18 +267,6 @@ module Sprout
       end
 
       ##
-      # Called from enclosing Rake::Task after
-      # initialization and before any tasks are
-      # executed.
-      #
-      # It is within this function that we can
-      # define other, new Tasks and/or manipulate
-      # our prerequisites.
-      #
-      def define
-      end
-
-      ##
       # Execute the feature after calling parse
       # with command line arguments.
       #
@@ -299,6 +287,25 @@ module Sprout
       def execute_delegate
         exe = Sprout::Executable.load(executable, pkg_name, pkg_version).path
         Sprout.current_system.execute exe, to_shell
+      end
+
+      def prepare
+        params.each do |param|
+          param.prepare
+        end
+      end
+
+      def to_rake args
+        yield self if block_given?
+        prepare
+        file_task = file args do
+          execute
+        end
+        file_task.prerequisites << task(Sprout::Library::TASK_NAME)
+        prerequisites.each do |prereq|
+          file_task.prerequisites << prereq
+        end
+        file_task
       end
 
       def to_help

@@ -1,36 +1,90 @@
 
 module Sprout
   module Library
+    TASK_NAME = :resolve_sprout_libraries
+
     include RubyFeature
 
     class << self
 
       ##
+      # Set the path within a project
+      # where libraries should be loaded.
+      def project_path=(path)
+        @project_path = path
+      end
+
+      ##
+      # The path within a project where 
+      # libraries should be added.
+      #
+      # Defaults to 'lib'
+      def project_path
+        @project_path ||= 'lib'
+      end
+
+      ##
       # Create Rake tasks that will load and install
       # a particular library.
       def define_task pkg_name, type=nil, version=nil
-        lib = Sprout::Library.load type, pkg_name.to_s, version
-        installation_path = "lib/#{pkg_name}"
-        if(File.directory?(lib.path))
-          task_name = installation_path
-          # Create a file task to copy the library source files:
-          file task_name do
-            FileUtils.cp_r lib.path, installation_path
-            Sprout::Log.puts ">> Copied file(s) from: (#{lib.path}) to: (#{installation_path})"
-          end
-          task :sprout_libraries => installation_path
+        library = Sprout::Library.load type, pkg_name, version
+        library.installation_task = task pkg_name
+
+        define_lib_dir_task_if_necessary
+        path_or_paths = library.path
+        if path_or_paths.is_a?(Array)
+          # TODO: Need to add support for merging these directories
+          # rather than simply clobbering...
+          path_or_paths.each { |p| define_path_task pkg_name, library, p }
         else
-          task_name = "#{installation_path}/#{File.basename(lib.path)}"
-          file task_name do
-            FileUtils.mkdir_p installation_path
-            FileUtils.cp lib.path, "#{installation_path}/"
-            Sprout::Log.puts ">> Created file(s) from: (#{lib.path}) to: (#{task_name})"
+          define_path_task pkg_name, library, path_or_paths
+        end
+        library
+      end
+
+      protected
+
+      def define_lib_dir_task_if_necessary
+        if !File.exists?(project_path)
+          define_file_task project_path do
+            FileUtils.mkdir_p project_path
+            Sprout::Log.puts ">> Created directory at: #{project_path}"
           end
         end
-
-        # Associate this library with then :resolve_libraries task
-        task :resolve_libraries => task_name
       end
+
+      def define_path_task pkg_name, library, path
+        installation_path = "#{project_path}/#{pkg_name}"
+        if File.directory?(path)
+          define_directory_copy_task path, installation_path
+        else
+          define_file_copy_task path, installation_path
+        end
+      end
+
+      def define_directory_copy_task path, installation_path
+        define_file_task installation_path do
+          FileUtils.cp_r path, installation_path
+          Sprout::Log.puts ">> Copied files from: (#{path}) to: (#{installation_path})"
+        end
+      end
+
+      def define_file_copy_task path, installation_path
+        task_name = "#{installation_path}/#{File.basename(library.path)}"
+        define_file_task task_name do
+          FileUtils.mkdir_p installation_path
+          FileUtils.cp library.path, "#{installation_path}/"
+          Sprout::Log.puts ">> Copied file from: (#{library.path}) to: (#{task_name})"
+        end
+      end
+
+      def define_file_task name
+        file name do |t|
+          yield if block_given?
+        end
+        task Sprout::Library::TASK_NAME => name
+      end
+
     end
 
   end
@@ -46,7 +100,7 @@ end
 #
 #   library :asunit4, :src
 #
-# Or, if you'd like to specify the version:
+# Or, if you'd like to specify version requirements:
 #
 #   library :asunit4, :swc, '>= 4.2.pre'
 #

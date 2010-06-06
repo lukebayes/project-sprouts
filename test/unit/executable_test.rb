@@ -23,6 +23,14 @@ class ExecutableTest < Test::Unit::TestCase
       assert_equal "--string-param=string1", @tool.to_shell
     end
 
+    should "not share parameter values across instances" do
+      first = FakeOtherExecutableTask.new
+      second = FakeOtherExecutableTask.new
+      first.string_param = 'value1'
+      second.string_param = 'value2'
+      assert first.string_param != second.string_param
+    end
+
     should "accept strings param" do
       @tool.strings_param << 'string1'
       @tool.strings_param << 'string2'
@@ -207,6 +215,12 @@ class ExecutableTest < Test::Unit::TestCase
 
       # Ensure the file mode was updated:
       assert "non-executable file mode should be updated by execute", first != File.stat(@mxmlc_executable).mode
+    end
+
+    should "include prerequisites" do
+      @tool.input = 'test/fixtures/executable/src/Main.as'
+      file_task = @tool.to_rake('bin/SomeProject.swf')
+      assert_equal 2, file_task.prerequisites.size
     end
   end
 end

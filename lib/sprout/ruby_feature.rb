@@ -54,12 +54,16 @@ module Sprout
       ##
       # Load a feature by name.
       def load name_or_names, pkg_name=nil, version_requirement=nil
-        # Try to require the pkg_name:
-        require_ruby_package pkg_name unless pkg_name.nil?
-        # Update any entities that registered from our require:
-        update_registered_entities
-        # search for the requested entity:
         entity = entity_for name_or_names, pkg_name, version_requirement
+        if(entity.nil?)
+          # Try to require the pkg_name:
+          require_ruby_package pkg_name unless pkg_name.nil?
+          # Update any entities that registered from our require:
+          update_registered_entities
+          # search for the requested entity:
+          entity = entity_for name_or_names, pkg_name, version_requirement
+        end
+
         if(entity.nil?)
           message = "The requested entity: (#{name_or_names}) with pkg_name: (#{pkg_name}) and version: "
           message << "(#{version_requirement}) does not appear to be loaded."
@@ -113,7 +117,7 @@ module Sprout
 
       def satisfies_pkg_name? entity, expected
         #puts ">> pkg_name: #{entity.pkg_name} vs. #{expected}"
-        expected.nil? || !entity.respond_to?(:pkg_name) || entity.pkg_name == expected
+        expected.nil? || !entity.respond_to?(:pkg_name) || entity.pkg_name.to_s == expected.to_s
       end
 
       def satisfies_name? entity, expected

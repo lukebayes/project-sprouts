@@ -18,11 +18,19 @@ class LibraryTest < Test::Unit::TestCase
 
   context "a new source library" do
     setup do
-      sources = File.join fixtures, 'library', 'sources'
+      fixture = File.join fixtures, 'library'
+      @lib_dir = File.join fixture, 'project_lib'
+      Sprout::Library.project_path = @lib_dir
+      sources = File.join fixture, 'sources'
       @src    = File.join sources, 'src'
       @lib_a  = File.join sources, 'lib', 'a'
       @lib_b  = File.join sources, 'lib', 'b'
       create_and_register_library :fake_source_lib, [@src, @lib_a, @lib_b]
+    end
+
+    teardown do
+      Sprout::Library.project_path = nil
+      remove_file @lib_dir
     end
 
     should "be able to load registered libraries" do
@@ -33,6 +41,21 @@ class LibraryTest < Test::Unit::TestCase
       assert_equal @lib_a, paths.shift
       assert_equal @lib_b, paths.shift
     end
+
+    should "create rake file tasks for each path provided" do
+      Sprout::Library.define_task :fake_source_lib
+      Rake::application[:resolve_sprout_libraries].invoke
+
+      library_dir = File.join(@lib_dir, 'fake_source_lib')
+      assert_file library_dir
+      assert_file File.join(library_dir, 'Source.as')
+      assert_file File.join(library_dir, 'a')
+      assert_file File.join(library_dir, 'b')
+    end
+
+    should "load the library from the load_path" do
+    end
+
   end
 
   private
