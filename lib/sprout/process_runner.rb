@@ -21,7 +21,10 @@ module Sprout #:nodoc:
     # *nix variants (including OS X).
     def execute_open4 *command
       execute_with_block *command do
-        @pid, @w, @r, @e = open4_popen4_block *command
+        # Not sure about the join - with the 1.0 push, we're
+        # sending in 2 args - the exe path, and options as a string.
+        # This was new and was causing problems...
+        @pid, @w, @r, @e = open4_popen4_block *command.join(' ')
       end
     end
     
@@ -30,7 +33,7 @@ module Sprout #:nodoc:
     # Windows installations.
     def execute_win32(*command)
       execute_with_block *command do
-        @pid, @w, @r, @e = win32_open3_block *command
+        @pid, @w, @r, @e = win32_open3_block *command.join(' ')
       end
     end
 

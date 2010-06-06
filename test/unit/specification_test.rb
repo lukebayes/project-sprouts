@@ -33,6 +33,18 @@ class SpecificationTest < Test::Unit::TestCase
         assert_not_nil Sprout::Executable.load :foo, 'foo_sdk', '1.0.pre'
       end
 
+      should "load returns libraries in expected order" do
+        @spec.add_file_target do |t|
+          t.add_library :swc, 'bin/foo'
+          t.add_library :src, 'bin/bar'
+        end
+
+        # Without specifying the :swc/:src decision:
+        library = Sprout::Library.load nil, 'foo_sdk'
+        assert_equal 'foo', File.basename(library.path)
+      end
+
+     
     end
   end
 

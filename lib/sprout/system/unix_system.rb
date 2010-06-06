@@ -9,12 +9,15 @@ module Sprout::System
         path = File.expand_path path
       end
 
-      attempt_to_repair_executable path
-
       if(path.index(' '))
         return path.split(' ').join('\ ')
       end
       return path
+    end
+
+    def execute(tool, options='')
+      attempt_to_repair_executable tool
+      super(tool, options)
     end
 
     ##
@@ -47,6 +50,7 @@ module Sprout::System
     def repair_executable path
       content = File.read(path)
       if(content.match(/\r\n/))
+        Sprout::Log.puts "[WARNING] Sprouts is about to replace invalid Windows line endings on an executable at: (#{path})"
         content.gsub!(/\r\n/, "\n")
         File.open(path, 'w+') do |f|
           f.write content

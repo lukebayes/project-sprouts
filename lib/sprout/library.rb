@@ -70,11 +70,11 @@ module Sprout
       end
 
       def define_file_copy_task path, installation_path
-        task_name = "#{installation_path}/#{File.basename(library.path)}"
+        task_name = "#{installation_path}/#{File.basename(path)}"
         define_file_task task_name do
           FileUtils.mkdir_p installation_path
-          FileUtils.cp library.path, "#{installation_path}/"
-          Sprout::Log.puts ">> Copied file from: (#{library.path}) to: (#{task_name})"
+          FileUtils.cp path, "#{installation_path}/"
+          Sprout::Log.puts ">> Copied file from: (#{path}) to: (#{task_name})"
         end
       end
 
@@ -105,6 +105,7 @@ end
 #   library :asunit4, :swc, '>= 4.2.pre'
 #
 def library pkg_name, type=nil, version=nil
+  puts ">> Library loaded!"
   Sprout::Library.define_task pkg_name, type, version
 end
 

@@ -296,6 +296,7 @@ module Sprout
       end
 
       def to_rake args
+        update_rake_task_name_from_args args
         yield self if block_given?
         prepare
         file_task = file args do
@@ -335,6 +336,34 @@ module Sprout
       end
 
       protected
+
+      def update_rake_task_name_from_args args
+        self.rake_task_name = parse_rake_task_args args
+      end
+
+      def parse_rake_task_args args
+        return args if args.is_a?(Symbol) || args.is_a?(String)
+        args.each_pair do |key, value|
+          return key
+        end
+        nil
+      end
+
+      ##
+      # Hook so that subclasses can override and set
+      # configuration params based on the task name that
+      # was provided.
+      #
+      # The primary use case for this is the MXMLC executable.
+      # This method is overridden and updates the output
+      # parameter with it's value.
+      def rake_task_name=(name)
+        @rake_task_name = name
+      end
+
+      def rake_task_name
+        @rake_task_name
+      end
 
       def parse_extra_options! options
         options.each do |value|

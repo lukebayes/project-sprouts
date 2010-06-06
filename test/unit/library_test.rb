@@ -16,15 +16,30 @@ class LibraryTest < Test::Unit::TestCase
     end
   end
 
+  context "a new precompiled library" do
+    setup do
+      fixture  = File.join fixtures, 'library'
+      @lib_dir = File.join fixture, 'project_lib'
+      sources  = File.join fixture, 'sources'
+      @src     = File.join sources, 'src', 'Source.as'
+      Sprout::Library.project_path = @lib_dir
+      create_and_register_library :fake_swc_lib, @src
+    end
+
+    should "create rake file tasks for single files" do
+      Sprout::Library.define_task :fake_swc_lib
+    end
+  end
+
   context "a new source library" do
     setup do
-      fixture = File.join fixtures, 'library'
+      fixture  = File.join fixtures, 'library'
       @lib_dir = File.join fixture, 'project_lib'
+      sources  = File.join fixture, 'sources'
+      @lib_a   = File.join sources, 'lib', 'a'
+      @lib_b   = File.join sources, 'lib', 'b'
+      @src     = File.join sources, 'src'
       Sprout::Library.project_path = @lib_dir
-      sources = File.join fixture, 'sources'
-      @src    = File.join sources, 'src'
-      @lib_a  = File.join sources, 'lib', 'a'
-      @lib_b  = File.join sources, 'lib', 'b'
       create_and_register_library :fake_source_lib, [@src, @lib_a, @lib_b]
     end
 
@@ -42,7 +57,7 @@ class LibraryTest < Test::Unit::TestCase
       assert_equal @lib_b, paths.shift
     end
 
-    should "create rake file tasks for each path provided" do
+    should "create rake file tasks for directories" do
       Sprout::Library.define_task :fake_source_lib
       Rake::application[:resolve_sprout_libraries].invoke
 

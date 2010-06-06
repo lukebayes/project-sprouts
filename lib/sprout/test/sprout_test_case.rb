@@ -31,6 +31,7 @@ module SproutTestCase # :nodoc:[all]
     remove_file @temp_cache
 
     if(@start_path && Dir.pwd != @start_path)
+      puts "[WARNING] >> SproutTestCase changing dir from #{Dir.pwd} back to: #{@start_path} - Did you mean to leave your working directory in a new place?"
       Dir.chdir @start_path
     end
 

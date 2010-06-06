@@ -184,12 +184,22 @@ class ExecutableTest < Test::Unit::TestCase
     end
 
     should "accept configuratin as a file task" do
-      mxmlc 'bin/SomeFile.swf' do |t|
+      @tool = mxmlc 'bin/SomeFile.swf' do |t|
         t.source_path << 'test/fixtures/executable/src'
         t.input = 'test/fixtures/executable/src/Main.as'
-        @tool = t # Hold onto the MXMLC reference...
       end
-      assert_equal "--source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
+      assert_equal 'bin/SomeFile.swf', @tool.output
+      assert_equal "--output=bin/SomeFile.swf --source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
+    end
+
+    should "accept configuration with prereqs as a file task" do
+      task :other_task
+      @tool = mxmlc 'bin/SomeFile.swf' => [:clean, :other_task] do |t|
+        t.source_path << 'test/fixtures/executable/src'
+        t.input = 'test/fixtures/executable/src/Main.as'
+      end
+      assert_equal 'bin/SomeFile.swf', @tool.output
+      assert_equal "--output=bin/SomeFile.swf --source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
     end
 
     should "to_shell input" do

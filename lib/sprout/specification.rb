@@ -182,7 +182,14 @@ module Sprout
 
     def register_file_target target
       register_items target.executables, Sprout::Executable, target
-      register_items target.libraries, Sprout::Library, target
+      # Reversing the libraries makes it so that definitions like:
+      #
+      #   target.add_library :swc, 'abcd'
+      #   target.add_library :src, 'efgh'
+      # 
+      # When loading, if no name is specified, the :swc will be
+      # returned to clients.
+      register_items target.libraries.reverse, Sprout::Library, target
     end
 
     def register_items collection, source, target

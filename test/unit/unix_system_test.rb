@@ -44,7 +44,7 @@ class UnixSystemTest < Test::Unit::TestCase
 
       should "fix windows line endings" do
         @user.expects :repair_executable
-        @user.clean_path @target
+        @user.attempt_to_repair_executable @target
       end
     end
   end
