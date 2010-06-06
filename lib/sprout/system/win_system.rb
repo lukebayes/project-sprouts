@@ -45,7 +45,6 @@ module Sprout::System
 
     def can_execute? platform
       [:windows, :win32].include?(platform) || super
-#      platform == :windows || platform == :win32 || super
     end
 
     protected
