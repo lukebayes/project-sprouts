@@ -18,7 +18,8 @@ module Sprout::System
     end
 
     def can_execute? platform
-      platform == :mac || platform == :osx || platform == :macosx || platform == :darwin || super
+      [:mac, :osx, :macosx, :darwin].include?(platform) || super
+#      platform == :mac || platform == :osx || platform == :macosx || platform == :darwin || super
     end
 
   end

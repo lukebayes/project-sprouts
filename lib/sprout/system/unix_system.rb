@@ -32,7 +32,8 @@ module Sprout::System
     end
 
     def can_execute? platform
-      platform == :unix || platform == :linux || super
+      [:unix, :linux].include?(platform) || super
+#      platform == :unix || platform == :linux || super
     end
 
     ##
