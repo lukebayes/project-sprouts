@@ -7,6 +7,7 @@ module Sprout
     add_param :test, String, { :default => "test" }
     add_param :unit, String, { :default => "unit" }
     add_param :bin, String, { :default => "bin" }
+    add_param :extension, String, { :default => ".as" }
     
     def manifest
       directory bin do
@@ -17,7 +18,7 @@ module Sprout
         directory generators do
           template "#{input.snake_case}_generator.rb", "generator_class.rb"
           directory "templates" do
-            template "#{input.camel_case}", "generator_template"
+            template "#{input.camel_case}#{extension}", "generator_template"
           end
         end
       end
