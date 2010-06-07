@@ -4,6 +4,6 @@ require 'rubygems'
 require 'sprout'
 require 'generators/<%= input.snake_case %>_generator'
 
-generator = <%= input.snake_case %>Generator.new
+generator = <%= input.camel_case %>Generator.new
 generator.parse! ARGV
 generator.execute
