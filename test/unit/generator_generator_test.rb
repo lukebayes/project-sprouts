@@ -35,7 +35,8 @@ class GeneratorGeneratorTest < Test::Unit::TestCase
       templates_dir = File.join(generators_dir, 'templates')
       assert_directory templates_dir
       
-      template_file = File.join(templates_dir, 'fwee_template.rb')
+      template_file = File.join(templates_dir, 'fwee.as')
+      assert_file template_file
       
       bin_dir = File.join(@temp, 'bin')
       assert_directory bin_dir
