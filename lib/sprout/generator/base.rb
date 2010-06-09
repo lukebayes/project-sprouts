@@ -29,8 +29,8 @@ module Sprout
       #
       #     ./config/generators
       #     ./vendor/generators
-      #     ~/Library/Sprouts/cache/1.0/generators                    # OS X only
-      #     ~/.sprouts/cache/1.0/generators                           # Unix only
+      #     ~/Library/Sprouts/1.0/generators                    # OS X only
+      #     ~/.sprouts/1.0/generators                           # Unix only
       #     [USER_HOME]/Application Data/Sprouts/cache/1.0/generators # Windows only
       #     ENV['SPROUT_GENERATORS']                                  # Only if defined
       #     [Generator Declaration __FILE__]/templates
