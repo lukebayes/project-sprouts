@@ -237,6 +237,14 @@ module Sprout
       # stderr and abort with non-zero response.
       attr_accessor :abort_on_failure
 
+      ##
+      # If the executable is configured as a Rake::Task, it will extract the
+      # Rake::Task[:name] property and apply it to this field.
+      #
+      # Concrete parameters can pull this value from their +belongs_to+ 
+      # parameter.
+      attr_accessor :rake_task_name
+
       attr_reader :param_hash
       attr_reader :params
       attr_reader :prerequisites
@@ -347,22 +355,6 @@ module Sprout
           return key
         end
         nil
-      end
-
-      ##
-      # Hook so that subclasses can override and set
-      # configuration params based on the task name that
-      # was provided.
-      #
-      # The primary use case for this is the MXMLC executable.
-      # This method is overridden and updates the output
-      # parameter with it's value.
-      def rake_task_name=(name)
-        @rake_task_name = name
-      end
-
-      def rake_task_name
-        @rake_task_name
       end
 
       def parse_extra_options! options

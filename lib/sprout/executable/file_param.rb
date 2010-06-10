@@ -24,7 +24,12 @@ module Sprout
       end
 
       def prepare_prerequisites
-        if(prerequisite?(value))
+        if file_task_name
+          self.value ||= belongs_to.rake_task_name
+          return
+        end
+
+        if prerequisite?(value)
           file value
           belongs_to.prerequisites << value
         end
@@ -33,7 +38,7 @@ module Sprout
       def validate
         super
 
-        if(!value.nil? && !File.exists?(value))
+        if(!file_task_name && !value.nil? && !File.exists?(value))
           raise Sprout::Errors::InvalidArgumentError.new "No such file or directory - #{value}"
         end
       end

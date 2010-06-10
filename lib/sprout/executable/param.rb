@@ -19,6 +19,7 @@ module Sprout
       attr_accessor :description
       attr_accessor :hidden_name
       attr_accessor :hidden_value
+      attr_accessor :file_task_name
       attr_accessor :name
       attr_accessor :prefix
       attr_accessor :reader

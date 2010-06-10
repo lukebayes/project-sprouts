@@ -477,7 +477,8 @@ module Sprout
     #
     # When using this option with the component compiler, the output is a SWC file rather than a SWF file.
     #
-    add_param :output, String
+    add_param :output, File, { :file_task_name => true }
+
     
     ##
     # Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).
@@ -665,12 +666,6 @@ module Sprout
     #
     set :executable, :mxmlc
 
-    protected
-
-    def rake_task_name=(name)
-      self.output = name
-      super
-    end
   end
 end
 
