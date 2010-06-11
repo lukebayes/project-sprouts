@@ -115,7 +115,7 @@ class GeneratorTest < Test::Unit::TestCase
       end
 
       should "not update superclass parameter collection" do
-        assert_equal 5, Sprout::Generator::Base.static_parameter_collection.size
+        assert_equal 6, Sprout::Generator::Base.static_parameter_collection.size
         assert_equal 1, Sprout::Generator::Base.static_default_value_collection.size
       end
 
@@ -138,6 +138,12 @@ class GeneratorTest < Test::Unit::TestCase
       
       should "remove the expected files" do
         @generator.unexecute
+        assert !File.exists?(@project), "Project should be deleted"
+      end
+
+      should "remove the expected files if destroy == true" do
+        @generator.destroy = true
+        @generator.execute
         assert !File.exists?(@project), "Project should be deleted"
       end
 

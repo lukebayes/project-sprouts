@@ -100,6 +100,10 @@ module Sprout
       add_param :path, Path, { :default => Dir.pwd }
 
       ##
+      # Insteast of creating, destroy the files.
+      add_param :destroy, Boolean
+
+      ##
       # Force the creation of files without prompting.
       add_param :force, Boolean
 
@@ -151,6 +155,7 @@ module Sprout
       ##
       # Record the actions and trigger them
       def execute
+        return prepare_command.unexecute if destroy
         prepare_command.execute
       end
 
