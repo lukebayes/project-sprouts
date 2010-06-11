@@ -8,7 +8,7 @@ module Sprout
 
     def manifest
       directory input.snake_case do
-        template input.camel_case
+        template "#{input.camel_case}<%= extension %>"
       end
       
     end

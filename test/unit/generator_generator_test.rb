@@ -26,6 +26,20 @@ class GeneratorGeneratorTest < Test::Unit::TestCase
       lib_dir = File.join(@temp, 'lib')
       assert_directory lib_dir
       
+      test_dir = File.join(@temp, 'test')
+      assert_directory test_dir
+      
+      fixtures_dir = File.join(test_dir, 'fixtures', 'generators')
+      assert_directory fixtures_dir
+      
+      test_file = File.join(test_dir, 'unit', 'fwee_generator_test.rb')
+      assert_file test_file do |content|
+        assert_matches /FweeGeneratorTest/, content
+      end
+      
+      test_helper_file = File.join(test_dir, 'unit', 'test_helper.rb')
+      assert_file test_helper_file
+      
       generators_dir = File.join(lib_dir, 'generators')
       assert_directory generators_dir
       
@@ -43,6 +57,8 @@ class GeneratorGeneratorTest < Test::Unit::TestCase
       
       executable_file = File.join(bin_dir, 'fwee')
       assert_file executable_file
+      
+
     end
 
   end
