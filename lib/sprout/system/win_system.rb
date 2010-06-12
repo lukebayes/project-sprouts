@@ -9,7 +9,7 @@ module Sprout::System
     LOCAL_SETTINGS = "Local\ Settings"
     APPLICATION_DATA = "Application\ Data"
 
-    def home
+    def find_home
       path = super
       if(path.include? "My Documents")
         path = File.dirname(path)
