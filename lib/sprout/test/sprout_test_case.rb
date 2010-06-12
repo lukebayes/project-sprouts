@@ -11,7 +11,7 @@ module SproutTestCase # :nodoc:[all]
   include Gem::DefaultUserInteraction
 
   def fixtures from=nil
-    @fixtures ||= find_fixtures(from || caller.first.split(':').first)
+    @fixtures ||= find_fixtures(from || from_caller_string(caller.first))
   end
 
   def setup
@@ -133,6 +133,15 @@ module SproutTestCase # :nodoc:[all]
 =end 
   
   private
+
+  def from_caller_string caller_string
+    parts = caller_string.split(':')
+    str = parts.shift
+    while(parts.size > 0 && !File.exists?(str))
+      str << ":#{parts.shift}"
+    end
+    str
+  end
 
   # Find the nearest fixtures folder to the provided
   # path by checking each parent directory.

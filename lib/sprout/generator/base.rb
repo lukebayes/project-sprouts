@@ -6,7 +6,7 @@ module Sprout
     class << self
 
       def register generator_class, templates_path=nil
-        #puts ">> Generator.register with: #{generator_class}"
+        puts ">> Generator.register with: #{generator_class}"
         generator_paths << { :class => generator_class, :templates => templates_path } unless templates_path.nil?
         super(generator_class)
       end
@@ -220,8 +220,13 @@ module Sprout
       private
 
       def self.template_from_caller caller_string
-        file = caller_string.split(":").shift
-        File.join(File.dirname(file), 'templates')
+        parts = caller_string.split(':')
+        str = parts.shift
+        while(parts.size > 0 && !File.exists?(str))
+          str << ":#{parts.shift}"
+        end
+
+        File.join(File.dirname(str), 'templates')
       end
 
     end
