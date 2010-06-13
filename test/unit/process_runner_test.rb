@@ -72,7 +72,7 @@ class ProcessRunnerTest < Test::Unit::TestCase
     context "on win32" do
       should "accept and forward multiple arguments" do
         # Comment out the following line to actually execute the process on Windows:
-        #@runner.expects(:execute_with_block).once.with("dir").returns nil
+        @runner.expects(:execute_with_block).once.with("dir").returns nil
         @runner.execute_win32("dir")
       end
 

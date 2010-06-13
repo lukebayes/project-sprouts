@@ -6,7 +6,7 @@ module Sprout
     class << self
 
       def register generator_class, templates_path=nil
-        puts ">> Generator.register with: #{generator_class}"
+        #puts ">> Generator.register with: #{generator_class}"
         generator_paths << { :class => generator_class, :templates => templates_path } unless templates_path.nil?
         super(generator_class)
       end
