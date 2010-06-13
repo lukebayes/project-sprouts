@@ -13,6 +13,7 @@ module Sprout::System
   class WinNixSystem < WinSystem
 
     def clean_path(path)
+      return nil if path.nil?
       if(path.index(' '))
         return %{'#{path}'}
       end

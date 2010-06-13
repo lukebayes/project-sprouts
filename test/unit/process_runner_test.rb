@@ -71,11 +71,14 @@ class ProcessRunnerTest < Test::Unit::TestCase
     #--------------------------------------------------
     context "on win32" do
       should "accept and forward multiple arguments" do
-        @runner.expects(:execute_with_block).once.with("ls", "-la").returns nil
-        @runner.execute_win32("ls", "-la")
+        # Comment out the following line to actually execute the process on Windows:
+        #@runner.expects(:execute_with_block).once.with("dir").returns nil
+        @runner.execute_win32("dir")
       end
 
     end
+
+
 
     context "an unknown process" do
       should "raise an exception if the executable doesn't exist" do

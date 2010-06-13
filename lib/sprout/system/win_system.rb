@@ -54,11 +54,22 @@ module Sprout::System
     # platform-specific execute method
     def get_and_execute_process_runner tool, options=nil
       runner = get_process_runner
-      runner.execute_win32 tool, options
+      runner.execute_win32 clean_executable_path(tool), options
       runner
     end
 
     private
+
+    def clean_executable_path tool
+      tool = tool.split("/").join("\\")
+      tool = find_tool tool
+    end
+
+    def find_tool tool
+      return "#{tool}.bat" if File.exists?("#{tool}.bat")
+      return "#{tool}.exe" if File.exists?("#{tool}.exe")
+      tool
+    end
 
     def env_path
       ENV['PATH']

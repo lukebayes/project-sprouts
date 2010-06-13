@@ -183,7 +183,7 @@ class ExecutableTest < Test::Unit::TestCase
       assert_equal :compc, @tool.executable
     end
 
-    should "accept configuratin as a file task" do
+    should "accept configuration as a file task" do
       @tool = mxmlc 'bin/SomeFile.swf' do |t|
         t.source_path << 'test/fixtures/executable/src'
         t.input = 'test/fixtures/executable/src/Main.as'

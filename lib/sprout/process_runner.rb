@@ -33,7 +33,7 @@ module Sprout #:nodoc:
     # Windows installations.
     def execute_win32(*command)
       execute_with_block *command do
-        @pid, @w, @r, @e = win32_open3_block *command.join(' ')
+        @pid, @w, @r, @e = io_popen_block *command.join(' ')
       end
     end
 
@@ -100,6 +100,12 @@ module Sprout #:nodoc:
     def open4_popen4_block *command
       require 'open4'
       open4.popen4(*command)
+    end
+
+    def io_popen_block *command
+      require 'open3'
+      write, read, error, wait_thread = Open3.popen3(*command)
+      [wait_thread[:pid], write, read, error]
     end
 
     def win32_open3_block *command
