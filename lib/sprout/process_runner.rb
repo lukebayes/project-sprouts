@@ -103,7 +103,7 @@ module Sprout #:nodoc:
     end
 
     def io_popen_block *command
-      if(RUBY_VERSION == '1.8.7')
+      if(RUBY_VERSION == '1.8.6' || RUBY_VERSION == '1.8.7')
         win32_open3_block *command
       else
         require 'open3'

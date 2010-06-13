@@ -9,7 +9,7 @@ module Sprout::System
     LOCAL_SETTINGS = "Local\ Settings"
     APPLICATION_DATA = "Application\ Data"
 
-    def find_home
+    def home
       path = super
       if(path.include? "My Documents")
         path = File.dirname(path)
@@ -61,8 +61,7 @@ module Sprout::System
     private
 
     def clean_executable_path tool
-      tool = tool.split("/").join("\\")
-      tool = find_tool tool
+      find_tool tool.split("/").join("\\")
     end
 
     def find_tool tool
