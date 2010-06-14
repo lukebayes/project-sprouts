@@ -17,7 +17,6 @@ module SproutTestCase # :nodoc:[all]
   def setup
     super
     @start_path = Dir.pwd
-    #temp_path # Call before someone can Dir.chdir...
   end
 
   def teardown
@@ -29,6 +28,9 @@ module SproutTestCase # :nodoc:[all]
 
     remove_file @temp_path
     remove_file @temp_cache
+
+    @temp_path  = nil
+    @temp_cache = nil
 
     if(@start_path && Dir.pwd != @start_path)
       puts "[WARNING] >> SproutTestCase changing dir from #{Dir.pwd} back to: #{@start_path} - Did you mean to leave your working directory in a new place?"
