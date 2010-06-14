@@ -118,21 +118,32 @@ module SproutTestCase # :nodoc:[all]
     @temp_cache ||= File.join(fixtures(caller.first.split(':').first), 'sprout', 'cache')
   end
 
-=begin
- THESE DON'T WORK! 
- They both introduced interacting, broken tests...
- Probably need to clear the mocks?
-
-  def as_a_unix_user
-    Sprout::System.stubs(:create).returns Sprout::System::UnixUser.new
+  def as_a_unix_system
+    expectation = Sprout::System.stubs(:create).returns(Sprout::System::UnixSystem.new)
     yield if block_given?
+    # Ugh - This is way too greedy... We're killing all mocks in here
+    # Doing it anyway b/c we need to get Windows support in place...
+    # TODO: Implement this feature without clobbering all stubs/mocks
+    Mocha::Mockery.instance.teardown
   end
 
-  def as_a_mac_user
-    Sprout::System.stubs(:create).returns Sprout::System::OSXUser.new
+  def as_a_mac_system
+    Sprout::System.stubs(:create).returns Sprout::System::OSXSystem.new
     yield if block_given?
+    # Ugh - This is way too greedy... We're killing all mocks in here
+    # Doing it anyway b/c we need to get Windows support in place...
+    # TODO: Implement this feature without clobbering all stubs/mocks
+    Mocha::Mockery.instance.teardown
   end
-=end 
+  
+  def as_a_windows_system
+    Sprout::System.stubs(:create).returns Sprout::System::WinSystem.new
+    yield if block_given?
+    # Ugh - This is way too greedy... We're killing all mocks in here
+    # Doing it anyway b/c we need to get Windows support in place...
+    # TODO: Implement this feature without clobbering all stubs/mocks
+    Mocha::Mockery.instance.teardown
+  end
   
   private
 

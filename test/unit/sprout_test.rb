@@ -50,6 +50,21 @@ class SproutTest < Test::Unit::TestCase
     end
   end
 
+  context "A new sprout test case" do
+
+    should "be able to work as a particular user but then revert when done" do
+      original_class = Sprout.current_system.class
+
+      block_called = false
+      as_a_unix_system do
+        block_called = true
+        assert_equal Sprout::System::UnixSystem, Sprout.current_system.class, "Requests for the current system should yield a UNIX system"
+      end
+      assert_equal original_class, Sprout.current_system.class
+      assert block_called, "Ensure the block was yielded to..."
+    end
+  end
+
   context "Executables" do
 
     context "with a sandboxed load path" do

@@ -7,8 +7,9 @@ class FileParamTest < Test::Unit::TestCase
 
     setup do
       @input_with_spaces = File.join(fixtures, "executable", "path with spaces", "input.as")
-      @input_with_spaces.gsub!(Dir.pwd + '/', '')
-      @input_with_spaces_cleaned = @input_with_spaces.gsub(' ', '\ ')
+      @input_with_spaces.gsub!(Dir.pwd + File::SEPARATOR, '')
+      @input_with_escaped_spaces = @input_with_spaces.gsub(' ', '\ ')
+      @input_with_quoted_spaces = "#{@input_with_spaces.gsub('/', '\\')}"
 
       @input = File.join(fixtures, "executable", "params", "input.as")
 
@@ -20,14 +21,24 @@ class FileParamTest < Test::Unit::TestCase
       @param.value = @input
     end
 
-    should "clean the path for current platform" do
-      #as_a_unix_user do
+    should "clean the path for unix systems" do
+      as_a_unix_system do
         @param.expects(:validate)
         # Ensure that system.clean_path is called
         @param.value = @input_with_spaces
         @param.prepare
-        assert_equal "-input=#{@input_with_spaces_cleaned}", @param.to_shell
-      #end
+        assert_equal "-input=#{@input_with_escaped_spaces}", @param.to_shell
+      end
+    end
+
+    should "clean the path for windows systems" do
+      as_a_windows_system do
+        @param.expects(:validate)
+        # Ensure that system.clean_path is called
+        @param.value = @input_with_spaces
+        @param.prepare
+        assert_equal "-input=\"#{@input_with_quoted_spaces}\"", @param.to_shell
+      end
     end
 
     should "include file path in shell output" do
