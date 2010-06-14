@@ -97,7 +97,7 @@ module Sprout
     # check out RubyGems documentation for their {Gem::Specification}[http://rubygems.rubyforge.org/rdoc/Gem/Specification.html].
     #
     def initialize
-      filename   = file_from_caller_string caller.first
+      filename   = Sprout.file_from_caller caller.first
       @load_path = File.dirname filename
       @name      = File.basename(filename).gsub('.rb', '')
       yield self if block_given?
@@ -170,14 +170,6 @@ module Sprout
       t.pkg_name    = name
       t.pkg_version = version
       yield t if block_given?
-    end
-
-    ##
-    # TODO: This is unlikely to work on Windows
-    # where the C:\ notation will mess up Ruby's
-    # caller delimiter...
-    def file_from_caller_string first_caller
-      return first_caller.split(':').shift
     end
 
     def register_file_target target

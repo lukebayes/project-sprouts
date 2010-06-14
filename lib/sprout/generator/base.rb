@@ -220,13 +220,8 @@ module Sprout
       private
 
       def self.template_from_caller caller_string
-        parts = caller_string.split(':')
-        str = parts.shift
-        while(parts.size > 0 && !File.exists?(str))
-          str << ":#{parts.shift}"
-        end
-
-        File.join(File.dirname(str), 'templates')
+        file = Sprout.file_from_caller caller_string
+        File.join(File.dirname(file), 'templates')
       end
 
     end

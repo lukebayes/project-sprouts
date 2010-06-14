@@ -70,6 +70,17 @@ module Sprout
         Sprout::System.create
       end
 
+      def file_from_caller caller_string
+        # NOTE: It's a bummer that this string is colon delimited -
+        # The value on Windows sometimes includes a colon...
+        parts = caller_string.split(':')
+        str   = parts.shift
+        while(parts.size > 0 && !File.exists?(str))
+          str << ":#{parts.shift}"
+        end
+        str
+      end
+
     end
   end
 end

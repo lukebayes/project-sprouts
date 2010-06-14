@@ -11,7 +11,7 @@ module SproutTestCase # :nodoc:[all]
   include Gem::DefaultUserInteraction
 
   def fixtures from=nil
-    @fixtures ||= find_fixtures(from || from_caller_string(caller.first))
+    @fixtures ||= find_fixtures(from || Sprout.file_from_caller(caller.first))
   end
 
   def setup
@@ -38,15 +38,12 @@ module SproutTestCase # :nodoc:[all]
   end
 
   def temp_path
-    @temp_path ||= make_temp_folder(caller.first.split(':').first)
+    caller_file = Sprout.file_from_caller caller.first
+    @temp_path ||= make_temp_folder File.dirname(caller_file)
   end
 
-  def make_temp_folder from=nil
-    path = File.join(fixtures(from), 'tmp')
-    if(!File.exists?(path))
-      FileUtils.mkdir_p path
-    end
-    path
+  def make_temp_folder from
+    FileUtils.mkdir_p File.join(fixtures(from), 'tmp')
   end
 
   def run_task(name)
@@ -120,6 +117,7 @@ module SproutTestCase # :nodoc:[all]
 =begin
  THESE DON'T WORK! 
  They both introduced interacting, broken tests...
+ Probably need to clear the mocks?
 
   def as_a_unix_user
     Sprout::System.stubs(:create).returns Sprout::System::UnixUser.new
@@ -133,15 +131,6 @@ module SproutTestCase # :nodoc:[all]
 =end 
   
   private
-
-  def from_caller_string caller_string
-    parts = caller_string.split(':')
-    str = parts.shift
-    while(parts.size > 0 && !File.exists?(str))
-      str << ":#{parts.shift}"
-    end
-    str
-  end
 
   # Find the nearest fixtures folder to the provided
   # path by checking each parent directory.

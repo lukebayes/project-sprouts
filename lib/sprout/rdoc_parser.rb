@@ -14,6 +14,8 @@ module Sprout
 
     private
 
+    ##
+    # NOTE: Don't forget that this string *sometimes* contains a colon on Windows...
     def parse_caller_string caller_string
       sections = caller_string.split(' ')
       parts = sections.first.split(':')
