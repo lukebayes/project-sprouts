@@ -45,7 +45,9 @@ module SproutTestCase # :nodoc:[all]
   end
 
   def make_temp_folder from
-    FileUtils.mkdir_p File.join(fixtures(from), 'tmp')
+    dir = File.join(fixtures(from), 'tmp')
+    FileUtils.mkdir_p dir
+    dir
   end
 
   def run_task(name)
