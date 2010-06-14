@@ -64,10 +64,8 @@ class SproutTest < Test::Unit::TestCase
       end
 
       should "find requested executables" do
-        #as_a_mac_user do
-          path = Sprout::Executable.load(:mxmlc, 'flex3sdk', '>= 3.0.0').path
-          assert_not_nil path
-        #end
+        path = Sprout::Executable.load(:mxmlc, 'flex3sdk', '>= 3.0.0').path
+        assert_not_nil path
       end
     end
     
@@ -128,7 +126,7 @@ class SproutTest < Test::Unit::TestCase
 
   private
 
-  def register_executable name, pkg_name, pkg_version, path, platform=:macosx
+  def register_executable name, pkg_name, pkg_version, path, platform=:universal
     exe = OpenStruct.new({
       :name => name,
       :path => path,
