@@ -93,7 +93,7 @@ class RubyFeatureTest < Test::Unit::TestCase
   private
 
   def create_item options={}
-    OpenStruct.new({:name => :foo, :pkg_name => 'sprout/base', :pkg_version => '1.0.pre', :platform => :darwin}.merge(options))
+    OpenStruct.new({:name => :foo, :pkg_name => 'sprout/base', :pkg_version => '1.0.pre', :platform => :universal}.merge(options))
   end
 
   class FakePlugin
