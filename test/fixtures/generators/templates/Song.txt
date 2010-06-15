@@ -1,0 +1,3 @@
+
+Your favorite song is '<%= favorite %>'!
+

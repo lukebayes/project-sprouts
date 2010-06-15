@@ -6,13 +6,16 @@ module Sprout
     class << self
 
       def register generator_class, templates_path=nil
-        #puts ">> Generator.register with: #{generator_class}"
         generator_paths << { :class => generator_class, :templates => templates_path } unless templates_path.nil?
         super(generator_class)
       end
 
       def template_folder_for clazz
-        generator_paths.each do |options|
+        # Search the potential matches in reverse order
+        # because subclasses have registered AFTER their
+        # superclasses and superclasses match the ===
+        # check...
+        generator_paths.reverse.each do |options|
           if options[:class] === clazz
             return options[:templates]
           end

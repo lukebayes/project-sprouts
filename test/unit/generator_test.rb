@@ -264,6 +264,44 @@ class GeneratorTest < Test::Unit::TestCase
     end
   end
 
+  context "a generator that is a subclass of another" do
+    # Require the source files for this context
+    require 'test/fixtures/generators/song_generator'
+    require 'test/fixtures/generators/song_subclass/least_favorite'
+
+    setup do
+      @path = File.join(fixtures, 'generators', 'tmp')
+      FileUtils.mkdir_p @path
+
+      @song_generator = SongGenerator.new
+      @song_generator.logger = StringIO.new
+      @song_generator.path = @path
+
+      @least_favorite = LeastFavorite.new
+      @least_favorite.logger = StringIO.new
+      @least_favorite.path = @path
+    end
+
+    teardown do
+      remove_file @path
+    end
+
+    should "select templates from where it's defined - not it's superclass" do
+      @song_generator.favorite = 'I Feel Better'
+      @song_generator.execute
+      assert_file File.join(@path, 'i_feel_better.txt') do |content|
+        assert_matches /Your favorite song is 'I Feel Better'/, content
+      end
+
+      @least_favorite.favorite = 'I Feel Better'
+      @least_favorite.execute
+      assert_file File.join(@path, 'sucky', 'i_feel_better.txt') do |content|
+        assert_matches /Your LEAST favorite song is 'I Feel Better'/, content
+      end
+    end
+
+  end
+
   class SubclassedGenerator < FakeGenerator
 
     add_param :new_param, String, { :default => 'Other' }
