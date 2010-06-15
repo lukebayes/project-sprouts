@@ -7,13 +7,8 @@ module Sprout
     class Files < Executable::Param
       include CollectionParam
 
-      # The prepare method should be called
-      # after a parameter instance has been created,
-      # and configured, but before
-      # prepare_prerequisites and before to_shell
-      def prepare
-        super
-        value.collect! do |path|
+      def to_shell_value
+        value.collect do |path|
           clean_path path
         end
       end

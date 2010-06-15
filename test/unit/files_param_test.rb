@@ -10,6 +10,10 @@ class FilesParamTest < Test::Unit::TestCase
       @input2 = File.join(fixtures, "executable", "params", "input2.as")
       @input3 = File.join(fixtures, "executable", "params", "input3.as")
 
+      @input4 = File.join(fixtures, "executable", "path with spaces", "input.as")
+      @input5 = File.join(fixtures, "executable", "path with spaces", "input2.as")
+      @input6 = File.join(fixtures, "executable", "path with spaces", "input3.as")
+
       @param = Sprout::Executable::Files.new
       @param.name = 'inputs'
       @param.belongs_to = FakeExecutableTask.new
@@ -37,7 +41,29 @@ class FilesParamTest < Test::Unit::TestCase
       @param.value << @input2
       @param.value << @input1
       
-      assert_equal "-inputs+=#{@input3} -inputs+=#{@input2} -inputs+=#{@input1}", @param.to_shell
+      as_a_unix_system do
+        sys = Sprout::System::UnixSystem.new
+        assert_equal "-inputs+=#{sys.clean_path(@input3)} -inputs+=#{sys.clean_path(@input2)} -inputs+=#{sys.clean_path(@input1)}", @param.to_shell, "As a Unix System"
+      end
+
+      as_a_windows_system do
+        sys = Sprout::System::WinSystem.new
+        assert_equal "-inputs+=#{sys.clean_path(@input3)} -inputs+=#{sys.clean_path(@input2)} -inputs+=#{sys.clean_path(@input1)}", @param.to_shell, "As a Windows System"
+      end
+    end
+
+    should "clean paths with spaces" do
+      @param.value << @input6
+      @param.value << @input5
+      @param.value << @input4
+      
+      as_a_unix_system do
+        assert_equal "-inputs+=#{@input6.gsub(' ', "\\ ")} -inputs+=#{@input5.gsub(' ', "\\ ")} -inputs+=#{@input4.gsub(' ', "\\ ")}", @param.to_shell, "As a Unix System"
+      end
+
+      as_a_windows_system do
+        assert_equal "-inputs+=\"#{@input6.gsub("/", "\\")}\" -inputs+=\"#{@input5.gsub("/", "\\")}\" -inputs+=\"#{@input4.gsub("/", "\\")}\"", @param.to_shell, "As a Windows System"
+      end
     end
 
     should "defer to to_shell_proc if provided" do

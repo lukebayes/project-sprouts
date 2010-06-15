@@ -39,9 +39,13 @@ module Sprout
         return '' if !visible?
         return @to_shell_proc.call(self) unless @to_shell_proc.nil?
         return value.join(' ') if hidden_name?
-        return value.collect { |val|
+        return to_shell_value.collect { |val|
           "#{shell_name}#{delimiter}#{val}"
         }.join(' ')
+      end
+
+      def to_shell_value
+        value
       end
     end
   end

@@ -18,9 +18,8 @@ module Sprout
         @option_parser_type_name = 'FILE'
       end
 
-      def prepare
-        super
-        self.value = clean_path value
+      def shell_value
+        clean_path value
       end
 
       def prepare_prerequisites
