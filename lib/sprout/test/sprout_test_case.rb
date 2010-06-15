@@ -119,9 +119,13 @@ module SproutTestCase # :nodoc:[all]
   end
 
   def as_each_system
-    [Sprout::System::UnixSystem.new,
+    [
+     Sprout::System::VistaSystem.new,
+     Sprout::System::WinNixSystem.new,
      Sprout::System::WinSystem.new,
-     Sprout::System::OSXSystem.new
+     Sprout::System::JavaSystem.new,
+     Sprout::System::OSXSystem.new,
+     Sprout::System::UnixSystem.new
     ].each do |sys|
       expectation = Sprout::System.stubs(:create).returns sys
       yield sys if block_given?

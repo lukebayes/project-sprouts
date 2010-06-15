@@ -42,7 +42,7 @@ class FilesParamTest < Test::Unit::TestCase
       @param.value << @input1
       
       as_each_system do |sys|
-        assert_equal "-inputs+=#{sys.clean_path(@input3)} -inputs+=#{sys.clean_path(@input2)} -inputs+=#{sys.clean_path(@input1)}", @param.to_shell, "As a Unix System"
+        assert_equal "-inputs+=#{sys.clean_path(@input3)} -inputs+=#{sys.clean_path(@input2)} -inputs+=#{sys.clean_path(@input1)}", @param.to_shell, "As a #{sys}"
       end
     end
 
@@ -52,7 +52,7 @@ class FilesParamTest < Test::Unit::TestCase
       @param.value << @input4
       
       as_each_system do |sys|
-        assert_equal "-inputs+=#{sys.clean_path(@input6)} -inputs+=#{sys.clean_path(@input5)} -inputs+=#{sys.clean_path(@input4)}", @param.to_shell, "As a Unix System"
+        assert_equal "-inputs+=#{sys.clean_path(@input6)} -inputs+=#{sys.clean_path(@input5)} -inputs+=#{sys.clean_path(@input4)}", @param.to_shell, "As a #{sys}"
       end
     end
 

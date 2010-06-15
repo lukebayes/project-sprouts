@@ -57,7 +57,14 @@ class SproutTest < Test::Unit::TestCase
 
       block_called = false
 
-      systems = [Sprout::System::UnixSystem, Sprout::System::WinSystem, Sprout::System::OSXSystem]
+      systems = [
+                 Sprout::System::VistaSystem,
+                 Sprout::System::WinNixSystem,
+                 Sprout::System::WinSystem,
+                 Sprout::System::JavaSystem,
+                 Sprout::System::OSXSystem,
+                 Sprout::System::UnixSystem
+                ]
       incr = 0
 
       as_each_system do |sys|
