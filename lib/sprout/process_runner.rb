@@ -129,12 +129,12 @@ module Sprout #:nodoc:
       begin
         @alive = true
         yield 
-      rescue Errno::EACCES => e
+      rescue Errno::EACCES => eacces
         update_executable_mode(*command)
         yield
-      rescue Errno::ENOENT => e
+      rescue Errno::ENOENT => enoent
         @alive = false
-        part = command[0].split(' ').shift
+        part = command[0]
         raise Sprout::Errors::ProcessRunnerError.new("The expected executable was not found for command [#{part}], please check your system path and/or sprout definition")
       end
     end
