@@ -42,7 +42,13 @@ class FileParamTest < Test::Unit::TestCase
     end
 
     should "include file path in shell output" do
-      assert_equal "-input=#{@input}", @param.to_shell
+      as_a_unix_system do |sys|
+        assert_equal "-input=#{sys.clean_path(@input)}", @param.to_shell
+      end
+
+      as_a_windows_system do |sys|
+        assert_equal "-input=#{sys.clean_path(@input)}", @param.to_shell
+      end
     end
 
     should "add file as prerequisite to parent" do
