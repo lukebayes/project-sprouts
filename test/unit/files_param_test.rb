@@ -41,13 +41,8 @@ class FilesParamTest < Test::Unit::TestCase
       @param.value << @input2
       @param.value << @input1
       
-      as_a_unix_system do |sys|
-        sys = Sprout::System::UnixSystem.new
+      as_each_system do |sys|
         assert_equal "-inputs+=#{sys.clean_path(@input3)} -inputs+=#{sys.clean_path(@input2)} -inputs+=#{sys.clean_path(@input1)}", @param.to_shell, "As a Unix System"
-      end
-
-      as_a_windows_system do |sys|
-        assert_equal "-inputs+=#{sys.clean_path(@input3)} -inputs+=#{sys.clean_path(@input2)} -inputs+=#{sys.clean_path(@input1)}", @param.to_shell, "As a Windows System"
       end
     end
 
@@ -56,12 +51,8 @@ class FilesParamTest < Test::Unit::TestCase
       @param.value << @input5
       @param.value << @input4
       
-      as_a_unix_system do |sys|
+      as_each_system do |sys|
         assert_equal "-inputs+=#{sys.clean_path(@input6)} -inputs+=#{sys.clean_path(@input5)} -inputs+=#{sys.clean_path(@input4)}", @param.to_shell, "As a Unix System"
-      end
-
-      as_a_windows_system do |sys|
-        assert_equal "-inputs+=#{sys.clean_path(@input6)} -inputs+=#{sys.clean_path(@input5)} -inputs+=#{sys.clean_path(@input4)}", @param.to_shell, "As a Windows System"
       end
     end
 

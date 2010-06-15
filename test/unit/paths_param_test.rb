@@ -20,11 +20,7 @@ class PathsParamTest < Test::Unit::TestCase
       @param.value << @path2
       @param.value << @path3
 
-      as_a_unix_system do |sys|
-        assert_equal "-paths+=#{sys.clean_path(@path1)} -paths+=#{sys.clean_path(@path2)} -paths+=#{sys.clean_path(@path3)}", @param.to_shell
-      end
-
-      as_a_windows_system do |sys|
+      as_each_system do |sys|
         assert_equal "-paths+=#{sys.clean_path(@path1)} -paths+=#{sys.clean_path(@path2)} -paths+=#{sys.clean_path(@path3)}", @param.to_shell
       end
 
@@ -36,11 +32,7 @@ class PathsParamTest < Test::Unit::TestCase
       @param.file_expression = "file2"
       @param.value << @path1
 
-      as_a_unix_system do |sys|
-        assert_equal "-paths+=#{sys.clean_path(@path1)}", @param.to_shell
-      end
-
-      as_a_windows_system do |sys|
+      as_each_system do |sys|
         assert_equal "-paths+=#{sys.clean_path(@path1)}", @param.to_shell
       end
 

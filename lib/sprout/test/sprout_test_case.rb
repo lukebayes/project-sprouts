@@ -118,6 +118,21 @@ module SproutTestCase # :nodoc:[all]
     @temp_cache ||= File.join(fixtures(caller.first.split(':').first), 'sprout', 'cache')
   end
 
+  def as_each_system
+    [Sprout::System::UnixSystem.new,
+     Sprout::System::WinSystem.new,
+     Sprout::System::OSXSystem.new
+    ].each do |sys|
+      expectation = Sprout::System.stubs(:create).returns sys
+      yield sys if block_given?
+      # Ugh - This is way too greedy... We're killing all mocks in here
+      # Doing it anyway b/c we need to get Windows support in place...
+      # TODO: Implement this feature without clobbering all stubs/mocks
+      Mocha::Mockery.instance.teardown
+    end
+  end
+
+=begin
   def as_a_unix_system
     sys = Sprout::System::UnixSystem.new
     expectation = Sprout::System.stubs(:create).returns sys
@@ -147,6 +162,8 @@ module SproutTestCase # :nodoc:[all]
     # TODO: Implement this feature without clobbering all stubs/mocks
     Mocha::Mockery.instance.teardown
   end
+=end
+
   
   private
 

@@ -21,18 +21,8 @@ class FileParamTest < Test::Unit::TestCase
       @param.value = @input
     end
 
-    should "clean the path for unix systems" do
-      as_a_unix_system do |sys|
-        @param.expects(:validate)
-        # Ensure that system.clean_path is called
-        @param.value = @input_with_spaces
-        @param.prepare
-        assert_equal "-input=#{sys.clean_path(@input_with_spaces)}", @param.to_shell
-      end
-    end
-
-    should "clean the path for windows systems" do
-      as_a_windows_system do |sys|
+    should "clean the path for each system" do
+      as_each_system do |sys|
         @param.expects(:validate)
         # Ensure that system.clean_path is called
         @param.value = @input_with_spaces
@@ -42,11 +32,7 @@ class FileParamTest < Test::Unit::TestCase
     end
 
     should "include file path in shell output" do
-      as_a_unix_system do |sys|
-        assert_equal "-input=#{sys.clean_path(@input)}", @param.to_shell
-      end
-
-      as_a_windows_system do |sys|
+      as_each_system do |sys|
         assert_equal "-input=#{sys.clean_path(@input)}", @param.to_shell
       end
     end
