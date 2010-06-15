@@ -22,22 +22,22 @@ class FileParamTest < Test::Unit::TestCase
     end
 
     should "clean the path for unix systems" do
-      as_a_unix_system do
+      as_a_unix_system do |sys|
         @param.expects(:validate)
         # Ensure that system.clean_path is called
         @param.value = @input_with_spaces
         @param.prepare
-        assert_equal "-input=#{@input_with_escaped_spaces}", @param.to_shell
+        assert_equal "-input=#{sys.clean_path(@input_with_spaces)}", @param.to_shell
       end
     end
 
     should "clean the path for windows systems" do
-      as_a_windows_system do
+      as_a_windows_system do |sys|
         @param.expects(:validate)
         # Ensure that system.clean_path is called
         @param.value = @input_with_spaces
         @param.prepare
-        assert_equal "-input=\"#{@input_with_quoted_spaces}\"", @param.to_shell
+        assert_equal "-input=#{sys.clean_path(@input_with_spaces)}", @param.to_shell
       end
     end
 

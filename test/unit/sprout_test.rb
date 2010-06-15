@@ -56,9 +56,13 @@ class SproutTest < Test::Unit::TestCase
       original_class = Sprout.current_system.class
 
       block_called = false
-      as_a_unix_system do
+      as_a_unix_system do |sys|
         block_called = true
         assert_equal Sprout::System::UnixSystem, Sprout.current_system.class, "Requests for the current system should yield a UNIX system"
+      end
+      as_a_windows_system do |sys|
+        block_called = true
+        assert_equal Sprout::System::WinSystem, Sprout.current_system.class
       end
       assert_equal original_class, Sprout.current_system.class
       assert block_called, "Ensure the block was yielded to..."

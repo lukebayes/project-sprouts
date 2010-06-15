@@ -20,13 +20,11 @@ class PathsParamTest < Test::Unit::TestCase
       @param.value << @path2
       @param.value << @path3
 
-      as_a_unix_system do
-        sys = Sprout::System::UnixSystem.new
+      as_a_unix_system do |sys|
         assert_equal "-paths+=#{sys.clean_path(@path1)} -paths+=#{sys.clean_path(@path2)} -paths+=#{sys.clean_path(@path3)}", @param.to_shell
       end
 
-      as_a_windows_system do
-        sys = Sprout::System::WinSystem.new
+      as_a_windows_system do |sys|
         assert_equal "-paths+=#{sys.clean_path(@path1)} -paths+=#{sys.clean_path(@path2)} -paths+=#{sys.clean_path(@path3)}", @param.to_shell
       end
 
@@ -37,7 +35,15 @@ class PathsParamTest < Test::Unit::TestCase
     should "accept a custom file expression" do
       @param.file_expression = "file2"
       @param.value << @path1
-      assert_equal "-paths+=#{@path1}", @param.to_shell
+
+      as_a_unix_system do |sys|
+        assert_equal "-paths+=#{sys.clean_path(@path1)}", @param.to_shell
+      end
+
+      as_a_windows_system do |sys|
+        assert_equal "-paths+=#{sys.clean_path(@path1)}", @param.to_shell
+      end
+
       # All child files have been added as prerequisites:
       assert_equal 1, @param.belongs_to.prerequisites.size
     end

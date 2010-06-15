@@ -119,8 +119,9 @@ module SproutTestCase # :nodoc:[all]
   end
 
   def as_a_unix_system
-    expectation = Sprout::System.stubs(:create).returns(Sprout::System::UnixSystem.new)
-    yield if block_given?
+    sys = Sprout::System::UnixSystem.new
+    expectation = Sprout::System.stubs(:create).returns sys
+    yield sys if block_given?
     # Ugh - This is way too greedy... We're killing all mocks in here
     # Doing it anyway b/c we need to get Windows support in place...
     # TODO: Implement this feature without clobbering all stubs/mocks
@@ -128,8 +129,9 @@ module SproutTestCase # :nodoc:[all]
   end
 
   def as_a_mac_system
-    Sprout::System.stubs(:create).returns Sprout::System::OSXSystem.new
-    yield if block_given?
+    sys = Sprout::System::OSXSystem.new
+    Sprout::System.stubs(:create).returns sys
+    yield sys if block_given?
     # Ugh - This is way too greedy... We're killing all mocks in here
     # Doing it anyway b/c we need to get Windows support in place...
     # TODO: Implement this feature without clobbering all stubs/mocks
@@ -137,8 +139,9 @@ module SproutTestCase # :nodoc:[all]
   end
   
   def as_a_windows_system
-    Sprout::System.stubs(:create).returns Sprout::System::WinSystem.new
-    yield if block_given?
+    sys = Sprout::System::WinSystem.new
+    Sprout::System.stubs(:create).returns sys
+    yield sys if block_given?
     # Ugh - This is way too greedy... We're killing all mocks in here
     # Doing it anyway b/c we need to get Windows support in place...
     # TODO: Implement this feature without clobbering all stubs/mocks
