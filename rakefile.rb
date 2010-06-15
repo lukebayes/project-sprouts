@@ -34,7 +34,7 @@ namespace :test do
   # Apparently, rcov does not work on Windows.
   # Hide these tasks so that we can at least
   # run the others...
-  if(!(RUBY_PLATFORM =~ /mswin/i))
+  if(!(RUBY_PLATFORM =~ /mingw/i) && !(RUBY_PLATFORM =~/mswin/i))
     require 'rcov/rcovtask'
 
     namespace :coverage do
