@@ -69,7 +69,6 @@ module Sprout::System
     #
     def execute(tool, options='')
       Sprout::Log.puts(">> Execute: #{tool} options: #{options}")
-      tool   = clean_path(tool)
       runner = get_and_execute_process_runner(tool, options)
       error  = runner.read_err
       result = runner.read
@@ -92,7 +91,6 @@ module Sprout::System
     # long-lived CLI processes like FCSH or FDB.
     #
     def execute_silent(tool, options='')
-      tool = clean_path(tool)
       return get_and_execute_process_runner(tool, options)
     end
 
@@ -212,7 +210,7 @@ module Sprout::System
     #
     def get_and_execute_process_runner tool, options=nil
       runner = get_process_runner
-      runner.execute_open4 tool, options
+      runner.execute_open4 clean_path(tool), options
       runner
     end
 
