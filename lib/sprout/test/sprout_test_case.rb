@@ -115,7 +115,8 @@ module SproutTestCase # :nodoc:[all]
   end
 
   def temp_cache
-    @temp_cache ||= File.join(fixtures(caller.first.split(':').first), 'sprout', 'cache')
+    dir = File.dirname(Sprout.file_from_caller(caller.first))
+    @temp_cache ||= File.join(fixtures(dir), 'sprout', 'cache')
   end
 
   def as_each_system
