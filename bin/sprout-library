@@ -2,7 +2,7 @@
 
 require 'rubygems'
 require 'sprout'
-require 'generators/library/library_generator'
+require 'sprout/generators/library/library_generator'
 
 generator = Sprout::LibraryGenerator.new
 generator.parse! ARGV

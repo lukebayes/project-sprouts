@@ -1,7 +1,6 @@
 require 'sprout'
 
-class <%= input.camel_case %>
-
+class <%= input.camel_case %> 
   NAME = '<%= input.snake_case %>'
 
   module VERSION
