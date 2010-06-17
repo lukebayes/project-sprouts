@@ -11,5 +11,9 @@ class String
      str = gsub(/^[a-z]|_+[a-z]/) { |a| a.upcase }
      str.gsub(/_/, '')
    end
+
+   def dash_case
+     self.snake_case.gsub('_', '-')
+   end
 end
 
