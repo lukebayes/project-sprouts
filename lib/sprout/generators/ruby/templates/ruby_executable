@@ -1,0 +1,6 @@
+require '<%= input.snake_case %>'
+
+<%= input.snake_case %> = <%= input.camel_case %>::Base.new
+<%= input.snake_case %>.parse! ARGV
+<%= input.snake_case %>.execute
+

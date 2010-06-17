@@ -1,0 +1,4 @@
+source :rubygems
+
+gem 'sprout', '>= 1.0.pre'
+
