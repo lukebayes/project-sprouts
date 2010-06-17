@@ -1,6 +1,0 @@
-require 'some_project'
-
-some_project = SomeProject::Base.new
-some_project.parse! ARGV
-some_project.execute
-
