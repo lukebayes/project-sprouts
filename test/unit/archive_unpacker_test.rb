@@ -23,6 +23,10 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
 
   context "an archive unpacker" do
 
+    should "fail to test hudson" do
+      fail "forced a failure"
+    end
+
     should "be identified as zip" do
       assert @unpacker.is_zip?("foo.zip"), "zip"
       assert !@unpacker.is_zip?("foo"), "not zip"
