@@ -30,6 +30,7 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
 
     should "be identified as tgz" do
       assert @unpacker.is_tgz?("foo.tgz"), "tgz"
+      assert @unpacker.is_tgz?("foo.tar.gz"), "tgz"
       assert !@unpacker.is_tgz?("foo"), "not tgz"
     end
 
