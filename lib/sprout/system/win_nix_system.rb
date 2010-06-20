@@ -38,11 +38,6 @@ module Sprout::System
       "/cygdrive/" + path
     end
 
-    private
-
-    def mingw_home_exists? path
-      File.exists?(path)
-    end
   end
 end
 
