@@ -6,9 +6,10 @@ module Sprout
     module VERSION #:nodoc:
       MAJOR = 1
       MINOR = 0
-      TINY  = 'pre'
+      TINY  = 1
+      RELEASE = 'pre'
 
-      STRING = [MAJOR, MINOR, TINY].join('.')
+      STRING = [MAJOR, MINOR, TINY, RELEASE].join('.')
       MAJOR_MINOR = [MAJOR, MINOR].join('.')
     end
   end

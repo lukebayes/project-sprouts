@@ -30,12 +30,19 @@ module Sprout::System
 
     def win_nix_home
       path  = win_home.split('\\').join("/")
-      path  = path.split(":").join("")
+      return path if File.exists?(path)
+
       parts = path.split("/")
       path  = parts.shift().downcase + "/" + parts.join("/")
+      path  = path.split(":").join("")
       "/cygdrive/" + path
     end
 
+    private
+
+    def mingw_home_exists? path
+      File.exists?(path)
+    end
   end
 end
 
