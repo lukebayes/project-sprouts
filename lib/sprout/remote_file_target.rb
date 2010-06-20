@@ -58,7 +58,7 @@ module Sprout
 
     def write_archive bytes
       FileUtils.mkdir_p File.dirname(downloaded_file)
-      File.open downloaded_file, 'w+' do |f|
+      File.open downloaded_file, 'wb+' do |f|
         f.write bytes
       end
     end
