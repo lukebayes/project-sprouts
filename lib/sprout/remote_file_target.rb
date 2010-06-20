@@ -40,12 +40,16 @@ module Sprout
     end
 
     def load_unpack_or_ignore_archive
-      if(!File.exists?(unpacked_file))
+      if(!unpacked_files_exist?)
         if(!File.exists?(downloaded_file))
           write_archive download_archive
         end
         unpack_archive
       end
+    end
+
+    def unpacked_files_exist?
+      File.exists?(unpacked_file) && !Dir.empty?(unpacked_file)
     end
 
     def download_archive
