@@ -33,9 +33,9 @@ module Sprout::System
 
     def clean_path(path)
       path = path.split('/').join("\\")
-      if(path.index(' '))
+      #if(path.index(' '))
         return %{"#{path}"}
-      end
+      #end
       return path
     end
 
