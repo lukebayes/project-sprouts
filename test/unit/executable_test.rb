@@ -209,9 +209,11 @@ class ExecutableTest < Test::Unit::TestCase
     end
 
     should "to_shell input" do
-      @tool.debug = true
-      @tool.source_path << "test/fixtures/executable/src"
-      assert_equal "--debug --source-path+=test/fixtures/executable/src", @tool.to_shell
+      as_a_unix_system do
+        @tool.debug = true
+        @tool.source_path << "test/fixtures/executable/src"
+        assert_equal "--debug --source-path+=test/fixtures/executable/src", @tool.to_shell
+      end
     end
 
     should "execute the registered executable" do
