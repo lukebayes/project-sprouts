@@ -151,9 +151,11 @@ class ExecutableTest < Test::Unit::TestCase
     end
 
     should "accept input" do
-      @tool.input = "test/fixtures/executable/src/Main.as"
-      assert_equal "test/fixtures/executable/src/Main.as", @tool.input
-      assert_equal "test/fixtures/executable/src/Main.as", @tool.to_shell
+      as_a_unix_system do
+        @tool.input = "test/fixtures/executable/src/Main.as"
+        assert_equal "test/fixtures/executable/src/Main.as", @tool.input
+        assert_equal "test/fixtures/executable/src/Main.as", @tool.to_shell
+      end
     end
 
     should "accept default gem name" do
@@ -184,22 +186,26 @@ class ExecutableTest < Test::Unit::TestCase
     end
 
     should "accept configuration as a file task" do
-      @tool = mxmlc 'bin/SomeFile.swf' do |t|
-        t.source_path << 'test/fixtures/executable/src'
-        t.input = 'test/fixtures/executable/src/Main.as'
+      as_a_unix_system do
+        @tool = mxmlc 'bin/SomeFile.swf' do |t|
+          t.source_path << 'test/fixtures/executable/src'
+          t.input = 'test/fixtures/executable/src/Main.as'
+        end
+        assert_equal 'bin/SomeFile.swf', @tool.output
+        assert_equal "--output=bin/SomeFile.swf --source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
       end
-      assert_equal 'bin/SomeFile.swf', @tool.output
-      assert_equal "--output=bin/SomeFile.swf --source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
     end
 
     should "accept configuration with prereqs as a file task" do
-      task :other_task
-      @tool = mxmlc 'bin/SomeFile.swf' => [:clean, :other_task] do |t|
-        t.source_path << 'test/fixtures/executable/src'
-        t.input = 'test/fixtures/executable/src/Main.as'
+      as_a_unix_system do
+        task :other_task
+        @tool = mxmlc 'bin/SomeFile.swf' => [:clean, :other_task] do |t|
+          t.source_path << 'test/fixtures/executable/src'
+          t.input = 'test/fixtures/executable/src/Main.as'
+        end
+        assert_equal 'bin/SomeFile.swf', @tool.output
+        assert_equal "--output=bin/SomeFile.swf --source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
       end
-      assert_equal 'bin/SomeFile.swf', @tool.output
-      assert_equal "--output=bin/SomeFile.swf --source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
     end
 
     should "to_shell input" do

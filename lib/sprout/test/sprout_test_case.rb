@@ -137,7 +137,6 @@ module SproutTestCase # :nodoc:[all]
     end
   end
 
-=begin
   def as_a_unix_system
     sys = Sprout::System::UnixSystem.new
     expectation = Sprout::System.stubs(:create).returns sys
@@ -167,7 +166,6 @@ module SproutTestCase # :nodoc:[all]
     # TODO: Implement this feature without clobbering all stubs/mocks
     Mocha::Mockery.instance.teardown
   end
-=end
 
   
   private
