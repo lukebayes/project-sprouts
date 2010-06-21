@@ -12,14 +12,6 @@ module Sprout::System
   # windows normally offers.
   class WinNixSystem < WinSystem
 
-    def clean_path(path)
-      return nil if path.nil?
-      if(path.index(' '))
-        return %{'#{path}'}
-      end
-      return path
-    end
-
     def win_home
       @win_home ||= ENV['HOMEDRIVE'] + ENV['HOMEPATH']
     end

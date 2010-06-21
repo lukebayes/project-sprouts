@@ -53,7 +53,7 @@ module Sprout::System
     # Gets the process runner and calls
     # platform-specific execute method
     def get_and_execute_process_runner tool, options=nil
-      tool = find_tool tool
+      tool = clean_path find_tool(tool)
       runner = get_process_runner
       runner.execute_win32 "\"#{tool}\" #{options}"
       runner

@@ -21,7 +21,7 @@ class WinNixSystemTest < Test::Unit::TestCase
     end
 
     should "wrap paths that have spaces with escaped quotes" do
-      assert_equal "\'foo bar\'", @sys.clean_path("foo bar")
+      assert_equal "\"foo bar\"", @sys.clean_path("foo bar")
     end
 
     should "not modify paths that have no spaced" do
