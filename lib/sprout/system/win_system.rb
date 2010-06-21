@@ -33,9 +33,9 @@ module Sprout::System
 
     def clean_path(path)
       path = path.split('/').join("\\")
-      #if(path.index(' '))
+      if(path.index(' '))
         return %{"#{path}"}
-      #end
+      end
       return path
     end
 
@@ -55,7 +55,7 @@ module Sprout::System
     def get_and_execute_process_runner tool, options=nil
       tool = clean_path find_tool(tool)
       runner = get_process_runner
-      runner.execute_win32 "\"#{tool}\" #{options}"
+      runner.execute_win32 tool, options
       runner
     end
 
