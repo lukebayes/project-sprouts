@@ -36,11 +36,13 @@ module Sprout
             unpack_zip(file_name, dir)
           when 'targz'
             unpack_targz(file_name, dir)
+          when 'tbz2'
+            unpack_tbz2(file_name, dir)
           when 'dmg'
             unpack_dmg(file_name, dir)
           when 'exe'
             FileUtils.mkdir_p(dir)
-            File.move(file_name, dir)
+            FileUtils.move(file_name, dir)
           when 'swc' || 'rb'
             return
           else
@@ -107,8 +109,16 @@ module Sprout
       path = File.expand_path(dir)
       return File.join(path, basename)
     end
-    
+
+    def unpack_tbz2(tgz_file, dir)
+      unpack_tar_zip tgz_file, dir, 'tar.bz2'
+    end
+
     def unpack_targz(tgz_file, dir)
+      unpack_tar_zip tgz_file, dir, 'tar.gz'
+    end
+    
+    def unpack_tar_zip(tgz_file, dir, ext)
       if(!File.exists?(dir))
         FileUtils.makedirs(dir)
       end
@@ -117,7 +127,7 @@ module Sprout
       
       # Recurse and unpack gzipped children (Adobe did this double 
       # gzip with the Linux FlashPlayer for some reason)
-      Dir.glob("#{dir}/**/*.tar.gz").each do |child|
+      Dir.glob("#{dir}/**/*.#{ext}").each do |child|
         if(child != tgz_file && dir != File.dirname(child))
           unpack_targz(child, File.dirname(child))
         end
