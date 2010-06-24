@@ -40,6 +40,12 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
       end
     end
 
+    should "unpack zip on darwin specially" do
+      @unpacker.stubs(:is_darwin?).returns true
+      @unpacker.expects(:unpack_zip_on_darwin)
+      @unpacker.unpack @zip_file, temp_path
+    end
+
     ['exe', 'swc', 'rb'].each do |format|
       should "copy #{format} files" do
         file = eval("@#{format}_file")

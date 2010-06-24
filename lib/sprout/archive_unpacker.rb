@@ -23,15 +23,39 @@ module Sprout
     end
 
     # Unpack zip archives on any platform.
+    #
+    # In case you're wondering... Ruby sucks...
+    # This code corrupts the FlashPlayer executable
+    # on OSX but if the file is manually unpacked,
+    # it works fine.
+    #
     def unpack_zip archive, destination, clobber=nil
       validate archive, destination
 
-      Zip::ZipFile.open archive do |zipfile|
-        zipfile.each do |entry|
-          next if entry.name =~ /__MACOSX/ or entry.name =~ /\.DS_Store/
-          unpack_zip_entry entry, destination, clobber
+      if is_darwin?
+        unpack_zip_on_darwin archive, destination, clobber
+      else
+        Zip::ZipFile.open archive do |zipfile|
+          zipfile.each do |entry|
+            next if entry.name =~ /__MACOSX/ or entry.name =~ /\.DS_Store/
+            unpack_zip_entry entry, destination, clobber
+          end
         end
       end
+    end
+
+    def is_darwin?
+      Sprout.current_system == Sprout::System::OSXSystem
+    end
+
+    def unpack_zip_on_darwin archive, destination, clobber
+      # Unzipping on OS X
+      FileUtils.makedirs destination
+      zip_dir = File.expand_path File.dirname(archive)
+      zip_name = File.basename archive
+      output = File.expand_path destination
+      # puts ">> zip_dir: #{zip_dir} zip_name: #{zip_name} output: #{output}"
+      %x(cd #{zip_dir};unzip #{zip_name} -d #{output})
     end
 
     # Unpack tar.gz or .tgz files on any platform.
