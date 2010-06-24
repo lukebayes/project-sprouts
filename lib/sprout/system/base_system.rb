@@ -96,18 +96,10 @@ module Sprout::System
 
     ##
     # Execute a new process in a separate thread.
-    # This can be useful for processes that take
-    # an especially long time to execute.
-    #
-    # Threads are complicated - use with caution...
     #
     def execute_thread(tool, options='')
-      if(Log.debug)
-         return ThreadMock.new
-      else
-        return Thread.new do
-          execute(tool, options)
-        end
+      return Thread.new do
+        execute(tool, options)
       end
     end
 
