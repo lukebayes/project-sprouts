@@ -3,6 +3,34 @@ require File.dirname(__FILE__) + '/test_helper'
 class SproutTest < Test::Unit::TestCase
   include SproutTestCase
 
+  context "The SproutTestCase" do
+
+    context "find_fixtures" do
+
+      setup do
+        @from = File.join(fixtures, 'sprout_test_case', 'test', 'other')
+        @expected_fixtures = File.join(fixtures, 'sprout_test_case', 'test', 'fixtures')
+        FileUtils.makedirs @from
+      end
+
+      teardown do
+        remove_file File.join(fixtures, 'sprout_test_case')
+      end
+
+      should "find_fixtures within a test folder" do
+        result = find_fixtures @from
+        assert_equal @expected_fixtures, result
+      end
+
+      should "throw if reaches system root" do
+        assert_raises Sprout::Errors::UsageError do
+          find_fixtures File.dirname(File.dirname(File.dirname(__FILE__)))
+        end
+      end
+    end
+
+  end
+
   context "Errors" do
     include Sprout::Errors
 
@@ -20,7 +48,7 @@ class SproutTest < Test::Unit::TestCase
       VersionRequirementNotMetError
     ].each do |error|
 
-      should "be available to instiate a #{error.to_s}" do
+      should "be available to instantiate a #{error.to_s}" do
         error.new
       end
     end
