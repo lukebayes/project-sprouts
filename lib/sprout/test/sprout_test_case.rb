@@ -182,7 +182,7 @@ module SproutTestCase # :nodoc:[all]
     # Return the fixtures folder if found:
     return fixture_path if File.directory? fixture_path
     # Move up one directory and try again:
-    return find_fixtures File.dirname(path)
+    return find_fixtures File.dirname(path) unless File.dirname(path) == path
   end
 
 end
