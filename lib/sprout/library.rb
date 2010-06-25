@@ -27,7 +27,7 @@ module Sprout
       # Create Rake tasks that will load and install
       # a particular library.
       def define_task pkg_name, type=nil, version=nil
-        library = Sprout::Library.load type, pkg_name, version
+        library = Sprout::Library.load type, pkg_name.to_s, version
         library.installation_task = task pkg_name
 
         define_lib_dir_task_if_necessary
@@ -105,7 +105,6 @@ end
 #   library :asunit4, :swc, '>= 4.2.pre'
 #
 def library pkg_name, type=nil, version=nil
-  puts ">> Library loaded!"
   Sprout::Library.define_task pkg_name, type, version
 end
 
