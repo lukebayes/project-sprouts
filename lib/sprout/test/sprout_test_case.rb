@@ -174,15 +174,31 @@ module SproutTestCase # :nodoc:[all]
   # path by checking each parent directory.
   def find_fixtures path
     # Return nil if path is nil or is not a file:
-    return nil if(path.nil? || !File.exists?(path))
+    find_fixtures_error(path) if(find_reached_root?(path))
     # Get the parent directory if path is a file:
     path = File.dirname(path) if !File.directory? path
+    if(should_create_fixtures_for?(path))
+      FileUtils.makedirs File.join(path, FIXTURES_NAME)
+    end
     # Check for a folder at "#{path}/fixtures":
     fixture_path = File.join(path, FIXTURES_NAME)
     # Return the fixtures folder if found:
     return fixture_path if File.directory? fixture_path
     # Move up one directory and try again:
     return find_fixtures File.dirname(path)
+  end
+
+  def should_create_fixtures_for? path
+    basename = File.basename path
+    return basename == 'test' || basename == 'tests'
+  end
+
+  def find_fixtures_error path
+    raise Sprout::Errors::UsageError.new "Request to find a fixtures folder failed at: #{path}"
+  end
+
+  def find_reached_root? path
+    return (path.nil? || !File.exists?(path) || File.dirname(path) == path)
   end
 
 end
