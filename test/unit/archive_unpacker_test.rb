@@ -41,9 +41,10 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
     end
 
     should "unpack zip on darwin specially" do
-      @unpacker.stubs(:is_darwin?).returns true
-      @unpacker.expects(:unpack_zip_on_darwin)
-      @unpacker.unpack @zip_file, temp_path
+      as_a_mac_system do
+        @unpacker.expects(:unpack_zip_on_darwin)
+        @unpacker.unpack @zip_file, temp_path
+      end
     end
 
     ['exe', 'swc', 'rb'].each do |format|
@@ -87,26 +88,32 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
           expected_file = File.join temp_path, @file_name
           FileUtils.touch expected_file
 
-          @unpacker.unpack @archive_file, temp_path, nil, :clobber
-          assert_file expected_file
-          assert_matches /hello world/, File.read(expected_file)
+          as_a_windows_system do
+            @unpacker.unpack @archive_file, temp_path, nil, :clobber
+            assert_file expected_file
+            assert_matches /hello world/, File.read(expected_file)
+          end
         end
 
         should "not clobber if not told to do so" do
           expected_file = File.join temp_path, @file_name
           FileUtils.touch expected_file
 
-          assert_raises Sprout::Errors::DestinationExistsError do
-            @unpacker.unpack @archive_file, temp_path, nil, :no_clobber
+          as_a_windows_system do
+            assert_raises Sprout::Errors::DestinationExistsError do
+              @unpacker.unpack @archive_file, temp_path, nil, :no_clobber
+            end
           end
         end
 
         should "unpack a nested archive" do
           expected_file = File.join temp_path, 'some folder', 'child folder', 'child child folder', @file_name
 
-          @unpacker.unpack @archive_folder, temp_path
-          assert_file expected_file
-          assert_matches /hello world/, File.read(expected_file)
+          as_a_windows_system do
+            @unpacker.unpack @archive_folder, temp_path
+            assert_file expected_file
+            assert_matches /hello world/, File.read(expected_file)
+          end
         end
       end
     end

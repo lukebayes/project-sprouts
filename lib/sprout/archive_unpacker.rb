@@ -45,15 +45,15 @@ module Sprout
     end
 
     def is_darwin?
-      Sprout.current_system == Sprout::System::OSXSystem
+      Sprout.current_system.is_a?(Sprout::System::OSXSystem)
     end
 
     def unpack_zip_on_darwin archive, destination, clobber
       # Unzipping on OS X
       FileUtils.makedirs destination
-      zip_dir = File.expand_path File.dirname(archive)
+      zip_dir  = File.expand_path File.dirname(archive)
       zip_name = File.basename archive
-      output = File.expand_path destination
+      output   = File.expand_path destination
       # puts ">> zip_dir: #{zip_dir} zip_name: #{zip_name} output: #{output}"
       %x(cd #{zip_dir};unzip #{zip_name} -d #{output})
     end
