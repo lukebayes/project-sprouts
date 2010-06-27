@@ -181,7 +181,7 @@ module Sprout
       # 
       # When loading, if no name is specified, the :swc will be
       # returned to clients.
-      register_items target.libraries.reverse, Sprout::Library, target
+      register_items target.libraries, Sprout::Library, target
     end
 
     def register_items collection, source, target

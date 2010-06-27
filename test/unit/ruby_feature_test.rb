@@ -88,6 +88,18 @@ class RubyFeatureTest < Test::Unit::TestCase
       FakePlugin.register(create_item)
       assert_not_nil FakePlugin.load [:bar, :baz, :foo]
     end
+
+    should "find platform-specific remote file target" do
+      osx = create_item(:platform => :osx)
+      linux = create_item(:platform => :linux)
+      FakePlugin.register osx
+      FakePlugin.register linux
+      as_a_mac_system do
+        result = FakePlugin.load :foo
+        assert_equal osx, result
+      end
+    end
+
   end
 
   private

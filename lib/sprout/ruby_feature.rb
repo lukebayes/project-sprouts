@@ -103,13 +103,14 @@ module Sprout
         #registered_entities.each do |entity|
           #puts ">> entity: #{entity.name} pkg_name: #{entity.pkg_name} version: #{entity.pkg_version}"
         #end
-        registered_entities.select do |entity|
+        registered_entities.reverse.select do |entity|
             satisfies_name?(entity, name_or_names) && 
             satisfies_platform?(entity) &&
             satisfies_pkg_name?(entity, pkg_name) &&
             satisfies_version?(entity, version_requirement)
         end.first
       end
+
       def satisfies_environment? entity, environment
         #puts ">> env: #{entity.environment} vs. #{environment}"
         environment.nil? || !entity.respond_to?(:environment) || entity.environment.to_s == environment.to_s
