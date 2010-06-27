@@ -679,9 +679,9 @@ end
 #      t.library_path << 'lib/SomeLib.swc'
 #    end
 #
-def mxmlc args, &block
+def mxmlc *args, &block
   mxmlc_tool = Sprout::MXMLC.new
-  mxmlc_tool.to_rake(args, &block)
+  mxmlc_tool.to_rake(*args, &block)
   mxmlc_tool
 end
 

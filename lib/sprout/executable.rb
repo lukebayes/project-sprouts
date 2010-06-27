@@ -303,13 +303,15 @@ module Sprout
         end
       end
 
-      def to_rake args
-        update_rake_task_name_from_args args
-        yield self if block_given?
-        prepare
-        file_task = file args do
+      def to_rake *args
+        # Define the file task for - so that
+        # desc blocks hook up to it...
+        file_task = file *args do
           execute
         end
+        update_rake_task_name_from_args *args
+        yield self if block_given?
+        prepare
         file_task.prerequisites << task(Sprout::Library::TASK_NAME)
         prerequisites.each do |prereq|
           file_task.prerequisites << prereq
@@ -345,13 +347,13 @@ module Sprout
 
       protected
 
-      def update_rake_task_name_from_args args
-        self.rake_task_name = parse_rake_task_args args
+      def update_rake_task_name_from_args *args
+        self.rake_task_name = parse_rake_task_arg args.last
       end
 
-      def parse_rake_task_args args
-        return args if args.is_a?(Symbol) || args.is_a?(String)
-        args.each_pair do |key, value|
+      def parse_rake_task_arg arg
+        return arg if arg.is_a?(Symbol) || arg.is_a?(String)
+        arg.each_pair do |key, value|
           return key
         end
         nil
