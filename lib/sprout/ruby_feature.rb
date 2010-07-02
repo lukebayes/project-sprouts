@@ -91,7 +91,7 @@ module Sprout
         end
       end
 
-      ##
+      #
       # Used by the Generator::Base to update inputs from 
       # empty class definitions to instances..
       def update_registered_entities

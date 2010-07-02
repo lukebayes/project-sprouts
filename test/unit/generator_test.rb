@@ -31,6 +31,8 @@ class GeneratorTest < Test::Unit::TestCase
       @string_io        = StringIO.new
       @generator        = configure_generator FakeGenerator.new
 
+      Sprout::Generator.register OtherFakeGenerator
+
       FileUtils.mkdir_p @fixture
     end
 
@@ -54,6 +56,14 @@ class GeneratorTest < Test::Unit::TestCase
         assert_file File.join(project, 'src', 'SomeProject.as') do |content|
           assert_matches /public class SomeProject/, content
           assert_matches /public function SomeProject/, content
+        end
+      end
+
+      should "call another generator" do
+        @generator.external = true
+        @generator.execute
+        assert_file File.join(@fixture, 'some_project', 'SomeOtherOtherFile') do |content|
+          assert_matches /We are agents of the free?/, content
         end
       end
 
@@ -110,7 +120,7 @@ class GeneratorTest < Test::Unit::TestCase
       end
 
       should "only have one param in class definition" do
-        assert_equal 2, FakeGenerator.static_parameter_collection.size
+        assert_equal 3, FakeGenerator.static_parameter_collection.size
         assert_equal 2, FakeGenerator.static_default_value_collection.size
       end
 
@@ -185,7 +195,7 @@ class GeneratorTest < Test::Unit::TestCase
   private
   
   def configure_generator generator
-    generator.input   = 'some_project'
+    generator.input  = 'some_project'
     generator.logger = @string_io
     generator.path   = @fixture
     generator.templates << @templates
@@ -196,6 +206,8 @@ class GeneratorTest < Test::Unit::TestCase
   # This is a fake Generator that should 
   # exercise the inputs.
   class FakeGenerator < Sprout::Generator::Base
+    
+    add_param :external, Boolean
 
     ##
     # Register this generator by input, type and version
@@ -225,9 +237,20 @@ class GeneratorTest < Test::Unit::TestCase
       directory input do
         template 'SomeFile'
         template 'SomeOtherFile', 'OtherFileTemplate'
+        generator :other_fake if external
         directory src do
           template "#{class_name}.as", 'Main.as'
         end
+      end
+    end
+  end
+
+  class OtherFakeGenerator < Sprout::Generator::Base
+    add_param :band_name, String, { :default => 'Barf' }
+
+    def manifest
+      directory input do
+        template 'SomeOtherOtherFile', 'OtherFileTemplate'
       end
     end
   end

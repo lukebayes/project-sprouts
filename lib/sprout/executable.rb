@@ -319,6 +319,31 @@ module Sprout
         file_task
       end
 
+      ##
+      # This will create a hash of ONLY values that are created
+      # using +add_param+, properties that are created with
+      # attr_accessor must be handled manually, or patches are welcome!
+      def to_hash
+        result = {}
+        params.each do |param|
+          result[param.name] = self.send(param.name)
+        end
+        result
+      end
+
+      ##
+      # This will ignore unknown parameters, because our very
+      # first use case, is when generators call other generators
+      # and generator A might have different parameters than
+      # generator B.
+      def from_hash hash
+        hash.each_pair do |key, value|
+          if(self.respond_to?(key))
+            self.send "#{key}=", value
+          end
+        end
+      end
+
       def to_help
         option_parser.to_s
       end

@@ -17,6 +17,18 @@ class ExecutableTest < Test::Unit::TestCase
       assert_equal "--boolean-param", @tool.to_shell
     end
 
+    should "serialize to a hash" do
+      @tool.boolean_param = true
+      hash = @tool.to_hash
+      assert_equal true, hash[:boolean_param]
+    end
+
+    should "serialize from a hash" do
+      hash = { :boolean_param => true }
+      @tool.from_hash hash
+      assert_equal true, @tool.boolean_param
+    end
+
     should "accept a string param" do
       @tool.string_param = "string1"
       assert_equal "string1", @tool.string_param
@@ -241,5 +253,6 @@ class ExecutableTest < Test::Unit::TestCase
       assert_equal 2, file_task.prerequisites.size
     end
   end
+
 end
 
