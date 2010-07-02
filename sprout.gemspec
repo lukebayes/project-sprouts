@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project         = "sprout" 
   s.require_path              = ['lib']
   s.files                     = FileList['**/**/*'].exclude /.git|.svn|.DS_Store/
-  s.executables               = ['sprout', 'sprout-library', 'sprout-tool', 'sprout-generator']
+  s.executables               = ['sprout', 'sprout-library', 'sprout-tool', 'sprout-generator', 'sprout-class']
   s.add_bundler_dependencies
 end
 

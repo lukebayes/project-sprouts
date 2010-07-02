@@ -10,13 +10,14 @@ module Sprout
         super(generator_class)
       end
 
-      def create_instance class_base_name, options=nil
+      def create_instance type, options=nil
+        class_name = "#{type.to_s.camel_case}Generator"
         registered_entities.each do |entity|
-          if(entity.to_s.match /#{class_base_name}$/)
+          if(entity.to_s.match /#{class_name}$/)
             return entity.new
           end
         end
-        raise Sprout::Errors::MissingGeneratorError.new "Could not find any generator named: (#{class_base_name}). Perhaps you need to add a RubyGem to your Gemfile?"
+        raise Sprout::Errors::MissingGeneratorError.new "Could not find any generator named: (#{class_name}). Perhaps you need to add a RubyGem to your Gemfile?"
       end
 
       def template_folder_for clazz
@@ -230,8 +231,7 @@ module Sprout
       end
 
       def generator name, options={}
-        class_name = "#{name.to_s.camel_case}Generator"
-        instance = Sprout::Generator.create_instance class_name, options
+        instance = Sprout::Generator.create_instance name, options
         instance.from_hash to_hash.merge(options)
         instance.logger = logger
         instance.execute
