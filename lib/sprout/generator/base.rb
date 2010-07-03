@@ -13,7 +13,7 @@ module Sprout
       def create_instance type, options=nil
         class_name = "#{type.to_s.camel_case}Generator"
         registered_entities.each do |entity|
-          if(entity.to_s.match /#{class_name}$/)
+          if(entity.to_s.match /::#{class_name}$/ || entity.to_s.match /^#{class_name}$/)
             return entity.new
           end
         end
