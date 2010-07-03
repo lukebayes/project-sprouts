@@ -15,7 +15,6 @@ Gem::Specification.new do |s|
   s.homepage                  = "http://projectsprouts.org"
   s.summary                   = "Software development - evolved"
   s.description               = "Project Sprouts gives you access to beautiful generators and easily customized templates, automated build scripts, distributed libraries and simple system configuration"
-  s.post_install_message      = File.read 'POSTINSTALL.rdoc'
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "sprout" 
   s.require_path              = ['lib']

@@ -1,3 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/bash
 
-puts 'Type sprout- and then hit the tab key to see the new sprout binaries.'
+echo 'Type sprout- and then hit the tab key to see the new sprout binaries.'
+
