@@ -1,9 +1,8 @@
 require 'rubygems'
 require 'bundler'
 
-Bundler.setup
+Bundler.require
 
-require 'rake'
 require 'rake/clean'
 require 'rake/testtask'
 require 'rake/rdoctask'
@@ -31,20 +30,15 @@ namespace :test do
     task(:clean) { rm_f "coverage.data" }
   end
 
-  # Apparently, rcov does not work on Windows.
+  # Apparently, rcov does not work on Windows or Ubuntu?
   # Hide these tasks so that we can at least
   # run the others...
-  if(!(RUBY_PLATFORM =~ /mingw/i) && !(RUBY_PLATFORM =~/mswin/i))
+  if(RUBY_PLATFORM =~ /darwin/i)
     require 'rcov/rcovtask'
 
-    namespace :coverage do
-      desc "Delete aggregate coverage data."
-      task(:clean) { rm_f "coverage.data" }
-    end
-  
-    desc "Aggregate code coverage for unit, functional and integration tests"
-    task :coverage => "test:coverage:clean"
-  
+    CLEAN.add('coverage.data')
+    CLEAN.add('.coverage')
+
     # Hold collection in case we need it:
     #%w[unit functional integration].each do |target|
     %w[unit].each do |target|
@@ -54,7 +48,12 @@ namespace :test do
           t.test_files = FileList["test/#{target}/**/*_test.rb"]
           t.output_dir = ".coverage/#{target}"
           t.verbose = true
-          t.rcov_opts << "--aggregate coverage.data --exclude .bundle"
+          t.rcov_opts = ["--sort coverage",
+                         "--aggregate coverage.data", 
+                         "--exclude .bundle",
+                         "--exclude .gem",
+                         "--exclude errors.rb",
+                         "--exclude progress_bar.rb"]
         end
       end
       task :coverage => "test:coverage:#{target}"
