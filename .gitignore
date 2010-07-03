@@ -11,4 +11,6 @@ bundles/as3/samples/mxmlc/bin/*.swc
 media
 .bundle
 .coverage
+coverage
+tmp
 coverage.data
