@@ -133,7 +133,6 @@ module Sprout
       # The primary input for the application or component.
       add_param :input, String, { :hidden_name => true, :required => true }
 
-
       ##
       # Set the default name for generators.
       set :name, :application

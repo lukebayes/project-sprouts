@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler'
+Bundler.require
+
+generator = Sprout::Generator.create_instance :test_class
+generator.parse! ARGV
+generator.execute
+
