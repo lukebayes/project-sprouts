@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "sprout" 
   s.require_path              = ['lib']
-  s.files                     = FileList['**/**/*'].exclude /.git|.svn|.DS_Store|rdoc|.coverage|coverage|tmp|pkg/
+  s.files                     = FileList['**/**/*'].exclude /.git|.svn|.DS_Store/
   s.executables               = ['sprout', 'sprout-library', 'sprout-tool', 'sprout-generator', 'sprout-class']
   s.add_bundler_dependencies
 end
