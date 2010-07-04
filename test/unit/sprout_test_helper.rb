@@ -16,3 +16,15 @@ require 'unit/fake_process_runner'
 require 'unit/fake_executable_task'
 require 'sprout/test/sprout_test_case'
 
+class Test::Unit::TestCase
+
+  # Only clear registrations in the Sprout core
+  # project - not in child projects
+  def teardown
+    super
+    Sprout::Executable.clear_entities!
+    Sprout::Library.clear_entities!
+    Sprout::Generator.clear_entities!
+  end
+end
+

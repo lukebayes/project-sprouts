@@ -22,9 +22,6 @@ module SproutTestCase # :nodoc:[all]
   def teardown
     super
     clear_tasks
-    Sprout::Executable.clear_entities!
-    Sprout::Library.clear_entities!
-    Sprout::Generator.clear_entities!
 
     remove_file @temp_path
     remove_file @temp_cache
@@ -36,7 +33,6 @@ module SproutTestCase # :nodoc:[all]
       puts "[WARNING] >> SproutTestCase changing dir from #{Dir.pwd} back to: #{@start_path} - Did you mean to leave your working directory in a new place?"
       Dir.chdir @start_path
     end
-
   end
 
   def temp_path
