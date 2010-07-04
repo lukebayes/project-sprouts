@@ -1,6 +1,8 @@
 require File.dirname(__FILE__) + '/test_helper'
 require 'test/fixtures/executable/mxmlc'
 require 'test/unit/fake_other_executable'
+require 'test/fixtures/executable/subclass/executable_superclass'
+require 'test/fixtures/executable/subclass/executable_subclass'
 
 class ExecutableTest < Test::Unit::TestCase
   include SproutTestCase
@@ -8,7 +10,14 @@ class ExecutableTest < Test::Unit::TestCase
   context "a new executable delegate" do
 
     setup do
-      @tool = FakeOtherExecutableTask.new
+      @tool       = FakeOtherExecutableTask.new
+      @subclassed = ExecutableSubclass.new
+    end
+
+    should "add subclass params after those added by superclass" do
+      @subclassed.superclass_param = 'A.txt'
+      @subclassed.subclass_param = 'B.txt'
+      assert_equal '--superclass-param=A.txt --subclass-param=B.txt', @subclassed.to_shell
     end
 
     should "accept boolean param" do

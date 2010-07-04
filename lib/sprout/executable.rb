@@ -84,6 +84,7 @@ module Sprout
         options ||= {}
         options[:name] = name
         options[:type] = type
+        # TODO: Integrate the RDOC-parsed parameter description here:
         #options[:description] ||= Sprout::RDocParser.description_for_caller caller.shift
 
         create_param_accessors options
@@ -450,14 +451,22 @@ module Sprout
 
       def assembled_static_collection collection_name
         collection = []
-        clazz = self.class
-        while clazz do
-          if clazz.respond_to?(collection_name)
+        inheritance_chain.reverse.each do |clazz|
+          if(clazz.respond_to?(collection_name))
             collection.concat clazz.send(collection_name)
           end
-          clazz = clazz.superclass
         end
         collection
+      end
+
+      def inheritance_chain
+        chain = []
+        clazz = self.class
+        while clazz do
+          chain << clazz
+          clazz = clazz.superclass
+        end
+        chain
       end
 
       def add_help_param

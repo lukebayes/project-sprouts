@@ -32,7 +32,6 @@ class GeneratorTest < Test::Unit::TestCase
       @generator        = configure_generator FakeGenerator.new
 
       Sprout::Generator.register OtherFakeGenerator
-
       FileUtils.mkdir_p @fixture
     end
 
@@ -276,7 +275,7 @@ class GeneratorTest < Test::Unit::TestCase
     end
     
     should "be loadable if it's in the load path" do
-      generator = Sprout::Generator.load :demo, 'temp_generator', '>= 1.0.pre'
+      generator = Sprout::Generator.load :application, 'temp_generator', '>= 1.0.pre'
       assert_not_nil generator
 
       generator.logger = StringIO.new
