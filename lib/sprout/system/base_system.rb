@@ -68,7 +68,7 @@ module Sprout::System
     # Raises a +Sprout::Errors::ExecutionError+ if the process writes to stderr
     #
     def execute(tool, options='')
-      Sprout::Log.puts(">> Execute: #{tool} options: #{options}")
+      Sprout::Log.puts("#{tool} #{options}")
       runner = get_and_execute_process_runner(tool, options)
       error  = runner.read_err
       result = runner.read
