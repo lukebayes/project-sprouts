@@ -30,7 +30,6 @@ class <%= input.camel_case %>GeneratorTest < Test::Unit::TestCase
       assert_file input_file do |content|
         assert_matches /Your content to assert here/, content
       end
-
     end
 
   end

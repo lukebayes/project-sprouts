@@ -1,10 +1,12 @@
 module Sprout::Generator
   class DirectoryManifest < Manifest
     attr_reader :children
+    attr_reader :generators
 
     def initialize
       super
       @children = []
+      @generators = []
     end
 
     def create
@@ -15,9 +17,11 @@ module Sprout::Generator
         say "Skipped existing:  #{path}"
       end
       create_children
+      execute_generators
     end
 
     def destroy
+      unexecute_generators
       success = destroy_children
 
       if success && can_remove?
@@ -45,5 +49,18 @@ module Sprout::Generator
       destroyed = children.reverse.select { |child| child.destroy }
       return (destroyed.size == children.size)
     end
+
+    def execute_generators
+      generators.each do |generator|
+        generator.execute
+      end
+    end
+
+    def unexecute_generators
+      generators.each do |generator|
+        generator.unexecute
+      end
+    end
+
   end
 end

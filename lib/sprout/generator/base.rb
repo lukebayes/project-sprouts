@@ -213,6 +213,7 @@ module Sprout
       def prepare_command
         @logger ||= $stdout
         @command = Command.new self
+        @command.logger = logger
         manifest
         @command
       end
@@ -230,10 +231,7 @@ module Sprout
       end
 
       def generator name, options={}
-        instance = Sprout::Generator.create_instance name, options
-        instance.from_hash to_hash.merge(options)
-        instance.logger = logger
-        instance.execute
+        @command.generator name, to_hash.merge(options)
       end
 
       private
