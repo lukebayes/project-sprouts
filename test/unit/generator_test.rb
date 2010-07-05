@@ -103,6 +103,7 @@ class GeneratorTest < Test::Unit::TestCase
 
       should "notify user of all files created" do
         @generator.input = 'some_project'
+        @string_io.expects(:puts).with('Skipped existing:  .')
         @string_io.expects(:puts).with('Created directory: ./some_project')
         @string_io.expects(:puts).with('Created file:      ./some_project/SomeFile')
         @string_io.expects(:puts).with('Created file:      ./some_project/SomeOtherFile')

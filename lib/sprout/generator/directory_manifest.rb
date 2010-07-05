@@ -14,7 +14,7 @@ module Sprout::Generator
         FileUtils.mkdir_p path
         say "Created directory: #{path}"
       else
-        say "Skipped existing:  #{path}"
+        say "Skipped existing:  #{path}" unless(path == Dir.pwd)
       end
       create_children
       execute_generators
