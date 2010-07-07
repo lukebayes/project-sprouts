@@ -1,16 +1,14 @@
 h1. IMPORTANT NOTE
 
-The mainline of this repository represents the next major release of Sprouts which involves a nearly complete rewrite.
+<font color="red">The mainline of this repository represents the next major release of Sprouts which involves a nearly complete rewrite.
 
-To see, or edit the source code for the currently-released code, please check out the "0.7.241-release branch":http://github.com/lukebayes/project-sprouts/tree/0.7.241-release.
+To see, or edit the source code for the currently-released code, please check out the "0.7.241-release branch":http://github.com/lukebayes/project-sprouts/tree/0.7.241-release.</font>
 
 h1. Project Sprouts
 
-Project Sprouts is an open-source, cross-platform project generation and configuration tool for ActionScript 2, ActionScript 3, and Flex projects.
+Project Sprouts is an open-source, cross-platform project generation and configuration tool for whatever technology you use. At the time of this writing, we have support for ActionScript 2, ActionScript 3, Flex and AIR projects.
 
-Project Sprouts provides everything you need to get up and running with SWF development instantly. The only prerequisites are Ruby and RubyGems.
-
-Sprouts includes support for project and code templates, automated build scripts, remote managed libraries, and automatic installation of dependencies like the Flash VM and a variety of compilers and tools.
+Sprouts includes support for project and code templates, automated build scripts, remote managed libraries, and automatic installation of executable dependencies like runtimes, compilers and other utilities.
 
 Sprouts works on OS X, Windows XP, Windows Vista and many flavors of *nix (including Solaris thanks to lots of patience from Armaghan Chaudhary).
 
@@ -23,113 +21,18 @@ h3. Installation
 <pre><code>gem install sprout</code></pre>
 _(If prompted, select the appropriate gem for your platform.)_
 
-h3. Getting Started
-
-Open a terminal and enter the following commands:
-
-Create a new ActionScript 3 project and move into it:
-
-<pre><code>sprout -n as3 SomeProject
-cd SomeProject</code></pre>
-
-Resolve all dependencies, compile and launch the SWF:
-
-<pre><code>rake</code></pre>
-
-Generate a new class, test case and test suite:
-
-<pre><code>script/generate utils.MathUtil</code></pre>
-
-Compile and launch the test harness:
-
-<pre><code>rake test</code></pre>
-
-Compile a SWC file:
-
-<pre><code>rake swc</code></pre>
-
-Generate documentation using "AsDoc":http://labs.adobe.com/wiki/index.php/ASDoc:
-
-<pre><code>rake doc</code></pre>
-
-Execute the test harness, emit a JUnit-compatible test results document, and close the Flash Player when complete or after encountering an uncaught exception:
-
-<pre><code>rake cruise</code></pre>
-
-Display all available Rake tasks:
-
-<pre><code>rake -T</code></pre>
-
-h3. Some Simple, Sample Rake Tasks
-
-Sprouts brings the power of the "Rake":http://martinfowler.com/articles/rake.html build language to SWF development. Rake is similar to Make and Ant, but harnesses the full power and flexibility of Ruby to help us describe the structure and automate the behavior of any build, from the simplest to the most complex.
-
-Following are some simple examples of the Rake tasks that Sprouts provides:
-
-_"The Default Rakefile - Expanded":http://gist.github.com/221569_
-
-_"An example of the erb_resolver Rake task":http://gist.github.com/306334_
-
-_ActionScript 3 and MXML Projects:_
-
-<pre><code>mxmlc :debug do |t|
-  t.input = 'src/SomeProject.as'
-  t.output = 'bin/SomeProject.swf'
-end
-
-compc :deploy do |t|
-  t.input = 'src/SomeProject.as'
-  t.output = 'bin/SomeProject.swc'
-end
-
-asdoc :doc do |t|
-  t.doc_classes = 'SomeProject'
-  t.source_path = 'src'
-end
-
-flashplayer :run do |t|
-  t.swf = 'bin/SomeProject.swf'
-end
-</code></pre>
-
-_ActionScript 2 Projects:_
-
-<pre><code>swfmill :skin do |t|
-  t.input = 'assets/skins/SomeProjectSkin'
-  t.output = 'assets/skins/SomeProjectSkin.swf'
-end
-
-mtasc :debug => :skin do |t|
-  t.main = true
-  t.header = '800:600:24'
-  t.input = 'src/SomeProject.as'
-  t.output = 'bin/SomeProject.swf'
-end
-
-flashplayer :run do |t|
-  t.swf = 'bin/SomeProject.swf'
-end
-</code></pre>
+To get started with Sprouts in Flash, follow the directions provided by the "Flash SDK":http://github.com/lukbayes/sprout-flashdk .
 
 h3. Some Links
 
 * "Web Site":http://projectsprouts.org
-* "File a Bug":http://github.com/lukebayes/project-sprouts/issues
 * "See the Documentation":http://projectsprouts.org/rdoc
 * "Meet the Community":http://groups.google.com/group/projectsprouts
-
-h1. Contributing
-
-* Fork this git repository
-* Clone your forked version with write-access
-* cd to your local copy
-* Run "bundle install"
-* Run "rake test"
 
 h3. MIT License
 
 <pre>
-Copyright (c) 2007, 2008, 2009 Pattern Park
+Copyright (c) 2007-2010 Pattern Park
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
