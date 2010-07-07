@@ -21,7 +21,7 @@ h3. Installation
 <pre><code>gem install sprout</code></pre>
 _(If prompted, select the appropriate gem for your platform.)_
 
-To get started with Sprouts in Flash, follow the directions provided by the "Flash SDK":http://github.com/lukbayes/sprout-flashdk .
+To get started with Sprouts in Flash, follow the directions provided by the "Flash SDK":http://github.com/lukebayes/sprout-flashdk .
 
 h3. Some Links
 
