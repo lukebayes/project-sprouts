@@ -17,13 +17,13 @@ class ExecutableTest < Test::Unit::TestCase
     should "add subclass params after those added by superclass" do
       @subclassed.superclass_param = 'A.txt'
       @subclassed.subclass_param = 'B.txt'
-      assert_equal '--superclass-param=A.txt --subclass-param=B.txt', @subclassed.to_shell
+      assert_equal '---superclass-param=A.txt ---subclass-param=B.txt', @subclassed.to_shell
     end
 
     should "accept boolean param" do
       @tool.boolean_param = true
       assert @tool.boolean_param
-      assert_equal "--boolean-param", @tool.to_shell
+      assert_equal "---boolean-param", @tool.to_shell
     end
 
     should "serialize to a hash" do
@@ -41,7 +41,7 @@ class ExecutableTest < Test::Unit::TestCase
     should "accept a string param" do
       @tool.string_param = "string1"
       assert_equal "string1", @tool.string_param
-      assert_equal "--string-param=string1", @tool.to_shell
+      assert_equal "---string-param=string1", @tool.to_shell
     end
 
     should "not share parameter values across instances" do
@@ -57,7 +57,7 @@ class ExecutableTest < Test::Unit::TestCase
       @tool.strings_param << 'string2'
 
       assert_equal ['string1', 'string2'], @tool.strings_param
-      assert_equal "--strings-param+=string1 --strings-param+=string2", @tool.to_shell
+      assert_equal "---strings-param+=string1 ---strings-param+=string2", @tool.to_shell
     end
 
     should "accept number param" do
@@ -213,7 +213,7 @@ class ExecutableTest < Test::Unit::TestCase
           t.input = 'test/fixtures/executable/src/Main.as'
         end
         assert_equal 'bin/SomeFile.swf', @tool.output
-        assert_equal "--output=bin/SomeFile.swf --source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
+        assert_equal "-output=bin/SomeFile.swf -source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
       end
     end
 
@@ -225,7 +225,7 @@ class ExecutableTest < Test::Unit::TestCase
           t.input = 'test/fixtures/executable/src/Main.as'
         end
         assert_equal 'bin/SomeFile.swf', @tool.output
-        assert_equal "--output=bin/SomeFile.swf --source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
+        assert_equal "-output=bin/SomeFile.swf -source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
       end
     end
 
@@ -233,7 +233,7 @@ class ExecutableTest < Test::Unit::TestCase
       as_a_unix_system do
         @tool.debug = true
         @tool.source_path << "test/fixtures/executable/src"
-        assert_equal "--debug --source-path+=test/fixtures/executable/src", @tool.to_shell
+        assert_equal "-debug -source-path+=test/fixtures/executable/src", @tool.to_shell
       end
     end
 

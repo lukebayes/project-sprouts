@@ -261,8 +261,8 @@ module Sprout
         @option_parser        = OptionParser.new
         @default_prefix       = DEFAULT_PREFIX
         @default_short_prefix = DEFAULT_SHORT_PREFIX
-        initialize_parameters
         initialize_defaults
+        initialize_parameters
       end
 
       def parse! commandline_options

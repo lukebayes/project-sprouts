@@ -15,6 +15,8 @@ class FakeOtherExecutableTask
   add_param :strings_param, Strings
   add_param :urls_param,    Urls
 
+  set :default_prefix, '---'
+
   add_param_alias :sp, :strings_param
 end
 
