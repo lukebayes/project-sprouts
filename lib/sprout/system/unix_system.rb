@@ -64,7 +64,7 @@ module Sprout::System
     #
     # Will this corrupt binaries? Yes... Yes. it. will.
     def should_repair_executable path
-      return (File.exists?(path) && !File.directory?(path) && File.read(path).match(/^\#\!\/bin\/sh/)a
+      return (File.exists?(path) && !File.directory?(path) && File.read(path).match(/^\#\!\/bin\/sh/))
     end
 
   end
