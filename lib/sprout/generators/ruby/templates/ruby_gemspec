@@ -4,13 +4,13 @@ $:.unshift lib unless $:.include?(lib)
 
 require 'bundler'
 require 'rake'
-require 'sprout/version'
+require '<%= input.snake_case %>'
 
 Gem::Specification.new do |s|
-  s.name                      = Sprout::NAME
-  s.version                   = Sprout::VERSION::STRING
+  s.name                      = <%= input.camel_case %>::NAME
+  s.version                   = <%= input.camel_case %>::VERSION
   s.platform                  = Gem::Platform::RUBY
-  s.authors                   = ["Luke Bayes"]
+  s.authors                   = ["Your Name Here"]
   s.email                     = "projectsprouts@googlegroups.com"
   s.homepage                  = "http://projectsprouts.org"
   s.summary                   = "Software development - evolved"
@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project         = "sprout" 
   s.require_path              = ['lib']
   s.files                     = FileList['**/**/*'].exclude /.git|.svn|.DS_Store/
-  s.executables               = ['sprout', 'sprout-generator', 'sprout-class', 'sprout-test', 'sprout-suite', 'sprout-ruby']
+  s.executables               = ['<%= input.dash_case %>']
   s.add_bundler_dependencies
 end
 

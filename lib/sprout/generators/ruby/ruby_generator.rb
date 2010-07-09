@@ -35,7 +35,9 @@ module Sprout
       snake = input.snake_case
 
       directory snake do
-        file 'Gemfile', 'ruby_gemfile'
+        template 'Gemfile', 'ruby_gemfile'
+        template 'Rakefile', 'ruby_rakefile'
+        template "#{input.snake_case}.gemspec", 'ruby_gemspec'
 
         directory lib do
           template "#{snake}.rb", 'ruby_input.rb'
@@ -46,7 +48,10 @@ module Sprout
 
         directory test do
           directory fixtures
-          directory unit
+          directory unit do
+            template "#{input.snake_case}_test.rb", 'ruby_test_case.rb'
+          end
+          template 'test_helper.rb', 'ruby_test_helper.rb'
         end
 
         directory bin do

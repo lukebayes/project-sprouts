@@ -1,3 +1,4 @@
+require 'rubygems'
 require '<%= input.snake_case %>'
 
 <%= input.snake_case %> = <%= input.camel_case %>::Base.new

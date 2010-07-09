@@ -31,6 +31,12 @@ class RubyGeneratorTest < Test::Unit::TestCase
       gem_file = File.join project_dir, 'Gemfile'
       assert_file gem_file
 
+      rake_file = File.join project_dir, 'Rakefile'
+      assert_file rake_file
+
+      gem_spec = File.join project_dir, 'some_project.gemspec'
+      assert_file gem_spec
+
       lib_dir = File.join project_dir, 'libs'
       assert_file lib_dir
 
@@ -49,8 +55,18 @@ class RubyGeneratorTest < Test::Unit::TestCase
       test_dir = File.join project_dir, 'test'
       assert_file test_dir
 
+      test_helper = File.join test_dir, 'test_helper.rb'
+      assert_file test_helper do |content|
+        assert_matches /require 'some_project'/, content
+      end
+
       unit_dir = File.join test_dir, 'unit'
       assert_file unit_dir
+
+      test_case = File.join unit_dir, 'some_project_test.rb'
+      assert_file test_case do |content|
+        assert_matches /class SomeProjectTest/, content
+      end
 
       fixtures_dir = File.join test_dir, 'fixtures'
       assert_file fixtures_dir
