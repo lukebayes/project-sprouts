@@ -4,7 +4,7 @@ gem 'sprout', '>= 1.0.0.pre'
 
 group :development do
   gem 'rake'
-  gem "shoulda"
-  gem "mocha"
+  gem 'shoulda'
+  gem 'mocha'
 end
 
