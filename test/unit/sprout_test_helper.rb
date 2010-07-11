@@ -9,7 +9,11 @@ Bundler.setup :default, :development
 require 'shoulda'
 require 'mocha'
 
-require File.dirname(__FILE__) + '/../../lib/sprout'
+lib = File.join(File.dirname(__FILE__), '..', '..', 'lib')
+$:.unshift lib unless $:.include? lib
+
+require 'sprout'
+
 $:.unshift File.expand_path(File.join(File.dirname(__FILE__), '..'))
 
 require 'unit/fake_process_runner'

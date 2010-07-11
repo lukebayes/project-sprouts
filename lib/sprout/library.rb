@@ -35,7 +35,7 @@ module Sprout
         if path_or_paths.is_a?(Array)
           # TODO: Need to add support for merging these directories
           # rather than simply clobbering...
-          path_or_paths.each { |p| define_path_task pkg_name, library, p }
+          path_or_paths.collect { |p| define_path_task pkg_name, library, p }
         else
           define_path_task pkg_name, library, path_or_paths
         end
@@ -67,6 +67,7 @@ module Sprout
           FileUtils.cp_r path, installation_path
           Sprout::Log.puts ">> Copied files from: (#{path}) to: (#{installation_path})"
         end
+        installation_path
       end
 
       def define_file_copy_task path, installation_path
@@ -76,6 +77,7 @@ module Sprout
           FileUtils.cp path, "#{installation_path}/"
           Sprout::Log.puts ">> Copied file from: (#{path}) to: (#{task_name})"
         end
+        task_name
       end
 
       def define_file_task name

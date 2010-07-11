@@ -314,7 +314,10 @@ module Sprout
         yield self if block_given?
         prepare
         
-        handle_library_prerequisites file_task.prerequisites
+        # TODO: Tried auto-updating with library
+        # prerequisites, but this led to strange
+        # behavior with multiple registrations.
+        #handle_library_prerequisites file_task.prerequisites
 
         # Add the library resolution rake task
         # as a prerequisite
@@ -410,11 +413,17 @@ module Sprout
 
       private
 
-      def handle_library_prerequisites prerequisites
-        prerequisites.each do |prerequisite|
+      def handle_library_prerequisites items
+        puts "======================"
+        items.each do |item|
           begin
-            lib = Sprout::Library.load prerequisite
-            library_added lib
+            puts "+++++++"
+            puts ">> loading #{item.to_s}"
+            lib = Sprout::Library.load nil, item.to_s
+            lib.project_paths.each do |path|
+              puts ">> LOOPING WITH: #{path}"
+              library_added path
+            end
           rescue Sprout::Errors::LoadError
           end
         end

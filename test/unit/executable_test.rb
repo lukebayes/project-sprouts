@@ -220,10 +220,10 @@ class ExecutableTest < Test::Unit::TestCase
     should "add libraries as provided" do
       as_a_unix_system do
 
-        asunit_lib = OpenStruct.new :name => :asunit4, :project_path => 'lib/AsUnit-4.4.2.swc'
+        asunit_lib = OpenStruct.new :name => :asunit4, :project_paths => ['lib/AsUnit-4.4.2.swc']
         Sprout::Library.register asunit_lib
 
-        @tool = mxmlc 'bin/SomeFile.swf' => [:asunit4, 'bin/OtherFileTask.swf'] do |t|
+        @tool = mxmlc 'bin/SomeFile.swf' => [:asunit4, 'abcd', 'bin/OsdftherFileTask.swf'] do |t|
           t.source_path << 'test/fixtures/executable/src'
           t.input = 'test/fixtures/executable/src/Main.as'
         end
