@@ -96,7 +96,7 @@ end
 #   library :asunit4
 #
 # Or, if you would like to specify which registered
-# library to pull from the identified package:
+# library to pull from the identified package (by name):
 #
 #   library :asunit4, :src
 #

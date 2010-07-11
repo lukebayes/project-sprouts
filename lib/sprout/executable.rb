@@ -305,7 +305,7 @@ module Sprout
       end
 
       def to_rake *args
-        # Define the file task for - so that
+        # Define the file task first - so that
         # desc blocks hook up to it...
         file_task = file *args do
           execute
@@ -313,6 +313,11 @@ module Sprout
         update_rake_task_name_from_args *args
         yield self if block_given?
         prepare
+        
+        handle_library_prerequisites file_task.prerequisites
+
+        # Add the library resolution rake task
+        # as a prerequisite
         file_task.prerequisites << task(Sprout::Library::TASK_NAME)
         prerequisites.each do |prereq|
           file_task.prerequisites << prereq
@@ -396,7 +401,24 @@ module Sprout
         end
       end
 
+      ##
+      # This method will generally be overridden
+      # by subclasses and they can do whatever customization
+      # is necessary for a particular library type.
+      def library_added library
+      end
+
       private
+
+      def handle_library_prerequisites prerequisites
+        prerequisites.each do |prerequisite|
+          begin
+            lib = Sprout::Library.load prerequisite
+            library_added lib
+          rescue Sprout::Errors::LoadError
+          end
+        end
+      end
 
       def help_requested? options
         options.include? '--help'

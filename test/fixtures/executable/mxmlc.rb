@@ -644,6 +644,15 @@ module Sprout
     #
     add_param :warnings, Boolean
 
+    def library_added library
+      path = library.project_path
+      if(path =~ /\.swc$/)
+        self.library_path << path
+      else
+        self.source_path << path
+      end
+    end
+
     ##
     # Main source file to send compiler"
     # This must be the last item in this list

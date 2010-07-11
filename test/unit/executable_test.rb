@@ -217,6 +217,20 @@ class ExecutableTest < Test::Unit::TestCase
       end
     end
 
+    should "add libraries as provided" do
+      as_a_unix_system do
+
+        asunit_lib = OpenStruct.new :name => :asunit4, :project_path => 'lib/AsUnit-4.4.2.swc'
+        Sprout::Library.register asunit_lib
+
+        @tool = mxmlc 'bin/SomeFile.swf' => [:asunit4, 'bin/OtherFileTask.swf'] do |t|
+          t.source_path << 'test/fixtures/executable/src'
+          t.input = 'test/fixtures/executable/src/Main.as'
+        end
+        assert_equal "-library-path+=lib/AsUnit-4.4.2.swc -output=bin/SomeFile.swf -source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
+      end
+    end
+
     should "accept configuration with prereqs as a file task" do
       as_a_unix_system do
         task :other_task
