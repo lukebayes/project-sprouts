@@ -4,7 +4,7 @@ module Sprout
 
     ##
     # The 3-part version for the new Ruby application.
-    add_param :version, String, { :default => '0.0.pre' }
+    add_param :version, String, { :default => '0.0.0.pre' }
 
     ##
     # The name of the 'lib' directory - where your Ruby
