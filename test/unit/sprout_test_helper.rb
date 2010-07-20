@@ -21,7 +21,6 @@ class Test::Unit::TestCase
   # Only clear registrations in the Sprout core
   # project - not in child projects
   def teardown
-    super
     Sprout::Executable.clear_entities!
     Sprout::Library.clear_entities!
     Sprout::Generator.clear_entities!
