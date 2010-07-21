@@ -317,7 +317,7 @@ module Sprout
         # TODO: Tried auto-updating with library
         # prerequisites, but this led to strange
         # behavior with multiple registrations.
-        #handle_library_prerequisites file_task.prerequisites
+        handle_library_prerequisites file_task.prerequisites
 
         # Add the library resolution rake task
         # as a prerequisite
@@ -414,17 +414,13 @@ module Sprout
       private
 
       def handle_library_prerequisites items
-        puts "======================"
         items.each do |item|
-          begin
-            puts "+++++++"
-            puts ">> loading #{item.to_s}"
+          t = Rake.application[item]
+          if(t.sprout_type == :library)
             lib = Sprout::Library.load nil, item.to_s
             lib.project_paths.each do |path|
-              puts ">> LOOPING WITH: #{path}"
               library_added path
             end
-          rescue Sprout::Errors::LoadError
           end
         end
       end

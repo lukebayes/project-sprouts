@@ -29,6 +29,7 @@ module Sprout
       def define_task pkg_name, type=nil, version=nil
         library = Sprout::Library.load type, pkg_name.to_s, version
         library.installation_task = task pkg_name
+        library.installation_task.sprout_type = :library
 
         define_lib_dir_task_if_necessary
         path_or_paths = library.path

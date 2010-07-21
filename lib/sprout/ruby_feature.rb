@@ -166,3 +166,11 @@ module Sprout
   end
 end
 
+##
+# Mixin on the Rake::Task so
+# that our concrete entities
+# can interoperate with some
+# knowledge of each other.
+class Rake::Task
+  attr_accessor :sprout_type
+end
