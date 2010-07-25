@@ -420,7 +420,7 @@ module Sprout
             lib = Sprout::Library.load nil, item.to_s
             lib.project_paths.each do |path|
               library_added path
-            end
+            end unless lib.project_paths.nil?
           end
         end
       end
