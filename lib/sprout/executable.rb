@@ -15,7 +15,7 @@ require 'sprout/executable/parameter_factory'
 module Sprout
 
   ##
-  # The Sprout::Executable module is a Domain Specific Language
+  # The Sprout::Executable module exposes a Domain Specific Language
   # for describing Command Line Interface (CLI) applications.
   #
   # This module can be included by any class, and depending on how that class
@@ -418,9 +418,7 @@ module Sprout
           t = Rake.application[item]
           if(t.sprout_type == :library)
             lib = Sprout::Library.load nil, item.to_s
-            lib.project_paths.each do |path|
-              library_added path
-            end unless lib.project_paths.nil?
+            library_added lib.installed_project_path
           end
         end
       end

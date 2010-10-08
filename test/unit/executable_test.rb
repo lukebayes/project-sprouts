@@ -224,7 +224,9 @@ class ExecutableTest < Test::Unit::TestCase
         task 'abcd'
         task 'bin/OtherFileTask.swf'
 
-        asunit_lib = OpenStruct.new :name => :asunit4, :project_paths => ['lib/AsUnit-4.4.2.swc']
+        #asunit_lib = OpenStruct.new :name => :asunit4, :installed_project_path => 'lib/AsUnit-4.4.2.swc'
+        
+        asunit_lib = OpenStruct.new :name => :asunit4, :installed_project_path => 'lib/AsUnit-4.4.2.swc'
         Sprout::Library.register asunit_lib
 
         library :asunit4

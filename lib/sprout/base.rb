@@ -70,9 +70,13 @@ module Sprout
         Sprout::System.create
       end
 
+      ##
+      # Get the file name from the 'caller' property of
+      # a Ruby exception.
+      #
+      # Note: It's a bummer that this string is colon delimited -
+      # The value on Windows can include a colon...
       def file_from_caller caller_string
-        # NOTE: It's a bummer that this string is colon delimited -
-        # The value on Windows sometimes includes a colon...
         parts = caller_string.split(':')
         str   = parts.shift
         while(parts.size > 0 && !File.exists?(str))
