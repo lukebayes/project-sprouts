@@ -22,7 +22,8 @@ class LibraryTest < Test::Unit::TestCase
       @lib_dir = File.join fixture, 'project_lib'
       sources  = File.join fixture, 'sources'
       @src     = File.join sources, 'src', 'Source.as'
-      Sprout::Library.project_path = @lib_dir
+
+      Sprout::Library.any_instance.stubs(:project_path).returns @lib_dir
       create_and_register_library :fake_swc_lib, @src
     end
 
@@ -39,12 +40,11 @@ class LibraryTest < Test::Unit::TestCase
       @lib_a   = File.join sources, 'lib', 'a'
       @lib_b   = File.join sources, 'lib', 'b'
       @src     = File.join sources, 'src'
-      Sprout::Library.project_path = @lib_dir
+      Sprout::Library.any_instance.stubs(:project_path).returns @lib_dir
       create_and_register_library :fake_source_lib, [@src, @lib_a, @lib_b]
     end
 
     teardown do
-      Sprout::Library.project_path = nil
       remove_file @lib_dir
     end
 
@@ -68,20 +68,16 @@ class LibraryTest < Test::Unit::TestCase
       assert_file File.join(library_dir, 'b')
     end
 
-    should "load the library from the load_path" do
-    end
-
   end
 
   private
 
   def create_and_register_library name, path, pkg_name=nil, pkg_version=nil
-    lib             = OpenStruct.new
+    lib             = Sprout::Library.new
     lib.name        = name
     lib.path        = path
     lib.pkg_name    = pkg_name unless pkg_name.nil?
     lib.pkg_version = pkg_version unless pkg_version.nil?
-
     Sprout::Library.register lib
   end
 end

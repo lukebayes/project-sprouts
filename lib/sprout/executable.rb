@@ -408,7 +408,11 @@ module Sprout
       # This method will generally be overridden
       # by subclasses and they can do whatever customization
       # is necessary for a particular library type.
-      def library_added library
+      #
+      # It's important to note that this value can be
+      # a String path to a file (or folder), or it can
+      # be an Array of paths to files (or folders).
+      def library_added path_or_paths
       end
 
       private

@@ -98,8 +98,10 @@ module Sprout
       end
 
       def entity_for name_or_names, pkg_name, version_requirement
+        # These commented blocks help immensely when debugging
+        # loading and registration issues, please leave them here:
         #puts "+++++++++++++++++++++++++++"
-        #puts ">> entity_for #{name} pkg_name: #{pkg_name} version: #{version_requirement}"
+        #puts ">> entity_for #{name_or_names} pkg_name: #{pkg_name} version: #{version_requirement}"
         #registered_entities.each do |entity|
           #puts ">> entity: #{entity.name} pkg_name: #{entity.pkg_name} version: #{entity.pkg_version}"
         #end
