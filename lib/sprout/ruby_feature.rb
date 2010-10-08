@@ -174,5 +174,5 @@ end
 # can interoperate with some
 # knowledge of each other.
 class Rake::Task
-  attr_accessor :sprout_type
+  attr_accessor :sprout_entity
 end

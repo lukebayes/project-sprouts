@@ -418,11 +418,10 @@ module Sprout
       private
 
       def handle_library_prerequisites items
-        items.each do |item|
-          t = Rake.application[item]
-          if(t.sprout_type == :library)
-            lib = Sprout::Library.load nil, item.to_s
-            library_added lib.installed_project_path
+        items.each do |task_name|
+          t = Rake.application[task_name]
+          if(!t.sprout_entity.nil?)
+            library_added t.sprout_entity.installed_project_path
           end
         end
       end

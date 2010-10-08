@@ -220,21 +220,20 @@ class ExecutableTest < Test::Unit::TestCase
     should "add libraries as provided" do
       as_a_unix_system do
 
-        Sprout::Library.any_instance.stubs(:define_path_task)
-
         task 'abcd'
         task 'bin/OtherFileTask.swf'
 
-        asunit_lib = Sprout::Library.new :name => :asunit4, :installed_project_path => 'lib/AsUnit-4.4.2.swc'
+        asunit_lib = Sprout::Library.new :name => :swc, :pkg_name => :asunit4, :path => 'lib/AsUnit-4.4.2.swc'
         Sprout::Library.register asunit_lib
 
-        library :asunit4
+        t = library :asunit4
 
-        #@tool = mxmlc 'bin/SomeFile.swf' => [:asunit4, 'abcd', 'bin/OtherFileTask.swf'] do |t|
-          #t.source_path << 'test/fixtures/executable/src'
-          #t.input = 'test/fixtures/executable/src/Main.as'
-        #end
-        #assert_equal "-library-path+=lib/AsUnit-4.4.2.swc -output=bin/SomeFile.swf -source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
+        @tool = mxmlc 'bin/SomeFile.swf' => [:asunit4, 'abcd', 'bin/OtherFileTask.swf'] do |t|
+          t.source_path << 'test/fixtures/executable/src'
+          t.input = 'test/fixtures/executable/src/Main.as'
+        end
+
+        assert_equal "-library-path+=lib/asunit4/AsUnit-4.4.2.swc -output=bin/SomeFile.swf -source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
       end
     end
 

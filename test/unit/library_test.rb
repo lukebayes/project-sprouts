@@ -7,11 +7,11 @@ class LibraryTest < Test::Unit::TestCase
     setup do
       @path = File.join fixtures, 'library', 'archive'
       @archive = File.join @path, 'Archive.swc'
-      create_and_register_library :fake_archive_lib, @archive
+      create_and_register_library :fake_archive_lib, :swc, @archive
     end
 
     should "be able to load registered libraries" do
-      lib = Sprout::Library.load :fake_archive_lib
+      lib = Sprout::Library.load :swc, :fake_archive_lib
       assert_not_nil lib
     end
   end
@@ -24,11 +24,11 @@ class LibraryTest < Test::Unit::TestCase
       @src     = File.join sources, 'src', 'Source.as'
 
       Sprout::Library.any_instance.stubs(:project_path).returns @lib_dir
-      create_and_register_library :fake_swc_lib, @src
+      create_and_register_library :fake_swc_lib, :swc, @src
     end
 
     should "create rake file tasks for single files" do
-      Sprout::Library.define_task :fake_swc_lib
+      Sprout::Library.define_task :swc, :fake_swc_lib
     end
   end
 
@@ -41,7 +41,7 @@ class LibraryTest < Test::Unit::TestCase
       @lib_b   = File.join sources, 'lib', 'b'
       @src     = File.join sources, 'src'
       Sprout::Library.any_instance.stubs(:project_path).returns @lib_dir
-      create_and_register_library :fake_source_lib, [@src, @lib_a, @lib_b]
+      create_and_register_library :fake_source_lib, :src, [@src, @lib_a, @lib_b]
     end
 
     teardown do
@@ -49,7 +49,7 @@ class LibraryTest < Test::Unit::TestCase
     end
 
     should "be able to load registered libraries" do
-      lib = Sprout::Library.load :fake_source_lib
+      lib = Sprout::Library.load :src, :fake_source_lib
       assert_not_nil lib
       paths = lib.path.dup
       assert_equal @src, paths.shift
@@ -58,7 +58,7 @@ class LibraryTest < Test::Unit::TestCase
     end
 
     should "create rake file tasks for directories" do
-      Sprout::Library.define_task :fake_source_lib
+      Sprout::Library.define_task :src, :fake_source_lib
       Rake::application[:resolve_sprout_libraries].invoke
 
       library_dir = File.join(@lib_dir, 'fake_source_lib')
@@ -72,7 +72,7 @@ class LibraryTest < Test::Unit::TestCase
 
   private
 
-  def create_and_register_library name, path, pkg_name=nil, pkg_version=nil
+  def create_and_register_library pkg_name, name, path, pkg_version=nil
     lib             = Sprout::Library.new
     lib.name        = name
     lib.path        = path

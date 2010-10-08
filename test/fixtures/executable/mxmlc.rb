@@ -644,12 +644,11 @@ module Sprout
     #
     add_param :warnings, Boolean
 
-    def library_added path
-      #puts ">> MXMLC.library_added with: #{path}"
-      if(path =~ /\.swc$/)
-        self.library_path << path
+    def library_added path_or_paths
+      if(path_or_paths =~ /\.swc$/)
+        self.library_path << path_or_paths
       else
-        self.source_path << path
+        self.source_path << path_or_paths
       end
     end
 

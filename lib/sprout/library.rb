@@ -50,12 +50,9 @@ module Sprout
       #
       #   library :asunit4
       #
-      def define_task pkg_name, type=nil, version=nil
-        puts ">> INSIDE DEFINE: #{pkg_name}"
-        
-        library = Sprout::Library.load pkg_name.to_s, type, version
+      def define_task name=nil, pkg_name=nil, pkg_version=nil
+        library = Sprout::Library.load name, pkg_name, pkg_version
         library.create_installation_tasks
-        library
       end
     end
 
@@ -64,10 +61,11 @@ module Sprout
       super()
     end
 
+    ##
+    # Returns the outer Rake::Task which is invokable.
     def create_installation_tasks
       define_lib_dir_task_if_necessary project_path
-
-      @installed_project_path = create_project_tasks
+      create_project_tasks
       create_outer_task
     end
 
@@ -75,7 +73,13 @@ module Sprout
       t = task pkg_name
       # This helps executable rake tasks decide if they
       # want to do something special for library tasks.
-      t.sprout_type = :library
+      t.sprout_entity = self
+      class << t
+        def sprout_library?
+          !sprout_entity.nil? &&
+            sprout_entity.is_a?(Sprout::Library)
+        end
+      end
       t
     end
 
@@ -89,9 +93,9 @@ module Sprout
       if path.is_a?(Array)
         # TODO: Need to add support for merging these directories
         # rather than simply clobbering...
-        path.collect { |single_path| define_path_task pkg_name, single_path }
+        @instaled_project_path = path.collect { |single_path| define_project_path_task pkg_name, single_path }
       else
-        define_path_task pkg_name, path
+        @installed_project_path = define_project_path_task pkg_name, path
       end
     end
 
@@ -104,29 +108,28 @@ module Sprout
       end
     end
 
-    def define_path_task pkg_name, path
-      installation_path = "#{project_path}/#{pkg_name}"
+    def define_project_path_task pkg_name, path
+      install_path = "#{project_path}/#{pkg_name}"
       if File.directory?(path)
-        define_directory_copy_task path, installation_path
+        define_directory_copy_task path, install_path
       else
-        define_file_copy_task path, installation_path
+        define_file_copy_task path, install_path
       end
     end
 
-    def define_directory_copy_task path, installation_path
-      define_file_task installation_path do
-        puts ">> INSIDE DIR COPY WITH: #{installation_path}"
-        FileUtils.cp_r path, installation_path
-        Sprout::Log.puts ">> Copied files from: (#{path}) to: (#{installation_path})"
+    def define_directory_copy_task path, install_path
+      define_file_task install_path do
+        FileUtils.cp_r path, install_path
+        Sprout::Log.puts ">> Copied files from: (#{path}) to: (#{install_path})"
       end
-      installation_path
+      install_path
     end
 
-    def define_file_copy_task path, installation_path
-      task_name = "#{installation_path}/#{File.basename(path)}"
+    def define_file_copy_task path, install_path
+      task_name = "#{install_path}/#{File.basename(path)}"
       define_file_task task_name do
-        FileUtils.mkdir_p installation_path
-        FileUtils.cp path, "#{installation_path}/"
+        FileUtils.mkdir_p install_path
+        FileUtils.cp path, "#{install_path}/"
         Sprout::Log.puts ">> Copied file from: (#{path}) to: (#{task_name})"
       end
       task_name
@@ -169,7 +172,7 @@ end
 #     t.source_path << 'test'
 #   end
 #
-def library pkg_name, type=nil, version=nil
-  Sprout::Library.define_task pkg_name, type, version
+def library pkg_name, name=nil, version=nil
+  Sprout::Library.define_task name, pkg_name, version
 end
 
