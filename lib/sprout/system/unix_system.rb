@@ -63,6 +63,9 @@ module Sprout::System
     # for the file at the provided +path+ String.
     #
     # Will this corrupt binaries? Yes... Yes. it. will.
+    #
+    # This also fails on UTF-8 files since Ruby's regex
+    # appears to choke on UTF-8??
     def should_repair_executable path
       return (File.exists?(path) && !File.directory?(path) && File.read(path).match(/^\#\!\/bin\/sh/))
     end
