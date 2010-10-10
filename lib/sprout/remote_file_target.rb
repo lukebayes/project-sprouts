@@ -49,10 +49,16 @@ module Sprout
     def load_unpack_or_ignore_archive
       if(!unpacked_files_exist?)
         if(!File.exists?(downloaded_file))
-          write_archive download_archive
+          bytes = download_archive
+          write_archive bytes
         end
 
-        bytes = File.read downloaded_file
+        # If we *just* downloaded the file,
+        # use the bytes directly, otherwise
+        # read them off disk from a previous
+        # download attempt:
+        bytes ||= File.open(downloaded_file, 'r').read
+
         if should_unpack?(bytes, md5)
           unpack_archive
         end
