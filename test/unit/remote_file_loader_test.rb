@@ -19,16 +19,6 @@ class RemoteFileLoaderTest <  Test::Unit::TestCase
       assert_equal 310, bytes.size
     end
 
-    should "fail if md5 doesn't match" do
-      Sprout::RemoteFileLoader.expects(:prompt_for_md5_failure)
-      Sprout::RemoteFileLoader.load @uri, 'abcd'
-    end
-
-    should "pass if md5 isn't provided" do
-      Sprout::RemoteFileLoader.expects(:prompt_for_md5_failure).never
-      Sprout::RemoteFileLoader.load @uri
-    end
   end
-
 end
 

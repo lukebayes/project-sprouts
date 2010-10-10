@@ -1,3 +1,4 @@
+require 'digest/md5'
 
 module Sprout
 
@@ -31,8 +32,14 @@ module Sprout
 
     private
 
+    ##
+    # Do not cache this value...
+    #
+    # This response can change over time IF:
+    #  - The downloaded bytes do not match the expected MD5
+    #  - AND the user confirms the prompt that they are OK with this
     def downloaded_file
-      @downloaded_file ||= File.join(Sprout.cache, pkg_name, "#{md5}.#{archive_type}")
+      File.join(Sprout.cache, pkg_name, "#{md5}.#{archive_type}")
     end
 
     def unpacked_file
@@ -44,7 +51,11 @@ module Sprout
         if(!File.exists?(downloaded_file))
           write_archive download_archive
         end
-        unpack_archive
+
+        bytes = File.read downloaded_file
+        if should_unpack?(bytes, md5)
+          unpack_archive
+        end
       end
     end
 
@@ -53,13 +64,36 @@ module Sprout
     end
 
     def download_archive
-      Sprout::RemoteFileLoader.load(url, md5, pkg_name)
+      Sprout::RemoteFileLoader.load url, pkg_name
     end
 
     def write_archive bytes
       FileUtils.mkdir_p File.dirname(downloaded_file)
       File.open downloaded_file, 'wb+' do |f|
         f.write bytes
+      end
+    end
+
+    def should_unpack? bytes, expected_md5sum
+      if expected_md5sum
+        downloaded_md5 = Digest::MD5.new
+        downloaded_md5 << bytes
+        
+        if(expected_md5sum != downloaded_md5.hexdigest)
+          return prompt_for_md5_failure downloaded_md5, expected_md5sum
+        end
+      end
+      return true
+    end
+
+    def prompt_for_md5_failure downloaded_md5, expected_md5sum
+      puts "The MD5 Sum of the downloaded file (#{downloaded_md5.hexdigest}) does not match what was expected (#{expected_md5sum})."
+      puts "Would you like to install anyway? [Yn]"
+      user_response = $stdin.gets.chomp!
+      if(user_response.downcase == 'y')
+        return true
+      else
+        raise Sprout::Errors::RemoteFileLoaderError.new('MD5 Checksum failed')
       end
     end
 

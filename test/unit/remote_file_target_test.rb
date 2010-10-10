@@ -54,7 +54,7 @@ class RemoteFileTargetTest < Test::Unit::TestCase
     setup do
       @target = Sprout::RemoteFileTarget.new do |t|
         t.archive_type = :zip
-        t.md5          = 'd6939117f1df58e216f365a12fec64f9'
+        t.md5          = '3f8ebc592a80ee37dd2f6b18947bcb96'
         t.url          = 'http://github.com/downloads/lukebayes/project-sprouts/echochamber-test.zip'
         t.pkg_name     = 'echochamber'
         t.pkg_version  = '1.0.pre'
@@ -82,6 +82,7 @@ class RemoteFileTargetTest < Test::Unit::TestCase
     context "that had an unpacking failure" do
       should "still unpack the file" do
         FileUtils.mkdir_p @unpacked_file
+        @target.expects(:should_unpack?).returns true
         @target.expects(:download_archive)
         @target.expects(:unpack_archive)
         @target.resolve
@@ -89,8 +90,16 @@ class RemoteFileTargetTest < Test::Unit::TestCase
     end
 
     context "that has been DOWNLOADED, but not UNPACKED" do
+
+      should "not unpack if md5 doesn't match, and user responds in negative" do
+        @target.expects(:should_unpack?).returns false
+        @target.expects(:unpack_archive).never
+        @target.resolve
+      end
+
       should "unpack but not download" do
         create_file @downloaded_file
+        @target.expects(:should_unpack?).returns true
         @target.expects(:download_archive).never
         @target.expects(:unpack_archive)
         @target.resolve

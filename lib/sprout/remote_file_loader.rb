@@ -1,4 +1,3 @@
-require 'digest/md5'
 
 module Sprout
 
@@ -8,31 +7,15 @@ module Sprout
 
     class << self
     
-      def load uri, md5=nil, filename=nil, force=false
-        response = fetch uri.to_s, filename
-        if(force || response_is_valid?(response, md5))
-          return response
-        end
-        nil
+      def load uri, md5=nil, display_name=nil
+        fetch uri.to_s, display_name
       end
 
       private
       
-      def response_is_valid? response, expected_md5sum
-        if(expected_md5sum)
-          md5 = Digest::MD5.new
-          md5 << response
-          
-          if(expected_md5sum != md5.hexdigest)
-            return prompt_for_md5_failure md5, expected_md5sum
-          end
-        end
-        return true
-      end
-      
-      def fetch uri, name=nil
+      def fetch uri, display_name=nil
         begin
-          return open_uri uri, name
+          return open_uri uri, display_name
         rescue SocketError => sock_err
           raise Sprout::Errors::RemoteFileLoaderError.new("[ERROR] #{sock_err.to_s}")
         rescue OpenURI::HTTPError => http_err
@@ -44,16 +27,16 @@ module Sprout
 
       private
 
-      def open_uri uri, name=nil
+      def open_uri uri, display_name=nil
         uri = URI.parse(uri)
         progress = nil
         response = nil
-        name ||= uri.path.split("/").pop
+        display_name ||= uri.path.split("/").pop
         
         # Why was this here? Shouldn't the 'open' command work for other
         # protocols like https?
         #
-        #message = "The RemoteFileTask failed for #{name}. We can only handle HTTP requests at this time, it seems you were trying: '#{uri.scheme}'"
+        #message = "The RemoteFileTask failed for #{display_name}. We can only handle HTTP requests at this time, it seems you were trying: '#{uri.scheme}'"
         #raise Sprout::Errors::RemoteFileLoaderError.new(message) if uri.scheme != 'http' || uri.scheme != 'https'
 
         # This is the strangest implementation I've seen in Ruby yet.
@@ -61,7 +44,7 @@ module Sprout
         open(uri.to_s, 
           :content_length_proc => lambda {|length|
             length ||= 0
-            progress = Sprout::ProgressBar.new(name, length)
+            progress = Sprout::ProgressBar.new(display_name, length)
             progress.file_transfer_mode
             progress.set(0)
           },
@@ -73,17 +56,6 @@ module Sprout
         end
 
         response
-      end
-
-      def prompt_for_md5_failure md5, expected_md5sum
-        puts "The MD5 Sum of the downloaded file (#{md5.hexdigest}) does not match what was expected (#{expected_md5sum})."
-        puts "Would you like to install anyway? [Yn]"
-        response = $stdin.gets.chomp!
-        if(response.downcase == 'y')
-          return true
-        else
-          raise Sprout::Errors::RemoteFileLoaderError.new('MD5 Checksum failed')
-        end
       end
 
     end
