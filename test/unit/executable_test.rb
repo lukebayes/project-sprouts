@@ -274,7 +274,7 @@ class ExecutableTest < Test::Unit::TestCase
       @tool.execute
 
       # Ensure the file mode was updated:
-      assert "non-executable file mode should be updated by execute", first != File.stat(@mxmlc_executable).mode
+      assert first != File.stat(@mxmlc_executable).mode, "non-executable file mode should be updated by execute" 
     end
 
     should "include prerequisites" do

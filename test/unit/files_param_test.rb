@@ -63,7 +63,7 @@ class FilesParamTest < Test::Unit::TestCase
 
       @param.value << 'abcd'
 
-      assert "Should be visible", @param.visible?
+      assert @param.visible?, "Should be visible" 
       assert_equal 'proc:inputs:abcd', @param.to_shell
     end
 
