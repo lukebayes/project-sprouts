@@ -57,7 +57,7 @@ module Sprout
         # use the bytes directly, otherwise
         # read them off disk from a previous
         # download attempt:
-        bytes ||= File.open(downloaded_file, 'r').read
+        bytes ||= File.open(downloaded_file, 'rb').read
 
         if should_unpack?(bytes, md5)
           unpack_archive
