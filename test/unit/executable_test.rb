@@ -1,8 +1,8 @@
-require File.dirname(__FILE__) + '/test_helper'
-require 'test/fixtures/executable/mxmlc'
-require 'test/unit/fake_other_executable'
-require 'test/fixtures/executable/subclass/executable_superclass'
-require 'test/fixtures/executable/subclass/executable_subclass'
+require 'test_helper'
+require 'fixtures/executable/mxmlc'
+require 'unit/fake_other_executable'
+require 'fixtures/executable/subclass/executable_superclass'
+require 'fixtures/executable/subclass/executable_subclass'
 
 class ExecutableTest < Test::Unit::TestCase
   include SproutTestCase

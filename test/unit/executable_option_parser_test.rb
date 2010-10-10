@@ -1,5 +1,5 @@
-require File.dirname(__FILE__) + '/test_helper'
-require 'test/fixtures/examples/echo_inputs'
+require 'test_helper'
+require 'fixtures/examples/echo_inputs'
 
 class ExecutableOptionParserTest < Test::Unit::TestCase
   include SproutTestCase

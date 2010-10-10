@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/test_helper'
+require 'test_helper'
 
 class GeneratorTest < Test::Unit::TestCase
   include SproutTestCase
@@ -289,8 +289,8 @@ class GeneratorTest < Test::Unit::TestCase
 
   context "a generator that is a subclass of another" do
     # Require the source files for this context
-    require 'test/fixtures/generators/song_generator'
-    require 'test/fixtures/generators/song_subclass/least_favorite'
+    require 'fixtures/generators/song_generator'
+    require 'fixtures/generators/song_subclass/least_favorite'
 
     setup do
       @path = File.join(fixtures, 'generators', 'tmp')

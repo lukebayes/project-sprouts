@@ -1,5 +1,4 @@
-require File.join(File.dirname(__FILE__), "test_helper")
-
+require 'test_helper'
 require 'sprout/generators/library/library_generator'
 
 class LibraryGeneratorTest < Test::Unit::TestCase

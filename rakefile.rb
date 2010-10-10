@@ -1,6 +1,11 @@
 require 'rubygems'
 require 'bundler'
 
+# Hack this dir onto path for Ruby 1.9.2
+# support:
+test_package = File.join(File.dirname(__FILE__), 'test')
+$: << test_package unless $:.include? test_package
+
 Bundler.require
 
 require 'rake/clean'
