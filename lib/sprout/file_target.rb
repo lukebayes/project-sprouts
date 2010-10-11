@@ -59,7 +59,7 @@ module Sprout
     end
 
     def to_s
-      "[FileTarget type=#{type} platform=#{platform}]"
+      "[FileTarget pkg_name=#{pkg_name} pkg_version=#{pkg_version} platform=#{platform}]"
     end
 
     def validate

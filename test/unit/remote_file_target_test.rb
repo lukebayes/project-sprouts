@@ -4,11 +4,7 @@ class RemoteFileTargetTest < Test::Unit::TestCase
   include SproutTestCase
 
   context "an improperly configured remote file target" do
-
-    setup do
-      Sprout::RemoteFileTarget.any_instance.stubs(:load_archive).returns true
-    end
-
+  
     should "throw validation error on archive_type" do
       assert_raises Sprout::Errors::ValidationError do
         t = Sprout::RemoteFileTarget.new
@@ -54,7 +50,7 @@ class RemoteFileTargetTest < Test::Unit::TestCase
     setup do
       @target = Sprout::RemoteFileTarget.new do |t|
         t.archive_type = :zip
-        t.md5          = '3f8ebc592a80ee37dd2f6b18947bcb96'
+        t.md5          = 'd41d8cd98f00b204e9800998ecf8427e'
         t.url          = 'http://github.com/downloads/lukebayes/project-sprouts/echochamber-test.zip'
         t.pkg_name     = 'echochamber'
         t.pkg_version  = '1.0.pre'
@@ -66,10 +62,17 @@ class RemoteFileTargetTest < Test::Unit::TestCase
 
       @downloaded_file = File.join(temp_cache, 'downloaded.zip')
       @target.stubs(:downloaded_file).returns @downloaded_file
+	  
+	  downloaded_bytes = File.join(fixtures, 'remote_file_target', 'echochamber-test.zip')
+      @archive_bytes = File.open(downloaded_bytes, 'rb').read
 
-      @archive_bytes = File.read(File.join(fixtures, 'remote_file_target', 'echochamber-test.zip'))
+      @target.stubs(:download_archive).returns @archive_bytes
+	end
+
+    teardown do
+	  remove_file File.join(fixtures, 'sprout')
     end
-
+	
     context "that has already been UNPACKED" do
       should "not be DOWNLOADED or unpacked" do
         create_file File.join(@unpacked_file, 'unpacked')
@@ -79,11 +82,11 @@ class RemoteFileTargetTest < Test::Unit::TestCase
       end
     end
 
-    context "that had an unpacking failure" do
+    context "that had an unpack failure" do
       should "still unpack the file" do
+	    # Create the expected unpacked_file:
         FileUtils.mkdir_p @unpacked_file
-        @target.expects(:should_unpack?).returns true
-        @target.expects(:download_archive)
+        @target.stubs('should_unpack?').returns true
         @target.expects(:unpack_archive)
         @target.resolve
       end
@@ -92,32 +95,29 @@ class RemoteFileTargetTest < Test::Unit::TestCase
     context "that has been DOWNLOADED, but not UNPACKED" do
 
       should "not unpack if md5 doesn't match, and user responds in negative" do
-        @target.expects(:should_unpack?).returns false
+        @target.stubs('should_unpack?').returns false
         @target.expects(:unpack_archive).never
         @target.resolve
       end
 
       should "unpack but not download" do
-        create_file @downloaded_file
-        @target.expects(:should_unpack?).returns true
-        @target.expects(:download_archive).never
-        @target.expects(:unpack_archive)
+        @target.stubs('should_unpack?').returns true
         @target.resolve
+        assert_not_empty @unpacked_file
       end
     end
 
     context "that has not yet been DOWNLOADED, or UNPACKED" do
       should "download and unpack the remote archive" do
-        @target.expects(:download_archive).returns @archive_bytes
+	    @target.stubs('should_unpack?').returns true
+		#@target.expects(:download_archive)
         #@target.expects(:unpack_archive)
-
         @target.resolve
+
         assert_file @downloaded_file
-        assert_file @unpacked_file
-        #assert_not_empty @unpacked_file
+        assert_not_empty @unpacked_file
       end
     end
 
   end
 end
-

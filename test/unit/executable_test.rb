@@ -259,6 +259,10 @@ class ExecutableTest < Test::Unit::TestCase
     end
 
     should "execute the registered executable" do
+      # This test should never pass on Windows, even
+      # though it did prior to Ruby 1.9.2...
+      return if Sprout::Platform.new.windows?
+
       # Configure stub executable:
       @tool.input = 'test/fixtures/executable/src/Main.as'
       @tool.source_path << 'test/fixtures/executable/src'

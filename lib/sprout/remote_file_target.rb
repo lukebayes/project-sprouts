@@ -111,4 +111,3 @@ module Sprout
 
   end
 end
-

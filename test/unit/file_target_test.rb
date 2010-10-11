@@ -11,6 +11,8 @@ class FileTargetTest < Test::Unit::TestCase
     context "that is created with a constructor block" do
       should "have the provided values" do
         target = Sprout::FileTarget.new do |t|
+          t.pkg_name    = 'asunit4'
+          t.pkg_version = '4.2.2.pre'
           t.add_library :swc, @asunit_swc
         end
         assert_provided_values target
@@ -20,6 +22,8 @@ class FileTargetTest < Test::Unit::TestCase
     context "that is created with no constructor block" do
       should "have the provided values" do
         target = Sprout::FileTarget.new
+        target.pkg_name    = 'asunit4'
+        target.pkg_version = '4.2.2.pre'
         target.add_library :swc, @asunit_swc
         assert_provided_values target
       end
@@ -36,6 +40,7 @@ class FileTargetTest < Test::Unit::TestCase
     library = t.libraries.first
     assert_equal :swc, library.name
     assert_equal File.join('.', @asunit_swc), library.path
+    assert_equal '[FileTarget pkg_name=asunit4 pkg_version=4.2.2.pre platform=universal]', t.to_s
   end
 
 end
