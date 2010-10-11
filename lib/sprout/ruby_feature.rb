@@ -108,7 +108,7 @@ module Sprout
         #puts "+++++++++++++++++++++++++++"
         #puts ">> entity_for #{name_or_names} pkg_name: #{pkg_name} version: #{version_requirement}"
         #registered_entities.each do |entity|
-          #puts ">> entity: #{entity.name} pkg_name: #{entity.pkg_name} version: #{entity.pkg_version}"
+          #puts ">> entity: #{entity.name} platform: #{entity.platform} pkg_name: #{entity.pkg_name} version: #{entity.pkg_version}"
         #end
         registered_entities.reverse.select do |entity|
             satisfies_name?(entity, name_or_names) && 

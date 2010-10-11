@@ -187,6 +187,7 @@ module Sprout
       collection.each do |item|
         item.pkg_name    = target.pkg_name
         item.pkg_version = target.pkg_version
+        item.platform    = target.platform
         source.register item
       end
     end

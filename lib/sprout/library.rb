@@ -11,6 +11,7 @@ module Sprout
     attr_accessor :path
     attr_accessor :pkg_name
     attr_accessor :pkg_version
+    attr_accessor :platform
 
     class << self
       ##

@@ -48,6 +48,52 @@ class SpecificationTest < Test::Unit::TestCase
     end
   end
 
+  context "a platform-specific, remote executable specification" do
+
+    setup do
+      @spec = Sprout::Specification.new do |s|
+        s.name = 'fake_flashplayer'
+        s.version = '10.1.53'
+
+        s.add_remote_file_target do |t|
+          t.platform     = :windows
+          t.add_executable :fake_flashplayer, "flashplayer_10_sa_debug.exe"
+        end
+
+        s.add_remote_file_target do |t|
+          t.platform     = :osx
+          t.add_executable :fake_flashplayer, "Flash Player Debugger.app"
+        end
+
+        s.add_remote_file_target do |t|
+          t.platform     = :linux
+          t.add_executable :fake_flashplayer, "flashplayerdebugger"
+        end
+      end
+    end
+
+    should "be available for Windows systems" do
+      as_a_windows_system do
+        target = Sprout::Executable.load 'fake_flashplayer'
+        assert_equal :windows, target.platform
+      end
+    end
+
+    should "be available for OSX systems" do
+      as_a_mac_system do
+        target = Sprout::Executable.load 'fake_flashplayer'
+        assert_equal :osx, target.platform
+      end
+    end
+
+    should "be available for Unix systems" do
+      as_a_unix_system do
+        target = Sprout::Executable.load 'fake_flashplayer'
+        assert_equal :linux, target.platform
+      end
+    end
+  end
+
   context "a newly included executable" do
     setup do
       @echo_chamber = File.join fixtures, 'executable', 'echochamber_gem', 'echo_chamber'
