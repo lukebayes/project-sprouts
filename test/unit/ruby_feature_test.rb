@@ -91,12 +91,26 @@ class RubyFeatureTest < Test::Unit::TestCase
 
     should "find platform-specific remote file target" do
       osx = create_item(:platform => :osx)
+      windows = create_item(:platform => :windows)
       linux = create_item(:platform => :linux)
+
       FakePlugin.register osx
+      FakePlugin.register windows
       FakePlugin.register linux
+
       as_a_mac_system do
         result = FakePlugin.load :foo
         assert_equal osx, result
+      end
+
+      as_a_windows_system do
+        result = FakePlugin.load :foo
+        assert_equal windows, result
+      end
+
+      as_a_unix_system do
+        result = FakePlugin.load :foo
+        assert_equal linux, result
       end
     end
 

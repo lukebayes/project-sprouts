@@ -134,6 +134,7 @@ module Sprout
 
       def satisfies_platform? entity
         #puts">> satisfies platform?"
+        # If not platform is defined, it's assumed to work on all platforms:
         return true if !entity.respond_to?(:platform) || entity.platform.nil?
         #puts ">> platform: #{entity.platform}"
         Sprout.current_system.can_execute?(entity.platform)
