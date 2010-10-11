@@ -108,6 +108,11 @@ class RubyFeatureTest < Test::Unit::TestCase
         assert_equal windows, result
       end
 
+      as_a_win_nix_system do
+        result = FakePlugin.load :foo
+        assert_equal windows, result
+      end
+
       as_a_unix_system do
         result = FakePlugin.load :foo
         assert_equal linux, result

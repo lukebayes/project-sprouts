@@ -163,6 +163,16 @@ module SproutTestCase # :nodoc:[all]
     Mocha::Mockery.instance.teardown
   end
 
+  def as_a_win_nix_system
+    sys = Sprout::System::WinNixSystem.new
+    Sprout::System.stubs(:create).returns sys
+    yield sys if block_given?
+    # Ugh - This is way too greedy... We're killing all mocks in here
+    # Doing it anyway b/c we need to get Windows support in place...
+    # TODO: Implement this feature without clobbering all stubs/mocks
+    Mocha::Mockery.instance.teardown
+  end
+
   
   private
 
