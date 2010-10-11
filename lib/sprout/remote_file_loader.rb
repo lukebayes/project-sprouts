@@ -17,7 +17,7 @@ module Sprout
         begin
           return open_uri uri, display_name
         rescue SocketError => sock_err
-          raise Sprout::Errors::RemoteFileLoaderError.new("[ERROR] #{sock_err.to_s}")
+          raise Sprout::Errors::RemoteFileLoaderError.new("[ERROR] Failed to load file from: '#{uri.to_s}' - Please check that your machine has a connection to the internet.\n[REMOTE ERROR] #{sock_err.to_s}")
         rescue OpenURI::HTTPError => http_err
           raise Sprout::Errors::RemoteFileLoaderError.new("[ERROR] Failed to load file from: '#{uri.to_s}'\n[REMOTE ERROR] #{http_err.io.read.strip}")
         rescue Errno::ECONNREFUSED => econ_err
