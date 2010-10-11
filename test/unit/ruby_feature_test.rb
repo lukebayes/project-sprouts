@@ -41,8 +41,22 @@ class RubyFeatureTest < Test::Unit::TestCase
       end
     end
 
+    should "not call resolve on register" do
+      plugin = FakePlugin.new({:name => :foo2})
+      plugin.expects(:resolve).never
+      FakePlugin.register plugin
+    end
+
+    should "call resolve on load" do
+      plugin = FakePlugin.new({:name => :foo2})
+      FakePlugin.register plugin
+
+      plugin.expects(:resolve)
+      FakePlugin.load :foo2
+    end
+
     should "allow registration and load without ruby package or version" do
-      FakePlugin.register OpenStruct.new({:name => :foo2})
+      FakePlugin.register FakePlugin.new({:name => :foo2})
       assert_not_nil FakePlugin.load :foo2
     end
 
@@ -68,12 +82,12 @@ class RubyFeatureTest < Test::Unit::TestCase
     end
 
     should "load when request is a string" do
-      FakePlugin.register(OpenStruct.new({:name => :foo3}))
+      FakePlugin.register(FakePlugin.new({:name => :foo3}))
       assert_not_nil FakePlugin.load 'foo3'
     end
 
     should "load when registration is a string" do
-      FakePlugin.register(OpenStruct.new({:name => :swc, :pkg_name => 'asunit4'}))
+      FakePlugin.register(FakePlugin.new({:name => :swc, :pkg_name => 'asunit4'}))
       assert_not_nil FakePlugin.load nil, :asunit4
     end
 
@@ -124,11 +138,16 @@ class RubyFeatureTest < Test::Unit::TestCase
   private
 
   def create_item options={}
-    OpenStruct.new({:name => :foo, :pkg_name => 'sprout/base', :pkg_version => '1.0.pre', :platform => :universal}.merge(options))
+    FakePlugin.new({:name => :foo, :pkg_name => 'sprout/base', :pkg_version => '1.0.pre', :platform => :universal}.merge(options))
   end
 
-  class FakePlugin
+  class FakePlugin < OpenStruct
     include Sprout::RubyFeature
+
+    ##
+    # Implement resolve like RemoteFileTargets..
+    def resolve
+    end
   end
 
   class OtherFakePlugin

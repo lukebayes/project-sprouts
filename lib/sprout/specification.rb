@@ -138,7 +138,6 @@ module Sprout
       target = RemoteFileTarget.new do |t|
         configure_target t, &block
       end
-      target.resolve
       register_file_target target
     end
 

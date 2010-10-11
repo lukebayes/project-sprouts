@@ -76,6 +76,11 @@ module Sprout
           message << "to update your local gems.\n\n"
           raise Sprout::Errors::LoadError.new message
         end
+
+        if(entity.respond_to?(:resolve))
+          entity.resolve
+        end
+
         entity
       end
 
