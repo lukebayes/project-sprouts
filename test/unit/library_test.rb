@@ -68,6 +68,10 @@ class LibraryTest < Test::Unit::TestCase
       assert_file File.join(library_dir, 'b')
     end
 
+    should "create rake tasks for libraries" do
+      lib = library :fake_source_lib
+      assert_not_nil Rake.application[:fake_source_lib]
+    end
   end
 
   private
