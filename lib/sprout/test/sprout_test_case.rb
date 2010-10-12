@@ -140,7 +140,7 @@ module SproutTestCase # :nodoc:[all]
     # Ugh - This is way too greedy... We're killing all mocks in here
     # Doing it anyway b/c we need to get Windows support in place...
     # TODO: Implement this feature without clobbering all stubs/mocks
-    Mocha::Mockery.instance.teardown
+    #Mocha::Mockery.instance.teardown
   end
 
   def as_a_mac_system
@@ -150,7 +150,7 @@ module SproutTestCase # :nodoc:[all]
     # Ugh - This is way too greedy... We're killing all mocks in here
     # Doing it anyway b/c we need to get Windows support in place...
     # TODO: Implement this feature without clobbering all stubs/mocks
-    Mocha::Mockery.instance.teardown
+    #Mocha::Mockery.instance.teardown
   end
   
   def as_a_windows_system
@@ -160,7 +160,7 @@ module SproutTestCase # :nodoc:[all]
     # Ugh - This is way too greedy... We're killing all mocks in here
     # Doing it anyway b/c we need to get Windows support in place...
     # TODO: Implement this feature without clobbering all stubs/mocks
-    Mocha::Mockery.instance.teardown
+    #Mocha::Mockery.instance.teardown
   end
 
   def as_a_win_nix_system
@@ -170,7 +170,7 @@ module SproutTestCase # :nodoc:[all]
     # Ugh - This is way too greedy... We're killing all mocks in here
     # Doing it anyway b/c we need to get Windows support in place...
     # TODO: Implement this feature without clobbering all stubs/mocks
-    Mocha::Mockery.instance.teardown
+    #Mocha::Mockery.instance.teardown
   end
 
   
@@ -227,5 +227,5 @@ end
 
 # Prevent log messages from interrupting the test output:
 Sprout::Log.debug = true
-Sprout::ProgressBar.debug = true
+#Sprout::ProgressBar.debug = true
 

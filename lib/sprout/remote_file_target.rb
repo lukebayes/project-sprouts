@@ -23,10 +23,7 @@ module Sprout
 
     protected
 
-    def expand_executable_path path
-      # TODO: This is failing b/c it gets called before
-      # we can set pkg_name and pkg_version - so join 
-      # raises null pointer error.
+    def expand_local_path path
       File.join unpacked_file, path
     end
 

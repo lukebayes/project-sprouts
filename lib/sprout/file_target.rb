@@ -28,6 +28,14 @@ module Sprout
     end
 
     ##
+    # This is a template method that will be called
+    # so that RemoteFileTarget subclasses and load
+    # the appropriate files at the appropriate time.
+    # Admittedly kind of smelly, other ideas welcome...
+    def resolve
+    end
+
+    ##
     # Add a library to the RubyGem package.
     # 
     # @name Symbol that will be used to retrieve this library later.
@@ -39,11 +47,11 @@ module Sprout
     # 
     def add_library name, path
       if path.is_a?(Array)
-        path = path.collect { |p| expand_executable_path(p) }
+        path = path.collect { |p| expand_local_path(p) }
       else
-        path = expand_executable_path path
+        path = expand_local_path path
       end
-      libraries << Sprout::Library.new( :name => name, :path => path, :file_target => self )
+      libraries << OpenStruct.new( :name => name, :path => path, :file_target => self )
     end
 
     ##
@@ -54,7 +62,7 @@ module Sprout
     # with this name.
     #
     def add_executable name, path
-      path = expand_executable_path path
+      path = expand_local_path path
       executables << OpenStruct.new( :name => name, :path => path, :file_target => self )
     end
 
@@ -67,7 +75,10 @@ module Sprout
       raise Sprout::Errors::UsageError.new "FileTarget.pkg_version is required" if pkg_version.nil?
     end
 
-    def expand_executable_path path
+    ## 
+    # This is a template method that is overridden
+    # by RemoteFileTarget.
+    def expand_local_path path
       File.join load_path, path
     end
 

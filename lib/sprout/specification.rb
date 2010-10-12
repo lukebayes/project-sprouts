@@ -135,10 +135,8 @@ module Sprout
     # If the archive has not been downloaded, it will be downloaded, unpacked
     # and the path to the requested executable will be returned.
     def add_remote_file_target &block
-      target = RemoteFileTarget.new do |t|
-        configure_target t, &block
-      end
-      register_file_target target
+      target = RemoteFileTarget.new
+      configure_target target, &block
     end
 
     # Add a file to the RubyGem itself. This is a great way to package smallish libraries in either
@@ -156,10 +154,8 @@ module Sprout
     #     end
     #
     def add_file_target &block
-      target = FileTarget.new do |t|
-        configure_target t, &block
-      end
-      register_file_target target
+      target = FileTarget.new
+      configure_target target, &block
     end
 
     private
@@ -169,9 +165,10 @@ module Sprout
       t.pkg_name    = name
       t.pkg_version = version
       yield t if block_given?
+      register_file_target_libs_and_exes t
     end
 
-    def register_file_target target
+    def register_file_target_libs_and_exes target
       register_items target.executables, Sprout::Executable, target
       # Reversing the libraries makes it so that definitions like:
       #
@@ -183,12 +180,13 @@ module Sprout
       register_items target.libraries, Sprout::Library, target
     end
 
-    def register_items collection, source, target
-      collection.each do |item|
-        item.pkg_name    = target.pkg_name
-        item.pkg_version = target.pkg_version
-        item.platform    = target.platform
-        source.register item
+    def register_items collection, ruby_feature, target
+      collection.each do |exe_or_lib|
+        exe_or_lib.pkg_name    = target.pkg_name
+        exe_or_lib.pkg_version = target.pkg_version
+        exe_or_lib.platform    = target.platform
+        exe_or_lib.file_target = target
+        ruby_feature.register exe_or_lib
       end
     end
 

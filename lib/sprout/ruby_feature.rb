@@ -77,10 +77,7 @@ module Sprout
           raise Sprout::Errors::LoadError.new message
         end
 
-        if(entity.respond_to?(:resolve))
-          entity.resolve
-        end
-
+        resolve_file_target entity
         entity
       end
 
@@ -89,6 +86,17 @@ module Sprout
       end
 
       protected
+
+      def resolve_file_target entity
+        if(entity.respond_to? :resolve)
+          entity.resolve
+        elsif(entity.respond_to? :file_target)
+          file_target = entity.file_target
+          if(file_target.respond_to? :resolve)
+            file_target.resolve
+          end
+        end
+      end
 
       def validate_registration entity
         if(!entity.respond_to?(:name) || entity.name.nil?)
