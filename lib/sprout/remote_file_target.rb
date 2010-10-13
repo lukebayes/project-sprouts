@@ -21,18 +21,6 @@ module Sprout
       self
     end
 
-    protected
-
-    def logger
-      Sprout::Log
-    end
-
-    def expand_local_path path
-      File.join unpacked_file, path
-    end
-
-    private
-
     ##
     # Do not cache this value...
     #
@@ -44,8 +32,26 @@ module Sprout
     end
 
     def unpacked_file
-      @unpacked_file ||= File.join(Sprout.cache, pkg_name, pkg_version)
+      upcased_pkg = pkg_name.upcase
+      upcased_version = pkg_version.upcase.gsub /\./, '_'
+        ENV["SPROUT_#{upcased_pkg}_#{upcased_version}"] ||
+        ENV["SPROUT_#{upcased_pkg}"] ||
+        ENV["#{upcased_pkg}_#{upcased_version}"] ||
+        ENV[upcased_pkg] ||
+        File.join(Sprout.cache, pkg_name, pkg_version)
     end
+
+    protected
+
+    def logger
+      Sprout::Log
+    end
+
+    def expand_local_path path
+      File.join unpacked_file, path
+    end
+
+    private
 
     def load_unpack_or_ignore_archive
       if(!unpacked_files_exist?)
