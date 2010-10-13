@@ -69,7 +69,7 @@ class LibraryTest < Test::Unit::TestCase
     end
 
     should "create rake tasks for libraries" do
-      lib = library :fake_source_lib
+      library :fake_source_lib
       assert_not_nil Rake.application[:fake_source_lib]
     end
   end

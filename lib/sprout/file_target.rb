@@ -51,7 +51,7 @@ module Sprout
       else
         path = expand_local_path path
       end
-      libraries << OpenStruct.new( :name => name, :path => path, :file_target => self )
+      libraries << Sprout::Library.new( :name => name, :path => path, :file_target => self )
     end
 
     ##

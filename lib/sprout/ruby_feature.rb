@@ -161,7 +161,7 @@ module Sprout
 
       def require_ruby_package name
         begin
-          require name
+          require name.to_s
         rescue LoadError => e
           raise Sprout::Errors::LoadError.new "Could not load the required file (#{name}) - Maybe you need to run 'gem install #{name}' or maybe 'bundle install'?"
         end
