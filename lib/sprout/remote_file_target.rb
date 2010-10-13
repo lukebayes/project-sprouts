@@ -23,6 +23,10 @@ module Sprout
 
     protected
 
+    def logger
+      Sprout::Log
+    end
+
     def expand_local_path path
       File.join unpacked_file, path
     end
@@ -101,6 +105,7 @@ module Sprout
     end
 
     def unpack_archive
+      logger.puts "Unpacking archive at #{downloaded_file} now. This can take anywhere from a few seconds to many minutes depending on your OS and the size of the archive.\n\nIf you're on windows, consider using this ample time to look into improving the zip utils in Ruby..."
       FileUtils.mkdir_p unpacked_file
       unpacker = Sprout::ArchiveUnpacker.new
       unpacker.unpack downloaded_file, unpacked_file, archive_type
