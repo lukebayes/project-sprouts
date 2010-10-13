@@ -214,6 +214,7 @@ class ExecutableTest < Test::Unit::TestCase
         end
         assert_equal 'bin/SomeFile.swf', @tool.output
         assert_equal "-output=bin/SomeFile.swf -source-path+=test/fixtures/executable/src test/fixtures/executable/src/Main.as", @tool.to_shell
+        assert_equal 'bin/SomeFile.swf', CLEAN.first
       end
     end
 

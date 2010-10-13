@@ -11,6 +11,7 @@ require 'sprout/executable/paths'
 require 'sprout/executable/url'
 require 'sprout/executable/urls'
 require 'sprout/executable/parameter_factory'
+require 'rake/clean'
 
 module Sprout
 
@@ -383,6 +384,7 @@ module Sprout
 
       def update_rake_task_name_from_args *args
         self.rake_task_name = parse_rake_task_arg args.last
+        CLEAN.add(self.rake_task_name)
       end
 
       def parse_rake_task_arg arg
