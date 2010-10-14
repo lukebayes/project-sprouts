@@ -73,7 +73,10 @@ class RemoteFileTargetTest < Test::Unit::TestCase
 
     teardown do
       remove_file File.join(fixtures, 'sprout')
-      ENV['ECHOCHAMBER'] = nil
+      ENV['ECHOCHAMBER']              = nil
+      ENV['ECHOCHAMBER_1_PRE']        = nil
+      ENV['SPROUT_ECHOCHAMBER']       = nil
+      ENV['SPROUT_ECHOCHAMBER_1_PRE'] = nil
     end
 
     context "that is identified by environment var" do
