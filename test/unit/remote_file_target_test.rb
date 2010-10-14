@@ -100,10 +100,12 @@ class RemoteFileTargetTest < Test::Unit::TestCase
 	
     context "that has already been UNPACKED" do
       should "not be DOWNLOADED or unpacked" do
-        create_file File.join(@unpacked_file, 'unpacked')
-        @target.expects(:download_archive).never
-        @target.expects(:unpack_archive).never
-        @target.resolve
+        as_a_mac_system do
+          create_file File.join(@unpacked_file, 'unpacked')
+          @target.expects(:download_archive).never
+          @target.expects(:unpack_archive).never
+          @target.resolve
+        end
       end
     end
 
