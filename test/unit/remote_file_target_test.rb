@@ -103,12 +103,14 @@ class RemoteFileTargetTest < Test::Unit::TestCase
 	
     context "that has already been UNPACKED" do
       should "not be DOWNLOADED or unpacked" do
-        as_a_mac_system do
-          create_file File.join(@unpacked_file, 'unpacked')
-          @target.expects(:download_archive).never
-          @target.expects(:unpack_archive).never
-          @target.resolve
-        end
+        FileUtils.mkdir_p @unpacked_file
+        create_file File.join(@unpacked_file, 'content')
+        @target.stubs(:unpacked_file).returns @unpacked_file
+
+        @target.expects(:prompt_for_md5_failure).never
+        @target.expects(:download_archive).never
+        @target.expects(:unpack_archive).never
+        @target.resolve
       end
     end
 
