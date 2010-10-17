@@ -11,10 +11,26 @@ module Sprout #:nodoc:
   # continuing beligerence of Windows or *nix (depending on 
   # which side of the fence you're on).
   class ProcessRunner
-    attr_reader :pid,
-                :r,
-                :w,
-                :e
+
+    attr_reader :pid
+    attr_reader :ruby_version
+
+    ##
+    # Read IO (readable)
+    attr_reader :r
+
+    ##
+    # Write IO (writeable)
+    attr_reader :w
+
+    ##
+    # Error IO (readable)
+    attr_reader :e
+
+    def initialize
+      super
+      @ruby_version = RUBY_VERSION
+    end
     
     # Execute the provided command using the open4.popen4
     # library. This is generally only used by Cygwin and
@@ -103,18 +119,22 @@ module Sprout #:nodoc:
     end
 
     def io_popen_block *command
-      if(RUBY_VERSION == '1.8.6' || RUBY_VERSION == '1.8.7')
+      if(ruby_version == '1.8.6' || ruby_version == '1.8.7')
         win32_open3_block *command
       else
-        require 'open3'
-        write, read, error, wait_thread = Open3.popen3(*command)
-        [wait_thread[:pid], write, read, error]
+        open3_block *command
       end
+    end
+
+    def open3_block *command
+      require 'open3'
+      write, read, error, wait_thread = Open3.popen3(*command)
+      [wait_thread[:pid], write, read, error]
     end
 
     def win32_open3_block *command
       write, read, error, pid = nil
-      gem 'win32-open3', '0.2.5'
+      gem 'win32-open3'
       require 'win32/open3'
       Open3.popen3(*command) do |w, r, e, p|
             pid   = p

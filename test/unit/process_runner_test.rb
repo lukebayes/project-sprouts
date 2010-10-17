@@ -76,6 +76,27 @@ class ProcessRunnerTest < Test::Unit::TestCase
         @runner.execute_win32("dir")
       end
 
+      should "attempt to load win32-open 3 gem on Ruby 1.8.6" do
+        @runner.stubs(:ruby_version).returns('1.8.6')
+        @runner.expects(:open3_block).never
+        @runner.expects(:win32_open3_block)
+        @runner.execute_win32('ls')
+      end
+
+      should "attempt to load win32-open 3 gem on Ruby 1.8.7" do
+        @runner.stubs(:ruby_version).returns('1.8.7')
+        @runner.expects(:open3_block).never
+        @runner.expects(:win32_open3_block)
+        @runner.execute_win32('ls')
+      end
+
+      should "NOT load win32-open 3 gem on Ruby 1.9.2" do
+        @runner.stubs(:ruby_version).returns('1.9.2')
+        @runner.expects(:win32_open3_block).never
+        @runner.expects(:open3_block)
+        @runner.execute_win32('ls')
+      end
+
     end
 
 
