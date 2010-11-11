@@ -12,5 +12,5 @@
 - !ruby/object:Sprout::RemoteFileTarget
   platform: linux
   url: http://download.macromedia.com/pub/flashplayer/updaters/10/flashplayer_10_sa_debug.tar.gz
-  archive_path: flash_player_10_linux_dev/standalone/debugger/flashplayer
+  archive_path: flashplayerdebugger
   md5: 6cabe6038343374b547043d29de14417
