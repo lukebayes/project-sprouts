@@ -23,9 +23,10 @@ module Sprout #:nodoc
       session.puts(command)
       response = session.read
       
-      error = response =~ /(.*Error:.*\^.*)\n/m
+      errorMatcherRegex = /.*(^.*Error:.*)/m
+      error = errorMatcherRegex.match(response)
       if(error)
-        raise FCSHError.new(response)
+        raise FCSHError.new("Error during compile:\n" + error[1])
       end
       
       session.close

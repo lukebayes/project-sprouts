@@ -39,8 +39,14 @@ module Sprout
     def initialize(out=nil)
       @out = out || $stdout
       @regex_to_token = [
-                        [/(.*Warning:.*\^.*)\n/m,   WARNING], # Warning encountered
-                        [/(.*Error:.*\^.*)\n/m,     ERROR], # Error encountered
+# NOTE (apinstein@mac.com) Looking for errors/warnings seems silly at this time since it only happens on the SERVER side and we are not
+# sending back "objects" to the client, only string data. Thus we can't throw or we exit the server, and we don't pass back anything but 
+# strings right now to the client. That's why fcsh_socket.rb is looking for Error: and raising on its own.
+# I think eventually the server might want to send back objects over the wire so that the client can be smarter about warnings/errors.
+                        #[/(.*Warning:.*\^.*)\n/m,   WARNING], # Warning encountered
+                        #[/.*(^.*Warning:.*)^[\S]/m, WARNING], # Warning encountered BETTER REGEX
+                        #[/(.*Error:.*\^.*)\n/m,     ERROR], # Error encountered
+                        #[/.*(^.*Error:.*)^[\S]/m,   ERROR], # Error encountered     BETTER REGEX
                         [PRELUDE_EXPRESSION,        PRELUDE],
                         [/\n\(fcsh\)/,              PROMPT] # Prompt for input
                        ]
@@ -50,12 +56,12 @@ module Sprout
       tokens = [];
       # Collect Errors and Warnings in a way that doesn't
       # Block forever when we have none....
-      t = Thread.new {
-        scan_stream(process_runner.e) do |token|
-          yield token if block_given?
-          tokens << token
-        end
-      }
+#      t = Thread.new {
+#        scan_stream(process_runner.e) do |token|
+#          yield token if block_given?
+#          tokens << token
+#        end
+#      }
       
       # Collect stdout from the process:
       scan_stream(process_runner.r) do |token|
@@ -79,9 +85,9 @@ module Sprout
       # The only way to overcome this with the current 
       # implementation, is to increase the timeout so that
       # FCSH takes a long, long time on every compilation!!!
-      sleep(0.2)
+      #sleep(0.2)
       
-      t.kill
+      #t.kill
       return tokens
     end
 
@@ -100,10 +106,11 @@ module Sprout
       while(true) do
         code = reader.getc
         return if code.nil?
-        
+
         partial << code.chr
         token = next_token(partial)
         if(token)
+          #puts "Got token: " + token.inspect
           tokens << token
           yield token if block_given?
           partial = ''
@@ -119,8 +126,8 @@ module Sprout
     # Retrieve the next token from the string, and
     # return nil if no token is found
     def next_token(string)
-      # puts "checking: #{string}"
       @regex_to_token.each do |regex, token_name|
+        #puts "\n\n\nChecking for #{token_name} with #{regex} in:\n#{string}\n------\n"
         match = regex.match(string)
         if match
           return {:name => token_name, :match => match, :output => get_output(token_name, match)}
