@@ -43,8 +43,7 @@ module Sprout
         # Had to stop throwing on no args because the suite generator does
         # not require the user to send in a class name....
         #usage("Final argument must be a name parameter") if runtime_args.empty?
-        @args = runtime_args.dup
-        assign_names! @args.shift
+        assign_names! runtime_args.shift.dup
       end
 
       # Quick access to the source directory identified by your project model
