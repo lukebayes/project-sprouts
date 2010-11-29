@@ -122,11 +122,11 @@ module Sprout #:nodoc:
       if(ruby_version == '1.8.6' || ruby_version == '1.8.7')
         win32_open3_block *command
       else
-        open3_block *command
+        open3_popen3_block *command
       end
     end
 
-    def open3_block *command
+    def open3_popen3_block *command
       require 'open3'
       write, read, error, wait_thread = Open3.popen3(*command)
       [wait_thread[:pid], write, read, error]
