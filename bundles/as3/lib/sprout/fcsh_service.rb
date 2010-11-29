@@ -40,7 +40,7 @@ module Sprout
 
       # TODO: This should use configurable SDK destinations:
       exe = Sprout.get_executable('sprout-flex3sdk-tool', 'bin/fcsh')
-      @process = User.execute_silent(exe)
+      @process = User.execute_silent(exe, '2>&1')
       
       response = ''
       @lexer.scan_process(@process).each do |token|
