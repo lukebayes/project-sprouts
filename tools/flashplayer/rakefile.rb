@@ -1,3 +1,6 @@
+dir = File.dirname(__FILE__)
+$:.push dir unless $:.include? dir
+
 require 'rake'
 require 'rake/gempackagetask'
 require 'rake/clean'
