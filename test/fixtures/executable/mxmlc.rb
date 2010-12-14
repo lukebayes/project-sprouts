@@ -660,7 +660,7 @@ module Sprout
     set :default_prefix, '-'
 
     ##
-    # The default gem name is sprout-flex3sdk
+    # The default gem name
     #
     set :pkg_name, 'flex4sdk'
 
