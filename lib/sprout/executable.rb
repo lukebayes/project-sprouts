@@ -77,7 +77,7 @@ module Sprout
       # in the order they are defined using +add_param+.
       #
       def add_param(name, type, options=nil) # :yields: Sprout::Executable::Param
-        raise Sprout::Errors::UsageError.new("[DEPRECATED] add_param no longer uses closures, you can provide the same values as a hash in the optional last argument.") if block_given?
+        raise Sprout::Errors::UsageError.new "[DEPRECATED] add_param no longer uses closures, you can provide the same values as a hash in the optional last argument." if block_given?
         raise Sprout::Errors::UsageError.new "The first parameter (name:SymbolOrString) is required" if name.nil?
         raise Sprout::Errors::UsageError.new "The second parameter (type:Class) is required" if type.nil?
         raise Sprout::Errors::UsageError.new "The type parameter must be a Class by reference" if !type.is_a?(Class)
@@ -295,8 +295,7 @@ module Sprout
       # This method is generally called from Rake task wrappers.
       #
       def execute_delegate
-        exe = Sprout::Executable.load(executable, pkg_name, pkg_version).path
-        Sprout.current_system.execute exe, to_shell
+        system_execute binary_path, to_shell
       end
 
       def prepare
@@ -418,6 +417,14 @@ module Sprout
       end
 
       private
+
+      def system_execute binary, params
+        Sprout.current_system.execute binary, params
+      end
+
+      def binary_path
+        Sprout::Executable.load(executable, pkg_name, pkg_version).path
+      end
 
       def handle_library_prerequisites items
         items.each do |task_name|

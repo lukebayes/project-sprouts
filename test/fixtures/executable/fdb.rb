@@ -2,14 +2,38 @@
 module Sprout
 
   class FDB
+
+    ####################################
+    # Begin Executable Configuration
     include Executable
+
+    ##
+    # Send a SWF file to debug
+    add_param :input, File, { :hidden_name => true }
+
+    set :default_prefix, '-'
+
+    ##
+    # The default gem name
+    set :pkg_name, 'flex4sdk'
+
+    ##
+    # The default gem version
+    set :pkg_version, '>= 1.0.0.pre'
+
+    ##
+    # The default executable target
+    set :executable, :fdb
+
+    ####################################
+    # Begin Daemon Configuration
     include Daemon
 
     ##
     # Print a backtrace of all stack frames
-    add_param :backtrace, Boolean
-    add_param_alias :bt, :backtrace
-    add_param_alias :where, :backtrace
+    add_action :backtrace
+    add_action_alias :bt, :backtrace
+    add_action_alias :where, :backtrace
 
     ##
     # Set a breakpoint at specified line or function
@@ -43,7 +67,7 @@ module Sprout
     #  If line number is specified, break at start of code for that line.
     #  If function is specified, break at start of code for that function.
     #  See 'commands' and 'condition' for further breakpoint control.
-    add_param :break, Strings
+    add_action :break, Strings
 
     ##
     # Halt when an exception is thrown.  This only affects caught
@@ -63,8 +87,8 @@ module Sprout
     #
     # Halts whenever a ReferenceError is thrown
     #
-    add_param :catch, Boolean
-    add_param_alias :ca, :catch
+    add_action :catch, String
+    add_action_alias :ca, :catch
 
     ##
     #
@@ -87,7 +111,7 @@ module Sprout
     # Abbreviated file names are accepted if unambiguous.
     # Listing a file with 'list' also makes that file the current file.
     #
-    add_param :cf, Boolean
+    add_action :cf, String
 
     ##
     # Clear breakpoint at specified line or function.
@@ -125,21 +149,21 @@ module Sprout
     # Abbreviated file names and function names are accepted if unambiguous.
     # If line number is specified, all breakpoints in that line are cleared.
     # If function is specified, breakpoints at beginning of function are cleared.
-    add_param :clear, Strings
-    add_param_alias :cl, :clear
+    add_action :clear, Strings
+    add_action_alias :cl, :clear
 
     ##
     # Continue execution after stopping at a breakpoint
     # Specify breakpoint number N to break only if COND is true.
     # Usage is `condition N COND', where N is an integer and COND is an
     # expression to be evaluated whenever breakpoint N is reached.
-    add_param :condition, String
+    add_action :condition, String
 
     ##
     # Continue execution after stopping at breakpoint.
     # This command takes no arguments.
-    add_param :continue, Boolean
-    add_param_alias :c, :continue
+    add_action :continue
+    add_action_alias :c, :continue
 
     ##
     # Set commands to be executed when a breakpoint is hit.
@@ -157,7 +181,7 @@ module Sprout
     #   End with a line saying just 'end'.
     #   >w
     #   >end
-    add_param :commands, String
+    add_action :commands, String
 
     ##
     # Delete one or more breakpoints.
@@ -173,8 +197,8 @@ module Sprout
     # Deletes breakpoints #2 and #5.
     #
     # To see breakpoint numbers, do 'info breakpoints'.
-    add_param :delete, Boolean
-    add_param_alias :d, :delete
+    add_action :delete, Strings
+    add_action_alias :d, :delete
 
     ##
     # Modify the list of directories in which fdb searches for source files.
@@ -202,8 +226,8 @@ module Sprout
     # which will be searched for source.
     # 
     # To see the current list, do 'show directories'.
-    add_param :directory, Path
-    add_param_alias :dir, :directory
+    add_action :directory, Path
+    add_action_alias :dir, :directory
 
     ##
     # Disable one or more breakpoints or auto-display expressions.
@@ -232,8 +256,8 @@ module Sprout
     #
     # To see breakpoint numbers, do 'info breakpoints'.
     # To see auto-display expression numbers, do 'info display'.
-    add_param :disable, Boolean
-    add_param_alias :disab, :disable
+    add_action :disable, String
+    add_action_alias :disab, :disable
 
     ##
     # (ActionScript 2 only; not supported when debugging ActionScript 3)
@@ -269,8 +293,8 @@ module Sprout
     #           The line in file #3 where the function doOther() begins.
     #   #3:29
     #           Line 29 in file #3.
-    add_param :disassemble, Boolean
-    add_param_alias :disas, :disassemble
+    add_action :disassemble, String
+    add_action_alias :disas, :disassemble
 
     ##
     # Add an auto-display expression
@@ -287,14 +311,14 @@ module Sprout
     # do 'info display'.
     #
     # NOTE: Removed because the base class adds this param for some reason.
-    # Investigate duplicate add_param calls.
-    #add_param :display, Boolean
-    #add_param_alias :disp, :display
+    # Investigate duplicate add_action calls.
+    #add_action :display, String
+    #add_action_alias :disp, :display
     
     ##
     # Enable breakpoints or auto-display expressions
-    add_param :enable, Boolean
-    add_param_alias :e, :enable
+    add_action :enable
+    add_action_alias :e, :enable
     
     ##
     # Specify an application to be debugged, without starting it.
@@ -332,14 +356,14 @@ module Sprout
     # (fdb)
     #
     # will wait for any application to connect to it.
-    add_param :file, File, { :required => true, :hidden_name => true }
-    add_param_alias :fil, :file
+    add_action :file, File, { :hidden_name => true }
+    add_action_alias :fil, :file
 
     ##
     # Execute until current function returns.
     # This command takes no arguments.
-    add_param :finish, Boolean
-    add_param_alias :f, :finish
+    add_action :finish
+    add_action_alias :f, :finish
 
     ##
     # Specify how fdb should handle a fault in the Flash Player.
@@ -361,8 +385,8 @@ module Sprout
     # Actions are print/noprint and stop/nostop.
     # 'print' means print a message if this fault happens.
     # 'stop' means reenter debugger if this fault happens. Implies 'print'.
-    add_param :handle, String
-    add_param_alias :han, :handle
+    add_action :handle, String
+    add_action_alias :han, :handle
 
     ##
     # Display help on FDB commands
@@ -405,13 +429,13 @@ module Sprout
     # what (wh)           Displays the context of a variable
     # where (w)           Same as bt
     # Type 'help' followed by command name for full documentation.
-    add_param :help, Boolean
-    add_param_alias :h, :help
+    add_action :help
+    add_action_alias :h, :help
 
     ##
     # Set listing location to where execution is halted
-    add_param :home, Path
-    add_param_alias :ho, :home
+    add_action :home, Path
+    add_action_alias :ho, :home
 
     ##
     # Generic command for showing things about the program being debugged.
@@ -430,14 +454,14 @@ module Sprout
     # info targets(i t)       Application being debugged
     # info variables (i v)    All global and static variable names
     # Type 'help info' followed by info subcommand name for full documentation.
-    add_param :info, Boolean
-    add_param_alias :i, :info
+    add_action :info, String
+    add_action_alias :i, :info
 
     ##
     # Kill execution of program being debugged
     # This command takes no arguments.
-    add_param :kill, Boolean
-    add_param_alias :k, :kill
+    add_action :kill
+    add_action_alias :k, :kill
 
     ##
     # List lines of code in a source file.
@@ -495,8 +519,8 @@ module Sprout
     # To see function names, do 'info functions'.
     # Abbreviated file names and function names are accepted if unambiguous.
     # Listing a file makes that file the current file. (See 'cf' command.)
-    add_param :list, String
-    add_param_alias :l, :list
+    add_action :list, String
+    add_action_alias :l, :list
 
     ##
     # Step program, proceeding through subroutine calls.
@@ -511,8 +535,8 @@ module Sprout
     #
     # Like the 'step' command as long as subroutine calls do not happen;
     # when they do, the call is treated as one instruction.
-    add_param :next, Boolean
-    add_param_alias :n, :next
+    add_action :next, String
+    add_action_alias :n, :next
 
     ##
     # Print value of variable or expression.
@@ -547,8 +571,8 @@ module Sprout
     # Print the values of all the properties of Object #10378.
     # Variables accessible are those of the lexical environment of the selected
     # stack frame, plus all those whose scope is global or an entire file.
-    add_param :print, String
-    add_param_alias :p, :print
+    add_action :print, String
+    add_action_alias :p, :print
 
     ##
     # Print the current working directory.
@@ -556,13 +580,13 @@ module Sprout
     # changed within fdb. The argument for 'run' and 'source' can be
     # specified relative to this directory.
     # This command takes no arguments.
-    add_param :pwd, Boolean
-    add_param_alias :pw, :pwd
+    add_action :pwd
+    add_action_alias :pw, :pwd
 
     ##
     # Exit FDB
-    add_param :quit, Boolean
-    add_param_alias :q, :quit
+    add_action :quit
+    add_action_alias :q, :quit
 
     ##
     # Start a debugging session.
@@ -594,8 +618,8 @@ module Sprout
     # 
     # On the Macintosh, the only supported form of the command is 'run' with no
     # arguments.  You must then manually launch the Flash player.
-    add_param :run, Boolean
-    add_param_alias :r, :run
+    add_action :run, String
+    add_action_alias :r, :run
 
     ##
     # Set the value of a variable or a convenience variable.
@@ -628,8 +652,8 @@ module Sprout
     #   set $myVar = 20
     #
     # Sets the convenience variable '$myVar' to the number 20
-    add_param :set, String
-    add_param_alias :se, :set
+    add_action :set, String
+    add_action_alias :se, :set
 
     ##
     # Read fdb commands from a file and execute them.
@@ -646,8 +670,8 @@ module Sprout
     # The file .fdbinit is read automatically in this way when fdb is started.
     # Only the current directory is searched for .fdbinit. This means that
     # you can have set up multiple .fdbinit files for different projects.
-    add_param :source, File
-    add_param_alias :so, :source
+    add_action :source, File
+    add_action_alias :so, :source
 
     ##
     # Step program until it reaches a different source line.
@@ -661,14 +685,14 @@ module Sprout
     #   step 3
     #
     # Step 3 times, or until the program stops for another reason.
-    add_param :step, Boolean
-    add_param_alias :s, :step
+    add_action :step, Number
+    add_action_alias :s, :step
 
     ##
     # Display a tutorial on how to use fdb.
     # This command takes no arguments.
-    add_param :tutorial, Boolean
-    add_param_alias :t, :tutorial
+    add_action :tutorial
+    add_action_alias :t, :tutorial
     
     ##
     # Remove one or more auto-display expressions.
@@ -685,13 +709,13 @@ module Sprout
     #
     # To see the list of auto-display expressions and their numbers,
     # do 'info display'.
-    add_param :undisplay, Boolean
-    add_param_alias :u, :undisplay
+    add_action :undisplay, String
+    add_action_alias :u, :undisplay
 
     ##
     # Set or clear a filter for file listing based on SWF
-    add_param :viewswf, Boolean
-    add_param_alias :v, :viewswf
+    add_action :viewswf
+    add_action_alias :v, :viewswf
 
     ##
     # Add a watchpoint on a given variable. The debugger will halt
@@ -701,27 +725,13 @@ module Sprout
     # 
     #   watch foo
     #
-    add_param :watch, String
-    add_param_alias :wa, :watch
+    add_action :watch, String
+    add_action_alias :wa, :watch
 
     ##
     # Displays the context in which a variable is resolved.
-    add_param :what, String
-    add_param_alias :wh, :what
-
-    set :default_prefix, '-'
-
-    ##
-    # The default gem name
-    set :pkg_name, 'flex4sdk'
-
-    ##
-    # The default gem version
-    set :pkg_version, '>= 1.0.0.pre'
-
-    ##
-    # The default executable target
-    set :executable, :fdb
+    add_action :what
+    add_action_alias :wh, :what
 
   end
 end

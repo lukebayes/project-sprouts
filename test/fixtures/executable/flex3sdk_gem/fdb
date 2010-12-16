@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+
+class FakeFDB
+
+  def initialize
+    puts "Adobe fdb (Flash Player Debugger) [build 16076]"
+    puts "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved."
+    printf "(fdb) "
+    gather_input
+  end
+
+  def gather_input
+    command = $stdin.gets.chomp!
+    if command == "run"
+      handle_run
+    elsif command == "quit"
+      handle_quit
+    else
+      puts ""
+      raise "Don't know how to respond to #{command}"
+    end
+
+  end
+
+  def handle_run
+    print "Waiting for Player to connect"
+    while true do; end
+  end
+
+  def handle_quit
+    puts "Quitting now"
+  end
+
+end
+
+fdb = FakeFDB.new
+
