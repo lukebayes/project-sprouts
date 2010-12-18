@@ -44,7 +44,7 @@ module Sprout
         # not require the user to send in a class name....
         #usage("Final argument must be a name parameter") if runtime_args.empty?
         @args = runtime_args.dup
-        assign_names! @args.shift
+        assign_names! @args.shift.dup
       end
 
       # Quick access to the source directory identified by your project model
