@@ -1,4 +1,5 @@
 require 'test_helper'
+#require 'fixtures/executable/fdb_buffer'
 require 'fixtures/executable/fdb'
 
 class DaemonTest < Test::Unit::TestCase
@@ -17,6 +18,7 @@ class DaemonTest < Test::Unit::TestCase
       @fdb.continue
       @fdb.next
       @fdb.next
+
       @fdb.execute
     end
 
@@ -26,8 +28,8 @@ class DaemonTest < Test::Unit::TestCase
 
   def configure_fdb_path
     @fdb_fake = File.join(fixtures, 'executable', 'flex3sdk_gem', 'fdb')
-    path_response  = OpenStruct.new(:path => @fdb_fake)
-    Sprout::Executable.expects(:load).with(:fdb, 'flex4sdk', '>= 1.0.0.pre').returns path_response
+    #path_response  = OpenStruct.new(:path => @fdb_fake)
+    #Sprout::Executable.expects(:load).with(:fdb, 'flex4sdk', '>= 1.0.0.pre').returns path_response
   end
 end
 

@@ -307,9 +307,7 @@ module Sprout
       def to_rake *args
         # Define the file task first - so that
         # desc blocks hook up to it...
-        file_task = file *args do
-          execute
-        end
+        outer_task = create_outer_task *args
         update_rake_task_name_from_args *args
         yield self if block_given?
         prepare
@@ -317,15 +315,15 @@ module Sprout
         # TODO: Tried auto-updating with library
         # prerequisites, but this led to strange
         # behavior with multiple registrations.
-        handle_library_prerequisites file_task.prerequisites
+        handle_library_prerequisites outer_task.prerequisites
 
         # Add the library resolution rake task
         # as a prerequisite
-        file_task.prerequisites << task(Sprout::Library::TASK_NAME)
+        outer_task.prerequisites << task(Sprout::Library::TASK_NAME)
         prerequisites.each do |prereq|
-          file_task.prerequisites << prereq
+          outer_task.prerequisites << prereq
         end
-        file_task
+        outer_task
       end
 
       ##
@@ -416,11 +414,17 @@ module Sprout
       def library_added path_or_paths
       end
 
-      private
+      def create_outer_task *args
+        file *args do
+          execute
+        end
+      end
 
       def system_execute binary, params
         Sprout.current_system.execute binary, params
       end
+
+      private
 
       def binary_path
         Sprout::Executable.load(executable, pkg_name, pkg_version).path

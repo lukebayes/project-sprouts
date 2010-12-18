@@ -91,16 +91,24 @@ module Sprout::System
     # long-lived CLI processes like FCSH or FDB.
     #
     def execute_silent(tool, options='')
-      return get_and_execute_process_runner(tool, options)
+      get_and_execute_process_runner(tool, options)
     end
 
     ##
     # Execute a new process in a separate thread.
     #
     def execute_thread(tool, options='')
-      return Thread.new do
-        execute(tool, options)
+      thread, runner = nil
+      thread = Thread.new do
+        runner = execute_silent(tool, options)
       end
+      # Wait for the runner to be created
+      # before returning a nil reference
+      # that never gets populated...
+      while runner.nil? do
+        sleep(0.1)
+      end
+      [thread, runner]
     end
 
     ##

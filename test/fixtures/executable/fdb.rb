@@ -15,11 +15,11 @@ module Sprout
 
     ##
     # The default gem name
-    set :pkg_name, 'flex4sdk'
+    set :pkg_name, 'flex4'
 
     ##
     # The default gem version
-    set :pkg_version, '>= 1.0.0.pre'
+    set :pkg_version, '>= 4.1.0'
 
     ##
     # The default executable target
@@ -28,6 +28,8 @@ module Sprout
     ####################################
     # Begin Daemon Configuration
     include Daemon
+
+    set :prompt, /^\(fdb\) /
 
     ##
     # Print a backtrace of all stack frames
