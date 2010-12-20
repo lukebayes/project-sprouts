@@ -9,12 +9,11 @@ class DaemonTest < Test::Unit::TestCase
     setup do
       # Uncomment to see actual output:
       #Sprout::Log.debug = false
-
-      @fdb = Sprout::FDB.new
-      configure_fdb_path
+      configure_fdb_fake
     end
 
     should "execute without shell params" do
+      @fdb = Sprout::FDB.new
       @fdb.run
       @fdb.break "AsUnitRunner:12"
       @fdb.continue
@@ -24,14 +23,27 @@ class DaemonTest < Test::Unit::TestCase
       @fdb.execute
     end
 
+    should "execute from rake task" do
+      f = fdb :fdb_debug do |t|
+        t.run
+        t.break "AsUnitRunner:12"
+        t.continue
+        t.kill
+        t.confirm
+        t.quit
+      end
+
+      f.execute
+    end
+
   end
 
   private
 
-  def configure_fdb_path
-    @fdb_fake = File.join(fixtures, 'executable', 'flex3sdk_gem', 'fdb')
+  def configure_fdb_fake
     # Comment the following and install the flashsdk
     # to run test against actual fdb:
+    @fdb_fake = File.join(fixtures, 'executable', 'flex3sdk_gem', 'fdb')
     path_response = OpenStruct.new(:path => @fdb_fake)
     Sprout::Executable.expects(:load).with(:fdb, 'flex4', '>= 4.1.0.pre').returns path_response
   end

@@ -159,6 +159,8 @@ module Sprout
 
     ##
     # Provide an affirmative response to a confirmation screen.
+    #
+    # See also: unconfirm
     add_action :confirm
 
     ##
@@ -696,6 +698,12 @@ module Sprout
     add_action :tutorial
     add_action_alias :t, :tutorial
     
+    ##
+    # Provide a negative response to a confirmation screen.
+    # 
+    # See also: confirm
+    add_action :unconfirm
+
     ##
     # Remove one or more auto-display expressions.
     #

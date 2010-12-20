@@ -95,6 +95,14 @@ module Sprout
       end
 
       ##
+      # Override this method so that we 
+      # are NOT added to the CLEAN collection.
+      # (Work performed in the Executable)
+      def update_rake_task_name_from_args *args
+        self.rake_task_name = parse_rake_task_arg args.last
+      end
+
+      ##
       # Override this method (Executable)
       # so that we 
       # create the process in a thread 

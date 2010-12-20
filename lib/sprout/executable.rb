@@ -379,9 +379,16 @@ module Sprout
 
       protected
 
+      def create_outer_task *args
+        file *args do
+          execute
+        end
+      end
+
       def update_rake_task_name_from_args *args
         self.rake_task_name = parse_rake_task_arg args.last
         CLEAN.add(self.rake_task_name)
+        self.rake_task_name
       end
 
       def parse_rake_task_arg arg
@@ -412,12 +419,6 @@ module Sprout
       # a String path to a file (or folder), or it can
       # be an Array of paths to files (or folders).
       def library_added path_or_paths
-      end
-
-      def create_outer_task *args
-        file *args do
-          execute
-        end
       end
 
       def system_execute binary, params
