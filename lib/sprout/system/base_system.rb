@@ -98,8 +98,8 @@ module Sprout::System
     # Execute a new process in a separate thread.
     #
     def execute_thread(tool, options='')
-      thread, runner = nil
-      thread = Thread.new do
+      runner = nil
+      Thread.new do
         runner = execute_silent(tool, options)
       end
       # Wait for the runner to be created
@@ -108,7 +108,7 @@ module Sprout::System
       while runner.nil? do
         sleep(0.1)
       end
-      [thread, runner]
+      runner
     end
 
     ##

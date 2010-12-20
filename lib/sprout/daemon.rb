@@ -41,11 +41,10 @@ module Sprout
         accessor_can_be_defined_at name
 
         define_method(name) do |*params|
-          puts ">> #{name} called with: #{params.inspect}"
-          if(!options[:writer].nil?)
-            value = self.send(options[:writer], *params)
-          end
-          action_stack << { :name => name, :params  => params }
+          action = name.to_s
+          action = "y" if name == :confirm # Convert affirmation
+          action << " #{params.join(' ')}" unless params.nil?
+          action_stack << action
         end
       end
 
@@ -78,9 +77,10 @@ module Sprout
       end
 
       def execute
-        thread, runner = super
+        runner = super
         execute_actions runner
-        thread.join
+        handle_user_session runner
+        Process.wait runner.pid
       end
 
       protected
@@ -106,37 +106,46 @@ module Sprout
       private
 
       def execute_actions runner
-        puts "---------------"
-        puts ">> execute_actions with: #{runner}"
-        puts "---------------"
         action_stack.each do |action|
-          execute_action runner, action_stack.shift
+          if wait_for_prompt runner
+            Sprout::Log.puts action
+            execute_action runner, action
+          end
         end
       end
 
       def execute_action runner, action
-        wait_for_prompt runner
-        puts ">> action: #{action.inspect}"
+        runner.puts action.strip
+      end
+
+      def handle_user_session runner
+        while !runner.r.eof?
+          if wait_for_prompt runner
+            input = $stdin.gets.chomp!
+            execute_action runner, input
+          end
+        end
       end
 
       def wait_for_prompt runner, expected_prompt=nil
+        ##
+        # TODO: This should also check for a variety of prompts...
         expected_prompt = expected_prompt || prompt
-        puts ">> wait for prompt with: #{runner}"
-        output = ''
-        line   = ''
+        line = ''
 
-        thread = Thread.new do
-          #puts ">> runner is: #{runner}"
-          while true do
-            char = runner.readpartial 1
-            puts "char: #{char}"
-
-            sleep 0.1
+        while runner.alive? do
+          Sprout::Log.flush
+          return false if runner.r.eof?
+          char = runner.readpartial 1
+          line << char
+          if char == "\n"
+            line = ''
           end
+          Sprout::Log.printf char
+          return true if line.match expected_prompt
         end
-
-        thread.join
       end
+
     end
   end
 end

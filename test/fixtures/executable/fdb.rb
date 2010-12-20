@@ -7,10 +7,6 @@ module Sprout
     # Begin Executable Configuration
     include Executable
 
-    ##
-    # Send a SWF file to debug
-    add_param :input, File, { :hidden_name => true }
-
     set :default_prefix, '-'
 
     ##
@@ -19,7 +15,7 @@ module Sprout
 
     ##
     # The default gem version
-    set :pkg_version, '>= 4.1.0'
+    set :pkg_version, '>= 4.1.0.pre'
 
     ##
     # The default executable target
@@ -29,7 +25,7 @@ module Sprout
     # Begin Daemon Configuration
     include Daemon
 
-    set :prompt, /^\(fdb\) /
+    set :prompt, /^\(fdb\) |\(y or n\) /
 
     ##
     # Print a backtrace of all stack frames
@@ -160,6 +156,10 @@ module Sprout
     # Usage is `condition N COND', where N is an integer and COND is an
     # expression to be evaluated whenever breakpoint N is reached.
     add_action :condition, String
+
+    ##
+    # Provide an affirmative response to a confirmation screen.
+    add_action :confirm
 
     ##
     # Continue execution after stopping at breakpoint.

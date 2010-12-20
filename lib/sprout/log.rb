@@ -31,14 +31,14 @@ module Sprout #:nodoc:
     
     def Log.flush_print
       if(!Log.debug)
-        $stdout.print @@printout
+        $stdout.printf @@printout
         @@printout = ''
       end
     end
     
     def Log.flush
       if(!Log.debug)
-        $stdout.puts @@output
+        $stdout.printf @@output
         @@output = ''
       end
     end

@@ -3,32 +3,55 @@
 class FakeFDB
 
   def initialize
-    puts "Adobe fdb (Flash Player Debugger) [build 16076]"
-    puts "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved."
-    printf "(fdb) "
+    str = "Adobe fdb (Flash Player Debugger) [build 16076]\n"
+    str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
+    str << "(fdb) "
+    printf str
     gather_input
   end
 
   def gather_input
+    $stdout.flush
     command = $stdin.gets.chomp!
     if command == "run"
       handle_run
+    elsif command == "continue"
+      handle_continue
+    elsif command == "kill"
+      handle_kill
     elsif command == "quit"
       handle_quit
     else
       puts ""
       raise "Don't know how to respond to #{command}"
     end
-
+    gather_input
   end
 
   def handle_run
-    print "Waiting for Player to connect"
-    while true do; end
+    str = "Waiting for Player to connect\n"
+    str << "Player connected; session starting.\n"
+    str << "Set breakpoints and then type 'continue' to resume the session.\n"
+    str = "[SWF] Users:lbayes:Projects:AsUnit-P2:asunit-4.0:bin:AsUnitRunner.swf - 226,833 bytes after decompression\n"
+    str << "(fdb) "
+    printf str
+  end
+
+  def handle_continue
+    str = "Breakpoint 1, AsUnitRunner() at AsUnitRunner.as:12\n"
+    str << "12                core = new TextCore();\n"
+    str << "(fdb) "
+    printf str
+  end
+
+  def handle_kill
+    printf "Kill the program being debugged? (y or n) "
   end
 
   def handle_quit
-    puts "Quitting now"
+    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    puts ">> EXITING NOW!"
+    exit
   end
 
 end
