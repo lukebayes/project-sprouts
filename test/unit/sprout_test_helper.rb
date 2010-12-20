@@ -9,7 +9,7 @@ Bundler.setup :default, :development
 require 'shoulda'
 require 'mocha'
 
-lib = File.join(File.dirname(__FILE__), '..', '..', 'lib')
+lib = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'lib'))
 $:.unshift lib unless $:.include? lib
 
 require 'sprout'

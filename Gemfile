@@ -18,7 +18,6 @@ group :development do
   gem "flay"
   gem "flog"
   gem "heckle"
-  gem "flashsdk"
   
   # rcov doesn't appear to install on
   # debian/ubuntu. Boo. Ideas?
