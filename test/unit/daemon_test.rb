@@ -34,6 +34,16 @@ class DaemonTest < Test::Unit::TestCase
       end
 
       f.execute
+
+      # NOTE: If this call raises, then the 
+      # Executable.update_rake_task_name method 
+      # must have changed, and the Daemon override 
+      # is no longer preventing non-File tasks 
+      # from being added to the CLEAN collection.
+      #
+      # Adding this as a message to the error would
+      # not display for some reason...
+      assert_equal 0, CLEAN.size
     end
 
   end

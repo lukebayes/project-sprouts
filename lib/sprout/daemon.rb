@@ -76,6 +76,15 @@ module Sprout
         @action_stack = []
       end
 
+      ##
+      # Execute the Daemon executable, followed
+      # by the collection of stored actions in 
+      # the order they were called.
+      #
+      # If none of the stored actions result in
+      # terminating the process, the underlying
+      # daemon will be connected to the terminal
+      # for user (manual) input.
       def execute
         runner = super
         execute_actions runner

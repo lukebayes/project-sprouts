@@ -379,12 +379,29 @@ module Sprout
 
       protected
 
+      ##
+      # Create the outer rake task. 
+      # For most executables, this will be a Rake::File task,
+      # This is a template method that should be overridden
+      # for executables that do not result in the creation of
+      # a file.
+      #
+      # See also: +update_rake_task_name_from_args+
       def create_outer_task *args
         file *args do
           execute
         end
       end
 
+      ##
+      # This method will add the current task to the Rake CLEAN
+      # collection.
+      # 
+      # Any Executable that does not create a Rake::File task
+      # should also override this method and prevent it from
+      # calling +CLEAN.add+.
+      #
+      # See also: +create_outer_task+
       def update_rake_task_name_from_args *args
         self.rake_task_name = parse_rake_task_arg args.last
         CLEAN.add(self.rake_task_name)
