@@ -5,11 +5,9 @@ module Sprout
     ##
     # Concrete param object for collections of files
     #
-    # See also Sprout::Executable::File
-    #
-    # See also Sprout::Executable::Param
-    #
-    # See also Sprout::Executable::CollectionParam
+    # @see Sprout::Executable::FileParam
+    # @see Sprout::Executable::Param
+    # @see Sprout::Executable::CollectionParam
     #
     class Files < Executable::Param
       include CollectionParam

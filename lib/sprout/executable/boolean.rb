@@ -24,7 +24,7 @@ module Sprout
     #     add_param :visible, Boolean
     #   end
     #
-    # See also Sprout::Executable::Param
+    # @see Sprout::Executable::Param
     #
     class Boolean < Param
 

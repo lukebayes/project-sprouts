@@ -5,11 +5,9 @@ module Sprout
     ##
     # A collection of Paths.
     #
-    # See also Sprout::Executable::Path
-    #
-    # See also Sprout::Executable::Param
-    #
-    # See also Sprout::Executable::CollectionParam
+    # @see Sprout::Executable::Path
+    # @see Sprout::Executable::Param
+    # @see Sprout::Executable::CollectionParam
     #
     class Paths < Files 
 

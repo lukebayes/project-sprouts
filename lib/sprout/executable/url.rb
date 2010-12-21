@@ -5,7 +5,7 @@ module Sprout
     ##
     # A parameter that represents a URL.
     #
-    # See also Sprout::Executable::Param
+    # @see Sprout::Executable::Param
     #
     # TODO: Should provide some custom validations for values
     # that should be a URL.

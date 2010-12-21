@@ -5,11 +5,9 @@ module Sprout
     ##
     # Collection of URL values.
     #
-    # See also Sprout::Executable::Url
-    #
-    # See also Sprout::Executable::Param
-    #
-    # See also Sprout::Executable::CollectionParam
+    # @see Sprout::Executable::Url
+    # @see Sprout::Executable::Param
+    # @see Sprout::Executable::CollectionParam
     #
     class Urls < Strings
     end

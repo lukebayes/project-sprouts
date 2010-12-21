@@ -10,10 +10,10 @@ module Sprout
     # Should only be included by classes that 
     # extend Sprout::Executable::Param.
     #
-    # See also Sprout::Executable::Files
-    # See also Sprout::Executable::Paths
-    # See also Sprout::Executable::Strings
-    # See also Sprout::Executable::Urls
+    # @see Sprout::Executable::Files
+    # @see Sprout::Executable::Paths
+    # @see Sprout::Executable::Strings
+    # @see Sprout::Executable::Urls
     #
     module CollectionParam
 

@@ -50,8 +50,8 @@ module Sprout
   #     t.do_something_else
   #   end
   #
-  # See also: Sprout::Daemon::ClassMethods
-  # See also: Sprout::Daemon::InstanceMethods
+  # @see: Sprout::Daemon::ClassMethods
+  # @see: Sprout::Daemon::InstanceMethods
   #
   module Daemon
 

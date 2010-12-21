@@ -8,7 +8,7 @@ module Sprout
     # Any spaces in the value will be escaped when 
     # returned to a shell.
     #
-    # See also Sprout::Executable::Param
+    # @see Sprout::Executable::Param
     #
     class StringParam < Executable::Param
 

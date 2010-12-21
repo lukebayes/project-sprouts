@@ -12,7 +12,8 @@ else
 end
 
 group :development do
-  gem "hanna", ">= 0.1.12"
+  gem "yard"
+  gem "RedCloth"
   gem "shoulda"
   gem "mocha"
   gem "flay"

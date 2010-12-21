@@ -56,7 +56,7 @@ module Sprout
   # This is the badly-named module that we use to hang our globally-accessible
   # interface from.
   #
-  # See also: Sprout::Base::ClassMethods
+  # @see: Sprout::Base::ClassMethods
   module Base
     extend Concern
 

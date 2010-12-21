@@ -8,7 +8,7 @@ module Sprout
     # Path parameters will create a FileList of prerequisites by concatenating the value with
     # the +file_expression+ that is set on the parameter or Sprout::Executable.
     #
-    # See also Sprout::Executable::Param
+    # @see Sprout::Executable::Param
     #
     class Path < Executable::Param
 

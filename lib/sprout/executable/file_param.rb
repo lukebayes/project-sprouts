@@ -20,7 +20,7 @@ module Sprout
     # is being used to create a Ruby executable, then these File
     # parameters will only be validated before execution.
     #
-    # See also Sprout::Executable::Param
+    # @see Sprout::Executable::Param
     #
     class FileParam < Param 
 

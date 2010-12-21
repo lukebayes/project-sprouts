@@ -10,18 +10,15 @@ Bundler.require
 
 require 'rake/clean'
 require 'rake/testtask'
-require 'hanna/rdoctask'
 
 require File.dirname(__FILE__) + '/lib/sprout/version'
 
-Rake::RDocTask.new do |rdoc|
-  rdoc.title = "Project Sprouts v.#{Sprout::VERSION::STRING}"
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.main = "Sprout::Sprout"
-  rdoc.rdoc_files.include("README.textile", "lib/**/*.rb")
-end
-
-CLEAN.add('rdoc')
+##
+# NOTE, to generate documentation, simply run:
+#
+#   bundle install
+#   yard
+#
 
 namespace :test do
   Rake::TestTask.new(:units) do |t|

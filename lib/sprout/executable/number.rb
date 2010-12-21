@@ -6,7 +6,7 @@ module Sprout
     ##
     # Concrete Sprout::Executable::Param object for numeric values.
     #
-    # See also Sprout::Executable::Param
+    # @see Sprout::Executable::Param
     #
     class Number < Param; end
   end

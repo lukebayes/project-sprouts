@@ -18,27 +18,17 @@ module Sprout
     #     add_param :name, String, :hidden_name => true
     #   end
     #
-    # See also Sprout::Executable::Boolean
-    #
-    # See also Sprout::Executable::FileParam
-    #
-    # See also Sprout::Executable::Files
-    #
-    # See also Sprout::Executable::Number
-    #
-    # See also Sprout::Executable::ParameterFactory
-    #
-    # See also Sprout::Executable::Path
-    #
-    # See also Sprout::Executable::Paths
-    #
-    # See also Sprout::Executable::StringParam
-    #
-    # See also Sprout::Executable::Strings
-    # 
-    # See also Sprout::Executable::Url
-    #
-    # See also Sprout::Executable::Urls
+    # @see Sprout::Executable::Boolean
+    # @see Sprout::Executable::FileParam
+    # @see Sprout::Executable::Files
+    # @see Sprout::Executable::Number
+    # @see Sprout::Executable::ParameterFactory
+    # @see Sprout::Executable::Path
+    # @see Sprout::Executable::Paths
+    # @see Sprout::Executable::StringParam
+    # @see Sprout::Executable::Strings
+    # @see Sprout::Executable::Url
+    # @see Sprout::Executable::Urls
     #
     class Param
 

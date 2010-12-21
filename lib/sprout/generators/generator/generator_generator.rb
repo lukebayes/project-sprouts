@@ -2,14 +2,48 @@
 module Sprout
   class GeneratorGenerator < Generator::Base
 
+    ##
+    # The default module that classes will be added
+    # to.
     add_param :namespace, String, { :default  => ''}
+
+    ##
+    # The name of the folder where external libraries
+    # will be installed.
     add_param :lib, String, { :default => 'lib' }
+
+    ##
+    # The name of the folder where custom generators and templates
+    # will be found.
     add_param :generators, String, { :default => 'generators' }
+
+    ##
+    # The name of the folder where tests should be generated.
     add_param :test, String, { :default => 'test' }
+
+    ##
+    # The name of the child folder of the test folder where 
+    # unit tests should be generated.
     add_param :unit, String, { :default => 'unit' }
+
+    ##
+    # The name of the child folder of the test folder where
+    # fixtures should be generated.
     add_param :fixtures, String, { :default => 'fixtures' }
-    add_param :vendor, String, { :default => 'vendor' }    
+
+    ##
+    # The name of the folder where external source code
+    # should be placed.
+    add_param :vendor, String, { :default => 'vendor' }
+
+    ##
+    # The name of the folder where binary or executable
+    # artifacts should be created by compiler tasks.
     add_param :bin, String, { :default => 'bin' }
+
+    ##
+    # The default (primary) file extension for generated source
+    # files. This should hint at the project type.
     add_param :extension, String, { :default => '.as' }
 
     def manifest  

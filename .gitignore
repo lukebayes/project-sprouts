@@ -2,13 +2,14 @@
 .DS_Store
 *.gem
 pkg
-rdoc
-rdoc/**/**/*
+doc
+doc/**/**/*
 *_documentation.rb
 bundles/as3/samples/mxmlc/bin/*.swf
 bundles/as3/samples/mxmlc/doc
 bundles/as3/samples/mxmlc/bin/*.swc
 media
+.yardoc
 .bundle
 .coverage
 coverage

@@ -1,0 +1,2 @@
+--files=README.textile --files=lib/**/*.rb --exclude=templates/* --protected --load=./script/add_param_handler.rb
+

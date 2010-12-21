@@ -36,29 +36,29 @@ module Sprout
     end
 
     ##
-    # Add a library to the RubyGem package.
+    # Add a library to the package.
     # 
-    # @name Symbol that will be used to retrieve this library later.
-    # @path File, Path or Array of files that will be associated with this
-    # library and copied to the target lib.
-    #
-    # If the path is a directory, all files forward of that directory
-    # will be copied into the RubyGem.
-    # 
+    # @return [Sprout::Library] The newly created library that was added.
+    # @param name [Symbol] Name that will be used to retrieve this library on +load+.
+    # @param path [File, Path, Array] File or files that will be associated with 
+    #   this library and copied into the target project library folder when loaded. 
+    #   (If the path is a directory, all files forward of that directory will be included.)
     def add_library name, path
       if path.is_a?(Array)
         path = path.collect { |p| expand_local_path(p) }
       else
         path = expand_local_path path
       end
-      libraries << Sprout::Library.new( :name => name, :path => path, :file_target => self )
+      library = Sprout::Library.new( :name => name, :path => path, :file_target => self )
+      libraries << library
+      library
     end
 
     ##
     # Add an executable to the RubyGem package.
     #
-    # @name Symbol that will be used to retrieve this executable later.
-    # @target The relative path to the executable that will be associated
+    # @param name [Symbol] that will be used to retrieve this executable later.
+    # @param path [File] relative path to the executable that will be associated
     # with this name.
     #
     def add_executable name, path

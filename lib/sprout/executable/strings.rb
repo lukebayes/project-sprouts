@@ -5,11 +5,9 @@ module Sprout
     ##
     # A collection of String values.
     #
-    # See also Sprout::Executable::String
-    #
-    # See also Sprout::Executable::Param
-    #
-    # See also Sprout::Executable::CollectionParam
+    # @see Sprout::Executable::String
+    # @see Sprout::Executable::Param
+    # @see Sprout::Executable::CollectionParam
     #
     class Strings < Executable::Param
       include CollectionParam

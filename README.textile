@@ -1,8 +1,8 @@
 h1. IMPORTANT NOTE
 
-<font color="red">The mainline of this repository represents the next major release of Sprouts which involves a nearly complete rewrite.
+The mainline of this repository represents the next major release of Sprouts which involves a nearly complete rewrite.
 
-To see, or edit the source code for the currently-released code, please check out the "release branch":http://github.com/lukebayes/project-sprouts/tree/release.</font>
+To see, or edit the source code for the currently-released version (0.7.x), please check out the "release branch":http://github.com/lukebayes/project-sprouts/tree/release.
 
 h1. Project Sprouts
 
@@ -12,26 +12,26 @@ Sprouts includes support for project and code templates, automated build scripts
 
 Sprouts works on OS X, Windows XP, Windows Vista and many flavors of *nix (including Solaris thanks to lots of patience from Armaghan Chaudhary).
 
-h3. Installation
+h2. Installation
 
-# "Install Ruby":http://www.ruby-lang.org/en/downloads/ _(>= v 1.9.2)
-# "Install RubyGems":http://rubyforge.org/frs/?group_id=126 _(>= v 1.3.7)_
-# Install the Sprout gem:
+ # "Install Ruby":http://www.ruby-lang.org/en/downloads/ _(>= v 1.9.2)_
+ # "Install RubyGems":http://rubyforge.org/frs/?group_id=126 _(>= v 1.3.7)_
+ # Install the Sprout gem:
 
-<pre><code>gem install sprout</code></pre>
+  gem install sprout
 
 To get started with Sprouts in *Flash*, follow the directions provided by the "Flash SDK":http://github.com/lukebayes/sprout-flashsdk.
 
-h3. Some Links
+h2. Some Links
 
 * "Web Site":http://projectsprouts.org
 * "See the Documentation":http://projectsprouts.org/rdoc
 * "Meet the Community":http://groups.google.com/group/projectsprouts
 
-h3. MIT License
+h1. MIT License
 
 <pre>
-Copyright (c) 2007-2010 Pattern Park
+Copyright (c) 2007-2011 Pattern Park
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

@@ -433,12 +433,7 @@ module Sprout
     # You run the mxmlc compiler multiple times to create SWF files for more than one locale, 
     # with only the locale option changing.
     #
-    # You must also include the parent directory of the individual locale directories, 
-    # plus the token {locale}, in the source-path; for example:
-    #
-    #      mxmlc -locale en_EN -source-path locale/{locale} -file-specs MainApp.mxml
-    #
-    # For more information, see Localizing Flex Applicationsin (http://livedocs.adobe.com/flex/2/docs/00000898.html#129288) Flex 2 Developer's Guide.
+    # For more information, see Localizing Flex Applications in (http://livedocs.adobe.com/flex/2/docs/00000898.html#129288) Flex 2 Developer's Guide.
     #
     add_param :locale, String
     
@@ -512,13 +507,16 @@ module Sprout
     add_param_alias :rsl, :runtime_shared_libraries
 
     ##
-    # [path-element] [rsl-url] [policy-file-url] [rsl-url] [policy-file-url]
-    # alias -rslp
-    # (repeatable)
+    # Runtime shared library path.
+    #
+    #   t.runtime_shared_library_path << "[path-element] [rsl-url] [policy-file-url]"
+    #
+    # @see Sprout::MXMLC#rslp
+    #
     add_param :runtime_shared_library_path, Strings
     
     ##
-    # Alias for runtime_shared_library_path
+    # Alias for #runtime_shared_library_path
     #
     add_param_alias :rslp, :runtime_shared_library_path
     
