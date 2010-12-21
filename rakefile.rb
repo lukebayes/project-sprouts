@@ -10,7 +10,7 @@ Bundler.require
 
 require 'rake/clean'
 require 'rake/testtask'
-require 'rake/rdoctask'
+require 'hanna/rdoctask'
 
 require File.dirname(__FILE__) + '/lib/sprout/version'
 
