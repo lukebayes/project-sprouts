@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: Sprout::System::JavaSystem</title>
+<link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (J)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Sprout.html" title="Sprout (module)">Sprout</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../System.html" title="Sprout::System (module)">System</a></span></span>
+     &raquo; 
+    <span class="title">JavaSystem</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Sprout::System::JavaSystem
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="BaseSystem.html" title="Sprout::System::BaseSystem (class)">BaseSystem</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="BaseSystem.html" title="Sprout::System::BaseSystem (class)">BaseSystem</a></span></li>
+          
+            <li class="next">Sprout::System::JavaSystem</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/sprout/system/java_system.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The concrete system for the JRuby environment</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  <h2>Method Summary</h2>
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="BaseSystem.html" title="Sprout::System::BaseSystem (class)">BaseSystem</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="BaseSystem.html#alt_separator%3F-instance_method" title="Sprout::System::BaseSystem#alt_separator? (method)">#alt_separator?</a></span>, <span class='object_link'><a href="BaseSystem.html#application_home-instance_method" title="Sprout::System::BaseSystem#application_home (method)">#application_home</a></span>, <span class='object_link'><a href="BaseSystem.html#can_execute%3F-instance_method" title="Sprout::System::BaseSystem#can_execute? (method)">#can_execute?</a></span>, <span class='object_link'><a href="BaseSystem.html#clean_path-instance_method" title="Sprout::System::BaseSystem#clean_path (method)">#clean_path</a></span>, <span class='object_link'><a href="BaseSystem.html#env_home-instance_method" title="Sprout::System::BaseSystem#env_home (method)">#env_home</a></span>, <span class='object_link'><a href="BaseSystem.html#env_homedrive-instance_method" title="Sprout::System::BaseSystem#env_homedrive (method)">#env_homedrive</a></span>, <span class='object_link'><a href="BaseSystem.html#env_homedrive_and_homepath-instance_method" title="Sprout::System::BaseSystem#env_homedrive_and_homepath (method)">#env_homedrive_and_homepath</a></span>, <span class='object_link'><a href="BaseSystem.html#env_homepath-instance_method" title="Sprout::System::BaseSystem#env_homepath (method)">#env_homepath</a></span>, <span class='object_link'><a href="BaseSystem.html#env_userprofile-instance_method" title="Sprout::System::BaseSystem#env_userprofile (method)">#env_userprofile</a></span>, <span class='object_link'><a href="BaseSystem.html#execute-instance_method" title="Sprout::System::BaseSystem#execute (method)">#execute</a></span>, <span class='object_link'><a href="BaseSystem.html#execute_silent-instance_method" title="Sprout::System::BaseSystem#execute_silent (method)">#execute_silent</a></span>, <span class='object_link'><a href="BaseSystem.html#execute_thread-instance_method" title="Sprout::System::BaseSystem#execute_thread (method)">#execute_thread</a></span>, <span class='object_link'><a href="BaseSystem.html#find_home-instance_method" title="Sprout::System::BaseSystem#find_home (method)">#find_home</a></span>, <span class='object_link'><a href="BaseSystem.html#format_application_name-instance_method" title="Sprout::System::BaseSystem#format_application_name (method)">#format_application_name</a></span>, <span class='object_link'><a href="BaseSystem.html#get_and_execute_process_runner-instance_method" title="Sprout::System::BaseSystem#get_and_execute_process_runner (method)">#get_and_execute_process_runner</a></span>, <span class='object_link'><a href="BaseSystem.html#get_process_runner-instance_method" title="Sprout::System::BaseSystem#get_process_runner (method)">#get_process_runner</a></span>, <span class='object_link'><a href="BaseSystem.html#home-instance_method" title="Sprout::System::BaseSystem#home (method)">#home</a></span>, <span class='object_link'><a href="BaseSystem.html#home%3D-instance_method" title="Sprout::System::BaseSystem#home= (method)">#home=</a></span>, <span class='object_link'><a href="BaseSystem.html#library-instance_method" title="Sprout::System::BaseSystem#library (method)">#library</a></span>, <span class='object_link'><a href="BaseSystem.html#tilde_home-instance_method" title="Sprout::System::BaseSystem#tilde_home (method)">#tilde_home</a></span>, <span class='object_link'><a href="BaseSystem.html#worst_case_home-instance_method" title="Sprout::System::BaseSystem#worst_case_home (method)">#worst_case_home</a></span></p>
+
+
+</div>
+    
+    <div id="footer">
+  Generated on Tue Dec 21 11:09:53 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

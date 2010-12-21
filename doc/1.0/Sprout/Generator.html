@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Module: Sprout::Generator</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (G)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Sprout.html" title="Sprout (module)">Sprout</a></span></span>
+     &raquo; 
+    <span class="title">Generator</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Sprout::Generator
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+      <dt class="r1">Includes:</dt>
+      <dd class="r1"><span class='object_link'><a href="RubyFeature.html" title="Sprout::RubyFeature (module)">RubyFeature</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/sprout/generator/base.rb<span class="defines">,<br />
+  lib/sprout/generator/command.rb,<br /> lib/sprout/generator/manifest.rb,<br /> lib/sprout/generator/file_manifest.rb,<br /> lib/sprout/generator/template_manifest.rb,<br /> lib/sprout/generator/directory_manifest.rb</span>
+</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Defined Under Namespace</h2>
+<p class="children">
+   
+    
+   
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Generator/Base.html" title="Sprout::Generator::Base (class)">Base</a></span>, <span class='object_link'><a href="Generator/Command.html" title="Sprout::Generator::Command (class)">Command</a></span>, <span class='object_link'><a href="Generator/DirectoryManifest.html" title="Sprout::Generator::DirectoryManifest (class)">DirectoryManifest</a></span>, <span class='object_link'><a href="Generator/FileManifest.html" title="Sprout::Generator::FileManifest (class)">FileManifest</a></span>, <span class='object_link'><a href="Generator/Manifest.html" title="Sprout::Generator::Manifest (class)">Manifest</a></span>, <span class='object_link'><a href="Generator/TemplateManifest.html" title="Sprout::Generator::TemplateManifest (class)">TemplateManifest</a></span>
+    
+  
+</p>
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_instance-class_method" title="create_instance (class method)">+ (Object) <strong>create_instance</strong>(type, options = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register-class_method" title="register (class method)">+ (Object) <strong>register</strong>(generator_class, templates_path = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#search_paths-class_method" title="search_paths (class method)">+ (Object) <strong>search_paths</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a new collection of paths to search within for generator
+declarations and more importantly, folders named, 'templates'.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#template_folder_for-class_method" title="template_folder_for (class method)">+ (Object) <strong>template_folder_for</strong>(clazz) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Concern.html" title="Sprout::Concern (module)">Concern</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Concern.html#append_features-instance_method" title="Sprout::Concern#append_features (method)">#append_features</a></span>, <span class='object_link'><a href="Concern.html#extended-class_method" title="Sprout::Concern.extended (method)">extended</a></span>, <span class='object_link'><a href="Concern.html#included-instance_method" title="Sprout::Concern#included (method)">#included</a></span></p>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="create_instance-class_method">
+  
+    + (<tt>Object</tt>) <strong>create_instance</strong>(type, options = nil) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/generator/base.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='id create_instance'>create_instance</span> <span class='id type'>type</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id class_name'>class_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id type'>type</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id camel_case'>camel_case</span><span class='rbrace'>}</span><span class='tstring_content'>Generator</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id registered_entities'>registered_entities</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id entity'>entity</span><span class='op'>|</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>::</span><span class='embexpr_beg'>#{</span><span class='id class_name'>class_name</span><span class='rbrace'>}</span><span class='tstring_content'>$</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id entity'>entity</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^</span><span class='embexpr_beg'>#{</span><span class='id class_name'>class_name</span><span class='rbrace'>}</span><span class='tstring_content'>$</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='kw'>return</span> <span class='id entity'>entity</span><span class='period'>.</span><span class='id new'>new</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='id raise'>raise</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Errors</span><span class='op'>::</span><span class='const'>MissingGeneratorError</span><span class='period'>.</span><span class='id new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Could not find any generator named: (</span><span class='embexpr_beg'>#{</span><span class='id class_name'>class_name</span><span class='rbrace'>}</span><span class='tstring_content'>). Perhaps you need to add a RubyGem to your Gemfile?</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="register-class_method">
+  
+    + (<tt>Object</tt>) <strong>register</strong>(generator_class, templates_path = nil) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+8
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/generator/base.rb', line 8</span>
+
+<span class='kw'>def</span> <span class='id register'>register</span> <span class='id generator_class'>generator_class</span><span class='comma'>,</span> <span class='id templates_path'>templates_path</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id generator_paths'>generator_paths</span> <span class='op'>&lt;&lt;</span> <span class='lbrace'>{</span> <span class='symbol'>:class</span> <span class='op'>=&gt;</span> <span class='id generator_class'>generator_class</span><span class='comma'>,</span> <span class='symbol'>:templates</span> <span class='op'>=&gt;</span> <span class='id templates_path'>templates_path</span> <span class='rbrace'>}</span> <span class='kw'>unless</span> <span class='id templates_path'>templates_path</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='kw'>super</span><span class='lparen'>(</span><span class='id generator_class'>generator_class</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="search_paths-class_method">
+  
+    + (<tt>Object</tt>) <strong>search_paths</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new collection of paths to search within for generator
+declarations and more importantly, folders named, 'templates'.</p>
+
+<p>The collection of search_paths will be a subset of the following that will
+include only those directories that exist:</p>
+
+<pre class="code">./config/generators
+./vendor/generators
+~/Library/Sprouts/1.0/generators                    # OS X only
+~/.sprouts/1.0/generators                           # Unix only
+[USER_HOME]/Application Data/Sprouts/cache/1.0/generators # Windows only
+ENV['SPROUT_GENERATORS']                                  # Only if defined
+[Generator Declaration __FILE__]/templates</pre>
+
+<p>When the generators attempt to resolve templates, each of the preceding
+folders will be scanned for a child directory named 'templates'. Within
+that directory, the requested template name will be scanned and the first
+found template file will be used. This process will be repeated for each
+template file that is requested.</p>
+
+<p>The idea is that you may wish to override some template files that a 
+generator creates, but leave others unchanged.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/generator/base.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='id search_paths'>search_paths</span>
+  <span class='comment'># NOTE: Do not cache this list, specific generators
+</span>  <span class='comment'># will modify it with their own lookups
+</span>  <span class='id create_search_paths'>create_search_paths</span><span class='period'>.</span><span class='id select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id path'>path</span><span class='op'>|</span> <span class='const'>File</span><span class='period'>.</span><span class='id directory?'>directory?</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="template_folder_for-class_method">
+  
+    + (<tt>Object</tt>) <strong>template_folder_for</strong>(clazz) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/generator/base.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='id template_folder_for'>template_folder_for</span> <span class='id clazz'>clazz</span>
+  <span class='comment'># Search the potential matches in reverse order
+</span>  <span class='comment'># because subclasses have registered AFTER their
+</span>  <span class='comment'># superclasses and superclasses match the ===
+</span>  <span class='comment'># check...
+</span>  <span class='id generator_paths'>generator_paths</span><span class='period'>.</span><span class='id reverse'>reverse</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id options'>options</span><span class='op'>|</span>
+    <span class='kw'>if</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:class</span><span class='rbracket'>]</span> <span class='op'>===</span> <span class='id clazz'>clazz</span>
+      <span class='kw'>return</span> <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:templates</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Tue Dec 21 11:09:51 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

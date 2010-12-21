@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>File: ruby_feature</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: ruby_feature</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'>
+<p>module Sprout</p>
+
+<pre class="code"><span class='comment'>##
+</span><span class='comment'># This class represents a Feature that is written in
+</span><span class='comment'># Ruby code that exists on the other side of the
+</span><span class='comment'># Ruby load path.
+</span><span class='comment'>#
+</span><span class='comment'># The idea here, is that one can +include+ the Sprout::RubyFeature
+</span><span class='comment'># module into their concrete class, and then accept
+</span><span class='comment'># requests to +register+ and +load+ from clients that
+</span><span class='comment'># are interested in pluggable features.
+</span><span class='comment'>#
+</span><span class='comment'># An example is as follows:
+</span><span class='comment'>#
+</span><span class='comment'>#     require 'sprout'
+</span><span class='comment'>#
+</span><span class='comment'>#     class MyClass
+</span><span class='comment'>#       include Sprout::RubyFeature
+</span><span class='comment'>#     end
+</span><span class='comment'>#
+</span><span class='comment'># In some other Ruby file:
+</span><span class='comment'>#
+</span><span class='comment'>#     MyClass.load :other, 'other_gem', '&gt;= 1.0pre'
+</span><span class='comment'>#
+</span><span class='comment'># In the desired Ruby file:
+</span><span class='comment'>#
+</span><span class='comment'>#     class OtherClass
+</span><span class='comment'>#       include Sprout::Executable
+</span><span class='comment'>#
+</span><span class='comment'>#       set :name, :other
+</span><span class='comment'>#       set :pkg_name, 'other_gem'
+</span><span class='comment'>#       set :pkg_version, '1.0.pre'
+</span><span class='comment'>#
+</span><span class='comment'>#       # do something...
+</span><span class='comment'>#     end
+</span><span class='comment'>#
+</span><span class='comment'>#     MyClass.register OtherClass.new
+</span><span class='comment'>#
+</span><span class='kw'>module</span> <span class='const'>RubyFeature</span>
+
+  <span class='id extend'>extend</span> <span class='const'>Concern</span>
+
+  <span class='kw'>module</span> <span class='const'>ClassMethods</span>
+
+    <span class='comment'>##
+</span>    <span class='comment'># Register a new feature for future lookups
+</span>    <span class='kw'>def</span> <span class='id register'>register</span> <span class='id entity'>entity</span>
+      <span class='id validate_registration'>validate_registration</span> <span class='id entity'>entity</span>
+      <span class='id registered_entities'>registered_entities</span><span class='period'>.</span><span class='id unshift'>unshift</span> <span class='id entity'>entity</span>
+      <span class='id entity'>entity</span>
+    <span class='kw'>end</span>
+
+    <span class='comment'>##
+</span>    <span class='comment'># Load a feature by name.
+</span>    <span class='kw'>def</span> <span class='id load'>load</span> <span class='id name_or_names'>name_or_names</span><span class='comma'>,</span> <span class='id pkg_name'>pkg_name</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id version_requirement'>version_requirement</span><span class='op'>=</span><span class='kw'>nil</span>
+      <span class='id entity'>entity</span> <span class='op'>=</span> <span class='id entity_for'>entity_for</span> <span class='id name_or_names'>name_or_names</span><span class='comma'>,</span> <span class='id pkg_name'>pkg_name</span><span class='comma'>,</span> <span class='id version_requirement'>version_requirement</span>
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id nil?'>nil?</span><span class='rparen'>)</span>
+        <span class='comment'># Try to require the pkg_name:
+</span>        <span class='id require_ruby_package'>require_ruby_package</span> <span class='id pkg_name'>pkg_name</span> <span class='kw'>unless</span> <span class='id pkg_name'>pkg_name</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+        <span class='comment'># Update any entities that registered from our require:
+</span>        <span class='id update_registered_entities'>update_registered_entities</span>
+        <span class='comment'># search for the requested entity:
+</span>        <span class='id entity'>entity</span> <span class='op'>=</span> <span class='id entity_for'>entity_for</span> <span class='id name_or_names'>name_or_names</span><span class='comma'>,</span> <span class='id pkg_name'>pkg_name</span><span class='comma'>,</span> <span class='id version_requirement'>version_requirement</span>
+      <span class='kw'>end</span>
+
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id nil?'>nil?</span><span class='rparen'>)</span>
+        <span class='id message'>message</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The requested entity: (</span><span class='embexpr_beg'>#{</span><span class='id name_or_names'>name_or_names</span><span class='rbrace'>}</span><span class='tstring_content'>) with pkg_name: (</span><span class='embexpr_beg'>#{</span><span class='id pkg_name'>pkg_name</span><span class='rbrace'>}</span><span class='tstring_content'>) and version: </span><span class='tstring_end'>&quot;</span></span>
+        <span class='id message'>message</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>(</span><span class='embexpr_beg'>#{</span><span class='id version_requirement'>version_requirement</span><span class='rbrace'>}</span><span class='tstring_content'>) does not appear to be loaded.</span><span class='tstring_end'>&quot;</span></span>
+        <span class='id message'>message</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span>
+        <span class='id message'>message</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>We did find (</span><span class='embexpr_beg'>#{</span><span class='id registered_entities'>registered_entities</span><span class='period'>.</span><span class='id size'>size</span><span class='rbrace'>}</span><span class='tstring_content'>) registered entities in that package:\n\n</span><span class='tstring_end'>&quot;</span></span>
+        <span class='id registered_entities'>registered_entities</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id other'>other</span><span class='op'>|</span>
+          <span class='id message'>message</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt;&gt; name: (</span><span class='embexpr_beg'>#{</span><span class='id other'>other</span><span class='period'>.</span><span class='id name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>) pkg_name: (</span><span class='embexpr_beg'>#{</span><span class='id other'>other</span><span class='period'>.</span><span class='id pkg_name'>pkg_name</span><span class='rbrace'>}</span><span class='tstring_content'>) pkg_version: (</span><span class='embexpr_beg'>#{</span><span class='id other'>other</span><span class='period'>.</span><span class='id pkg_version'>pkg_version</span><span class='rbrace'>}</span><span class='tstring_content'>)\n</span><span class='tstring_end'>&quot;</span></span>
+        <span class='kw'>end</span>
+        <span class='id message'>message</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n\nYou may need to update your Gemfile and run 'bundle install' </span><span class='tstring_end'>&quot;</span></span>
+        <span class='id message'>message</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>to update your local gems.\n\n</span><span class='tstring_end'>&quot;</span></span>
+        <span class='id raise'>raise</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Errors</span><span class='op'>::</span><span class='const'>LoadError</span><span class='period'>.</span><span class='id new'>new</span> <span class='id message'>message</span>
+      <span class='kw'>end</span>
+
+      <span class='id resolve_file_target'>resolve_file_target</span> <span class='id entity'>entity</span>
+      <span class='id entity'>entity</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>def</span> <span class='id clear_entities!'>clear_entities!</span>
+      <span class='ivar'>@registered_entities</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+
+    <span class='id protected'>protected</span>
+
+    <span class='kw'>def</span> <span class='id resolve_file_target'>resolve_file_target</span> <span class='id entity'>entity</span>
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='symbol'>:resolve</span><span class='rparen'>)</span>
+        <span class='id entity'>entity</span><span class='period'>.</span><span class='id resolve'>resolve</span>
+      <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='symbol'>:file_target</span><span class='rparen'>)</span>
+        <span class='id file_target'>file_target</span> <span class='op'>=</span> <span class='id entity'>entity</span><span class='period'>.</span><span class='id file_target'>file_target</span>
+        <span class='kw'>if</span><span class='lparen'>(</span><span class='id file_target'>file_target</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='symbol'>:resolve</span><span class='rparen'>)</span>
+          <span class='id file_target'>file_target</span><span class='period'>.</span><span class='id resolve'>resolve</span>
+        <span class='kw'>end</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>def</span> <span class='id validate_registration'>validate_registration</span> <span class='id entity'>entity</span>
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:name</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id entity'>entity</span><span class='period'>.</span><span class='id name'>name</span><span class='period'>.</span><span class='id nil?'>nil?</span><span class='rparen'>)</span>
+        <span class='id raise'>raise</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Errors</span><span class='op'>::</span><span class='const'>UsageError</span><span class='period'>.</span><span class='id new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Cannot register a RubyFeature without a 'name' getter</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+
+    <span class='comment'>#
+</span>    <span class='comment'># Used by the Generator::Base to update inputs from 
+</span>    <span class='comment'># empty class definitions to instances..
+</span>    <span class='kw'>def</span> <span class='id update_registered_entities'>update_registered_entities</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>def</span> <span class='id entity_for'>entity_for</span> <span class='id name_or_names'>name_or_names</span><span class='comma'>,</span> <span class='id pkg_name'>pkg_name</span><span class='comma'>,</span> <span class='id version_requirement'>version_requirement</span>
+      <span class='comment'># These commented blocks help immensely when debugging
+</span>      <span class='comment'># loading and registration issues, please leave them here:
+</span>      <span class='comment'>#puts &quot;+++++++++++++++++++++++++++&quot;
+</span>      <span class='comment'>#puts &quot;&gt;&gt; entity_for #{name_or_names} pkg_name: #{pkg_name} version: #{version_requirement}&quot;
+</span>      <span class='comment'>#registered_entities.each do |entity|
+</span>        <span class='comment'>#puts &quot;&gt;&gt; entity: #{entity.name} platform: #{entity.platform} pkg_name: #{entity.pkg_name} version: #{entity.pkg_version}&quot;
+</span>      <span class='comment'>#end
+</span>      <span class='id registered_entities'>registered_entities</span><span class='period'>.</span><span class='id reverse'>reverse</span><span class='period'>.</span><span class='id select'>select</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id entity'>entity</span><span class='op'>|</span>
+          <span class='id satisfies_name?'>satisfies_name?</span><span class='lparen'>(</span><span class='id entity'>entity</span><span class='comma'>,</span> <span class='id name_or_names'>name_or_names</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> 
+          <span class='id satisfies_platform?'>satisfies_platform?</span><span class='lparen'>(</span><span class='id entity'>entity</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span>
+          <span class='id satisfies_pkg_name?'>satisfies_pkg_name?</span><span class='lparen'>(</span><span class='id entity'>entity</span><span class='comma'>,</span> <span class='id pkg_name'>pkg_name</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span>
+          <span class='id satisfies_version?'>satisfies_version?</span><span class='lparen'>(</span><span class='id entity'>entity</span><span class='comma'>,</span> <span class='id version_requirement'>version_requirement</span><span class='rparen'>)</span>
+      <span class='kw'>end</span><span class='period'>.</span><span class='id first'>first</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>def</span> <span class='id satisfies_environment?'>satisfies_environment?</span> <span class='id entity'>entity</span><span class='comma'>,</span> <span class='id environment'>environment</span>
+      <span class='comment'>#puts &quot;&gt;&gt; env: #{entity.environment} vs. #{environment}&quot;
+</span>      <span class='id environment'>environment</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='op'>||</span> <span class='op'>!</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:environment</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id entity'>entity</span><span class='period'>.</span><span class='id environment'>environment</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='op'>==</span> <span class='id environment'>environment</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>def</span> <span class='id satisfies_pkg_name?'>satisfies_pkg_name?</span> <span class='id entity'>entity</span><span class='comma'>,</span> <span class='id expected'>expected</span>
+      <span class='comment'>#puts &quot;&gt;&gt; pkg_name: #{entity.pkg_name} vs. #{expected}&quot;
+</span>      <span class='id expected'>expected</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='op'>||</span> <span class='op'>!</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:pkg_name</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id entity'>entity</span><span class='period'>.</span><span class='id pkg_name'>pkg_name</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='op'>==</span> <span class='id expected'>expected</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>def</span> <span class='id satisfies_name?'>satisfies_name?</span> <span class='id entity'>entity</span><span class='comma'>,</span> <span class='id expected'>expected</span>
+      <span class='comment'>#puts &quot;&gt;&gt; name: #{entity.name} vs. #{expected}&quot;
+</span>      <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id expected'>expected</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='op'>||</span> <span class='op'>!</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:name</span><span class='rparen'>)</span>
+      <span class='kw'>if</span> <span class='id expected'>expected</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Array</span><span class='rparen'>)</span>
+        <span class='kw'>return</span> <span class='id expected'>expected</span><span class='period'>.</span><span class='id include?'>include?</span> <span class='id entity'>entity</span><span class='period'>.</span><span class='id name'>name</span>
+      <span class='kw'>end</span>
+      <span class='kw'>return</span> <span class='id expected'>expected</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='op'>==</span> <span class='id entity'>entity</span><span class='period'>.</span><span class='id name'>name</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>def</span> <span class='id satisfies_platform?'>satisfies_platform?</span> <span class='id entity'>entity</span>
+      <span class='comment'>#puts&quot;&gt;&gt; satisfies platform?&quot;
+</span>      <span class='comment'># If not platform is defined, it's assumed to work on all platforms:
+</span>      <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:platform</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id entity'>entity</span><span class='period'>.</span><span class='id platform'>platform</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+      <span class='comment'>#puts &quot;&gt;&gt; platform: #{entity.platform}&quot;
+</span>      <span class='const'>Sprout</span><span class='period'>.</span><span class='id current_system'>current_system</span><span class='period'>.</span><span class='id can_execute?'>can_execute?</span><span class='lparen'>(</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id platform'>platform</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>def</span> <span class='id satisfies_version?'>satisfies_version?</span> <span class='id entity'>entity</span><span class='comma'>,</span> <span class='id version_requirement'>version_requirement</span><span class='op'>=</span><span class='kw'>nil</span>
+      <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id version_requirement'>version_requirement</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+      <span class='id req_version'>req_version</span> <span class='op'>=</span> <span class='const'>Gem</span><span class='op'>::</span><span class='const'>Requirement</span><span class='period'>.</span><span class='id create'>create</span> <span class='id version_requirement'>version_requirement</span>
+      <span class='id req_version'>req_version</span><span class='period'>.</span><span class='id satisfied_by?'>satisfied_by?</span><span class='lparen'>(</span><span class='const'>Gem</span><span class='op'>::</span><span class='const'>Version</span><span class='period'>.</span><span class='id create'>create</span><span class='lparen'>(</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id pkg_version'>pkg_version</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>def</span> <span class='id require_ruby_package'>require_ruby_package</span> <span class='id name'>name</span>
+      <span class='kw'>begin</span>
+        <span class='id require'>require</span> <span class='id name'>name</span><span class='period'>.</span><span class='id to_s'>to_s</span>
+      <span class='kw'>rescue</span> <span class='const'>LoadError</span> <span class='op'>=&gt;</span> <span class='id e'>e</span>
+        <span class='id raise'>raise</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Errors</span><span class='op'>::</span><span class='const'>LoadError</span><span class='period'>.</span><span class='id new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Could not load the required file (</span><span class='embexpr_beg'>#{</span><span class='id name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>) - Maybe you need to run 'gem install </span><span class='embexpr_beg'>#{</span><span class='id name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>' or maybe 'bundle install'?</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+
+    <span class='comment'>##
+</span>    <span class='comment'># An entity has the following parameters:
+</span>    <span class='comment'># name
+</span>    <span class='comment'># pkg_name
+</span>    <span class='comment'># pkg_version
+</span>    <span class='comment'># platform
+</span>    <span class='comment'>#
+</span>    <span class='kw'>def</span> <span class='id registered_entities'>registered_entities</span>
+      <span class='ivar'>@registered_entities</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+<span class='kw'>end</span></pre>
+
+<p>end</p>
+
+<p>## # Mixin on the Rake::Task so # that our concrete entities # can
+interoperate with some # knowledge of each other. class Rake::Task</p>
+
+<pre class="code"><span class='id attr_accessor'>attr_accessor</span> <span class='symbol'>:sprout_entity</span></pre>
+
+<p>end</p>
+</div></div>
+    
+    <div id="footer">
+  Generated on Tue Dec 21 11:09:49 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

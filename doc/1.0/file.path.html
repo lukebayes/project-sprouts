@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>File: path</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: path</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'>
+<p>module Sprout</p>
+
+<pre class="code"><span class='kw'>module</span> <span class='const'>Executable</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Concrete Sprout::Executable::Param object for Path values.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Path parameters will create a FileList of prerequisites by concatenating the value with
+</span>  <span class='comment'># the +file_expression+ that is set on the parameter or Sprout::Executable.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @see Sprout::Executable::Param
+</span>  <span class='comment'>#
+</span>  <span class='kw'>class</span> <span class='const'>Path</span> <span class='op'>&lt;</span> <span class='const'>Executable</span><span class='op'>::</span><span class='const'>Param</span>
+
+    <span class='kw'>def</span> <span class='id prepare_prerequisites'>prepare_prerequisites</span>
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='id value'>value</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id file_is_output?'>file_is_output?</span><span class='lparen'>(</span><span class='id value'>value</span><span class='rparen'>)</span><span class='rparen'>)</span>
+        <span class='id files'>files</span> <span class='op'>=</span> <span class='const'>FileList</span><span class='lbracket'>[</span><span class='id value'>value</span> <span class='op'>+</span> <span class='id file_expression'>file_expression</span><span class='rbracket'>]</span>
+        <span class='id files'>files</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id f'>f</span><span class='op'>|</span>
+          <span class='id file'>file</span> <span class='id f'>f</span>
+          <span class='id belongs_to'>belongs_to</span><span class='period'>.</span><span class='id prerequisites'>prerequisites</span> <span class='op'>&lt;&lt;</span> <span class='id f'>f</span>
+        <span class='kw'>end</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+
+<p>end</p>
+</div></div>
+    
+    <div id="footer">
+  Generated on Tue Dec 21 11:09:49 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

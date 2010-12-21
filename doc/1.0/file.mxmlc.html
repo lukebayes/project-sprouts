@@ -1,0 +1,740 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>File: mxmlc</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: mxmlc</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'>
+<p>module Sprout</p>
+
+<pre class="code"><span class='comment'># The MXMLC task provides a rake front end to the Flex MXMLC command line compiler.
+</span><span class='comment'># This task is integrated with the LibraryTask so that if any dependencies are
+</span><span class='comment'># library tasks, they will be automatically added to the library_path or source_path
+</span><span class='comment'># depending on whether they provide a swc or sources.
+</span><span class='comment'>#
+</span><span class='comment'># The entire MXMLC advanced interface has been provided here. All parameter names should be
+</span><span class='comment'># identical to what is available on the regular compiler except dashes have been replaced
+</span><span class='comment'># by underscores.
+</span><span class='comment'>#
+</span><span class='comment'># The following example can be pasted in a file named 'rakefile.rb' which should be placed in
+</span><span class='comment'># the same folder as an ActionScript 3.0 class named 'SomeProject.as' that extends
+</span><span class='comment'># flash.display.Sprite.
+</span><span class='comment'>#
+</span><span class='comment'>#   # Create a remote library dependency on the corelib swc.
+</span><span class='comment'>#   library :corelib
+</span><span class='comment'># 
+</span><span class='comment'>#   # Alias the compilation task with one that is easier to type
+</span><span class='comment'>#   task :compile =&gt; 'SomeProject.swf'
+</span><span class='comment'>#
+</span><span class='comment'>#   # Create an MXMLC named for the output file that it creates. This task depends on the
+</span><span class='comment'>#   # corelib library and will automatically add the corelib.swc to it's library_path
+</span><span class='comment'>#   mxmlc 'SomeProject.swf' =&gt; :corelib do |t|
+</span><span class='comment'>#     t.input                     = 'SomeProject.as'
+</span><span class='comment'>#     t.default_size              = '800 600'
+</span><span class='comment'>#     t.default_background_color  = &quot;#FFFFFF&quot;
+</span><span class='comment'>#   end
+</span><span class='comment'>#
+</span><span class='comment'># Note: Be sure to check out the features of the Executable to learn more about gem_version and preprocessor
+</span><span class='comment'>#
+</span><span class='comment'># Interface and descriptions found here:
+</span><span class='comment'># http://livedocs.adobe.com/flex/2/docs/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&amp;file=00001481.html
+</span><span class='comment'>#
+</span><span class='kw'>class</span> <span class='const'>MXMLC</span>
+  <span class='id include'>include</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Executable</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Enables accessibility features when compiling the Flex application or SWC file. The default value is false.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:accessible</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_value</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets the file encoding for ActionScript files. For more information see: http://livedocs.adobe.com/flex/2/docs/00001503.html#149244
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:actionscript_file_encoding</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Checks if a source-path entry is a subdirectory of another source-path entry. It helps make the package names of MXML components unambiguous. This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:allow_source_path_overlap</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_value</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Use the ActionScript 3.0 class-based object model for greater performance and better error reporting. In the class-based object model, most built-in functions are implemented as fixed methods of classes.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default value is true. If you set this value to false, you must set the es option to true.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:as3</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Prints detailed compile times to the standard output. The default value is true.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:benchmark</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets the value of the {context.root} token in channel definitions in the flex-services.xml file. If you do not specify the value of this option, Flex uses an empty string.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information on using the {context.root} token, see http://livedocs.adobe.com/flex/2/docs/00001446.html#205687.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:context_root</span><span class='comma'>,</span> <span class='const'>Path</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:contributor</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files. (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380)
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:creator</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files. (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380)
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:date</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Generates a debug SWF file. This file includes line numbers and filenames of all the source files. When a run-time error occurs, the stacktrace shows these line numbers and filenames. This information is also used by the command-line debugger and the Flex Builder debugger. Enabling the debug option generates larger SWF files.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For the mxmlc compiler, the default value is false. For the compc compiler, the default value is true. 
+</span>  <span class='comment'># 
+</span>  <span class='comment'># For SWC files generated with the compc compiler, set this value to true, unless the target SWC file is an RSL. In that case, set the debug option to false.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For information about the command-line debugger, see Using the Command-Line Debugger (http://livedocs.adobe.com/flex/2/docs/00001540.html#181846).
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Flex also uses the verbose-stacktraces setting to determine whether line numbers are added to the stacktrace.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:debug</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_value</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Lets you engage in remote debugging sessions with the Flash IDE. This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:debug_password</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets the application's background color. You use the 0x notation to set the color, as the following example shows:
+</span>  <span class='comment'># 
+</span>  <span class='comment'>#     -default-background-color=0xCCCCFF
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default value is null. The default background of a Flex application is an image of a gray gradient. You must override this image for the value of the default-background-color option to be visible. For more information, see Editing application settings (http://livedocs.adobe.com/flex/2/docs/00001504.html#138781).
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'># 
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:default_background_color</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets the application's frame rate. The default value is 24. This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:default_frame_rate</span><span class='comma'>,</span> <span class='const'>Number</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Defines the application's script execution limits.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The max-recursion-depth value specifies the maximum depth of Adobe Flash Player call stack before Flash Player stops. This is essentially the stack overflow limit. The default value is 1000.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The max-execution-time value specifies the maximum duration, in seconds, that an ActionScript event handler can execute before Flash Player assumes that it is hung, and aborts it. The default value is 60 seconds. You cannot set this value above 60 seconds.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Example:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     # 900 is new max-recursion-depth
+</span>  <span class='comment'>#     # 20 is new max-execution-time
+</span>  <span class='comment'>#     t.default_script_limits = '900 20'
+</span>  <span class='comment'>#
+</span>  <span class='comment'># You can override these settings in the application.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:default_script_limits</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Defines the default application size, in pixels for example: default_size = '950 550'. This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:default_size</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:delimiter</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Defines the location of the default style sheet. Setting this option overrides the implicit use of the defaults.css style sheet in the framework.swc file.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information on the defaults.css file, see Using Styles and Themes (http://livedocs.adobe.com/flex/2/docs/00000751.html#241755) in Flex 2 Developer's Guide.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:default_css_url</span><span class='comma'>,</span> <span class='const'>Url</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># This parameter is normally called 'define' but thanks to scoping issues with Sprouts and Rake, we needed to rename it and chose: 'define_conditional'.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Define a global AS3 conditional compilation definition, e.g. -define=CONFIG::debugging,true or -define+=CONFIG::debugging,true (to append to existing definitions in flex-config.xml)  (advanced, repeatable)
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:define_conditional</span><span class='comma'>,</span> <span class='const'>Strings</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:shell_name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-define</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:description</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Outputs the compiler options in the flex-config.xml file to the target path; for example:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     mxmlc -dump-config myapp-config.xml
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:dump_config</span><span class='comma'>,</span> <span class='const'>File</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Use the ECMAScript edition 3 prototype-based object model to allow dynamic overriding of prototype properties. In the prototype-based object model, built-in functions are implemented as dynamic properties of prototype objects.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># You can set the strict option to true when you use this model, but it might result in compiler errors for references to dynamic properties.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default value is false. If you set this option to true, you must set the es3 option to false.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:es</span><span class='comma'>,</span> <span class='const'>Boolean</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets a list of symbols to exclude from linking when compiling a SWF file.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This option provides compile-time link checking for external references that are dynamically linked.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information about dynamic linking, see About linking (http://livedocs.adobe.com/flex/2/docs/00001521.html#205852).
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'># 
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:externs</span><span class='comma'>,</span> <span class='const'>Strings</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies a list of SWC files or directories to exclude from linking when compiling a SWF file. This option provides compile-time link checking for external components that are dynamically linked.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information about dynamic linking, see About linking (http://livedocs.adobe.com/flex/2/docs/00001521.html#205852).
+</span>  <span class='comment'>#
+</span>  <span class='comment'># You can use the += operator to append the new SWC file to the list of external libraries.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This parameter has been aliased as +el+.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:external_library_path</span><span class='comma'>,</span> <span class='const'>Files</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Alias for external_library_path
+</span>  <span class='comment'>#
+</span>  <span class='id add_param_alias'>add_param_alias</span> <span class='symbol'>:el</span><span class='comma'>,</span> <span class='symbol'>:external_library_path</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies source files to compile. This is the default option for the mxmlc compiler.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:file_specs</span><span class='comma'>,</span> <span class='const'>Files</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies the range of Unicode settings for that language. For more information, see Using Styles and Themes (http://livedocs.adobe.com/flex/2/docs/00000751.html#241755) in Flex 2 Developer's Guide.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:fonts_languages_language_range</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:shell_name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-compiler.fonts.languages.language-range</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Defines the font manager. The default is flash.fonts.JREFontManager. You can also use the flash.fonts.BatikFontManager. For more information, see Using Styles and Themes in Flex 2 Developer's Guide (http://livedocs.adobe.com/flex/2/docs/00000751.html#241755).
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:fonts_managers</span><span class='comma'>,</span> <span class='const'>Strings</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets the maximum number of fonts to keep in the server cache. For more information, see Caching fonts and glyphs (http://livedocs.adobe.com/flex/2/docs/00001469.html#208457).
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:fonts_max_cached_fonts</span><span class='comma'>,</span> <span class='const'>Number</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets the maximum number of character glyph-outlines to keep in the server cache for each font face. For more information, see Caching fonts and glyphs (http://livedocs.adobe.com/flex/2/docs/00001469.html#208457).
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'># 
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:fonts_max_glyphs_per_face</span><span class='comma'>,</span> <span class='const'>Number</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies a SWF file frame label with a sequence of class names that are linked onto the frame.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For example: frames_frame = 'someLabel MyProject OtherProject FoodProject'
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'># 
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:frames_frame</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:shell_name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-frames.frame</span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Toggles the generation of an IFlexBootstrap-derived loader class.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:generate_frame_loader</span><span class='comma'>,</span> <span class='const'>Boolean</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Enables the headless implementation of the Flex compiler. This sets the following:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     System.setProperty('java.awt.headless', 'true')
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The headless setting (java.awt.headless=true) is required to use fonts and SVG on UNIX systems without X Windows.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:headless_server</span><span class='comma'>,</span> <span class='const'>Boolean</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Links all classes inside a SWC file to the resulting application SWF file, regardless of whether or not they are used.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Contrast this option with the library-path option that includes only those classes that are referenced at compile time.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># To link one or more classes whether or not they are used and not an entire SWC file, use the includes option.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This option is commonly used to specify resource bundles.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:include_libraries</span><span class='comma'>,</span> <span class='const'>Files</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Links one or more classes to the resulting application SWF file, whether or not those classes are required at compile time.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># To link an entire SWC file rather than individual classes, use the include-libraries option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:includes</span><span class='comma'>,</span> <span class='const'>Strings</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Define one or more directory paths for include processing. For each path that is provided, all .as and .mxml files found forward of that path will
+</span>  <span class='comment'># be included in the SWF regardless of whether they are imported or not.
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:include_path</span><span class='comma'>,</span> <span class='const'>Paths</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Enables incremental compilation. For more information, see About incremental compilation (http://livedocs.adobe.com/flex/2/docs/00001506.html#153980).
+</span>  <span class='comment'># 
+</span>  <span class='comment'># This option is true by default for the Flex Builder application compiler. For the command-line compiler, the default is false. The web-tier compiler does not support incremental compilation.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:incremental</span><span class='comma'>,</span> <span class='const'>Boolean</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Keep the specified metadata in the SWF (advanced, repeatable).
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Example:
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Rakefile:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     mxmlc 'bin/SomeProject.swf' do |t|
+</span>  <span class='comment'>#       t.keep_as3_metadata &lt;&lt; 'Orange'
+</span>  <span class='comment'>#     end
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Source Code:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     [Orange(isTasty=true)]
+</span>  <span class='comment'>#     public function eatOranges():void {
+</span>  <span class='comment'>#         // do something
+</span>  <span class='comment'>#     }
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:keep_as3_metadata</span><span class='comma'>,</span> <span class='const'>Strings</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Determines whether to keep the generated ActionScript class files.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The generated class files include stubs and classes that are generated by the compiler and used to build the SWF file.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default location of the files is the /generated subdirectory, which is directly below the target MXML file. If the /generated directory does not exist, the compiler creates one.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default names of the primary generated class files are filename-generated.as and filename-interface.as.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default value is false.\nThis is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:keep_generated_actionscript</span><span class='comma'>,</span> <span class='const'>Boolean</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:language</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Enables ABC bytecode lazy initialization.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default value is false.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:lazy_init</span><span class='comma'>,</span> <span class='const'>Boolean</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># &lt;product&gt; &lt;serial-number&gt;
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Specifies a product and a serial number.  (repeatable)
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:license</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Links SWC files to the resulting application SWF file. The compiler only links in those classes for the SWC file that are required.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default value of the library-path option includes all SWC files in the libs directory and the current locale. These are required.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># To point to individual classes or packages rather than entire SWC files, use the source-path option.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># If you set the value of the library-path as an option of the command-line compiler, you must also explicitly add the framework.swc and locale SWC files. Your new entry is not appended to the library-path but replaces it.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># You can use the += operator to append the new argument to the list of existing SWC files.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># In a configuration file, you can set the append attribute of the library-path tag to true to indicate that the values should be appended to the library path rather than replace it.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:library_path</span><span class='comma'>,</span> <span class='const'>Files</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Alias to library_path
+</span>  <span class='comment'>#
+</span>  <span class='id add_param_alias'>add_param_alias</span> <span class='symbol'>:l</span><span class='comma'>,</span> <span class='symbol'>:library_path</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Prints linking information to the specified output file. 
+</span>  <span class='comment'># This file is an XML file that contains 
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     &lt;def&gt;, &lt;pre&gt;, and &lt;ext&gt; 
+</span>  <span class='comment'>#
+</span>  <span class='comment'># symbols showing linker dependencies in the final SWF file.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The file format output by this command can be used to write a file for input to the load-externs option.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information on the report, see Examining linker dependencies (http://livedocs.adobe.com/flex/2/docs/00001394.html#211202).
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:link_report</span><span class='comma'>,</span> <span class='const'>File</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies the location of the configuration file that defines compiler options.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># If you specify a configuration file, you can override individual options by setting them on the command line.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># All relative paths in the configuration file are relative to the location of the configuration file itself.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Use the += operator to chain this configuration file to other configuration files.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information on using configuration files to provide options to the command-line compilers, see About configuration files (http://livedocs.adobe.com/flex/2/docs/00001490.html#138195).
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:load_config</span><span class='comma'>,</span> <span class='const'>Files</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies the location of an XML file that contains 
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     &lt;def&gt;, &lt;pre&gt;, and &lt;ext&gt; 
+</span>  <span class='comment'>#
+</span>  <span class='comment'># symbols to omit from linking when compiling a SWF file. 
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The XML file uses the same syntax as the one produced by the link-report option. 
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information on the report, see Examining linker dependencies (http://livedocs.adobe.com/flex/2/docs/00001394.html#211202).
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This option provides compile-time link checking for external components that are dynamically linked.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information about dynamic linking, see About linking (http://livedocs.adobe.com/flex/2/docs/00001521.html#205852).
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is an advanced option.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:load_externs</span><span class='comma'>,</span> <span class='const'>File</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies the locale that should be packaged in the SWF file (for example, en_EN). 
+</span>  <span class='comment'>#
+</span>  <span class='comment'># You run the mxmlc compiler multiple times to create SWF files for more than one locale, 
+</span>  <span class='comment'># with only the locale option changing.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information, see Localizing Flex Applicationsin (http://livedocs.adobe.com/flex/2/docs/00000898.html#129288) Flex 2 Developer's Guide.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:locale</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:localized_description</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).&quot;
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:localized_title</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies a namespace for the MXML file. You must include a URI and the location of the manifest file that defines the contents of this namespace. This path is relative to the MXML file.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information about manifest files, see About manifest files (http://livedocs.adobe.com/flex/2/docs/00001519.html#134676).
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:namespaces_namespace</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Enables the ActionScript optimizer. This optimizer reduces file size and increases performance by optimizing the SWF file's bytecode.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default value is false.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:optimize</span><span class='comma'>,</span> <span class='const'>Boolean</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies the output path and filename for the resulting file. If you omit this option, the compiler saves the SWF file to the directory where the target file is located.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default SWF filename matches the target filename, but with a SWF file extension.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># If you use a relative path to define the filename, it is always relative to the current working directory, not the target MXML application root.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The compiler creates extra directories based on the specified filename if those directories are not present.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># When using this option with the component compiler, the output is a SWC file rather than a SWF file.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:output</span><span class='comma'>,</span> <span class='const'>File</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:file_task_name</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:publisher</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># XML text to store in the SWF metadata (overrides metadata.* configuration) (advanced)
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:raw_metadata</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Prints a list of resource bundles to input to the compc compiler to create a resource bundle SWC file. The filename argument is the name of the file that contains the list of bundles.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information, see Localizing Flex Applications (http://livedocs.adobe.com/flex/2/docs/00000898.html#129288) in Flex 2 Developer's Guide.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:resource_bundle_list</span><span class='comma'>,</span> <span class='const'>File</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies a list of run-time shared libraries (RSLs) to use for this application. RSLs are dynamically-linked at run time.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># You specify the location of the SWF file relative to the deployment location of the application. For example, if you store a file named library.swf file in the web_root/libraries directory on the web server, and the application in the web root, you specify libraries/library.swf.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information about RSLs, see Using Runtime Shared Libraries. (http://livedocs.adobe.com/flex/2/docs/00001520.html#168690)
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:runtime_shared_libraries</span><span class='comma'>,</span> <span class='const'>Strings</span>
+
+  <span class='comment'>## 
+</span>  <span class='comment'># Alias for runtime_shared_libraries
+</span>  <span class='comment'>#
+</span>  <span class='id add_param_alias'>add_param_alias</span> <span class='symbol'>:rsl</span><span class='comma'>,</span> <span class='symbol'>:runtime_shared_libraries</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Runtime shared library path.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   t.runtime_shared_library_path &lt;&lt; &quot;[path-element] [rsl-url] [policy-file-url]&quot;
+</span>  <span class='comment'>#
+</span>  <span class='comment'># @see Sprout::MXMLC#rslp
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:runtime_shared_library_path</span><span class='comma'>,</span> <span class='const'>Strings</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Alias for #runtime_shared_library_path
+</span>  <span class='comment'>#
+</span>  <span class='id add_param_alias'>add_param_alias</span> <span class='symbol'>:rslp</span><span class='comma'>,</span> <span class='symbol'>:runtime_shared_library_path</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies the location of the services-config.xml file. This file is used by Flex Data Services.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:services</span><span class='comma'>,</span> <span class='const'>File</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Shows warnings for ActionScript classes.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default value is true.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information about viewing warnings and errors, see Viewing warnings and errors (http://livedocs.adobe.com/flex/2/docs/00001517.html#182413).
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:show_actionscript_warnings</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Shows a warning when Flash Player cannot detect changes to a bound property.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default value is true.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information about compiler warnings, see Using SWC files (http://livedocs.adobe.com/flex/2/docs/00001505.html#158337).
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:show_binding_warnings</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Shows deprecation warnings for Flex components. To see warnings for ActionScript classes, use the show-actionscript-warnings option.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default value is true.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information about viewing warnings and errors, see Viewing warnings and errors.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:show_deprecation_warnings</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Adds directories or files to the source path. The Flex compiler searches directories in the source path for MXML or AS source files that are used in your Flex applications and includes those that are required at compile time.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># You can use wildcards to include all files and subdirectories of a directory.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># To link an entire library SWC file and not individual classes or directories, use the library-path option.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The source path is also used as the search path for the component compiler's include-classes and include-resource-bundles options.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># You can also use the += operator to append the new argument to the list of existing source path entries.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:source_path</span><span class='comma'>,</span> <span class='const'>Paths</span>
+
+  <span class='id add_param_alias'>add_param_alias</span> <span class='symbol'>:sp</span><span class='comma'>,</span> <span class='symbol'>:source_path</span> 
+
+  <span class='comment'>##
+</span>  <span class='comment'># Statically link the libraries specified by the -runtime-shared-libraries-path option.
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#     alias -static-rsls
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:static_link_runtime_shared_libraries</span><span class='comma'>,</span> <span class='const'>Boolean</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Alias for static_link_runtime_shared_libraries
+</span>  <span class='comment'>#
+</span>  <span class='id add_param_alias'>add_param_alias</span> <span class='symbol'>:static_rsls</span><span class='comma'>,</span> <span class='symbol'>:static_link_runtime_shared_libraries</span> 
+
+  <span class='comment'>##
+</span>  <span class='comment'># Prints undefined property and function calls; also performs compile-time type checking on assignments and options supplied to method calls.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default value is true.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information about viewing warnings and errors, see Viewing warnings and errors (http://livedocs.adobe.com/flex/2/docs/00001517.html#182413).
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:strict</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies the version of the player the application is targeting.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Features requiring a later version will not be compiled into the application. The minimum value supported is &quot;9.0.0&quot;.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:target_player</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies a list of theme files to use with this application. Theme files can be SWC files with CSS files inside them or CSS files.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For information on compiling a SWC theme file, see Using Styles and Themes (http://livedocs.adobe.com/flex/2/docs/00000751.html#241755) in Flex 2 Developer's Guide.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:theme</span><span class='comma'>,</span> <span class='const'>Files</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:title</span><span class='comma'>,</span> <span class='const'>String</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Specifies that the current application uses network services.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default value is true.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># When the use-network property is set to false, the application can access the local filesystem (for example, use the XML.load() method with file: URLs) but not network services. In most circumstances, the value of this property should be true.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># For more information about the use-network property, see Applying Flex Security (http://livedocs.adobe.com/flex/2/docs/00001328.html#137544).
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:use_network</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Generates source code that includes line numbers. When a run-time error occurs, the stacktrace shows these line numbers.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Enabling this option generates larger SWF files.\nThe default value is false.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:verbose_stacktraces</span><span class='comma'>,</span> <span class='const'>Boolean</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Verifies the libraries loaded at runtime are the correct ones.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:verify_digests</span><span class='comma'>,</span> <span class='const'>Boolean</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Enables specified warnings. For more information, see Viewing warnings and errors (http://livedocs.adobe.com/flex/2/docs/00001517.html#182413).
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:warn_warning_type</span><span class='comma'>,</span> <span class='const'>Boolean</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Enables all warnings. Set to false to disable all warnings. This option overrides the warn-warning_type options.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># The default value is true.
+</span>  <span class='comment'>#
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:warnings</span><span class='comma'>,</span> <span class='const'>Boolean</span>
+
+  <span class='kw'>def</span> <span class='id library_added'>library_added</span> <span class='id path_or_paths'>path_or_paths</span>
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id path_or_paths'>path_or_paths</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\.swc$</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id library_path'>library_path</span> <span class='op'>&lt;&lt;</span> <span class='id path_or_paths'>path_or_paths</span>
+    <span class='kw'>else</span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='id path_or_paths'>path_or_paths</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Main source file to send compiler&quot;
+</span>  <span class='comment'># This must be the last item in this list
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:input</span><span class='comma'>,</span> <span class='const'>File</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:required</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:hidden_name</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+
+  <span class='id set'>set</span> <span class='symbol'>:default_prefix</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-</span><span class='tstring_end'>'</span></span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># The default gem name
+</span>  <span class='comment'>#
+</span>  <span class='id set'>set</span> <span class='symbol'>:pkg_name</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>flex4sdk</span><span class='tstring_end'>'</span></span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># The default gem version
+</span>  <span class='comment'>#
+</span>  <span class='id set'>set</span> <span class='symbol'>:pkg_version</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>&gt;= 1.0.pre</span><span class='tstring_end'>'</span></span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># The default executable target
+</span>  <span class='comment'>#
+</span>  <span class='id set'>set</span> <span class='symbol'>:executable</span><span class='comma'>,</span> <span class='symbol'>:mxmlc</span>
+
+<span class='kw'>end</span></pre>
+
+<p>end</p>
+
+<p>## # Rake task helper that delegates to # the MXMLC executable. # #   
+mxmlc ‘bin/SomeProject.swf’ do |t| #      t.input        =
+‘src/SomeProject.as’ #      t.source_path  &lt;&lt; ‘lib/corelib’ #     
+t.library_path &lt;&lt; ‘lib/SomeLib.swc’ #    end # def mxmlc *args,
+&amp;block</p>
+
+<pre class="code"><span class='id mxmlc_tool'>mxmlc_tool</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>MXMLC</span><span class='period'>.</span><span class='id new'>new</span>
+<span class='id mxmlc_tool'>mxmlc_tool</span><span class='period'>.</span><span class='id to_rake'>to_rake</span><span class='lparen'>(</span><span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+<span class='id mxmlc_tool'>mxmlc_tool</span></pre>
+
+<p>end</p>
+</div></div>
+    
+    <div id="footer">
+  Generated on Tue Dec 21 11:02:51 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

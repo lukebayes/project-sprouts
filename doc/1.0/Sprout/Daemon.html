@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Module: Sprout::Daemon</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Sprout.html" title="Sprout (module)">Sprout</a></span></span>
+     &raquo; 
+    <span class="title">Daemon</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Sprout::Daemon
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+      <dt class="r1">Extended by:</dt>
+      <dd class="r1"><span class='object_link'><a href="Concern.html" title="Sprout::Concern (module)">Concern</a></span></dd>
+      
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/sprout/daemon.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The Sprout::Daemon module exposes the Domain Specific Language provided by
+the Sprout::Executable module, but with enhancements (and modifications) to
+support long-lived processes (like FDB and FCSH).</p>
+
+<p>NOTE: Any class that includes Sprout::Daemon should first include 
+Sprout::Executable. This is an admittedly smelly constraint, but it works
+for now.</p>
+
+<pre class="code"><span class='kw'>class</span> <span class='const'>Foo</span>
+  <span class='id include'>include</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Executable</span>
+  <span class='id include'>include</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Daemon</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Keep in mind that we're still working
+</span>  <span class='comment'># with Executable, so add_param is available
+</span>  <span class='comment'># for the initialization of the process.
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:input</span><span class='comma'>,</span> <span class='const'>File</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Expose the do_something action after
+</span>  <span class='comment'># the process is started.
+</span>  <span class='id add_action'>add_action</span> <span class='symbol'>:do_something</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Expose the do_something_else action after
+</span>  <span class='comment'># the process is started.
+</span>  <span class='id add_action'>add_action</span> <span class='symbol'>:do_something_else</span>
+<span class='kw'>end</span></pre>
+
+<p>You can also create a globally-accessible rake task to expose your new
+Daemon instance to Rake by creating a method like the following:</p>
+
+<pre class="code"><span class='kw'>def</span> <span class='id foo'>foo</span> <span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id foo_tool'>foo_tool</span> <span class='op'>=</span> <span class='const'>Foo</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id foo_tool'>foo_tool</span><span class='period'>.</span><span class='id to_rake'>to_rake</span> <span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+<span class='kw'>end</span></pre>
+
+<p>Note: The aforementioned rake helper is usually written at the bottom of 
+the class file that is referenced.</p>
+
+<p>The aforementioned Rake task could be used like:</p>
+
+<pre class="code"><span class='id foo'>foo</span> <span class='symbol'>:bar</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id do_something'>do_something</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id do_something_else'>do_something_else</span>
+<span class='kw'>end</span></pre>
+
+<p>@see: Sprout::Daemon::ClassMethods @see: Sprout::Daemon::InstanceMethods</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+   
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Daemon/ClassMethods.html" title="Sprout::Daemon::ClassMethods (module)">ClassMethods</a></span>, <span class='object_link'><a href="Daemon/InstanceMethods.html" title="Sprout::Daemon::InstanceMethods (module)">InstanceMethods</a></span>
+    
+   
+    
+  
+</p>
+
+
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  <h2>Method Summary</h2>
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Concern.html" title="Sprout::Concern (module)">Concern</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Concern.html#append_features-instance_method" title="Sprout::Concern#append_features (method)">append_features</a></span>, <span class='object_link'><a href="Concern.html#extended-class_method" title="Sprout::Concern.extended (method)">extended</a></span>, <span class='object_link'><a href="Concern.html#included-instance_method" title="Sprout::Concern#included (method)">included</a></span></p>
+
+
+</div>
+    
+    <div id="footer">
+  Generated on Tue Dec 21 11:09:50 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

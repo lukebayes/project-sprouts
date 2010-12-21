@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>File: base_system</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: base_system</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'>
+<p>module Sprout::System</p>
+
+<pre class="code"><span class='comment'># The abstract base class for all supported system/platform types.
+</span><span class='comment'># In general, users are created by calling the +create+ factory method
+</span><span class='comment'># on the +System+ module.
+</span><span class='comment'>#     
+</span><span class='comment'>#     System.create
+</span><span class='comment'>#
+</span><span class='comment'># Assuming you call the create method, you should wind up with
+</span><span class='comment'># a concrete system that matches your system, and these concrete
+</span><span class='comment'># users will generally be derived from this base class.
+</span><span class='comment'>#
+</span><span class='kw'>class</span> <span class='const'>BaseSystem</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Get the home path for a system on a particular operating system.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This path will be different, depending on which system owns
+</span>  <span class='comment'># the curren process, and which operating system they are on.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id home'>home</span>
+    <span class='ivar'>@home</span> <span class='op'>||=</span> <span class='id find_home'>find_home</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Set the home path for a system on a particular operating system.
+</span>  <span class='comment'># 
+</span>  <span class='comment'># If you request the home path before setting it, we will
+</span>  <span class='comment'># attempt to determine the home path of the current system for
+</span>  <span class='comment'># the current operating system.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This is just a simple way to override the default behavior.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id home='>home=</span><span class='lparen'>(</span><span class='id home'>home</span><span class='rparen'>)</span>
+    <span class='ivar'>@home</span> <span class='op'>=</span> <span class='id home'>home</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Some operating systems (like OS X and Windows) have a 
+</span>  <span class='comment'># specific location where applications are expected to store
+</span>  <span class='comment'># files for a particular system. This location is generally
+</span>  <span class='comment'># a subdirectory of +home+.
+</span>  <span class='comment'># 
+</span>  <span class='comment'># The value of this location will usually be overridden in
+</span>  <span class='comment'># concrete System classes.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id library'>library</span>
+    <span class='kw'>return</span> <span class='id home'>home</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Instantiate and return a new Sprout::ProcessRunner so
+</span>  <span class='comment'># that we can execute it.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id get_process_runner'>get_process_runner</span>
+    <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>ProcessRunner</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id can_execute?'>can_execute?</span> <span class='id platform'>platform</span>
+    <span class='id platform'>platform</span> <span class='op'>==</span> <span class='symbol'>:universal</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Creates a new process, executes the command
+</span>  <span class='comment'># and returns whatever the process wrote to stdout, or stderr.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Raises a +Sprout::Errors::ExecutionError+ if the process writes to stderr
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id execute'>execute</span><span class='lparen'>(</span><span class='id tool'>tool</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+    <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Log</span><span class='period'>.</span><span class='id puts'>puts</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id tool'>tool</span><span class='rbrace'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id options'>options</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id runner'>runner</span> <span class='op'>=</span> <span class='id get_and_execute_process_runner'>get_and_execute_process_runner</span><span class='lparen'>(</span><span class='id tool'>tool</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
+    <span class='id error'>error</span>  <span class='op'>=</span> <span class='id runner'>runner</span><span class='period'>.</span><span class='id read_err'>read_err</span>
+    <span class='id result'>result</span> <span class='op'>=</span> <span class='id runner'>runner</span><span class='period'>.</span><span class='id read'>read</span>
+
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id result'>result</span><span class='period'>.</span><span class='id size'>size</span> <span class='op'>&gt;</span> <span class='int'>0</span><span class='rparen'>)</span>
+      <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Log</span><span class='period'>.</span><span class='id puts'>puts</span> <span class='id result'>result</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>if</span><span class='lparen'>(</span><span class='id error'>error</span><span class='period'>.</span><span class='id size'>size</span> <span class='op'>&gt;</span> <span class='int'>0</span><span class='rparen'>)</span>
+      <span class='id raise'>raise</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Errors</span><span class='op'>::</span><span class='const'>ExecutionError</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[ERROR] </span><span class='embexpr_beg'>#{</span><span class='id error'>error</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+
+    <span class='id result'>result</span> <span class='op'>||</span> <span class='id error'>error</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Creates and returns the process without
+</span>  <span class='comment'># attempting to read or write to the stream.
+</span>  <span class='comment'># This is useful for interacting with
+</span>  <span class='comment'># long-lived CLI processes like FCSH or FDB.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id execute_silent'>execute_silent</span><span class='lparen'>(</span><span class='id tool'>tool</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+    <span class='id get_and_execute_process_runner'>get_and_execute_process_runner</span><span class='lparen'>(</span><span class='id tool'>tool</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Execute a new process in a separate thread.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id execute_thread'>execute_thread</span><span class='lparen'>(</span><span class='id tool'>tool</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+    <span class='id runner'>runner</span> <span class='op'>=</span> <span class='kw'>nil</span>
+    <span class='const'>Thread</span><span class='period'>.</span><span class='id new'>new</span> <span class='kw'>do</span>
+      <span class='id runner'>runner</span> <span class='op'>=</span> <span class='id execute_silent'>execute_silent</span><span class='lparen'>(</span><span class='id tool'>tool</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='comment'># Wait for the runner to be created
+</span>    <span class='comment'># before returning a nil reference
+</span>    <span class='comment'># that never gets populated...
+</span>    <span class='kw'>while</span> <span class='id runner'>runner</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='kw'>do</span>
+      <span class='id sleep'>sleep</span><span class='lparen'>(</span><span class='float'>0.1</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='id runner'>runner</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Clean the provided +path+ String for the current
+</span>  <span class='comment'># operating system.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Each operating system behaves differently when we
+</span>  <span class='comment'># attempt to execute a file with spaces in the +path+
+</span>  <span class='comment'># to the file.
+</span>  <span class='comment'># 
+</span>  <span class='comment'># Subclasses will generally override this method and
+</span>  <span class='comment'># clean the path appropriately for their operating 
+</span>  <span class='comment'># system.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id clean_path'>clean_path</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Different operating systems will store Application data
+</span>  <span class='comment'># different default locations.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># Subclasses will generally override this method and 
+</span>  <span class='comment'># return the appropriate location for their operating system.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># +name+ String value of the Application name for which we'd
+</span>  <span class='comment'># like to store data.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id application_home'>application_home</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+    <span class='kw'>return</span> <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='id library'>library</span><span class='comma'>,</span> <span class='id format_application_name'>format_application_name</span><span class='lparen'>(</span><span class='id name'>name</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='semicolon'>;</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Template method that should be overridden by
+</span>  <span class='comment'># subclasses.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id format_application_name'>format_application_name</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+    <span class='id name'>name</span>
+  <span class='kw'>end</span>
+
+  <span class='id protected'>protected</span>
+
+  <span class='kw'>def</span> <span class='id env_homedrive'>env_homedrive</span>
+    <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>HOMEDRIVE</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id env_homepath'>env_homepath</span>
+    <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>HOMEPATH</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id env_homedrive_and_homepath'>env_homedrive_and_homepath</span>
+    <span class='id drive'>drive</span> <span class='op'>=</span> <span class='id env_homedrive'>env_homedrive</span>
+    <span class='id path'>path</span> <span class='op'>=</span> <span class='id env_homepath'>env_homepath</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id drive'>drive</span><span class='rbrace'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id drive'>drive</span> <span class='op'>&amp;&amp;</span> <span class='id path'>path</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id env_userprofile'>env_userprofile</span>
+    <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>USERPROFILE</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id env_home'>env_home</span>
+    <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>HOME</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id tilde_home'>tilde_home</span>
+    <span class='const'>File</span><span class='period'>.</span><span class='id expand_path'>expand_path</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>~</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id alt_separator?'>alt_separator?</span>
+    <span class='const'>File</span><span class='op'>::</span><span class='const'>ALT_SEPARATOR</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id worst_case_home'>worst_case_home</span>
+    <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>C:\\</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id alt_separator?'>alt_separator?</span>
+    <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id find_home'>find_home</span>
+    <span class='lbracket'>[</span><span class='symbol'>:env_userprofile</span><span class='comma'>,</span> <span class='symbol'>:env_home</span><span class='comma'>,</span> <span class='symbol'>:env_homedrive_and_homepath</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id key'>key</span><span class='op'>|</span>
+      <span class='id value'>value</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='id key'>key</span><span class='rparen'>)</span>
+      <span class='kw'>return</span> <span class='id value'>value</span> <span class='kw'>unless</span> <span class='id value'>value</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+    <span class='kw'>end</span>
+
+    <span class='kw'>begin</span>
+      <span class='kw'>return</span> <span class='id tilde_home'>tilde_home</span>
+    <span class='kw'>rescue</span> <span class='const'>StandardError</span>
+      <span class='id worst_case_home'>worst_case_home</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='id protected'>protected</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Get a process runner and execute the provided +executable+,
+</span>  <span class='comment'># with the provided +options+.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># +executable+ String path to the external executable file.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># +options+ String commandline options to send to the +executable+.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id get_and_execute_process_runner'>get_and_execute_process_runner</span> <span class='id tool'>tool</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='kw'>nil</span>
+    <span class='id runner'>runner</span> <span class='op'>=</span> <span class='id get_process_runner'>get_process_runner</span>
+    <span class='id runner'>runner</span><span class='period'>.</span><span class='id execute_open4'>execute_open4</span> <span class='id clean_path'>clean_path</span><span class='lparen'>(</span><span class='id tool'>tool</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id options'>options</span>
+    <span class='id runner'>runner</span>
+  <span class='kw'>end</span>
+
+<span class='kw'>end</span>
+
+<span class='kw'>class</span> <span class='const'>ThreadMock</span> <span class='comment'># :nodoc:
+</span>  <span class='kw'>def</span> <span class='id alive?'>alive?</span>
+    <span class='kw'>return</span> <span class='kw'>false</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+
+<p>end</p>
+</div></div>
+    
+    <div id="footer">
+  Generated on Tue Dec 21 11:09:49 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>File: concern</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: concern</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'>
+<p>module Sprout</p>
+
+<pre class="code"><span class='comment'>##
+</span><span class='comment'># This class was copied from Rails source code and provides
+</span><span class='comment'># our RubyFeature with the ability to more clearly mix in
+</span><span class='comment'># functionality against a class and behave as if inheritance
+</span><span class='comment'># works at the class mixin level.
+</span><span class='comment'>#
+</span><span class='comment'># TODO: I'd like to update our system so that this
+</span><span class='comment'># functionality is no longer necessary - if you have ideas
+</span><span class='comment'># or opinions about this code, please let me know!
+</span><span class='kw'>module</span> <span class='const'>Concern</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Callback handler when a class is extended. This
+</span>  <span class='comment'># handler will set the @_dependencies array on the
+</span>  <span class='comment'># concrete class that just extended a 
+</span>  <span class='comment'># 'Concern'.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># This callback is often triggered with:
+</span>  <span class='comment'>#
+</span>  <span class='comment'>#   class Foo
+</span>  <span class='comment'>#     extend Concern
+</span>  <span class='comment'>#   end
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id extended'>extended</span><span class='lparen'>(</span><span class='id base'>base</span><span class='rparen'>)</span>
+    <span class='id base'>base</span><span class='period'>.</span><span class='id instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@_dependencies</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Apply both class and instance features found in the 
+</span>  <span class='comment'># base class to the new subclass.
+</span>  <span class='kw'>def</span> <span class='id append_features'>append_features</span><span class='lparen'>(</span><span class='id base'>base</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='id base'>base</span><span class='period'>.</span><span class='id instance_variable_defined?'>instance_variable_defined?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@_dependencies</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='id base'>base</span><span class='period'>.</span><span class='id instance_variable_get'>instance_variable_get</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@_dependencies</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='op'>&lt;&lt;</span> <span class='kw'>self</span>
+      <span class='kw'>return</span> <span class='kw'>false</span>
+    <span class='kw'>else</span>
+      <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id base'>base</span> <span class='op'>&lt;</span> <span class='kw'>self</span>
+      <span class='ivar'>@_dependencies</span><span class='period'>.</span><span class='id each'>each</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id dep'>dep</span><span class='op'>|</span> <span class='id base'>base</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='symbol'>:include</span><span class='comma'>,</span> <span class='id dep'>dep</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
+      <span class='kw'>super</span>
+      <span class='id base'>base</span><span class='period'>.</span><span class='id extend'>extend</span> <span class='id const_get'>const_get</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ClassMethods</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id const_defined?'>const_defined?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ClassMethods</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='id base'>base</span><span class='period'>.</span><span class='id send'>send</span> <span class='symbol'>:include</span><span class='comma'>,</span> <span class='id const_get'>const_get</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InstanceMethods</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id const_defined?'>const_defined?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>InstanceMethods</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='id base'>base</span><span class='period'>.</span><span class='id class_eval'>class_eval</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='ivar'>@_included_block</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id instance_variable_defined?'>instance_variable_defined?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@_included_block</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Handle inclusion of this module.
+</span>  <span class='kw'>def</span> <span class='id included'>included</span><span class='lparen'>(</span><span class='id base'>base</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='id base'>base</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+      <span class='ivar'>@_included_block</span> <span class='op'>=</span> <span class='id block'>block</span>
+    <span class='kw'>else</span>
+      <span class='kw'>super</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+
+<p>end</p>
+
+<h1>begin</h1>
+
+<p>Copyright © 2004-2010 David Heinemeier Hansson</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the “Software”),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.</p>
+
+<h1>end</h1>
+</div></div>
+    
+    <div id="footer">
+  Generated on Tue Dec 21 11:09:49 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,1352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: Sprout::ProcessRunner</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Sprout.html" title="Sprout (module)">Sprout</a></span></span>
+     &raquo; 
+    <span class="title">ProcessRunner</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Sprout::ProcessRunner
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Sprout::ProcessRunner</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/sprout/process_runner.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The ProcessRunner is a cross-platform wrapper for executing external
+executable processes.</p>
+
+<p>As it turns out, Ruby handle differences very well, and  other process
+libraries (like win32-open3 and open4.popen4), do make the experience more
+consistent on a given platform, but they don't hide the differences
+introduced by the  continuing beligerence of Windows or *nix (depending on 
+which side of the fence you're on).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#e-instance_method" title="#e (instance method)">- (Object) <strong>e</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Error IO (readable).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pid-instance_method" title="#pid (instance method)">- (Object) <strong>pid</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute pid.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#r-instance_method" title="#r (instance method)">- (Object) <strong>r</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Read IO (readable).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ruby_version-instance_method" title="#ruby_version (instance method)">- (Object) <strong>ruby_version</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ruby_version.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#w-instance_method" title="#w (instance method)">- (Object) <strong>w</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Write IO (writeable).</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#alive%3F-instance_method" title="#alive? (instance method)">- (Boolean) <strong>alive?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close-instance_method" title="#close (instance method)">- (Object) <strong>close</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_write-instance_method" title="#close_write (instance method)">- (Object) <strong>close_write</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#execute_open4-instance_method" title="#execute_open4 (instance method)">- (Object) <strong>execute_open4</strong>(*command) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Execute the provided command using the open4.popen4 library.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#execute_win32-instance_method" title="#execute_win32 (instance method)">- (Object) <strong>execute_win32</strong>(*command) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Execute the provided command using the win32-open3 library.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flush-instance_method" title="#flush (instance method)">- (Object) <strong>flush</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#getc-instance_method" title="#getc (instance method)">- (Object) <strong>getc</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (ProcessRunner) <strong>initialize</strong> </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of ProcessRunner.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#kill-instance_method" title="#kill (instance method)">- (Object) <strong>kill</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#print-instance_method" title="#print (instance method)">- (Object) <strong>print</strong>(msg) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#puts-instance_method" title="#puts (instance method)">- (Object) <strong>puts</strong>(msg) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read-instance_method" title="#read (instance method)">- (Object) <strong>read</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_err-instance_method" title="#read_err (instance method)">- (Object) <strong>read_err</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#readlines-instance_method" title="#readlines (instance method)">- (Object) <strong>readlines</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#readpartial-instance_method" title="#readpartial (instance method)">- (Object) <strong>readpartial</strong>(count) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_status-instance_method" title="#update_status (instance method)">- (Object) <strong>update_status</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Sprout::ProcessRunner (class)">ProcessRunner</a></span></tt>) <strong>initialize</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of ProcessRunner</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 30</span>
+
+<span class='kw'>def</span> <span class='id initialize'>initialize</span>
+  <span class='kw'>super</span>
+  <span class='ivar'>@ruby_version</span> <span class='op'>=</span> <span class='const'>RUBY_VERSION</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <span id="e-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="e-instance_method">
+  
+    - (<tt>Object</tt>) <strong>e</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Error IO (readable)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='id e'>e</span>
+  <span class='ivar'>@e</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="pid-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="pid-instance_method">
+  
+    - (<tt>Object</tt>) <strong>pid</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute pid</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id pid'>pid</span>
+  <span class='ivar'>@pid</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="r-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="r-instance_method">
+  
+    - (<tt>Object</tt>) <strong>r</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Read IO (readable)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='id r'>r</span>
+  <span class='ivar'>@r</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="ruby_version-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="ruby_version-instance_method">
+  
+    - (<tt>Object</tt>) <strong>ruby_version</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ruby_version</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 16</span>
+
+<span class='kw'>def</span> <span class='id ruby_version'>ruby_version</span>
+  <span class='ivar'>@ruby_version</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="w-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="w-instance_method">
+  
+    - (<tt>Object</tt>) <strong>w</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Write IO (writeable)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id w'>w</span>
+  <span class='ivar'>@w</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="alive?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>alive?</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 56</span>
+
+<span class='kw'>def</span> <span class='id alive?'>alive?</span>
+  <span class='ivar'>@alive</span> <span class='op'>=</span> <span class='id update_status'>update_status</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="close-instance_method">
+  
+    - (<tt>Object</tt>) <strong>close</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 64</span>
+
+<span class='kw'>def</span> <span class='id close'>close</span>
+  <span class='id update_status'>update_status</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="close_write-instance_method">
+  
+    - (<tt>Object</tt>) <strong>close_write</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+102
+103
+104</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 102</span>
+
+<span class='kw'>def</span> <span class='id close_write'>close_write</span>
+  <span class='ivar'>@w</span><span class='period'>.</span><span class='id close_write'>close_write</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="execute_open4-instance_method">
+  
+    - (<tt>Object</tt>) <strong>execute_open4</strong>(*command) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Execute the provided command using the open4.popen4 library. This is
+generally only used by Cygwin and *nix variants (including OS X).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+38
+39
+40
+41
+42
+43
+44
+45</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 38</span>
+
+<span class='kw'>def</span> <span class='id execute_open4'>execute_open4</span> <span class='op'>*</span><span class='id command'>command</span>
+  <span class='id execute_with_block'>execute_with_block</span> <span class='op'>*</span><span class='id command'>command</span> <span class='kw'>do</span>
+    <span class='comment'># Not sure about the join - with the 1.0 push, we're
+</span>    <span class='comment'># sending in 2 args - the exe path, and options as a string.
+</span>    <span class='comment'># This was new and was causing problems...
+</span>    <span class='ivar'>@pid</span><span class='comma'>,</span> <span class='ivar'>@w</span><span class='comma'>,</span> <span class='ivar'>@r</span><span class='comma'>,</span> <span class='ivar'>@e</span> <span class='op'>=</span> <span class='id open4_popen4_block'>open4_popen4_block</span> <span class='op'>*</span><span class='id command'>command</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="execute_win32-instance_method">
+  
+    - (<tt>Object</tt>) <strong>execute_win32</strong>(*command) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Execute the provided command using the win32-open3 library. This is
+generally used even by 64-bit Windows installations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+50
+51
+52
+53
+54</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 50</span>
+
+<span class='kw'>def</span> <span class='id execute_win32'>execute_win32</span><span class='lparen'>(</span><span class='op'>*</span><span class='id command'>command</span><span class='rparen'>)</span>
+  <span class='id execute_with_block'>execute_with_block</span> <span class='op'>*</span><span class='id command'>command</span> <span class='kw'>do</span>
+    <span class='ivar'>@pid</span><span class='comma'>,</span> <span class='ivar'>@w</span><span class='comma'>,</span> <span class='ivar'>@r</span><span class='comma'>,</span> <span class='ivar'>@e</span> <span class='op'>=</span> <span class='id io_popen_block'>io_popen_block</span> <span class='op'>*</span><span class='id command'>command</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="flush-instance_method">
+  
+    - (<tt>Object</tt>) <strong>flush</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+86
+87
+88</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 86</span>
+
+<span class='kw'>def</span> <span class='id flush'>flush</span>
+  <span class='ivar'>@w</span><span class='period'>.</span><span class='id flush'>flush</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="getc-instance_method">
+  
+    - (<tt>Object</tt>) <strong>getc</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 90</span>
+
+<span class='kw'>def</span> <span class='id getc'>getc</span>
+  <span class='ivar'>@r</span><span class='period'>.</span><span class='id getc'>getc</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="kill-instance_method">
+  
+    - (<tt>Object</tt>) <strong>kill</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='id kill'>kill</span>
+  <span class='const'>Process</span><span class='period'>.</span><span class='id kill'>kill</span><span class='lparen'>(</span><span class='int'>9</span><span class='comma'>,</span> <span class='id pid'>pid</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="print-instance_method">
+  
+    - (<tt>Object</tt>) <strong>print</strong>(msg) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+94
+95
+96</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 94</span>
+
+<span class='kw'>def</span> <span class='id print'>print</span><span class='lparen'>(</span><span class='id msg'>msg</span><span class='rparen'>)</span>
+  <span class='ivar'>@w</span><span class='period'>.</span><span class='id print'>print</span> <span class='id msg'>msg</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="puts-instance_method">
+  
+    - (<tt>Object</tt>) <strong>puts</strong>(msg) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+98
+99
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 98</span>
+
+<span class='kw'>def</span> <span class='id puts'>puts</span><span class='lparen'>(</span><span class='id msg'>msg</span><span class='rparen'>)</span>
+  <span class='ivar'>@w</span><span class='period'>.</span><span class='id puts'>puts</span><span class='lparen'>(</span><span class='id msg'>msg</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="read-instance_method">
+  
+    - (<tt>Object</tt>) <strong>read</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 106</span>
+
+<span class='kw'>def</span> <span class='id read'>read</span>
+  <span class='kw'>return</span> <span class='ivar'>@r</span><span class='period'>.</span><span class='id read'>read</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="read_err-instance_method">
+  
+    - (<tt>Object</tt>) <strong>read_err</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+110
+111
+112</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 110</span>
+
+<span class='kw'>def</span> <span class='id read_err'>read_err</span>
+  <span class='kw'>return</span> <span class='ivar'>@e</span><span class='period'>.</span><span class='id read'>read</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="readlines-instance_method">
+  
+    - (<tt>Object</tt>) <strong>readlines</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+82
+83
+84</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 82</span>
+
+<span class='kw'>def</span> <span class='id readlines'>readlines</span>
+  <span class='ivar'>@r</span><span class='period'>.</span><span class='id readlines'>readlines</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="readpartial-instance_method">
+  
+    - (<tt>Object</tt>) <strong>readpartial</strong>(count) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+78
+79
+80</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 78</span>
+
+<span class='kw'>def</span> <span class='id readpartial'>readpartial</span><span class='lparen'>(</span><span class='id count'>count</span><span class='rparen'>)</span>
+  <span class='ivar'>@r</span><span class='period'>.</span><span class='id readpartial'>readpartial</span><span class='lparen'>(</span><span class='id count'>count</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="update_status-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_status</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+68
+69
+70
+71
+72
+73
+74
+75
+76</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/process_runner.rb', line 68</span>
+
+<span class='kw'>def</span> <span class='id update_status'>update_status</span>
+  <span class='id pid_int'>pid_int</span> <span class='op'>=</span> <span class='const'>Integer</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span> <span class='ivar'>@pid</span> <span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>begin</span>
+    <span class='const'>Process</span><span class='op'>::</span><span class='id kill'>kill</span> <span class='int'>0</span><span class='comma'>,</span> <span class='id pid_int'>pid_int</span>
+    <span class='kw'>true</span>
+  <span class='kw'>rescue</span> <span class='const'>Errno</span><span class='op'>::</span><span class='const'>ESRCH</span>
+    <span class='kw'>false</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Tue Dec 21 11:09:51 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

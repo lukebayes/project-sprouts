@@ -1,0 +1,2119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: Sprout::ProgressBarImpl</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (P)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Sprout.html" title="Sprout (module)">Sprout</a></span></span>
+     &raquo; 
+    <span class="title">ProgressBarImpl</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Sprout::ProgressBarImpl
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Sprout::ProgressBarImpl</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">lib/sprout/progress_bar.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>:nodoc:[all]</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bar_mark-instance_method" title="#bar_mark (instance method)">- (Object) <strong>bar_mark</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute bar_mark.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current-instance_method" title="#current (instance method)">- (Object) <strong>current</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute current.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#start_time-instance_method" title="#start_time (instance method)">- (Object) <strong>start_time</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute start_time.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#title-instance_method" title="#title (instance method)">- (Object) <strong>title</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute title.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#title_width-instance_method" title="#title_width (instance method)">- (Object) <strong>title_width</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute title_width.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#total-instance_method" title="#total (instance method)">- (Object) <strong>total</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute total.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bytes-instance_method" title="#bytes (instance method)">- (Object) <strong>bytes</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clear-instance_method" title="#clear (instance method)">- (Object) <strong>clear</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#convert_bytes-instance_method" title="#convert_bytes (instance method)">- (Object) <strong>convert_bytes</strong>(bytes) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#do_percentage-instance_method" title="#do_percentage (instance method)">- (Object) <strong>do_percentage</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#elapsed-instance_method" title="#elapsed (instance method)">- (Object) <strong>elapsed</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#eol-instance_method" title="#eol (instance method)">- (Object) <strong>eol</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#eta-instance_method" title="#eta (instance method)">- (Object) <strong>eta</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>ETA stands for Estimated Time of Arrival.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#file_transfer_mode-instance_method" title="#file_transfer_mode (instance method)">- (Object) <strong>file_transfer_mode</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#finish-instance_method" title="#finish (instance method)">- (Object) <strong>finish</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#finished%3F-instance_method" title="#finished? (instance method)">- (Boolean) <strong>finished?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fmt_bar-instance_method" title="#fmt_bar (instance method)">- (Object) <strong>fmt_bar</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fmt_percentage-instance_method" title="#fmt_percentage (instance method)">- (Object) <strong>fmt_percentage</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fmt_stat-instance_method" title="#fmt_stat (instance method)">- (Object) <strong>fmt_stat</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fmt_stat_for_file_transfer-instance_method" title="#fmt_stat_for_file_transfer (instance method)">- (Object) <strong>fmt_stat_for_file_transfer</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fmt_title-instance_method" title="#fmt_title (instance method)">- (Object) <strong>fmt_title</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#format%3D-instance_method" title="#format= (instance method)">- (Object) <strong>format=</strong>(format) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#format_arguments%3D-instance_method" title="#format_arguments= (instance method)">- (Object) <strong>format_arguments=</strong>(arguments) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#format_time-instance_method" title="#format_time (instance method)">- (Object) <strong>format_time</strong>(t) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_width-instance_method" title="#get_width (instance method)">- (Object) <strong>get_width</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#halt-instance_method" title="#halt (instance method)">- (Object) <strong>halt</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inc-instance_method" title="#inc (instance method)">- (Object) <strong>inc</strong>(step = 1) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (ProgressBarImpl) <strong>initialize</strong>(title, total, out = STDERR) </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of ProgressBarImpl.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#inspect-instance_method" title="#inspect (instance method)">- (Object) <strong>inspect</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set-instance_method" title="#set (instance method)">- (Object) <strong>set</strong>(count) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show-instance_method" title="#show (instance method)">- (Object) <strong>show</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_if_needed-instance_method" title="#show_if_needed (instance method)">- (Object) <strong>show_if_needed</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#transfer_rate-instance_method" title="#transfer_rate (instance method)">- (Object) <strong>transfer_rate</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Sprout::ProgressBarImpl (class)">ProgressBarImpl</a></span></tt>) <strong>initialize</strong>(title, total, out = STDERR) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of ProgressBarImpl</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 46</span>
+
+<span class='kw'>def</span> <span class='id initialize'>initialize</span> <span class='lparen'>(</span><span class='id title'>title</span><span class='comma'>,</span> <span class='id total'>total</span><span class='comma'>,</span> <span class='id out'>out</span> <span class='op'>=</span> <span class='const'>STDERR</span><span class='rparen'>)</span>
+  <span class='ivar'>@title</span> <span class='op'>=</span> <span class='id title'>title</span>
+  <span class='ivar'>@total</span> <span class='op'>=</span> <span class='id total'>total</span>
+  <span class='ivar'>@out</span> <span class='op'>=</span> <span class='id out'>out</span>
+  <span class='ivar'>@terminal_width</span> <span class='op'>=</span> <span class='int'>80</span>
+  <span class='ivar'>@bar_mark</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@current</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@previous</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='ivar'>@finished_p</span> <span class='op'>=</span> <span class='kw'>false</span>
+  <span class='ivar'>@start_time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span>
+  <span class='ivar'>@previous_time</span> <span class='op'>=</span> <span class='ivar'>@start_time</span>
+  <span class='ivar'>@title_width</span> <span class='op'>=</span> <span class='int'>18</span>
+  <span class='ivar'>@format</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%-</span><span class='embexpr_beg'>#{</span><span class='ivar'>@title_width</span><span class='rbrace'>}</span><span class='tstring_content'>s %3d%% %s %s</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@format_arguments</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='symbol'>:title</span><span class='comma'>,</span> <span class='symbol'>:percentage</span><span class='comma'>,</span> <span class='symbol'>:bar</span><span class='comma'>,</span> <span class='symbol'>:stat</span><span class='rbracket'>]</span>
+  <span class='id clear'>clear</span>
+  <span class='id show'>show</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="bar_mark=-instance_method"></span>
+      <span id="bar_mark-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="bar_mark-instance_method">
+  
+    - (<tt>Object</tt>) <strong>bar_mark</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute bar_mark</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='id bar_mark'>bar_mark</span>
+  <span class='ivar'>@bar_mark</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="current-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="current-instance_method">
+  
+    - (<tt>Object</tt>) <strong>current</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute current</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 64</span>
+
+<span class='kw'>def</span> <span class='id current'>current</span>
+  <span class='ivar'>@current</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="start_time=-instance_method"></span>
+      <span id="start_time-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="start_time-instance_method">
+  
+    - (<tt>Object</tt>) <strong>start_time</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute start_time</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='id start_time'>start_time</span>
+  <span class='ivar'>@start_time</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="title-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="title-instance_method">
+  
+    - (<tt>Object</tt>) <strong>title</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute title</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='id title'>title</span>
+  <span class='ivar'>@title</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="title_width=-instance_method"></span>
+      <span id="title_width-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="title_width-instance_method">
+  
+    - (<tt>Object</tt>) <strong>title_width</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute title_width</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 66</span>
+
+<span class='kw'>def</span> <span class='id title_width'>title_width</span>
+  <span class='ivar'>@title_width</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="total-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="total-instance_method">
+  
+    - (<tt>Object</tt>) <strong>total</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute total</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+65
+66
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 65</span>
+
+<span class='kw'>def</span> <span class='id total'>total</span>
+  <span class='ivar'>@total</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="bytes-instance_method">
+  
+    - (<tt>Object</tt>) <strong>bytes</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 114</span>
+
+<span class='kw'>def</span> <span class='id bytes'>bytes</span>
+  <span class='id convert_bytes'>convert_bytes</span><span class='lparen'>(</span><span class='ivar'>@current</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="clear-instance_method">
+  
+    - (<tt>Object</tt>) <strong>clear</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+214
+215
+216
+217
+218</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 214</span>
+
+<span class='kw'>def</span> <span class='id clear'>clear</span>
+  <span class='ivar'>@out</span><span class='period'>.</span><span class='id print'>print</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\r</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@out</span><span class='period'>.</span><span class='id print'>print</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span> <span class='op'>*</span> <span class='lparen'>(</span><span class='id get_width'>get_width</span> <span class='op'>-</span> <span class='int'>1</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='ivar'>@out</span><span class='period'>.</span><span class='id print'>print</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\r</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="convert_bytes-instance_method">
+  
+    - (<tt>Object</tt>) <strong>convert_bytes</strong>(bytes) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='id convert_bytes'>convert_bytes</span> <span class='lparen'>(</span><span class='id bytes'>bytes</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id bytes'>bytes</span> <span class='op'>&lt;</span> <span class='int'>1024</span>
+    <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%6dB</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id bytes'>bytes</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='id bytes'>bytes</span> <span class='op'>&lt;</span> <span class='int'>1024</span> <span class='op'>*</span> <span class='int'>1000</span> <span class='comment'># 1000kb
+</span>    <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%5.1fKB</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id bytes'>bytes</span><span class='period'>.</span><span class='id to_f'>to_f</span> <span class='op'>/</span> <span class='int'>1024</span><span class='rparen'>)</span>
+  <span class='kw'>elsif</span> <span class='id bytes'>bytes</span> <span class='op'>&lt;</span> <span class='int'>1024</span> <span class='op'>*</span> <span class='int'>1024</span> <span class='op'>*</span> <span class='int'>1000</span>  <span class='comment'># 1000mb
+</span>    <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%5.1fMB</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id bytes'>bytes</span><span class='period'>.</span><span class='id to_f'>to_f</span> <span class='op'>/</span> <span class='int'>1024</span> <span class='op'>/</span> <span class='int'>1024</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%5.1fGB</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id bytes'>bytes</span><span class='period'>.</span><span class='id to_f'>to_f</span> <span class='op'>/</span> <span class='int'>1024</span> <span class='op'>/</span> <span class='int'>1024</span> <span class='op'>/</span> <span class='int'>1024</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="do_percentage-instance_method">
+  
+    - (<tt>Object</tt>) <strong>do_percentage</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+146
+147
+148
+149
+150
+151
+152</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 146</span>
+
+<span class='kw'>def</span> <span class='id do_percentage'>do_percentage</span>
+  <span class='kw'>if</span> <span class='ivar'>@total</span><span class='period'>.</span><span class='id zero?'>zero?</span>
+    <span class='int'>100</span>
+  <span class='kw'>else</span>
+    <span class='ivar'>@current</span>  <span class='op'>*</span> <span class='int'>100</span> <span class='op'>/</span> <span class='ivar'>@total</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="elapsed-instance_method">
+  
+    - (<tt>Object</tt>) <strong>elapsed</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+137
+138
+139
+140</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 137</span>
+
+<span class='kw'>def</span> <span class='id elapsed'>elapsed</span>
+  <span class='id elapsed_time'>elapsed_time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span> <span class='op'>-</span> <span class='ivar'>@start_time</span>
+  <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Time: %s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id format_time'>format_time</span><span class='lparen'>(</span><span class='id elapsed_time'>elapsed_time</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="eol-instance_method">
+  
+    - (<tt>Object</tt>) <strong>eol</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+142
+143
+144</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 142</span>
+
+<span class='kw'>def</span> <span class='id eol'>eol</span>
+  <span class='kw'>if</span> <span class='ivar'>@finished_p</span> <span class='kw'>then</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>else</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\r</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="eta-instance_method">
+  
+    - (<tt>Object</tt>) <strong>eta</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>ETA stands for Estimated Time of Arrival.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127
+128
+129
+130
+131
+132
+133
+134
+135</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 127</span>
+
+<span class='kw'>def</span> <span class='id eta'>eta</span>
+  <span class='kw'>if</span> <span class='ivar'>@current</span> <span class='op'>==</span> <span class='int'>0</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ETA:  --:--:--</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>else</span>
+    <span class='id elapsed_time'>elapsed_time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span> <span class='op'>-</span> <span class='ivar'>@start_time</span>
+    <span class='id estimated_time'>estimated_time</span> <span class='op'>=</span> <span class='id elapsed_time'>elapsed_time</span> <span class='op'>*</span> <span class='ivar'>@total</span> <span class='op'>/</span> <span class='ivar'>@current</span> <span class='op'>-</span> <span class='id elapsed_time'>elapsed_time</span>
+    <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ETA:  %s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id format_time'>format_time</span><span class='lparen'>(</span><span class='id estimated_time'>estimated_time</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="file_transfer_mode-instance_method">
+  
+    - (<tt>Object</tt>) <strong>file_transfer_mode</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+230
+231
+232</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 230</span>
+
+<span class='kw'>def</span> <span class='id file_transfer_mode'>file_transfer_mode</span>
+  <span class='ivar'>@format_arguments</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='symbol'>:title</span><span class='comma'>,</span> <span class='symbol'>:percentage</span><span class='comma'>,</span> <span class='symbol'>:bar</span><span class='comma'>,</span> <span class='symbol'>:stat_for_file_transfer</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="finish-instance_method">
+  
+    - (<tt>Object</tt>) <strong>finish</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+220
+221
+222
+223
+224</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 220</span>
+
+<span class='kw'>def</span> <span class='id finish'>finish</span>
+  <span class='ivar'>@current</span> <span class='op'>=</span> <span class='ivar'>@total</span>
+  <span class='ivar'>@finished_p</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id show'>show</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="finished?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>finished?</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+226
+227
+228</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 226</span>
+
+<span class='kw'>def</span> <span class='id finished?'>finished?</span>
+  <span class='ivar'>@finished_p</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="fmt_bar-instance_method">
+  
+    - (<tt>Object</tt>) <strong>fmt_bar</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72
+73
+74
+75</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='id fmt_bar'>fmt_bar</span>
+  <span class='id bar_width'>bar_width</span> <span class='op'>=</span> <span class='id do_percentage'>do_percentage</span> <span class='op'>*</span> <span class='ivar'>@terminal_width</span> <span class='op'>/</span> <span class='int'>100</span>
+  <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>|%s%s|</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> 
+          <span class='ivar'>@bar_mark</span> <span class='op'>*</span> <span class='id bar_width'>bar_width</span><span class='comma'>,</span> 
+          <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span> <span class='op'>*</span>  <span class='lparen'>(</span><span class='ivar'>@terminal_width</span> <span class='op'>-</span> <span class='id bar_width'>bar_width</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="fmt_percentage-instance_method">
+  
+    - (<tt>Object</tt>) <strong>fmt_percentage</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 77</span>
+
+<span class='kw'>def</span> <span class='id fmt_percentage'>fmt_percentage</span>
+  <span class='id do_percentage'>do_percentage</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="fmt_stat-instance_method">
+  
+    - (<tt>Object</tt>) <strong>fmt_stat</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+81
+82
+83</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 81</span>
+
+<span class='kw'>def</span> <span class='id fmt_stat'>fmt_stat</span>
+  <span class='kw'>if</span> <span class='ivar'>@finished_p</span> <span class='kw'>then</span> <span class='id elapsed'>elapsed</span> <span class='kw'>else</span> <span class='id eta'>eta</span> <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="fmt_stat_for_file_transfer-instance_method">
+  
+    - (<tt>Object</tt>) <strong>fmt_stat_for_file_transfer</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87
+88
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 85</span>
+
+<span class='kw'>def</span> <span class='id fmt_stat_for_file_transfer'>fmt_stat_for_file_transfer</span>
+  <span class='kw'>if</span> <span class='ivar'>@finished_p</span> <span class='kw'>then</span> 
+    <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%s %s %s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id bytes'>bytes</span><span class='comma'>,</span> <span class='id transfer_rate'>transfer_rate</span><span class='comma'>,</span> <span class='id elapsed'>elapsed</span><span class='rparen'>)</span>
+  <span class='kw'>else</span> 
+    <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%s %s %s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id bytes'>bytes</span><span class='comma'>,</span> <span class='id transfer_rate'>transfer_rate</span><span class='comma'>,</span> <span class='id eta'>eta</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="fmt_title-instance_method">
+  
+    - (<tt>Object</tt>) <strong>fmt_title</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+93
+94
+95</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 93</span>
+
+<span class='kw'>def</span> <span class='id fmt_title'>fmt_title</span>
+  <span class='ivar'>@title</span><span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span><span class='lparen'>(</span><span class='ivar'>@title_width</span> <span class='op'>-</span> <span class='int'>1</span><span class='rparen'>)</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>:</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="format=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>format=</strong>(format) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+234
+235
+236</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 234</span>
+
+<span class='kw'>def</span> <span class='id format='>format=</span> <span class='lparen'>(</span><span class='id format'>format</span><span class='rparen'>)</span>
+  <span class='ivar'>@format</span> <span class='op'>=</span> <span class='id format'>format</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="format_arguments=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>format_arguments=</strong>(arguments) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+238
+239
+240</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 238</span>
+
+<span class='kw'>def</span> <span class='id format_arguments='>format_arguments=</span> <span class='lparen'>(</span><span class='id arguments'>arguments</span><span class='rparen'>)</span>
+  <span class='ivar'>@format_arguments</span> <span class='op'>=</span> <span class='id arguments'>arguments</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="format_time-instance_method">
+  
+    - (<tt>Object</tt>) <strong>format_time</strong>(t) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+118
+119
+120
+121
+122
+123
+124</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 118</span>
+
+<span class='kw'>def</span> <span class='id format_time'>format_time</span> <span class='lparen'>(</span><span class='id t'>t</span><span class='rparen'>)</span>
+  <span class='id t'>t</span> <span class='op'>=</span> <span class='id t'>t</span><span class='period'>.</span><span class='id to_i'>to_i</span>
+  <span class='id sec'>sec</span> <span class='op'>=</span> <span class='id t'>t</span> <span class='op'>%</span> <span class='int'>60</span>
+  <span class='id min'>min</span>  <span class='op'>=</span> <span class='lparen'>(</span><span class='id t'>t</span> <span class='op'>/</span> <span class='int'>60</span><span class='rparen'>)</span> <span class='op'>%</span> <span class='int'>60</span>
+  <span class='id hour'>hour</span> <span class='op'>=</span> <span class='id t'>t</span> <span class='op'>/</span> <span class='int'>3600</span>
+  <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%02d:%02d:%02d</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id hour'>hour</span><span class='comma'>,</span> <span class='id min'>min</span><span class='comma'>,</span> <span class='id sec'>sec</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_width-instance_method">
+  
+    - (<tt>Object</tt>) <strong>get_width</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 154</span>
+
+<span class='kw'>def</span> <span class='id get_width'>get_width</span>
+  <span class='comment'>#    return 80
+</span>  <span class='comment'># FIXME: I don't know how portable it is.
+</span>  <span class='id default_width'>default_width</span> <span class='op'>=</span> <span class='int'>80</span>
+  <span class='kw'>begin</span>
+    <span class='id tiocgwinsz'>tiocgwinsz</span> <span class='op'>=</span> <span class='int'>0x5413</span>
+    <span class='id data'>data</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span> <span class='int'>0</span><span class='comma'>,</span> <span class='int'>0</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id pack'>pack</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SSSS</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='ivar'>@out</span><span class='period'>.</span><span class='id ioctl'>ioctl</span><span class='lparen'>(</span><span class='id tiocgwinsz'>tiocgwinsz</span><span class='comma'>,</span> <span class='id data'>data</span><span class='rparen'>)</span> <span class='op'>&gt;=</span> <span class='int'>0</span> <span class='kw'>then</span>
+      <span class='id unpacked'>unpacked</span> <span class='op'>=</span> <span class='id data'>data</span><span class='period'>.</span><span class='id unpack'>unpack</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SSSS</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+      <span class='id cols'>cols</span> <span class='op'>=</span> <span class='id unpacked'>unpacked</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
+      <span class='comment'># Commented this because Aptana was complaining about
+</span>      <span class='comment'># The unused variables
+</span>      <span class='comment'># rows, cols, xpixels, ypixels = data.unpack(&quot;SSSS&quot;)
+</span>      <span class='kw'>if</span> <span class='id cols'>cols</span> <span class='op'>&gt;=</span> <span class='int'>0</span> <span class='kw'>then</span> <span class='id cols'>cols</span> <span class='kw'>else</span> <span class='id default_width'>default_width</span> <span class='kw'>end</span>
+    <span class='kw'>else</span>
+      <span class='id default_width'>default_width</span>
+    <span class='kw'>end</span>
+  <span class='kw'>rescue</span> <span class='const'>Exception</span>
+    <span class='id default_width'>default_width</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="halt-instance_method">
+  
+    - (<tt>Object</tt>) <strong>halt</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+242
+243
+244
+245</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 242</span>
+
+<span class='kw'>def</span> <span class='id halt'>halt</span>
+  <span class='ivar'>@finished_p</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id show'>show</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="inc-instance_method">
+  
+    - (<tt>Object</tt>) <strong>inc</strong>(step = 1) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+247
+248
+249
+250
+251
+252</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 247</span>
+
+<span class='kw'>def</span> <span class='id inc'>inc</span> <span class='lparen'>(</span><span class='id step'>step</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
+  <span class='ivar'>@current</span> <span class='op'>+=</span> <span class='id step'>step</span>
+  <span class='ivar'>@current</span> <span class='op'>=</span> <span class='ivar'>@total</span> <span class='kw'>if</span> <span class='ivar'>@current</span> <span class='op'>&gt;</span> <span class='ivar'>@total</span>
+  <span class='id show_if_needed'>show_if_needed</span>
+  <span class='ivar'>@previous</span> <span class='op'>=</span> <span class='ivar'>@current</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="inspect-instance_method">
+  
+    - (<tt>Object</tt>) <strong>inspect</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+263
+264
+265</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 263</span>
+
+<span class='kw'>def</span> <span class='id inspect'>inspect</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#&lt;ProgressBar:</span><span class='embexpr_beg'>#{</span><span class='ivar'>@current</span><span class='rbrace'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@total</span><span class='rbrace'>}</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="set-instance_method">
+  
+    - (<tt>Object</tt>) <strong>set</strong>(count) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+254
+255
+256
+257
+258
+259
+260
+261</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 254</span>
+
+<span class='kw'>def</span> <span class='id set'>set</span> <span class='lparen'>(</span><span class='id count'>count</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id count'>count</span> <span class='op'>&lt;</span> <span class='int'>0</span> <span class='op'>||</span> <span class='id count'>count</span> <span class='op'>&gt;</span> <span class='ivar'>@total</span>
+    <span class='ivar'>@total</span> <span class='op'>=</span> <span class='id count'>count</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@current</span> <span class='op'>=</span> <span class='id count'>count</span>
+  <span class='id show_if_needed'>show_if_needed</span>
+  <span class='ivar'>@previous</span> <span class='op'>=</span> <span class='ivar'>@current</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="show-instance_method">
+  
+    - (<tt>Object</tt>) <strong>show</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 176</span>
+
+<span class='kw'>def</span> <span class='id show'>show</span>
+  <span class='id arguments'>arguments</span> <span class='op'>=</span> <span class='ivar'>@format_arguments</span><span class='period'>.</span><span class='id map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id method'>method</span><span class='op'>|</span>
+    <span class='id method'>method</span> <span class='op'>=</span> <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>fmt_%s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id method'>method</span><span class='rparen'>)</span>
+    <span class='id send'>send</span><span class='lparen'>(</span><span class='id method'>method</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id line'>line</span> <span class='op'>=</span> <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='ivar'>@format</span><span class='comma'>,</span> <span class='op'>*</span><span class='id arguments'>arguments</span><span class='rparen'>)</span>
+
+  <span class='id width'>width</span> <span class='op'>=</span> <span class='id get_width'>get_width</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id line'>line</span><span class='period'>.</span><span class='id length'>length</span> <span class='op'>==</span> <span class='id width'>width</span> <span class='op'>-</span> <span class='int'>1</span><span class='rparen'>)</span>
+    <span class='ivar'>@out</span><span class='period'>.</span><span class='id print'>print</span><span class='lparen'>(</span><span class='id line'>line</span> <span class='op'>+</span> <span class='id eol'>eol</span><span class='rparen'>)</span>
+    <span class='ivar'>@out</span><span class='period'>.</span><span class='id flush'>flush</span>
+  <span class='kw'>elsif</span><span class='lparen'>(</span><span class='id line'>line</span><span class='period'>.</span><span class='id length'>length</span> <span class='op'>&gt;=</span> <span class='id width'>width</span><span class='rparen'>)</span>
+    <span class='ivar'>@terminal_width</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='ivar'>@terminal_width</span> <span class='op'>-</span> <span class='lparen'>(</span><span class='id line'>line</span><span class='period'>.</span><span class='id length'>length</span> <span class='op'>-</span> <span class='id width'>width</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id max'>max</span>
+    <span class='kw'>if</span> <span class='ivar'>@terminal_width</span> <span class='op'>==</span> <span class='int'>0</span> <span class='kw'>then</span> <span class='ivar'>@out</span><span class='period'>.</span><span class='id print'>print</span><span class='lparen'>(</span><span class='id line'>line</span> <span class='op'>+</span> <span class='id eol'>eol</span><span class='rparen'>)</span> <span class='kw'>else</span> <span class='id show'>show</span> <span class='kw'>end</span>
+  <span class='kw'>else</span> <span class='comment'># line.length &lt; width - 1
+</span>    <span class='ivar'>@terminal_width</span> <span class='op'>+=</span> <span class='id width'>width</span> <span class='op'>-</span> <span class='id line'>line</span><span class='period'>.</span><span class='id length'>length</span> <span class='op'>+</span> <span class='int'>1</span>
+    <span class='id show'>show</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@previous_time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="show_if_needed-instance_method">
+  
+    - (<tt>Object</tt>) <strong>show_if_needed</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 197</span>
+
+<span class='kw'>def</span> <span class='id show_if_needed'>show_if_needed</span>
+  <span class='kw'>if</span> <span class='ivar'>@total</span><span class='period'>.</span><span class='id zero?'>zero?</span>
+    <span class='id cur_percentage'>cur_percentage</span> <span class='op'>=</span> <span class='int'>100</span>
+    <span class='id prev_percentage'>prev_percentage</span> <span class='op'>=</span> <span class='int'>0</span>
+  <span class='kw'>else</span>
+    <span class='id cur_percentage'>cur_percentage</span>  <span class='op'>=</span> <span class='lparen'>(</span><span class='ivar'>@current</span>  <span class='op'>*</span> <span class='int'>100</span> <span class='op'>/</span> <span class='ivar'>@total</span><span class='rparen'>)</span><span class='period'>.</span><span class='id to_i'>to_i</span>
+    <span class='id prev_percentage'>prev_percentage</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='ivar'>@previous</span> <span class='op'>*</span> <span class='int'>100</span> <span class='op'>/</span> <span class='ivar'>@total</span><span class='rparen'>)</span><span class='period'>.</span><span class='id to_i'>to_i</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Use &quot;!=&quot; instead of &quot;&gt;&quot; to support negative changes
+</span>  <span class='kw'>if</span> <span class='id cur_percentage'>cur_percentage</span> <span class='op'>!=</span> <span class='id prev_percentage'>prev_percentage</span> <span class='op'>||</span> 
+      <span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span> <span class='op'>-</span> <span class='ivar'>@previous_time</span> <span class='op'>&gt;=</span> <span class='int'>1</span> <span class='op'>||</span> <span class='ivar'>@finished_p</span>
+    <span class='id show'>show</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="transfer_rate-instance_method">
+  
+    - (<tt>Object</tt>) <strong>transfer_rate</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+109
+110
+111
+112</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 109</span>
+
+<span class='kw'>def</span> <span class='id transfer_rate'>transfer_rate</span>
+  <span class='id bytes_per_second'>bytes_per_second</span> <span class='op'>=</span> <span class='ivar'>@current</span><span class='period'>.</span><span class='id to_f'>to_f</span> <span class='op'>/</span> <span class='lparen'>(</span><span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span> <span class='op'>-</span> <span class='ivar'>@start_time</span><span class='rparen'>)</span>
+  <span class='id sprintf'>sprintf</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%s/s</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id convert_bytes'>convert_bytes</span><span class='lparen'>(</span><span class='id bytes_per_second'>bytes_per_second</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Tue Dec 21 11:09:51 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

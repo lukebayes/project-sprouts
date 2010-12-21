@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>File: directory_manifest</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: directory_manifest</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'>
+<p>module Sprout::Generator</p>
+
+<pre class="code"><span class='kw'>class</span> <span class='const'>DirectoryManifest</span> <span class='op'>&lt;</span> <span class='const'>Manifest</span>
+  <span class='id attr_reader'>attr_reader</span> <span class='symbol'>:children</span>
+  <span class='id attr_reader'>attr_reader</span> <span class='symbol'>:generators</span>
+
+  <span class='kw'>def</span> <span class='id initialize'>initialize</span>
+    <span class='kw'>super</span>
+    <span class='ivar'>@children</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+    <span class='ivar'>@generators</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id create'>create</span>
+    <span class='kw'>if</span> <span class='op'>!</span><span class='const'>File</span><span class='period'>.</span><span class='id directory?'>directory?</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span>
+      <span class='const'>FileUtils</span><span class='period'>.</span><span class='id mkdir_p'>mkdir_p</span> <span class='id path'>path</span>
+      <span class='id say'>say</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Created directory: </span><span class='embexpr_beg'>#{</span><span class='id path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>else</span>
+      <span class='id say'>say</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Skipped existing:  </span><span class='embexpr_beg'>#{</span><span class='id path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span><span class='lparen'>(</span><span class='id path'>path</span> <span class='op'>==</span> <span class='const'>Dir</span><span class='period'>.</span><span class='id pwd'>pwd</span><span class='rparen'>)</span>
+    <span class='kw'>end</span>
+    <span class='id create_children'>create_children</span>
+    <span class='id execute_generators'>execute_generators</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id destroy'>destroy</span>
+    <span class='id unexecute_generators'>unexecute_generators</span>
+    <span class='id success'>success</span> <span class='op'>=</span> <span class='id destroy_children'>destroy_children</span>
+
+    <span class='kw'>if</span> <span class='id success'>success</span> <span class='op'>&amp;&amp;</span> <span class='id can_remove?'>can_remove?</span>
+      <span class='const'>FileUtils</span><span class='period'>.</span><span class='id rmdir'>rmdir</span> <span class='id path'>path</span>
+      <span class='id say'>say</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Removed directory: </span><span class='embexpr_beg'>#{</span><span class='id path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>true</span>
+    <span class='kw'>else</span>
+      <span class='id say'>say</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Skipped remove directory: </span><span class='embexpr_beg'>#{</span><span class='id path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+      <span class='kw'>false</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='id private'>private</span>
+
+  <span class='kw'>def</span> <span class='id can_remove?'>can_remove?</span>
+    <span class='const'>File</span><span class='period'>.</span><span class='id directory?'>directory?</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='const'>Dir</span><span class='period'>.</span><span class='id empty?'>empty?</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id create_children'>create_children</span>
+    <span class='id created'>created</span> <span class='op'>=</span> <span class='id children'>children</span><span class='period'>.</span><span class='id select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id child'>child</span><span class='op'>|</span> <span class='id child'>child</span><span class='period'>.</span><span class='id create'>create</span> <span class='rbrace'>}</span>
+    <span class='kw'>return</span> <span class='lparen'>(</span><span class='id created'>created</span><span class='period'>.</span><span class='id size'>size</span> <span class='op'>==</span> <span class='id children'>children</span><span class='period'>.</span><span class='id size'>size</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id destroy_children'>destroy_children</span>
+    <span class='id destroyed'>destroyed</span> <span class='op'>=</span> <span class='id children'>children</span><span class='period'>.</span><span class='id reverse'>reverse</span><span class='period'>.</span><span class='id select'>select</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id child'>child</span><span class='op'>|</span> <span class='id child'>child</span><span class='period'>.</span><span class='id destroy'>destroy</span> <span class='rbrace'>}</span>
+    <span class='kw'>return</span> <span class='lparen'>(</span><span class='id destroyed'>destroyed</span><span class='period'>.</span><span class='id size'>size</span> <span class='op'>==</span> <span class='id children'>children</span><span class='period'>.</span><span class='id size'>size</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id execute_generators'>execute_generators</span>
+    <span class='id generators'>generators</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id generator'>generator</span><span class='op'>|</span>
+      <span class='id generator'>generator</span><span class='period'>.</span><span class='id execute'>execute</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id unexecute_generators'>unexecute_generators</span>
+    <span class='id generators'>generators</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id generator'>generator</span><span class='op'>|</span>
+      <span class='id generator'>generator</span><span class='period'>.</span><span class='id unexecute'>unexecute</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+<span class='kw'>end</span></pre>
+
+<p>end</p>
+</div></div>
+    
+    <div id="footer">
+  Generated on Tue Dec 21 11:09:49 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

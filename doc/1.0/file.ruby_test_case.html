@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>File: ruby_test_case</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: ruby_test_case</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'>
+<p>require File.join(File.dirname(__FILE__), ‘..’, ‘test_helper’)</p>
+
+<p>class &lt;%= input.camel_case %&gt;Test &lt; Test::Unit::TestCase</p>
+
+<pre class="code"><span class='id include'>include</span> <span class='const'>SproutTestCase</span>
+
+<span class='id context'>context</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>A &lt;%= input.camel_case %&gt;</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
+
+  <span class='id setup'>setup</span> <span class='kw'>do</span>
+    <span class='ivar'>@fixture</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span> <span class='id fixtures'>fixtures</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>&lt;%= input.snake_case %&gt;</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>tmp</span><span class='tstring_end'>'</span></span>
+    <span class='const'>FileUtils</span><span class='period'>.</span><span class='id makedirs'>makedirs</span> <span class='ivar'>@fixture</span>
+  <span class='kw'>end</span>
+
+  <span class='id teardown'>teardown</span> <span class='kw'>do</span>
+    <span class='id remove_file'>remove_file</span> <span class='ivar'>@fixture</span>
+  <span class='kw'>end</span>
+
+  <span class='id should'>should</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>do something</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
+    <span class='id assert_file'>assert_file</span> <span class='ivar'>@fixture</span>
+    <span class='id assert'>assert</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Force test failure</span><span class='tstring_end'>'</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+
+<p>end</p>
+</div></div>
+    
+    <div id="footer">
+  Generated on Tue Dec 21 11:09:49 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

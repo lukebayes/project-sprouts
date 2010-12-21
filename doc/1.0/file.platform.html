@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>File: platform</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: platform</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'>
+<p>module Sprout</p>
+
+<pre class="code"><span class='comment'>##
+</span><span class='comment'># Determine what environment we're in so that we
+</span><span class='comment'># can play nice with libraries, processes, executables, etc.
+</span><span class='comment'>#
+</span><span class='kw'>class</span> <span class='const'>Platform</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Returns +true+ if the current platform is some flavor of Windows.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id windows?'>windows?</span>
+    <span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>cygwin|mswin|mingw|bccwin|wince|emx|vista</span><span class='regexp_end'>/</span></span> <span class='op'>=~</span> <span class='id ruby_platform'>ruby_platform</span><span class='rparen'>)</span> <span class='op'>!=</span> <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Returns +true+ if the current platform is Vista.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id vista?'>vista?</span>
+    <span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>vista</span><span class='regexp_end'>/</span></span> <span class='op'>=~</span> <span class='id ruby_platform'>ruby_platform</span><span class='rparen'>)</span> <span class='op'>!=</span> <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Returns +true+ if the current platform is some flavor of Unix on
+</span>  <span class='comment'># Windows. Recognized nix-ish systems are: Cygwin, Mingw and BCCWin.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id windows_nix?'>windows_nix?</span>
+    <span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>cygwin|mingw|bccwin</span><span class='regexp_end'>/</span></span> <span class='op'>=~</span> <span class='id ruby_platform'>ruby_platform</span><span class='rparen'>)</span> <span class='op'>!=</span> <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Returns +true+ if the current platform is some flash of OS X.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id mac?'>mac?</span>
+    <span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>darwin</span><span class='regexp_end'>/</span></span> <span class='op'>=~</span> <span class='id ruby_platform'>ruby_platform</span><span class='rparen'>)</span> <span class='op'>!=</span> <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Returns +true+ if the current platform is not +windows?+ or +java?+.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id unix?'>unix?</span>
+    <span class='kw'>not</span> <span class='id windows?'>windows?</span> <span class='kw'>and</span> <span class='kw'>not</span> <span class='id java?'>java?</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Returns +true+ if the current platform is +unix?+ and not +mac?+.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id linux?'>linux?</span>
+    <span class='id unix?'>unix?</span> <span class='kw'>and</span> <span class='kw'>not</span> <span class='id mac?'>mac?</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Returns +true+ if the current platform is running in the JVM (JRuby).
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id java?'>java?</span>
+    <span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>java</span><span class='regexp_end'>/</span></span> <span class='op'>=~</span> <span class='id ruby_platform'>ruby_platform</span><span class='rparen'>)</span> <span class='op'>!=</span> <span class='kw'>nil</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Instance wrapper for the global Ruby Constant, +RUBY_PLATFORM+.
+</span>  <span class='comment'>#
+</span>  <span class='comment'># wrapping this global allows for much easier testing and environment simulation.
+</span>  <span class='comment'>#
+</span>  <span class='kw'>def</span> <span class='id ruby_platform'>ruby_platform</span>
+    <span class='const'>RUBY_PLATFORM</span>
+  <span class='kw'>end</span>
+
+<span class='kw'>end</span></pre>
+
+<p>end</p>
+</div></div>
+    
+    <div id="footer">
+  Generated on Tue Dec 21 11:09:49 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>
