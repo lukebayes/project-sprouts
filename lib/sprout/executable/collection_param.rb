@@ -1,12 +1,19 @@
 module Sprout
 
   module Executable
+
+    ##
     # Included by any parameters that represent
     # a collection of values, rather than a single
     # value.
     # 
     # Should only be included by classes that 
     # extend Sprout::Executable::Param.
+    #
+    # See also Sprout::Executable::Files
+    # See also Sprout::Executable::Paths
+    # See also Sprout::Executable::Strings
+    # See also Sprout::Executable::Urls
     #
     module CollectionParam
 
@@ -17,7 +24,30 @@ module Sprout
         @option_parser_type_name = 'a,b,c'
       end
 
-      # Assign the value and raise if 
+      ##
+      # Assign the value and raise if a collection wasn't provided.
+      #
+      # This customization was added so that Rake tasks could help
+      # users avoid accidentally clobbering a collection with equals assignments.
+      #
+      # The following example is incorrect and will raise an exception:
+      #
+      #   foo :name do |t|
+      #     t.collection = 'A'
+      #   end
+      #
+      # The following example is correct and should not raise an exception:
+      #
+      #   foo :name do |t|
+      #     t.collection << 'A'
+      #   end 
+      #
+      # The following example is also correct and should not raise an exception:
+      #
+      #   foo :name do |t|
+      #     t.collection = ['A']
+      #   end
+      #
       def value=(val)
         if(val.is_a?(String) || !val.is_a?(Enumerable))
           message = "The #{name} property is an Enumerable. It looks like you may have used the assignment operator (=) with (#{value.inspect}) where the append operator (<<) was expected."
@@ -26,12 +56,14 @@ module Sprout
         @value = val
       end
 
+      ##
       # Hide the collection param if no items
       # have been added to it.
       def visible?
         (!value.nil? && value.size > 0)
       end
 
+      ##
       # Returns a shell formatted string of the collection
       def to_shell
         prepare if !prepared?

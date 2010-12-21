@@ -3,7 +3,11 @@ module Sprout
 
   module Executable
 
-    # Concrete param object for numberic values
+    ##
+    # Concrete Sprout::Executable::Param object for numeric values.
+    #
+    # See also Sprout::Executable::Param
+    #
     class Number < Param; end
   end
 end

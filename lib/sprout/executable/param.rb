@@ -6,30 +6,68 @@ module Sprout
     ##
     # The abstract base class for all Executable parameters.
     #
+    # This class provides a variety of template methods and general
+    # functionality to the different executable parameter types.
+    #
+    # Many of these parameter attributes are exposed to Sprout::Executable
+    # concrete classes as the options hash like:
+    #
+    #   class Foo
+    #     include Sprout::Executable
+    #
+    #     add_param :name, String, :hidden_name => true
+    #   end
+    #
+    # See also Sprout::Executable::Boolean
+    #
+    # See also Sprout::Executable::FileParam
+    #
+    # See also Sprout::Executable::Files
+    #
+    # See also Sprout::Executable::Number
+    #
+    # See also Sprout::Executable::ParameterFactory
+    #
+    # See also Sprout::Executable::Path
+    #
+    # See also Sprout::Executable::Paths
+    #
+    # See also Sprout::Executable::StringParam
+    #
+    # See also Sprout::Executable::Strings
+    # 
+    # See also Sprout::Executable::Url
+    #
+    # See also Sprout::Executable::Urls
+    #
     class Param
+
+      ##
+      # Default value for the delimiter that will
+      # separate parameter names from their values.
       DEFAULT_DELIMITER               = '='
+
+      ##
+      # Defaut TYPE assumed for parameters when
+      # creating documentation for the OptionParser.
       DEFAULT_OPTION_PARSER_TYPE_NAME = 'STRING'
 
-      # These values should usually be pulled
-      # from the 'belongs_to' executable:
+      ##
+      # Default value for the parameter prefix.
+      # Should usually be pulled from the 
+      # +belongs_to+ Sprout::Executable.
       DEFAULT_PREFIX                  = '--'
+
+      ## 
+      # Default prefix for truncated parameters.
+      # Should usually be pulled from the 
+      # +belongs_to+ Sprout::Executable.
       DEFAULT_SHORT_PREFIX            = '-'
 
+      ##
+      # The Sprout::Executable that this parameter
+      # instance belongs to.
       attr_accessor :belongs_to
-      attr_accessor :description
-      attr_accessor :hidden_name
-      attr_accessor :hidden_value
-      attr_accessor :file_task_name
-      attr_accessor :name
-      attr_accessor :prefix
-      attr_accessor :reader
-      attr_accessor :required
-      attr_accessor :to_shell_proc
-      attr_accessor :type
-      attr_accessor :validator
-      attr_accessor :value
-      attr_accessor :visible
-      attr_accessor :writer
 
       ##
       # Executable::Params join their name/value pair with an
@@ -38,22 +76,164 @@ module Sprout
       attr_accessor :delimiter
 
       ##
+      # The String description that will be used for
+      # RDoc documentation and user help.
+      attr_accessor :description
+
+      ##
+      # Boolean value that hides the name parameter
+      # from the shell execution.
+      #
+      #    add_param :name, String, :hidden_name => true
+      #
+      # Without this option, the above parameter would 
+      # serialize to the process like:
+      #
+      #   foo --name=Value
+      #
+      # But with this option, the above parameter would
+      # serialize to the process like:
+      #
+      #   foo Value
+      #
+      attr_accessor :hidden_name
+
+      ##
+      # Boolean value that hides the value parameter
+      # from the shell execution.
+      #
+      #   add_param :visible, Boolean, :hidden_value => true
+      #
+      # Without this option, the above parameter would
+      # serialize to the process like:
+      #
+      #   foo --visible=true
+      #
+      # But with this option, the above parameter would
+      # serialize to the process like:
+      #
+      #   foo --visible
+      #
+      attr_accessor :hidden_value
+
+      ##
+      # The String (or Symbol) name of the parameter.
+      attr_accessor :name
+
+      ##
+      # The String prefix that should be in front of each
+      # command line parameter.
+      #
+      # If no value is set for this option, the 
+      # DEFAULT_PREFIX (--) will be used for regular parameters,
+      # and the DEFAULT_SHORT_PREFIX (-) will be used for short
+      # parameters.
+      attr_accessor :prefix
+
+      ##
+      # A Symbol that refers to a custom attribute reader
+      # that is available to instance methods on the 
+      # Sprout::Executable that uses it.
+      #
+      #   add_param :visible, Boolean, :reader => :get_visible
+      #
+      #   def get_visible
+      #     return @visible
+      #   end
+      #
+      attr_accessor :reader
+
+      ##
+      # Boolean value that will cause a Sprout::Errors::UsageError
+      # if the executable is invoked without this parameter first
+      # being set.
+      #
+      #   add_param :visible, Boolean :required => true
+      #
+      # Default false
+      #
+      attr_accessor :required
+
+      ##
+      # An optional Proc that should be called when this parameter
+      # is serialized to shell output. The Proc should return a 
+      # String value that makes sense to the underlying process.
+      #
+      #   add_param :visible, Boolean, :to_shell_proc => Proc.new {|p| "---result" }
+      #
+      attr_accessor :to_shell_proc
+
+      ##
+      # The data type of the parameter, used to generate more appropriate
+      # RDoc content for the concrete Sprout::Executable.
+      attr_accessor :type
+      
+      ##
+      # The value that was assigned to this parameter when the 
+      # concrete Sprout::Executable was instantiated and configured.
+      attr_accessor :value
+
+      ##
+      # A Symbol that refers to a custom attribute writer
+      # that is available to instance methods on the 
+      # Sprout::Executable that uses it.
+      #
+      #   add_param :visible, Boolean, :writer => :set_visible
+      #
+      #   def set_visible=(vis)
+      #     @visible = vis
+      #   end
+      #
+      attr_accessor :writer
+
+      ##
       # Set the file_expression (blob) to append to each path
       # in order to build the prerequisites FileList.
       #
       # Defaults to the parent Executable.default_file_expression
       #
-      # NOTE: We should add support for file_expressionS
+      # TODO: We should add support for file_expressionS
       # since these are really just blobs that are sent
       # to the FileList[expr] and that interface accepts
       # an array.
       attr_writer :file_expression
 
       ##
-      # Return the name with a single leading dash
-      # and underscores replaced with dashes
+      # Optional String value of the name of this parameter
+      # that should be returned to the shell.
+      #
+      # By default, this method will infer the name by
+      # prepending the +prefix+ and replacing underscores
+      # with dashes. For example:
+      #
+      #   add_param :some_name, String
+      #
+      # Would return '--some-name=value' to the shell.
+      #
+      # If this option is set, then the provided value
+      # will be used rather than inferred.
+      #
+      #   add_param :some_name, String, :shell_name => '--OtherName'
+      #
+      # Would return '--OtherName=value' when sent to the shell.
+      #
       attr_writer :shell_name
 
+      ##
+      # Optional String value that should be used for this
+      # parameter's short name. Generally only helpful
+      # for Sprout::Executable 's that are going to be exposed
+      # to Ruby OptionParser as Ruby applications.
+      #
+      # By default, this value will be the first letter
+      # of the parameter name, and when multiple parameters
+      # share the same first letter, the first one encountered
+      # will be used.
+      attr_writer :short_name
+      ##
+      # Default constructor for Params, if you create
+      # a new concrete type, be sure to call +super()+ in your
+      # own constructor.
       def initialize
         @description             = 'Default Description'
         @hidden_value            = false
@@ -70,14 +250,14 @@ module Sprout
       end
       
       ##
-      # Raise an exception if a required parameter is nil.
+      # Returns Boolean value if this parameter is required.
       def required?
         (required == true)
       end
       
       ##
-      # Ensure this parameter is in a valid state, raise an appropriate
-      # exception if it is not.
+      # Ensure this parameter is in a valid state, raise a Sprout::Errors::MissingArgumentError
+      # if it is not.
       def validate
         if(required? && value.nil?)
           raise Sprout::Errors::MissingArgumentError.new("#{name} is required and must not be nil")
@@ -86,11 +266,19 @@ module Sprout
 
       ##
       # Set the default value of the parameter.
+      # Using this option will ensure that required parameters
+      # are not nil, and default values can be overridden on 
+      # instances.
+      #
+      #   add_param :name, String, :default => 'Bob'
+      #
       def default=(value)
         self.value = value
         @default = value
       end
 
+      ##
+      # Return the default value or nil if none was provided.
       def default
         @default
       end
@@ -136,6 +324,9 @@ module Sprout
         @short_prefix ||= (belongs_to.nil?) ? DEFAULT_SHORT_PREFIX : belongs_to.default_short_prefix
       end
 
+      ##
+      # How this parameter is provided to the
+      # Ruby OptionParser when being exposed as a Ruby Executable.
       def option_parser_declaration
         declaration = [ prefix, option_parser_name ]
         # TODO: Need to figure out how to support hidden name inputs...
@@ -148,14 +339,30 @@ module Sprout
         declaration.join('')
       end
 
+      ##
+      # The Ruby OptionParser short name with prefix.
       def option_parser_short_name
         [ short_prefix, short_name ].join('')
       end
       
+      ##
+      # The short name for this parameter.
+      # If it's not explicitly, the first
+      # character of the parameter name will
+      # be used. When multiple parameters have
+      # the same first character, the first one
+      # encountered will win.
       def short_name
         @short_name ||= name.to_s.split('').shift
       end
 
+      ##
+      # The String representation of the value in
+      # a format that is appropriate for the terminal.
+      #
+      # For certain types of parameters, like File,
+      # spaces may be escaped on some platforms.
+      #
       def shell_value
         value.to_s
       end
@@ -168,6 +375,13 @@ module Sprout
         @shell_name ||= prefix + name.to_s.split('_').join('-')
       end
 
+      ##
+      # Prepare and serialize this parameter to a string
+      # that is appropriate for shell execution on the
+      # current platform.
+      #
+      # Calling +to_shell+ will first trigger a call to
+      # the +prepare+ template method unless +prepared?+ returns +true+.
       def to_shell
         prepare if !prepared?
         validate
@@ -208,10 +422,22 @@ module Sprout
       def prepare_prerequisites
       end
 
+      ##
+      # Clean the provided path using the current Sprout::System.
       def clean_path path
         Sprout::System.create.clean_path path
       end
 
+      ##
+      # Return true if the Sprout::Executable
+      # that this parameter +belongs_to+ has an +output+
+      # method (or parameter), and if the provided +file+
+      # matches the value of that parameter.
+      #
+      # This method (convention) is used to avoid creating circular
+      # prerequisites in Rake. For most types of File parameters
+      # we want to make them into prerequisites, but not if the
+      # File is the one being created by the outer Sprout::Executable.
       def file_is_output? file
         belongs_to.respond_to?(:output) && belongs_to.output.to_s == file
       end

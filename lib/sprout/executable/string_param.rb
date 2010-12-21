@@ -2,7 +2,14 @@ module Sprout
 
   module Executable
 
-    # Concrete param object for :string values
+    ##
+    # A parameter with a String value.
+    #
+    # Any spaces in the value will be escaped when 
+    # returned to a shell.
+    #
+    # See also Sprout::Executable::Param
+    #
     class StringParam < Executable::Param
 
       def shell_value

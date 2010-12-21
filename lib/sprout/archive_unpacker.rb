@@ -1,4 +1,5 @@
 require 'zip/zip'
+require 'sprout/version'
 require 'archive/tar/minitar'
 
 module Sprout
@@ -7,8 +8,9 @@ module Sprout
   # unpack downloaded archives.
   class ArchiveUnpacker
 
+    ##
     # Figure out what kind of archive you have from the file name,
-    # and unpack it using the appropriate scheme.
+    # and unpack it using the appropriate scheme for the current system.
     def unpack archive, destination, type=nil, clobber=nil
       return unpack_zip(archive, destination, clobber) if is_zip?(archive, type)
       return unpack_tgz(archive, destination, clobber) if is_tgz?(archive, type)
@@ -22,6 +24,7 @@ module Sprout
       raise Sprout::Errors::UnknownArchiveType.new("Unsupported or unknown archive type encountered with: #{archive}")
     end
 
+    ##
     # Unpack zip archives on any platform.
     #
     # In case you're wondering... Ruby sucks...
@@ -44,10 +47,16 @@ module Sprout
       end
     end
 
+    ##
+    # Return true if we're on a Darwin native system (OSX).
     def is_darwin?
       Sprout.current_system.is_a?(Sprout::System::OSXSystem)
     end
 
+    ##
+    # Optimization for zip files on OSX, which uses the native
+    # 'unzip' utility which is much faster than Ruby for large
+    # archives (like the Flex SDK).
     def unpack_zip_on_darwin archive, destination, clobber
       # Unzipping on OS X
       FileUtils.makedirs destination
@@ -58,6 +67,7 @@ module Sprout
       %x(cd #{zip_dir};unzip #{zip_name} -d #{output})
     end
 
+    ##
     # Unpack tar.gz or .tgz files on any platform.
     def unpack_tgz archive, destination, clobber=nil
       validate archive, destination
@@ -80,8 +90,11 @@ module Sprout
       end
     end
 
+    ##
     # Rather than unpacking, safely copy the file from one location
     # to another.
+    # This method is generally used when .exe files are downloaded
+    # directly.
     def copy_file file, destination, clobber=nil
       validate file, destination
       target = File.expand_path( File.join(destination, File.basename(file)) )
@@ -94,39 +107,54 @@ module Sprout
       destination
     end
 
+    ##
     # Return true if the provided file name looks like a zip file.
     def is_zip? archive, type=nil
       type == :zip || !archive.match(/\.zip$/).nil?
     end
 
+    ##
     # Return true if the provided file name looks like a tar.gz file.
     def is_tgz? archive, type=nil
       type == :tgz || !archive.match(/\.tgz$/).nil? || !archive.match(/\.tar.gz$/).nil?
     end
 
+    ##
+    # Return true if the downloaded archive is a .exe file.
     def is_exe? archive, type=nil
       type == :exe || !archive.match(/\.exe$/).nil?
     end
     
+    ##
+    # Return true if the downloaded archive is a .swc file.
     def is_swc? archive, type=nil
       type == :swc || !archive.match(/\.swc$/).nil?
     end
 
+    ## 
+    # Return true if the downloaded archive is a .rb file
     def is_rb? archive, type=nil
       type == :rb || !archive.match(/\.rb$/).nil?
     end
 
     private
 
+    ##
+    # Return true if the provided archive can be copied as-is, rather
+    # than being unpacked first.
     def is_copyable? archive
       (is_exe?(archive) || is_swc?(archive) || is_rb?(archive))
     end
 
+    ##
+    # Return true if the tgz should be unpacked.
     def should_unpack_tgz? dir, clobber=nil
       return !directory_has_children?(dir) || clobber == :clobber
 
     end
 
+    ##
+    # Return true if the provided directory has one or more chidren.
     def directory_has_children? dir
       (Dir.entries(dir) - ['.', '..']).size > 0
     end
@@ -136,16 +164,25 @@ module Sprout
       validate_destination destination
     end
 
+    ##
+    # Raise Sprout::Errors::ArchiveUnpackerError if the provided
+    # path does not exist.
     def validate_archive archive
       message = "Archive could not be found at: #{archive}"
       raise Sprout::Errors::ArchiveUnpackerError.new(message) if archive.nil? || !File.exists?(archive)
     end
 
+    ##
+    # Raise Sprout::Errors::ArchiveUnpackerError if the provided
+    # destination path does not exist.
     def validate_destination path
       message = "Archive destination could not be found at: #{path}"
       raise Sprout::Errors::ArchiveUnpackerError.new(message) if path.nil? || !File.exists?(path)
     end
 
+    ##
+    # Unpack an entry from a zip archive. This is an inconvenience method
+    # thanks to the way Ruby zip handles zip archives.
     def unpack_zip_entry entry, destination, clobber
       # Ensure hidden mac files don't get written to disk:
       path = File.join destination, entry.name

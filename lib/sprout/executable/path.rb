@@ -3,7 +3,13 @@ module Sprout
   module Executable
 
     ##
-    # Concrete param object for :path values
+    # Concrete Sprout::Executable::Param object for Path values.
+    #
+    # Path parameters will create a FileList of prerequisites by concatenating the value with
+    # the +file_expression+ that is set on the parameter or Sprout::Executable.
+    #
+    # See also Sprout::Executable::Param
+    #
     class Path < Executable::Param
 
       def prepare_prerequisites

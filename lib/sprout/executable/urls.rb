@@ -2,7 +2,15 @@ module Sprout
 
   module Executable
 
-    # Concrete param object for collections of files
+    ##
+    # Collection of URL values.
+    #
+    # See also Sprout::Executable::Url
+    #
+    # See also Sprout::Executable::Param
+    #
+    # See also Sprout::Executable::CollectionParam
+    #
     class Urls < Strings
     end
   end

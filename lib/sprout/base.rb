@@ -15,6 +15,7 @@ require 'sprout/process_runner'
 require 'sprout/system'
 require 'sprout/ruby_feature'
 
+##
 # This is a fix for Issue #106
 # http://code.google.com/p/projectsprouts/issues/detail?id=106
 # Which is created because the new version (1.0.1) of RubyGems
@@ -50,23 +51,55 @@ require 'sprout/generator/base'
 require 'sprout/library'
 
 module Sprout
+
+  ##
+  # This is the badly-named module that we use to hang our globally-accessible
+  # interface from.
+  #
+  # See also: Sprout::Base::ClassMethods
   module Base
     extend Concern
 
     module ClassMethods
 
+      ##
+      # Returns the system-specific path to the writeable cache directory
+      # where Sprouts will look for downloaded archives.
+      #
+      #   puts ">> Sprout Cache: #{Sprout::Base.cache}"
+      #
       def cache
         File.join(sprout_home, 'cache')
       end
 
+      ##
+      # Returns the location where the currently-running version of Sprouts
+      # will write files and generators and their templates.
+      #
+      #   puts ">> Sprout home: #{Sprout::Base.sprout_home}"
+      #
       def sprout_home
         File.join(current_system.application_home('sprouts'), Sprout::VERSION::MAJOR_MINOR)
       end
 
+      ##
+      # Returns the location where Sprouts will look for generators and their
+      # templates.
+      #
+      #   puts ">> Generator Cache: #{Sprout::Base.generator_cache}"
+      #
       def generator_cache
         File.join cache, 'generators'
       end
 
+      ##
+      # Return the Sprout::System that is currently being used to 
+      # determine features like the cache path and how external processes
+      # are executed.
+      #
+      #   system = Sprout::Base.current_system
+      #   puts ">> System: #{system.inspect}"
+      #
       def current_system
         Sprout::System.create
       end
@@ -75,8 +108,9 @@ module Sprout
       # Get the file name from the 'caller' property of
       # a Ruby exception.
       #
-      # Note: It's a bummer that this string is colon delimited -
-      # The value on Windows can include a colon...
+      # Note: It's a real bummer that this string is colon delimited -
+      # The value on Windows often includes a colon...
+      # Once again, Windows is dissed by fundamental Ruby decisions.
       def file_from_caller caller_string
         parts = caller_string.split(':')
         str   = parts.shift
@@ -89,7 +123,4 @@ module Sprout
     end
   end
 end
-
-# TODO: the included 'files' should get modified by the following expressions:
-      #included_files = FileList["**/*"].exclude /.DS_Store|generated|.svn|.git|airglobal.swc|airframework.swc/
 

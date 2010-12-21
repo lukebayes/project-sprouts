@@ -3,7 +3,14 @@ module Sprout
   module Executable
 
     ##
-    # Concrete param object for collections of paths
+    # A collection of Paths.
+    #
+    # See also Sprout::Executable::Path
+    #
+    # See also Sprout::Executable::Param
+    #
+    # See also Sprout::Executable::CollectionParam
+    #
     class Paths < Files 
 
       def prepare_prerequisites
