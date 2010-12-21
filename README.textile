@@ -25,7 +25,7 @@ To get started with Sprouts in *Flash*, follow the directions provided by the "F
 h2. Some Links
 
 * "Web Site":http://projectsprouts.org
-* "See the Documentation":http://projectsprouts.org/rdoc
+* "See the Documentation":http://projectsprouts.org/doc/1.0/frames.html ("No Frames":http://projectsprouts.org/doc/1.0)
 * "Meet the Community":http://groups.google.com/group/projectsprouts
 
 h1. MIT License
