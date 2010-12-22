@@ -63,7 +63,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/sprout/test/sprout_test_case.rb</dd>
+    <dd class="r2 last">sprout/lib/sprout/test/sprout_test_case.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -589,7 +589,6 @@ mehods or assertions</p>
       <pre class="lines">
 
 
-146
 147
 148
 149
@@ -597,10 +596,11 @@ mehods or assertions</p>
 151
 152
 153
-154</pre>
+154
+155</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 147</span>
 
 <span class='kw'>def</span> <span class='id as_a_mac_system'>as_a_mac_system</span>
   <span class='id sys'>sys</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>OSXSystem</span><span class='period'>.</span><span class='id new'>new</span>
@@ -650,7 +650,6 @@ mehods or assertions</p>
       <pre class="lines">
 
 
-136
 137
 138
 139
@@ -658,10 +657,11 @@ mehods or assertions</p>
 141
 142
 143
-144</pre>
+144
+145</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 137</span>
 
 <span class='kw'>def</span> <span class='id as_a_unix_system'>as_a_unix_system</span>
   <span class='id sys'>sys</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>UnixSystem</span><span class='period'>.</span><span class='id new'>new</span>
@@ -711,7 +711,6 @@ mehods or assertions</p>
       <pre class="lines">
 
 
-166
 167
 168
 169
@@ -719,10 +718,11 @@ mehods or assertions</p>
 171
 172
 173
-174</pre>
+174
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 166</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 167</span>
 
 <span class='kw'>def</span> <span class='id as_a_win_nix_system'>as_a_win_nix_system</span>
   <span class='id sys'>sys</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>WinNixSystem</span><span class='period'>.</span><span class='id new'>new</span>
@@ -772,7 +772,6 @@ mehods or assertions</p>
       <pre class="lines">
 
 
-156
 157
 158
 159
@@ -780,10 +779,11 @@ mehods or assertions</p>
 161
 162
 163
-164</pre>
+164
+165</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 156</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='id as_a_windows_system'>as_a_windows_system</span>
   <span class='id sys'>sys</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>WinSystem</span><span class='period'>.</span><span class='id new'>new</span>
@@ -812,7 +812,6 @@ mehods or assertions</p>
       <pre class="lines">
 
 
-118
 119
 120
 121
@@ -828,10 +827,11 @@ mehods or assertions</p>
 131
 132
 133
-134</pre>
+134
+135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id as_each_system'>as_each_system</span>
   <span class='lbracket'>[</span>
@@ -868,13 +868,13 @@ mehods or assertions</p>
       <pre class="lines">
 
 
-82
 83
 84
-85</pre>
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id assert_directory'>assert_directory</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id message'>message</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id message'>message</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Expected directory not found at </span><span class='embexpr_beg'>#{</span><span class='id path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -919,14 +919,14 @@ mehods or assertions</p>
       <pre class="lines">
 
 
-76
 77
 78
 79
-80</pre>
+80
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id assert_file'>assert_file</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id message'>message</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id message'>message</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Expected file not found at </span><span class='embexpr_beg'>#{</span><span class='id path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -951,17 +951,17 @@ mehods or assertions</p>
       <pre class="lines">
 
 
-94
 95
 96
 97
 98
 99
 100
-101</pre>
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 95</span>
 
 <span class='kw'>def</span> <span class='id assert_matches'>assert_matches</span><span class='lparen'>(</span><span class='id expression'>expression</span><span class='comma'>,</span> <span class='id string'>string</span><span class='comma'>,</span> <span class='id message'>message</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
   <span class='kw'>if</span><span class='lparen'>(</span><span class='id expression'>expression</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -989,15 +989,15 @@ mehods or assertions</p>
       <pre class="lines">
 
 
-87
 88
 89
 90
 91
-92</pre>
+92
+93</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id assert_not_empty'>assert_not_empty</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id message'>message</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id assert_file'>assert_file</span> <span class='id path'>path</span><span class='comma'>,</span> <span class='id message'>message</span>
@@ -1026,12 +1026,14 @@ mehods or assertions</p>
 59
 60
 61
-62</pre>
+62
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 59</span>
 
 <span class='kw'>def</span> <span class='id clear_tasks'>clear_tasks</span>
+  <span class='const'>CLEAN</span><span class='period'>.</span><span class='id delete_if'>delete_if</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id a'>a</span><span class='op'>|</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
   <span class='const'>Rake</span><span class='op'>::</span><span class='const'>Task</span><span class='period'>.</span><span class='id clear'>clear</span>
   <span class='const'>Rake</span><span class='period'>.</span><span class='id application'>application</span><span class='period'>.</span><span class='id clear'>clear</span>
 <span class='kw'>end</span></pre>
@@ -1053,14 +1055,14 @@ mehods or assertions</p>
       <pre class="lines">
 
 
-64
 65
 66
 67
-68</pre>
+68
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='id create_file'>create_file</span> <span class='id path'>path</span>
   <span class='id dir'>dir</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id dirname'>dirname</span> <span class='id path'>path</span>
@@ -1090,7 +1092,7 @@ mehods or assertions</p>
 15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 13</span>
 
 <span class='kw'>def</span> <span class='id fixtures'>fixtures</span> <span class='id from'>from</span><span class='op'>=</span><span class='kw'>nil</span>
   <span class='ivar'>@fixtures</span> <span class='op'>||=</span> <span class='id find_fixtures'>find_fixtures</span><span class='lparen'>(</span><span class='id from'>from</span> <span class='op'>||</span> <span class='const'>Sprout</span><span class='period'>.</span><span class='id file_from_caller'>file_from_caller</span><span class='lparen'>(</span><span class='id caller'>caller</span><span class='period'>.</span><span class='id first'>first</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1118,7 +1120,7 @@ mehods or assertions</p>
 57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 55</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id get_task'>get_task</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id application'>application</span><span class='lbracket'>[</span><span class='id name'>name</span><span class='rbracket'>]</span>
@@ -1148,7 +1150,7 @@ mehods or assertions</p>
 47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id make_temp_folder'>make_temp_folder</span> <span class='id from'>from</span>
   <span class='id dir'>dir</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='id fixtures'>fixtures</span><span class='lparen'>(</span><span class='id from'>from</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>tmp</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
@@ -1173,14 +1175,14 @@ mehods or assertions</p>
       <pre class="lines">
 
 
-70
 71
 72
 73
-74</pre>
+74
+75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id remove_file'>remove_file</span><span class='lparen'>(</span><span class='id path'>path</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='kw'>if</span><span class='lparen'>(</span><span class='id path'>path</span> <span class='op'>&amp;&amp;</span> <span class='const'>File</span><span class='period'>.</span><span class='id exists?'>exists?</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1212,7 +1214,7 @@ mehods or assertions</p>
 53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id run_task'>run_task</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
   <span class='id t'>t</span> <span class='op'>=</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id application'>application</span><span class='lbracket'>[</span><span class='id name'>name</span><span class='rbracket'>]</span>
@@ -1243,7 +1245,7 @@ mehods or assertions</p>
 20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id setup'>setup</span>
   <span class='kw'>super</span>
@@ -1267,13 +1269,13 @@ mehods or assertions</p>
       <pre class="lines">
 
 
-107
 108
 109
-110</pre>
+110
+111</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id skip'>skip</span> <span class='id message'>message</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
   <span class='id puts'>puts</span>
@@ -1314,7 +1316,7 @@ mehods or assertions</p>
 36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id teardown'>teardown</span>
   <span class='kw'>super</span>
@@ -1349,13 +1351,13 @@ mehods or assertions</p>
       <pre class="lines">
 
 
-113
 114
 115
-116</pre>
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id temp_cache'>temp_cache</span>
   <span class='id dir'>dir</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id dirname'>dirname</span><span class='lparen'>(</span><span class='const'>Sprout</span><span class='period'>.</span><span class='id file_from_caller'>file_from_caller</span><span class='lparen'>(</span><span class='id caller'>caller</span><span class='period'>.</span><span class='id first'>first</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1385,7 +1387,7 @@ mehods or assertions</p>
 41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/test/sprout_test_case.rb', line 38</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test/sprout_test_case.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='id temp_path'>temp_path</span>
   <span class='id caller_file'>caller_file</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='period'>.</span><span class='id file_from_caller'>file_from_caller</span> <span class='id caller'>caller</span><span class='period'>.</span><span class='id first'>first</span>
@@ -1401,7 +1403,7 @@ mehods or assertions</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:51 2010 by 
+  Generated on Wed Dec 22 12:27:06 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

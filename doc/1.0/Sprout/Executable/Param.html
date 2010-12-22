@@ -74,7 +74,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/sprout/executable/param.rb</dd>
+    <dd class="r2 last">sprout/lib/sprout/executable/param.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -1191,7 +1191,7 @@ to call <tt>super()</tt> in your own constructor.</p>
 233</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 227</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 227</span>
 
 <span class='kw'>def</span> <span class='id initialize'>initialize</span>
   <span class='ivar'>@description</span>             <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Default Description</span><span class='tstring_end'>'</span></span>
@@ -1241,7 +1241,7 @@ to call <tt>super()</tt> in your own constructor.</p>
 62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='id belongs_to'>belongs_to</span>
   <span class='ivar'>@belongs_to</span>
@@ -1283,7 +1283,7 @@ default, this can be modified  To a space or whatever you wish.</p>
 68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id delimiter'>delimiter</span>
   <span class='ivar'>@delimiter</span>
@@ -1325,7 +1325,7 @@ help.</p>
 73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 71</span>
 
 <span class='kw'>def</span> <span class='id description'>description</span>
   <span class='ivar'>@description</span>
@@ -1356,7 +1356,7 @@ help.</p>
 362</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 360</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 360</span>
 
 <span class='kw'>def</span> <span class='id file_expression'>file_expression</span>
   <span class='ivar'>@file_expression</span> <span class='op'>||=</span> <span class='id belongs_to'>belongs_to</span><span class='period'>.</span><span class='id default_file_expression'>default_file_expression</span>
@@ -1409,7 +1409,7 @@ like:</p>
 91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id hidden_name'>hidden_name</span>
   <span class='ivar'>@hidden_name</span>
@@ -1462,7 +1462,7 @@ like:</p>
 109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 107</span>
 
 <span class='kw'>def</span> <span class='id hidden_value'>hidden_value</span>
   <span class='ivar'>@hidden_value</span>
@@ -1503,7 +1503,7 @@ like:</p>
 113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='id name'>name</span>
   <span class='ivar'>@name</span>
@@ -1545,7 +1545,7 @@ other times it's a double dash '--' but usually it's just a single dash '-'</p>
 123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 121</span>
 
 <span class='kw'>def</span> <span class='id prefix'>prefix</span>
   <span class='ivar'>@prefix</span> <span class='op'>||=</span> <span class='lparen'>(</span><span class='id belongs_to'>belongs_to</span><span class='period'>.</span><span class='id nil?'>nil?</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='const'>DEFAULT_PREFIX</span> <span class='op'>:</span> <span class='id belongs_to'>belongs_to</span><span class='period'>.</span><span class='id default_prefix'>default_prefix</span>
@@ -1593,7 +1593,7 @@ instance methods on the  Sprout::Executable that uses it.</p>
 136</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 134</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 134</span>
 
 <span class='kw'>def</span> <span class='id reader'>reader</span>
   <span class='ivar'>@reader</span>
@@ -1639,7 +1639,7 @@ executable is invoked without this parameter first being set.</p>
 147</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 145</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 145</span>
 
 <span class='kw'>def</span> <span class='id required'>required</span>
   <span class='ivar'>@required</span>
@@ -1670,7 +1670,7 @@ executable is invoked without this parameter first being set.</p>
 366</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 364</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 364</span>
 
 <span class='kw'>def</span> <span class='id shell_name'>shell_name</span>
   <span class='ivar'>@shell_name</span> <span class='op'>||=</span> <span class='id prefix'>prefix</span> <span class='op'>+</span> <span class='id name'>name</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>_</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
@@ -1713,7 +1713,7 @@ the same first character, the first one encountered will win.</p>
 347</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 345</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 345</span>
 
 <span class='kw'>def</span> <span class='id short_name'>short_name</span>
   <span class='ivar'>@short_name</span> <span class='op'>||=</span> <span class='id name'>name</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id shift'>shift</span>
@@ -1758,7 +1758,7 @@ the underlying process.</p>
 156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 154</span>
 
 <span class='kw'>def</span> <span class='id to_shell_proc'>to_shell_proc</span>
   <span class='ivar'>@to_shell_proc</span>
@@ -1800,7 +1800,7 @@ content for the concrete Sprout::Executable.</p>
 161</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 159</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='id type'>type</span>
   <span class='ivar'>@type</span>
@@ -1842,7 +1842,7 @@ Sprout::Executable was instantiated and configured.</p>
 166</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 164</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 164</span>
 
 <span class='kw'>def</span> <span class='id value'>value</span>
   <span class='ivar'>@value</span>
@@ -1890,7 +1890,7 @@ instance methods on the  Sprout::Executable that uses it.</p>
 179</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 177</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 177</span>
 
 <span class='kw'>def</span> <span class='id writer'>writer</span>
   <span class='ivar'>@writer</span>
@@ -1935,7 +1935,7 @@ instance methods on the  Sprout::Executable that uses it.</p>
 419</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 417</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 417</span>
 
 <span class='kw'>def</span> <span class='id clean_path'>clean_path</span> <span class='id path'>path</span>
   <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='period'>.</span><span class='id create'>create</span><span class='period'>.</span><span class='id clean_path'>clean_path</span> <span class='id path'>path</span>
@@ -1973,7 +1973,7 @@ instance methods on the  Sprout::Executable that uses it.</p>
 274</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 272</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 272</span>
 
 <span class='kw'>def</span> <span class='id default'>default</span>
   <span class='ivar'>@default</span>
@@ -2016,7 +2016,7 @@ instances.</p>
 268</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 265</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 265</span>
 
 <span class='kw'>def</span> <span class='id default='>default=</span><span class='lparen'>(</span><span class='id value'>value</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id value'>value</span> <span class='op'>=</span> <span class='id value'>value</span>
@@ -2075,7 +2075,7 @@ Sprout::Executable.</p>
 433</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 431</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 431</span>
 
 <span class='kw'>def</span> <span class='id file_is_output?'>file_is_output?</span> <span class='id file'>file</span>
   <span class='id belongs_to'>belongs_to</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:output</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id belongs_to'>belongs_to</span><span class='period'>.</span><span class='id output'>output</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='op'>==</span> <span class='id file'>file</span>
@@ -2127,7 +2127,7 @@ Sprout::Executable.</p>
 295</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 293</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 293</span>
 
 <span class='kw'>def</span> <span class='id hidden_name?'>hidden_name?</span>
   <span class='ivar'>@hidden_name</span>
@@ -2179,7 +2179,7 @@ toggles like '-debug'</p>
 302</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 300</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 300</span>
 
 <span class='kw'>def</span> <span class='id hidden_value?'>hidden_value?</span>
   <span class='ivar'>@hidden_value</span>
@@ -2226,7 +2226,7 @@ as a Ruby Executable.</p>
 330</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 320</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 320</span>
 
 <span class='kw'>def</span> <span class='id option_parser_declaration'>option_parser_declaration</span>
   <span class='id declaration'>declaration</span> <span class='op'>=</span> <span class='lbracket'>[</span> <span class='id prefix'>prefix</span><span class='comma'>,</span> <span class='id option_parser_name'>option_parser_name</span> <span class='rbracket'>]</span>
@@ -2262,7 +2262,7 @@ as a Ruby Executable.</p>
 401</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 399</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 399</span>
 
 <span class='kw'>def</span> <span class='id option_parser_name'>option_parser_name</span>
   <span class='id name'>name</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>_</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
@@ -2300,7 +2300,7 @@ as a Ruby Executable.</p>
 336</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 334</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 334</span>
 
 <span class='kw'>def</span> <span class='id option_parser_short_name'>option_parser_short_name</span>
   <span class='lbracket'>[</span> <span class='id short_prefix'>short_prefix</span><span class='comma'>,</span> <span class='id short_name'>short_name</span> <span class='rbracket'>]</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
@@ -2328,7 +2328,7 @@ as a Ruby Executable.</p>
 405</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 403</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 403</span>
 
 <span class='kw'>def</span> <span class='id option_parser_type_name'>option_parser_type_name</span>
   <span class='ivar'>@option_parser_type_name</span>
@@ -2357,7 +2357,7 @@ as a Ruby Executable.</p>
 410</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 407</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 407</span>
 
 <span class='kw'>def</span> <span class='id option_parser_type_output'>option_parser_type_output</span>
   <span class='id type'>type</span> <span class='op'>=</span> <span class='id hidden_value?'>hidden_value?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span> <span class='op'>:</span> <span class='id option_parser_type_name'>option_parser_type_name</span>
@@ -2398,7 +2398,7 @@ context we're in.</p>
 282</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 279</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 279</span>
 
 <span class='kw'>def</span> <span class='id prepare'>prepare</span>
   <span class='id prepare_prerequisites'>prepare_prerequisites</span>
@@ -2426,7 +2426,7 @@ context we're in.</p>
 413</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 412</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 412</span>
 
 <span class='kw'>def</span> <span class='id prepare_prerequisites'>prepare_prerequisites</span>
 <span class='kw'>end</span></pre>
@@ -2476,7 +2476,7 @@ context we're in.</p>
 288</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 286</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 286</span>
 
 <span class='kw'>def</span> <span class='id prepared?'>prepared?</span>
   <span class='ivar'>@prepared</span>
@@ -2527,7 +2527,7 @@ context we're in.</p>
 246</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 244</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 244</span>
 
 <span class='kw'>def</span> <span class='id required?'>required?</span>
   <span class='lparen'>(</span><span class='id required'>required</span> <span class='op'>==</span> <span class='kw'>true</span><span class='rparen'>)</span>
@@ -2569,7 +2569,7 @@ platforms.</p>
 358</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 356</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 356</span>
 
 <span class='kw'>def</span> <span class='id shell_value'>shell_value</span>
   <span class='id value'>value</span><span class='period'>.</span><span class='id to_s'>to_s</span>
@@ -2597,7 +2597,7 @@ platforms.</p>
 315</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 313</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 313</span>
 
 <span class='kw'>def</span> <span class='id short_prefix'>short_prefix</span>
   <span class='ivar'>@short_prefix</span> <span class='op'>||=</span> <span class='lparen'>(</span><span class='id belongs_to'>belongs_to</span><span class='period'>.</span><span class='id nil?'>nil?</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='const'>DEFAULT_SHORT_PREFIX</span> <span class='op'>:</span> <span class='id belongs_to'>belongs_to</span><span class='period'>.</span><span class='id default_short_prefix'>default_short_prefix</span>
@@ -2641,7 +2641,7 @@ description</p>
 395</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 389</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 389</span>
 
 <span class='kw'>def</span> <span class='id to_rdoc'>to_rdoc</span>
   <span class='id result'>result</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
@@ -2693,7 +2693,7 @@ template method unless <tt>prepared?</tt> returns <tt>true</tt>.</p>
 383</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 375</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 375</span>
 
 <span class='kw'>def</span> <span class='id to_shell'>to_shell</span>
   <span class='id prepare'>prepare</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id prepared?'>prepared?</span>
@@ -2740,7 +2740,7 @@ Sprout::Errors::MissingArgumentError if it is not.</p>
 255</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 251</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 251</span>
 
 <span class='kw'>def</span> <span class='id validate'>validate</span>
   <span class='kw'>if</span><span class='lparen'>(</span><span class='id required?'>required?</span> <span class='op'>&amp;&amp;</span> <span class='id value'>value</span><span class='period'>.</span><span class='id nil?'>nil?</span><span class='rparen'>)</span>
@@ -2794,7 +2794,7 @@ are not nil</p>
 240</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/param.rb', line 238</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 238</span>
 
 <span class='kw'>def</span> <span class='id visible?'>visible?</span>
   <span class='op'>!</span><span class='id value'>value</span><span class='period'>.</span><span class='id nil?'>nil?</span>
@@ -2809,7 +2809,7 @@ are not nil</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:50 2010 by 
+  Generated on Wed Dec 22 12:27:04 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

@@ -74,7 +74,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/sprout/progress_bar.rb</dd>
+    <dd class="r2 last">sprout/lib/sprout/progress_bar.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -882,7 +882,7 @@
 62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id initialize'>initialize</span> <span class='lparen'>(</span><span class='id title'>title</span><span class='comma'>,</span> <span class='id total'>total</span><span class='comma'>,</span> <span class='id out'>out</span> <span class='op'>=</span> <span class='const'>STDERR</span><span class='rparen'>)</span>
   <span class='ivar'>@title</span> <span class='op'>=</span> <span class='id title'>title</span>
@@ -942,7 +942,7 @@
 68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id bar_mark'>bar_mark</span>
   <span class='ivar'>@bar_mark</span>
@@ -983,7 +983,7 @@
 66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id current'>current</span>
   <span class='ivar'>@current</span>
@@ -1024,7 +1024,7 @@
 68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id start_time'>start_time</span>
   <span class='ivar'>@start_time</span>
@@ -1065,7 +1065,7 @@
 65</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id title'>title</span>
   <span class='ivar'>@title</span>
@@ -1106,7 +1106,7 @@
 68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id title_width'>title_width</span>
   <span class='ivar'>@title_width</span>
@@ -1147,7 +1147,7 @@
 67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='id total'>total</span>
   <span class='ivar'>@total</span>
@@ -1182,7 +1182,7 @@
 116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 114</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id bytes'>bytes</span>
   <span class='id convert_bytes'>convert_bytes</span><span class='lparen'>(</span><span class='ivar'>@current</span><span class='rparen'>)</span>
@@ -1212,7 +1212,7 @@
 218</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 214</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 214</span>
 
 <span class='kw'>def</span> <span class='id clear'>clear</span>
   <span class='ivar'>@out</span><span class='period'>.</span><span class='id print'>print</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\r</span><span class='tstring_end'>&quot;</span></span>
@@ -1250,7 +1250,7 @@
 107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 97</span>
 
 <span class='kw'>def</span> <span class='id convert_bytes'>convert_bytes</span> <span class='lparen'>(</span><span class='id bytes'>bytes</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id bytes'>bytes</span> <span class='op'>&lt;</span> <span class='int'>1024</span>
@@ -1290,7 +1290,7 @@
 152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 146</span>
 
 <span class='kw'>def</span> <span class='id do_percentage'>do_percentage</span>
   <span class='kw'>if</span> <span class='ivar'>@total</span><span class='period'>.</span><span class='id zero?'>zero?</span>
@@ -1323,7 +1323,7 @@
 140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 137</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 137</span>
 
 <span class='kw'>def</span> <span class='id elapsed'>elapsed</span>
   <span class='id elapsed_time'>elapsed_time</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span> <span class='op'>-</span> <span class='ivar'>@start_time</span>
@@ -1352,7 +1352,7 @@
 144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 142</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 142</span>
 
 <span class='kw'>def</span> <span class='id eol'>eol</span>
   <span class='kw'>if</span> <span class='ivar'>@finished_p</span> <span class='kw'>then</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>else</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\r</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>end</span>
@@ -1396,7 +1396,7 @@
 135</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='id eta'>eta</span>
   <span class='kw'>if</span> <span class='ivar'>@current</span> <span class='op'>==</span> <span class='int'>0</span>
@@ -1430,7 +1430,7 @@
 232</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 230</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 230</span>
 
 <span class='kw'>def</span> <span class='id file_transfer_mode'>file_transfer_mode</span>
   <span class='ivar'>@format_arguments</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='symbol'>:title</span><span class='comma'>,</span> <span class='symbol'>:percentage</span><span class='comma'>,</span> <span class='symbol'>:bar</span><span class='comma'>,</span> <span class='symbol'>:stat_for_file_transfer</span><span class='rbracket'>]</span>
@@ -1460,7 +1460,7 @@
 224</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 220</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 220</span>
 
 <span class='kw'>def</span> <span class='id finish'>finish</span>
   <span class='ivar'>@current</span> <span class='op'>=</span> <span class='ivar'>@total</span>
@@ -1511,7 +1511,7 @@
 228</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 226</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 226</span>
 
 <span class='kw'>def</span> <span class='id finished?'>finished?</span>
   <span class='ivar'>@finished_p</span>
@@ -1542,7 +1542,7 @@
 75</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 70</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 70</span>
 
 <span class='kw'>def</span> <span class='id fmt_bar'>fmt_bar</span>
   <span class='id bar_width'>bar_width</span> <span class='op'>=</span> <span class='id do_percentage'>do_percentage</span> <span class='op'>*</span> <span class='ivar'>@terminal_width</span> <span class='op'>/</span> <span class='int'>100</span>
@@ -1573,7 +1573,7 @@
 79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id fmt_percentage'>fmt_percentage</span>
   <span class='id do_percentage'>do_percentage</span>
@@ -1601,7 +1601,7 @@
 83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 81</span>
 
 <span class='kw'>def</span> <span class='id fmt_stat'>fmt_stat</span>
   <span class='kw'>if</span> <span class='ivar'>@finished_p</span> <span class='kw'>then</span> <span class='id elapsed'>elapsed</span> <span class='kw'>else</span> <span class='id eta'>eta</span> <span class='kw'>end</span>
@@ -1633,7 +1633,7 @@
 91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id fmt_stat_for_file_transfer'>fmt_stat_for_file_transfer</span>
   <span class='kw'>if</span> <span class='ivar'>@finished_p</span> <span class='kw'>then</span> 
@@ -1665,7 +1665,7 @@
 95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id fmt_title'>fmt_title</span>
   <span class='ivar'>@title</span><span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span><span class='lparen'>(</span><span class='ivar'>@title_width</span> <span class='op'>-</span> <span class='int'>1</span><span class='rparen'>)</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>:</span><span class='tstring_end'>&quot;</span></span>
@@ -1693,7 +1693,7 @@
 236</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 234</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 234</span>
 
 <span class='kw'>def</span> <span class='id format='>format=</span> <span class='lparen'>(</span><span class='id format'>format</span><span class='rparen'>)</span>
   <span class='ivar'>@format</span> <span class='op'>=</span> <span class='id format'>format</span>
@@ -1721,7 +1721,7 @@
 240</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 238</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 238</span>
 
 <span class='kw'>def</span> <span class='id format_arguments='>format_arguments=</span> <span class='lparen'>(</span><span class='id arguments'>arguments</span><span class='rparen'>)</span>
   <span class='ivar'>@format_arguments</span> <span class='op'>=</span> <span class='id arguments'>arguments</span>
@@ -1753,7 +1753,7 @@
 124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 118</span>
 
 <span class='kw'>def</span> <span class='id format_time'>format_time</span> <span class='lparen'>(</span><span class='id t'>t</span><span class='rparen'>)</span>
   <span class='id t'>t</span> <span class='op'>=</span> <span class='id t'>t</span><span class='period'>.</span><span class='id to_i'>to_i</span>
@@ -1803,7 +1803,7 @@
 174</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 154</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 154</span>
 
 <span class='kw'>def</span> <span class='id get_width'>get_width</span>
   <span class='comment'>#    return 80
@@ -1850,7 +1850,7 @@
 245</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 242</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 242</span>
 
 <span class='kw'>def</span> <span class='id halt'>halt</span>
   <span class='ivar'>@finished_p</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -1882,7 +1882,7 @@
 252</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 247</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 247</span>
 
 <span class='kw'>def</span> <span class='id inc'>inc</span> <span class='lparen'>(</span><span class='id step'>step</span> <span class='op'>=</span> <span class='int'>1</span><span class='rparen'>)</span>
   <span class='ivar'>@current</span> <span class='op'>+=</span> <span class='id step'>step</span>
@@ -1913,7 +1913,7 @@
 265</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 263</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 263</span>
 
 <span class='kw'>def</span> <span class='id inspect'>inspect</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#&lt;ProgressBar:</span><span class='embexpr_beg'>#{</span><span class='ivar'>@current</span><span class='rbrace'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='ivar'>@total</span><span class='rbrace'>}</span><span class='tstring_content'>&gt;</span><span class='tstring_end'>&quot;</span></span>
@@ -1946,7 +1946,7 @@
 261</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 254</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 254</span>
 
 <span class='kw'>def</span> <span class='id set'>set</span> <span class='lparen'>(</span><span class='id count'>count</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id count'>count</span> <span class='op'>&lt;</span> <span class='int'>0</span> <span class='op'>||</span> <span class='id count'>count</span> <span class='op'>&gt;</span> <span class='ivar'>@total</span>
@@ -1996,7 +1996,7 @@
 195</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 176</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 176</span>
 
 <span class='kw'>def</span> <span class='id show'>show</span>
   <span class='id arguments'>arguments</span> <span class='op'>=</span> <span class='ivar'>@format_arguments</span><span class='period'>.</span><span class='id map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id method'>method</span><span class='op'>|</span>
@@ -2053,7 +2053,7 @@
 211</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 197</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 197</span>
 
 <span class='kw'>def</span> <span class='id show_if_needed'>show_if_needed</span>
   <span class='kw'>if</span> <span class='ivar'>@total</span><span class='period'>.</span><span class='id zero?'>zero?</span>
@@ -2094,7 +2094,7 @@
 112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/progress_bar.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/progress_bar.rb', line 109</span>
 
 <span class='kw'>def</span> <span class='id transfer_rate'>transfer_rate</span>
   <span class='id bytes_per_second'>bytes_per_second</span> <span class='op'>=</span> <span class='ivar'>@current</span><span class='period'>.</span><span class='id to_f'>to_f</span> <span class='op'>/</span> <span class='lparen'>(</span><span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span> <span class='op'>-</span> <span class='ivar'>@start_time</span><span class='rparen'>)</span>
@@ -2110,7 +2110,7 @@
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:49 2010 by 
+  Generated on Wed Dec 22 12:27:03 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

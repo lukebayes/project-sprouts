@@ -59,7 +59,7 @@
   
   
     <dt class="r1 last">Defined in:</dt>
-    <dd class="r1 last">lib/sprout/base.rb</dd>
+    <dd class="r1 last">sprout/lib/sprout/base.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -229,12 +229,12 @@ Sprouts will look for downloaded archives.</p>
       <pre class="lines">
 
 
-71
-72
-73</pre>
+66
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/base.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/base.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id cache'>cache</span>
   <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='id sprout_home'>sprout_home</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cache</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
@@ -271,12 +271,12 @@ features like the cache path and how external processes are executed.</p>
       <pre class="lines">
 
 
-103
-104
-105</pre>
+98
+99
+100</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/base.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/base.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='id current_system'>current_system</span>
   <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='period'>.</span><span class='id create'>create</span>
@@ -313,17 +313,17 @@ fundamental Ruby decisions.</p>
       <pre class="lines">
 
 
+109
+110
+111
+112
+113
 114
 115
-116
-117
-118
-119
-120
-121</pre>
+116</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/base.rb', line 114</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/base.rb', line 109</span>
 
 <span class='kw'>def</span> <span class='id file_from_caller'>file_from_caller</span> <span class='id caller_string'>caller_string</span>
   <span class='id parts'>parts</span> <span class='op'>=</span> <span class='id caller_string'>caller_string</span><span class='period'>.</span><span class='id split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>:</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
@@ -364,12 +364,12 @@ templates.</p>
       <pre class="lines">
 
 
-91
-92
-93</pre>
+86
+87
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/base.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/base.rb', line 86</span>
 
 <span class='kw'>def</span> <span class='id generator_cache'>generator_cache</span>
   <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span> <span class='id cache'>cache</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>generators</span><span class='tstring_end'>'</span></span>
@@ -405,12 +405,12 @@ write files and generators and their templates.</p>
       <pre class="lines">
 
 
-81
-82
-83</pre>
+76
+77
+78</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/base.rb', line 81</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/base.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id sprout_home'>sprout_home</span>
   <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='id current_system'>current_system</span><span class='period'>.</span><span class='id application_home'>application_home</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>sprouts</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>VERSION</span><span class='op'>::</span><span class='const'>MAJOR_MINOR</span><span class='rparen'>)</span>
@@ -425,7 +425,7 @@ write files and generators and their templates.</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:48 2010 by 
+  Generated on Wed Dec 22 12:27:00 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

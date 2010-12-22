@@ -74,22 +74,12 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/sprout/log.rb</dd>
+    <dd class="r2 last">sprout/lib/sprout/log.rb</dd>
   
 </dl>
 <div class="clear"></div>
 
-<h2>Overview</h2><div class="docstring">
-  <div class="discussion">
-    
-<p>:nodoc:</p>
 
-
-  </div>
-</div>
-<div class="tags">
-  
-</div>
   <h2>Constant Summary</h2>
   
     <dl class="constants">
@@ -291,12 +281,12 @@
       <pre class="lines">
 
 
+12
 13
-14
-15</pre>
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/log.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/log.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='const'>Log</span><span class='period'>.</span><span class='id debug'>debug</span>
   <span class='kw'>return</span> <span class='cvar'>@@debug</span>
@@ -319,12 +309,12 @@
       <pre class="lines">
 
 
+8
 9
-10
-11</pre>
+10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/log.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/log.rb', line 8</span>
 
 <span class='kw'>def</span> <span class='const'>Log</span><span class='period'>.</span><span class='id debug='>debug=</span><span class='lparen'>(</span><span class='id debug'>debug</span><span class='rparen'>)</span>
   <span class='cvar'>@@debug</span> <span class='op'>=</span> <span class='id debug'>debug</span>
@@ -347,15 +337,15 @@
       <pre class="lines">
 
 
+38
 39
 40
 41
 42
-43
-44</pre>
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/log.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/log.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='const'>Log</span><span class='period'>.</span><span class='id flush'>flush</span>
   <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='const'>Log</span><span class='period'>.</span><span class='id debug'>debug</span><span class='rparen'>)</span>
@@ -381,15 +371,15 @@
       <pre class="lines">
 
 
+31
 32
 33
 34
 35
-36
-37</pre>
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/log.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/log.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='const'>Log</span><span class='period'>.</span><span class='id flush_print'>flush_print</span>
   <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='const'>Log</span><span class='period'>.</span><span class='id debug'>debug</span><span class='rparen'>)</span>
@@ -415,13 +405,13 @@
       <pre class="lines">
 
 
+21
 22
 23
-24
-25</pre>
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/log.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/log.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='const'>Log</span><span class='period'>.</span><span class='id print'>print</span><span class='lparen'>(</span><span class='id msg'>msg</span><span class='rparen'>)</span>
   <span class='cvar'>@@printout</span> <span class='op'>&lt;&lt;</span> <span class='id msg'>msg</span>
@@ -445,13 +435,13 @@
       <pre class="lines">
 
 
+26
 27
 28
-29
-30</pre>
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/log.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/log.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='const'>Log</span><span class='period'>.</span><span class='id printf'>printf</span><span class='lparen'>(</span><span class='id msg'>msg</span><span class='rparen'>)</span>
   <span class='cvar'>@@printout</span> <span class='op'>&lt;&lt;</span> <span class='id msg'>msg</span>
@@ -475,13 +465,13 @@
       <pre class="lines">
 
 
+16
 17
 18
-19
-20</pre>
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/log.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/log.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='const'>Log</span><span class='period'>.</span><span class='id puts'>puts</span><span class='lparen'>(</span><span class='id msg'>msg</span><span class='rparen'>)</span>
   <span class='cvar'>@@output</span> <span class='op'>&lt;&lt;</span> <span class='id msg'>msg</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span>
@@ -497,7 +487,7 @@
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:48 2010 by 
+  Generated on Wed Dec 22 12:27:00 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

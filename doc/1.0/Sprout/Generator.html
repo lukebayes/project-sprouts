@@ -63,14 +63,125 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/sprout/generator/base.rb<span class="defines">,<br />
-  lib/sprout/generator/command.rb,<br /> lib/sprout/generator/manifest.rb,<br /> lib/sprout/generator/file_manifest.rb,<br /> lib/sprout/generator/template_manifest.rb,<br /> lib/sprout/generator/directory_manifest.rb</span>
+    <dd class="r2 last">sprout/lib/sprout/generator.rb<span class="defines">,<br />
+  sprout/lib/sprout/generator/base.rb,<br /> sprout/lib/sprout/generator/command.rb,<br /> sprout/lib/sprout/generator/manifest.rb,<br /> sprout/lib/sprout/generator/file_manifest.rb,<br /> sprout/lib/sprout/generator/template_manifest.rb,<br /> sprout/lib/sprout/generator/directory_manifest.rb</span>
 </dd>
   
 </dl>
 <div class="clear"></div>
 
-<h2>Defined Under Namespace</h2>
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<h1>Introduction</h1>
+
+<p>Sprout Generators are command line applications that are  installed by
+RubyGems and should universally provide the  following features:</p>
+<ul><li>
+<p>Terminal tab completion to discover generators</p>
+</li><li>
+<p>Call with no arguments to see help output</p>
+</li><li>
+<p>Call with an <tt>--input</tt> (or trailing) argument to create</p>
+</li><li>
+<p>Call with a collection of arguments given on a previous run  plus
+<tt>--delete</tt> to undo a previous <tt>create</tt></p>
+</li></ul>
+
+<h1>Usage</h1>
+
+<h2>Discovery</h2>
+
+<p>Sprout generators should be installed by RubyGems as command line 
+applications on your system. After installing the flashsdk gem, you  should
+have access to a variety of generators. You can find out what  generators
+are available by typing: sprout- followed by pressing the  &lt;TAB&gt; key.</p>
+
+<p>Your terminal should list out all available applications that match  this
+name.</p>
+
+<p>Some generators are expected to create new projects, others expect to  run
+within existing projects. You should be able to infer the kind of 
+generator you're looking at by the name, but if you can't just run the 
+generator with no arguments to see it's usage guidelines.</p>
+
+<p>Generators that expect to be run from within a project will usually  expect
+a file named <tt>Gemfile</tt> to exist in the project root. If you're 
+trying to run Sprout generators in a project that wasn't created using 
+Sprouts, create this file and add the Rubygems that include the  generators
+that you want to use.</p>
+
+<h2>Execution</h2>
+
+<p>Generators are created by human beings and sometimes they have  different
+assumptions than you do. If you're running a generator  within a project
+(especially for the first time - or since updating a  gem), be sure to get
+your project checked into version control before  running anything.</p>
+
+<p>Non-application generators should always be executed at the project  root
+(where you store your Rakefile, Gemfile or build.xml).</p>
+
+<h2>Deletion</h2>
+
+<p>Any generator that inherits from the provided Sprout::Generators::Base 
+includes support for deletion. If you run a generator and realize that  you
+don't want the files that it created, you can always run the same 
+generator again with the same arguments, but add the --delete (or -d) 
+argument.</p>
+
+<h2>Templates</h2>
+
+<p>Each time a generator is asked to locate a template, it begins a lookup
+process. This process is designed to make it easy for you to modify any
+template at the scope you desire.</p>
+
+<p>The lookup process will end at the first location where the expected  file
+is found.</p>
+
+<p>The search will begin with the location specified by the
+<tt>-templates</tt>  option (if provided) and will continue by adding
+'/templates' to the  end of each location specified by the listing for 
+Sprout::Generator#search_paths .</p>
+
+<h1>Creation</h1>
+
+<p>The core Sprout gem comes with a Sprout::GeneratorGenerator. This command
+line  application is intended to be executed within a project and given the
+name  of a generator that you'd like to create.</p>
+
+<p>Try experimenting with this, and please  <a
+href="http://groups.google.com/group/projectsprouts/">suggest</a> any
+improvements to  the Google Group.</p>
+<hr style="height: 1px">
+
+<p>Back to Home: <a href="../file.README.html" title="README.textile">README.textile</a></p>
+
+<p>Next Topic: <span class='object_link'><a href="Library.html" title="Sprout::Library (class)">Library</a></span></p>
+<hr style="height: 1px">
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="GeneratorGenerator.html" title="Sprout::GeneratorGenerator (class)">GeneratorGenerator</a></span></li>
+    
+      <li><span class='object_link'><a href="Library.html" title="Sprout::Library (class)">Library</a></span></li>
+    
+      <li><span class='object_link'><a href="Executable.html" title="Sprout::Executable (module)">Executable</a></span></li>
+    
+      <li><span class='object_link'><a href="Specification.html" title="Sprout::Specification (class)">Specification</a></span></li>
+    
+      <li><span class='object_link'><a href="RubyFeature.html" title="Sprout::RubyFeature (module)">RubyFeature</a></span></li>
+    
+      <li><span class='object_link'><a href="System.html" title="Sprout::System (module)">System</a></span></li>
+    
+  </ul>
+
+</div><h2>Defined Under Namespace</h2>
 <p class="children">
    
     
@@ -115,7 +226,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Create an instance of a concrete Generator using a <tt>type</tt> argument.</p>
+</div></span>
   
 </li>
 
@@ -123,28 +236,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#register-class_method" title="register (class method)">+ (Object) <strong>register</strong>(generator_class, templates_path = nil) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#search_paths-class_method" title="search_paths (class method)">+ (Object) <strong>search_paths</strong> </a>
+      <a href="#register-class_method" title="register (class method)">+ (Hash) <strong>register</strong>(generator_class, templates_path = nil) </a>
     
 
     
@@ -158,7 +250,30 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns a new collection of paths to search within for generator
+<p>Register a generator class and template path for future use.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#search_paths-class_method" title="search_paths (class method)">+ (Array) <strong>search_paths</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a new collection of paths to search within for generator 
 declarations and more importantly, folders named, 'templates'.</p>
 </div></span>
   
@@ -181,7 +296,9 @@ declarations and more importantly, folders named, 'templates'.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieve the root template folder for the provided Class.</p>
+</div></span>
   
 </li>
 
@@ -217,24 +334,81 @@ declarations and more importantly, folders named, 'templates'.</p>
   
 
   
-</p><table class="source_code">
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Create an instance of a concrete Generator using a <tt>type</tt> argument.</p>
+
+<p>The idea is that libraries may register a generator class named,</p>
+
+<pre class="code">+TestGenerator+, and other generators can instantiate it without
+including it's Class by reference with:
+
+Sprout::Generator.create_instance :test</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+        <span class='name'>type</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A snake-cased name of the class without the Generator suffix. for example,
+to instantiate a generator named, <tt>TestSuiteGenerator</tt>, this
+argument would be <tt>:test_suite</tt></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>deprecated - please remove this argument wherever it's found.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-13
-14
-15
-16
-17
-18
-19
-20
-21</pre>
+148
+149
+150
+151
+152
+153
+154
+155
+156</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/generator/base.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generator.rb', line 148</span>
 
 <span class='kw'>def</span> <span class='id create_instance'>create_instance</span> <span class='id type'>type</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='kw'>nil</span>
   <span class='id class_name'>class_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id type'>type</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id camel_case'>camel_case</span><span class='rbrace'>}</span><span class='tstring_content'>Generator</span><span class='tstring_end'>&quot;</span></span>
@@ -253,23 +427,102 @@ declarations and more importantly, folders named, 'templates'.</p>
       <div class="method_details ">
   <p class="signature " id="register-class_method">
   
-    + (<tt>Object</tt>) <strong>register</strong>(generator_class, templates_path = nil) 
+    + (<tt>Hash</tt>) <strong>register</strong>(generator_class, templates_path = nil) 
   
 
   
-</p><table class="source_code">
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Register a generator class and template path for future use. Generator
+class names must end with "Generator", and everything to the left will be
+used for future lookups.</p>
+
+<p>The following example will register a TestGenerator that can be retrieved
+as <tt>:test</tt>.</p>
+
+<pre class="code"><span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Generator</span><span class='period'>.</span><span class='id register'>register</span> <span class='const'>TestGenerator</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Class</tt>)</span>
+      
+      
+        <span class='name'>generator_class</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A reference to the concrete Generator class. Usually these classes extend
+Sprout::Generator::Base.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Directory</tt>)</span>
+      
+      
+        <span class='name'>templates_path</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The path to the default templates that should  be used for this generator.
+By default, a folder named <tt>templates</tt> relative to  the class
+definition will be used. Templates will also be searched for in a variety
+of locations depending on the user system. This path is simply the final
+searching point.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the entity that was stored to represent the provided Generator. The entity
+will  generally have the keys, :class and :templates.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-8
-9
-10
-11</pre>
+130
+131
+132
+133</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/generator/base.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generator.rb', line 130</span>
 
 <span class='kw'>def</span> <span class='id register'>register</span> <span class='id generator_class'>generator_class</span><span class='comma'>,</span> <span class='id templates_path'>templates_path</span><span class='op'>=</span><span class='kw'>nil</span>
   <span class='id generator_paths'>generator_paths</span> <span class='op'>&lt;&lt;</span> <span class='lbrace'>{</span> <span class='symbol'>:class</span> <span class='op'>=&gt;</span> <span class='id generator_class'>generator_class</span><span class='comma'>,</span> <span class='symbol'>:templates</span> <span class='op'>=&gt;</span> <span class='id templates_path'>templates_path</span> <span class='rbrace'>}</span> <span class='kw'>unless</span> <span class='id templates_path'>templates_path</span><span class='period'>.</span><span class='id nil?'>nil?</span>
@@ -283,14 +536,14 @@ declarations and more importantly, folders named, 'templates'.</p>
       <div class="method_details ">
   <p class="signature " id="search_paths-class_method">
   
-    + (<tt>Object</tt>) <strong>search_paths</strong> 
+    + (<tt>Array</tt>) <strong>search_paths</strong> 
   
 
   
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Returns a new collection of paths to search within for generator
+<p>Returns a new collection of paths to search within for generator 
 declarations and more importantly, folders named, 'templates'.</p>
 
 <p>The collection of search_paths will be a subset of the following that will
@@ -298,11 +551,13 @@ include only those directories that exist:</p>
 
 <pre class="code">./config/generators
 ./vendor/generators
-~/Library/Sprouts/1.0/generators                    # OS X only
-~/.sprouts/1.0/generators                           # Unix only
+~/Library/Sprouts/1.0/generators                          # OS X only
+~/.sprouts/1.0/generators                                 # Unix only
 [USER_HOME]/Application Data/Sprouts/cache/1.0/generators # Windows only
 ENV['SPROUT_GENERATORS']                                  # Only if defined
-[Generator Declaration __FILE__]/templates</pre>
+[Generator Declaration __FILE__]
+[Generator SUPER-class declaration __FILE__]
+[Repeat step above until there is no super-class]</pre>
 
 <p>When the generators attempt to resolve templates, each of the preceding
 folders will be scanned for a child directory named 'templates'. Within
@@ -310,28 +565,46 @@ that directory, the requested template name will be scanned and the first
 found template file will be used. This process will be repeated for each
 template file that is requested.</p>
 
-<p>The idea is that you may wish to override some template files that a 
-generator creates, but leave others unchanged.</p>
+<p>The results of this search are not cached, so you can override a single 
+template and leave the rest wherever the generator has defined them.</p>
 
 
   </div>
 </div>
 <div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
   
+    <li>
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>of paths</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-60
-61
-62
-63
-64</pre>
+205
+206
+207
+208
+209</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/generator/base.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generator.rb', line 205</span>
 
 <span class='kw'>def</span> <span class='id search_paths'>search_paths</span>
   <span class='comment'># NOTE: Do not cache this list, specific generators
@@ -350,27 +623,40 @@ generator creates, but leave others unchanged.</p>
   
 
   
-</p><table class="source_code">
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieve the root template folder for the provided Class.</p>
+
+<p>This method will look for a templates folder next to each superclass in the
+inheritance chain.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34</pre>
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/generator/base.rb', line 23</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generator.rb', line 164</span>
 
 <span class='kw'>def</span> <span class='id template_folder_for'>template_folder_for</span> <span class='id clazz'>clazz</span>
   <span class='comment'># Search the potential matches in reverse order
@@ -394,7 +680,7 @@ generator creates, but leave others unchanged.</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:49 2010 by 
+  Generated on Wed Dec 22 12:27:02 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

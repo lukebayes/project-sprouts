@@ -59,7 +59,7 @@
   
   
     <dt class="r1 last">Defined in:</dt>
-    <dd class="r1 last">lib/sprout/executable.rb</dd>
+    <dd class="r1 last">sprout/lib/sprout/executable.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -268,7 +268,7 @@ interpreted in the order they are defined using <tt>add_param</tt>.</p>
 94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id add_param'>add_param</span><span class='lparen'>(</span><span class='id name'>name</span><span class='comma'>,</span> <span class='id type'>type</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span> <span class='comment'># :yields: Sprout::Executable::Param
 </span>  <span class='id raise'>raise</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Errors</span><span class='op'>::</span><span class='const'>UsageError</span><span class='period'>.</span><span class='id new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[DEPRECATED] add_param no longer uses closures, you can provide the same values as a hash in the optional last argument.</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id block_given?'>block_given?</span>
@@ -309,7 +309,7 @@ interpreted in the order they are defined using <tt>add_param</tt>.</p>
 98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable.rb', line 96</span>
 
 <span class='kw'>def</span> <span class='id add_param_alias'>add_param_alias</span> <span class='id new_name'>new_name</span><span class='comma'>,</span> <span class='id old_name'>old_name</span>
   <span class='id create_param_accessors'>create_param_accessors</span> <span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='id new_name'>new_name</span><span class='comma'>,</span> <span class='symbol'>:real_name</span> <span class='op'>=&gt;</span> <span class='id old_name'>old_name</span>
@@ -337,7 +337,7 @@ interpreted in the order they are defined using <tt>add_param</tt>.</p>
 110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable.rb', line 108</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id set'>set</span> <span class='id key'>key</span><span class='comma'>,</span> <span class='id value'>value</span>
   <span class='id set_default_value'>set_default_value</span> <span class='id key'>key</span><span class='comma'>,</span> <span class='id value'>value</span>
@@ -365,7 +365,7 @@ interpreted in the order they are defined using <tt>add_param</tt>.</p>
 106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id static_default_value_collection'>static_default_value_collection</span>
   <span class='ivar'>@static_default_value_collection</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -393,7 +393,7 @@ interpreted in the order they are defined using <tt>add_param</tt>.</p>
 102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id static_parameter_collection'>static_parameter_collection</span>
   <span class='ivar'>@static_parameter_collection</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -408,7 +408,7 @@ interpreted in the order they are defined using <tt>add_param</tt>.</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:49 2010 by 
+  Generated on Wed Dec 22 12:27:02 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

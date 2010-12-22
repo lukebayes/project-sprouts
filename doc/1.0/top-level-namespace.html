@@ -65,7 +65,7 @@
 <p class="children">
    
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Sprout.html" title="Sprout (module)">Sprout</a></span>, <span class='object_link'><a href="SproutTestCase.html" title="SproutTestCase (module)">SproutTestCase</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="FlashPlayer.html" title="FlashPlayer (module)">FlashPlayer</a></span>, <span class='object_link'><a href="FlashSDK.html" title="FlashSDK (module)">FlashSDK</a></span>, <span class='object_link'><a href="Sprout.html" title="Sprout (module)">Sprout</a></span>, <span class='object_link'><a href="SproutTestCase.html" title="SproutTestCase (module)">SproutTestCase</a></span>
     
    
     
@@ -83,6 +83,113 @@
     </h2>
 
     <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#adt-instance_method" title="#adt (instance method)">- (Object) <strong>adt</strong>(*args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#amxmlc-instance_method" title="#amxmlc (instance method)">- (Object) <strong>amxmlc</strong>(*args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#compc-instance_method" title="#compc (instance method)">- (Object) <strong>compc</strong>(args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fdb-instance_method" title="#fdb (instance method)">- (Object) <strong>fdb</strong>(*args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Rake task helper that delegates to the FDB executable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#flashplayer-instance_method" title="#flashplayer (instance method)">- (Object) <strong>flashplayer</strong>(*args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
       
         <li class="public ">
   <span class="summary_signature">
@@ -107,6 +214,27 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mxmlc-instance_method" title="#mxmlc (instance method)">- (Object) <strong>mxmlc</strong>(args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -117,7 +245,179 @@
     
     
       <div class="method_details first">
-  <p class="signature first" id="library-instance_method">
+  <p class="signature first" id="adt-instance_method">
+  
+    - (<tt>Object</tt>) <strong>adt</strong>(*args, &amp;block) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+222
+223
+224
+225
+226</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/adt.rb', line 222</span>
+
+<span class='kw'>def</span> <span class='id adt'>adt</span> <span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id exe'>exe</span> <span class='op'>=</span> <span class='const'>FlashSDK</span><span class='op'>::</span><span class='const'>ADT</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id exe'>exe</span><span class='period'>.</span><span class='id to_rake'>to_rake</span><span class='lparen'>(</span><span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+  <span class='id exe'>exe</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="amxmlc-instance_method">
+  
+    - (<tt>Object</tt>) <strong>amxmlc</strong>(*args, &amp;block) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26
+27
+28</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/amxmlc.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id amxmlc'>amxmlc</span> <span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id exe'>exe</span> <span class='op'>=</span> <span class='const'>FlashSDK</span><span class='op'>::</span><span class='const'>AMXMLC</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id exe'>exe</span><span class='period'>.</span><span class='id to_rake'>to_rake</span> <span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id exe'>exe</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="compc-instance_method">
+  
+    - (<tt>Object</tt>) <strong>compc</strong>(args, &amp;block) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compc.rb', line 87</span>
+
+<span class='kw'>def</span> <span class='id compc'>compc</span> <span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id exe'>exe</span> <span class='op'>=</span> <span class='const'>FlashSDK</span><span class='op'>::</span><span class='const'>COMPC</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id exe'>exe</span><span class='period'>.</span><span class='id to_rake'>to_rake</span><span class='lparen'>(</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+  <span class='id exe'>exe</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="fdb-instance_method">
+  
+    - (<tt>Object</tt>) <strong>fdb</strong>(*args, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Rake task helper that delegates to the FDB executable.</p>
+
+<pre class="code"><span class='id fdb'>fdb</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id break'>break</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>com/foo/bar/SomeClass.as:23</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id continue'>continue</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id run'>run</span>
+<span class='kw'>end</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+770
+771
+772
+773
+774</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/fdb.rb', line 770</span>
+
+<span class='kw'>def</span> <span class='id fdb'>fdb</span> <span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id fdb_tool'>fdb_tool</span> <span class='op'>=</span> <span class='const'>FlashSDK</span><span class='op'>::</span><span class='const'>FDB</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id fdb_tool'>fdb_tool</span><span class='period'>.</span><span class='id to_rake'>to_rake</span> <span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id fdb_tool'>fdb_tool</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="flashplayer-instance_method">
+  
+    - (<tt>Object</tt>) <strong>flashplayer</strong>(*args, &amp;block) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96
+97
+98</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/task.rb', line 96</span>
+
+<span class='kw'>def</span> <span class='id flashplayer'>flashplayer</span> <span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='const'>FlashPlayer</span><span class='op'>::</span><span class='const'>Task</span><span class='period'>.</span><span class='id define_task'>define_task</span> <span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="library-instance_method">
   
     - (<tt>Object</tt>) <strong>library</strong>(pkg_name, name = nil, version = nil) 
   
@@ -163,15 +463,47 @@ like:</p>
       <pre class="lines">
 
 
-176
-177
-178</pre>
+251
+252
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/library.rb', line 176</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/library.rb', line 251</span>
 
 <span class='kw'>def</span> <span class='id library'>library</span> <span class='id pkg_name'>pkg_name</span><span class='comma'>,</span> <span class='id name'>name</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id version'>version</span><span class='op'>=</span><span class='kw'>nil</span>
   <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Library</span><span class='period'>.</span><span class='id define_task'>define_task</span> <span class='id name'>name</span><span class='comma'>,</span> <span class='id pkg_name'>pkg_name</span><span class='comma'>,</span> <span class='id version'>version</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="mxmlc-instance_method">
+  
+    - (<tt>Object</tt>) <strong>mxmlc</strong>(args, &amp;block) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+68
+69
+70
+71
+72</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/mxmlc.rb', line 68</span>
+
+<span class='kw'>def</span> <span class='id mxmlc'>mxmlc</span> <span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id exe'>exe</span> <span class='op'>=</span> <span class='const'>FlashSDK</span><span class='op'>::</span><span class='const'>MXMLC</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id exe'>exe</span><span class='period'>.</span><span class='id to_rake'>to_rake</span><span class='lparen'>(</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+  <span class='id exe'>exe</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -183,7 +515,7 @@ like:</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:52 2010 by 
+  Generated on Wed Dec 22 12:27:08 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

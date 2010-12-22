@@ -63,7 +63,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/sprout/executable/collection_param.rb</dd>
+    <dd class="r2 last">sprout/lib/sprout/executable/collection_param.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -258,7 +258,7 @@ than a single value.</p>
 25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/collection_param.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/collection_param.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id initialize'>initialize</span>
   <span class='kw'>super</span>
@@ -306,7 +306,7 @@ than a single value.</p>
 77</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/collection_param.rb', line 68</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/collection_param.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id to_shell'>to_shell</span>
   <span class='id prepare'>prepare</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id prepared?'>prepared?</span>
@@ -341,7 +341,7 @@ than a single value.</p>
 81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/collection_param.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/collection_param.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id to_shell_value'>to_shell_value</span>
   <span class='id value'>value</span>
@@ -404,7 +404,7 @@ accidentally clobbering a collection with equals assignments.</p>
 57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/collection_param.rb', line 51</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/collection_param.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id value='>value=</span><span class='lparen'>(</span><span class='id val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span><span class='lparen'>(</span><span class='id val'>val</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='op'>!</span><span class='id val'>val</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Enumerable</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -459,7 +459,7 @@ accidentally clobbering a collection with equals assignments.</p>
 64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/executable/collection_param.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/collection_param.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id visible?'>visible?</span>
   <span class='lparen'>(</span><span class='op'>!</span><span class='id value'>value</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id value'>value</span><span class='period'>.</span><span class='id size'>size</span> <span class='op'>&gt;</span> <span class='int'>0</span><span class='rparen'>)</span>
@@ -474,7 +474,7 @@ accidentally clobbering a collection with equals assignments.</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:51 2010 by 
+  Generated on Wed Dec 22 12:27:06 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

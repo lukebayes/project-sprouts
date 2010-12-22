@@ -59,7 +59,7 @@
   
   
     <dt class="r1 last">Defined in:</dt>
-    <dd class="r1 last">lib/sprout/ruby_feature.rb</dd>
+    <dd class="r1 last">sprout/lib/sprout/ruby_feature.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -405,7 +405,7 @@ to instances..</p>
 86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id clear_entities!'>clear_entities!</span>
   <span class='ivar'>@registered_entities</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -445,7 +445,7 @@ to instances..</p>
 127</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 113</span>
 
 <span class='kw'>def</span> <span class='id entity_for'>entity_for</span> <span class='id name_or_names'>name_or_names</span><span class='comma'>,</span> <span class='id pkg_name'>pkg_name</span><span class='comma'>,</span> <span class='id version_requirement'>version_requirement</span>
   <span class='comment'># These commented blocks help immensely when debugging
@@ -519,7 +519,7 @@ to instances..</p>
 82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 56</span>
 
 <span class='kw'>def</span> <span class='id load'>load</span> <span class='id name_or_names'>name_or_names</span><span class='comma'>,</span> <span class='id pkg_name'>pkg_name</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id version_requirement'>version_requirement</span><span class='op'>=</span><span class='kw'>nil</span>
   <span class='id entity'>entity</span> <span class='op'>=</span> <span class='id entity_for'>entity_for</span> <span class='id name_or_names'>name_or_names</span><span class='comma'>,</span> <span class='id pkg_name'>pkg_name</span><span class='comma'>,</span> <span class='id version_requirement'>version_requirement</span>
@@ -583,7 +583,7 @@ to instances..</p>
 52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id register'>register</span> <span class='id entity'>entity</span>
   <span class='id validate_registration'>validate_registration</span> <span class='id entity'>entity</span>
@@ -623,7 +623,7 @@ to instances..</p>
 179</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 177</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 177</span>
 
 <span class='kw'>def</span> <span class='id registered_entities'>registered_entities</span>
   <span class='ivar'>@registered_entities</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -655,7 +655,7 @@ to instances..</p>
 168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 162</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 162</span>
 
 <span class='kw'>def</span> <span class='id require_ruby_package'>require_ruby_package</span> <span class='id name'>name</span>
   <span class='kw'>begin</span>
@@ -694,7 +694,7 @@ to instances..</p>
 99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id resolve_file_target'>resolve_file_target</span> <span class='id entity'>entity</span>
   <span class='kw'>if</span><span class='lparen'>(</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span> <span class='symbol'>:resolve</span><span class='rparen'>)</span>
@@ -751,7 +751,7 @@ to instances..</p>
 132</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 129</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 129</span>
 
 <span class='kw'>def</span> <span class='id satisfies_environment?'>satisfies_environment?</span> <span class='id entity'>entity</span><span class='comma'>,</span> <span class='id environment'>environment</span>
   <span class='comment'>#puts &quot;&gt;&gt; env: #{entity.environment} vs. #{environment}&quot;
@@ -806,7 +806,7 @@ to instances..</p>
 146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 139</span>
 
 <span class='kw'>def</span> <span class='id satisfies_name?'>satisfies_name?</span> <span class='id entity'>entity</span><span class='comma'>,</span> <span class='id expected'>expected</span>
   <span class='comment'>#puts &quot;&gt;&gt; name: #{entity.name} vs. #{expected}&quot;
@@ -861,7 +861,7 @@ to instances..</p>
 137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 134</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 134</span>
 
 <span class='kw'>def</span> <span class='id satisfies_pkg_name?'>satisfies_pkg_name?</span> <span class='id entity'>entity</span><span class='comma'>,</span> <span class='id expected'>expected</span>
   <span class='comment'>#puts &quot;&gt;&gt; pkg_name: #{entity.pkg_name} vs. #{expected}&quot;
@@ -915,7 +915,7 @@ to instances..</p>
 154</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 148</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 148</span>
 
 <span class='kw'>def</span> <span class='id satisfies_platform?'>satisfies_platform?</span> <span class='id entity'>entity</span>
   <span class='comment'>#puts&quot;&gt;&gt; satisfies platform?&quot;
@@ -970,7 +970,7 @@ to instances..</p>
 160</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 156</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 156</span>
 
 <span class='kw'>def</span> <span class='id satisfies_version?'>satisfies_version?</span> <span class='id entity'>entity</span><span class='comma'>,</span> <span class='id version_requirement'>version_requirement</span><span class='op'>=</span><span class='kw'>nil</span>
   <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id version_requirement'>version_requirement</span><span class='period'>.</span><span class='id nil?'>nil?</span>
@@ -1010,7 +1010,7 @@ to instances..</p>
 111</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 110</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id update_registered_entities'>update_registered_entities</span>
 <span class='kw'>end</span></pre>
@@ -1039,7 +1039,7 @@ to instances..</p>
 105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/ruby_feature.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id validate_registration'>validate_registration</span> <span class='id entity'>entity</span>
   <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id entity'>entity</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:name</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id entity'>entity</span><span class='period'>.</span><span class='id name'>name</span><span class='period'>.</span><span class='id nil?'>nil?</span><span class='rparen'>)</span>
@@ -1056,7 +1056,7 @@ to instances..</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:49 2010 by 
+  Generated on Wed Dec 22 12:27:03 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

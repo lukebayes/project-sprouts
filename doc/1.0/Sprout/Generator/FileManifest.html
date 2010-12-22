@@ -76,7 +76,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/sprout/generator/file_manifest.rb</dd>
+    <dd class="r2 last">sprout/lib/sprout/generator/file_manifest.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -310,7 +310,7 @@
 6</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/generator/file_manifest.rb', line 4</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generator/file_manifest.rb', line 4</span>
 
 <span class='kw'>def</span> <span class='id template'>template</span>
   <span class='ivar'>@template</span>
@@ -351,7 +351,7 @@
 7</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/generator/file_manifest.rb', line 5</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generator/file_manifest.rb', line 5</span>
 
 <span class='kw'>def</span> <span class='id templates'>templates</span>
   <span class='ivar'>@templates</span>
@@ -392,7 +392,7 @@
 15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/generator/file_manifest.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generator/file_manifest.rb', line 7</span>
 
 <span class='kw'>def</span> <span class='id create'>create</span>
   <span class='id content'>content</span> <span class='op'>=</span> <span class='id resolve_template'>resolve_template</span>
@@ -439,7 +439,7 @@
 32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/generator/file_manifest.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generator/file_manifest.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id destroy'>destroy</span>
   <span class='kw'>if</span> <span class='op'>!</span><span class='const'>File</span><span class='period'>.</span><span class='id exists?'>exists?</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span>
@@ -486,7 +486,7 @@
 48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/generator/file_manifest.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generator/file_manifest.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id read_source'>read_source</span>
   <span class='id templates'>templates</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id template_path'>template_path</span><span class='op'>|</span>
@@ -520,7 +520,7 @@
 38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/generator/file_manifest.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generator/file_manifest.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id resolve_template'>resolve_template</span>
   <span class='id read_source'>read_source</span>
@@ -548,7 +548,7 @@
 52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/generator/file_manifest.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generator/file_manifest.rb', line 50</span>
 
 <span class='kw'>def</span> <span class='id source_name'>source_name</span>
   <span class='id template'>template</span> <span class='op'>||</span> <span class='const'>File</span><span class='period'>.</span><span class='id basename'>basename</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span>
@@ -563,7 +563,7 @@
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:51 2010 by 
+  Generated on Wed Dec 22 12:27:06 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

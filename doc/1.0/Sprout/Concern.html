@@ -63,7 +63,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/sprout/concern.rb</dd>
+    <dd class="r2 last">sprout/lib/sprout/concern.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -218,7 +218,7 @@ subclass.</p>
 28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/concern.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/concern.rb', line 26</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id extended'>extended</span><span class='lparen'>(</span><span class='id base'>base</span><span class='rparen'>)</span>
   <span class='id base'>base</span><span class='period'>.</span><span class='id instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@_dependencies</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -273,7 +273,7 @@ subclass.</p>
 45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/concern.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/concern.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id append_features'>append_features</span><span class='lparen'>(</span><span class='id base'>base</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id base'>base</span><span class='period'>.</span><span class='id instance_variable_defined?'>instance_variable_defined?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@_dependencies</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -325,7 +325,7 @@ subclass.</p>
 55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/concern.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/concern.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id included'>included</span><span class='lparen'>(</span><span class='id base'>base</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id base'>base</span><span class='period'>.</span><span class='id nil?'>nil?</span>
@@ -344,7 +344,7 @@ subclass.</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:48 2010 by 
+  Generated on Wed Dec 22 12:27:02 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

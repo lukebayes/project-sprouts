@@ -59,7 +59,7 @@
   
   
     <dt class="r1 last">Defined in:</dt>
-    <dd class="r1 last">lib/sprout/daemon.rb</dd>
+    <dd class="r1 last">sprout/lib/sprout/daemon.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -303,7 +303,7 @@ this instance.</p>
 146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/daemon.rb', line 144</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 144</span>
 
 <span class='kw'>def</span> <span class='id action_stack'>action_stack</span>
   <span class='ivar'>@action_stack</span>
@@ -358,7 +358,7 @@ expressed here using the | (or) operator.</p>
 141</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/daemon.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 139</span>
 
 <span class='kw'>def</span> <span class='id prompt'>prompt</span>
   <span class='ivar'>@prompt</span>
@@ -406,7 +406,7 @@ so that we create a 'task' instead of a 'file' task.</p>
 177</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/daemon.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 173</span>
 
 <span class='kw'>def</span> <span class='id create_outer_task'>create_outer_task</span> <span class='op'>*</span><span class='id args'>args</span>
   <span class='id task'>task</span> <span class='op'>*</span><span class='id args'>args</span> <span class='kw'>do</span>
@@ -454,7 +454,7 @@ input.</p>
 165</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/daemon.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 160</span>
 
 <span class='kw'>def</span> <span class='id execute'>execute</span>
   <span class='id runner'>runner</span> <span class='op'>=</span> <span class='kw'>super</span>
@@ -496,7 +496,7 @@ input.</p>
 149</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/daemon.rb', line 146</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 146</span>
 
 <span class='kw'>def</span> <span class='id initialize'>initialize</span>
   <span class='kw'>super</span>
@@ -537,7 +537,7 @@ it.</p>
 195</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/daemon.rb', line 193</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 193</span>
 
 <span class='kw'>def</span> <span class='id system_execute'>system_execute</span> <span class='id binary'>binary</span><span class='comma'>,</span> <span class='id params'>params</span>
   <span class='const'>Sprout</span><span class='period'>.</span><span class='id current_system'>current_system</span><span class='period'>.</span><span class='id execute_thread'>execute_thread</span> <span class='id binary'>binary</span><span class='comma'>,</span> <span class='id params'>params</span>
@@ -577,7 +577,7 @@ Executable)</p>
 186</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/daemon.rb', line 184</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 184</span>
 
 <span class='kw'>def</span> <span class='id update_rake_task_name_from_args'>update_rake_task_name_from_args</span> <span class='op'>*</span><span class='id args'>args</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id rake_task_name'>rake_task_name</span> <span class='op'>=</span> <span class='id parse_rake_task_arg'>parse_rake_task_arg</span> <span class='id args'>args</span><span class='period'>.</span><span class='id last'>last</span>
@@ -592,7 +592,7 @@ Executable)</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:48 2010 by 
+  Generated on Wed Dec 22 12:27:01 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

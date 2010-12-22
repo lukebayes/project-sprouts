@@ -78,7 +78,9 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/sprout/system/osx_system.rb</dd>
+    <dd class="r2 last">sprout/lib/sprout/system/osx_system.rb<span class="defines">,<br />
+  flashsdk/lib/flashplayer/system_mixins.rb</span>
+</dd>
   
 </dl>
 <div class="clear"></div>
@@ -177,6 +179,30 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_flashplayer_with-instance_method" title="#open_flashplayer_with (instance method)">- (Object) <strong>open_flashplayer_with</strong>(exe, swf) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Use AppleScript to open the specified Flash Player because, simply
+launching the executable does not focus it.</p>
+</div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -245,7 +271,7 @@
 22</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/system/osx_system.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/osx_system.rb', line 20</span>
 
 <span class='kw'>def</span> <span class='id can_execute?'>can_execute?</span> <span class='id platform'>platform</span>
   <span class='lbracket'>[</span><span class='symbol'>:mac</span><span class='comma'>,</span> <span class='symbol'>:osx</span><span class='comma'>,</span> <span class='symbol'>:macosx</span><span class='comma'>,</span> <span class='symbol'>:darwin</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id include?'>include?</span><span class='lparen'>(</span><span class='id platform'>platform</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='kw'>super</span>
@@ -273,7 +299,7 @@
 18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/system/osx_system.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/osx_system.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id format_application_name'>format_application_name</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id name'>name</span><span class='period'>.</span><span class='id capitalize'>capitalize</span>
@@ -306,7 +332,7 @@
 14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sprout/system/osx_system.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/osx_system.rb', line 7</span>
 
 <span class='kw'>def</span> <span class='id library'>library</span>
   <span class='id lib'>lib</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='id home'>home</span><span class='comma'>,</span> <span class='const'>LIBRARY</span><span class='rparen'>)</span>
@@ -321,12 +347,73 @@
 </table>
 </div>
     
+      <div class="method_details ">
+  <p class="signature " id="open_flashplayer_with-instance_method">
+  
+    - (<tt>Object</tt>) <strong>open_flashplayer_with</strong>(exe, swf) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Use AppleScript to open the specified Flash Player because, simply
+launching the executable does not focus it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/system_mixins.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id open_flashplayer_with'>open_flashplayer_with</span> <span class='id exe'>exe</span><span class='comma'>,</span> <span class='id swf'>swf</span>
+  <span class='comment'># Clean paths differently for this exectuable,
+</span>  <span class='comment'># because we're forking out to AppleScript over
+</span>  <span class='comment'># a new process, and spaces need to be escaped.
+</span>  <span class='ivar'>@player_exe</span> <span class='op'>=</span> <span class='id exe'>exe</span><span class='period'>.</span><span class='id split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>\ </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+
+  <span class='id wrapper'>wrapper</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id wrapper'>wrapper</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>osascript</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id wrapper'>wrapper</span> <span class='op'>&lt;&lt;</span> <span class='id open_flashplayer_script_path'>open_flashplayer_script_path</span>
+  <span class='id wrapper'>wrapper</span> <span class='op'>&lt;&lt;</span> <span class='ivar'>@player_exe</span>
+
+  <span class='comment'># Call the UnixSystem.open_flashplayer_with method:
+</span>  <span class='kw'>super</span> <span class='id wrapper'>wrapper</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='const'>File</span><span class='period'>.</span><span class='id expand_path'>expand_path</span><span class='lparen'>(</span><span class='id swf'>swf</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 21 11:22:50 2010 by 
+  Generated on Wed Dec 22 12:27:06 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>
