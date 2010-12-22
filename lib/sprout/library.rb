@@ -1,5 +1,80 @@
 
 module Sprout
+
+  ##
+  # Sprout Libraries provide support for sharing and versioning raw or 
+  # pre-compiled source code across projects.
+  #
+  # Sprout Libraries give us the ability to include raw (or pre-compiled) source
+  # code directly within a Ruby Gem, or to refer to an archive somewhere on
+  # the internet.
+  #
+  # A Sprout Library is made up of two components:
+  #
+  # * Specification: The description of the library
+  # * Source Code: Raw or pre-compiled (swc, jar, abc)
+  #
+  # = Specification
+  # Libraries can be added to local or remote file targets in a 
+  # Sprout::Specification. When calling add_library, one must provide the 
+  # library name (symbol that will be used from Rake) and a relative path (or 
+  # Array of paths) from the Specification to the library file or directory.
+  #
+  # Following is an example of a Sprout::Specification that registers a SWC 
+  # that will be distributed directly within a Ruby Gem:
+  #
+  #   Sprout::Specification.new do |s|
+  #     s.name = "asunit4"
+  #     s.version = "4.4.2"
+  #     s.add_file_target do |f|
+  #       f.add_library :swc, File.join('bin', "AsUnit-4.4.2.swc")
+  #     end
+  #   end
+  #
+  # Following is an example of a Sprout::Specification that registers a ZIP
+  # archive that will be distributed separately from the Ruby Gem:
+  #
+  #   Sprout::Specification.new do |s|
+  #     s.name = "asunit3"
+  #     s.version = "3.0.0"
+  #     s.add_remote_file_target do |f|
+  #       f.url = "https://github.com/patternpark/asunit/tree/3.0.0"
+  #       f.md5 = "abcdefghijklmnopqrstuvwxyz"
+  #       f.add_library :swc, "bin/AsUnit-3.0.1.zip"
+  #     end
+  #   end
+  #
+  # Libraries can be consumed from any Rakefile without concern for how
+  # the source code is distributed. Following is an example Rake task
+  # that uses the AsUnit 4.0 Library:
+  #
+  #   # Define the library Rake::Task:
+  #   library :asunit4
+  #
+  #   # Add the library as a dependency from another task
+  #   # that should know how to properly associate the files:
+  #   mxmlc 'bin/SomeProject.swf' => :asunit4 do |t|
+  #     t.input = 'src/SomeProject.as'
+  #   end
+  #
+  # When the library task is executed, the library should be resolved and 
+  # expanded into the project. When the mxmlc task is executed, the installed 
+  # library should be associated with the compilation command.
+  #   
+  # ---
+  # 
+  # Previous Topic: {Sprout::Generator}
+  #
+  # Next Topic: {Sprout::Executable}
+  #
+  # ---
+  # 
+  # @see Sprout::Generator
+  # @see Sprout::Executable
+  # @see Sprout::Specification
+  # @see Sprout::RubyFeature
+  # @see Sprout::System
+  #
   class Library
     include RubyFeature
 
