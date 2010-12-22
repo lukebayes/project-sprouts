@@ -1,0 +1,767 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: Sprout::Specification</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Sprout.html" title="Sprout (module)">Sprout</a></span></span>
+     &raquo; 
+    <span class="title">Specification</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Sprout::Specification
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Sprout::Specification</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">sprout/lib/sprout/specification.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Sprouts provides us with the ability to distribute source files, 
+precompiled libraries, and remote executables. It does all of  this by
+(ab)using RubyGems.</p>
+
+<p>RubyGems gives us the ability to version-manage, and distribute  arbitrary
+text and binary payloads.</p>
+
+<p>In order to support Flash development, we have one major problem that
+RubyGems does not solve for us. This is the fact that  many elements of our
+executable chain are not open-source, and we do not have the rights to
+directly distribute them.</p>
+
+<p>This restriction means that many of our tools and dependencies cannot be 
+packaged and distributed <em>directly</em> within a RubyGem (or from any
+server other than Adobe's as a matter of fact).</p>
+
+<p>In order to overcome this restriction, we have introduced a
+Sprout::Specification. This is a regular Ruby file with regular Ruby code
+in it. The main idea behind this file, is that it needs to be given a name
+and available in your load path.</p>
+
+<p>Whenever a rake build task (Sprout::Executable) or library task,
+(Sprout::Library) is encountered, it will call Sprout::Executable.load or
+Sprout::Library.load (respectively).</p>
+
+<p>These methods will attempt to <tt>require</tt> the provided specification
+and - if it's in your load path - the specification will be loaded, and any
+relevant file targets will be returned.</p>
+
+<p>There are many ways to get Ruby code into your load path. One of the
+easiest to package it up in a RubyGem and configure the
+<tt>require_paths</tt> parameter of  your Gem::Specification.</p>
+
+<p><a
+href="http://docs.rubygems.org/read/chapter/20#require_paths">docs.rubygems.org/read/chapter/20#require_paths</a></p>
+
+<p>To learn more about packaging RubyGems:</p>
+
+<p><a
+href="http://docs.rubygems.org/read/chapter/20#page85">docs.rubygems.org/read/chapter/20#page85</a>
+<a
+href="http://rubygems.rubyforge.org/rdoc/Gem/Specification.html">rubygems.rubyforge.org/rdoc/Gem/Specification.html</a></p>
+
+<p>To learn more about published RubyGems:</p>
+
+<p><a
+href="http://rubygems.org/pages/gem_docs">rubygems.org/pages/gem_docs</a></p>
+
+<p>To package a SWC library into a Sprout RubyGem, you would create a file
+(usually) named [project_name.spec] in the root of the project.</p>
+
+<p>This is your Gem::Specification.</p>
+
+<p>You would also create a file named [projet_name.rb] and put that into the
+root of the project or some other folder that you have added to  the
+Gem::Specification.require_paths parameter.</p>
+
+<h2>Example: Include a file directly in the RubyGem</h2>
+
+<p>In the case of AsUnit, this file would be named asunit4.rb and it's
+contents are as follows:</p>
+
+<pre class="code">:include:../../test/fixtures/specification/asunit4.rb</pre>
+
+<h2>Example: Refer to files that are not in the RubyGem</h2>
+
+<p>For projects like the Flex SDK, we can't distribute many of the required
+files, so we can refer to these files in our Sprout::Specification as
+<tt>remote_file_targets</tt>.</p>
+
+<pre class="code">:include:../../test/fixtures/specification/flex4sdk.rb</pre>
+
+<h2>Example: Create custom downloads for each supported platform</h2>
+
+<p>For projects like the Flash Player itself, we need to refer to different 
+downloadable content for each supported platform.</p>
+
+<pre class="code">:include:../../test/fixtures/specification/flashplayer.rb</pre>
+
+<h2>Packaging and Sharing</h2>
+
+<p>Public RubyGems are hosted at <a
+href="http://rubygems.org">rubygems.org</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#file_targets-instance_method" title="#file_targets (instance method)">- (Object) <strong>file_targets</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute file_targets.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_path-instance_method" title="#load_path (instance method)">- (Object) <strong>load_path</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute load_path.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#name-instance_method" title="#name (instance method)">- (Object) <strong>name</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute name.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#version-instance_method" title="#version (instance method)">- (Object) <strong>version</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute version.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_file_target-instance_method" title="#add_file_target (instance method)">- (Object) <strong>add_file_target</strong>(&amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add a file to the RubyGem itself.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_remote_file_target-instance_method" title="#add_remote_file_target (instance method)">- (Object) <strong>add_remote_file_target</strong>(&amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add a remote file target to this RubyGem so that when it is loaded, Sprouts
+will go fetch this file from the network.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Specification) <strong>initialize</strong> {|_self| ... }</a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a new Sprout::Specification.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Sprout::Specification (class)">Specification</a></span></tt>) <strong>initialize</strong> {|_self| ... }
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a new Sprout::Specification.</p>
+
+<p>This method will yield the new Sprout::Specification to the provided block,
+and delegate most configuration parameters to a <a
+href="http://rubygems.rubyforge.org/rdoc/Gem/Specification.html">Gem::Specification</a>.</p>
+
+<p>To learn more about what parameters are available and/or required, please
+check out RubyGems documentation for their <a
+href="http://rubygems.rubyforge.org/rdoc/Gem/Specification.html">Gem::Specification</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+        <span class='type'>(<tt>_self</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+<h3>Yield Parameters:</h3>
+<ul class="yieldparam">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Sprout::Specification (class)">Sprout::Specification</a></span></tt>)</span>
+      
+      
+        <span class='name'>_self</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the object that the method was called on</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+99
+100
+101
+102
+103
+104</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/specification.rb', line 99</span>
+
+<span class='kw'>def</span> <span class='id initialize'>initialize</span>
+  <span class='id filename'>filename</span>   <span class='op'>=</span> <span class='const'>Sprout</span><span class='period'>.</span><span class='id file_from_caller'>file_from_caller</span> <span class='id caller'>caller</span><span class='period'>.</span><span class='id first'>first</span>
+  <span class='ivar'>@load_path</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id dirname'>dirname</span> <span class='id filename'>filename</span>
+  <span class='ivar'>@name</span>      <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id basename'>basename</span><span class='lparen'>(</span><span class='id filename'>filename</span><span class='rparen'>)</span><span class='period'>.</span><span class='id gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>.rb</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='kw'>yield</span> <span class='kw'>self</span> <span class='kw'>if</span> <span class='id block_given?'>block_given?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <span id="file_targets-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="file_targets-instance_method">
+  
+    - (<tt>Object</tt>) <strong>file_targets</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute file_targets</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/specification.rb', line 87</span>
+
+<span class='kw'>def</span> <span class='id file_targets'>file_targets</span>
+  <span class='ivar'>@file_targets</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="load_path-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="load_path-instance_method">
+  
+    - (<tt>Object</tt>) <strong>load_path</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute load_path</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+88
+89
+90</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/specification.rb', line 88</span>
+
+<span class='kw'>def</span> <span class='id load_path'>load_path</span>
+  <span class='ivar'>@load_path</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="name=-instance_method"></span>
+      <span id="name-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="name-instance_method">
+  
+    - (<tt>Object</tt>) <strong>name</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute name</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/specification.rb', line 84</span>
+
+<span class='kw'>def</span> <span class='id name'>name</span>
+  <span class='ivar'>@name</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="version=-instance_method"></span>
+      <span id="version-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="version-instance_method">
+  
+    - (<tt>Object</tt>) <strong>version</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute version</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/specification.rb', line 85</span>
+
+<span class='kw'>def</span> <span class='id version'>version</span>
+  <span class='ivar'>@version</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="add_file_target-instance_method">
+  
+    - (<tt>Object</tt>) <strong>add_file_target</strong>(&amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Add a file to the RubyGem itself. This is a great way to package smallish
+libraries in either source or already-packaged form. For example, one might
+add a SWC to a RubyGem library.</p>
+
+<p>Each time this method is called, a new Sprout::FileTarget instance will be
+yielded to the provided block, and added to a collection for packaging.</p>
+
+<pre class="code">Sprout::Specification.new do |s|
+   ...
+   s.add_file_target do |t|
+      t.platform = :universal
+      t.add_executable :asdoc, 'bin/asdoc'
+   end
+end</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+156
+157
+158
+159</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/specification.rb', line 156</span>
+
+<span class='kw'>def</span> <span class='id add_file_target'>add_file_target</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id target'>target</span> <span class='op'>=</span> <span class='const'>FileTarget</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id configure_target'>configure_target</span> <span class='id target'>target</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="add_remote_file_target-instance_method">
+  
+    - (<tt>Object</tt>) <strong>add_remote_file_target</strong>(&amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Add a remote file target to this RubyGem so that when it is loaded, Sprouts
+will go fetch this file from the network.</p>
+
+<p>Each time this method is called, a new Sprout::RemoteFiletarget instance
+will be yielded to the provided block and resolved after the block
+completes.</p>
+
+<p>After this block is evaluated, Sprouts will first check the collection of
+env_names to see if the expected paths are available. If a valid env_name
+is found, Sprouts will return the path to the requested executable from the
+environment variable.</p>
+
+<p>If no env_names are set, or the requested executable is not found within
+any that are identified, Sprouts will check to see if the archive has
+already been unpacked into the expected location:</p>
+
+<pre class="code"><span class='comment'>#{SPROUT_HOME}/cache/#{SPROUT_VERSION}/flex4sdk/#{md5}/4.0.pre</span></pre>
+
+<p>If the archive been unpacked, Sprouts will return the path to the 
+requested executable.</p>
+
+<p>If the archive has not been unpacked, Sprouts will check to see if the
+archive has been downloaded to:</p>
+
+<pre class="code"><span class='comment'>#{SPROUT_HOME}/cache/#{SPROUT_VERSION}/flex4sdk/#{md5}.zip</span></pre>
+
+<p>If the archive has been downloaded, it will be unpacked and the path to the
+requested executable will be returned.</p>
+
+<p>If the archive has not been downloaded, it will be downloaded, unpacked and
+the path to the requested executable will be returned.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+137
+138
+139
+140</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/specification.rb', line 137</span>
+
+<span class='kw'>def</span> <span class='id add_remote_file_target'>add_remote_file_target</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id target'>target</span> <span class='op'>=</span> <span class='const'>RemoteFileTarget</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id configure_target'>configure_target</span> <span class='id target'>target</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Dec 22 12:43:20 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

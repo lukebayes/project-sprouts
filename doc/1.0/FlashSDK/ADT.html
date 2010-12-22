@@ -1,0 +1,2079 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: FlashSDK::ADT</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../FlashSDK.html" title="FlashSDK (module)">FlashSDK</a></span></span>
+     &raquo; 
+    <span class="title">ADT</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: FlashSDK::ADT
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">FlashSDK::ADT</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="../Sprout/Executable.html" title="Sprout::Executable (module)">Sprout::Executable</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">flashsdk/lib/flashsdk/adt.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates AIR certificates and compiles AIR packages for distribution.</p>
+
+<p>Following is an example of how this tool might be used to create a
+certificate and AIR package:</p>
+
+<pre class="code"><span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span>
+
+<span class='id adt'>adt</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cert/SomeProject.pfx</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id certificate'>certificate</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id cn'>cn</span>          <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>SelfCertificate</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id key_type'>key_type</span>    <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>2048-RSA</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id pfx_file'>pfx_file</span>    <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cert/SomeProject.pfx</span><span class='tstring_end'>'</span></span>
+  <span class='comment'># Don't check the .password file into version control:
+</span>  <span class='id t'>t</span><span class='period'>.</span><span class='id password'>password</span>    <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id read'>read</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cert/.password</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span>
+
+<span class='id adt'>adt</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.air</span><span class='tstring_end'>'</span></span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cert/SomeProject.pfx</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id package'>package</span>        <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id package_input'>package_input</span>  <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>SomeProject.xml</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id package_output'>package_output</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.air</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id storetype'>storetype</span>      <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>PKCS12</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id keystore'>keystore</span>       <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cert/SomeProject.pfx</span><span class='tstring_end'>'</span></span>
+  <span class='comment'># Don't check the .password file into version control:
+</span>  <span class='id t'>t</span><span class='period'>.</span><span class='id storepass'>storepass</span>      <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id read'>read</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cert/.password</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id included_files'>included_files</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span>
+
+<span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile, certify and package the AIR application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id task'>task</span> <span class='id package'>package</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.air</span><span class='tstring_end'>'</span></span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+  <h2>Constant Summary</h2>
+  
+
+
+  
+  
+  
+  
+  <h3 class="inherited">Constants included from <span class='object_link'><a href="../Sprout/Executable.html" title="Sprout::Executable (module)">Sprout::Executable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Sprout/Executable.html#DEFAULT_FILE_EXPRESSION-constant" title="Sprout::Executable::DEFAULT_FILE_EXPRESSION (constant)">DEFAULT_FILE_EXPRESSION</a></span>, <span class='object_link'><a href="../Sprout/Executable.html#DEFAULT_PREFIX-constant" title="Sprout::Executable::DEFAULT_PREFIX (constant)">DEFAULT_PREFIX</a></span>, <span class='object_link'><a href="../Sprout/Executable.html#DEFAULT_SHORT_PREFIX-constant" title="Sprout::Executable::DEFAULT_SHORT_PREFIX (constant)">DEFAULT_SHORT_PREFIX</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#certificate-instance_method" title="#certificate (instance method)">- (Boolean) <strong>certificate</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Set true to create a certificate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#checkstore-instance_method" title="#checkstore (instance method)">- (String) <strong>checkstore</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Check Store Signing options.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cn-instance_method" title="#cn (instance method)">- (String) <strong>cn</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The Certificate name.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#country-instance_method" title="#country (instance method)">- (String) <strong>country</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Country, follows certificate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#included_files-instance_method" title="#included_files (instance method)">- (Array&lt;String&gt; [Files]) <strong>included_files</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A list of files to include in the.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#included_paths-instance_method" title="#included_paths (instance method)">- (Array&lt;String&gt; [Paths]) <strong>included_paths</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A list of paths (directories) to search for contents that will be included
+in the packaged AIR application.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#key_type-instance_method" title="#key_type (instance method)">- (String) <strong>key_type</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Key Type, follows certificate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#keypass-instance_method" title="#keypass (instance method)">- (String) <strong>keypass</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A Signing Option.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#keystore-instance_method" title="#keystore (instance method)">- (String) <strong>keystore</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A Signing Option.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#migrate-instance_method" title="#migrate (instance method)">- (Array&lt;String&gt; [Files]) <strong>migrate</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Expects Signing Options, plus two files:.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#org_name-instance_method" title="#org_name (instance method)">- (String) <strong>org_name</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Organization name, follows certificate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#org_unit-instance_method" title="#org_unit (instance method)">- (String) <strong>org_unit</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Organization unit, follows certificate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#package-instance_method" title="#package (instance method)">- (Boolean) <strong>package</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create an AIR package.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#package_input-instance_method" title="#package_input (instance method)">- (File) <strong>package_input</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The XML application descriptor that should be used to create an AIR
+application.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#package_output-instance_method" title="#package_output (instance method)">- (String) <strong>package_output</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The AIR file that should be created after packaging is complete.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#password-instance_method" title="#password (instance method)">- (String) <strong>password</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>When creating a certificate, this is the file where the password can be
+found.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pfx_file-instance_method" title="#pfx_file (instance method)">- (String) <strong>pfx_file</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>PFX File.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#providername-instance_method" title="#providername (instance method)">- (String) <strong>providername</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A Signing Option.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sign-instance_method" title="#sign (instance method)">- (Array&lt;String&gt; [Files]) <strong>sign</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Expects two files:.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#storepass-instance_method" title="#storepass (instance method)">- (String) <strong>storepass</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Provide the password directly to the ADT task so that it doesn't attempt to
+prompt.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#storetype-instance_method" title="#storetype (instance method)">- (String) <strong>storetype</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A Signing Option.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#tsa-instance_method" title="#tsa (instance method)">- (String) <strong>tsa</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A Signing Option.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#version-instance_method" title="#version (instance method)">- (String) <strong>version</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The AIR runtime version to use.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h2>Method Summary</h2>
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Sprout/Concern.html" title="Sprout::Concern (module)">Sprout::Concern</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Sprout/Concern.html#append_features-instance_method" title="Sprout::Concern#append_features (method)">#append_features</a></span>, <span class='object_link'><a href="../Sprout/Concern.html#extended-class_method" title="Sprout::Concern.extended (method)">extended</a></span>, <span class='object_link'><a href="../Sprout/Concern.html#included-instance_method" title="Sprout::Concern#included (method)">#included</a></span></p>
+
+  
+  
+  
+  
+  
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="certificate=-instance_method"></span>
+      <span id="certificate-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="certificate-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>certificate</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Set true to create a certificate.</p>
+
+<p>If this value is true, you can optionally set org_unit, org_name and
+country.</p>
+
+<p>If this value is true, you MUST set <tt>cn</tt>, <tt>key_type</tt>, and
+<tt>pfx_file</tt>.</p>
+
+<pre class="code"><span class='id adt'>adt</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cert/SampleCert.pfx</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id certificate'>certificate</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id cn'>cn</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>SelfCertificate</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id key_type'>key_type</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>1024-RSA</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id pfx_file'>pfx_file</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cert/SampleCert.pfx</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id password'>password</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>samplepassword</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:certificate</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_value</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="checkstore=-instance_method"></span>
+      <span id="checkstore-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="checkstore-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>checkstore</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Check Store Signing options</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:checkstore</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="cn=-instance_method"></span>
+      <span id="cn-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="cn-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>cn</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The Certificate name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:cn</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:delimiter</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="country=-instance_method"></span>
+      <span id="country-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="country-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>country</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Country, follows certificate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:country</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="included_files=-instance_method"></span>
+      <span id="included_files-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="included_files-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>) <strong>included_files</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>A list of files to include in the</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Files]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:included_files</span><span class='comma'>,</span> <span class='const'>Files</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_name</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="included_paths=-instance_method"></span>
+      <span id="included_paths-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="included_paths-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Paths.html" title="Sprout::Executable::Paths (class)">Paths</a></span>]</tt>) <strong>included_paths</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>A list of paths (directories) to search for contents that will be included
+in the packaged AIR application.</p>
+
+<p>If files are hidden from the file system, they will not be included.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Paths.html" title="Sprout::Executable::Paths (class)">Paths</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Paths]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:included_paths</span><span class='comma'>,</span> <span class='const'>Paths</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_name</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="key_type=-instance_method"></span>
+      <span id="key_type-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="key_type-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>key_type</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Key Type, follows certificate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:key_type</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_name</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="keypass=-instance_method"></span>
+      <span id="keypass-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="keypass-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>keypass</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>A Signing Option</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:keypass</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:delimiter</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="keystore=-instance_method"></span>
+      <span id="keystore-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="keystore-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>keystore</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>A Signing Option</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:keystore</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:delimiter</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="migrate=-instance_method"></span>
+      <span id="migrate-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="migrate-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>) <strong>migrate</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Expects Signing Options, plus two files:</p>
+
+<p>1) The Air file in 2) The Air file out</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Files]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:migrate</span><span class='comma'>,</span> <span class='const'>Files</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="org_name=-instance_method"></span>
+      <span id="org_name-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="org_name-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>org_name</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Organization name, follows certificate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:org_name</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="org_unit=-instance_method"></span>
+      <span id="org_unit-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="org_unit-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>org_unit</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Organization unit, follows certificate.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:org_unit</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="package=-instance_method"></span>
+      <span id="package-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="package-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>package</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Create an AIR package.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:package</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_value</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="package_input=-instance_method"></span>
+      <span id="package_input-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="package_input-instance_method">
+  
+    - (<tt>File</tt>) <strong>package_input</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The XML application descriptor that should be used to create an AIR
+application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of File</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:package_input</span><span class='comma'>,</span> <span class='const'>File</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_name</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="package_output=-instance_method"></span>
+      <span id="package_output-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="package_output-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>package_output</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The AIR file that should be created after packaging is complete.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:package_output</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_name</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="password=-instance_method"></span>
+      <span id="password-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="password-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>password</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>When creating a certificate, this is the file where the password can be
+found.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:password</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_name</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:delimiter</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="pfx_file=-instance_method"></span>
+      <span id="pfx_file-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="pfx_file-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>pfx_file</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>PFX File</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:pfx_file</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_name</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="providername=-instance_method"></span>
+      <span id="providername-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="providername-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>providername</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>A Signing Option</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:providername</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:delimiter</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="sign=-instance_method"></span>
+      <span id="sign-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="sign-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>) <strong>sign</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Expects two files:</p>
+
+<p>1) The Airi file (?) 2) The Air file</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Files]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:sign</span><span class='comma'>,</span> <span class='const'>Files</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:delimiter</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="storepass=-instance_method"></span>
+      <span id="storepass-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="storepass-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>storepass</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Provide the password directly to the ADT task so that it doesn't attempt to
+prompt.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:storepass</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:delimiter</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="storetype=-instance_method"></span>
+      <span id="storetype-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="storetype-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>storetype</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>A Signing Option</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:storetype</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:delimiter</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="tsa=-instance_method"></span>
+      <span id="tsa-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="tsa-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>tsa</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>A Signing Option</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:tsa</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="version=-instance_method"></span>
+      <span id="version-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="version-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>version</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The AIR runtime version to use.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:version</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:delimiter</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Dec 22 12:43:19 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

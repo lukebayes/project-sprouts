@@ -1,0 +1,483 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Module: Sprout::Executable::CollectionParam</title>
+<link rel="stylesheet" href="../../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '../..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../../_index.html">Index (C)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../../Sprout.html" title="Sprout (module)">Sprout</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Executable.html" title="Sprout::Executable (module)">Executable</a></span></span>
+     &raquo; 
+    <span class="title">CollectionParam</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Sprout::Executable::CollectionParam
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+    <dt class="r1">Included in:</dt>
+    <dd class="r1"><span class='object_link'><a href="Files.html" title="Sprout::Executable::Files (class)">Files</a></span>, <span class='object_link'><a href="Strings.html" title="Sprout::Executable::Strings (class)">Strings</a></span></dd>
+    
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">sprout/lib/sprout/executable/collection_param.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Included by any parameters that represent a collection of values, rather
+than a single value.</p>
+
+<p>Should only be included by classes that  extend Sprout::Executable::Param.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Files.html" title="Sprout::Executable::Files (class)">Files</a></span></li>
+    
+      <li><span class='object_link'><a href="Paths.html" title="Sprout::Executable::Paths (class)">Paths</a></span></li>
+    
+      <li><span class='object_link'><a href="Strings.html" title="Sprout::Executable::Strings (class)">Strings</a></span></li>
+    
+      <li><span class='object_link'><a href="Urls.html" title="Sprout::Executable::Urls (class)">Urls</a></span></li>
+    
+  </ul>
+
+</div>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (CollectionParam) <strong>initialize</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of CollectionParam.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_shell-instance_method" title="#to_shell (instance method)">- (Object) <strong>to_shell</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns a shell formatted string of the collection.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_shell_value-instance_method" title="#to_shell_value (instance method)">- (Object) <strong>to_shell_value</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#value%3D-instance_method" title="#value= (instance method)">- (Object) <strong>value=</strong>(val) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Assign the value and raise if a collection wasn't provided.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#visible%3F-instance_method" title="#visible? (instance method)">- (Boolean) <strong>visible?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Hide the collection param if no items have been added to it.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Sprout::Executable::CollectionParam (module)">CollectionParam</a></span></tt>) <strong>initialize</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>A new instance of CollectionParam</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+20
+21
+22
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/collection_param.rb', line 20</span>
+
+<span class='kw'>def</span> <span class='id initialize'>initialize</span>
+  <span class='kw'>super</span>
+  <span class='ivar'>@value</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='ivar'>@delimiter</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>+=</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@option_parser_type_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>a,b,c</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="to_shell-instance_method">
+  
+    - (<tt>Object</tt>) <strong>to_shell</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a shell formatted string of the collection</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/collection_param.rb', line 68</span>
+
+<span class='kw'>def</span> <span class='id to_shell'>to_shell</span>
+  <span class='id prepare'>prepare</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id prepared?'>prepared?</span>
+  <span class='id validate'>validate</span>
+  <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span> <span class='kw'>if</span> <span class='op'>!</span><span class='id visible?'>visible?</span>
+  <span class='kw'>return</span> <span class='ivar'>@to_shell_proc</span><span class='period'>.</span><span class='id call'>call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@to_shell_proc</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='kw'>return</span> <span class='id value'>value</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id hidden_name?'>hidden_name?</span>
+  <span class='kw'>return</span> <span class='id to_shell_value'>to_shell_value</span><span class='period'>.</span><span class='id collect'>collect</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id val'>val</span><span class='op'>|</span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id shell_name'>shell_name</span><span class='rbrace'>}</span><span class='embexpr_beg'>#{</span><span class='id delimiter'>delimiter</span><span class='rbrace'>}</span><span class='embexpr_beg'>#{</span><span class='id val'>val</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='rbrace'>}</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="to_shell_value-instance_method">
+  
+    - (<tt>Object</tt>) <strong>to_shell_value</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+79
+80
+81</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/collection_param.rb', line 79</span>
+
+<span class='kw'>def</span> <span class='id to_shell_value'>to_shell_value</span>
+  <span class='id value'>value</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="value=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>value=</strong>(val) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Assign the value and raise if a collection wasn't provided.</p>
+
+<p>This customization was added so that Rake tasks could help users avoid
+accidentally clobbering a collection with equals assignments.</p>
+
+<p>The following example is incorrect and will raise an exception:</p>
+
+<pre class="code"><span class='id foo'>foo</span> <span class='symbol'>:name</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id collection'>collection</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+<p>The following example is correct and should not raise an exception:</p>
+
+<pre class="code"><span class='id foo'>foo</span> <span class='symbol'>:name</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id collection'>collection</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+<p>The following example is also correct and should not raise an exception:</p>
+
+<pre class="code"><span class='id foo'>foo</span> <span class='symbol'>:name</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id collection'>collection</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>A</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53
+54
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/collection_param.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='id value='>value=</span><span class='lparen'>(</span><span class='id val'>val</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id val'>val</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='op'>!</span><span class='id val'>val</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Enumerable</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id message'>message</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The </span><span class='embexpr_beg'>#{</span><span class='id name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> property is an Enumerable. It looks like you may have used the assignment operator (=) with (</span><span class='embexpr_beg'>#{</span><span class='id value'>value</span><span class='period'>.</span><span class='id inspect'>inspect</span><span class='rbrace'>}</span><span class='tstring_content'>) where the append operator (&lt;&lt;) was expected.</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id raise'>raise</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Errors</span><span class='op'>::</span><span class='const'>ExecutableError</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='id message'>message</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='ivar'>@value</span> <span class='op'>=</span> <span class='id val'>val</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="visible?-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>visible?</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Hide the collection param if no items have been added to it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/collection_param.rb', line 62</span>
+
+<span class='kw'>def</span> <span class='id visible?'>visible?</span>
+  <span class='lparen'>(</span><span class='op'>!</span><span class='id value'>value</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id value'>value</span><span class='period'>.</span><span class='id size'>size</span> <span class='op'>&gt;</span> <span class='int'>0</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Dec 22 12:43:23 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,798 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: FlashSDK::ADL</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../FlashSDK.html" title="FlashSDK (module)">FlashSDK</a></span></span>
+     &raquo; 
+    <span class="title">ADL</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: FlashSDK::ADL
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">FlashSDK::ADL</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="../Sprout/Executable.html" title="Sprout::Executable (module)">Sprout::Executable</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">flashsdk/lib/flashsdk/adl.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+  <h2>Constant Summary</h2>
+  
+
+
+  
+  
+  
+  
+  <h3 class="inherited">Constants included from <span class='object_link'><a href="../Sprout/Executable.html" title="Sprout::Executable (module)">Sprout::Executable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Sprout/Executable.html#DEFAULT_FILE_EXPRESSION-constant" title="Sprout::Executable::DEFAULT_FILE_EXPRESSION (constant)">DEFAULT_FILE_EXPRESSION</a></span>, <span class='object_link'><a href="../Sprout/Executable.html#DEFAULT_PREFIX-constant" title="Sprout::Executable::DEFAULT_PREFIX (constant)">DEFAULT_PREFIX</a></span>, <span class='object_link'><a href="../Sprout/Executable.html#DEFAULT_SHORT_PREFIX-constant" title="Sprout::Executable::DEFAULT_SHORT_PREFIX (constant)">DEFAULT_SHORT_PREFIX</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#app_desc-instance_method" title="#app_desc (instance method)">- (String) <strong>app_desc</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An instance of String.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#input-instance_method" title="#input (instance method)">- (File) <strong>input</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>add_param :shitty_dashes, String, { :hidden_name =&gt; true, :delimiter
+=&gt; ' ', :default =&gt; '--' }.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#nodebug-instance_method" title="#nodebug (instance method)">- (Boolean) <strong>nodebug</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An instance of Boolean.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#profile-instance_method" title="#profile (instance method)">- (String) <strong>profile</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An instance of String.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pubid-instance_method" title="#pubid (instance method)">- (String) <strong>pubid</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An instance of String.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#root_dir-instance_method" title="#root_dir (instance method)">- (String) <strong>root_dir</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An instance of String.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#runtime-instance_method" title="#runtime (instance method)">- (Path) <strong>runtime</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An instance of Path.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#screensize-instance_method" title="#screensize (instance method)">- (String) <strong>screensize</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An instance of String.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h2>Method Summary</h2>
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Sprout/Concern.html" title="Sprout::Concern (module)">Sprout::Concern</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Sprout/Concern.html#append_features-instance_method" title="Sprout::Concern#append_features (method)">#append_features</a></span>, <span class='object_link'><a href="../Sprout/Concern.html#extended-class_method" title="Sprout::Concern.extended (method)">extended</a></span>, <span class='object_link'><a href="../Sprout/Concern.html#included-instance_method" title="Sprout::Concern#included (method)">#included</a></span></p>
+
+  
+  
+  
+  
+  
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="app_desc=-instance_method"></span>
+      <span id="app_desc-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="app_desc-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>app_desc</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>An instance of String</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:app_desc</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_name</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:delimiter</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="input=-instance_method"></span>
+      <span id="input-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="input-instance_method">
+  
+    - (<tt>File</tt>) <strong>input</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>add_param :shitty_dashes, String, { :hidden_name =&gt; true, :delimiter
+=&gt; ' ', :default =&gt; '--' }</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of File</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:input</span><span class='comma'>,</span> <span class='const'>File</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_name</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="nodebug=-instance_method"></span>
+      <span id="nodebug-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="nodebug-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>nodebug</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>An instance of Boolean</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:nodebug</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="profile=-instance_method"></span>
+      <span id="profile-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="profile-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>profile</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>An instance of String</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:profile</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="pubid=-instance_method"></span>
+      <span id="pubid-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="pubid-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>pubid</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>An instance of String</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:pubid</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="root_dir=-instance_method"></span>
+      <span id="root_dir-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="root_dir-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>root_dir</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>An instance of String</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:root_dir</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_name</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:delimiter</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'> </span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="runtime=-instance_method"></span>
+      <span id="runtime-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="runtime-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Path.html" title="Sprout::Executable::Path (class)">Path</a></span></tt>) <strong>runtime</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>An instance of Path</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Path.html" title="Sprout::Executable::Path (class)">Path</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Path</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:runtime</span><span class='comma'>,</span> <span class='const'>Path</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="screensize=-instance_method"></span>
+      <span id="screensize-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="screensize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>screensize</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>An instance of String</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:screensize</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Dec 22 12:43:18 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

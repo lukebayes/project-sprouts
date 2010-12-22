@@ -1,0 +1,764 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: Sprout::RubyGenerator</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (R)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Sprout.html" title="Sprout (module)">Sprout</a></span></span>
+     &raquo; 
+    <span class="title">RubyGenerator</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Sprout::RubyGenerator
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="Generator/Base.html" title="Sprout::Generator::Base (class)">Generator::Base</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Generator/Base.html" title="Sprout::Generator::Base (class)">Generator::Base</a></span></li>
+          
+            <li class="next">Sprout::RubyGenerator</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">sprout/lib/sprout/generators/ruby/ruby_generator.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+  <h2>Constant Summary</h2>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Constants included from <span class='object_link'><a href="Executable.html" title="Sprout::Executable (module)">Executable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Executable.html#DEFAULT_FILE_EXPRESSION-constant" title="Sprout::Executable::DEFAULT_FILE_EXPRESSION (constant)">DEFAULT_FILE_EXPRESSION</a></span>, <span class='object_link'><a href="Executable.html#DEFAULT_PREFIX-constant" title="Sprout::Executable::DEFAULT_PREFIX (constant)">DEFAULT_PREFIX</a></span>, <span class='object_link'><a href="Executable.html#DEFAULT_SHORT_PREFIX-constant" title="Sprout::Executable::DEFAULT_SHORT_PREFIX (constant)">DEFAULT_SHORT_PREFIX</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bin-instance_method" title="#bin (instance method)">- (String) <strong>bin</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The name of the bin directory - where executables will be located.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fixtures-instance_method" title="#fixtures (instance method)">- (String) <strong>fixtures</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The name of the 'fixtures' directory - where test fixtures will be located.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lib-instance_method" title="#lib (instance method)">- (String) <strong>lib</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The name of the 'lib' directory - where your Ruby files will be located.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#test-instance_method" title="#test (instance method)">- (String) <strong>test</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The name of the 'test' directory - where all tests and fixtures will be
+located.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unit-instance_method" title="#unit (instance method)">- (String) <strong>unit</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The name of the 'unit' directory - where unit tests will be located.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#version-instance_method" title="#version (instance method)">- (String) <strong>version</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The 3-part version for the new Ruby application.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#manifest-instance_method" title="#manifest (instance method)">- (Object) <strong>manifest</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Generator/Base.html" title="Sprout::Generator::Base (class)">Generator::Base</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Generator/Base.html#default_search_paths-instance_method" title="Sprout::Generator::Base#default_search_paths (method)">#default_search_paths</a></span>, <span class='object_link'><a href="Generator/Base.html#directory-instance_method" title="Sprout::Generator::Base#directory (method)">#directory</a></span>, <span class='object_link'><a href="Generator/Base.html#execute-instance_method" title="Sprout::Generator::Base#execute (method)">#execute</a></span>, <span class='object_link'><a href="Generator/Base.html#file-instance_method" title="Sprout::Generator::Base#file (method)">#file</a></span>, <span class='object_link'><a href="Generator/Base.html#generator-instance_method" title="Sprout::Generator::Base#generator (method)">#generator</a></span>, <span class='object_link'><a href="Generator/Base.html#inherited-class_method" title="Sprout::Generator::Base.inherited (method)">inherited</a></span>, <span class='object_link'><a href="Generator/Base.html#prepare_command-instance_method" title="Sprout::Generator::Base#prepare_command (method)">#prepare_command</a></span>, <span class='object_link'><a href="Generator/Base.html#resolve_template-instance_method" title="Sprout::Generator::Base#resolve_template (method)">#resolve_template</a></span>, <span class='object_link'><a href="Generator/Base.html#say-instance_method" title="Sprout::Generator::Base#say (method)">#say</a></span>, <span class='object_link'><a href="Generator/Base.html#template-instance_method" title="Sprout::Generator::Base#template (method)">#template</a></span>, <span class='object_link'><a href="Generator/Base.html#template_paths-instance_method" title="Sprout::Generator::Base#template_paths (method)">#template_paths</a></span>, <span class='object_link'><a href="Generator/Base.html#unexecute-instance_method" title="Sprout::Generator::Base#unexecute (method)">#unexecute</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Concern.html" title="Sprout::Concern (module)">Concern</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Concern.html#append_features-instance_method" title="Sprout::Concern#append_features (method)">#append_features</a></span>, <span class='object_link'><a href="Concern.html#extended-class_method" title="Sprout::Concern.extended (method)">extended</a></span>, <span class='object_link'><a href="Concern.html#included-instance_method" title="Sprout::Concern#included (method)">#included</a></span></p>
+
+  
+  
+  
+  
+  
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="bin=-instance_method"></span>
+      <span id="bin-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="bin-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>bin</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The name of the bin directory - where executables will be located.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:bin</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin</span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="fixtures=-instance_method"></span>
+      <span id="fixtures-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="fixtures-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>fixtures</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The name of the 'fixtures' directory - where test fixtures will be located.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:fixtures</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>fixtures</span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="lib=-instance_method"></span>
+      <span id="lib-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="lib-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>lib</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The name of the 'lib' directory - where your Ruby files will be located.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:lib</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib</span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="test=-instance_method"></span>
+      <span id="test-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="test-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>test</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The name of the 'test' directory - where all tests and fixtures will be
+located.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:test</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>test</span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="unit=-instance_method"></span>
+      <span id="unit-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="unit-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>unit</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The name of the 'unit' directory - where unit tests will be located.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:unit</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>unit</span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="version=-instance_method"></span>
+      <span id="version-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="version-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>version</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The 3-part version for the new Ruby application.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:version</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>0.0.0.pre</span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="manifest-instance_method">
+  
+    - (<tt>Object</tt>) <strong>manifest</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generators/ruby/ruby_generator.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='id manifest'>manifest</span>
+  <span class='id snake'>snake</span> <span class='op'>=</span> <span class='id input'>input</span><span class='period'>.</span><span class='id snake_case'>snake_case</span>
+
+  <span class='id directory'>directory</span> <span class='id snake'>snake</span> <span class='kw'>do</span>
+    <span class='id template'>template</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Gemfile</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ruby_gemfile</span><span class='tstring_end'>'</span></span>
+    <span class='id template'>template</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Rakefile</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ruby_rakefile</span><span class='tstring_end'>'</span></span>
+    <span class='id template'>template</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id input'>input</span><span class='period'>.</span><span class='id snake_case'>snake_case</span><span class='rbrace'>}</span><span class='tstring_content'>.gemspec</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ruby_gemspec</span><span class='tstring_end'>'</span></span>
+
+    <span class='id directory'>directory</span> <span class='id lib'>lib</span> <span class='kw'>do</span>
+      <span class='id template'>template</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id snake'>snake</span><span class='rbrace'>}</span><span class='tstring_content'>.rb</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ruby_input.rb</span><span class='tstring_end'>'</span></span>
+      <span class='id directory'>directory</span> <span class='id snake'>snake</span> <span class='kw'>do</span>
+        <span class='id template'>template</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>base.rb</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ruby_base.rb</span><span class='tstring_end'>'</span></span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+
+    <span class='id directory'>directory</span> <span class='id test'>test</span> <span class='kw'>do</span>
+      <span class='id directory'>directory</span> <span class='id fixtures'>fixtures</span>
+      <span class='id directory'>directory</span> <span class='id unit'>unit</span> <span class='kw'>do</span>
+        <span class='id template'>template</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id input'>input</span><span class='period'>.</span><span class='id snake_case'>snake_case</span><span class='rbrace'>}</span><span class='tstring_content'>_test.rb</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ruby_test_case.rb</span><span class='tstring_end'>'</span></span>
+      <span class='kw'>end</span>
+      <span class='id template'>template</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>test_helper.rb</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ruby_test_helper.rb</span><span class='tstring_end'>'</span></span>
+    <span class='kw'>end</span>
+
+    <span class='id directory'>directory</span> <span class='id bin'>bin</span> <span class='kw'>do</span>
+      <span class='id template'>template</span> <span class='id input'>input</span><span class='period'>.</span><span class='id dash_case'>dash_case</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ruby_executable</span><span class='tstring_end'>'</span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Dec 22 12:43:24 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

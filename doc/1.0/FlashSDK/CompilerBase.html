@@ -1,0 +1,6286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: FlashSDK::CompilerBase</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../FlashSDK.html" title="FlashSDK (module)">FlashSDK</a></span></span>
+     &raquo; 
+    <span class="title">CompilerBase</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: FlashSDK::CompilerBase
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">FlashSDK::CompilerBase</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2"><span class='object_link'><a href="../Sprout/Executable.html" title="Sprout::Executable (module)">Sprout::Executable</a></span></dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">flashsdk/lib/flashsdk/compiler_base.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="COMPC.html" title="FlashSDK::COMPC (class)">COMPC</a></span>, <span class='object_link'><a href="MXMLC.html" title="FlashSDK::MXMLC (class)">MXMLC</a></span></p>
+</div>
+
+  <h2>Constant Summary</h2>
+  
+
+
+  
+  
+  
+  
+  <h3 class="inherited">Constants included from <span class='object_link'><a href="../Sprout/Executable.html" title="Sprout::Executable (module)">Sprout::Executable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Sprout/Executable.html#DEFAULT_FILE_EXPRESSION-constant" title="Sprout::Executable::DEFAULT_FILE_EXPRESSION (constant)">DEFAULT_FILE_EXPRESSION</a></span>, <span class='object_link'><a href="../Sprout/Executable.html#DEFAULT_PREFIX-constant" title="Sprout::Executable::DEFAULT_PREFIX (constant)">DEFAULT_PREFIX</a></span>, <span class='object_link'><a href="../Sprout/Executable.html#DEFAULT_SHORT_PREFIX-constant" title="Sprout::Executable::DEFAULT_SHORT_PREFIX (constant)">DEFAULT_SHORT_PREFIX</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#accessible-instance_method" title="#accessible (instance method)">- (Boolean) <strong>accessible</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Enables accessibility features when compiling the Flex application or SWC
+file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#actionscript_file_encoding-instance_method" title="#actionscript_file_encoding (instance method)">- (String) <strong>actionscript_file_encoding</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the file encoding for ActionScript files.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#allow_source_path_overlap-instance_method" title="#allow_source_path_overlap (instance method)">- (Boolean) <strong>allow_source_path_overlap</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Checks if a source-path entry is a subdirectory of another source-path
+entry.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#as3-instance_method" title="#as3 (instance method)">- (Boolean) <strong>as3</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Use the ActionScript 3.0 class-based object model for greater performance
+and better error reporting.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#benchmark-instance_method" title="#benchmark (instance method)">- (Boolean) <strong>benchmark</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Prints detailed compile times to the standard output.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#context_root-instance_method" title="#context_root (instance method)">- (Path) <strong>context_root</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the value of the contextcontext.root token in channel definitions in the
+flex-services.xml file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#contributor-instance_method" title="#contributor (instance method)">- (String) <strong>contributor</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets metadata in the resulting SWF file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#creator-instance_method" title="#creator (instance method)">- (String) <strong>creator</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets metadata in the resulting SWF file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#date-instance_method" title="#date (instance method)">- (String) <strong>date</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets metadata in the resulting SWF file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#debug-instance_method" title="#debug (instance method)">- (Boolean) <strong>debug</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Generates a debug SWF file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#debug_password-instance_method" title="#debug_password (instance method)">- (String) <strong>debug_password</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Lets you engage in remote debugging sessions with the Flash IDE.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_background_color-instance_method" title="#default_background_color (instance method)">- (String) <strong>default_background_color</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the application's background color.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_css_url-instance_method" title="#default_css_url (instance method)">- (Url) <strong>default_css_url</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Defines the location of the default style sheet.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_frame_rate-instance_method" title="#default_frame_rate (instance method)">- (Number) <strong>default_frame_rate</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the application's frame rate.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_script_limits-instance_method" title="#default_script_limits (instance method)">- (String) <strong>default_script_limits</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Defines the application's script execution limits.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_size-instance_method" title="#default_size (instance method)">- (String) <strong>default_size</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Defines the default application size, in pixels for example: .</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#define_conditional-instance_method" title="#define_conditional (instance method)">- (Array&lt;String&gt;) <strong>define_conditional</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This parameter is normally called 'define' but thanks to scoping issues
+with Sprouts and Rake, we needed to rename it and chose:
+'define_conditional'.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#description-instance_method" title="#description (instance method)">- (String) <strong>description</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets metadata in the resulting SWF file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#dump_config-instance_method" title="#dump_config (instance method)">- (File) <strong>dump_config</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Outputs the compiler options in the flex-config.xml file to the target
+path; for example:.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#es-instance_method" title="#es (instance method)">- (Boolean) <strong>es</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Use the ECMAScript edition 3 prototype-based object model to allow dynamic
+overriding of prototype properties.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#external_library_path-instance_method" title="#external_library_path (instance method)">- (Array&lt;String&gt; [Files]) <strong>external_library_path</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies a list of SWC files or directories to exclude from linking when
+compiling a SWF file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#externs-instance_method" title="#externs (instance method)">- (Array&lt;String&gt;) <strong>externs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets a list of symbols to exclude from linking when compiling a SWF file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#file_specs-instance_method" title="#file_specs (instance method)">- (Array&lt;String&gt; [Files]) <strong>file_specs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies source files to compile.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fonts_languages_language_range-instance_method" title="#fonts_languages_language_range (instance method)">- (String) <strong>fonts_languages_language_range</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies the range of Unicode settings for that language.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fonts_managers-instance_method" title="#fonts_managers (instance method)">- (Array&lt;String&gt;) <strong>fonts_managers</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Defines the font manager.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fonts_max_cached_fonts-instance_method" title="#fonts_max_cached_fonts (instance method)">- (Number) <strong>fonts_max_cached_fonts</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the maximum number of fonts to keep in the server cache.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fonts_max_glyphs_per_face-instance_method" title="#fonts_max_glyphs_per_face (instance method)">- (Number) <strong>fonts_max_glyphs_per_face</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets the maximum number of character glyph-outlines to keep in the server
+cache for each font face.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#frames_frame-instance_method" title="#frames_frame (instance method)">- (String) <strong>frames_frame</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies a SWF file frame label with a sequence of class names that are
+linked onto the frame.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#generate_frame_loader-instance_method" title="#generate_frame_loader (instance method)">- (Boolean) <strong>generate_frame_loader</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Toggles the generation of an IFlexBootstrap-derived loader class.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#headless_server-instance_method" title="#headless_server (instance method)">- (Boolean) <strong>headless_server</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Enables the headless implementation of the Flex compiler.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#include_libraries-instance_method" title="#include_libraries (instance method)">- (Array&lt;String&gt; [Files]) <strong>include_libraries</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Links all classes inside a SWC file to the resulting application SWF file,
+regardless of whether or not they are used.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#include_path-instance_method" title="#include_path (instance method)">- (Array&lt;String&gt; [Paths]) <strong>include_path</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Define one or more directory paths for include processing.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#includes-instance_method" title="#includes (instance method)">- (Array&lt;String&gt;) <strong>includes</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Links one or more classes to the resulting application SWF file, whether or
+not those classes are required at compile time.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#incremental-instance_method" title="#incremental (instance method)">- (Boolean) <strong>incremental</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Enables incremental compilation.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#keep_as3_metadata-instance_method" title="#keep_as3_metadata (instance method)">- (Array&lt;String&gt;) <strong>keep_as3_metadata</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Keep the specified metadata in the SWF (advanced, repeatable).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#keep_generated_actionscript-instance_method" title="#keep_generated_actionscript (instance method)">- (Boolean) <strong>keep_generated_actionscript</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Determines whether to keep the generated ActionScript class files.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#language-instance_method" title="#language (instance method)">- (String) <strong>language</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets metadata in the resulting SWF file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#lazy_init-instance_method" title="#lazy_init (instance method)">- (Boolean) <strong>lazy_init</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Enables ABC bytecode lazy initialization.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#library_path-instance_method" title="#library_path (instance method)">- (Array&lt;String&gt; [Files]) <strong>library_path</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Links SWC files to the resulting application SWF file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#license-instance_method" title="#license (instance method)">- (String) <strong>license</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>&lt;product&gt; &lt;serial-number&gt;.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#link_report-instance_method" title="#link_report (instance method)">- (File) <strong>link_report</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Prints linking information to the specified output file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_config-instance_method" title="#load_config (instance method)">- (Array&lt;String&gt; [Files]) <strong>load_config</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies the location of the configuration file that defines compiler
+options.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#load_externs-instance_method" title="#load_externs (instance method)">- (File) <strong>load_externs</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies the location of an XML file that contains .</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#locale-instance_method" title="#locale (instance method)">- (String) <strong>locale</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies the locale that should be packaged in the SWF file (for example,
+en_EN).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#localized_description-instance_method" title="#localized_description (instance method)">- (String) <strong>localized_description</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets metadata in the resulting SWF file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#localized_title-instance_method" title="#localized_title (instance method)">- (String) <strong>localized_title</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets metadata in the resulting SWF file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#namespaces_namespace-instance_method" title="#namespaces_namespace (instance method)">- (String) <strong>namespaces_namespace</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies a namespace for the MXML file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#optimize-instance_method" title="#optimize (instance method)">- (Boolean) <strong>optimize</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Enables the ActionScript optimizer.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#output-instance_method" title="#output (instance method)">- (File) <strong>output</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies the output path and filename for the resulting file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#publisher-instance_method" title="#publisher (instance method)">- (String) <strong>publisher</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets metadata in the resulting SWF file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#raw_metadata-instance_method" title="#raw_metadata (instance method)">- (String) <strong>raw_metadata</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>XML text to store in the SWF metadata (overrides metadata.* configuration)
+(advanced).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resource_bundle_list-instance_method" title="#resource_bundle_list (instance method)">- (File) <strong>resource_bundle_list</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Prints a list of resource bundles to input to the compc compiler to create
+a resource bundle SWC file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#runtime_shared_libraries-instance_method" title="#runtime_shared_libraries (instance method)">- (Array&lt;String&gt;) <strong>runtime_shared_libraries</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies a list of run-time shared libraries (RSLs) to use for this
+application.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#runtime_shared_library_path-instance_method" title="#runtime_shared_library_path (instance method)">- (Array&lt;String&gt;) <strong>runtime_shared_library_path</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><dl><dt>path-element</dt>
+<dd><dl><dt>rsl-url</dt>
+<dd><dl><dt>policy-file-url</dt>
+<dd><dl><dt>rsl-url</dt>
+<dd><dl><dt>policy-file-url</dt>
+<dd></dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+
+<p>alias -rslp (repeatable).</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#services-instance_method" title="#services (instance method)">- (File) <strong>services</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies the location of the services-config.xml file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_actionscript_warnings-instance_method" title="#show_actionscript_warnings (instance method)">- (Boolean) <strong>show_actionscript_warnings</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Shows warnings for ActionScript classes.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_binding_warnings-instance_method" title="#show_binding_warnings (instance method)">- (Boolean) <strong>show_binding_warnings</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Shows a warning when Flash Player cannot detect changes to a bound
+property.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_deprecation_warnings-instance_method" title="#show_deprecation_warnings (instance method)">- (Boolean) <strong>show_deprecation_warnings</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Shows deprecation warnings for Flex components.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#source_path-instance_method" title="#source_path (instance method)">- (Array&lt;String&gt; [Paths]) <strong>source_path</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds directories or files to the source path.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#static_link_runtime_shared_libraries-instance_method" title="#static_link_runtime_shared_libraries (instance method)">- (Boolean) <strong>static_link_runtime_shared_libraries</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Statically link the libraries specified by the
+-runtime-shared-libraries-path option.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#strict-instance_method" title="#strict (instance method)">- (Boolean) <strong>strict</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Prints undefined property and function calls; also performs compile-time
+type checking on assignments and options supplied to method calls.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#target_player-instance_method" title="#target_player (instance method)">- (String) <strong>target_player</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies the version of the player the application is targeting.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#theme-instance_method" title="#theme (instance method)">- (Array&lt;String&gt; [Files]) <strong>theme</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies a list of theme files to use with this application.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#title-instance_method" title="#title (instance method)">- (String) <strong>title</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Sets metadata in the resulting SWF file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#use_network-instance_method" title="#use_network (instance method)">- (Boolean) <strong>use_network</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies that the current application uses network services.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#verbose_stacktraces-instance_method" title="#verbose_stacktraces (instance method)">- (Boolean) <strong>verbose_stacktraces</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Generates source code that includes line numbers.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#verify_digests-instance_method" title="#verify_digests (instance method)">- (Boolean) <strong>verify_digests</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Verifies the libraries loaded at runtime are the correct ones.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#warn_warning_type-instance_method" title="#warn_warning_type (instance method)">- (Boolean) <strong>warn_warning_type</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Enables specified warnings.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#warnings-instance_method" title="#warnings (instance method)">- (Boolean) <strong>warnings</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Enables all warnings.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#library_added-instance_method" title="#library_added (instance method)">- (Object) <strong>library_added</strong>(path) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Sprout/Concern.html" title="Sprout::Concern (module)">Sprout::Concern</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Sprout/Concern.html#append_features-instance_method" title="Sprout::Concern#append_features (method)">#append_features</a></span>, <span class='object_link'><a href="../Sprout/Concern.html#extended-class_method" title="Sprout::Concern.extended (method)">extended</a></span>, <span class='object_link'><a href="../Sprout/Concern.html#included-instance_method" title="Sprout::Concern#included (method)">#included</a></span></p>
+
+  
+  
+  
+  
+  
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="accessible=-instance_method"></span>
+      <span id="accessible-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="accessible-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>accessible</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Enables accessibility features when compiling the Flex application or SWC
+file. The default value is false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:accessible</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_value</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="actionscript_file_encoding=-instance_method"></span>
+      <span id="actionscript_file_encoding-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="actionscript_file_encoding-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>actionscript_file_encoding</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the file encoding for ActionScript files. For more information see: <a
+href="http://livedocs.adobe.com/flex/2/docs/00001503.html#149244">livedocs.adobe.com/flex/2/docs/00001503.html#149244</a></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:actionscript_file_encoding</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="allow_source_path_overlap=-instance_method"></span>
+      <span id="allow_source_path_overlap-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="allow_source_path_overlap-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>allow_source_path_overlap</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Checks if a source-path entry is a subdirectory of another source-path
+entry. It helps make the package names of MXML components unambiguous. This
+is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:allow_source_path_overlap</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_value</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="as3=-instance_method"></span>
+      <span id="as3-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="as3-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>as3</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Use the ActionScript 3.0 class-based object model for greater performance
+and better error reporting. In the class-based object model, most built-in
+functions are implemented as fixed methods of classes.</p>
+
+<p>The default value is true. If you set this value to false, you must set the
+es option to true.</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:as3</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="benchmark=-instance_method"></span>
+      <span id="benchmark-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="benchmark-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>benchmark</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Prints detailed compile times to the standard output. The default value is
+true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:benchmark</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="context_root=-instance_method"></span>
+      <span id="context_root-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="context_root-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Path.html" title="Sprout::Executable::Path (class)">Path</a></span></tt>) <strong>context_root</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the value of the FlashSDK::CompilerBase.contextcontext.root token in channel definitions in the
+flex-services.xml file. If you do not specify the value of this option,
+Flex uses an empty string.</p>
+
+<p>For more information on using the FlashSDK::CompilerBase.contextcontext.root token, see <a
+href="http://livedocs.adobe.com/flex/2/docs/00001446.html#205687">livedocs.adobe.com/flex/2/docs/00001446.html#205687</a>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Path.html" title="Sprout::Executable::Path (class)">Path</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Path</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:context_root</span><span class='comma'>,</span> <span class='const'>Path</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="contributor=-instance_method"></span>
+      <span id="contributor-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="contributor-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>contributor</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:contributor</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="creator=-instance_method"></span>
+      <span id="creator-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="creator-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>creator</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files. (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:creator</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="date=-instance_method"></span>
+      <span id="date-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="date-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>date</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files. (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:date</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="debug=-instance_method"></span>
+      <span id="debug-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="debug-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>debug</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Generates a debug SWF file. This file includes line numbers and filenames
+of all the source files. When a run-time error occurs, the stacktrace shows
+these line numbers and filenames. This information is also used by the
+command-line debugger and the Flex Builder debugger. Enabling the debug
+option generates larger SWF files.</p>
+
+<p>For the mxmlc compiler, the default value is false. For the compc compiler,
+the default value is true.</p>
+
+<p>For SWC files generated with the compc compiler, set this value to true,
+unless the target SWC file is an RSL. In that case, set the debug option to
+false.</p>
+
+<p>For information about the command-line debugger, see Using the Command-Line
+Debugger (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001540.html#181846">livedocs.adobe.com/flex/2/docs/00001540.html#181846</a>).</p>
+
+<p>Flex also uses the verbose-stacktraces setting to determine whether line
+numbers are added to the stacktrace.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:debug</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:hidden_value</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="debug_password=-instance_method"></span>
+      <span id="debug_password-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="debug_password-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>debug_password</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Lets you engage in remote debugging sessions with the Flash IDE. This is an
+advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:debug_password</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="default_background_color=-instance_method"></span>
+      <span id="default_background_color-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="default_background_color-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>default_background_color</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the application's background color. You use the 0x notation to set the
+color, as the following example shows:</p>
+
+<pre class="code"><span class='op'>-</span><span class='id default'>default</span><span class='op'>-</span><span class='id background'>background</span><span class='op'>-</span><span class='id color'>color</span><span class='op'>=</span><span class='int'>0xCCCCFF</span></pre>
+
+<p>The default value is null. The default background of a Flex application is
+an image of a gray gradient. You must override this image for the value of
+the default-background-color option to be visible. For more information,
+see Editing application settings (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001504.html#138781">livedocs.adobe.com/flex/2/docs/00001504.html#138781</a>).</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:default_background_color</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="default_css_url=-instance_method"></span>
+      <span id="default_css_url-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="default_css_url-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Url.html" title="Sprout::Executable::Url (class)">Url</a></span></tt>) <strong>default_css_url</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Defines the location of the default style sheet. Setting this option
+overrides the implicit use of the defaults.css style sheet in the
+framework.swc file.</p>
+
+<p>For more information on the defaults.css file, see Using Styles and Themes
+(<a
+href="http://livedocs.adobe.com/flex/2/docs/00000751.html#241755">livedocs.adobe.com/flex/2/docs/00000751.html#241755</a>)
+in Flex 2 Developer's Guide.</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Url.html" title="Sprout::Executable::Url (class)">Url</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Url</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:default_css_url</span><span class='comma'>,</span> <span class='const'>Url</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="default_frame_rate=-instance_method"></span>
+      <span id="default_frame_rate-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="default_frame_rate-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Number.html" title="Sprout::Executable::Number (class)">Number</a></span></tt>) <strong>default_frame_rate</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the application's frame rate. The default value is 24. This is an
+advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Number.html" title="Sprout::Executable::Number (class)">Number</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Number</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:default_frame_rate</span><span class='comma'>,</span> <span class='const'>Number</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="default_script_limits=-instance_method"></span>
+      <span id="default_script_limits-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="default_script_limits-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>default_script_limits</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Defines the application's script execution limits.</p>
+
+<p>The max-recursion-depth value specifies the maximum depth of Adobe Flash
+Player call stack before Flash Player stops. This is essentially the stack
+overflow limit. The default value is 1000.</p>
+
+<p>The max-execution-time value specifies the maximum duration, in seconds,
+that an ActionScript event handler can execute before Flash Player assumes
+that it is hung, and aborts it. The default value is 60 seconds. You cannot
+set this value above 60 seconds.</p>
+
+<p>Example:</p>
+
+<pre class="code"><span class='comment'># 900 is new max-recursion-depth
+</span><span class='comment'># 20 is new max-execution-time
+</span><span class='id t'>t</span><span class='period'>.</span><span class='id default_script_limits'>default_script_limits</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>900 20</span><span class='tstring_end'>'</span></span></pre>
+
+<p>You can override these settings in the application.</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:default_script_limits</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="default_size=-instance_method"></span>
+      <span id="default_size-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="default_size-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>default_size</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Defines the default application size, in pixels for example:</p>
+
+<pre class="code">default_size = '950 550'.</pre>
+
+<p>If you're using the Flex 4 SDK, this value should be comma-delimited like:</p>
+
+<pre class="code"><span class='id default_size'>default_size</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>950,550</span><span class='tstring_end'>'</span></span></pre>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:default_size</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="define_conditional=-instance_method"></span>
+      <span id="define_conditional-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="define_conditional-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>define_conditional</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>This parameter is normally called 'define' but thanks to scoping issues
+with Sprouts and Rake, we needed to rename it and chose:
+'define_conditional'.</p>
+
+<p>Define a global AS3 conditional compilation definition, e.g.
+-define=CONFIG::debugging,true or -define+=CONFIG::debugging,true (to
+append to existing definitions in flex-config.xml)  (advanced, repeatable)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:define_conditional</span><span class='comma'>,</span> <span class='const'>Strings</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:shell_name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-define</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="description=-instance_method"></span>
+      <span id="description-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="description-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>description</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:description</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="dump_config=-instance_method"></span>
+      <span id="dump_config-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="dump_config-instance_method">
+  
+    - (<tt>File</tt>) <strong>dump_config</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Outputs the compiler options in the flex-config.xml file to the target
+path; for example:</p>
+
+<pre class="code">mxmlc -dump-config myapp-config.xml</pre>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of File</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:dump_config</span><span class='comma'>,</span> <span class='const'>File</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="es=-instance_method"></span>
+      <span id="es-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="es-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>es</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Use the ECMAScript edition 3 prototype-based object model to allow dynamic
+overriding of prototype properties. In the prototype-based object model,
+built-in functions are implemented as dynamic properties of prototype
+objects.</p>
+
+<p>You can set the strict option to true when you use this model, but it might
+result in compiler errors for references to dynamic properties.</p>
+
+<p>The default value is false. If you set this option to true, you must set
+the es3 option to false.</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:es</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="external_library_path=-instance_method"></span>
+      <span id="external_library_path-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="external_library_path-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>) <strong>external_library_path</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies a list of SWC files or directories to exclude from linking when
+compiling a SWF file. This option provides compile-time link checking for
+external components that are dynamically linked.</p>
+
+<p>For more information about dynamic linking, see About linking (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001521.html#205852">livedocs.adobe.com/flex/2/docs/00001521.html#205852</a>).</p>
+
+<p>You can use the += operator to append the new SWC file to the list of
+external libraries.</p>
+
+<p>This parameter has been aliased as <tt>el</tt>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Files]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:external_library_path</span><span class='comma'>,</span> <span class='const'>Files</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="externs=-instance_method"></span>
+      <span id="externs-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="externs-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>externs</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets a list of symbols to exclude from linking when compiling a SWF file.</p>
+
+<p>This option provides compile-time link checking for external references
+that are dynamically linked.</p>
+
+<p>For more information about dynamic linking, see About linking (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001521.html#205852">livedocs.adobe.com/flex/2/docs/00001521.html#205852</a>).</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:externs</span><span class='comma'>,</span> <span class='const'>Strings</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="file_specs=-instance_method"></span>
+      <span id="file_specs-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="file_specs-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>) <strong>file_specs</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies source files to compile. This is the default option for the mxmlc
+compiler.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Files]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:file_specs</span><span class='comma'>,</span> <span class='const'>Files</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="fonts_languages_language_range=-instance_method"></span>
+      <span id="fonts_languages_language_range-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="fonts_languages_language_range-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>fonts_languages_language_range</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies the range of Unicode settings for that language. For more
+information, see Using Styles and Themes (<a
+href="http://livedocs.adobe.com/flex/2/docs/00000751.html#241755">livedocs.adobe.com/flex/2/docs/00000751.html#241755</a>)
+in Flex 2 Developer's Guide.</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:fonts_languages_language_range</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:shell_name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-compiler.fonts.languages.language-range</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="fonts_managers=-instance_method"></span>
+      <span id="fonts_managers-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="fonts_managers-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>fonts_managers</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Defines the font manager. The default is flash.fonts.JREFontManager. You
+can also use the flash.fonts.BatikFontManager. For more information, see
+Using Styles and Themes in Flex 2 Developer's Guide (<a
+href="http://livedocs.adobe.com/flex/2/docs/00000751.html#241755">livedocs.adobe.com/flex/2/docs/00000751.html#241755</a>).</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:fonts_managers</span><span class='comma'>,</span> <span class='const'>Strings</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="fonts_max_cached_fonts=-instance_method"></span>
+      <span id="fonts_max_cached_fonts-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="fonts_max_cached_fonts-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Number.html" title="Sprout::Executable::Number (class)">Number</a></span></tt>) <strong>fonts_max_cached_fonts</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the maximum number of fonts to keep in the server cache. For more
+information, see Caching fonts and glyphs (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001469.html#208457">livedocs.adobe.com/flex/2/docs/00001469.html#208457</a>).</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Number.html" title="Sprout::Executable::Number (class)">Number</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Number</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:fonts_max_cached_fonts</span><span class='comma'>,</span> <span class='const'>Number</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="fonts_max_glyphs_per_face=-instance_method"></span>
+      <span id="fonts_max_glyphs_per_face-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="fonts_max_glyphs_per_face-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Number.html" title="Sprout::Executable::Number (class)">Number</a></span></tt>) <strong>fonts_max_glyphs_per_face</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets the maximum number of character glyph-outlines to keep in the server
+cache for each font face. For more information, see Caching fonts and
+glyphs (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001469.html#208457">livedocs.adobe.com/flex/2/docs/00001469.html#208457</a>).</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Number.html" title="Sprout::Executable::Number (class)">Number</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Number</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:fonts_max_glyphs_per_face</span><span class='comma'>,</span> <span class='const'>Number</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="frames_frame=-instance_method"></span>
+      <span id="frames_frame-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="frames_frame-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>frames_frame</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies a SWF file frame label with a sequence of class names that are
+linked onto the frame.</p>
+
+<p>For example: frames_frame = 'someLabel MyProject OtherProject FoodProject'</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:frames_frame</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:shell_name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-frames.frame</span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="generate_frame_loader=-instance_method"></span>
+      <span id="generate_frame_loader-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="generate_frame_loader-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>generate_frame_loader</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Toggles the generation of an IFlexBootstrap-derived loader class.</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:generate_frame_loader</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="headless_server=-instance_method"></span>
+      <span id="headless_server-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="headless_server-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>headless_server</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Enables the headless implementation of the Flex compiler. This sets the
+following:</p>
+
+<pre class="code"><span class='const'>System</span><span class='period'>.</span><span class='id setProperty'>setProperty</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>java.awt.headless</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>true</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span></pre>
+
+<p>The headless setting (java.awt.headless=true) is required to use fonts and
+SVG on UNIX systems without X Windows.</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:headless_server</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="include_libraries=-instance_method"></span>
+      <span id="include_libraries-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="include_libraries-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>) <strong>include_libraries</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Links all classes inside a SWC file to the resulting application SWF file,
+regardless of whether or not they are used.</p>
+
+<p>Contrast this option with the library-path option that includes only those
+classes that are referenced at compile time.</p>
+
+<p>To link one or more classes whether or not they are used and not an entire
+SWC file, use the includes option.</p>
+
+<p>This option is commonly used to specify resource bundles.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Files]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:include_libraries</span><span class='comma'>,</span> <span class='const'>Files</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="include_path=-instance_method"></span>
+      <span id="include_path-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="include_path-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Paths.html" title="Sprout::Executable::Paths (class)">Paths</a></span>]</tt>) <strong>include_path</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Define one or more directory paths for include processing. For each path
+that is provided, all .as and .mxml files found forward of that path will
+be included in the SWF regardless of whether they are imported or not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Paths.html" title="Sprout::Executable::Paths (class)">Paths</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Paths]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:include_path</span><span class='comma'>,</span> <span class='const'>Paths</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="includes=-instance_method"></span>
+      <span id="includes-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="includes-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>includes</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Links one or more classes to the resulting application SWF file, whether or
+not those classes are required at compile time.</p>
+
+<p>To link an entire SWC file rather than individual classes, use the
+include-libraries option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:includes</span><span class='comma'>,</span> <span class='const'>Strings</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="incremental=-instance_method"></span>
+      <span id="incremental-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="incremental-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>incremental</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Enables incremental compilation. For more information, see About
+incremental compilation (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001506.html#153980">livedocs.adobe.com/flex/2/docs/00001506.html#153980</a>).</p>
+
+<p>This option is true by default for the Flex Builder application compiler.
+For the command-line compiler, the default is false. The web-tier compiler
+does not support incremental compilation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:incremental</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="keep_as3_metadata=-instance_method"></span>
+      <span id="keep_as3_metadata-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="keep_as3_metadata-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>keep_as3_metadata</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Keep the specified metadata in the SWF (advanced, repeatable).</p>
+
+<p>Example:</p>
+
+<p>Rakefile:</p>
+
+<pre class="code"><span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id keep_as3_metadata'>keep_as3_metadata</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Orange</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+<p>Source Code:</p>
+
+<pre class="code">[Orange(isTasty=true)]
+public function eatOranges():void {
+    // do something
+}</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:keep_as3_metadata</span><span class='comma'>,</span> <span class='const'>Strings</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="keep_generated_actionscript=-instance_method"></span>
+      <span id="keep_generated_actionscript-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="keep_generated_actionscript-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>keep_generated_actionscript</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Determines whether to keep the generated ActionScript class files.</p>
+
+<p>The generated class files include stubs and classes that are generated by
+the compiler and used to build the SWF file.</p>
+
+<p>The default location of the files is the /generated subdirectory, which is
+directly below the target MXML file. If the /generated directory does not
+exist, the compiler creates one.</p>
+
+<p>The default names of the primary generated class files are
+filename-generated.as and filename-interface.as.</p>
+
+<p>The default value is false.nThis is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:keep_generated_actionscript</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="language=-instance_method"></span>
+      <span id="language-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="language-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>language</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:language</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="lazy_init=-instance_method"></span>
+      <span id="lazy_init-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="lazy_init-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>lazy_init</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Enables ABC bytecode lazy initialization.</p>
+
+<p>The default value is false.</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:lazy_init</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="library_path=-instance_method"></span>
+      <span id="library_path-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="library_path-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>) <strong>library_path</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Links SWC files to the resulting application SWF file. The compiler only
+links in those classes for the SWC file that are required.</p>
+
+<p>The default value of the library-path option includes all SWC files in the
+libs directory and the current locale. These are required.</p>
+
+<p>To point to individual classes or packages rather than entire SWC files,
+use the source-path option.</p>
+
+<p>If you set the value of the library_path using the '=' operator, you must
+also explicitly add the framework.swc and  locale SWC files. Your new entry
+is not appended to the library-path but replaces it.</p>
+
+<pre class="code"><span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id library_path'>library_path</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/SomeLib.swc</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+
+<p>You can use the &lt;&lt; operator to append the new argument to the list of
+existing SWC files.</p>
+
+<pre class="code"><span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id library_path'>library_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/SomeLib.swc</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+<p>In a configuration file, you can set the append attribute of the
+library-path tag to true to indicate that the values should be appended to
+the library path rather than replace it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Files]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:library_path</span><span class='comma'>,</span> <span class='const'>Files</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="license=-instance_method"></span>
+      <span id="license-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="license-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>license</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>&lt;product&gt; &lt;serial-number&gt;</p>
+
+<p>Specifies a product and a serial number.  (repeatable)</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:license</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="link_report=-instance_method"></span>
+      <span id="link_report-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="link_report-instance_method">
+  
+    - (<tt>File</tt>) <strong>link_report</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Prints linking information to the specified output file.  This file is an
+XML file that contains</p>
+
+<pre class="code">&lt;def&gt;, &lt;pre&gt;, and &lt;ext&gt;</pre>
+
+<p>symbols showing linker dependencies in the final SWF file.</p>
+
+<p>The file format output by this command can be used to write a file for
+input to the load-externs option.</p>
+
+<p>For more information on the report, see Examining linker dependencies (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001394.html#211202">livedocs.adobe.com/flex/2/docs/00001394.html#211202</a>).</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of File</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:link_report</span><span class='comma'>,</span> <span class='const'>File</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="load_config=-instance_method"></span>
+      <span id="load_config-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="load_config-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>) <strong>load_config</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies the location of the configuration file that defines compiler
+options.</p>
+
+<p>If you specify a configuration file, you can override individual options by
+setting them on the command line.</p>
+
+<p>All relative paths in the configuration file are relative to the location
+of the configuration file itself.</p>
+
+<p>Use the += operator to chain this configuration file to other configuration
+files.</p>
+
+<p>For more information on using configuration files to provide options to the
+command-line compilers, see About configuration files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001490.html#138195">livedocs.adobe.com/flex/2/docs/00001490.html#138195</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Files]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:load_config</span><span class='comma'>,</span> <span class='const'>Files</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="load_externs=-instance_method"></span>
+      <span id="load_externs-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="load_externs-instance_method">
+  
+    - (<tt>File</tt>) <strong>load_externs</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies the location of an XML file that contains</p>
+
+<pre class="code">&lt;def&gt;, &lt;pre&gt;, and &lt;ext&gt;</pre>
+
+<p>symbols to omit from linking when compiling a SWF file.</p>
+
+<p>The XML file uses the same syntax as the one produced by the link-report
+option.</p>
+
+<p>For more information on the report, see Examining linker dependencies (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001394.html#211202">livedocs.adobe.com/flex/2/docs/00001394.html#211202</a>).</p>
+
+<p>This option provides compile-time link checking for external components
+that are dynamically linked.</p>
+
+<p>For more information about dynamic linking, see About linking (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001521.html#205852">livedocs.adobe.com/flex/2/docs/00001521.html#205852</a>).</p>
+
+<p>This is an advanced option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of File</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:load_externs</span><span class='comma'>,</span> <span class='const'>File</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="locale=-instance_method"></span>
+      <span id="locale-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="locale-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>locale</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies the locale that should be packaged in the SWF file (for example,
+en_EN).</p>
+
+<p>You run the mxmlc compiler multiple times to create SWF files for more than
+one locale,  with only the locale option changing.</p>
+
+<p>You must also include the parent directory of the individual locale
+directories,  plus the token locale, in the source-path; for example:</p>
+
+<pre class="code">mxmlc -locale en_EN -source-path locale/{locale} -file-specs MainApp.mxml</pre>
+
+<p>For more information, see Localizing Flex Applicationsin (<a
+href="http://livedocs.adobe.com/flex/2/docs/00000898.html#129288">livedocs.adobe.com/flex/2/docs/00000898.html#129288</a>)
+Flex 2 Developer's Guide.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:locale</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="localized_description=-instance_method"></span>
+      <span id="localized_description-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="localized_description-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>localized_description</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:localized_description</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="localized_title=-instance_method"></span>
+      <span id="localized_title-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="localized_title-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>localized_title</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>)."</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:localized_title</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="namespaces_namespace=-instance_method"></span>
+      <span id="namespaces_namespace-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="namespaces_namespace-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>namespaces_namespace</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies a namespace for the MXML file. You must include a URI and the
+location of the manifest file that defines the contents of this namespace.
+This path is relative to the MXML file.</p>
+
+<p>For more information about manifest files, see About manifest files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001519.html#134676">livedocs.adobe.com/flex/2/docs/00001519.html#134676</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:namespaces_namespace</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="optimize=-instance_method"></span>
+      <span id="optimize-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="optimize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>optimize</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Enables the ActionScript optimizer. This optimizer reduces file size and
+increases performance by optimizing the SWF file's bytecode.</p>
+
+<p>The default value is false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:optimize</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="output=-instance_method"></span>
+      <span id="output-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="output-instance_method">
+  
+    - (<tt>File</tt>) <strong>output</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies the output path and filename for the resulting file. If you omit
+this option, the compiler saves the SWF file to the directory where the
+target file is located.</p>
+
+<p>The default SWF filename matches the target filename, but with a SWF file
+extension.</p>
+
+<p>If you use a relative path to define the filename, it is always relative to
+the current working directory, not the target MXML application root.</p>
+
+<p>The compiler creates extra directories based on the specified filename if
+those directories are not present.</p>
+
+<p>When using this option with the component compiler, the output is a SWC
+file rather than a SWF file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of File</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:output</span><span class='comma'>,</span> <span class='const'>File</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:file_task_name</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="publisher=-instance_method"></span>
+      <span id="publisher-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="publisher-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>publisher</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:publisher</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="raw_metadata=-instance_method"></span>
+      <span id="raw_metadata-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="raw_metadata-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>raw_metadata</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>XML text to store in the SWF metadata (overrides metadata.* configuration)
+(advanced)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:raw_metadata</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="resource_bundle_list=-instance_method"></span>
+      <span id="resource_bundle_list-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="resource_bundle_list-instance_method">
+  
+    - (<tt>File</tt>) <strong>resource_bundle_list</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Prints a list of resource bundles to input to the compc compiler to create
+a resource bundle SWC file. The filename argument is the name of the file
+that contains the list of bundles.</p>
+
+<p>For more information, see Localizing Flex Applications (<a
+href="http://livedocs.adobe.com/flex/2/docs/00000898.html#129288">livedocs.adobe.com/flex/2/docs/00000898.html#129288</a>)
+in Flex 2 Developer's Guide.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of File</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:resource_bundle_list</span><span class='comma'>,</span> <span class='const'>File</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="runtime_shared_libraries=-instance_method"></span>
+      <span id="runtime_shared_libraries-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="runtime_shared_libraries-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>runtime_shared_libraries</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies a list of run-time shared libraries (RSLs) to use for this
+application. RSLs are dynamically-linked at run time.</p>
+
+<p>You specify the location of the SWF file relative to the deployment
+location of the application. For example, if you store a file named
+library.swf file in the web_root/libraries directory on the web server, and
+the application in the web root, you specify libraries/library.swf.</p>
+
+<p>For more information about RSLs, see Using Runtime Shared Libraries. (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001520.html#168690">livedocs.adobe.com/flex/2/docs/00001520.html#168690</a>)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:runtime_shared_libraries</span><span class='comma'>,</span> <span class='const'>Strings</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="runtime_shared_library_path=-instance_method"></span>
+      <span id="runtime_shared_library_path-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="runtime_shared_library_path-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>runtime_shared_library_path</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <dl><dt>path-element</dt>
+<dd><dl><dt>rsl-url</dt>
+<dd><dl><dt>policy-file-url</dt>
+<dd><dl><dt>rsl-url</dt>
+<dd><dl><dt>policy-file-url</dt>
+<dd></dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+</dd></dl>
+
+<p>alias -rslp (repeatable)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:runtime_shared_library_path</span><span class='comma'>,</span> <span class='const'>Strings</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="services=-instance_method"></span>
+      <span id="services-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="services-instance_method">
+  
+    - (<tt>File</tt>) <strong>services</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies the location of the services-config.xml file. This file is used
+by Flex Data Services.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of File</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:services</span><span class='comma'>,</span> <span class='const'>File</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="show_actionscript_warnings=-instance_method"></span>
+      <span id="show_actionscript_warnings-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="show_actionscript_warnings-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>show_actionscript_warnings</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Shows warnings for ActionScript classes.</p>
+
+<p>The default value is true.</p>
+
+<p>For more information about viewing warnings and errors, see Viewing
+warnings and errors (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001517.html#182413">livedocs.adobe.com/flex/2/docs/00001517.html#182413</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:show_actionscript_warnings</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="show_binding_warnings=-instance_method"></span>
+      <span id="show_binding_warnings-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="show_binding_warnings-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>show_binding_warnings</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Shows a warning when Flash Player cannot detect changes to a bound
+property.</p>
+
+<p>The default value is true.</p>
+
+<p>For more information about compiler warnings, see Using SWC files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001505.html#158337">livedocs.adobe.com/flex/2/docs/00001505.html#158337</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:show_binding_warnings</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="show_deprecation_warnings=-instance_method"></span>
+      <span id="show_deprecation_warnings-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="show_deprecation_warnings-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>show_deprecation_warnings</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Shows deprecation warnings for Flex components. To see warnings for
+ActionScript classes, use the show-actionscript-warnings option.</p>
+
+<p>The default value is true.</p>
+
+<p>For more information about viewing warnings and errors, see Viewing
+warnings and errors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:show_deprecation_warnings</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="source_path=-instance_method"></span>
+      <span id="source_path-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="source_path-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Paths.html" title="Sprout::Executable::Paths (class)">Paths</a></span>]</tt>) <strong>source_path</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds directories or files to the source path. The Flex compiler searches
+directories in the source path for MXML or AS source files that are used in
+your Flex applications and includes those that are required at compile
+time.</p>
+
+<p>You can use wildcards to include all files and subdirectories of a
+directory.</p>
+
+<p>To link an entire library SWC file and not individual classes or
+directories, use the library-path option.</p>
+
+<p>The source path is also used as the search path for the component
+compiler's include-classes and include-resource-bundles options.</p>
+
+<p>You can also use the += operator to append the new argument to the list of
+existing source path entries.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Paths.html" title="Sprout::Executable::Paths (class)">Paths</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Paths]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:source_path</span><span class='comma'>,</span> <span class='const'>Paths</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="static_link_runtime_shared_libraries=-instance_method"></span>
+      <span id="static_link_runtime_shared_libraries-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="static_link_runtime_shared_libraries-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>static_link_runtime_shared_libraries</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Statically link the libraries specified by the
+-runtime-shared-libraries-path option.</p>
+
+<pre class="code">alias -static-rsls</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:static_link_runtime_shared_libraries</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="strict=-instance_method"></span>
+      <span id="strict-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="strict-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>strict</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Prints undefined property and function calls; also performs compile-time
+type checking on assignments and options supplied to method calls.</p>
+
+<p>The default value is true.</p>
+
+<p>For more information about viewing warnings and errors, see Viewing
+warnings and errors (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001517.html#182413">livedocs.adobe.com/flex/2/docs/00001517.html#182413</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:strict</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="target_player=-instance_method"></span>
+      <span id="target_player-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="target_player-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>target_player</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies the version of the player the application is targeting.</p>
+
+<p>Features requiring a later version will not be compiled into the
+application. The minimum value supported is "9.0.0".</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:target_player</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="theme=-instance_method"></span>
+      <span id="theme-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="theme-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>) <strong>theme</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies a list of theme files to use with this application. Theme files
+can be SWC files with CSS files inside them or CSS files.</p>
+
+<p>For information on compiling a SWC theme file, see Using Styles and Themes
+(<a
+href="http://livedocs.adobe.com/flex/2/docs/00000751.html#241755">livedocs.adobe.com/flex/2/docs/00000751.html#241755</a>)
+in Flex 2 Developer's Guide.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Files]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:theme</span><span class='comma'>,</span> <span class='const'>Files</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="title=-instance_method"></span>
+      <span id="title-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="title-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>title</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets metadata in the resulting SWF file. For more information, see Adding
+metadata to SWF files (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001502.html#145380">livedocs.adobe.com/flex/2/docs/00001502.html#145380</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:title</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="use_network=-instance_method"></span>
+      <span id="use_network-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="use_network-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>use_network</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies that the current application uses network services.</p>
+
+<p>The default value is true.</p>
+
+<p>When the use-network property is set to false, the application can access
+the local filesystem (for example, use the XML.load() method with file:
+URLs) but not network services. In most circumstances, the value of this
+property should be true.</p>
+
+<p>For more information about the use-network property, see Applying Flex
+Security (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001328.html#137544">livedocs.adobe.com/flex/2/docs/00001328.html#137544</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:use_network</span><span class='comma'>,</span> <span class='const'>Boolean</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:default</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:show_on_false</span> <span class='op'>=&gt;</span> <span class='kw'>true</span> <span class='rbrace'>}</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="verbose_stacktraces=-instance_method"></span>
+      <span id="verbose_stacktraces-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="verbose_stacktraces-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>verbose_stacktraces</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Generates source code that includes line numbers. When a run-time error
+occurs, the stacktrace shows these line numbers.</p>
+
+<p>Enabling this option generates larger SWF files.nThe default value is
+false.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:verbose_stacktraces</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="verify_digests=-instance_method"></span>
+      <span id="verify_digests-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="verify_digests-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>verify_digests</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Verifies the libraries loaded at runtime are the correct ones.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:verify_digests</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="warn_warning_type=-instance_method"></span>
+      <span id="warn_warning_type-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="warn_warning_type-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>warn_warning_type</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Enables specified warnings. For more information, see Viewing warnings and
+errors (<a
+href="http://livedocs.adobe.com/flex/2/docs/00001517.html#182413">livedocs.adobe.com/flex/2/docs/00001517.html#182413</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:warn_warning_type</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="warnings=-instance_method"></span>
+      <span id="warnings-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="warnings-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>warnings</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Enables all warnings. Set to false to disable all warnings. This option
+overrides the warn-warning_type options.</p>
+
+<p>The default value is true.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:warnings</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="library_added-instance_method">
+  
+    - (<tt>Object</tt>) <strong>library_added</strong>(path) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+632
+633
+634
+635
+636
+637
+638</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 632</span>
+
+<span class='kw'>def</span> <span class='id library_added'>library_added</span> <span class='id path'>path</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id path'>path</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\.swc$</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id library_path'>library_path</span> <span class='op'>&lt;&lt;</span> <span class='id path'>path</span>
+  <span class='kw'>else</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='id path'>path</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Dec 22 12:43:22 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>
