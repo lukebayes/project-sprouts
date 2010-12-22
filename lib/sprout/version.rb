@@ -1,17 +1,13 @@
 
 module Sprout
   NAME = 'sprout'
-
-  if(!defined? Sprout::VERSION)
-    module VERSION #:nodoc:
-      MAJOR = 1
-      MINOR = 0
-      TINY  = 34
-      RELEASE = 'pre'
-
-      STRING = [MAJOR, MINOR, TINY, RELEASE].join('.')
-      MAJOR_MINOR = [MAJOR, MINOR].join('.')
-    end
+  module VERSION #:nodoc:
+    STRING      = File.read(File.join(File.dirname(__FILE__), '..', '..', 'VERSION').strip)
+    MAJOR       = STRING.split('.')[0]
+    MINOR       = STRING.split('.')[1]
+    TINY        = STRING.split('.')[2]
+    RELEASE     = STRING.split('.')[3]
+    MAJOR_MINOR = [MAJOR, MINOR].join('.')
   end
 end
 

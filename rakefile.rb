@@ -11,8 +11,6 @@ Bundler.require
 require 'rake/clean'
 require 'rake/testtask'
 
-require File.dirname(__FILE__) + '/lib/sprout/version'
-
 ##
 # NOTE, to generate documentation, simply run:
 #

@@ -4,11 +4,10 @@ $:.unshift lib unless $:.include?(lib)
 
 require 'bundler'
 require 'rake'
-require 'sprout/version'
 
 Gem::Specification.new do |s|
-  s.name                      = Sprout::NAME
-  s.version                   = Sprout::VERSION::STRING
+  s.name                      = 'sprout'
+  s.version                   = File.read('VERSION').strip
   s.platform                  = Gem::Platform::RUBY
   s.authors                   = ["Luke Bayes"]
   s.email                     = "projectsprouts@googlegroups.com"
