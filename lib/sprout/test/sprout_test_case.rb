@@ -57,6 +57,7 @@ module SproutTestCase # :nodoc:[all]
   end
 
   def clear_tasks
+    CLEAN.delete_if {|a| true }
     Rake::Task.clear
     Rake.application.clear
   end
