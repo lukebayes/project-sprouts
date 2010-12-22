@@ -88,13 +88,20 @@ module Sprout
   # suggest[http://groups.google.com/group/projectsprouts/] any improvements to 
   # the Google Group.
   #
-  # @see Sprout::GeneratorGenerator
-  #
   # ---
   # 
   # Back to Home: {file:README.textile}
   #
   # Next Topic: {Sprout::Library}
+  #
+  # ---
+  # 
+  # @see Sprout::GeneratorGenerator
+  # @see Sprout::Library
+  # @see Sprout::Executable
+  # @see Sprout::Specification
+  # @see Sprout::RubyFeature
+  # @see Sprout::System
   #
   module Generator
     include RubyFeature
@@ -137,7 +144,8 @@ module Sprout
       # @param type [Symbol] A snake-cased name of the class without the Generator suffix.
       #   for example, to instantiate a generator named, +TestSuiteGenerator+, this argument
       #   would be +:test_suite+
-      def create_instance type
+      # @param options [Hash] deprecated - please remove this argument wherever it's found.
+      def create_instance type, options=nil
         class_name = "#{type.to_s.camel_case}Generator"
         registered_entities.each do |entity|
           if(entity.to_s.match(/::#{class_name}$/) || entity.to_s.match(/^#{class_name}$/))
