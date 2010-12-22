@@ -18,6 +18,8 @@ require 'rake/testtask'
 #   yard
 #
 
+CLEAN.add 'doc'
+
 namespace :test do
   Rake::TestTask.new(:units) do |t|
     t.libs << "test/unit"
