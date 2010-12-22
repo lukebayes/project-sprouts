@@ -40,12 +40,7 @@ require 'sprout/executable'
 require 'sprout/daemon'
 
 # Generators
-require 'sprout/generator/command'
-require 'sprout/generator/manifest'
-require 'sprout/generator/file_manifest'
-require 'sprout/generator/template_manifest'
-require 'sprout/generator/directory_manifest'
-require 'sprout/generator/base'
+require 'sprout/generator'
 
 # Libraries
 require 'sprout/library'
