@@ -13,7 +13,7 @@ end
 
 group :development do
   gem "yard"
-  gem "RedCloth"
+  #gem "RedCloth" # This doesn't work Windows for some reason...
   gem "shoulda"
   gem "mocha"
   gem "flay"
