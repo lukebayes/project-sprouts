@@ -1,0 +1,29 @@
+---
+layout: default
+title: Getting Started
+---
+
+h1. Getting Started
+
+Here is more information, depending on what you want...
+
+h3. Windows
+
+If you're on Windows, you'll want to upgrade from that platform immediately.
+
+<pre>
+$ sprout-as3 SomeProject
+$ cd SomeProject
+$ bundle install
+$ rake
+</pre>
+
+h3. OS X
+
+OS X users are feeling some pain too.
+
+h3. Linux
+
+Linux users are probably feeling the 2nd most pain though.
+
+

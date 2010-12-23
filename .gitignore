@@ -7,3 +7,4 @@ rdoc/**/**/*
 bundles/as3/samples/mxmlc/bin/*.swf
 bundles/as3/samples/mxmlc/doc
 bundles/as3/samples/mxmlc/bin/*.swc
+_site
