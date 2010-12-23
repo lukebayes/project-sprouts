@@ -57,19 +57,19 @@ module Sprout
     # @return [Dir] The system-specific path to the writeable cache directory
     # where Sprouts will look for downloaded archives.
     #
-    #   puts ">> Sprout Cache: #{Sprout::Base.cache}"
+    #   puts ">> Sprout Cache: #{Sprout.cache}"
     #
     def cache
-      File.join(sprout_home, 'cache')
+      File.join(home, 'cache')
     end
 
     ##
     # @return [Dir] The location where the currently-running version of Sprouts
     # will write files and generators and their templates.
     #
-    #   puts ">> Sprout home: #{Sprout::Base.sprout_home}"
+    #   puts ">> Sprout home: #{Sprout.home}"
     #
-    def sprout_home
+    def home
       File.join(current_system.application_home('sprouts'), Sprout::VERSION::MAJOR_MINOR)
     end
 
@@ -77,7 +77,7 @@ module Sprout
     # @return [Dir] The location where Sprouts will look for generators and their
     # templates.
     #
-    #   puts ">> Generator Cache: #{Sprout::Base.generator_cache}"
+    #   puts ">> Generator Cache: #{Sprout.generator_cache}"
     #
     def generator_cache
       File.join cache, 'generators'
@@ -88,7 +88,7 @@ module Sprout
     # determine features like the cache path and how external processes
     # are executed.
     #
-    #   system = Sprout::Base.current_system
+    #   system = Sprout.current_system
     #   puts ">> System: #{system.inspect}"
     #
     def current_system
