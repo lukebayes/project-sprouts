@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ArchiveUnpackerTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   def setup
     super

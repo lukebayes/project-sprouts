@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ProcessRunnerTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "process runner" do
 

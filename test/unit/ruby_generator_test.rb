@@ -3,7 +3,7 @@ require 'test_helper'
 require 'sprout/generators/ruby/ruby_generator'
 
 class RubyGeneratorTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "A generated ruby application" do
 

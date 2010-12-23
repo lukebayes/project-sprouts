@@ -2,7 +2,7 @@ require 'test_helper'
 require 'fixtures/examples/echo_inputs'
 
 class ExecutableOptionParserTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "a new ruby executable" do
     

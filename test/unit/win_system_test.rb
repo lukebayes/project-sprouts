@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class WinSystemTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "new windows system" do
 

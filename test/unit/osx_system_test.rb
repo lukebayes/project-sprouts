@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class OSXSystemTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "new osx system" do
 

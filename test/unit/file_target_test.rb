@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class FileTargetTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "a file target" do
     setup do

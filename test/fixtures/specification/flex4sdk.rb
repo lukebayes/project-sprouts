@@ -1,31 +1,42 @@
-# This is a sample Sprout Specification.
-#
-# This document describes the Flex 4 SDK in terms of the libraries and executables
-# that is provides.
-#
-# Whenever this file is loaded (required) by a Ruby application that has already loaded
-# the core sprout files, the remote_file_target will be downloaded and installed,
-# and each executable and library will be available to any interested rake
-# tasks.
-#
-# An example of how one might retrieve a path to the downloaded MXMLC executable is
-# as follows:
-#
-#     Sprout.get_executable :mxmlc, 'flex4sdk', '>= 4.0.pre'
-#
-Sprout::Specification.new do |s|
 
-  s.name    = 'flex4sdk'
-  s.version = '4.0.pre'
+Sprout::Specification.new do |s|
+  # This is the Specification that loads the Flex 4 SDK,
+  # To use the Flex 4 SDK from your build tasks, you can
+  # simply update the pkg_name parameter of your build 
+  # task as follows:
+  #
+  #   mxmlc 'bin/SomeProject.swf' do |t|
+  #     t.input       = 'src/SomeProject.as'
+  #     t.pkg_name    = 'flex4'
+  #   end
+  #
+  # If you'd like to consume any of the libraries that
+  # are included with the Flex SDK, you can embed them
+  # from your Rakefile as follows:
+  #
+  #   library :f_textlayout
+  #
+  #   mxmlc 'bin/SomeProject.swf' => :f_textlayout do |t|
+  #     t.input = 'src/SomeProject.as'
+  #   end
+  #
+  # If you'd like to consume one of the localized frameworks
+  # you can set that up as follows:
+  #
+  #   library 'flex_4_es_ES'
+  #
+  #   mxmlc 'bin/SomeProject.swf' => 'flex_4_es_ES' do |t|
+  #     t.input = 'src/SomeProject.as'
+  #   end
+  #
+  s.name    = 'flex4'
+  s.version = '4.1.0.16076'
 
   s.add_remote_file_target do |t|
-    # Apply the windows-specific configuration:
-    t.platform = :universal
-    # Apply the shared platform configuration:
-    # Remote Archive:
+    t.platform     = :universal
     t.archive_type = :zip
-    t.url          = "http://download.macromedia.com/pub/labs/flex/4/flex4sdk_b2_100509.zip"
-    t.md5          = "6a0838c5cb33145fe88933778ddb966d"
+    t.url          = "http://fpdownload.adobe.com/pub/flex/sdk/builds/flex4/flex_sdk_4.1.0.16076.zip"
+    t.md5          = "4c5f3d3fa4e1f5be244679210cd852c0"
 
     # Executables: (add .exe suffix if it was passed in)
     t.add_executable :aasdoc,     "bin/aasdoc"

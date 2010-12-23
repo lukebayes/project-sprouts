@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RubyFeatureTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "a new ruby feature" do
 

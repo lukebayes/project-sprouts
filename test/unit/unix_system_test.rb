@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UnixSystemTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "new unix system" do
 

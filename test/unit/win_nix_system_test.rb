@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class WinNixSystemTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "new windows nix (cygwin/mingw) system" do
 

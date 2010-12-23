@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SpecificationTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "a newly defined specification" do
     setup do
@@ -113,6 +113,12 @@ class SpecificationTest < Test::Unit::TestCase
     end
   end
 
+=begin
+  ##
+  # This test method is EXTREMELY slow!
+  # It attempts to download and unpack the 
+  # Flex SDK - but only the first time
+  # it's run on a particular system...
   context "a universal collection of executables" do
 
     setup do
@@ -144,6 +150,7 @@ class SpecificationTest < Test::Unit::TestCase
       assert_not_nil mxmlc
     end
   end
+=end
 
   context "a newly included executable" do
     setup do

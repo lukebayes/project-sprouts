@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class ExecutableParamTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "a new, simple Executable::Param" do
 

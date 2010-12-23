@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class LibraryTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "a new archive library" do
     setup do

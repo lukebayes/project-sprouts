@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class PathsParamTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "a new PathsParam" do
 

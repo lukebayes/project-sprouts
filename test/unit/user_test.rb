@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UserTest < Test::Unit::TestCase
-  #include SproutTestCase
+  #include SproutTestHelper
 
   ['vista', 'mswin', 'wince', 'emx'].each do |variant|
     context variant do

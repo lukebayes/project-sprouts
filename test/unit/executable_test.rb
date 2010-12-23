@@ -5,7 +5,7 @@ require 'fixtures/executable/subclass/executable_superclass'
 require 'fixtures/executable/subclass/executable_subclass'
 
 class ExecutableTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "a new executable delegate" do
 

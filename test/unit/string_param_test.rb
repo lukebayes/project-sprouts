@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class StringParamTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "a new StringParam" do
 

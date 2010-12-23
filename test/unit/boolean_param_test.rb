@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class BooleanParamTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "a new, simple BooleanParam" do
 

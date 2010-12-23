@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class FileParamTest < Test::Unit::TestCase
-  include SproutTestCase
+  include SproutTestHelper
 
   context "a new FileParam" do
 
