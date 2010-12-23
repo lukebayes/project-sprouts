@@ -4,27 +4,40 @@ module Sprout
   # The ProcessRunner is a cross-platform wrapper for executing
   # external executable processes.
   #
-  # As it turns out, Ruby handle differences very well, and 
-  # other process libraries (like win32-open3 and open4.popen4),
-  # do make the experience more consistent on a given platform,
-  # but they don't hide the differences introduced by the 
-  # continuing beligerence of Windows or *nix (depending on 
-  # which side of the fence you're on).
+  # This class is typically accesses via the concrete Sprout::System
+  # classes in order to avoid ugly branching logic in the application
+  # layer.
+  #
+  # An example of this kind of usage might be:
+  #
+  #   Sprout.current_system.execute './some.exe', '--foo=bar --baz=buz'
+  #
+  # To use this class directly, you need to know if you're on
+  # a unix-like system or a dos platform as these two deal with
+  # processes very differently.
+  #
+  # Assuming you know you're on a unix-like system, you could
+  # execute the previous example with:
+  #
+  #   runner = Sprout::ProcessRunner.new
+  #   runner.execute_open4 './some.exe --foo-bar --baz=buz'
+  #   puts runner.read
+  #
   class ProcessRunner
 
     attr_reader :pid
     attr_reader :ruby_version
 
     ##
-    # Read IO (readable)
+    # @return [IO] Read only
     attr_reader :r
 
     ##
-    # Write IO (writeable)
+    # @return [IO] Write only
     attr_reader :w
 
     ##
-    # Error IO (readable)
+    # @return [IO] Error output
     attr_reader :e
 
     def initialize
@@ -32,6 +45,7 @@ module Sprout
       @ruby_version = RUBY_VERSION
     end
     
+    ##
     # Execute the provided command using the open4.popen4
     # library. This is generally only used by Cygwin and
     # *nix variants (including OS X).
@@ -44,27 +58,36 @@ module Sprout
       end
     end
     
+    ##
     # Execute the provided command using the win32-open3
-    # library. This is generally used even by 64-bit
-    # Windows installations.
+    # library. This is generally used only only Windows
+    # systems (even 64 bit).
     def execute_win32(*command)
       execute_with_block *command do
         @pid, @w, @r, @e = io_popen_block *command.join(' ')
       end
     end
 
+    ##
+    # @return [Boolean] whether the process is still running.
     def alive?
       @alive = update_status
     end
     
+    ##
+    # Kill the process.
     def kill
       Process.kill(9, pid)
     end
     
+    ##
+    # Close the process
     def close
       update_status
     end
     
+    ##
+    # Send an update signal to the process.
     def update_status
       pid_int = Integer("#{ @pid }")
       begin
@@ -75,38 +98,62 @@ module Sprout
       end
     end
     
-    def readpartial(count)
-      @r.readpartial(count)
+    ##
+    # Read +count+ characters from the process standard out.
+    #
+    # @param count [Integer] Number of characters to read.
+    # @return [String]
+    def readpartial count
+      @r.readpartial count
     end
     
-    def readlines
-      @r.readlines
+    ##
+    # Read +count+ lines from the process standard out.
+    #
+    # @param count [Integer] Number of lines to read.
+    # @return [String]
+    def readlines count
+      @r.readlines count
     end
     
+    ##
+    # Flush the write IO to the process.
     def flush
       @w.flush
     end
     
+    ##
+    # Get user input on the read stream from the process.
     def getc
       @r.getc
     end
     
-    def print(msg)
+    ##
+    # Print some characters to process without an end of line character.
+    def print msg
       @w.print msg
     end
     
+    ##
+    # Print characters to the process followed by an end of line.
     def puts(msg)
       @w.puts(msg)
     end
     
+    ##
+    # Close the write stream - usually terminates the process.
     def close_write
       @w.close_write
     end
     
+    ##
+    # Wait for the process to end and return the entire standard output.
     def read
       return @r.read
     end
     
+    ##
+    # Wait for the process to end and return the entire standard error.
     def read_err
       return @e.read
     end

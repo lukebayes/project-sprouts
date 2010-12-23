@@ -2,18 +2,14 @@
 module Sprout
 
   ##
-  # The Sprout::Daemon module exposes the Domain Specific Language
-  # provided by the Sprout::Executable module, but with
+  # The Sprout::Daemon class exposes the Domain Specific Language
+  # provided by the Sprout::Executable, along with
   # enhancements (and modifications) to support long-lived processes
   # (like FDB and FCSH).
   #
-  # NOTE: Any class that includes Sprout::Daemon should first include 
-  # Sprout::Executable. This is an admittedly smelly constraint, but it works
-  # for now.
-  #
-  #   class Foo
-  #     include Sprout::Executable
-  #     include Sprout::Daemon
+  #   ##
+  #   # The Foo class extends Sprout::Daemon
+  #   class Foo < Sprout::Daemon
   #
   #     ##
   #     # Keep in mind that we're still working
@@ -32,26 +28,20 @@ module Sprout
   #     add_action :do_something_else
   #   end
   #
-  # You can also create a globally-accessible rake task to expose
-  # your new Daemon instance to Rake by creating a method like the following:
+  # You can also create a globally-accessible rake task to use
+  # your new Daemon instance by creating a method like the following:
   #
   #   def foo *args, &block
   #     foo_tool = Foo.new
   #     foo_tool.to_rake *args, &block
   #   end
   #
-  # Note: The aforementioned rake helper is usually written at the bottom of 
-  # the class file that is referenced.
-  # 
-  # The aforementioned Rake task could be used like:
+  # The previous Rake task could be used like:
   #
-  #   foo :bar do |t|
+  #   foo 'Bar.txt' do |t|
   #     t.do_something
   #     t.do_something_else
   #   end
-  #
-  # @see: Sprout::Daemon::ClassMethods
-  # @see: Sprout::Daemon::InstanceMethods
   #
   class Daemon < Executable::Base
 
@@ -64,20 +54,39 @@ module Sprout
       # This method should raise a Sprout::Errors::UsageError
       # if the provided action name is already defined for 
       # the provided instance.
+      #
+      # @param name [Symbol, String] The name of the method.
+      # @param arguments [Array<Object>] An array of arguments that the method accepts.
+      # @param options [Hash] The options hash is reserved for future use.
+      #
+      #   class Foo < Sprout::Daemon
+      #     
+      #     add_action :continue
+      #
+      #     add_action :quit
+      #   end
+      #
+      # @return [nil]
       def add_action name, arguments=nil, options=nil
         options ||= {}
         options[:name] = name
         options[:arguments] = arguments
         create_action_method options
+        nil
       end
 
       ##
-      # Create an (often shorter) alias to another
+      # Create an (often shorter) alias to an existing
       # action name.
+      #
+      # @return [nil]
+      #
+      # @see add_action
       def add_action_alias alias_name, source_name
         define_method(alias_name) do |*params|
           self.send(source_name, params)
         end
+        nil
       end
 
       private
@@ -127,16 +136,13 @@ module Sprout
     #
     #   set :prompt, /^\(fdb\) |\(y or n\) /
     #
+    # @return [Regexp]
     attr_accessor :prompt
 
     ##
-    # This is the array of actions that have
-    # been provided at the class level to this instance.
-    attr_reader :action_stack
-
-    def initialize
-      super
-      @action_stack = []
+    # @return [Array<Hash>] Return or create a new array.
+    def action_stack
+      @action_stack ||= []
     end
 
     ##
@@ -161,6 +167,8 @@ module Sprout
     # This is the override of the underlying
     # Sprout::Executable template method so that we
     # create a 'task' instead of a 'file' task.
+    #
+    # @return [Rake::Task]
     def create_outer_task *args
       task *args do
         execute
@@ -172,6 +180,8 @@ module Sprout
     # Sprout::Executable template method so that we
     # are NOT added to the CLEAN collection.
     # (Work performed in the Executable)
+    #
+    # @return [String]
     def update_rake_task_name_from_args *args
       self.rake_task_name = parse_rake_task_arg args.last
     end
@@ -181,6 +191,8 @@ module Sprout
     # Sprout::Executable template method so that we
     # create the process in a thread 
     # in order to read and write to it.
+    #
+    # @return [Thread]
     def system_execute binary, params
       Sprout.current_system.execute_thread binary, params
     end
