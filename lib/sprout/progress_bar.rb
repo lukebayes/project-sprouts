@@ -13,7 +13,7 @@
 require 'singleton'
 
 module Sprout
-  class ProgressBar # :nodoc:[all]
+  class ProgressBar
     VERSION = "0.9"
     @@debug = false
     @@outio = $stderr
@@ -41,7 +41,7 @@ module Sprout
 
   end
 
-  class ProgressBarImpl # :nodoc:[all]
+  class ProgressBarImpl
     
     def initialize (title, total, out = STDERR)
       @title = title
@@ -265,13 +265,13 @@ module Sprout
     end
   end
 
-  class ReversedProgressBar < ProgressBar  # :nodoc:[all]
+  class ReversedProgressBar < ProgressBar
     def do_percentage
       100 - super
     end
   end
 
-  class ProgressBarOutputStream  # :nodoc:[all]
+  class ProgressBarOutputStream
     attr_reader :title
     
     def initialize(mgr)
@@ -293,7 +293,7 @@ module Sprout
     
   end
 
-  class ProgressBarManager # :nodoc:[all]
+  class ProgressBarManager
     include Singleton
     
     def initialize

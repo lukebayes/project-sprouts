@@ -54,7 +54,7 @@ module Sprout
   class << self
 
     ##
-    # Returns the system-specific path to the writeable cache directory
+    # @return [Dir] The system-specific path to the writeable cache directory
     # where Sprouts will look for downloaded archives.
     #
     #   puts ">> Sprout Cache: #{Sprout::Base.cache}"
@@ -64,7 +64,7 @@ module Sprout
     end
 
     ##
-    # Returns the location where the currently-running version of Sprouts
+    # @return [Dir] The location where the currently-running version of Sprouts
     # will write files and generators and their templates.
     #
     #   puts ">> Sprout home: #{Sprout::Base.sprout_home}"
@@ -74,7 +74,7 @@ module Sprout
     end
 
     ##
-    # Returns the location where Sprouts will look for generators and their
+    # @return [Dir] The location where Sprouts will look for generators and their
     # templates.
     #
     #   puts ">> Generator Cache: #{Sprout::Base.generator_cache}"
@@ -84,7 +84,7 @@ module Sprout
     end
 
     ##
-    # Return the Sprout::System that is currently being used to 
+    # @return [Sprout::System] That is currently being used to 
     # determine features like the cache path and how external processes
     # are executed.
     #
@@ -96,7 +96,7 @@ module Sprout
     end
 
     ##
-    # Get the file name from the 'caller' property of
+    # @return [File] Path to the file from the 'caller' property of
     # a Ruby exception.
     #
     # Note: It's a real bummer that this string is colon delimited -

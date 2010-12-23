@@ -1,5 +1,5 @@
 
-module Sprout #:nodoc:
+module Sprout
 
   # The ProcessRunner is a cross-platform wrapper for executing
   # external executable processes.

@@ -216,7 +216,7 @@ module Sprout::System
 
   end
 
-  class ThreadMock # :nodoc:
+  class ThreadMock
     def alive?
       return false
     end

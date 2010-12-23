@@ -1,9 +1,15 @@
 
+##
+# TODO: Should be named SproutTestHelper
+#
+# Include this module into your test cases to make
+# testing Sprout tools easier.
+#
 # Had to make this a module instead of a base class
 # because the ruby test suite kept complaining that 
 # the abstract test case didn't have any test mehods
 # or assertions
-module SproutTestCase # :nodoc:[all]
+module SproutTestCase
   FIXTURES_NAME = 'fixtures'
 
   # Gives us the ability to hide RubyGem output from

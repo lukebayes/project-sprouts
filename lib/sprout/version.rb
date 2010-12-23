@@ -1,7 +1,7 @@
 
 module Sprout
   NAME = 'sprout'
-  module VERSION #:nodoc:
+  module VERSION
     STRING      = File.read(File.join(File.dirname(__FILE__), '..', '..', 'VERSION').strip)
     MAJOR       = STRING.split('.')[0]
     MINOR       = STRING.split('.')[1]
