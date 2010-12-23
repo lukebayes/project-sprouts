@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RemoteFileTargetTest < Test::Unit::TestCase
-  include SproutTestHelper
+  include Sprout::TestHelper
 
   context "an improperly configured remote file target" do
   

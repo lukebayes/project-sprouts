@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class VistaSystemTest < Test::Unit::TestCase
-  include SproutTestHelper
+  include Sprout::TestHelper
 
   context "new windows vista system" do
 

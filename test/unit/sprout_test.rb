@@ -1,9 +1,9 @@
 require 'test_helper'
 
 class SproutTest < Test::Unit::TestCase
-  include SproutTestHelper
+  include Sprout::TestHelper
 
-  context "The SproutTestHelper" do
+  context "The Sprout::TestHelper" do
 
     context "find_fixtures" do
 

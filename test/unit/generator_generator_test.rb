@@ -3,7 +3,7 @@ require 'test_helper'
 require 'sprout/generators/generator/generator_generator'
 
 class GeneratorGeneratorTest < Test::Unit::TestCase
-  include SproutTestHelper
+  include Sprout::TestHelper
 
   context "A new generator generator" do
 

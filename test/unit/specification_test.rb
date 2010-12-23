@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class SpecificationTest < Test::Unit::TestCase
-  include SproutTestHelper
+  include Sprout::TestHelper
 
   context "a newly defined specification" do
     setup do

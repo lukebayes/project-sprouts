@@ -2,7 +2,7 @@ require 'test_helper'
 require 'fixtures/executable/fdb'
 
 class DaemonTest < Test::Unit::TestCase
-  include SproutTestHelper
+  include Sprout::TestHelper
 
   context "a new daemon delegate" do
 

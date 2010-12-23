@@ -10,7 +10,7 @@
 #   require 'sprout/test/sprout_test_helper'
 #
 #   class SomeTestCase < Test::Unit::TestCase
-#     include SproutTestHelper
+#     include Sprout::TestHelper
 #
 #     def setup
 #       super
@@ -29,7 +29,7 @@
 #     end
 #   end
 #
-module SproutTestHelper
+module Sprout::TestHelper
 
   ##
   # The name of the folder that should contain

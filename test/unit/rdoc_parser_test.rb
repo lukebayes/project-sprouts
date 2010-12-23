@@ -2,7 +2,7 @@ require 'test_helper'
 require 'fixtures/examples/echo_inputs'
 
 class ExecutableOptionParserTest < Test::Unit::TestCase
-  include SproutTestHelper
+  include Sprout::TestHelper
 
   context "a new RDoc parser" do
 

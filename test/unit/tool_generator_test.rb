@@ -3,7 +3,7 @@ require 'test_helper'
 require 'sprout/generators/tool/tool_generator'
 
 class ToolGeneratorTest < Test::Unit::TestCase
-  include SproutTestHelper
+  include Sprout::TestHelper
 
   context "A generated tool" do
 

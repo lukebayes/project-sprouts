@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class RemoteFileLoaderTest <  Test::Unit::TestCase
-  include SproutTestHelper
+  include Sprout::TestHelper
 
   context "The remote file loader" do
 

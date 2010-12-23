@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class StringTest < Test::Unit::TestCase
-  include SproutTestHelper
+  include Sprout::TestHelper
 
   context "a new string" do
 

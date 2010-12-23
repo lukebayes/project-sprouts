@@ -2,7 +2,7 @@ require 'test_helper'
 require 'sprout/generators/library/library_generator'
 
 class LibraryGeneratorTest < Test::Unit::TestCase
-  include SproutTestHelper
+  include Sprout::TestHelper
 
   context "A generated library" do
 

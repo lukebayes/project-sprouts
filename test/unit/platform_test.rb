@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class PlatformTest < Test::Unit::TestCase
-  include SproutTestHelper
+  include Sprout::TestHelper
 
   context "platform" do
 
