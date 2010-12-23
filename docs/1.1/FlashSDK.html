@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Module: FlashSDK</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (F)</a> &raquo; 
+    
+    
+    <span class="title">FlashSDK</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: FlashSDK
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">flashsdk/lib/flashsdk.rb<span class="defines">,<br />
+  flashsdk/lib/flashsdk/fdb.rb,<br /> flashsdk/lib/flashsdk/adl.rb,<br /> flashsdk/lib/flashsdk/adt.rb,<br /> flashsdk/lib/flashsdk/mxmlc.rb,<br /> flashsdk/lib/flashsdk/compc.rb,<br /> flashsdk/lib/flashsdk/module.rb,<br /> flashsdk/lib/flashsdk/amxmlc.rb,<br /> flashsdk/lib/flashsdk/compiler_base.rb,<br /> flashsdk/lib/flashsdk/generators/flash_helper.rb,<br /> flashsdk/lib/flashsdk/generators/class_generator.rb,<br /> flashsdk/lib/flashsdk/generators/class_generator.rb,<br /> flashsdk/lib/flashsdk/generators/project_generator.rb,<br /> flashsdk/lib/flashsdk/generators/flex_project_generator.rb</span>
+</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The FlashSDK is a collection of project and file generators, automated
+build tasks, external libraries, executables, and runtimes that make it
+possible to create SWF and AIR content.</p>
+
+<p>If you're just getting started with the FlashSDK, you'll probably want to
+read more about the following topics.</p>
+
+<h1>Generators</h1>
+
+<p>The FlashSDK comes with a handful of standard generators. These generators
+should be installed into your system $PATH when you install the FlashSDK
+gem. In general, Sprout generators fall into one of two categories: a)
+Application Generators, or b) File Generators.</p>
+
+<p>Application Generators can be run from any directory on your system and
+will usually create a new folder and place a large number of files into
+that folder. These generators usually don't have any prerequisites in terms
+of where they're run.</p>
+
+<p>File Generators usually expect to be run within an existing project
+directory, and often have dependencies related to the type of  project
+they're run in. For example, most Class generators expect to find a Gemfile
+in the same directory where they're run.</p>
+
+<p>If you're interested in creating your own Generators, please see the
+<span class='object_link'><a href="Sprout/Generator.html" title="Sprout::Generator (module)">Sprout::Generator</a></span> documentation.</p>
+
+<h2>See Also:</h2>
+
+<p><span class='object_link'><a href="FlashSDK/ClassGenerator.html" title="FlashSDK::ClassGenerator (class)">ClassGenerator</a></span>, <span class='object_link'><a href="FlashSDK/FlexProjectGenerator.html" title="FlashSDK::FlexProjectGenerator (class)">FlexProjectGenerator</a></span>,
+<span class='object_link'><a href="FlashSDK/ProjectGenerator.html" title="FlashSDK::ProjectGenerator (class)">ProjectGenerator</a></span></p>
+
+<h1>Rake Tasks</h1>
+
+<p>The FlashSDK includes a number of automated build tasks that work with the
+Rake build system.</p>
+
+<p>If you're not familiar with Rake, you should stop right now and read Martin
+Fowler's essay introducing it to the world: <a
+href="http://martinfowler.com/articles/rake.html">martinfowler.com/articles/rake.html</a></p>
+
+<h2>See Also:</h2>
+
+<p><span class='object_link'><a href="FlashSDK/MXMLC.html" title="FlashSDK::MXMLC (class)">MXMLC</a></span>,  <span class='object_link'><a href="FlashSDK/COMPC.html" title="FlashSDK::COMPC (class)">COMPC</a></span>, <span class='object_link'><a href="FlashSDK/FDB.html" title="FlashSDK::FDB (class)">FDB</a></span>, <span class='object_link'><a href="FlashSDK/ADL.html" title="FlashSDK::ADL (class)">ADL</a></span>,
+<span class='object_link'><a href="FlashSDK/ADT.html" title="FlashSDK::ADT (class)">ADT</a></span>, <span class='object_link'><a href="FlashPlayer/Task.html" title="FlashPlayer::Task (class)">FlashPlayer::Task</a></span></p>
+
+<h1>Libraries</h1>
+
+<p>There is a growing collection of libraries that have been made available to
+Sprouts users. The first of these projects is the automated unit test
+framework, <a href="http://asunit.org">AsUnit</a>.</p>
+
+<p>To include a new Sprout Library into your project, you'll need to take the
+following steps:</p>
+<ul><li>
+<p>Add it to your Gemfile like:</p>
+
+<pre class="code"><span class='id gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>asunit4</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt;= 4.0.0.pre</span><span class='tstring_end'>&quot;</span></span></pre>
+</li><li>
+<p>Add it to your Rakefile like:</p>
+
+<pre class="code"><span class='id library'>library</span> <span class='symbol'>:asunit4</span></pre>
+</li><li>
+<p>Add it to your Rake Task like:</p>
+
+<pre class="code">mxmlc 'bin/SomeProjectRunner.swf' =&gt; :asunit4 do |t|
+  ...
+end</pre>
+</li><li>
+<p>From your project root, run:</p>
+
+<pre class="code"><span class='id bundle'>bundle</span> <span class='id install'>install</span></pre>
+</li></ul>
+
+<p>If you're interested in learning more about how to <em>create</em> new
+libraries, check out the <span class='object_link'><a href="Sprout/Library.html" title="Sprout::Library (class)">Sprout::Library</a></span> documentation.</p>
+
+<h1>Executables / Runtimes</h1>
+
+<p>The FlasSDK also includes a number of tools that help us compile and run
+ActionScript (or AIR) applications.</p>
+
+<p>These executables are usually accessed via Rake, and shouldn't require any
+manual intervention, but some of you are interested in where these
+applications live and how to change how they're accessed.</p>
+
+<p>Following are the {Sprout::Specification}s that are included with the
+FlashSDK:</p>
+<ul><li>
+<p><a href="file.specification.html" title="flashsdk/lib/flashplayer/specification.rb">flashsdk/lib/flashplayer/specification.rb</a></p>
+</li><li>
+<p><a href="file.flex3.html" title="flashsdk/lib/flex3.rb">flashsdk/lib/flex3.rb</a></p>
+</li><li>
+<p><a href="file.flex4.html" title="flashsdk/lib/flex4.rb">flashsdk/lib/flex4.rb</a></p>
+</li></ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><h2>Defined Under Namespace</h2>
+<p class="children">
+   
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="FlashSDK/FlashHelper.html" title="FlashSDK::FlashHelper (module)">FlashHelper</a></span>
+    
+   
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="FlashSDK/ADL.html" title="FlashSDK::ADL (class)">ADL</a></span>, <span class='object_link'><a href="FlashSDK/ADT.html" title="FlashSDK::ADT (class)">ADT</a></span>, <span class='object_link'><a href="FlashSDK/AMXMLC.html" title="FlashSDK::AMXMLC (class)">AMXMLC</a></span>, <span class='object_link'><a href="FlashSDK/COMPC.html" title="FlashSDK::COMPC (class)">COMPC</a></span>, <span class='object_link'><a href="FlashSDK/ClassGenerator.html" title="FlashSDK::ClassGenerator (class)">ClassGenerator</a></span>, <span class='object_link'><a href="FlashSDK/CompilerBase.html" title="FlashSDK::CompilerBase (class)">CompilerBase</a></span>, <span class='object_link'><a href="FlashSDK/FDB.html" title="FlashSDK::FDB (class)">FDB</a></span>, <span class='object_link'><a href="FlashSDK/FlexProjectGenerator.html" title="FlashSDK::FlexProjectGenerator (class)">FlexProjectGenerator</a></span>, <span class='object_link'><a href="FlashSDK/MXMLC.html" title="FlashSDK::MXMLC (class)">MXMLC</a></span>, <span class='object_link'><a href="FlashSDK/ProjectGenerator.html" title="FlashSDK::ProjectGenerator (class)">ProjectGenerator</a></span>, <span class='object_link'><a href="FlashSDK/TestClassGenerator.html" title="FlashSDK::TestClassGenerator (class)">TestClassGenerator</a></span>
+    
+  
+</p>
+
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="VERSION-constant" class="">VERSION =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>File</span><span class='period'>.</span><span class='id read'>read</span><span class='lparen'>(</span><span class='id version_file'>version_file</span><span class='rparen'>)</span><span class='period'>.</span><span class='id strip'>strip</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Dec 23 00:24:49 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

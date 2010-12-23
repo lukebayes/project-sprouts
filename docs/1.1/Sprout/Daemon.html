@@ -1,0 +1,967 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: Sprout::Daemon</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (D)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Sprout.html" title="Sprout (module)">Sprout</a></span></span>
+     &raquo; 
+    <span class="title">Daemon</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Sprout::Daemon
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="Executable/Base.html" title="Sprout::Executable::Base (class)">Executable::Base</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Executable/Base.html" title="Sprout::Executable::Base (class)">Executable::Base</a></span></li>
+          
+            <li class="next">Sprout::Daemon</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">sprout/lib/sprout/daemon.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The Sprout::Daemon class exposes the Domain Specific Language provided by
+the Sprout::Executable, along with enhancements (and modifications) to
+support long-lived processes (like FDB and FCSH).</p>
+
+<pre class="code"><span class='comment'>##
+</span><span class='comment'># The Foo class extends Sprout::Daemon
+</span><span class='kw'>class</span> <span class='const'>Foo</span> <span class='op'>&lt;</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Daemon</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Keep in mind that we're still working
+</span>  <span class='comment'># with Executable, so add_param is available
+</span>  <span class='comment'># for the initialization of the process.
+</span>  <span class='id add_param'>add_param</span> <span class='symbol'>:input</span><span class='comma'>,</span> <span class='const'>File</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Expose the do_something action after
+</span>  <span class='comment'># the process is started.
+</span>  <span class='id add_action'>add_action</span> <span class='symbol'>:do_something</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># Expose the do_something_else action after
+</span>  <span class='comment'># the process is started.
+</span>  <span class='id add_action'>add_action</span> <span class='symbol'>:do_something_else</span>
+<span class='kw'>end</span></pre>
+
+<p>You can also create a globally-accessible rake task to use your new Daemon
+instance by creating a method like the following:</p>
+
+<pre class="code"><span class='kw'>def</span> <span class='id foo'>foo</span> <span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id foo_tool'>foo_tool</span> <span class='op'>=</span> <span class='const'>Foo</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id foo_tool'>foo_tool</span><span class='period'>.</span><span class='id to_rake'>to_rake</span> <span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+<span class='kw'>end</span></pre>
+
+<p>The previous Rake task could be used like:</p>
+
+<pre class="code"><span class='id foo'>foo</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Bar.txt</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id do_something'>do_something</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id do_something_else'>do_something_else</span>
+<span class='kw'>end</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="../FlashSDK/FDB.html" title="FlashSDK::FDB (class)">FlashSDK::FDB</a></span></p>
+</div>
+
+  <h2>Constant Summary</h2>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Constants included from <span class='object_link'><a href="Executable.html" title="Sprout::Executable (module)">Executable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Executable.html#DEFAULT_FILE_EXPRESSION-constant" title="Sprout::Executable::DEFAULT_FILE_EXPRESSION (constant)">DEFAULT_FILE_EXPRESSION</a></span>, <span class='object_link'><a href="Executable.html#DEFAULT_PREFIX-constant" title="Sprout::Executable::DEFAULT_PREFIX (constant)">DEFAULT_PREFIX</a></span>, <span class='object_link'><a href="Executable.html#DEFAULT_SHORT_PREFIX-constant" title="Sprout::Executable::DEFAULT_SHORT_PREFIX (constant)">DEFAULT_SHORT_PREFIX</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#prompt-instance_method" title="#prompt (instance method)">- (Regexp) <strong>prompt</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The prompt expression for this daemon process.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_action-class_method" title="add_action (class method)">+ (nil) <strong>add_action</strong>(name, arguments = nil, options = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Add an action that can be called while the long-lived process is active.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_action_alias-class_method" title="add_action_alias (class method)">+ (nil) <strong>add_action_alias</strong>(alias_name, source_name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create an (often shorter) alias to an existing action name.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#action_stack-instance_method" title="#action_stack (instance method)">- (Array&lt;Hash&gt;) <strong>action_stack</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return or create a new array.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#create_outer_task-instance_method" title="#create_outer_task (instance method)">- (Rake::Task) <strong>create_outer_task</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is the override of the underlying Sprout::Executable template method
+so that we create a 'task' instead of a 'file' task.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#execute-instance_method" title="#execute (instance method)">- (Object) <strong>execute</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Execute the Daemon executable, followed by the collection of stored actions
+in  the order they were called.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#system_execute-instance_method" title="#system_execute (instance method)">- (Thread) <strong>system_execute</strong>(binary, params) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is the override of the underlying Sprout::Executable template method
+so that we create the process in a thread  in order to read and write to
+it.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#update_rake_task_name_from_args-instance_method" title="#update_rake_task_name_from_args (instance method)">- (String) <strong>update_rake_task_name_from_args</strong>(*args) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is the override of the underlying Sprout::Executable template method
+so that we are NOT added to the CLEAN collection.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Executable/Base.html" title="Sprout::Executable::Base (class)">Executable::Base</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Executable/Base.html#add_param-class_method" title="Sprout::Executable::Base.add_param (method)">add_param</a></span>, <span class='object_link'><a href="Executable/Base.html#add_param_alias-class_method" title="Sprout::Executable::Base.add_param_alias (method)">add_param_alias</a></span>, <span class='object_link'><a href="Executable/Base.html#default_file_expression-instance_method" title="Sprout::Executable::Base#default_file_expression (method)">#default_file_expression</a></span>, <span class='object_link'><a href="Executable/Base.html#execute_delegate-instance_method" title="Sprout::Executable::Base#execute_delegate (method)">#execute_delegate</a></span>, <span class='object_link'><a href="Executable/Base.html#from_hash-instance_method" title="Sprout::Executable::Base#from_hash (method)">#from_hash</a></span>, <span class='object_link'><a href="Executable/Base.html#initialize-instance_method" title="Sprout::Executable::Base#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="Executable/Base.html#library_added-instance_method" title="Sprout::Executable::Base#library_added (method)">#library_added</a></span>, <span class='object_link'><a href="Executable/Base.html#parse%21-instance_method" title="Sprout::Executable::Base#parse! (method)">#parse!</a></span>, <span class='object_link'><a href="Executable/Base.html#parse_extra_options%21-instance_method" title="Sprout::Executable::Base#parse_extra_options! (method)">#parse_extra_options!</a></span>, <span class='object_link'><a href="Executable/Base.html#parse_rake_task_arg-instance_method" title="Sprout::Executable::Base#parse_rake_task_arg (method)">#parse_rake_task_arg</a></span>, <span class='object_link'><a href="Executable/Base.html#prepare-instance_method" title="Sprout::Executable::Base#prepare (method)">#prepare</a></span>, <span class='object_link'><a href="Executable/Base.html#set-class_method" title="Sprout::Executable::Base.set (method)">set</a></span>, <span class='object_link'><a href="Executable/Base.html#static_default_value_collection-class_method" title="Sprout::Executable::Base.static_default_value_collection (method)">static_default_value_collection</a></span>, <span class='object_link'><a href="Executable/Base.html#static_parameter_collection-class_method" title="Sprout::Executable::Base.static_parameter_collection (method)">static_parameter_collection</a></span>, <span class='object_link'><a href="Executable/Base.html#to_hash-instance_method" title="Sprout::Executable::Base#to_hash (method)">#to_hash</a></span>, <span class='object_link'><a href="Executable/Base.html#to_help-instance_method" title="Sprout::Executable::Base#to_help (method)">#to_help</a></span>, <span class='object_link'><a href="Executable/Base.html#to_rake-instance_method" title="Sprout::Executable::Base#to_rake (method)">#to_rake</a></span>, <span class='object_link'><a href="Executable/Base.html#to_shell-instance_method" title="Sprout::Executable::Base#to_shell (method)">#to_shell</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="Concern.html" title="Sprout::Concern (module)">Concern</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Concern.html#append_features-instance_method" title="Sprout::Concern#append_features (method)">#append_features</a></span>, <span class='object_link'><a href="Concern.html#extended-class_method" title="Sprout::Concern.extended (method)">extended</a></span>, <span class='object_link'><a href="Concern.html#included-instance_method" title="Sprout::Concern#included (method)">#included</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="Executable/Base.html#initialize-instance_method" title="Sprout::Executable::Base#initialize (method)">Sprout::Executable::Base</a></span></p>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="prompt=-instance_method"></span>
+      <span id="prompt-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="prompt-instance_method">
+  
+    - (<tt>Regexp</tt>) <strong>prompt</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The prompt expression for this daemon process.</p>
+
+<p>When executing a series of commands, the wrapper will wait until it matches
+this expression on stdout before continuing the series.</p>
+
+<p>For FDB, this value is set like:</p>
+
+<pre class="code"><span class='id set'>set</span> <span class='symbol'>:prompt</span><span class='comma'>,</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^\(fdb\) </span><span class='regexp_end'>/</span></span></pre>
+
+<p>Most processes can trigger a variety of different prompts, these can be
+expressed here using the | (or) operator.</p>
+
+<p>FDB actually uses the following:</p>
+
+<pre class="code"><span class='id set'>set</span> <span class='symbol'>:prompt</span><span class='comma'>,</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^\(fdb\) |\(y or n\) </span><span class='regexp_end'>/</span></span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Regexp</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+140
+141
+142</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 140</span>
+
+<span class='kw'>def</span> <span class='id prompt'>prompt</span>
+  <span class='ivar'>@prompt</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="add_action-class_method">
+  
+    + (<tt>nil</tt>) <strong>add_action</strong>(name, arguments = nil, options = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Add an action that can be called while the long-lived process is active.</p>
+
+<p>This method should raise a Sprout::Errors::UsageError if the provided
+action name is already defined for  the provided instance.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Symbol</tt>, <tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+        <span class='name'>name</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The name of the method.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;Object&gt;</tt>)</span>
+      
+      
+        <span class='name'>arguments</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An array of arguments that the method accepts.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The options hash is reserved for future use.</p>
+
+<p>class Foo &lt; Sprout::Daemon</p>
+
+<pre class="code"><span class='id add_action'>add_action</span> <span class='symbol'>:continue</span>
+
+<span class='id add_action'>add_action</span> <span class='symbol'>:quit</span></pre>
+
+<p>end</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72
+73
+74
+75
+76</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='id add_action'>add_action</span> <span class='id name'>name</span><span class='comma'>,</span> <span class='id arguments'>arguments</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id options'>options</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:name</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id name'>name</span>
+  <span class='id options'>options</span><span class='lbracket'>[</span><span class='symbol'>:arguments</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id arguments'>arguments</span>
+  <span class='id create_action_method'>create_action_method</span> <span class='id options'>options</span>
+  <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="add_action_alias-class_method">
+  
+    + (<tt>nil</tt>) <strong>add_action_alias</strong>(alias_name, source_name) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Create an (often shorter) alias to an existing action name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#add_action-class_method" title="Sprout::Daemon.add_action (method)">add_action</a></span></li>
+    
+  </ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87
+88
+89
+90</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 85</span>
+
+<span class='kw'>def</span> <span class='id add_action_alias'>add_action_alias</span> <span class='id alias_name'>alias_name</span><span class='comma'>,</span> <span class='id source_name'>source_name</span>
+  <span class='id define_method'>define_method</span><span class='lparen'>(</span><span class='id alias_name'>alias_name</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='op'>*</span><span class='id params'>params</span><span class='op'>|</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='id source_name'>source_name</span><span class='comma'>,</span> <span class='id params'>params</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="action_stack-instance_method">
+  
+    - (<tt>Array&lt;Hash&gt;</tt>) <strong>action_stack</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Return or create a new array.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;Hash&gt;</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Return or create a new array.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+144
+145
+146</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 144</span>
+
+<span class='kw'>def</span> <span class='id action_stack'>action_stack</span>
+  <span class='ivar'>@action_stack</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_outer_task-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></tt>) <strong>create_outer_task</strong>(*args)  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>This is the override of the underlying Sprout::Executable template method
+so that we create a 'task' instead of a 'file' task.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+172
+173
+174
+175
+176</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 172</span>
+
+<span class='kw'>def</span> <span class='id create_outer_task'>create_outer_task</span> <span class='op'>*</span><span class='id args'>args</span>
+  <span class='id task'>task</span> <span class='op'>*</span><span class='id args'>args</span> <span class='kw'>do</span>
+    <span class='id execute'>execute</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="execute-instance_method">
+  
+    - (<tt>Object</tt>) <strong>execute</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Execute the Daemon executable, followed by the collection of stored actions
+in  the order they were called.</p>
+
+<p>If none of the stored actions result in terminating the process, the
+underlying daemon will be connected to the terminal for user (manual)
+input.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+157
+158
+159
+160
+161
+162</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 157</span>
+
+<span class='kw'>def</span> <span class='id execute'>execute</span>
+  <span class='id runner'>runner</span> <span class='op'>=</span> <span class='kw'>super</span>
+  <span class='id execute_actions'>execute_actions</span> <span class='id runner'>runner</span>
+  <span class='id handle_user_session'>handle_user_session</span> <span class='id runner'>runner</span>
+  <span class='const'>Process</span><span class='period'>.</span><span class='id wait'>wait</span> <span class='id runner'>runner</span><span class='period'>.</span><span class='id pid'>pid</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="system_execute-instance_method">
+  
+    - (<tt>Thread</tt>) <strong>system_execute</strong>(binary, params)  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>This is the override of the underlying Sprout::Executable template method
+so that we create the process in a thread  in order to read and write to
+it.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Thread</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+196
+197
+198</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 196</span>
+
+<span class='kw'>def</span> <span class='id system_execute'>system_execute</span> <span class='id binary'>binary</span><span class='comma'>,</span> <span class='id params'>params</span>
+  <span class='const'>Sprout</span><span class='period'>.</span><span class='id current_system'>current_system</span><span class='period'>.</span><span class='id execute_thread'>execute_thread</span> <span class='id binary'>binary</span><span class='comma'>,</span> <span class='id params'>params</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="update_rake_task_name_from_args-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>update_rake_task_name_from_args</strong>(*args)  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>This is the override of the underlying Sprout::Executable template method
+so that we are NOT added to the CLEAN collection. (Work performed in the
+Executable)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+185
+186
+187</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 185</span>
+
+<span class='kw'>def</span> <span class='id update_rake_task_name_from_args'>update_rake_task_name_from_args</span> <span class='op'>*</span><span class='id args'>args</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id rake_task_name'>rake_task_name</span> <span class='op'>=</span> <span class='id parse_rake_task_arg'>parse_rake_task_arg</span> <span class='id args'>args</span><span class='period'>.</span><span class='id last'>last</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Dec 23 00:24:50 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

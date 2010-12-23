@@ -1,0 +1,1246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: Sprout::ArchiveUnpacker</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (A)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Sprout.html" title="Sprout (module)">Sprout</a></span></span>
+     &raquo; 
+    <span class="title">ArchiveUnpacker</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Sprout::ArchiveUnpacker
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Sprout::ArchiveUnpacker</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">sprout/lib/sprout/archive_unpacker.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>Given a source, destination and archive type (or ability to infer it),
+unpack the provided archive.</p>
+
+<pre class="code"><span class='id unpacker'>unpacker</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>ArchiveUnpacker</span><span class='period'>.</span><span class='id new'>new</span>
+<span class='id unpacker'>unpacker</span><span class='period'>.</span><span class='id unpack'>unpack</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Foo.zip</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>unpacked/</span><span class='tstring_end'>&quot;</span></span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy_file-instance_method" title="#copy_file (instance method)">- (File) <strong>copy_file</strong>(file, destination, clobber = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Rather than unpacking, safely copy the file from one location to another.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_darwin%3F-instance_method" title="#is_darwin? (instance method)">- (Boolean) <strong>is_darwin?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if we're on a Darwin native system (OSX).</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_exe%3F-instance_method" title="#is_exe? (instance method)">- (Boolean) <strong>is_exe?</strong>(archive, type = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the downloaded archive is a .exe file or the <tt>type</tt>
+argument is <tt>:exe</tt>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_rb%3F-instance_method" title="#is_rb? (instance method)">- (Boolean) <strong>is_rb?</strong>(archive, type = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the downloaded archive is a .rb file or the <tt>type</tt>
+argument is <tt>:rb</tt>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_swc%3F-instance_method" title="#is_swc? (instance method)">- (Boolean) <strong>is_swc?</strong>(archive, type = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the downloaded archive is a .swc file or the <tt>type</tt>
+argument is <tt>:swc</tt>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_tgz%3F-instance_method" title="#is_tgz? (instance method)">- (Boolean) <strong>is_tgz?</strong>(archive, type = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Return true if the provided file name looks like a tar.gz file or the
+<tt>type</tt> argument is <tt>:tgz</tt>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_zip%3F-instance_method" title="#is_zip? (instance method)">- (Boolean) <strong>is_zip?</strong>(archive, type = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns true if the provided file name looks like a zip file or the
+<tt>type</tt> argument is <tt>:zip</tt>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unpack-instance_method" title="#unpack (instance method)">- (String) <strong>unpack</strong>(archive, destination, type = nil, clobber = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Unpack the provided <tt>archive</tt> into the provided
+<tt>destination</tt>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unpack_tgz-instance_method" title="#unpack_tgz (instance method)">- (File) <strong>unpack_tgz</strong>(archive, destination, clobber = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Unpack tar.gz or .tgz files on any platform.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unpack_zip-instance_method" title="#unpack_zip (instance method)">- (File) <strong>unpack_zip</strong>(archive, destination, clobber = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Unpack zip archives on any platform using whatever strategy is most
+efficient and reliable.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#unpack_zip_on_darwin-instance_method" title="#unpack_zip_on_darwin (instance method)">- (File) <strong>unpack_zip_on_darwin</strong>(archive, destination, clobber) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Optimization for zip files on OSX.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="copy_file-instance_method">
+  
+    - (<tt>File</tt>) <strong>copy_file</strong>(file, destination, clobber = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Rather than unpacking, safely copy the file from one location to another.
+This method is generally used when .exe files are downloaded directly.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the file or directory that was created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/archive_unpacker.rb', line 125</span>
+
+<span class='kw'>def</span> <span class='id copy_file'>copy_file</span> <span class='id file'>file</span><span class='comma'>,</span> <span class='id destination'>destination</span><span class='comma'>,</span> <span class='id clobber'>clobber</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id validate'>validate</span> <span class='id file'>file</span><span class='comma'>,</span> <span class='id destination'>destination</span>
+  <span class='id target'>target</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id expand_path'>expand_path</span><span class='lparen'>(</span> <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='id destination'>destination</span><span class='comma'>,</span> <span class='const'>File</span><span class='period'>.</span><span class='id basename'>basename</span><span class='lparen'>(</span><span class='id file'>file</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id exists?'>exists?</span><span class='lparen'>(</span><span class='id target'>target</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id clobber'>clobber</span> <span class='op'>!=</span> <span class='symbol'>:clobber</span><span class='rparen'>)</span>
+    <span class='id raise'>raise</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Errors</span><span class='op'>::</span><span class='const'>DestinationExistsError</span><span class='period'>.</span><span class='id new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unable to copy </span><span class='embexpr_beg'>#{</span><span class='id file'>file</span><span class='rbrace'>}</span><span class='tstring_content'> to </span><span class='embexpr_beg'>#{</span><span class='id target'>target</span><span class='rbrace'>}</span><span class='tstring_content'> because target already exists and we were not asked to :clobber it</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+  <span class='const'>FileUtils</span><span class='period'>.</span><span class='id mkdir_p'>mkdir_p</span> <span class='id destination'>destination</span>
+  <span class='const'>FileUtils</span><span class='period'>.</span><span class='id cp_r'>cp_r</span> <span class='id file'>file</span><span class='comma'>,</span> <span class='id destination'>destination</span>
+
+  <span class='id destination'>destination</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="is_darwin?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>is_darwin?</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Return true if we're on a Darwin native system (OSX).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/archive_unpacker.rb', line 72</span>
+
+<span class='kw'>def</span> <span class='id is_darwin?'>is_darwin?</span>
+  <span class='const'>Sprout</span><span class='period'>.</span><span class='id current_system'>current_system</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>OSXSystem</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="is_exe?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>is_exe?</strong>(archive, type = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Return true if the downloaded archive is a .exe file or the <tt>type</tt>
+argument is <tt>:exe</tt>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+154
+155
+156</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/archive_unpacker.rb', line 154</span>
+
+<span class='kw'>def</span> <span class='id is_exe?'>is_exe?</span> <span class='id archive'>archive</span><span class='comma'>,</span> <span class='id type'>type</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id type'>type</span> <span class='op'>==</span> <span class='symbol'>:exe</span> <span class='op'>||</span> <span class='op'>!</span><span class='id archive'>archive</span><span class='period'>.</span><span class='id match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\.exe$</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="is_rb?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>is_rb?</strong>(archive, type = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Return true if the downloaded archive is a .rb file or the <tt>type</tt>
+argument is <tt>:rb</tt>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/archive_unpacker.rb', line 168</span>
+
+<span class='kw'>def</span> <span class='id is_rb?'>is_rb?</span> <span class='id archive'>archive</span><span class='comma'>,</span> <span class='id type'>type</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id type'>type</span> <span class='op'>==</span> <span class='symbol'>:rb</span> <span class='op'>||</span> <span class='op'>!</span><span class='id archive'>archive</span><span class='period'>.</span><span class='id match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\.rb$</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="is_swc?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>is_swc?</strong>(archive, type = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Return true if the downloaded archive is a .swc file or the <tt>type</tt>
+argument is <tt>:swc</tt>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+161
+162
+163</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/archive_unpacker.rb', line 161</span>
+
+<span class='kw'>def</span> <span class='id is_swc?'>is_swc?</span> <span class='id archive'>archive</span><span class='comma'>,</span> <span class='id type'>type</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id type'>type</span> <span class='op'>==</span> <span class='symbol'>:swc</span> <span class='op'>||</span> <span class='op'>!</span><span class='id archive'>archive</span><span class='period'>.</span><span class='id match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\.swc$</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="is_tgz?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>is_tgz?</strong>(archive, type = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Return true if the provided file name looks like a tar.gz file or the
+<tt>type</tt> argument is <tt>:tgz</tt>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+147
+148
+149</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/archive_unpacker.rb', line 147</span>
+
+<span class='kw'>def</span> <span class='id is_tgz?'>is_tgz?</span> <span class='id archive'>archive</span><span class='comma'>,</span> <span class='id type'>type</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id type'>type</span> <span class='op'>==</span> <span class='symbol'>:tgz</span> <span class='op'>||</span> <span class='op'>!</span><span class='id archive'>archive</span><span class='period'>.</span><span class='id match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\.tgz$</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='op'>||</span> <span class='op'>!</span><span class='id archive'>archive</span><span class='period'>.</span><span class='id match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\.tar.gz$</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="is_zip?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>is_zip?</strong>(archive, type = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns true if the provided file name looks like a zip file or the
+<tt>type</tt> argument is <tt>:zip</tt>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+140
+141
+142</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/archive_unpacker.rb', line 140</span>
+
+<span class='kw'>def</span> <span class='id is_zip?'>is_zip?</span> <span class='id archive'>archive</span><span class='comma'>,</span> <span class='id type'>type</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id type'>type</span> <span class='op'>==</span> <span class='symbol'>:zip</span> <span class='op'>||</span> <span class='op'>!</span><span class='id archive'>archive</span><span class='period'>.</span><span class='id match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\.zip$</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="unpack-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>unpack</strong>(archive, destination, type = nil, clobber = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Unpack the provided <tt>archive</tt> into the provided
+<tt>destination</tt>.</p>
+
+<p>If a <tt>type</tt> is not provided, a type will be inferred from the file
+name suffix.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+        <span class='name'>archive</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the archive that will be unpacked (or copied)</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Path</tt>)</span>
+      
+      
+        <span class='name'>destination</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the folder where unpacked files should be placed (or copied).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+        <span class='name'>type</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The type of the archive in cases where it can't be inferred from the name.
+Acceptable values are: :zip, :tgz, :swc, :exe or :rb</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <span class='name'>clobber</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>If the destination already contains the expected file(s),  the unpacker
+will not run unless <tt>clobber</tt> is true.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>path to the unpacked files (usually same as destination).</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Raises:</h3>
+<ul class="raise">
+  
+    <li>
+      
+        <span class='type'></span>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>Sprout::Errors::UnknownArchiveType If the archive type cannot be inferred
+and a valid type is not provided.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/archive_unpacker.rb', line 27</span>
+
+<span class='kw'>def</span> <span class='id unpack'>unpack</span> <span class='id archive'>archive</span><span class='comma'>,</span> <span class='id destination'>destination</span><span class='comma'>,</span> <span class='id type'>type</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id clobber'>clobber</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='kw'>return</span> <span class='id unpack_zip'>unpack_zip</span><span class='lparen'>(</span><span class='id archive'>archive</span><span class='comma'>,</span> <span class='id destination'>destination</span><span class='comma'>,</span> <span class='id clobber'>clobber</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id is_zip?'>is_zip?</span><span class='lparen'>(</span><span class='id archive'>archive</span><span class='comma'>,</span> <span class='id type'>type</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='id unpack_tgz'>unpack_tgz</span><span class='lparen'>(</span><span class='id archive'>archive</span><span class='comma'>,</span> <span class='id destination'>destination</span><span class='comma'>,</span> <span class='id clobber'>clobber</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id is_tgz?'>is_tgz?</span><span class='lparen'>(</span><span class='id archive'>archive</span><span class='comma'>,</span> <span class='id type'>type</span><span class='rparen'>)</span>
+
+  <span class='comment'># This is definitely debatable, should we copy the file even if it's
+</span>  <span class='comment'># not an archive that we're about to unpack?
+</span>  <span class='comment'># If so, why would we only do this with some subset of file types?
+</span>  <span class='comment'># Opinions welcome here...
+</span>  <span class='kw'>return</span> <span class='id copy_file'>copy_file</span><span class='lparen'>(</span><span class='id archive'>archive</span><span class='comma'>,</span> <span class='id destination'>destination</span><span class='comma'>,</span> <span class='id clobber'>clobber</span><span class='rparen'>)</span>  <span class='kw'>if</span> <span class='id is_copyable?'>is_copyable?</span><span class='lparen'>(</span><span class='id archive'>archive</span><span class='rparen'>)</span>
+
+  <span class='id raise'>raise</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Errors</span><span class='op'>::</span><span class='const'>UnknownArchiveType</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unsupported or unknown archive type encountered with: </span><span class='embexpr_beg'>#{</span><span class='id archive'>archive</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="unpack_tgz-instance_method">
+  
+    - (<tt>File</tt>) <strong>unpack_tgz</strong>(archive, destination, clobber = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Unpack tar.gz or .tgz files on any platform.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the file or directory that was created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/archive_unpacker.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='id unpack_tgz'>unpack_tgz</span> <span class='id archive'>archive</span><span class='comma'>,</span> <span class='id destination'>destination</span><span class='comma'>,</span> <span class='id clobber'>clobber</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id validate'>validate</span> <span class='id archive'>archive</span><span class='comma'>,</span> <span class='id destination'>destination</span>
+
+  <span class='id tar'>tar</span> <span class='op'>=</span> <span class='const'>Zlib</span><span class='op'>::</span><span class='const'>GzipReader</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id open'>open</span><span class='lparen'>(</span><span class='id archive'>archive</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>rb</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id should_unpack_tgz?'>should_unpack_tgz?</span><span class='lparen'>(</span><span class='id destination'>destination</span><span class='comma'>,</span> <span class='id clobber'>clobber</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id raise'>raise</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Errors</span><span class='op'>::</span><span class='const'>DestinationExistsError</span><span class='period'>.</span><span class='id new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unable to unpack </span><span class='embexpr_beg'>#{</span><span class='id archive'>archive</span><span class='rbrace'>}</span><span class='tstring_content'> into </span><span class='embexpr_beg'>#{</span><span class='id destination'>destination</span><span class='rbrace'>}</span><span class='tstring_content'> without explicit :clobber argument</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+
+  <span class='const'>Archive</span><span class='op'>::</span><span class='const'>Tar</span><span class='op'>::</span><span class='const'>Minitar</span><span class='period'>.</span><span class='id unpack'>unpack</span><span class='lparen'>(</span><span class='id tar'>tar</span><span class='comma'>,</span> <span class='id destination'>destination</span><span class='rparen'>)</span>
+
+  <span class='comment'># Recurse and unpack gzipped children (Adobe did this double 
+</span>  <span class='comment'># gzip with the Linux FlashPlayer for some weird reason)
+</span>  <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id destination'>destination</span><span class='rbrace'>}</span><span class='tstring_content'>/**/*.tgz</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id destination'>destination</span><span class='rbrace'>}</span><span class='tstring_content'>/**/*.tar.gz</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id pattern'>pattern</span><span class='op'>|</span>
+    <span class='const'>Dir</span><span class='period'>.</span><span class='id glob'>glob</span><span class='lparen'>(</span><span class='id pattern'>pattern</span><span class='rparen'>)</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id child'>child</span><span class='op'>|</span>
+      <span class='kw'>if</span><span class='lparen'>(</span><span class='id child'>child</span> <span class='op'>!=</span> <span class='id archive'>archive</span> <span class='op'>&amp;&amp;</span> <span class='id dir'>dir</span> <span class='op'>!=</span> <span class='const'>File</span><span class='period'>.</span><span class='id dirname'>dirname</span><span class='lparen'>(</span><span class='id child'>child</span><span class='rparen'>)</span><span class='rparen'>)</span>
+        <span class='id unpack_tgz'>unpack_tgz</span><span class='lparen'>(</span><span class='id child'>child</span><span class='comma'>,</span> <span class='const'>File</span><span class='period'>.</span><span class='id dirname'>dirname</span><span class='lparen'>(</span><span class='id child'>child</span><span class='rparen'>)</span><span class='rparen'>)</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="unpack_zip-instance_method">
+  
+    - (<tt>File</tt>) <strong>unpack_zip</strong>(archive, destination, clobber = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Unpack zip archives on any platform using whatever strategy is most
+efficient and reliable.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+        <span class='name'>archive</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the archive that will be unpacked.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Path</tt>)</span>
+      
+      
+        <span class='name'>destination</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the folder where unpacked files should be placed.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <span class='name'>clobber</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>If the destination already contains the expected file(s),  the unpacker
+will not run unless <tt>clobber</tt> is true.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the file or directory that was created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/archive_unpacker.rb', line 49</span>
+
+<span class='kw'>def</span> <span class='id unpack_zip'>unpack_zip</span> <span class='id archive'>archive</span><span class='comma'>,</span> <span class='id destination'>destination</span><span class='comma'>,</span> <span class='id clobber'>clobber</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id validate'>validate</span> <span class='id archive'>archive</span><span class='comma'>,</span> <span class='id destination'>destination</span>
+
+  <span class='comment'>##
+</span>  <span class='comment'># As it turns out, the Rubyzip library corrupts
+</span>  <span class='comment'># binary files (like the Flash Player) on OSX and is also
+</span>  <span class='comment'># horribly slow for large archives (like the ~120MB Flex SDK)
+</span>  <span class='comment'># on all platforms.
+</span>  <span class='kw'>if</span> <span class='id is_darwin?'>is_darwin?</span>
+    <span class='id unpack_zip_on_darwin'>unpack_zip_on_darwin</span> <span class='id archive'>archive</span><span class='comma'>,</span> <span class='id destination'>destination</span><span class='comma'>,</span> <span class='id clobber'>clobber</span>
+  <span class='kw'>else</span>
+    <span class='const'>Zip</span><span class='op'>::</span><span class='const'>ZipFile</span><span class='period'>.</span><span class='id open'>open</span> <span class='id archive'>archive</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id zipfile'>zipfile</span><span class='op'>|</span>
+      <span class='id zipfile'>zipfile</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id entry'>entry</span><span class='op'>|</span>
+        <span class='kw'>next</span> <span class='kw'>if</span> <span class='id entry'>entry</span><span class='period'>.</span><span class='id name'>name</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>__MACOSX</span><span class='regexp_end'>/</span></span> <span class='kw'>or</span> <span class='id entry'>entry</span><span class='period'>.</span><span class='id name'>name</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\.DS_Store</span><span class='regexp_end'>/</span></span>
+          <span class='id unpack_zip_entry'>unpack_zip_entry</span> <span class='id entry'>entry</span><span class='comma'>,</span> <span class='id destination'>destination</span><span class='comma'>,</span> <span class='id clobber'>clobber</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="unpack_zip_on_darwin-instance_method">
+  
+    - (<tt>File</tt>) <strong>unpack_zip_on_darwin</strong>(archive, destination, clobber) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Optimization for zip files on OSX. Uses the native 'unzip' utility which is
+much faster (and more reliable)  than Ruby for large archives (like the
+Flex SDK) and  binaries that Ruby corrupts (like the Flash Player).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the file or directory that was created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+83
+84
+85
+86
+87
+88
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/archive_unpacker.rb', line 83</span>
+
+<span class='kw'>def</span> <span class='id unpack_zip_on_darwin'>unpack_zip_on_darwin</span> <span class='id archive'>archive</span><span class='comma'>,</span> <span class='id destination'>destination</span><span class='comma'>,</span> <span class='id clobber'>clobber</span>
+  <span class='comment'># Unzipping on OS X
+</span>  <span class='const'>FileUtils</span><span class='period'>.</span><span class='id makedirs'>makedirs</span> <span class='id destination'>destination</span>
+  <span class='id zip_dir'>zip_dir</span>  <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id expand_path'>expand_path</span> <span class='const'>File</span><span class='period'>.</span><span class='id dirname'>dirname</span><span class='lparen'>(</span><span class='id archive'>archive</span><span class='rparen'>)</span>
+  <span class='id zip_name'>zip_name</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id basename'>basename</span> <span class='id archive'>archive</span>
+  <span class='id output'>output</span>   <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id expand_path'>expand_path</span> <span class='id destination'>destination</span>
+  <span class='comment'># puts &quot;&gt;&gt; zip_dir: #{zip_dir} zip_name: #{zip_name} output: #{output}&quot;
+</span>  <span class='backtick'>%x(</span><span class='tstring_content'>cd </span><span class='embexpr_beg'>#{</span><span class='id zip_dir'>zip_dir</span><span class='rbrace'>}</span><span class='tstring_content'>;unzip </span><span class='embexpr_beg'>#{</span><span class='id zip_name'>zip_name</span><span class='rbrace'>}</span><span class='tstring_content'> -d </span><span class='embexpr_beg'>#{</span><span class='id output'>output</span><span class='rbrace'>}</span><span class='tstring_end'>)</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Dec 23 00:24:54 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>File: flex4</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: flex4</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'>
+<p>Sprout::Specification.new do |s|</p>
+
+<pre class="code"><span class='comment'># This is the Specification that loads the Flex 4 SDK,
+</span><span class='comment'># To use the Flex 4 SDK from your build tasks, you can
+</span><span class='comment'># simply update the pkg_name parameter of your build 
+</span><span class='comment'># task as follows:
+</span><span class='comment'>#
+</span><span class='comment'>#   mxmlc 'bin/SomeProject.swf' do |t|
+</span><span class='comment'>#     t.input       = 'src/SomeProject.as'
+</span><span class='comment'>#     t.pkg_name    = 'flex4'
+</span><span class='comment'>#   end
+</span><span class='comment'>#
+</span><span class='comment'># If you'd like to consume any of the libraries that
+</span><span class='comment'># are included with the Flex SDK, you can embed them
+</span><span class='comment'># from your Rakefile as follows:
+</span><span class='comment'>#
+</span><span class='comment'>#   library :f_textlayout
+</span><span class='comment'>#
+</span><span class='comment'>#   mxmlc 'bin/SomeProject.swf' =&gt; :f_textlayout do |t|
+</span><span class='comment'>#     t.input = 'src/SomeProject.as'
+</span><span class='comment'>#   end
+</span><span class='comment'>#
+</span><span class='comment'># If you'd like to consume one of the localized frameworks
+</span><span class='comment'># you can set that up as follows:
+</span><span class='comment'>#
+</span><span class='comment'>#   library 'flex_4_es_ES'
+</span><span class='comment'>#
+</span><span class='comment'>#   mxmlc 'bin/SomeProject.swf' =&gt; 'flex_4_es_ES' do |t|
+</span><span class='comment'>#     t.input = 'src/SomeProject.as'
+</span><span class='comment'>#   end
+</span><span class='comment'>#
+</span><span class='id s'>s</span><span class='period'>.</span><span class='id name'>name</span>    <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>flex4</span><span class='tstring_end'>'</span></span>
+<span class='id s'>s</span><span class='period'>.</span><span class='id version'>version</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>4.1.0.16076</span><span class='tstring_end'>'</span></span>
+
+<span class='id s'>s</span><span class='period'>.</span><span class='id add_remote_file_target'>add_remote_file_target</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id platform'>platform</span>     <span class='op'>=</span> <span class='symbol'>:universal</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id archive_type'>archive_type</span> <span class='op'>=</span> <span class='symbol'>:zip</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id url'>url</span>          <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://fpdownload.adobe.com/pub/flex/sdk/builds/flex4/flex_sdk_4.1.0.16076.zip</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id md5'>md5</span>          <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>4c5f3d3fa4e1f5be244679210cd852c0</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='comment'># Executables: (add .exe suffix if it was passed in)
+</span>  <span class='id t'>t</span><span class='period'>.</span><span class='id add_executable'>add_executable</span> <span class='symbol'>:aasdoc</span><span class='comma'>,</span>     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/aasdoc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_executable'>add_executable</span> <span class='symbol'>:acompc</span><span class='comma'>,</span>     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/acompc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_executable'>add_executable</span> <span class='symbol'>:adl</span><span class='comma'>,</span>        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/adl</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_executable'>add_executable</span> <span class='symbol'>:adt</span><span class='comma'>,</span>        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/adt</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_executable'>add_executable</span> <span class='symbol'>:amxmlc</span><span class='comma'>,</span>     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/amxmlc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_executable'>add_executable</span> <span class='symbol'>:asdoc</span><span class='comma'>,</span>      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/asdoc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_executable'>add_executable</span> <span class='symbol'>:compc</span><span class='comma'>,</span>      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/compc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_executable'>add_executable</span> <span class='symbol'>:copylocale</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/compc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_executable'>add_executable</span> <span class='symbol'>:digest</span><span class='comma'>,</span>     <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/digest</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_executable'>add_executable</span> <span class='symbol'>:fcsh</span><span class='comma'>,</span>       <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/fcsh</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_executable'>add_executable</span> <span class='symbol'>:fdb</span><span class='comma'>,</span>        <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/fdb</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_executable'>add_executable</span> <span class='symbol'>:mxmlc</span><span class='comma'>,</span>      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/mxmlc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_executable'>add_executable</span> <span class='symbol'>:optimizer</span><span class='comma'>,</span>  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/optimizer</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='comment'># Flex framework SWCs:
+</span>  <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='symbol'>:flex</span><span class='comma'>,</span>            <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/libs/flex.swc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='symbol'>:flex4</span><span class='comma'>,</span>           <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/libs/flex4.swc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='symbol'>:f_textlayout</span><span class='comma'>,</span>    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/libs/framework_textLayout.swc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='symbol'>:framework</span><span class='comma'>,</span>       <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/libs/framework.swc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='symbol'>:rpc</span><span class='comma'>,</span>             <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/libs/rpc.swc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='symbol'>:sparkskins</span><span class='comma'>,</span>      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/libs/sparkskins.swc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='symbol'>:textlayout</span><span class='comma'>,</span>      <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/libs/textLayout.swc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='symbol'>:utilities</span><span class='comma'>,</span>       <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/libs/utilities.swc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='symbol'>:playerglobal_9</span><span class='comma'>,</span>  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/libs/player/9/playerglobal.swc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='symbol'>:playerglobal_10</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/libs/player/10/playerglobal.swc</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='comment'># AsDoc templates:
+</span>  <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='symbol'>:asdoc_templates</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>asdoc/templates</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='comment'># Locale-Specific Flex SWCs:
+</span>  <span class='lbracket'>[</span>
+    <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>da_DK</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>de_DE</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>en_US</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>es_ES</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>fi_FL</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>fr_FR</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>it_IT</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ja_JP</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> 
+    <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ko_KR</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>nb_NO</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>nl_NL</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>pt_BR</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ru_RU</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>sv_SE</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>zh_CN</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>zh_TW</span><span class='tstring_end'>'</span></span>
+  <span class='rbracket'>]</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id locale'>locale</span><span class='op'>|</span>
+    <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>flex_4_</span><span class='embexpr_beg'>#{</span><span class='id locale'>locale</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id to_sym'>to_sym</span><span class='comma'>,</span>       <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/locale/</span><span class='embexpr_beg'>#{</span><span class='id locale'>locale</span><span class='rbrace'>}</span><span class='tstring_content'>/flex4_rb.swc</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>airframework_</span><span class='embexpr_beg'>#{</span><span class='id locale'>locale</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id to_sym'>to_sym</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/locale/</span><span class='embexpr_beg'>#{</span><span class='id locale'>locale</span><span class='rbrace'>}</span><span class='tstring_content'>/airframework_rb.swc</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>framework_</span><span class='embexpr_beg'>#{</span><span class='id locale'>locale</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id to_sym'>to_sym</span><span class='comma'>,</span>    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/locale/</span><span class='embexpr_beg'>#{</span><span class='id locale'>locale</span><span class='rbrace'>}</span><span class='tstring_content'>/framework_rb.swc</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id t'>t</span><span class='period'>.</span><span class='id add_library'>add_library</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rpc_</span><span class='embexpr_beg'>#{</span><span class='id locale'>locale</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id to_sym'>to_sym</span><span class='comma'>,</span>          <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frameworks/locale/</span><span class='embexpr_beg'>#{</span><span class='id locale'>locale</span><span class='rbrace'>}</span><span class='tstring_content'>/rpc_rb.swc</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+
+<p>end</p>
+</div></div>
+    
+    <div id="footer">
+  Generated on Thu Dec 23 00:24:49 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

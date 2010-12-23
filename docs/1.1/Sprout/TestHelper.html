@@ -1,0 +1,2260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Module: Sprout::TestHelper</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (T)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Sprout.html" title="Sprout (module)">Sprout</a></span></span>
+     &raquo; 
+    <span class="title">TestHelper</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Sprout::TestHelper
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+      <dt class="r1">Includes:</dt>
+      <dd class="r1">Gem::DefaultUserInteraction</dd>
+      
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">sprout/lib/sprout/test_helper.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A collection of custom assertions and helper methods to take some of the
+suck out of testing functionality that is based on Sprout features.</p>
+
+<p>Include this module into your test cases to make testing Sprout tools
+easier.</p>
+
+<pre class="code"><span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>sprout/test/sprout_test_helper</span><span class='tstring_end'>'</span></span>
+
+<span class='kw'>class</span> <span class='const'>SomeTestCase</span> <span class='op'>&lt;</span> <span class='const'>Test</span><span class='op'>::</span><span class='const'>Unit</span><span class='op'>::</span><span class='const'>TestCase</span>
+  <span class='id include'>include</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>TestHelper</span>
+
+  <span class='kw'>def</span> <span class='id setup'>setup</span>
+    <span class='kw'>super</span>
+    <span class='comment'># do something
+</span>  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id teardown'>teardown</span>
+    <span class='kw'>super</span>
+    <span class='comment'># do something
+</span>  <span class='kw'>end</span>
+
+  <span class='kw'>def</span> <span class='id test_something'>test_something</span>
+    <span class='id assert_file'>assert_file</span> <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='id fixtures'>fixtures</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>some_file</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id f'>f</span><span class='op'>|</span>
+      <span class='id assert_matches'>assert_matches</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>Fred</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='id f'>f</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="FIXTURES_NAME-constant" class="">FIXTURES_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The name of the folder that should contain fixture data.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+        </dt>
+        <dd><pre class="code"><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>fixtures</span><span class='tstring_end'>'</span></span></pre></dd>
+      
+    </dl>
+  
+
+
+  
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#as_a_mac_system-instance_method" title="#as_a_mac_system (instance method)">- (Sprout::System::OSXSystem) <strong>as_a_mac_system</strong> {|Sprout::System::OSXSystem| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Execute a block as a OSXSystem.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#as_a_unix_system-instance_method" title="#as_a_unix_system (instance method)">- (Sprout::System::UnixSystem) <strong>as_a_unix_system</strong> {|Sprout::System::UnixSystem| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Execute a block as a UnixSystem.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#as_a_win_nix_system-instance_method" title="#as_a_win_nix_system (instance method)">- (Sprout::System::WinNixSystem) <strong>as_a_win_nix_system</strong> {|Sprout::System::WinNixSystem| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Execute a block as a WinNixSystem.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#as_a_windows_system-instance_method" title="#as_a_windows_system (instance method)">- (Sprout::System::WinSystem) <strong>as_a_windows_system</strong> {|Sprout::System::WinSystem| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Execute a block as a WinSystem.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#as_each_system-instance_method" title="#as_each_system (instance method)">- (Sprout::System::BaseSystem) <strong>as_each_system</strong> {|Sprout::System::BaseSystem| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Execute a block as each available Sprout::System, any code within this
+block that calls Sprout.current_user will receive the currently active
+Sprout::System.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#assert_directory-instance_method" title="#assert_directory (instance method)">- (Object) <strong>assert_directory</strong>(path, message = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Assert that a directory exists at <tt>path</tt> and display
+<tt>message</tt> if it does not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#assert_file-instance_method" title="#assert_file (instance method)">- (Object) <strong>assert_file</strong>(path, message = nil) {|String| ... }</a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Assert that a file exists at <tt>path</tt> and display <tt>message</tt>  if
+it does not.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#assert_matches-instance_method" title="#assert_matches (instance method)">- (Object) <strong>assert_matches</strong>(expression, string, message = '') </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Assert that an expression matches the provided string.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#assert_not_empty-instance_method" title="#assert_not_empty (instance method)">- (Object) <strong>assert_not_empty</strong>(path, message = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Assert that a file exists at <tt>path</tt> and is not empty.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#clear_tasks-instance_method" title="#clear_tasks (instance method)">- (Object) <strong>clear_tasks</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Clear all registered Rake tasks.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#create_file-instance_method" title="#create_file (instance method)">- (File) <strong>create_file</strong>(path) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create an empty file at <tt>path</tt>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#fixtures-instance_method" title="#fixtures (instance method)">- (Dir) <strong>fixtures</strong>(from = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>the text case that calls this method.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#get_task-instance_method" title="#get_task (instance method)">- (Rake::Task) <strong>get_task</strong>(name) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieve a registered Rake task by name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#insert_fake_executable-instance_method" title="#insert_fake_executable (instance method)">- (Object) <strong>insert_fake_executable</strong>(fake) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Update the Sprout::Executable registry so that subsequent requests for an
+executable return a fake one instead of the real one.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#make_temp_folder-instance_method" title="#make_temp_folder (instance method)">- (Dir) <strong>make_temp_folder</strong>(from) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a temporary folder relative to the provided path.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#remove_file-instance_method" title="#remove_file (instance method)">- (Object) <strong>remove_file</strong>(path = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Remove a file if it exists.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#run_task-instance_method" title="#run_task (instance method)">- (Rake::Task) <strong>run_task</strong>(name) </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Invoke a Rake task by name.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#setup-instance_method" title="#setup (instance method)">- (Object) <strong>setup</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Override the setup method in order to record the  working directory before
+the test method runs.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#skip-instance_method" title="#skip (instance method)">- (Object) <strong>skip</strong>(message = &quot;&quot;) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#teardown-instance_method" title="#teardown (instance method)">- (Object) <strong>teardown</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Override the teardown method in order to perform systemic cleanup work
+like, clearing lingering rake tasks, and removing temporary folders.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#temp_cache-instance_method" title="#temp_cache (instance method)">- (Dir) <strong>temp_cache</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create and/or return sprout/cache directory relative to the fixtures folder
+nearest the file that calls this method.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#temp_path-instance_method" title="#temp_path (instance method)">- (Dir) <strong>temp_path</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a temporary folder relative to the test case that calls this method.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="as_a_mac_system-instance_method">
+  
+    - (<tt><span class='object_link'><a href="System/OSXSystem.html" title="Sprout::System::OSXSystem (class)">Sprout::System::OSXSystem</a></span></tt>) <strong>as_a_mac_system</strong> {|Sprout::System::OSXSystem| ... } <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Execute a block as a OSXSystem.</p>
+
+<pre class="code"><span class='id as_a_mac_system'>as_a_mac_system</span> <span class='kw'>do</span>
+   <span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt;&gt; Sprout.home: </span><span class='embexpr_beg'>#{</span><span class='const'>Sprout</span><span class='period'>.</span><span class='id home'>home</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="System/OSXSystem.html" title="Sprout::System::OSXSystem (class)">Sprout::System::OSXSystem</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The current Sprout::System.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="System/OSXSystem.html" title="Sprout::System::OSXSystem (class)">Sprout::System::OSXSystem</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The Sprout::System that was created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 324</span>
+
+<span class='kw'>def</span> <span class='id as_a_mac_system'>as_a_mac_system</span>
+  <span class='id sys'>sys</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>OSXSystem</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='period'>.</span><span class='id stubs'>stubs</span><span class='lparen'>(</span><span class='symbol'>:create</span><span class='rparen'>)</span><span class='period'>.</span><span class='id returns'>returns</span> <span class='id sys'>sys</span>
+  <span class='kw'>yield</span> <span class='id sys'>sys</span> <span class='kw'>if</span> <span class='id block_given?'>block_given?</span>
+  <span class='comment'># Ugh - This is way too greedy... We're killing all mocks in here
+</span>  <span class='comment'># Doing it anyway b/c we need to get Windows support in place...
+</span>  <span class='comment'># TODO: Implement this feature without clobbering all stubs/mocks
+</span>  <span class='comment'>#Mocha::Mockery.instance.teardown
+</span>  <span class='id sys'>sys</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="as_a_unix_system-instance_method">
+  
+    - (<tt><span class='object_link'><a href="System/UnixSystem.html" title="Sprout::System::UnixSystem (class)">Sprout::System::UnixSystem</a></span></tt>) <strong>as_a_unix_system</strong> {|Sprout::System::UnixSystem| ... } <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Execute a block as a UnixSystem.</p>
+
+<pre class="code"><span class='id as_a_unix_system'>as_a_unix_system</span> <span class='kw'>do</span>
+   <span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt;&gt; Sprout.home: </span><span class='embexpr_beg'>#{</span><span class='const'>Sprout</span><span class='period'>.</span><span class='id home'>home</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="System/UnixSystem.html" title="Sprout::System::UnixSystem (class)">Sprout::System::UnixSystem</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The current Sprout::System.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="System/UnixSystem.html" title="Sprout::System::UnixSystem (class)">Sprout::System::UnixSystem</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The Sprout::System that was created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 304</span>
+
+<span class='kw'>def</span> <span class='id as_a_unix_system'>as_a_unix_system</span>
+  <span class='id sys'>sys</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>UnixSystem</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id expectation'>expectation</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='period'>.</span><span class='id stubs'>stubs</span><span class='lparen'>(</span><span class='symbol'>:create</span><span class='rparen'>)</span><span class='period'>.</span><span class='id returns'>returns</span> <span class='id sys'>sys</span>
+  <span class='kw'>yield</span> <span class='id sys'>sys</span> <span class='kw'>if</span> <span class='id block_given?'>block_given?</span>
+  <span class='comment'># Ugh - This is way too greedy... We're killing all mocks in here
+</span>  <span class='comment'># Doing it anyway b/c we need to get Windows support in place...
+</span>  <span class='comment'># TODO: Implement this feature without clobbering all stubs/mocks
+</span>  <span class='comment'>#Mocha::Mockery.instance.teardown
+</span>  <span class='id sys'>sys</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="as_a_win_nix_system-instance_method">
+  
+    - (<tt><span class='object_link'><a href="System/WinNixSystem.html" title="Sprout::System::WinNixSystem (class)">Sprout::System::WinNixSystem</a></span></tt>) <strong>as_a_win_nix_system</strong> {|Sprout::System::WinNixSystem| ... } <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Execute a block as a WinNixSystem.</p>
+
+<pre class="code"><span class='id as_a_win_nix_system'>as_a_win_nix_system</span> <span class='kw'>do</span>
+   <span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt;&gt; Sprout.home: </span><span class='embexpr_beg'>#{</span><span class='const'>Sprout</span><span class='period'>.</span><span class='id home'>home</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="System/WinNixSystem.html" title="Sprout::System::WinNixSystem (class)">Sprout::System::WinNixSystem</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The current Sprout::System.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="System/WinNixSystem.html" title="Sprout::System::WinNixSystem (class)">Sprout::System::WinNixSystem</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The Sprout::System that was created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 364</span>
+
+<span class='kw'>def</span> <span class='id as_a_win_nix_system'>as_a_win_nix_system</span>
+  <span class='id sys'>sys</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>WinNixSystem</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='period'>.</span><span class='id stubs'>stubs</span><span class='lparen'>(</span><span class='symbol'>:create</span><span class='rparen'>)</span><span class='period'>.</span><span class='id returns'>returns</span> <span class='id sys'>sys</span>
+  <span class='kw'>yield</span> <span class='id sys'>sys</span> <span class='kw'>if</span> <span class='id block_given?'>block_given?</span>
+  <span class='comment'># Ugh - This is way too greedy... We're killing all mocks in here
+</span>  <span class='comment'># Doing it anyway b/c we need to get Windows support in place...
+</span>  <span class='comment'># TODO: Implement this feature without clobbering all stubs/mocks
+</span>  <span class='comment'>#Mocha::Mockery.instance.teardown
+</span>  <span class='id sys'>sys</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="as_a_windows_system-instance_method">
+  
+    - (<tt><span class='object_link'><a href="System/WinSystem.html" title="Sprout::System::WinSystem (class)">Sprout::System::WinSystem</a></span></tt>) <strong>as_a_windows_system</strong> {|Sprout::System::WinSystem| ... } <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Execute a block as a WinSystem.</p>
+
+<pre class="code"><span class='id as_a_windows_system'>as_a_windows_system</span> <span class='kw'>do</span>
+   <span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt;&gt; Sprout.home: </span><span class='embexpr_beg'>#{</span><span class='const'>Sprout</span><span class='period'>.</span><span class='id home'>home</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="System/WinSystem.html" title="Sprout::System::WinSystem (class)">Sprout::System::WinSystem</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The current Sprout::System.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="System/WinSystem.html" title="Sprout::System::WinSystem (class)">Sprout::System::WinSystem</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The Sprout::System that was created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 344</span>
+
+<span class='kw'>def</span> <span class='id as_a_windows_system'>as_a_windows_system</span>
+  <span class='id sys'>sys</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>WinSystem</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='period'>.</span><span class='id stubs'>stubs</span><span class='lparen'>(</span><span class='symbol'>:create</span><span class='rparen'>)</span><span class='period'>.</span><span class='id returns'>returns</span> <span class='id sys'>sys</span>
+  <span class='kw'>yield</span> <span class='id sys'>sys</span> <span class='kw'>if</span> <span class='id block_given?'>block_given?</span>
+  <span class='comment'># Ugh - This is way too greedy... We're killing all mocks in here
+</span>  <span class='comment'># Doing it anyway b/c we need to get Windows support in place...
+</span>  <span class='comment'># TODO: Implement this feature without clobbering all stubs/mocks
+</span>  <span class='comment'>#Mocha::Mockery.instance.teardown
+</span>  <span class='id sys'>sys</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="as_each_system-instance_method">
+  
+    - (<tt><span class='object_link'><a href="System/BaseSystem.html" title="Sprout::System::BaseSystem (class)">Sprout::System::BaseSystem</a></span></tt>) <strong>as_each_system</strong> {|Sprout::System::BaseSystem| ... } <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Execute a block as each available Sprout::System, any code within this
+block that calls Sprout.current_user will receive the currently active
+Sprout::System.</p>
+
+<pre class="code"><span class='id as_each_system'>as_each_system</span> <span class='kw'>do</span>
+  <span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt;&gt; Sprout.home: </span><span class='embexpr_beg'>#{</span><span class='const'>Sprout</span><span class='period'>.</span><span class='id home'>home</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+
+<p>This method is primarily used to ensure that we create  system-appropriate
+paths and processes.</p>
+
+<p>NOTE: This process automatically calls Mocha::Mockery.instance.teardown
+after the yield. This means that any mocks that have been created will no
+longer be available after the provided block is complete.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="System/BaseSystem.html" title="Sprout::System::BaseSystem (class)">Sprout::System::BaseSystem</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The concrete subclass of BaseSystem</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="System/BaseSystem.html" title="Sprout::System::BaseSystem (class)">Sprout::System::BaseSystem</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The concrete class that was created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 276</span>
+
+<span class='kw'>def</span> <span class='id as_each_system'>as_each_system</span>
+  <span class='lbracket'>[</span>
+   <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>VistaSystem</span><span class='period'>.</span><span class='id new'>new</span><span class='comma'>,</span>
+   <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>WinNixSystem</span><span class='period'>.</span><span class='id new'>new</span><span class='comma'>,</span>
+   <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>WinSystem</span><span class='period'>.</span><span class='id new'>new</span><span class='comma'>,</span>
+   <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>JavaSystem</span><span class='period'>.</span><span class='id new'>new</span><span class='comma'>,</span>
+   <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>OSXSystem</span><span class='period'>.</span><span class='id new'>new</span><span class='comma'>,</span>
+   <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>UnixSystem</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='rbracket'>]</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id sys'>sys</span><span class='op'>|</span>
+    <span class='id expectation'>expectation</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='period'>.</span><span class='id stubs'>stubs</span><span class='lparen'>(</span><span class='symbol'>:create</span><span class='rparen'>)</span><span class='period'>.</span><span class='id returns'>returns</span> <span class='id sys'>sys</span>
+    <span class='kw'>yield</span> <span class='id sys'>sys</span> <span class='kw'>if</span> <span class='id block_given?'>block_given?</span>
+    <span class='comment'># Ugh - This is way too greedy... We're killing all mocks in here
+</span>    <span class='comment'># Doing it anyway b/c we need to get Windows support in place...
+</span>    <span class='comment'># TODO: Implement this feature without clobbering all stubs/mocks
+</span>    <span class='const'>Mocha</span><span class='op'>::</span><span class='const'>Mockery</span><span class='period'>.</span><span class='id instance'>instance</span><span class='period'>.</span><span class='id teardown'>teardown</span>
+    <span class='id sys'>sys</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="assert_directory-instance_method">
+  
+    - (<tt>Object</tt>) <strong>assert_directory</strong>(path, message = nil)  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Assert that a directory exists at <tt>path</tt> and display
+<tt>message</tt> if it does not.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Dir.html" title="Dir (class)">Dir</a></span></tt>)</span>
+      
+      
+        <span class='name'>path</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the directory that should exist.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+        <span class='name'>message</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The message that should be displayed if the expected directory does not
+exist.</p>
+
+<p>assert_directory File.join(fixtures, 'SomeDir')</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+191
+192
+193
+194</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 191</span>
+
+<span class='kw'>def</span> <span class='id assert_directory'>assert_directory</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id message'>message</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id message'>message</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Expected directory not found at </span><span class='embexpr_beg'>#{</span><span class='id path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id assert'>assert</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id directory?'>directory?</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id message'>message</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="assert_file-instance_method">
+  
+    - (<tt>Object</tt>) <strong>assert_file</strong>(path, message = nil) {|String| ... } <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Assert that a file exists at <tt>path</tt> and display <tt>message</tt>  if
+it does not.</p>
+
+<p>This method yields the file contents so that you can write  readable tests
+like:</p>
+
+<pre class="code"><span class='id assert_file'>assert_file</span> <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='id fixtures'>fixtures</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>my_file</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id f'>f</span><span class='op'>|</span>
+  <span class='id assert_matches'>assert_matches</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>Johnny</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='id f'>f</span>
+<span class='kw'>end</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+        <span class='name'>path</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the file that should exist.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+        <span class='name'>message</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The message that should be displayed if the expected file does not exist.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The contents of the file.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+176
+177
+178
+179
+180</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 176</span>
+
+<span class='kw'>def</span> <span class='id assert_file'>assert_file</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id message'>message</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id message'>message</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Expected file not found at </span><span class='embexpr_beg'>#{</span><span class='id path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id assert'>assert</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id exists?'>exists?</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id message'>message</span><span class='rparen'>)</span>
+  <span class='kw'>yield</span> <span class='const'>File</span><span class='period'>.</span><span class='id read'>read</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id block_given?'>block_given?</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="assert_matches-instance_method">
+  
+    - (<tt>Object</tt>) <strong>assert_matches</strong>(expression, string, message = '')  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Assert that an expression matches the provided string.</p>
+
+<p>This helper mainly makes tests more readable and provides simpler failure
+messages without extra work.</p>
+
+<pre class="code"><span class='id assert_matches'>assert_matches</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>Fred</span><span class='regexp_end'>/</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Bill, Fred, Bob</span><span class='tstring_end'>'</span></span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+220
+221
+222
+223
+224
+225
+226
+227</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 220</span>
+
+<span class='kw'>def</span> <span class='id assert_matches'>assert_matches</span><span class='lparen'>(</span><span class='id expression'>expression</span><span class='comma'>,</span> <span class='id string'>string</span><span class='comma'>,</span> <span class='id message'>message</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id expression'>expression</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id expresion'>expresion</span> <span class='op'>=</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='embexpr_beg'>#{</span><span class='id expression'>expression</span><span class='rbrace'>}</span><span class='regexp_end'>/</span></span>
+  <span class='kw'>end</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='op'>!</span><span class='id string'>string</span><span class='period'>.</span><span class='id match'>match</span><span class='lparen'>(</span><span class='id expression'>expression</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='id fail'>fail</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id message'>message</span><span class='rbrace'>}</span><span class='tstring_content'> - '</span><span class='embexpr_beg'>#{</span><span class='id string'>string</span><span class='rbrace'>}</span><span class='tstring_content'>' should include '</span><span class='embexpr_beg'>#{</span><span class='id expression'>expression</span><span class='rbrace'>}</span><span class='tstring_content'>'</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="assert_not_empty-instance_method">
+  
+    - (<tt>Object</tt>) <strong>assert_not_empty</strong>(path, message = nil)  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Assert that a file exists at <tt>path</tt> and is not empty. Display
+<tt>message</tt> if the file does not exist or if it is empty.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+        <span class='name'>path</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the file that should exist.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+        <span class='name'>message</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The message that should be displayed if  the expected file does not exist
+or is empty.</p>
+
+<p>assert_not_empty File.join(fixtures, 'SomeFile')</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+205
+206
+207
+208
+209
+210</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 205</span>
+
+<span class='kw'>def</span> <span class='id assert_not_empty'>assert_not_empty</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id message'>message</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id assert_file'>assert_file</span> <span class='id path'>path</span><span class='comma'>,</span> <span class='id message'>message</span>
+  <span class='id files'>files</span> <span class='op'>=</span> <span class='const'>FileList</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id path'>path</span><span class='rbrace'>}</span><span class='tstring_content'>/*</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='id message'>message</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> - Expected </span><span class='embexpr_beg'>#{</span><span class='id path'>path</span><span class='rbrace'>}</span><span class='tstring_content'> to not be empty, but it was</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id assert'>assert</span> <span class='id files'>files</span><span class='period'>.</span><span class='id size'>size</span> <span class='op'>&gt;</span> <span class='int'>0</span><span class='comma'>,</span> <span class='id message'>message</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="clear_tasks-instance_method">
+  
+    - (<tt>Object</tt>) <strong>clear_tasks</strong>  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Clear all registered Rake tasks.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+133
+134
+135
+136
+137</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 133</span>
+
+<span class='kw'>def</span> <span class='id clear_tasks'>clear_tasks</span>
+  <span class='const'>CLEAN</span><span class='period'>.</span><span class='id delete_if'>delete_if</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id a'>a</span><span class='op'>|</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
+  <span class='const'>Rake</span><span class='op'>::</span><span class='const'>Task</span><span class='period'>.</span><span class='id clear'>clear</span>
+  <span class='const'>Rake</span><span class='period'>.</span><span class='id application'>application</span><span class='period'>.</span><span class='id clear'>clear</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_file-instance_method">
+  
+    - (<tt>File</tt>) <strong>create_file</strong>(path)  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Create an empty file at <tt>path</tt></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+        <span class='name'>The</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>path to the file that should be created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The path to the file.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+144
+145
+146
+147
+148</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 144</span>
+
+<span class='kw'>def</span> <span class='id create_file'>create_file</span> <span class='id path'>path</span>
+  <span class='id dir'>dir</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id dirname'>dirname</span> <span class='id path'>path</span>
+  <span class='const'>FileUtils</span><span class='period'>.</span><span class='id mkdir_p'>mkdir_p</span> <span class='id dir'>dir</span>
+  <span class='const'>FileUtils</span><span class='period'>.</span><span class='id touch'>touch</span> <span class='id path'>path</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="fixtures-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Dir.html" title="Dir (class)">Dir</a></span></tt>) <strong>fixtures</strong>(from = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>the text case that calls this method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Dir.html" title="Dir (class)">Dir</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to a fixtures folder that is next to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+56
+57
+58</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 56</span>
+
+<span class='kw'>def</span> <span class='id fixtures'>fixtures</span> <span class='id from'>from</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='ivar'>@fixtures</span> <span class='op'>||=</span> <span class='id find_fixtures'>find_fixtures</span><span class='lparen'>(</span><span class='id from'>from</span> <span class='op'>||</span> <span class='const'>Sprout</span><span class='period'>.</span><span class='id file_from_caller'>file_from_caller</span><span class='lparen'>(</span><span class='id caller'>caller</span><span class='period'>.</span><span class='id first'>first</span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_task-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></tt>) <strong>get_task</strong>(name)  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieve a registered Rake task by name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The task that was found.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127
+128
+129</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 127</span>
+
+<span class='kw'>def</span> <span class='id get_task'>get_task</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+  <span class='kw'>return</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id application'>application</span><span class='lbracket'>[</span><span class='id name'>name</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="insert_fake_executable-instance_method">
+  
+    - (<tt>Object</tt>) <strong>insert_fake_executable</strong>(fake)  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Update the Sprout::Executable registry so that subsequent requests for an
+executable return a fake one instead of the real one.</p>
+
+<p>Note: Calling this method will set a mocha expectation that the
+Sprout::Executable.load method will be called during the test method run.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+        <span class='name'>exe</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The executable that will be sent to the load request (e.g. :fdb, :mxmlc,
+etc.).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+        <span class='name'>fake_name</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The path to the fake executable that should be used.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+241
+242
+243
+244
+245
+246</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 241</span>
+
+<span class='kw'>def</span> <span class='id insert_fake_executable'>insert_fake_executable</span> <span class='id fake'>fake</span>
+  <span class='comment'># Comment the following and install the flashsdk gem
+</span>  <span class='comment'># to run test against actual executables instead of fakes:
+</span>  <span class='id path_response'>path_response</span> <span class='op'>=</span> <span class='const'>OpenStruct</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:path</span> <span class='op'>=&gt;</span> <span class='id fake'>fake</span><span class='rparen'>)</span>
+  <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Executable</span><span class='period'>.</span><span class='id expects'>expects</span><span class='lparen'>(</span><span class='symbol'>:load</span><span class='rparen'>)</span><span class='period'>.</span><span class='id returns'>returns</span> <span class='id path_response'>path_response</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="make_temp_folder-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Dir.html" title="Dir (class)">Dir</a></span></tt>) <strong>make_temp_folder</strong>(from)  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a temporary folder relative to the provided path.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Dir.html" title="Dir (class)">Dir</a></span></tt>)</span>
+      
+      
+        <span class='name'>from</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Folder within which a 'tmp' folder should be added.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Dir.html" title="Dir (class)">Dir</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the requested temp folder.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107
+108
+109
+110
+111</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 107</span>
+
+<span class='kw'>def</span> <span class='id make_temp_folder'>make_temp_folder</span> <span class='id from'>from</span>
+  <span class='id dir'>dir</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='id fixtures'>fixtures</span><span class='lparen'>(</span><span class='id from'>from</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>tmp</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='const'>FileUtils</span><span class='period'>.</span><span class='id mkdir_p'>mkdir_p</span> <span class='id dir'>dir</span>
+  <span class='id dir'>dir</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="remove_file-instance_method">
+  
+    - (<tt>Object</tt>) <strong>remove_file</strong>(path = nil)  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Remove a file if it exists. If no file exists, do nothing.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+        <span class='name'>path</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the file that should be removed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+155
+156
+157
+158
+159</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 155</span>
+
+<span class='kw'>def</span> <span class='id remove_file'>remove_file</span><span class='lparen'>(</span><span class='id path'>path</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='id path'>path</span> <span class='op'>&amp;&amp;</span> <span class='const'>File</span><span class='period'>.</span><span class='id exists?'>exists?</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span><span class='rparen'>)</span>
+    <span class='const'>FileUtils</span><span class='period'>.</span><span class='id rm_rf'>rm_rf</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="run_task-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></tt>) <strong>run_task</strong>(name)  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Invoke a Rake task by name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Rake/Task.html" title="Rake::Task (class)">Rake::Task</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The task that was invoked.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+117
+118
+119
+120
+121</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 117</span>
+
+<span class='kw'>def</span> <span class='id run_task'>run_task</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
+  <span class='id t'>t</span> <span class='op'>=</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id application'>application</span><span class='lbracket'>[</span><span class='id name'>name</span><span class='rbracket'>]</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id invoke'>invoke</span>
+  <span class='kw'>return</span> <span class='id t'>t</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="setup-instance_method">
+  
+    - (<tt>Object</tt>) <strong>setup</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Override the setup method in order to record the  working directory before
+the test method runs.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+63
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 63</span>
+
+<span class='kw'>def</span> <span class='id setup'>setup</span>
+  <span class='kw'>super</span>
+  <span class='ivar'>@start_path</span> <span class='op'>=</span> <span class='const'>Dir</span><span class='period'>.</span><span class='id pwd'>pwd</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="skip-instance_method">
+  
+    - (<tt>Object</tt>) <strong>skip</strong>(message = &quot;&quot;) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+47
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 47</span>
+
+<span class='kw'>def</span> <span class='id skip'>skip</span> <span class='id message'>message</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id puts'>puts</span>
+  <span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>&gt;&gt; SproutTestCase.skip called from: </span><span class='embexpr_beg'>#{</span><span class='id caller'>caller</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_content'> ( </span><span class='embexpr_beg'>#{</span><span class='id message'>message</span><span class='rbrace'>}</span><span class='tstring_content'> )</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="teardown-instance_method">
+  
+    - (<tt>Object</tt>) <strong>teardown</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Override the teardown method in order to perform systemic cleanup work
+like, clearing lingering rake tasks, and removing temporary folders.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 72</span>
+
+<span class='kw'>def</span> <span class='id teardown'>teardown</span>
+  <span class='kw'>super</span>
+  <span class='id clear_tasks'>clear_tasks</span>
+
+  <span class='id remove_file'>remove_file</span> <span class='ivar'>@temp_path</span>
+  <span class='id remove_file'>remove_file</span> <span class='ivar'>@temp_cache</span>
+
+  <span class='ivar'>@temp_path</span>  <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@temp_cache</span> <span class='op'>=</span> <span class='kw'>nil</span>
+
+  <span class='kw'>if</span><span class='lparen'>(</span><span class='ivar'>@start_path</span> <span class='op'>&amp;&amp;</span> <span class='const'>Dir</span><span class='period'>.</span><span class='id pwd'>pwd</span> <span class='op'>!=</span> <span class='ivar'>@start_path</span><span class='rparen'>)</span>
+    <span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[WARNING] &gt;&gt; SproutTestCase changing dir from </span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id pwd'>pwd</span><span class='rbrace'>}</span><span class='tstring_content'> back to: </span><span class='embexpr_beg'>#{</span><span class='ivar'>@start_path</span><span class='rbrace'>}</span><span class='tstring_content'> - Did you mean to leave your working directory in a new place?</span><span class='tstring_end'>&quot;</span></span>
+    <span class='const'>Dir</span><span class='period'>.</span><span class='id chdir'>chdir</span> <span class='ivar'>@start_path</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="temp_cache-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Dir.html" title="Dir (class)">Dir</a></span></tt>) <strong>temp_cache</strong>  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Create and/or return sprout/cache directory relative to the fixtures folder
+nearest the file that calls this method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Dir.html" title="Dir (class)">Dir</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The path to the cache directory.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+252
+253
+254
+255</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 252</span>
+
+<span class='kw'>def</span> <span class='id temp_cache'>temp_cache</span>
+  <span class='id dir'>dir</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id dirname'>dirname</span><span class='lparen'>(</span><span class='const'>Sprout</span><span class='period'>.</span><span class='id file_from_caller'>file_from_caller</span><span class='lparen'>(</span><span class='id caller'>caller</span><span class='period'>.</span><span class='id first'>first</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='ivar'>@temp_cache</span> <span class='op'>||=</span> <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='id fixtures'>fixtures</span><span class='lparen'>(</span><span class='id dir'>dir</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>sprout</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>cache</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="temp_path-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Dir.html" title="Dir (class)">Dir</a></span></tt>) <strong>temp_path</strong>  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a temporary folder relative to the test case that calls this method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Dir.html" title="Dir (class)">Dir</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the requested temp folder.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+95
+96
+97
+98</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 95</span>
+
+<span class='kw'>def</span> <span class='id temp_path'>temp_path</span>
+  <span class='id caller_file'>caller_file</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='period'>.</span><span class='id file_from_caller'>file_from_caller</span> <span class='id caller'>caller</span><span class='period'>.</span><span class='id first'>first</span>
+  <span class='ivar'>@temp_path</span> <span class='op'>||=</span> <span class='id make_temp_folder'>make_temp_folder</span> <span class='const'>File</span><span class='period'>.</span><span class='id dirname'>dirname</span><span class='lparen'>(</span><span class='id caller_file'>caller_file</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Dec 23 00:24:52 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

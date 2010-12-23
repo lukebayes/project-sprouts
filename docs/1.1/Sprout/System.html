@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Module: Sprout::System</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (S)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../Sprout.html" title="Sprout (module)">Sprout</a></span></span>
+     &raquo; 
+    <span class="title">System</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Module: Sprout::System
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">sprout/lib/sprout/system.rb<span class="defines">,<br />
+  sprout/lib/sprout/system/win_system.rb,<br /> sprout/lib/sprout/system/osx_system.rb,<br /> sprout/lib/sprout/system/base_system.rb,<br /> sprout/lib/sprout/system/java_system.rb,<br /> sprout/lib/sprout/system/unix_system.rb,<br /> sprout/lib/sprout/system/vista_system.rb,<br /> flashsdk/lib/flashplayer/system_mixins.rb,<br /> sprout/lib/sprout/system/win_nix_system.rb</span>
+</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Defined Under Namespace</h2>
+<p class="children">
+   
+    
+   
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="System/BaseSystem.html" title="Sprout::System::BaseSystem (class)">BaseSystem</a></span>, <span class='object_link'><a href="System/JavaSystem.html" title="Sprout::System::JavaSystem (class)">JavaSystem</a></span>, <span class='object_link'><a href="System/OSXSystem.html" title="Sprout::System::OSXSystem (class)">OSXSystem</a></span>, <span class='object_link'><a href="System/ThreadMock.html" title="Sprout::System::ThreadMock (class)">ThreadMock</a></span>, <span class='object_link'><a href="System/UnixSystem.html" title="Sprout::System::UnixSystem (class)">UnixSystem</a></span>, <span class='object_link'><a href="System/VistaSystem.html" title="Sprout::System::VistaSystem (class)">VistaSystem</a></span>, <span class='object_link'><a href="System/WinNixSystem.html" title="Sprout::System::WinNixSystem (class)">WinNixSystem</a></span>, <span class='object_link'><a href="System/WinSystem.html" title="Sprout::System::WinSystem (class)">WinSystem</a></span>
+    
+  
+</p>
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create-class_method" title="create (class method)">+ (Object) <strong>create</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This is the factory that one should generally be used to create new,
+concrete System objects.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="create-class_method">
+  
+    + (<tt>Object</tt>) <strong>create</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>This is the factory that one should generally be used to create new,
+concrete System objects.</p>
+
+<p>A typical example follows:</p>
+
+<pre class="code"><span class='id system'>system</span> <span class='op'>=</span> <span class='const'>System</span><span class='period'>.</span><span class='id create'>create</span>
+<span class='const'>Dir</span><span class='period'>.</span><span class='id chdir'>chdir</span> <span class='id system'>system</span><span class='period'>.</span><span class='id home'>home</span>
+<span class='id system'>system</span><span class='period'>.</span><span class='id execute'>execute</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>pwd</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># /home/yourusername</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id create'>create</span>
+  <span class='id p'>p</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Platform</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='kw'>return</span> <span class='const'>VistaSystem</span><span class='period'>.</span><span class='id new'>new</span>  <span class='kw'>if</span> <span class='id p'>p</span><span class='period'>.</span><span class='id vista?'>vista?</span>
+  <span class='kw'>return</span> <span class='const'>WinNixSystem</span><span class='period'>.</span><span class='id new'>new</span> <span class='kw'>if</span> <span class='id p'>p</span><span class='period'>.</span><span class='id windows_nix?'>windows_nix?</span>
+  <span class='kw'>return</span> <span class='const'>WinSystem</span><span class='period'>.</span><span class='id new'>new</span>    <span class='kw'>if</span> <span class='id p'>p</span><span class='period'>.</span><span class='id windows?'>windows?</span>
+  <span class='kw'>return</span> <span class='const'>JavaSystem</span><span class='period'>.</span><span class='id new'>new</span>   <span class='kw'>if</span> <span class='id p'>p</span><span class='period'>.</span><span class='id java?'>java?</span>
+  <span class='kw'>return</span> <span class='const'>OSXSystem</span><span class='period'>.</span><span class='id new'>new</span>    <span class='kw'>if</span> <span class='id p'>p</span><span class='period'>.</span><span class='id mac?'>mac?</span>
+  <span class='kw'>return</span> <span class='const'>UnixSystem</span><span class='period'>.</span><span class='id new'>new</span> 
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Dec 23 00:24:50 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

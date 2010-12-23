@@ -1,0 +1,877 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: FlashSDK::COMPC</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (C)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../FlashSDK.html" title="FlashSDK (module)">FlashSDK</a></span></span>
+     &raquo; 
+    <span class="title">COMPC</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: FlashSDK::COMPC
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="CompilerBase.html" title="FlashSDK::CompilerBase (class)">CompilerBase</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="../Sprout/Executable/Base.html" title="Sprout::Executable::Base (class)">Sprout::Executable::Base</a></span></li>
+          
+            <li class="next"><span class='object_link'><a href="CompilerBase.html" title="FlashSDK::CompilerBase (class)">CompilerBase</a></span></li>
+          
+            <li class="next">FlashSDK::COMPC</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">flashsdk/lib/flashsdk/compc.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+  <h2>Constant Summary</h2>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Constants included from <span class='object_link'><a href="../Sprout/Executable.html" title="Sprout::Executable (module)">Sprout::Executable</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Sprout/Executable.html#DEFAULT_FILE_EXPRESSION-constant" title="Sprout::Executable::DEFAULT_FILE_EXPRESSION (constant)">DEFAULT_FILE_EXPRESSION</a></span>, <span class='object_link'><a href="../Sprout/Executable.html#DEFAULT_PREFIX-constant" title="Sprout::Executable::DEFAULT_PREFIX (constant)">DEFAULT_PREFIX</a></span>, <span class='object_link'><a href="../Sprout/Executable.html#DEFAULT_SHORT_PREFIX-constant" title="Sprout::Executable::DEFAULT_SHORT_PREFIX (constant)">DEFAULT_SHORT_PREFIX</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#directory-instance_method" title="#directory (instance method)">- (Boolean) <strong>directory</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Outputs the SWC file into an open directory format rather than a SWC file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#include_classes-instance_method" title="#include_classes (instance method)">- (Array&lt;String&gt;) <strong>include_classes</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies classes to include in the SWC file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#include_file-instance_method" title="#include_file (instance method)">- (Array&lt;String&gt; [Files]) <strong>include_file</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Adds the file to the SWC file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#include_lookup_only-instance_method" title="#include_lookup_only (instance method)">- (Boolean) <strong>include_lookup_only</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An instance of Boolean.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#include_namespaces-instance_method" title="#include_namespaces (instance method)">- (Array&lt;String&gt;) <strong>include_namespaces</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies namespace-style components in the SWC file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#include_resource_bundles-instance_method" title="#include_resource_bundles (instance method)">- (Array&lt;String&gt; [Files]) <strong>include_resource_bundles</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies the resource bundles to include in this SWC file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#include_sources-instance_method" title="#include_sources (instance method)">- (Array&lt;String&gt; [Paths]) <strong>include_sources</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Specifies classes or directories to add to the SWC file.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#namespace-instance_method" title="#namespace (instance method)">- (String) <strong>namespace</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Not sure about this option, it was in the CLI help, but not documented on
+the Adobe site.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+  
+  
+  
+  
+  
+  <h2>Method Summary</h2>
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="CompilerBase.html" title="FlashSDK::CompilerBase (class)">CompilerBase</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="CompilerBase.html#library_added-instance_method" title="FlashSDK::CompilerBase#library_added (method)">#library_added</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Sprout/Executable/Base.html" title="Sprout::Executable::Base (class)">Sprout::Executable::Base</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Sprout/Executable/Base.html#add_param-class_method" title="Sprout::Executable::Base.add_param (method)">add_param</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#add_param_alias-class_method" title="Sprout::Executable::Base.add_param_alias (method)">add_param_alias</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#create_outer_task-instance_method" title="Sprout::Executable::Base#create_outer_task (method)">#create_outer_task</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#default_file_expression-instance_method" title="Sprout::Executable::Base#default_file_expression (method)">#default_file_expression</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#execute-instance_method" title="Sprout::Executable::Base#execute (method)">#execute</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#execute_delegate-instance_method" title="Sprout::Executable::Base#execute_delegate (method)">#execute_delegate</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#from_hash-instance_method" title="Sprout::Executable::Base#from_hash (method)">#from_hash</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#initialize-instance_method" title="Sprout::Executable::Base#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#library_added-instance_method" title="Sprout::Executable::Base#library_added (method)">#library_added</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#parse%21-instance_method" title="Sprout::Executable::Base#parse! (method)">#parse!</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#parse_extra_options%21-instance_method" title="Sprout::Executable::Base#parse_extra_options! (method)">#parse_extra_options!</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#parse_rake_task_arg-instance_method" title="Sprout::Executable::Base#parse_rake_task_arg (method)">#parse_rake_task_arg</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#prepare-instance_method" title="Sprout::Executable::Base#prepare (method)">#prepare</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#set-class_method" title="Sprout::Executable::Base.set (method)">set</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#static_default_value_collection-class_method" title="Sprout::Executable::Base.static_default_value_collection (method)">static_default_value_collection</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#static_parameter_collection-class_method" title="Sprout::Executable::Base.static_parameter_collection (method)">static_parameter_collection</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#system_execute-instance_method" title="Sprout::Executable::Base#system_execute (method)">#system_execute</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#to_hash-instance_method" title="Sprout::Executable::Base#to_hash (method)">#to_hash</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#to_help-instance_method" title="Sprout::Executable::Base#to_help (method)">#to_help</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#to_rake-instance_method" title="Sprout::Executable::Base#to_rake (method)">#to_rake</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#to_shell-instance_method" title="Sprout::Executable::Base#to_shell (method)">#to_shell</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#update_rake_task_name_from_args-instance_method" title="Sprout::Executable::Base#update_rake_task_name_from_args (method)">#update_rake_task_name_from_args</a></span></p>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods included from <span class='object_link'><a href="../Sprout/Concern.html" title="Sprout::Concern (module)">Sprout::Concern</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="../Sprout/Concern.html#append_features-instance_method" title="Sprout::Concern#append_features (method)">#append_features</a></span>, <span class='object_link'><a href="../Sprout/Concern.html#extended-class_method" title="Sprout::Concern.extended (method)">extended</a></span>, <span class='object_link'><a href="../Sprout/Concern.html#included-instance_method" title="Sprout::Concern#included (method)">#included</a></span></p>
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <p class="notice">This class inherits a constructor from <span class='object_link'><a href="../Sprout/Executable/Base.html#initialize-instance_method" title="Sprout::Executable::Base#initialize (method)">Sprout::Executable::Base</a></span></p>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="directory=-instance_method"></span>
+      <span id="directory-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="directory-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>directory</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Outputs the SWC file into an open directory format rather than a SWC file</p>
+
+<pre class="code"><span class='id compc'>compc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/rsls/foo</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id directory'>directory</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id include_sources'>include_sources</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:directory</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="include_classes=-instance_method"></span>
+      <span id="include_classes-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="include_classes-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>include_classes</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies classes to include in the SWC file. You provide the class name
+(for example, MyClass) rather than the file name (for example, MyClass.as)
+to the file for this option. As a result, all classes specified with this
+option must be in the compiler's source path. You specify this by using the
+source-path compiler option.</p>
+
+<p>You can use packaged and unpackaged classes. To use components in
+namespaces, use the include-namespaces option.</p>
+
+<p>If the components are in packages, ensure that you use dot-notation rather
+than slashes to separate package levels.</p>
+
+<p>This is the default option for the component compiler.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:include_classes</span><span class='comma'>,</span> <span class='const'>Strings</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="include_file=-instance_method"></span>
+      <span id="include_file-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="include_file-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>) <strong>include_file</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Adds the file to the SWC file. This option does not embed files inside the
+library.swf file. This is useful for skinning and theming, where you want
+to add non-compiled files that can be referenced in a style sheet or
+embedded as assets in MXML files.</p>
+
+<p>If you use the [Embed] syntax to add a resource to your application, you
+are not required to use this option to also link it into the SWC file.</p>
+
+<p>For more information, see Adding nonsource classes (<a
+href="http://livedocs.adobe.com/flex/201/html/compilers_123_39.html#158900">livedocs.adobe.com/flex/201/html/compilers_123_39.html#158900</a>).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Files]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:include_file</span><span class='comma'>,</span> <span class='const'>Files</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="include_lookup_only=-instance_method"></span>
+      <span id="include_lookup_only-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="include_lookup_only-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>include_lookup_only</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>An instance of Boolean</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../Sprout/Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Boolean</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:include_lookup_only</span><span class='comma'>,</span> <span class='const'>Boolean</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="include_namespaces=-instance_method"></span>
+      <span id="include_namespaces-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="include_namespaces-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>include_namespaces</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies namespace-style components in the SWC file. You specify a list of
+URIs to include in the SWC file. The uri argument must already be defined
+with the namespace option.</p>
+
+<p>To use components in packages, use the include-classes option.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt;</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:include_namespaces</span><span class='comma'>,</span> <span class='const'>Strings</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="include_resource_bundles=-instance_method"></span>
+      <span id="include_resource_bundles-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="include_resource_bundles-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>) <strong>include_resource_bundles</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies the resource bundles to include in this SWC file. All resource
+bundles specified with this option must be in the compiler's source path.
+You specify this using the source-path compiler option.</p>
+
+<p>For more information on using resource bundles, see Localizing Flex
+Applications (<a
+href="http://livedocs.adobe.com/flex/201/html/l10n_076_1.html#129288">livedocs.adobe.com/flex/201/html/l10n_076_1.html#129288</a>)
+in Flex 2 Developer's Guide.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Files.html" title="Sprout::Executable::Files (class)">Files</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Files]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:include_resource_bundles</span><span class='comma'>,</span> <span class='const'>Files</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="include_sources=-instance_method"></span>
+      <span id="include_sources-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="include_sources-instance_method">
+  
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Paths.html" title="Sprout::Executable::Paths (class)">Paths</a></span>]</tt>) <strong>include_sources</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Specifies classes or directories to add to the SWC file. When specifying
+classes, you specify the path to the class file (for example, MyClass.as)
+rather than the class name itself (for example, MyClass). This lets you add
+classes to the SWC file that are not in the source path. In general,
+though, use the include-classes option, which lets you add classes that are
+in the source path.</p>
+
+<p>If you specify a directory, this option includes all files with an MXML or
+AS extension, and ignores all other files.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt; [<span class='object_link'><a href="../Sprout/Executable/Paths.html" title="Sprout::Executable::Paths (class)">Paths</a></span>]</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of Array&lt;String&gt; [Paths]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:include_sources</span><span class='comma'>,</span> <span class='const'>Paths</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="namespace=-instance_method"></span>
+      <span id="namespace-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="namespace-instance_method">
+  
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>namespace</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Not sure about this option, it was in the CLI help, but not documented on
+the Adobe site</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An instance of String</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File ''</span>
+
+<span class='id add_param'>add_param</span> <span class='symbol'>:namespace</span><span class='comma'>,</span> <span class='const'>String</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+</div>
+    
+    <div id="footer">
+  Generated on Thu Dec 23 00:24:51 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>
