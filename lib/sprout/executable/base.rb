@@ -3,6 +3,9 @@ module Sprout
   module Executable
     class Base
 
+      ##
+      # Include the Executable module so that Classes
+      # defined within it are available to subclasses of Base.
       include Sprout::Executable
 
       class << self

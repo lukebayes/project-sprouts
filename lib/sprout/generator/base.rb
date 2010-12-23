@@ -9,7 +9,7 @@ module Sprout
         # instantiate here, none of the code declared in the class body will
         # be associated with this instance.
         #
-        # Go ahead and register the class and update instances afterwards.
+        # Go ahead and register the class and update instances later...
         Sprout::Generator.register base, template_from_caller(caller.first)
       end
 

@@ -103,7 +103,8 @@ module Sprout
   # @see Sprout::RubyFeature
   # @see Sprout::System
   #
-  module Generator
+  module Generator 
+
     include RubyFeature
 
     class << self
