@@ -102,6 +102,19 @@ module SproutTestHelper
   end
 
   ##
+  # Update the Sprout::Executable registry so that subsequent
+  # requests for an executable return a fake one instead of
+  # the real one.
+  # @param exe [Symbol] The executable that will be sent to the load request (e.g. :fdb, :mxmlc, etc.).
+  # @param fake_name [String] The path to the fake executable that should be used.
+  def insert_fake_executable fake
+    # Comment the following and install the flashsdk gem
+    # to run test against actual executables instead of fakes:
+    path_response = OpenStruct.new(:path => fake)
+    Sprout::Executable.expects(:load).returns path_response
+  end
+
+  ##
   # Add the skip method that was introduced in Ruby 1.9.1 Test::Unit
   # This doesn't really work all that well...
   if(RUBY_VERSION == '1.8.7')
