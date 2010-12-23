@@ -74,8 +74,7 @@ class ExecutableTest < Test::Unit::TestCase
 
     should "raise UsageError with unknown type" do
       assert_raises Sprout::Errors::UsageError do
-        class BrokenExecutable
-          include Sprout::Executable
+        class BrokenExecutable < Sprout::Executable::Base
           add_param :broken_param, nil
         end
 
@@ -85,8 +84,7 @@ class ExecutableTest < Test::Unit::TestCase
 
     should "raise Error if type is not a Class" do
       assert_raises Sprout::Errors::UsageError do
-        class BrokenExecutable2
-          include Sprout::Executable
+        class BrokenExecutable2 < Sprout::Executable::Base
           add_param :some_name, :string
         end
       end
@@ -94,8 +92,7 @@ class ExecutableTest < Test::Unit::TestCase
 
     should "raise Error when requested param name already exists" do
       assert_raises Sprout::Errors::DuplicateMemberError do
-        class BrokenExecutable3
-          include Sprout::Executable
+        class BrokenExecutable3 < Sprout::Executable::Base
           attr_accessor :existing_method
 
           add_param :existing_method, String
@@ -105,8 +102,7 @@ class ExecutableTest < Test::Unit::TestCase
 
     should "raise Error if a block is provided to add_param" do
       assert_raises Sprout::Errors::UsageError do
-        class BrokenExecutable4
-          include Sprout::Executable
+        class BrokenExecutable4 < Sprout::Executable::Base
           add_param :name, String do
             # this is no longer how it's done...
           end
@@ -115,8 +111,7 @@ class ExecutableTest < Test::Unit::TestCase
     end
 
     should "define a new method" do
-      class WorkingTool
-        include Sprout::Executable
+      class WorkingTool < Sprout::Executable::Base
         add_param :custom_name, String
       end
 
@@ -130,8 +125,7 @@ class ExecutableTest < Test::Unit::TestCase
     end
 
     should "accept custom reader" do
-      class WorkingTool
-        include Sprout::Executable
+      class WorkingTool < Sprout::Executable::Base
         add_param :custom1, String, { :reader => :read_custom }
         def read_custom
           "#{@custom1} world"
@@ -144,8 +138,7 @@ class ExecutableTest < Test::Unit::TestCase
     end
 
     should "accept custom writer" do
-      class WorkingTool
-        include Sprout::Executable
+      class WorkingTool < Sprout::Executable::Base
         add_param :custom2, String, { :writer => :write_custom }
         def write_custom(value)
           @custom2 = "#{value} world"

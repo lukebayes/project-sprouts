@@ -1,8 +1,7 @@
 
 class CustomFakeParameter < Sprout::Executable::StringParam; end
 
-class FakeOtherExecutableTask
-  include Sprout::Executable
+class FakeOtherExecutableTask < Sprout::Executable::Base
 
   add_param :boolean_param, Boolean
   add_param :custom_param,  CustomFakeParameter

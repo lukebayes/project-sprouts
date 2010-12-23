@@ -33,8 +33,7 @@ module Sprout
   # Interface and descriptions found here:
   # http://livedocs.adobe.com/flex/2/docs/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&file=00001481.html
   #
-  class MXMLC
-    include Sprout::Executable
+  class MXMLC < Sprout::Executable::Base
     
     ##
     # Enables accessibility features when compiling the Flex application or SWC file. The default value is false.

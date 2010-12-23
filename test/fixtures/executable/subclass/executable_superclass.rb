@@ -1,6 +1,5 @@
 
-class ExecutableSuperclass
-  include Sprout::Executable
+class ExecutableSuperclass < Sprout::Executable::Base
 
   set :default_prefix, '---'
 

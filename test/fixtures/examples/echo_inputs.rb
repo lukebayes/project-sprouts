@@ -5,8 +5,7 @@ require 'sprout'
 
 class CustomParameter < Sprout::Executable::Param; end
 
-class EchoInputs
-  include Sprout::Executable
+class EchoInputs < Sprout::Executable::Base
   
   ##
   # A boolean parameter that will be set to true if present.

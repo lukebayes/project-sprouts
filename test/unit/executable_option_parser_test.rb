@@ -109,8 +109,7 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
 
       # Define the class in a place
       # where only these tests can use it.
-      class SomeExecutable
-        include Sprout::Executable
+      class SomeExecutable < Sprout::Executable::Base
         add_param :debug, Boolean
         add_param :input, String, { :hidden_name => true }
       end

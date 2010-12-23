@@ -1,11 +1,7 @@
 
 module Sprout
 
-  class FDB
-
-    ####################################
-    # Begin Executable Configuration
-    include Executable
+  class FDB < Daemon
 
     set :default_prefix, '-'
 
@@ -21,10 +17,8 @@ module Sprout
     # The default executable target
     set :executable, :fdb
 
-    ####################################
-    # Begin Daemon Configuration
-    include Daemon
-
+    ##
+    # The regex for when input can be accepted again.
     set :prompt, /^\(fdb\) |\(y or n\) /
 
     ##

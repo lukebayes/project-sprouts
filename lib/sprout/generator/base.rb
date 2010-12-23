@@ -1,8 +1,7 @@
 module Sprout
   module Generator
 
-    class Base
-      include Sprout::Executable
+    class Base < Sprout::Executable::Base
 
       def self.inherited base
         # NOTE: We can NOT instantiate the class here,
