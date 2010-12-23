@@ -2,8 +2,7 @@ require 'sprout'
 
 module <%= input.camel_case %> 
 
-  class Base
-    include Sprout::Executable
+  class Base < Sprout::Executable::Base
 
   end
 end
