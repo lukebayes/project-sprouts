@@ -1,14 +1,12 @@
 module Sprout
 
   ##
-  # This class was copied from Rails source code and provides
-  # our RubyFeature with the ability to more clearly mix in
-  # functionality against a class and behave as if inheritance
-  # works at the class mixin level.
+  # This class was copied from Rails source code and enhances
+  # Ruby's native mixin functionality for our Sprout::RubyFeature.
+  # 
+  # I'd like to work to get rid of this class, and the confusion
+  # that it introduces.
   #
-  # TODO: I'd like to update our system so that this
-  # functionality is no longer necessary - if you have ideas
-  # or opinions about this code, please let me know!
   module Concern
 
     ##
