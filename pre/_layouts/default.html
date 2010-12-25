@@ -18,15 +18,20 @@
 
   <a href="http://github.com/lukebayes/project-sprouts"><img style="position: absolute; top: 300; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
-  <div class="center">
-    <div class="content header-shadow">
-      {{ content }}
-    </div>
-  </div>
+{{ content }}
 
   <div id="footer">
     <div class="center">
       <div class="content header-shadow">
+
+        <ul>
+          {% for post in site.posts limit:5 %}
+          <li class="post">
+            <a href="{{ post.permalink }}">{{ post.title }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+
       </div>
     </div>
   </div>
