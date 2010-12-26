@@ -1,6 +1,6 @@
 auto: true
 server: true
 server_port: 3000
-pygments: false
+pygments: true
 lsi: false
 

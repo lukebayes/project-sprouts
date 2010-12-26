@@ -13,12 +13,12 @@ title: Project Sprouts
 
     <p>Sprouts is a modular development platform that takes advantage of <a href="http://ruby-lang.org">Ruby</a> and <a href="http://rubygems.org">RubyGems</a> to share code generators, libraries, executables and automated build tasks. It runs anywhere Ruby does, including OS X, Windows, and *nix variants.</p>
 
-    <h2 id="testimonials">What are folks saying?</h2>
+    <h2 id="testimonials">What are are folks saying?</h2>
     <div id="quotes">
-      <blockquote>The best thing to happen to Flex since Matt Chotin&#8230;</blockquote>
+      <blockquote>The best thing to happen to Flex since Matt Chotin....</blockquote>
       <div class="attribution">Ryan Stewart, Adobe Flash Platform Evangelist</div>
 
-      <blockquote>I swear project sprouts is the most significant single thing in terms of changing my work flow. Awesome.&#8230;</blockquote>
+      <blockquote>I swear project sprouts is the most significant single thing in terms of changing my work flow.</blockquote>
       <div class="attribution">Stray, ActionScript developer</div>
     </div>
 
@@ -27,7 +27,7 @@ title: Project Sprouts
     <ul class="reasons">
       <li>Decouple builds from development tools</li>
       <li>Ensure that everyone on the team is using the exact same compilers, libraries and runtimes - by version</li>
-      <li>Primary/critical tool chain should be platform independent</li>
+      <li>Critical tools should be platform independent</li>
       <li>Avoid manually creating project files and folders over and over</li>
       <li>Avoid manually adding project dependencies over and over</li>
       <li>Avoid manually creating boilerplate classes, test cases and test suites</li>
@@ -38,7 +38,7 @@ title: Project Sprouts
   </div>
 </div>
 
-<div class="center getting-started">
+<div id="getting-started" class="center getting-started">
   <div class="content header-shadow">
 
     <h1>Getting Started</h1>
@@ -47,7 +47,7 @@ title: Project Sprouts
     To get started with Project Sprouts, you'll need Ruby (>= 1.9.2), RubyGems (>= 1.3.7) and at least some interest in the programming language <a href="http://www.ruby-lang.org">Ruby</a> and the build tool <a href="http://martinfowler.com/articles/rake.html">Rake</a>.
     </p>
 
-    <pre class="bullet sunburst">
+    {% highlight bash %}
       # Install the ActionScript 3 / Flash Bundle:
       $ gem install flashsdk --pre
 
@@ -61,30 +61,30 @@ title: Project Sprouts
       $ rake
 
       # Congratulations - you're up and running!
-    </pre>
+    {% endhighlight %}
 
     <p>
     To go a little further with Test-Driven Development:
     </p>
 
-    <pre class="bullet sunburst">
+    {% highlight bash %}
       # Generate a class, test and test suite:
       $ sprout-class utils.MathUtil
 
       # Compile and run the test harness:
       $ rake test
-    </pre>
+    {% endhighlight %}
 
     <p>
     And finally:
     </p>
 
-    <pre class="bullet sunburst">
+    {% highlight bash %}
       # Show available tasks:
       $ rake -T
-    </pre>
+    {% endhighlight %}
 
-    <a class="more-info" href="#">More</a>
+    <a class="more-info" href="/getting-started.html">More Details</a>
 
   </div>
 </div>
