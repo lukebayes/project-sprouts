@@ -3,10 +3,12 @@ layout: default
 title: Installation
 ---
 
-<div class="center">
+<div class="center">  
   <div class="content header-shadow">
 
-h1. Installation
+h1. Troubleshooting
+
+h3. 
 
   </div>
 </div>
@@ -16,19 +18,27 @@ h1. Installation
 
 h2. Windows
 
-<p>It is especially critical that Windows users be running a Ruby that is greater than or equal to version 1.9.2. The previous versions of Ruby had critical bugs that prevented this version of Sprouts from working.</p>
+h3. Ruby Version >= 1.9.2?
 
-<p>We highly recommend Windows users get going with the <a href="http://rubyinstaller.org/">Ruby Installer</a>. You should know that this installer includes a version of Mingw
-</p>
+It is especially critical that Windows users be running a Ruby that is greater than or equal to version 1.9.2. The previous versions of Ruby had critical bugs that prevented this version of Sprouts from working.
+
+We highly recommend Windows users get going with the <a href="http://rubyinstaller.org/">Ruby Installer</a>. You should know that this installer includes a version of Mingw
+
   </div>
 </div>
 
 <div class="center">
   <div class="content header-shadow">
-  
+      
 h2. OS X
 
-OS X users are feeling some pain too.
+h3. Using Ruby Version Manager (RVM)?
+
+<a target="_blank" href="http://rvm.beginrescueend.com/">Ruby Version Manager</a> is a tool that makes it very easy to switch between different versions of Ruby. It also gets your system into a state where you don't use <code>sudo</code> to install RubyGems.
+
+h3. Are XCode / Developer tools installed?
+
+Be sure you have installed the OS X "Developer Tools" which should have been included with your operating system DVD.
 
   </div>
 </div>
@@ -38,10 +48,11 @@ OS X users are feeling some pain too.
 
 h2. Linux
 
-Linux users are probably feeling the 2nd most pain though.
+h3. Debian system (like Ubuntu) don't like RubyGems in the path
 
-Come to think of it, why do all of the operating systems have to kind of suck in some significant way?
+You will <a target="_blank" href="http://docs.rubygems.org/read/chapter/3">likely need to update your system path</a> to accomodate installed RubyGems.
 
   </div>
 </div>
+
 
