@@ -1,0 +1,10 @@
+---
+layout: post
+title: Troubleshooting
+---
+
+h1. Troubleshooting
+
+This section should help you troubleshoot your system
+
+

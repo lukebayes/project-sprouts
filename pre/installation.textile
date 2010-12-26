@@ -1,0 +1,47 @@
+---
+layout: default
+title: Installation
+---
+
+<div class="center">
+  <div class="content header-shadow">
+
+h1. Installation
+
+  </div>
+</div>
+
+<div class="center even-section">
+  <div class="content header-shadow">
+
+h2. Windows
+
+<p>It is especially critical that Windows users be running a Ruby that is greater than or equal to version 1.9.2. The previous versions of Ruby had critical bugs that prevented this version of Sprouts from working.</p>
+
+<p>We highly recommend Windows users get going with the <a href="http://rubyinstaller.org/">Ruby Installer</a>. You should know that this installer includes a version of Mingw
+</p>
+  </div>
+</div>
+
+<div class="center">
+  <div class="content header-shadow">
+  
+h2. OS X
+
+OS X users are feeling some pain too.
+
+  </div>
+</div>
+
+<div class="center even-section">
+  <div class="content header-shadow">
+
+h2. Linux
+
+Linux users are probably feeling the 2nd most pain though.
+
+Come to think of it, why do all of the operating systems have to kind of suck in some significant way?
+
+  </div>
+</div>
+

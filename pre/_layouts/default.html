@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <a href="http://github.com/lukebayes/project-sprouts"><img style="position: absolute; top: 300; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+  <a href="http://github.com/lukebayes/project-sprouts/tree/master"><img style="position: absolute; top: 300; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
 {{ content }}
 
@@ -24,18 +24,48 @@
     <div class="center">
       <div class="content header-shadow">
 
-        <ul class="nav">
-          <li class="home"><a href="/">Home</a></li>
-          <li class="getting-started"><a href="/getting-started.html">Getting Started</a></li>
-        </ul>
+        <table>
 
-        <ul>
-          {% for post in site.posts limit:5 %}
-          <li class="post">
-            <a href="{{ post.permalink }}">{{ post.title }}</a>
-          </li>
-          {% endfor %}
-        </ul>
+          <tr>
+            <td>
+
+              <ul>
+                <li class="header">Details</li>
+                <li class="home"><a href="/">Home</a></li>
+                <li class=""><a href="/installation.html">Installation</a></li>
+                <li class=""><a href="/troubleshooting.html">Troubleshooting</a></li>
+                <li class=""><a href="/generators.html">Generators</a></li>
+                <li class=""><a href="/libraries.html">Libraries</a></li>
+                <li class=""><a href="/tools.html">Tools</a></li>
+              </ul>
+
+            </td>
+            <td>
+
+              <ul>
+                <li class="header">Posts</li>
+                {% for post in site.posts limit:10 %}
+                <li class="post"><a href="{{ post.url }}">{{ post.title }}</a> <span class="date"></span></li>
+                {% endfor %}
+              </ul>
+
+            </td>
+            <td>
+
+              <ul>
+                <li class="header">Do It</li>
+                <li><a href="http://groups.google.com/group/projectsprouts">Contact</a> (Google Groups)</li>
+                <li><a href="https://github.com/lukebayes/project-sprouts/tree/master">Source Code</a> (Github)</li>
+                <li><a href="https://github.com/lukebayes/project-sprouts/issues">File an Issue</a> (Github)</li>
+                <li><a href="http://rubygems.org/gems/sprout">Download</a> (RubyGems)</li>
+                <li class=""><a href="http://projectsprouts.org/docs/1.1/frames.html">Documentation</a> 
+                (<a href="http://projectsprouts.org/docs/1.1/index.html">No Frames</a>)</li>
+              </ul>
+
+            </td>
+          </tr>
+
+        </table>
 
       </div>
     </div>

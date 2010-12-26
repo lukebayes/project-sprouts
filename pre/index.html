@@ -7,11 +7,11 @@ title: Project Sprouts
   <div class="content header-shadow">
     <h1>What Is It?</h1>
     <hr />
-    <p>Project Sprouts is a highly cohesive, loosely-coupled collection of features that take some of the suck out of programming.</p>
-
-    <p>Sprouts has been seen working on Mac, Windows and Linux and while it currently targets ActionScript, Flex and AIR development, tools can be easily created to improve any programming environment.</p>
+    <p>Project Sprouts is a highly cohesive, loosely coupled collection of features that take <em>some</em> of the suck out of programming.</p>
 
     <p>Sprouts is a modular development platform that takes advantage of <a href="http://ruby-lang.org">Ruby</a> and <a href="http://rubygems.org">RubyGems</a> to share code generators, libraries, executables and automated build tasks. It runs anywhere Ruby does, including OS X, Windows, and *nix variants.</p>
+
+    <p>Sprouts has been seen working on Mac, Windows and Linux and while it currently targets ActionScript, Flex and AIR development, tools can be easily created to improve any programming environment.</p>
 
     <h2 id="testimonials">What are are folks saying?</h2>
     <div id="quotes">
@@ -25,87 +25,84 @@ title: Project Sprouts
     <h2 id="reasons">Why would someone use Sprouts?</h2>
     <p>There are lots of reasons to use Sprouts for your projects, here are some of mine:</p>
     <ul class="reasons">
-      <li>Decouple builds from development tools</li>
-      <li>Ensure that everyone on the team is using the exact same compilers, libraries and runtimes - by version</li>
-      <li>Critical tools should be platform independent</li>
-      <li>Avoid manually creating project files and folders over and over</li>
-      <li>Avoid manually adding project dependencies over and over</li>
-      <li>Avoid manually creating boilerplate classes, test cases and test suites</li>
-      <li>Want to create new exploration projects with a single command</li>
-      <li>Want to easily integrate projects with a Continuous Integration server</li>
-      <li>Want to allow anyone on the project team to easily build the project</li>
+      <li><strong>Decouple builds</strong> from development tools</li>
+      <li><strong>Consistent environment</strong> across any size team</li>
+      <li><strong>Platform independent</strong> critical tools</li>
+      <li><strong>Automatically generate</strong> project files, directories, classes, test cases, and test suites</li>
+      <li><strong>Continuous Integration</strong> simplified</li>
     </ul>
   </div>
 </div>
 
-<div id="getting-started" class="center getting-started">
+<div id="getting-started" class="center even-section">
   <div class="content header-shadow">
 
     <h1>Getting Started</h1>
     <hr />
     <p>
-    To get started with Project Sprouts, you'll need Ruby (>= 1.9.2), RubyGems (>= 1.3.7) and at least some interest in the programming language <a href="http://www.ruby-lang.org">Ruby</a> and the build tool <a href="http://martinfowler.com/articles/rake.html">Rake</a>.
+    To get started with Project Sprouts and Flash development, you'll need Ruby (>= 1.9.2 <a href="#">Mac</a>, <a href="#">Win</a>, <a href="#">Nix</a>), <a href="#">RubyGems</a> (>= 1.3.7) and at least some interest in the programming language <a href="http://www.ruby-lang.org">Ruby</a> and the build tool <a href="http://martinfowler.com/articles/rake.html">Rake</a>.
     </p>
 
-    {% highlight bash %}
-      # Install the ActionScript 3 / Flash Bundle:
-      $ gem install flashsdk --pre
+{% highlight bash %}
+# Install the ActionScript 3 / Flash Bundle:
+gem install flashsdk --pre
 
-      # Generate a new ActionScript 3 project:
-      $ sprout-as3 SomeProject
+# Generate a new ActionScript 3 project:
+sprout-as3 SomeProject
 
-      # Move into the new project:
-      $ cd SomeProject
+# Move into the new project:
+cd SomeProject
 
-      # Compile and run the main project:
-      $ rake
+# Install dependencies:
+bundle install
 
-      # Congratulations - you're up and running!
-    {% endhighlight %}
+# Compile and run the main project:
+rake
+
+# Congratulations - you're up and running!
+{% endhighlight %}
 
     <p>
-    To go a little further with Test-Driven Development:
+    Go a little further with Test-Driven Development:
     </p>
 
-    {% highlight bash %}
-      # Generate a class, test and test suite:
-      $ sprout-class utils.MathUtil
+{% highlight bash %}
+# Generate a class, test and test suite:
+sprout-class utils.MathUtil
 
-      # Compile and run the test harness:
-      $ rake test
-    {% endhighlight %}
+# Compile and run the test harness:
+rake test
+{% endhighlight %}
 
     <p>
     And finally:
     </p>
 
-    {% highlight bash %}
-      # Show available tasks:
-      $ rake -T
-    {% endhighlight %}
-
-    <a class="more-info" href="/getting-started.html">More Details</a>
+{% highlight bash %}
+# Show available tasks:
+rake -T
+{% endhighlight %}
 
   </div>
 </div>
 
-<div id="core-concepts" class="center">
+<div id="getting-help" class="center">
   <div class="content header-shadow">
 
-    <h1>Core Concepts</h1>
-    <hr />
+    <h1>Getting Help</h1>
 
-    <h2>Tools</h2>
-    <p>A tool is any executable that has been distributed within, or referenced by, a <code>Sprout::Specification</code>.</p>
+    <p>Sometimes, getting everything set up and running doesn't go as smoothly as we hope. When this happens, we consider this a failure on our end. One of the core objectives behind Sprouts is to make it painless to get up and running&mdash;if it's not, then we have failed.</p>
+    
+    <p>If the information on the <a href="/installation.html">installation</a> page doesn't get you unstuck, please <a href="http://groups.google.com/group/projectsprouts">send us</a> your operating system information, any potentially helpful terminal output and the following:</p>
 
-    <h2>Tasks</h2>
-    <p>Sprouts takes advantage of the Rake build language, and brings the power of this language to non-Ruby programming environments.</p>
+{% highlight bash %}
+# Ruby version:
+ruby -v
 
-    <h2>Libraries</h2>
-    <p>By using Sprouts, you can package shared code in source or compiled form and distribute it directly within a RubyGem or even refer to it at a different location on the internet. In either case, the library will be downloaded, cached, and made available to users of your project.</p>
-
-    <h2>Generators</h2>
-    <p>Sprout Generators are</p>
+# RubyGems version:
+gem -v
+{% endhighlight %}
 
   </div>
 </div>
+

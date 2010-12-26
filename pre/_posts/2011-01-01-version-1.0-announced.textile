@@ -1,0 +1,10 @@
+---
+layout: post
+title: Announcing Site, Blog, Docs and Release Candidate
+tags:
+- announcements
+---
+
+h1. Project Sprouts Version 1.0 Prerelease
+
+It's true. We're finally going to arrive at this place....
