@@ -182,13 +182,17 @@ module Sprout
     # @param wait [Boolean] default true. Send false to
     #   connect to a daemon from Ruby code.
     #
-    def execute wait=true
+    def execute should_wait=true
       @process_runner = super()
       @process_launched = true
       wait_for_prompt
       execute_actions
-      handle_user_session if wait
-      Process.wait process_runner.pid if wait
+      handle_user_session if should_wait
+      wait if should_wait
+    end
+
+    def wait
+      Process.wait process_runner.pid
     end
 
     ##
@@ -210,6 +214,18 @@ module Sprout
         Sprout::Log.printf char
         Sprout::Log.flush
         return true unless line.match(expected_prompt).nil?
+      end
+    end
+
+    ##
+    # Expose the running process to manual
+    # input on the terminal, and write stdout
+    # back to the user.
+    def handle_user_session
+      while !process_runner.r.eof?
+        input = $stdin.gets.chomp!
+        execute_action input, true
+        wait_for_prompt
       end
     end
 
@@ -259,8 +275,9 @@ module Sprout
     # Execute the collection of provided actions.
     def execute_actions
       action_stack.each do |action|
-        break unless execute_action action
+        break unless execute_action(action)
       end
+      @action_stack = []
     end
 
     ##
@@ -270,18 +287,6 @@ module Sprout
       Sprout::Log.puts(action) unless silence
       process_runner.puts action
       wait_for_prompt
-    end
-
-    ##
-    # Expose the running process to manual
-    # input on the terminal, and write stdout
-    # back to the user.
-    def handle_user_session
-      while !process_runner.r.eof?
-        input = $stdin.gets.chomp!
-        execute_action input, true
-        wait_for_prompt
-      end
     end
 
   end
