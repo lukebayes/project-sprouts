@@ -224,6 +224,7 @@ module Sprout
         super
         @abort_on_failure     = true
         @appended_args        = nil
+        @prepared             = false
         @prepended_args       = nil
         @param_hash           = {}
         @params               = []
@@ -255,22 +256,8 @@ module Sprout
       # calling execute will wind up executing the 
       # external process.
       def execute
+        prepare
         execute_delegate
-      end
-
-      ##
-      # Call the provided executable delegate.
-      #
-      # This method is generally called from Rake task wrappers.
-      #
-      def execute_delegate
-        system_execute binary_path, to_shell
-      end
-
-      def prepare
-        params.each do |param|
-          param.prepare
-        end
       end
 
       def to_rake *args
@@ -347,6 +334,23 @@ module Sprout
       end
 
       protected
+
+      ##
+      # Call the provided executable delegate.
+      #
+      # This method is generally called from Rake task wrappers.
+      #
+      def execute_delegate
+        system_execute binary_path, to_shell
+      end
+
+      def prepare
+        return if @prepared
+        @prepared = true
+        params.each do |param|
+          param.prepare
+        end
+      end
 
       ##
       # Create the outer rake task. 

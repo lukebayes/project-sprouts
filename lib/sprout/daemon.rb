@@ -106,6 +106,7 @@ module Sprout
           action = "y" if name == :confirm # Convert affirmation
           action << " #{params.join(' ')}" unless params.nil?
           action_stack << action
+          execute_actions if process_launched?
         end
       end
 
@@ -139,6 +140,12 @@ module Sprout
     # @return [Regexp]
     attr_accessor :prompt
 
+
+    ##
+    # The Sprout::ProcessRunner that delegates to the long-running process,
+    # via stdin, stdout and stderr.
+    attr_reader :process_runner
+
     ##
     # @return [Array<Hash>] Return or create a new array.
     def action_stack
@@ -154,14 +161,63 @@ module Sprout
     # terminating the process, the underlying
     # daemon will be connected to the terminal
     # for user (manual) input.
-    def execute
-      runner = super
-      execute_actions runner
-      handle_user_session runner
-      Process.wait runner.pid
+    #
+    # You can also send wait=false to connect
+    # to a daemon process from Ruby and execute
+    # actions over time. This might look like:
+    #
+    #    fdb = FlashSDK::FDB.new
+    #    fdb.execute false
+    #
+    #    # Do something else while FDB
+    #    # is open, then:
+    #    
+    #    fdb.run
+    #    fdb.break "AsUnitRunner:12"
+    #    fdb.continue
+    #    fdb.kill
+    #    fdb.confirm
+    #    fdb.quit
+    #
+    # @param wait [Boolean] default true. Send false to
+    #   connect to a daemon from Ruby code.
+    #
+    def execute wait=true
+      @process_runner = super()
+      @process_launched = true
+      wait_for_prompt
+      execute_actions
+      handle_user_session if wait
+      Process.wait process_runner.pid if wait
+    end
+
+    ##
+    # Wait for the underlying process to present
+    # an input prompt, so that another action
+    # can be submitted, or user input can be
+    # collected.
+    def wait_for_prompt expected_prompt=nil
+      expected_prompt = expected_prompt || prompt
+      line = ''
+
+      while process_runner.alive? do
+        return false if process_runner.r.eof?
+        char = process_runner.readpartial 1
+        line << char
+        if char == "\n"
+          line = ''
+        end
+        Sprout::Log.printf char
+        Sprout::Log.flush
+        return true unless line.match(expected_prompt).nil?
+      end
     end
 
     protected
+
+    def process_launched?
+      @process_launched
+    end
 
     ##
     # This is the override of the underlying
@@ -201,55 +257,30 @@ module Sprout
 
     ##
     # Execute the collection of provided actions.
-    def execute_actions runner
+    def execute_actions
       action_stack.each do |action|
-        if wait_for_prompt runner
-          Sprout::Log.puts action
-          execute_action runner, action
-        end
+        break unless execute_action action
       end
     end
 
     ##
     # Execute a single action.
-    def execute_action runner, action
-      runner.puts action.strip
+    def execute_action action, silence=false
+      action = action.strip
+      Sprout::Log.puts(action) unless silence
+      process_runner.puts action
+      wait_for_prompt
     end
 
     ##
     # Expose the running process to manual
     # input on the terminal, and write stdout
     # back to the user.
-    def handle_user_session runner
-      while !runner.r.eof?
-        if wait_for_prompt runner
-          input = $stdin.gets.chomp!
-          execute_action runner, input
-        end
-      end
-    end
-
-    ##
-    # Wait for the underlying process to present
-    # an input prompt, so that another action
-    # can be submitted, or user input can be
-    # collected.
-    def wait_for_prompt runner, expected_prompt=nil
-      ##
-      # TODO: This should also check for a variety of prompts...
-      expected_prompt = expected_prompt || prompt
-      line = ''
-
-      while runner.alive? do
-        Sprout::Log.flush
-        return false if runner.r.eof?
-        char = runner.readpartial 1
-        line << char
-        if char == "\n"
-          line = ''
-        end
-        Sprout::Log.printf char
-        return true if line.match expected_prompt
+    def handle_user_session
+      while !process_runner.r.eof?
+        input = $stdin.gets.chomp!
+        execute_action input, true
+        wait_for_prompt
       end
     end
 

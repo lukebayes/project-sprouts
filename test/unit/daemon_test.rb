@@ -14,6 +14,7 @@ class DaemonTest < Test::Unit::TestCase
 
     should "execute without shell params" do
       @fdb = Sprout::FDB.new
+
       @fdb.run
       @fdb.break "AsUnitRunner:12"
       @fdb.continue
@@ -21,6 +22,20 @@ class DaemonTest < Test::Unit::TestCase
       @fdb.confirm
       @fdb.quit
       @fdb.execute
+
+    end
+
+    should "open and wait for real-time interactions" do
+      @fdb = Sprout::FDB.new
+      @fdb.execute false
+      @fdb.expects(:execute_action).at_least(6)
+
+      @fdb.run
+      @fdb.break "AsUnitRunner:12"
+      @fdb.continue
+      @fdb.kill
+      @fdb.confirm
+      @fdb.quit
     end
 
     should "execute from rake task" do
