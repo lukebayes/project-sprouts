@@ -83,7 +83,27 @@
 </dl>
 <div class="clear"></div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>The COMPC compiler is a tool that creates SWC libraries from source code.</p>
 
+<p>Following is an example of the creation of a simple SWC file:</p>
+
+<pre class="code"><span class='id compc'>compc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swc</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id include_classes'>include_classes</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>SomeProject</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span>
+
+<span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Compile the SWC</span><span class='tstring_end'>'</span></span>
+<span class='id task'>task</span> <span class='symbol'>:swc</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swc</span><span class='tstring_end'>'</span></span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
   <h2>Constant Summary</h2>
   
 
@@ -134,7 +154,8 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Outputs the SWC file into an open directory format rather than a SWC file.</p>
+<p>Outputs the SWC content as a SWF into an open directory format rather than
+a SWC file.</p>
 </div></span>
   
 </li>
@@ -389,7 +410,10 @@ the Adobe site.</p>
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Outputs the SWC file into an open directory format rather than a SWC file</p>
+<p>Outputs the SWC content as a SWF into an open directory format rather than
+a SWC file.</p>
+
+<p>This is especially useful for creating Runtime Shared Libraries.</p>
 
 <pre class="code"><span class='id compc'>compc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/rsls/foo</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
   <span class='id t'>t</span><span class='period'>.</span><span class='id directory'>directory</span> <span class='op'>=</span> <span class='kw'>true</span>
@@ -418,6 +442,13 @@ the Adobe site.</p>
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>Sprout::COMPC#include_sources</li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -766,6 +797,14 @@ in the source path.</p>
 <p>If you specify a directory, this option includes all files with an MXML or
 AS extension, and ignores all other files.</p>
 
+<pre class="code"><span class='id compc'>compc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/SomeProject.swc</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id include_sources'>include_sources</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id library_path'>library_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/somelib.swc</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+<p>You'll need to be sure your source path and library path are both set up
+properly for this work.</p>
+
 
   </div>
 </div>
@@ -868,7 +907,7 @@ the Adobe site</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 28 11:40:17 2010 by 
+  Generated on Tue Dec 28 12:34:46 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>
