@@ -44,7 +44,7 @@ module Sprout
     protected
 
     def logger
-      Sprout::Log
+      Sprout.stdout
     end
 
     def expand_local_path path

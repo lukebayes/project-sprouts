@@ -424,8 +424,9 @@ end
   #   bare_setup - place this in setup method to create the app_root folder for each test
   #   bare_teardown - place this in teardown method to destroy the TMP_ROOT or app_root folder after each test
 
-
 # Prevent log messages from interrupting the test output:
-Sprout::Log.debug = true
+Sprout.stdout = Sprout.stdout_test
+Sprout.stderr = Sprout.stderr_test
+
 #Sprout::ProgressBar.debug = true
 

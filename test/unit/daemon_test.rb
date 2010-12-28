@@ -7,8 +7,6 @@ class DaemonTest < Test::Unit::TestCase
   context "a new daemon delegate" do
 
     setup do
-      # Uncomment to see actual output:
-      #Sprout::Log.debug = false
       configure_fdb_fake
     end
 

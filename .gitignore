@@ -1,6 +1,7 @@
 .svn
 .DS_Store
 *.gem
+*.log
 pkg
 doc
 doc/**/**/*

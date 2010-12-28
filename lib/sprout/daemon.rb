@@ -213,8 +213,8 @@ module Sprout
         if char == "\n"
           line = ''
         end
-        Sprout::Log.printf char
-        Sprout::Log.flush
+        Sprout.stdout.printf char
+        Sprout.stdout.flush
         return true unless line.match(expected_prompt).nil?
       end
     end
@@ -286,7 +286,7 @@ module Sprout
     # Execute a single action.
     def execute_action action, silence=false
       action = action.strip
-      Sprout::Log.puts(action) unless silence
+      Sprout.stdout.puts(action) unless silence
       process_runner.puts action
       wait_for_prompt
     end

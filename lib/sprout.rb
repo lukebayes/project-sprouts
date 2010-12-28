@@ -5,13 +5,14 @@ $:.unshift lib unless $:.include?(lib)
 # External tools and std libs:
 require 'rake'
 require 'delegate'
+require 'logger'
 
 # Core, Process and Platform support:
 require 'sprout/version'
+require 'sprout/output_buffer'
 require 'sprout/progress_bar'
 require 'sprout/dir'
 require 'sprout/string'
-require 'sprout/log'
 require 'sprout/errors'
 require 'sprout/platform'
 require 'sprout/process_runner'
@@ -93,6 +94,30 @@ module Sprout
     #
     def current_system
       Sprout::System.create
+    end
+    
+    def stdout=(out)
+      @stdout = out
+    end
+    
+    def stdout
+      @stdout ||= $stdout
+    end
+    
+    def stdout_test
+      OutputBuffer.new 'test-stdout.log'
+    end
+    
+    def stderr=(err)
+      @stderr = err
+    end
+    
+    def stderr
+      @stderr ||= $stderr
+    end
+    
+    def stderr_test
+      OutputBuffer.new 'test-stderr.log'
     end
 
     ##

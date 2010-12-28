@@ -179,7 +179,7 @@ module Sprout
       if !File.exists?(dir)
         define_file_task dir do
           FileUtils.mkdir_p dir
-          Sprout::Log.puts ">> Created directory at: #{dir}"
+          Sprout.stdout.puts ">> Created directory at: #{dir}"
         end
       end
     end
@@ -196,7 +196,7 @@ module Sprout
     def define_directory_copy_task path, install_path
       define_file_task install_path do
         FileUtils.cp_r path, install_path
-        Sprout::Log.puts ">> Copied files from: (#{path}) to: (#{install_path})"
+        Sprout.stdout.puts ">> Copied files from: (#{path}) to: (#{install_path})"
       end
       install_path
     end
@@ -206,7 +206,7 @@ module Sprout
       define_file_task task_name do
         FileUtils.mkdir_p install_path
         FileUtils.cp path, "#{install_path}/"
-        Sprout::Log.puts ">> Copied file from: (#{path}) to: (#{task_name})"
+        Sprout.stdout.puts ">> Copied file from: (#{path}) to: (#{task_name})"
       end
       task_name
     end
