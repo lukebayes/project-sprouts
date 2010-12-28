@@ -158,6 +158,10 @@ module Sprout
       return @e.read
     end
 
+    def readpartial_err count
+      return @e.readpartial count
+    end
+
     private
 
     def open4_popen4_block *command

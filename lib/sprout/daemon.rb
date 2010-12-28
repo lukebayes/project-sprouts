@@ -205,6 +205,8 @@ module Sprout
       line = ''
 
       while process_runner.alive? do
+        #puts ">> ERROR #{process_runner.readpartial_err 1}"
+
         return false if process_runner.r.eof?
         char = process_runner.readpartial 1
         line << char

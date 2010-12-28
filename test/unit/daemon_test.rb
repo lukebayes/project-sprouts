@@ -43,6 +43,20 @@ class DaemonTest < Test::Unit::TestCase
       @fdb.wait # wait for actions to finish.
     end
 
+=begin
+    should "print errors" do
+      @fdb = Sprout::FDB.new
+      # For some reason, using mocha expectations are 
+      # actually stubbing the methods and breaking this
+      # test. Not sure what I'm doing wrong here...
+      #@fdb.expects(:execute_action).at_least(6)
+      @fdb.execute false
+      @fdb.run_with_error
+      @fdb.quit
+      @fdb.wait # wait for actions to finish.
+    end
+=end
+
     should "execute from rake task" do
       f = fdb :fdb_debug do |t|
         t.run

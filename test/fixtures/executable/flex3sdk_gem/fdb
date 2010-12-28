@@ -29,6 +29,8 @@ class FakeFDB
       handle_confirmation parts
     when "quit"
       handle_quit parts
+    when "run_with_error"
+      handle_run_with_error parts
     else
       puts "FAKE FDB doesn't know how to respond to #{command}"
       exit 1
@@ -67,6 +69,14 @@ class FakeFDB
     str = "Confirmation accepted\n"
     str << "(fdb) "
     printf str
+  end
+
+  def handle_run_with_error args
+    str = "This is an error!\n"
+    str << "This is more details about the error!\n"
+    str << "Here are even more details!\n"
+    $stderr.printf str
+    printf "(fdb) "
   end
 
   def handle_quit args

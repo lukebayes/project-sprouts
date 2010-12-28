@@ -22,6 +22,10 @@ module Sprout
     set :prompt, /^\(fdb\) |\(y or n\) /
 
     ##
+    # Force the fake to write to stderr:
+    add_action :run_with_error
+
+    ##
     # Print a backtrace of all stack frames
     add_action :backtrace
     add_action_alias :bt, :backtrace
