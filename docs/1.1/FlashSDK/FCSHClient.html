@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta name="Content-Type" content="text/html; charset=utf-8" />
-<title>Class: Rake::Task</title>
+<title>Class: FlashSDK::FCSHClient</title>
 <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
 
@@ -23,10 +23,10 @@
     <div id="header">
       <div id="menu">
   
-    <a href="../_index.html">Index (T)</a> &raquo; 
-    <span class='title'>Rake</span>
+    <a href="../_index.html">Index (F)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../FlashSDK.html" title="FlashSDK (module)">FlashSDK</a></span></span>
      &raquo; 
-    <span class="title">Task</span>
+    <span class="title">FCSHClient</span>
   
   
   <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
@@ -43,7 +43,7 @@
     
     <iframe id="search_frame"></iframe>
     
-    <div id="content"><h1>Class: Rake::Task
+    <div id="content"><h1>Class: FlashSDK::FCSHClient
   
   
   
@@ -58,7 +58,7 @@
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">Rake::Task</li>
+            <li class="next">FlashSDK::FCSHClient</li>
           
         </ul>
         <a href="#" class="inheritanceTree">show all</a>
@@ -74,99 +74,72 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">sprout/lib/sprout/ruby_feature.rb</dd>
+    <dd class="r2 last">flashsdk/lib/flashsdk/fcsh_client.rb</dd>
   
 </dl>
 <div class="clear"></div>
 
-<h2>Overview</h2><div class="docstring">
-  <div class="discussion">
-    
-<p>Mixin on the Rake::Task so that our concrete entities can interoperate with
-some knowledge of each other.</p>
 
 
-  </div>
-</div>
-<div class="tags">
+
   
-</div><div id="subclasses">
-  <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="../FlashPlayer/Task.html" title="FlashPlayer::Task (class)">FlashPlayer::Task</a></span></p>
-</div>
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
 
-
-  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
+    <ul class="summary">
+      
+        <li class="public ">
   <span class="summary_signature">
     
-      <a href="#sprout_entity-instance_method" title="#sprout_entity (instance method)">- (Object) <strong>sprout_entity</strong> </a>
+      <a href="#execute-instance_method" title="#execute (instance method)">- (Object) <strong>execute</strong>(executable, path, command) </a>
     
 
     
   </span>
   
   
-    
-    
-  
   
   
   
   
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute sprout_entity.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
-    
-  </ul>
-
-
-
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
       
-      <span id="sprout_entity=-instance_method"></span>
-      <span id="sprout_entity-instance_method"></span>
-      <div class="method_details first">
-  <p class="signature first" id="sprout_entity-instance_method">
-  
-    - (<tt>Object</tt>) <strong>sprout_entity</strong> 
+    </ul>
   
 
-  
-</p><div class="docstring">
-  <div class="discussion">
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
     
-<p>Returns the value of attribute sprout_entity</p>
-
-
-  </div>
-</div>
-<div class="tags">
+    
+      <div class="method_details first">
+  <p class="signature first" id="execute-instance_method">
   
-</div><table class="source_code">
+    - (<tt>Object</tt>) <strong>execute</strong>(executable, path, command) 
+  
+
+  
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-191
-192
-193</pre>
+6
+7</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/ruby_feature.rb', line 191</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/fcsh_client.rb', line 6</span>
 
-<span class='kw'>def</span> <span class='id sprout_entity'>sprout_entity</span>
-  <span class='ivar'>@sprout_entity</span>
+<span class='kw'>def</span> <span class='id execute'>execute</span> <span class='id executable'>executable</span><span class='comma'>,</span> <span class='id path'>path</span><span class='comma'>,</span> <span class='id command'>command</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -175,11 +148,10 @@ some knowledge of each other.</p>
     
   </div>
 
-
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 28 11:40:18 2010 by 
+  Generated on Tue Dec 28 11:40:19 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

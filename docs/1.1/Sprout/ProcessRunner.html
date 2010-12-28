@@ -603,6 +603,27 @@ previous example with:</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#readpartial_err-instance_method" title="#readpartial_err (instance method)">- (Object) <strong>readpartial_err</strong>(count) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#update_status-instance_method" title="#update_status (instance method)">- (Object) <strong>update_status</strong> </a>
     
 
@@ -1573,6 +1594,34 @@ generally used only only Windows systems (even 64 bit).</p>
 </div>
     
       <div class="method_details ">
+  <p class="signature " id="readpartial_err-instance_method">
+  
+    - (<tt>Object</tt>) <strong>readpartial_err</strong>(count) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+161
+162
+163</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 161</span>
+
+<span class='kw'>def</span> <span class='id readpartial_err'>readpartial_err</span> <span class='id count'>count</span>
+  <span class='kw'>return</span> <span class='ivar'>@e</span><span class='period'>.</span><span class='id readpartial'>readpartial</span> <span class='id count'>count</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <p class="signature " id="update_status-instance_method">
   
     - (<tt>Object</tt>) <strong>update_status</strong> 
@@ -1627,7 +1676,7 @@ generally used only only Windows systems (even 64 bit).</p>
 </div>
     
     <div id="footer">
-  Generated on Thu Dec 23 00:24:52 2010 by 
+  Generated on Tue Dec 28 11:40:18 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

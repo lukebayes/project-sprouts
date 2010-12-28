@@ -131,7 +131,7 @@ instance by creating a method like the following:</p>
   
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="../FlashSDK/FDB.html" title="FlashSDK::FDB (class)">FlashSDK::FDB</a></span></p>
+  <p class="children"><span class='object_link'><a href="../FlashSDK/FCSH.html" title="FlashSDK::FCSH (class)">FlashSDK::FCSH</a></span>, <span class='object_link'><a href="../FlashSDK/FDB.html" title="FlashSDK::FDB (class)">FlashSDK::FDB</a></span></p>
 </div>
 
   <h2>Constant Summary</h2>
@@ -159,6 +159,33 @@ instance by creating a method like the following:</p>
   
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
   <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#process_runner-instance_method" title="#process_runner (instance method)">- (Object) <strong>process_runner</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The Sprout::ProcessRunner that delegates to the long-running process, via
+stdin, stdout and stderr.</p>
+</div></span>
+  
+</li>
+
     
       <li class="public ">
   <span class="summary_signature">
@@ -302,7 +329,7 @@ so that we create a 'task' instead of a 'file' task.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#execute-instance_method" title="#execute (instance method)">- (Object) <strong>execute</strong> </a>
+      <a href="#execute-instance_method" title="#execute (instance method)">- (Object) <strong>execute</strong>(should_wait = true) </a>
     
 
     
@@ -319,6 +346,51 @@ so that we create a 'task' instead of a 'file' task.</p>
 <p>Execute the Daemon executable, followed by the collection of stored actions
 in  the order they were called.</p>
 </div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#handle_user_session-instance_method" title="#handle_user_session (instance method)">- (Object) <strong>handle_user_session</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Expose the running process to manual input on the terminal, and write
+stdout back to the user.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#process_launched%3F-instance_method" title="#process_launched? (instance method)">- (Boolean) <strong>process_launched?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -372,6 +444,51 @@ so that we are NOT added to the CLEAN collection.</p>
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait-instance_method" title="#wait (instance method)">- (Object) <strong>wait</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#wait_for_prompt-instance_method" title="#wait_for_prompt (instance method)">- (Object) <strong>wait_for_prompt</strong>(expected_prompt = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Wait for the underlying process to present an input prompt, so that another
+action can be submitted, or user input can be collected.</p>
+</div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -416,10 +533,52 @@ so that we are NOT added to the CLEAN collection.</p>
     <h2>Instance Attribute Details</h2>
     
       
+      <span id=""></span>
+      <span id="process_runner-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="process_runner-instance_method">
+  
+    - (<tt>Object</tt>) <strong>process_runner</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The Sprout::ProcessRunner that delegates to the long-running process, via
+stdin, stdout and stderr.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+147
+148
+149</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 147</span>
+
+<span class='kw'>def</span> <span class='id process_runner'>process_runner</span>
+  <span class='ivar'>@process_runner</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
       <span id="prompt=-instance_method"></span>
       <span id="prompt-instance_method"></span>
-      <div class="method_details first">
-  <p class="signature first" id="prompt-instance_method">
+      <div class="method_details ">
+  <p class="signature " id="prompt-instance_method">
   
     - (<tt>Regexp</tt>) <strong>prompt</strong> 
   
@@ -468,12 +627,12 @@ expressed here using the | (or) operator.</p>
       <pre class="lines">
 
 
-140
 141
-142</pre>
+142
+143</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 141</span>
 
 <span class='kw'>def</span> <span class='id prompt'>prompt</span>
   <span class='ivar'>@prompt</span>
@@ -727,12 +886,12 @@ action name is already defined for  the provided instance.</p>
       <pre class="lines">
 
 
-144
-145
-146</pre>
+151
+152
+153</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 144</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 151</span>
 
 <span class='kw'>def</span> <span class='id action_stack'>action_stack</span>
   <span class='ivar'>@action_stack</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -779,14 +938,14 @@ so that we create a 'task' instead of a 'file' task.</p>
       <pre class="lines">
 
 
-172
-173
-174
-175
-176</pre>
+246
+247
+248
+249
+250</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 172</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 246</span>
 
 <span class='kw'>def</span> <span class='id create_outer_task'>create_outer_task</span> <span class='op'>*</span><span class='id args'>args</span>
   <span class='id task'>task</span> <span class='op'>*</span><span class='id args'>args</span> <span class='kw'>do</span>
@@ -801,7 +960,7 @@ so that we create a 'task' instead of a 'file' task.</p>
       <div class="method_details ">
   <p class="signature " id="execute-instance_method">
   
-    - (<tt>Object</tt>) <strong>execute</strong> 
+    - (<tt>Object</tt>) <strong>execute</strong>(should_wait = true) 
   
 
   
@@ -815,6 +974,91 @@ in  the order they were called.</p>
 underlying daemon will be connected to the terminal for user (manual)
 input.</p>
 
+<p>You can also send wait=false to connect to a daemon process from Ruby and
+execute actions over time. This might look like:</p>
+
+<pre class="code"><span class='id fdb'>fdb</span> <span class='op'>=</span> <span class='const'>FlashSDK</span><span class='op'>::</span><span class='const'>FDB</span><span class='period'>.</span><span class='id new'>new</span>
+<span class='id fdb'>fdb</span><span class='period'>.</span><span class='id execute'>execute</span> <span class='kw'>false</span>
+
+<span class='comment'># Do something else while FDB
+</span><span class='comment'># is open, then:
+</span>
+<span class='id fdb'>fdb</span><span class='period'>.</span><span class='id run'>run</span>
+<span class='id fdb'>fdb</span><span class='period'>.</span><span class='id break'>break</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>AsUnitRunner:12</span><span class='tstring_end'>&quot;</span></span>
+<span class='id fdb'>fdb</span><span class='period'>.</span><span class='id continue'>continue</span>
+<span class='id fdb'>fdb</span><span class='period'>.</span><span class='id kill'>kill</span>
+<span class='id fdb'>fdb</span><span class='period'>.</span><span class='id confirm'>confirm</span>
+<span class='id fdb'>fdb</span><span class='period'>.</span><span class='id quit'>quit</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+        <span class='name'>wait</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>default true. Send false to connect to a daemon from Ruby code.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+185
+186
+187
+188
+189
+190
+191
+192</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 185</span>
+
+<span class='kw'>def</span> <span class='id execute'>execute</span> <span class='id should_wait'>should_wait</span><span class='op'>=</span><span class='kw'>true</span>
+  <span class='ivar'>@process_runner</span> <span class='op'>=</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span>
+  <span class='ivar'>@process_launched</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id wait_for_prompt'>wait_for_prompt</span>
+  <span class='id execute_actions'>execute_actions</span>
+  <span class='id handle_user_session'>handle_user_session</span> <span class='kw'>if</span> <span class='id should_wait'>should_wait</span>
+  <span class='id wait'>wait</span> <span class='kw'>if</span> <span class='id should_wait'>should_wait</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="handle_user_session-instance_method">
+  
+    - (<tt>Object</tt>) <strong>handle_user_session</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Expose the running process to manual input on the terminal, and write
+stdout back to the user.</p>
+
 
   </div>
 </div>
@@ -826,21 +1070,72 @@ input.</p>
       <pre class="lines">
 
 
-157
-158
-159
-160
-161
-162</pre>
+226
+227
+228
+229
+230
+231
+232</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 226</span>
 
-<span class='kw'>def</span> <span class='id execute'>execute</span>
-  <span class='id runner'>runner</span> <span class='op'>=</span> <span class='kw'>super</span>
-  <span class='id execute_actions'>execute_actions</span> <span class='id runner'>runner</span>
-  <span class='id handle_user_session'>handle_user_session</span> <span class='id runner'>runner</span>
-  <span class='const'>Process</span><span class='period'>.</span><span class='id wait'>wait</span> <span class='id runner'>runner</span><span class='period'>.</span><span class='id pid'>pid</span>
+<span class='kw'>def</span> <span class='id handle_user_session'>handle_user_session</span>
+  <span class='kw'>while</span> <span class='op'>!</span><span class='id process_runner'>process_runner</span><span class='period'>.</span><span class='id r'>r</span><span class='period'>.</span><span class='id eof?'>eof?</span>
+    <span class='id input'>input</span> <span class='op'>=</span> <span class='gvar'>$stdin</span><span class='period'>.</span><span class='id gets'>gets</span><span class='period'>.</span><span class='id chomp!'>chomp!</span>
+    <span class='id execute_action'>execute_action</span> <span class='id input'>input</span><span class='comma'>,</span> <span class='kw'>true</span>
+    <span class='id wait_for_prompt'>wait_for_prompt</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="process_launched?-instance_method">
+  
+    - (<tt><span class='object_link'><a href="Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>process_launched?</strong>  <span class="extras">(protected)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Executable/Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+236
+237
+238</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 236</span>
+
+<span class='kw'>def</span> <span class='id process_launched?'>process_launched?</span>
+  <span class='ivar'>@process_launched</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -885,12 +1180,12 @@ it.</p>
       <pre class="lines">
 
 
-196
-197
-198</pre>
+270
+271
+272</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 196</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 270</span>
 
 <span class='kw'>def</span> <span class='id system_execute'>system_execute</span> <span class='id binary'>binary</span><span class='comma'>,</span> <span class='id params'>params</span>
   <span class='const'>Sprout</span><span class='period'>.</span><span class='id current_system'>current_system</span><span class='period'>.</span><span class='id execute_thread'>execute_thread</span> <span class='id binary'>binary</span><span class='comma'>,</span> <span class='id params'>params</span>
@@ -938,15 +1233,112 @@ Executable)</p>
       <pre class="lines">
 
 
-185
-186
-187</pre>
+259
+260
+261</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 185</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 259</span>
 
 <span class='kw'>def</span> <span class='id update_rake_task_name_from_args'>update_rake_task_name_from_args</span> <span class='op'>*</span><span class='id args'>args</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id rake_task_name'>rake_task_name</span> <span class='op'>=</span> <span class='id parse_rake_task_arg'>parse_rake_task_arg</span> <span class='id args'>args</span><span class='period'>.</span><span class='id last'>last</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="wait-instance_method">
+  
+    - (<tt>Object</tt>) <strong>wait</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+194
+195
+196</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 194</span>
+
+<span class='kw'>def</span> <span class='id wait'>wait</span>
+  <span class='const'>Process</span><span class='period'>.</span><span class='id wait'>wait</span> <span class='id process_runner'>process_runner</span><span class='period'>.</span><span class='id pid'>pid</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="wait_for_prompt-instance_method">
+  
+    - (<tt>Object</tt>) <strong>wait_for_prompt</strong>(expected_prompt = nil) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Wait for the underlying process to present an input prompt, so that another
+action can be submitted, or user input can be collected.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/daemon.rb', line 203</span>
+
+<span class='kw'>def</span> <span class='id wait_for_prompt'>wait_for_prompt</span> <span class='id expected_prompt'>expected_prompt</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id expected_prompt'>expected_prompt</span> <span class='op'>=</span> <span class='id expected_prompt'>expected_prompt</span> <span class='op'>||</span> <span class='id prompt'>prompt</span>
+  <span class='id line'>line</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+
+  <span class='kw'>while</span> <span class='id process_runner'>process_runner</span><span class='period'>.</span><span class='id alive?'>alive?</span> <span class='kw'>do</span>
+    <span class='comment'>#puts &quot;&gt;&gt; ERROR #{process_runner.readpartial_err 1}&quot;
+</span>
+    <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='id process_runner'>process_runner</span><span class='period'>.</span><span class='id r'>r</span><span class='period'>.</span><span class='id eof?'>eof?</span>
+    <span class='id char'>char</span> <span class='op'>=</span> <span class='id process_runner'>process_runner</span><span class='period'>.</span><span class='id readpartial'>readpartial</span> <span class='int'>1</span>
+    <span class='id line'>line</span> <span class='op'>&lt;&lt;</span> <span class='id char'>char</span>
+    <span class='kw'>if</span> <span class='id char'>char</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span>
+      <span class='id line'>line</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+    <span class='kw'>end</span>
+    <span class='const'>Sprout</span><span class='period'>.</span><span class='id stdout'>stdout</span><span class='period'>.</span><span class='id printf'>printf</span> <span class='id char'>char</span>
+    <span class='const'>Sprout</span><span class='period'>.</span><span class='id stdout'>stdout</span><span class='period'>.</span><span class='id flush'>flush</span>
+    <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>unless</span> <span class='id line'>line</span><span class='period'>.</span><span class='id match'>match</span><span class='lparen'>(</span><span class='id expected_prompt'>expected_prompt</span><span class='rparen'>)</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -958,7 +1350,7 @@ Executable)</p>
 </div>
     
     <div id="footer">
-  Generated on Thu Dec 23 00:24:50 2010 by 
+  Generated on Tue Dec 28 11:40:15 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

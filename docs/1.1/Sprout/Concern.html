@@ -71,13 +71,11 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>This class was copied from Rails source code and provides our RubyFeature
-with the ability to more clearly mix in functionality against a class and
-behave as if inheritance works at the class mixin level.</p>
+<p>This class was copied from Rails source code and enhances Ruby's native
+mixin functionality for our Sprout::RubyFeature.</p>
 
-<p>TODO: I'd like to update our system so that this functionality is no longer
-necessary - if you have ideas or opinions about this code, please let me
-know!</p>
+<p>I'd like to work to get rid of this class, and the confusion that it
+introduces.</p>
 
 
   </div>
@@ -213,12 +211,12 @@ subclass.</p>
       <pre class="lines">
 
 
-26
-27
-28</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/concern.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/concern.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id extended'>extended</span><span class='lparen'>(</span><span class='id base'>base</span><span class='rparen'>)</span>
   <span class='id base'>base</span><span class='period'>.</span><span class='id instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@_dependencies</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
@@ -258,6 +256,8 @@ subclass.</p>
       <pre class="lines">
 
 
+31
+32
 33
 34
 35
@@ -268,12 +268,10 @@ subclass.</p>
 40
 41
 42
-43
-44
-45</pre>
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/concern.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/concern.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id append_features'>append_features</span><span class='lparen'>(</span><span class='id base'>base</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id base'>base</span><span class='period'>.</span><span class='id instance_variable_defined?'>instance_variable_defined?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@_dependencies</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -316,16 +314,16 @@ subclass.</p>
       <pre class="lines">
 
 
+47
+48
 49
 50
 51
 52
-53
-54
-55</pre>
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/concern.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/concern.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='id included'>included</span><span class='lparen'>(</span><span class='id base'>base</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id base'>base</span><span class='period'>.</span><span class='id nil?'>nil?</span>
@@ -344,7 +342,7 @@ subclass.</p>
 </div>
     
     <div id="footer">
-  Generated on Thu Dec 23 00:24:50 2010 by 
+  Generated on Tue Dec 28 11:40:16 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>
