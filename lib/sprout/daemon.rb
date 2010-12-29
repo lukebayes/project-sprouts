@@ -322,7 +322,7 @@ module Sprout
     # Execute a single action.
     def execute_action action, silence=false
       action = action.strip
-      Sprout.stdout.puts(action) unless silence
+      Sprout.stdout.puts("#{action}\n") unless silence
       process_runner.puts action
       wait_for_prompt
     end
