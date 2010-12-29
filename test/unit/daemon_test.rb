@@ -10,7 +10,10 @@ class DaemonTest < Test::Unit::TestCase
       # Uncomment the following to see interactive sessions:
       #Sprout.stdout = $stdout
       #Sprout.stderr = $stderr
-      configure_fdb_fake
+
+      # Comment the following and install the flashsdk
+      # to run test against actual fdb:
+      insert_fake_executable File.join(fixtures, 'executable', 'flex3sdk_gem', 'fdb')
     end
 
     should "execute without shell params" do
@@ -86,14 +89,5 @@ class DaemonTest < Test::Unit::TestCase
 
   end
 
-  private
-
-  def configure_fdb_fake
-    # Comment the following and install the flashsdk
-    # to run test against actual fdb:
-    @fdb_fake = File.join(fixtures, 'executable', 'flex3sdk_gem', 'fdb')
-    path_response = OpenStruct.new(:path => @fdb_fake)
-    Sprout::Executable.expects(:load).with(:fdb, 'flex4', '>= 4.1.0.pre').returns path_response
-  end
 end
 
