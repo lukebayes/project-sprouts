@@ -202,21 +202,18 @@ module Sprout
     # collected.
     def wait_for_prompt expected_prompt=nil
       expected_prompt = expected_prompt || prompt
-      line = ''
 
-      while process_runner.alive? do
-        #puts ">> ERROR #{process_runner.readpartial_err 1}"
+      fake_stderr = Sprout::OutputBuffer.new
+      fake_stdout = Sprout::OutputBuffer.new
+      stderr = read_from process_runner.e, fake_stderr
+      stdout = read_from process_runner.r, fake_stdout, expected_prompt
+      stdout.join && stderr.kill
 
-        return false if process_runner.r.eof?
-        char = process_runner.readpartial 1
-        line << char
-        if char == "\n"
-          line = ''
-        end
-        Sprout.stdout.printf char
-        Sprout.stdout.flush
-        return true unless line.match(expected_prompt).nil?
-      end
+      stdout_str = fake_stdout.read
+      stderr_str = fake_stderr.read
+
+      Sprout.stderr.printf(stderr_str)
+      Sprout.stdout.printf(stdout_str)
     end
 
     ##
@@ -232,6 +229,45 @@ module Sprout
     end
 
     protected
+
+    ##
+    # This is the ass-hattery that we need to go
+    # through in order to read from stderr and
+    # stdout from a long-running process without
+    # eternally blocking the parent - and providing
+    # the ability to asynchronously write into the
+    # input stream.
+    #
+    # If you know how to better do this accross
+    # platforms (mac, win and nix) without losing
+    # information (i.e. combining stderr and stdout
+    # into a single stream), I'm all ears!
+    def read_from pipe, to, until_prompt=nil
+      line = ''
+      lines = ''
+      Thread.new do
+        Thread.current.abort_on_exception = true
+        while true do
+          break if pipe.eof?
+          char = pipe.readpartial 1
+          line << char
+          if char == "\n"
+            to.puts line
+            to.flush
+            lines << line
+            line = ''
+          end
+          if !until_prompt.nil? && line.match(until_prompt)
+            lines << line
+            to.printf line
+            to.flush
+            line = ''
+            break
+          end
+        end
+        lines
+      end
+    end
 
     def process_launched?
       @process_launched

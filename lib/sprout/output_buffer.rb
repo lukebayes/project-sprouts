@@ -1,7 +1,7 @@
 
 module Sprout
 
-  class OutputBuffer < Logger
+  class OutputBuffer < String
     
     def initialize *args
       super
@@ -9,25 +9,24 @@ module Sprout
     end
 
     def puts msg
-      flush if @characters.size > 0
-      info msg
+      @characters << msg
     end
 
     def print msg
       @characters << msg
-      flush
     end
 
     def printf msg
       @characters << msg
-      flush
+    end
+
+    def read
+      response = @characters
+      @characters = ''
+      response
     end
     
     def flush
-      if @characters.match /\n/
-        info @characters
-        @characters = ''
-      end
     end
 
   end

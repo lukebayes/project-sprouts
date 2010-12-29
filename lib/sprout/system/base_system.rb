@@ -100,6 +100,7 @@ module Sprout::System
     def execute_thread(tool, options='')
       runner = nil
       Thread.new do
+        Thread.current.abort_on_exception = true
         runner = execute_silent(tool, options)
       end
       # Wait for the runner to be created

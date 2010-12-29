@@ -104,10 +104,6 @@ module Sprout
       @stdout ||= $stdout
     end
     
-    def stdout_test
-      OutputBuffer.new 'test-stdout.log'
-    end
-    
     def stderr=(err)
       @stderr = err
     end
@@ -116,10 +112,6 @@ module Sprout
       @stderr ||= $stderr
     end
     
-    def stderr_test
-      OutputBuffer.new 'test-stderr.log'
-    end
-
     ##
     # @return [File] Path to the file from the 'caller' property of
     # a Ruby exception.

@@ -60,7 +60,7 @@ module Sprout
     
     ##
     # Execute the provided command using the win32-open3
-    # library. This is generally used only only Windows
+    # library. This should only be used on Windows
     # systems (even 64 bit).
     def execute_win32(*command)
       execute_with_block *command do

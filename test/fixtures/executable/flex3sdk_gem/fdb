@@ -80,8 +80,7 @@ class FakeFDB
   end
 
   def handle_quit args
-    str << ">> EXITING NOW!\n"
-    puts str
+    puts ">> EXITING NOW!\n"
     exit! 0
   end
 

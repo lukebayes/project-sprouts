@@ -7,6 +7,9 @@ class DaemonTest < Test::Unit::TestCase
   context "a new daemon delegate" do
 
     setup do
+      # Uncomment the following to see interactive sessions:
+      #Sprout.stdout = $stdout
+      #Sprout.stderr = $stderr
       configure_fdb_fake
     end
 
@@ -41,8 +44,10 @@ class DaemonTest < Test::Unit::TestCase
       @fdb.wait # wait for actions to finish.
     end
 
-=begin
     should "print errors" do
+      ##
+      # Collect the messages sent to stderr:
+      
       @fdb = Sprout::FDB.new
       # For some reason, using mocha expectations are 
       # actually stubbing the methods and breaking this
@@ -52,8 +57,9 @@ class DaemonTest < Test::Unit::TestCase
       @fdb.run_with_error
       @fdb.quit
       @fdb.wait # wait for actions to finish.
+
+      assert_equal "This is an error!\nThis is more details about the error!\nHere are even more details!\n", Sprout.stderr.read
     end
-=end
 
     should "execute from rake task" do
       f = fdb :fdb_debug do |t|
