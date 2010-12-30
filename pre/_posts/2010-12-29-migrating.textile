@@ -190,7 +190,3 @@ end
 
 If you have a more sophisticated Rakefile, and find yourself struggling with the migration, feel free to <a target="_blank" href="http://groups.google.com/group/projectsprouts/">ask questions on the list</a>.
 
-h2. Thanks for your support!
-
-I sincerely hope you enjoy this new release of Sprouts, it is truly so much easier to test, grow and enhance, I have high hopes for our growing community in the coming months and years.
-

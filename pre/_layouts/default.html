@@ -37,12 +37,8 @@
                 <li class="home"><a href="/">Home</a></li>
                 <li class="troubleshooting"><a href="/troubleshooting.html">Troubleshooting</a></li>
                 <li class="migrating"><a href="/2010/12/29/migrating.html">Migration Guide</a></li>
-                <li class="developer"><a href="/2010/12/29/developer.html">Developer Guide</a></li>
-                <!--
-                <li class=""><a href="/generators.html">Generators</a></li>
-                <li class=""><a href="/libraries.html">Libraries</a></li>
-                <li class=""><a href="/tools.html">Tools</a></li>
-                -->
+                <li class="legacy-docs"><a href="/rdoc/index.html">Legacy Docs (0.7)</a></li>
+                <li class="legacy-site"><a href="/legacy/index.html">Legacy Site (0.7)</a></li>
               </ul>
 
             </td>
@@ -51,7 +47,7 @@
               <ul>
                 <li class="header">Posts <a href="/atom.xml"><img class="footer-feed-icon" src="/images/35px-Feed-icon.png" /></a></li>
                 {% for post in site.posts limit:10 %}
-                <li class="post"><a href="{{ post.url }}">{{ post.date | date: "%Y %m %d" }} - {{ post.title }}</a> <span class="date"></span></li>
+                <li class="post"><a href="{{ post.url }}"><span class="date">{{ post.date | date: "%Y-%m-%d" }}</span> | {{ post.title }}</a></li>
                 {% endfor %}
               </ul>
 

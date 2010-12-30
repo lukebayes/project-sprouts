@@ -1,21 +1,38 @@
 ---
 layout: post
-title: Announcing Site, Blog, Docs and Release Candidate
+title: Project Sprouts Version 1.0 Beta Released!
 author: Luke Bayes
 ---
 
 h1. Project Sprouts Version 1.0 Beta Released!
 
-29 December, 2010 - Luke Bayes
+28 December, 2010 - Luke Bayes
 
-After <a target="_blank" href="http://rubyforge.org/projects/asproject/">over 4 years</a> of thinking, rethinking, designing, implementing and reimplementing, I'm elated to announce the immediate availability of the <a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/master">Project Sprouts version 1.0 beta</a>.
+h2. The Thinker
 
-<span class="attribution">
-<img class="bordered" src="/images/3638652042_3cb4b970bd_z.jpg" title="Tiny Sprout" alt="Tiny Sprout" />
+After <a target="_blank" href="http://rubyforge.org/projects/asproject/">over 4 years</a> of thinking, rethinking, designing, implementing and reimplementing, I'm elated to announce the immediate availability of the Project Sprouts version 1.0 beta.
+
+<img class="bordered" src="/images/3638652042_3cb4b970bd_z.jpg" title="Tiny Sprout" alt="Tiny Sprout" /><span class="attribution">
 "Image":http://www.flickr.com/photos/san_ast/3638652042/ courtesy of "Santhosh Nandakumar":http://www.flickr.com/people/san_ast/ and the "Creative Commons":http://creativecommons.org/licenses/by/2.0/ license.
 </span>
 
-This release is a nearly complete rewrite of every fundamental building block that was used in the past. We have decoupled, simplified, tested and documented just about every crevice. As you dig around and stretch it out, you'll likely notice areas that could use improvement. You may even stumble over an error or two. If you see anything at all suspicious (especially full-blown failures), please do <a target="_blank" href="http://groups.google.com/group/projectsprouts/">let us know</a>.
+You can install the beta as follows:
+
+{% highlight bash %}
+gem install sprout --pre
+{% endhighlight %}
+
+You can test out the Flash SDK with:
+
+{% highlight bash %}
+gem install flashsdk --pre
+{% endhighlight %}
+
+You should receive further instructions in your terminal after installation.
+
+h2. Moar Plz!
+
+This release represents a nearly complete rewrite of Sprouts internals with a focus on testability, extensibility and decoupling. This build sets out to solve - in a general way - many problems associated with building cross platform, distributed tools with Ruby, and along the way, it makes life much easier for those of us that work with ActionScript or Flex. As you dig around and uncover various dark corners, you're likely to notice areas that could use some improvement. You may even stumble over an error or two. If you see anything at all suspicious (especially full-blown failures), please do <a target="_blank" href="http://groups.google.com/group/projectsprouts/">let us know</a>.
 
 If you're working with ActionScript 3.0 or Flex projects, please check out this latest release. This release does _not_ include support for ActionScript 2.0 projects, and unless someone from the community contributes that functionality, it probably isn't going to get done.
 
@@ -23,12 +40,18 @@ While the new style of Rake tasks should be familiar to anyone using Sprouts 0.7
 
 If you're migrating a legacy Sprouts project, please check out the "migration guide":/2010/12/29/migrating.html.
 
-We are also working hard to completely revamp our documentation using the <a target="_blank" href="http://yardoc.org/">Yard documentation engine</a>. 
+We are also working hard to completely revamp our "documentation":/docs/1.1/index.html using the <a target="_blank" href="http://yardoc.org/">Yard documentation engine</a>. 
 
-We still have a handful of features that need some attention, so if you've been meaning to give back to an open-source project, this would be a great opportunity.
+We still have a handful of features that need some attention, so if you've been meaning to contribute some time to an open-source project, this could be a great opportunity.
 
-Check out our "developer guide":/2010/12/29/developer.html for more info on how to contribute.
+This is also the inaugural post to the new Project Sprouts Blog!
 
-This is also the inaugural post to the new Project Sprouts Blog! Be sure to subscribe to the "atom feed":/atom.xml so that you'll be notified whenever we post.
+Be sure to subscribe to the "atom feed":/atom.xml.
 
-This blog (and site) was created with <a target="_blank" href="https://github.com/mojombo/jekyll">Jekyll</a>, and is stored in the <a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/gh-pages">Github gh-pages branch</a>. If you have an article (or correction) that you'd like to contribute, please fork and send me a pull request!
+This blog (and site) was created with <a target="_blank" href="https://github.com/mojombo/jekyll">Jekyll</a>, and is stored in the <a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/gh-pages">gh-pages branch</a>. If you have an article (or correction) that you'd like to contribute, please fork and send me a pull request!
+
+h2. Thanks for your support!
+
+I sincerely hope you enjoy this new release of Sprouts, it is truly so much easier to test and extend and work with. I have high hopes for our growing community in the coming months and years.
+
+
