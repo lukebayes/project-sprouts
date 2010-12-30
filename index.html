@@ -1,259 +1,204 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>Sprouts Home</title>
-		
-		<link rel="stylesheet" href="assets/css/screen.css" type="text/css" media="screen, projection">
-		<link rel="stylesheet" href="assets/css/print.css" type="text/css" media="print">
-        
-        <style>
-            #twitter_update_list li {
-                clear: both;
-                padding-bottom: 10px;
-                margin-bottom: 10px;
-                margin-bottom: 15px;
-                list-style-type: none;
-                font-size: 115%;
-            }
-            
-            #twitter_update_list a.user-image {
-                border: 1px solid #fff;
-                padding: 3px;
-                margin-left: 0px;
-                margin-right: 5px;
-                float: left;
-                width: 30px;
-                height: 30px;
-            }
-            
-            #twitter_update_list a.user-image:hover {
-                border: 1px solid #ffcc00;
-            }
-            
-            #twitter_update_list img {
-                width: 30px;
-                height: 30px;
-                
-            }
-            
-            #twitter_update_list span {
-                text-align: top;
-            }
-            
-        </style>
-        
-		<!--[if IE]><link rel="stylesheet" href="assets/css/ie.css" type="text/css" media="screen, projection"><![endif]-->
-		<script>
-		function renderTwitterCell(tweet, text, name) {
-		    return "<li><a class='user-image' href='http://twitter.com/"+name+"'><img src='"+tweet.profile_image_url+"' /></a><span>"+text+' <a style="font-size:85%" href="http://twitter.com/'+name+"/statuses/"+tweet.id+'">'+relative_time(tweet.created_at)+"</a></span></li>";
-	    }
-		
-      function twitterCallback2(C){ var A=[]; for(var D=0;D<C.length;D++){ var E=C[D].from_user; var B=C[D].text.replace(/((https?|s?ftp|ssh)\:\/\/[^"\s\<\>]*[^.,;'">\:\s\<\>\)\]\!])/g,function(F){return'<a href="'+F+'">'+F+"</a>";}).replace(/\B@([_a-z0-9]+)/ig,function(F){return F.charAt(0)+'<a href="http://www.twitter.com/'+F.substring(1)+'">'+F.substring(1)+"</a>"}); A.push( renderTwitterCell(C[D],B,E) )}document.getElementById("twitter_update_list").innerHTML=A.join("")} function relative_time(C) { var A = Date.parse(C); var D = (arguments.length > 1) ? arguments[1] : new Date; var E = parseInt((D.getTime() - A) / 1000); if (E < 60) { return "less than a minute ago"; } else { if (E < 120) { return "about a minute ago"; } else { if (E < 3600) { return parseInt(E / 60).toString() + " minutes ago"; } else { if (E < 7200) { return "about an hour ago"; } else { if (E < 86400) { return "about " + parseInt(E / 3600).toString() + " hours ago"; } else { if (E < 172800) { return "1 day ago"; } else { return parseInt(E / 86400).toString() + " days ago"; } } } } } } }
-		
-        // function logit(obj) {
-        //     console.log('--------------------');
-        //     for(var key in obj) {
-        //         console.log(key + " : " + obj[key]);
-        //          }
-        //         }
-		
-		function twitterCallback(json) {
-            twitterCallback2(json.results);
-            // var len = json.results.length;
-            // for(var i=0; i < len; i++) {
-            //     logit(json.results[i]);
-            // }
-	    }
-		</script>
-	</head>
-	<body>
-		
-		<div class="container"><!-- main wrapper -->
-			
-			<!-- Common Header -->
-			<div id="topNav" class="column span-24 last">
-				
-				<div id="topNav_left" class="column span-1"></div>
-				
-				<div id="topNav_center" class="column span-22">
-					
-					<div class="column span-4">
-						<img id="logo" src="assets/img/sprouts_logo_bw_small_2.png" alt="Small Sprouts Logo" />
-					</div>
-					
-					<div class="column span-12 prepend-6 last">
-						<ul>
-							<li><a href='index.html'>Home</a> |</li>
-							<li><a href='screencasts.html'>Screencasts</a> |</li>
-							<li><a href='getting_started.html'>Get Started</a> |</li>
-							<li><a href='learn.html'>Documentation</a> |</li>
-							<li><a href='community.html'>Community</a></li>
-						</ul>
-					</div>
-					
-				</div>
-				
-				<div id="topNav_right" class="column span-1 last"></div>
-			</div>
-			
-			<div id="mainBorder" class="column span-24 last"><!-- Main Border -->
-			
-					<!-- First Page Logo -->
-					<div class="column span-18 append-3 prepend-3 last">
-			
-						<div id="header" class="column span-18 last" >
-							<div class="column mid span-5 append-1 prepend-1 center"><!-- Logo -->
-								<img src="assets/img/sprouts_logo.png" alt="Sprouts Logo" />
-							</div>
-							<div class="column mid span-9 prepend-1 center last">
-								<h1>Flash development evolved</h1>
-								
-								<h3>
-									Sprouts is an open-source, cross-platform project generation and configuration tool for ActionScript 2, ActionScript 3, Adobe AIR and Flex projects.
-								</h3>
-							</div>
-						</div>
-					
-					</div>
-					
-					<!-- Call to Action -->
-					<div id="actionWrapper" class="column span-20 append-2 prepend-2 last">
-						
-						<div id="action" class="column span-20 last">	
-							
-							<div id="leftActionBorder" class="column span-1"></div>
-							
-							<div id="actionBody" class="column span-18">
-								
-								<div class="column span-3 prepend-1 append-1">
-									<a href="screencasts.html">
-										<h2>Witness It</h2>
-										<img src="assets/img/witness_button.png" alt="Witness It!" />
-									</a>
-								</div>
-								<div class="column span-3 append-1">
-									<a href="getting_started.html">
-										<h2>Get Started</h2>
-										<img src="assets/img/get_started_button.png" alt="Getting started with Sprouts" />
-									</a>
-								</div>
-								<div class="column span-3 append-1">
-									<a href="learn.html">
-										<h2>Learn More</h2>
-										<img src="assets/img/learn_button.png" alt="Click to Learn More" />
-									</a>
-								</div>
-								<div class="column span-3 append-1">
-									<a href="community.html">
-										<h2>Get Involved</h2>
-										<img src="assets/img/community_button.png" alt="Join the Community" />
-									</a>
-								</div>
-								
-							</div>
-							
-							<div id="rightActionBorder" class="column span-1 last"></div>
-							
-						</div>
-						
-					</div>
-					
-					<!-- Main Content Below -->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Project Sprouts</title>
+  <link rel="stylesheet" type="text/css" href="/css/reset-min.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/css/pygments.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/css/sprouts.css" media="all" />
+  <script src="/javascripts/jquery-min-1.4.4.js"></script>
+  <script src="/javascripts/sprouts.js"></script>
+</head>
+<body>
+  <div id="header">
+    <div class="center">
+      <div class="content header-shadow">
+        <div class="logo">Sprouts</div>
+        <div class="tagline">Software development&mdash;evolved</div>
+      </div>
+    </div>
+  </div>
 
+  <a href="http://github.com/lukebayes/project-sprouts/tree/master"><img style="position: absolute; top: 300; right: 0; border: 0;" src="/images/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
-					<div class="column span-4 prepend-4 append-2">
-						<h3>Quick Start</h3>
-					</div>
+<div class="center">
+  <div class="content header-shadow">
+    <h1>What Is It?</h1>
+    <hr />
+    <p>Project Sprouts is a highly cohesive, loosely coupled collection of features that take <em>some</em> of the suck out of programming.</p>
 
-					<div class="column span-10 last">
-						<p>If you're interested, this process should take less than 10 minutes, even if you've never seen Ruby before!</p>
-						<p>
-						You'll need <a href="http://rubyonrails.org/down">Ruby</a> and <a href="http://docs.rubygems.org/">RubyGems</a> installed and working on your system in order to use Sprouts.</p>
-						<p>Once you have these configured, you can install the sprout gem by opening a terminal and entering the following:
-						<code>sudo gem install sprout</code> <i>DOS / Windows users do not enter sudo</i>
-						<p>After installing the Sprout gem, you can exercise Sprouts as follows:</p>
-						<code>sprout -n as3 SomeProject
-cd SomeProject
+    <p>Sprouts is a modular development platform that takes advantage of <a target="_blank" href="http://ruby-lang.org">Ruby</a> and <a target="_blank" href="http://rubygems.org">RubyGems</a> to share code generators, libraries, executables and automated build tasks. It runs anywhere Ruby does, including OS X, Windows, and *nix variants.</p>
+
+    <p>Sprouts has been seen working on Mac, Windows and Linux and while it currently targets ActionScript, Flex and AIR development, tools can be easily created to improve any programming environment.</p>
+
+<!--
+    <span class="attribution">
+      <img class="bordered" src="/images/3309728826_f0489cb9a5.jpg" /><br />
+      <a href="http://www.flickr.com/photos/littlemonkeybutt/3309728826">Image</a> courtesy of <a href="http://www.flickr.com/photos/littlemonkeybutt/">KatieL366</a> and the <a href="http://creativecommons.org/licenses/by-nc/2.0/deed.en">Creative Commons</a> license.
+    </span>
+-->
+    <h2 id="testimonials">What are are folks saying?</h2>
+    <div id="quotes">
+      <blockquote>The best thing to happen to Flex since Matt Chotin....</blockquote>
+      <div class="attribution">Ryan Stewart, Adobe Flash Platform Evangelist</div>
+
+      <blockquote>I swear project sprouts is the most significant single thing in terms of changing my work flow.</blockquote>
+      <div class="attribution">Stray, ActionScript developer</div>
+    </div>
+
+    <h2 id="reasons">Why would someone use Sprouts?</h2>
+    <p>There are lots of reasons to use Sprouts for your projects, here are some of mine:</p>
+    <ul class="reasons">
+      <li><strong>Test-Driven Development</strong> is much easier</li>
+      <li><strong>Decouple builds</strong> from development tools</li>
+      <li><strong>Consistent environment</strong> across any size team</li>
+      <li><strong>Platform independent</strong> tool chain</li>
+      <li><strong>Automatically generate</strong> project files, directories, classes, test cases, and test suites</li>
+      <li><strong>Continuous Integration</strong> simplified</li>
+    </ul>
+  </div>
+</div>
+
+<div id="getting-started" class="center even-section">
+  <div class="content header-shadow">
+
+    <h1>Getting Started</h1>
+    <hr />
+    <p>
+    To get started with Project Sprouts and Flash development, you'll need Ruby (>= 1.9.2 <a target="_blank" href="#">Mac</a>, <a target="_blank" href="#">Win</a>, <a target="_blank" href="#">Nix</a>), <a target="_blank" href="http://rubygems.org">RubyGems</a> (>= 1.3.7) and at least some interest in the programming language <a target="_blank" href="http://mislav.uniqpath.com/poignant-guide/">Ruby</a> and the build tool <a target="_blank" href="http://martinfowler.com/articles/rake.html">Rake</a>.
+    </p>
+
+<div class="highlight"><pre><code class="bash"><span class="c"># Install the ActionScript 3 / Flash Bundle:</span>
+gem install flashsdk --pre
+
+<span class="c"># Generate a new ActionScript 3 project:</span>
+sprout-as3 SomeProject
+
+<span class="c"># Move into the new project:</span>
+<span class="nb">cd </span>SomeProject
+
+<span class="c"># Install dependencies:</span>
+bundle install
+
+<span class="c"># Compile and run the main project:</span>
 rake
-script/generate utils.MathUtil
-rake test</code>
 
-Windows users may have to run:
-<code>script\generate.rb utils.MathUtil
-</code>
-						<p>If you had any questions or issues during that process, please try again with our more detailed <a href="getting_started.html">getting started</a> guide.</p>
-					</div>
+<span class="c"># Congratulations - you&#39;re up and running!</span>
+</code></pre>
+</div>
+
+    <p>
+    Go a little further with Test-Driven Development:
+    </p>
+
+<div class="highlight"><pre><code class="bash"><span class="c"># Generate a class, test and test suite:</span>
+sprout-class utils.MathUtil
+
+<span class="c"># Compile and run the test harness:</span>
+rake <span class="nb">test</span>
+</code></pre>
+</div>
+
+    <p>
+    And finally:
+    </p>
+
+<div class="highlight"><pre><code class="bash"><span class="c"># Show available tasks:</span>
+rake -T
+</code></pre>
+</div>
+
+  </div>
+</div>
+
+<div id="getting-help" class="center">
+  <div class="content header-shadow">
+
+    <h1>Getting Help</h1>
+
+    <p>Sometimes, getting everything set up and running doesn't go as smoothly as we hope. When this happens, we consider this a failure on our end. One of the core objectives behind Sprouts is to make it painless to get up and running&mdash;if it's not, then we have failed.</p>
+    
+    <p>If the information on the <a href="/installation.html">installation</a> page doesn't get you unstuck, please <a target="_blank" href="http://groups.google.com/group/projectsprouts">send us</a> your operating system information, any potentially helpful terminal output and the following:</p>
+
+<div class="highlight"><pre><code class="bash"><span class="c"># Ruby version:</span>
+ruby -v
+
+<span class="c"># RubyGems version:</span>
+gem -v
+</code></pre>
+</div>
+
+  </div>
+</div>
 
 
-					<div class="column span-4 prepend-4 append-2">
-						<h3>Why Sprouts?</h3>
-					</div>
-					
-					<div class="column span-10 last">
-						<p>
-							Sprouts helps individuals and teams be more productive as follows:
-						</p>
-						<ul>
-							<li>Generate new programming projects from a growing variety of project templates
-							</li>
-							<li>Easily generate classes, test cases, test suites and more
-							</li>
-							<li>Automatically download and install both open-source and proprietary tools such as <a href="http://www.mtasc.org">MTASC</a>, <a href="http://www.swfmill.org">SWFMill</a>, <a href="http://www.adobe.com/products/flex/sdk/">MXMLC, COMPC, AsDoc</a>, and even the <a href="http://www.adobe.com/products/flashplayer">Adobe Flash Player</a>
-							</li>
-							<li>Automatically download and install many popular libraries such as <a href="http://www.asunit.org">AsUnit</a>, <a href="http://code.google.com/p/as3flexunitlib/">FlexUnit</a>, <a href="http://www.puremvc.org">PureMVC</a>, <a href="http://labs.adobe.com/wiki/index.php/Cairngorm">Cairngorm</a>, the <a href="http://code.google.com/p/as3corelib/">Adobe Corelib</a> and more
-							</li>
-							<li>Compile and run your SWF application with a single terminal command
-							</li>
-							<li>Compile and run your test harness independently of your application
-							</li>
-							<li>Easily include your client builds with continuous integration tools such as <a href="http://cruisecontrol.sourceforge.net/">Cruise Control</a> or especially <a href="http://cruisecontrolrb.thoughtworks.com/">CruiseControl.rb</a>
-							</li>
-							<li>Get other team members up and running with an existing project by simply checking it out of version control and building it
-							</li>
-						</ul>
-					</div>
-					
-					<hr style="width:80%;margin-left:auto;margin-right:auto;" />
-					
-					<div class="column span-4 prepend-4 append-2">
-						<h3>Who's talking about Sprouts?</h3>
-					</div>
-					
-					<div class="column span-10 last">
-						<div id="talk">
-						    <h3><a href="http://search.twitter.com/search?q=projectsprouts">Twitter Search for 'projectsprouts'</a></h3>
-            				<ul id="twitter_update_list">
-            				</ul>
-						</div>
-					</div>
 
-					<!-- Footer -->
-					<div id="footer" class="column span-24 last">
-						<div>
-							Copyright &copy; 2007 Sprouts Core Team | 
-							<a href="http://groups.google.com/group/projectsprouts">Contact</a> | 
-							<a href="getting_started.html">Get Started</a>
-						</div>
-					</div>
-					
-			</div>
-			
-		</div>
-    <a href="http://github.com/lukebayes/project-sprouts"><img style="position: absolute; top: 0; left: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub" /></a>
-		
-    	<script type="text/javascript" src="http://search.twitter.com/search.json?q=projectsprouts&callback=twitterCallback&rpp=5"></script>
-	</body>
+  <div id="footer">
+    <div class="center">
+      <div class="content header-shadow">
 
-		<!-- Key below is specific to www.projectsprouts.org -->
-		<script type="text/javascript">
-		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-		</script>
-		<script type="text/javascript">
-		var pageTracker = _gat._getTracker("UA-1619511-4");
-		pageTracker._initData();
-		pageTracker._trackPageview();
-		</script>
+        <table>
+
+          <tr>
+            <td>
+
+              <ul>
+                <li class="header">Details</li>
+                <li class="home"><a href="/">Home</a></li>
+                <li class="troubleshooting"><a href="/troubleshooting.html">Troubleshooting</a></li>
+                <li class="migrating"><a href="/2010/12/29/migrating.html">Migration Guide</a></li>
+                <li class="legacy-docs"><a href="/rdoc/index.html">Legacy Docs (0.7)</a></li>
+                <li class="legacy-site"><a href="/legacy/index.html">Legacy Site (0.7)</a></li>
+              </ul>
+
+            </td>
+            <td>
+
+              <ul>
+                <li class="header">Posts <a href="/atom.xml"><img class="footer-feed-icon" src="/images/35px-Feed-icon.png" /></a></li>
+                
+                <li class="post"><a href="/2010/12/29/migrating.html"><span class="date">2010-12-29</span> | Migrating from 0.7 to 1.0 beta</a></li>
+                
+                <li class="post"><a href="/2010/12/28/version-1.0-announced.html"><span class="date">2010-12-28</span> | Project Sprouts Version 1.0 Beta Released!</a></li>
+                
+              </ul>
+
+            </td>
+            <td>
+
+              <ul>
+                <li class="header">Do It</li>
+                <li><a target="_blank" href="http://groups.google.com/group/projectsprouts">Contact</a> (Google Groups)</li>
+                <li><a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/master">Source Code</a> (Github)</li>
+                <li><a target="_blank" href="https://github.com/lukebayes/project-sprouts/issues">File an Issue</a> (Github)</li>
+                <li><a target="_blank" href="http://rubygems.org/gems/sprout">Download</a> (RubyGems)</li>
+                <li><a target="_blank" href="http://projectsprouts.org/docs/1.1/frames.html">Documentation</a> 
+                (<a target="_blank" href="http://projectsprouts.org/docs/1.1/index.html">No Frames</a>)</li>
+              </ul>
+
+            </td>
+
+          </tr>
+
+        </table>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+<!-- Google Analytics for projectsprouts.org -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-1619511-4");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+
 
 </html>
+

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Migrating from 0.7 to 1.0 beta</title>
+  <link rel="stylesheet" type="text/css" href="/css/reset-min.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/css/pygments.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/css/sprouts.css" media="all" />
+  <script src="/javascripts/jquery-min-1.4.4.js"></script>
+  <script src="/javascripts/sprouts.js"></script>
+</head>
+<body>
+  <div id="header">
+    <div class="center">
+      <div class="content header-shadow">
+        <div class="logo">Sprouts</div>
+        <div class="tagline">Software development&mdash;evolved</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="http://github.com/lukebayes/project-sprouts/tree/master"><img style="position: absolute; top: 300; right: 0; border: 0;" src="/images/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
+<div class="center">
+  <div class="content header-shadow">
+    <h1>Migrating from 0.7 to 1.0 beta</h1>
+<p>29 December, 2010 &#8211; Luke Bayes</p>
+<p>There are some significant changes that have come with the new version of Sprouts. This guide should help you transition a legacy Sprouts project into the new hotness. Let&#8217;s get sideways.</p>
+<p><span class="attribution"><br />
+<img src="/images/4981869236_6578a75813_z.jpg" title="Sprouted Onion" alt="Sprouted Onion" /><br />
+<a href="http://www.flickr.com/photos/bigrhys/4981869236/">Image</a> courtesy of <a href="http://www.flickr.com/photos/bigrhys/">Rhys Alton</a> and the <a href="http://creativecommons.org/licenses/by/2.0/">Creative Commons</a> license.<br />
+</span></p>
+<p>In order to simplify this, let&#8217;s start assuming you have a default version 0.7 project called &#8216;SomeProject&#8217;.</p>
+<p>Assuming this is so, you&#8217;ll likely have some AsUnit 3.0 tests, and a Rakefile that looks something like the following:</p>
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;sprout&#39;</span>
+<span class="c1"># Optionally load gems from a server other than rubyforge:</span>
+<span class="c1"># set_sources &#39;http://gems.projectsprouts.org&#39;</span>
+<span class="n">sprout</span> <span class="s1">&#39;as3&#39;</span>
+
+<span class="c1">############################################</span>
+<span class="c1"># Configure your Project Model</span>
+<span class="n">project_model</span> <span class="ss">:model</span> <span class="k">do</span> <span class="o">|</span><span class="n">m</span><span class="o">|</span>
+  <span class="n">m</span><span class="o">.</span><span class="n">project_name</span>            <span class="o">=</span> <span class="s1">&#39;SomeProject&#39;</span>
+  <span class="n">m</span><span class="o">.</span><span class="n">language</span>                <span class="o">=</span> <span class="s1">&#39;as3&#39;</span>
+  <span class="n">m</span><span class="o">.</span><span class="n">background_color</span>        <span class="o">=</span> <span class="s1">&#39;#FFFFFF&#39;</span>
+  <span class="n">m</span><span class="o">.</span><span class="n">width</span>                   <span class="o">=</span> <span class="mi">970</span>
+  <span class="n">m</span><span class="o">.</span><span class="n">height</span>                  <span class="o">=</span> <span class="mi">550</span>
+  <span class="c1"># m.use_fdb               = true</span>
+  <span class="c1"># m.use_fcsh              = true</span>
+  <span class="c1"># m.preprocessor          = &#39;cpp -D__DEBUG=false -P - - | tail -c +3&#39;</span>
+  <span class="c1"># m.preprocessed_path     = &#39;.preprocessed&#39;</span>
+  <span class="c1"># m.src_dir               = &#39;src&#39;</span>
+  <span class="c1"># m.lib_dir               = &#39;lib&#39;</span>
+  <span class="c1"># m.swc_dir               = &#39;lib&#39;</span>
+  <span class="c1"># m.bin_dir               = &#39;bin&#39;</span>
+  <span class="c1"># m.test_dir              = &#39;test&#39;</span>
+  <span class="c1"># m.doc_dir               = &#39;doc&#39;</span>
+  <span class="c1"># m.asset_dir             = &#39;assets&#39;</span>
+  <span class="c1"># m.compiler_gem_name     = &#39;sprout-flex4sdk-tool&#39;</span>
+  <span class="c1"># m.compiler_gem_version  = &#39;&gt;= 4.0.0&#39;</span>
+  <span class="c1"># m.source_path           &lt;&lt; &quot;#{m.lib_dir}/somelib&quot;</span>
+  <span class="c1"># m.libraries             &lt;&lt; :corelib</span>
+<span class="k">end</span>
+
+<span class="n">desc</span> <span class="s1">&#39;Compile and debug the application&#39;</span>
+<span class="n">debug</span> <span class="ss">:debug</span>
+
+<span class="n">desc</span> <span class="s1">&#39;Compile run the test harness&#39;</span>
+<span class="n">unit</span> <span class="ss">:test</span>
+
+<span class="n">desc</span> <span class="s1">&#39;Compile the optimized deployment&#39;</span>
+<span class="n">deploy</span> <span class="ss">:deploy</span>
+
+<span class="n">desc</span> <span class="s1">&#39;Create documentation&#39;</span>
+<span class="n">document</span> <span class="ss">:doc</span>
+
+<span class="n">desc</span> <span class="s1">&#39;Compile a SWC file&#39;</span>
+<span class="n">swc</span> <span class="ss">:swc</span>
+
+<span class="n">desc</span> <span class="s1">&#39;Compile and run the test harness for CI&#39;</span>
+<span class="n">ci</span> <span class="ss">:cruise</span>
+
+<span class="c1"># set up the default rake task</span>
+<span class="n">task</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="ss">:debug</span>
+</code></pre>
+</div><p>One of the (many) problems with this Rakefile, is that there is too much magic.</p>
+<p>All of this magic makes it very difficult for new users to learn what&#8217;s going on here. While it looks simple, there is an enormous amount of work happening. If we wanted all of the same features that are exposed in this project, but using Sprouts v 1.0, here&#8217;s what should happen.</p>
+<h2>1) Add a Gemfile</h2>
+<p>Add a new file to the root of the project named <em>Gemfile</em>, with the following contents:</p>
+<div class="highlight"><pre><code class="ruby"><span class="n">source</span> <span class="s2">&quot;http://rubygems.org&quot;</span>
+
+<span class="n">gem</span> <span class="s2">&quot;flashsdk&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;= 1.0.0.pre&quot;</span>
+<span class="n">gem</span> <span class="s2">&quot;asunit4&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;= 4.2.2.pre&quot;</span>
+</code></pre>
+</div><p>This Gemfile is a feature of <a target="_blank" href="http://gembundler.com">Gem Bundler</a> which is an awesome tool that does a great job of helping us decouple our applications from the mechanism that is used to distribute them &#8211; generally <a target="_blank" href="http://rubygems.org">RubyGems</a>.</p>
+<p>This file describes all of the Ruby Gems that our application should load in order for the <em>require</em> statements within it to work.</p>
+<p>Of course, some Ruby Gems require others, which themselves require others. Gem Bundler does a great job of managing these dependencies for us, so we should only declare our outermost dependencies.</p>
+<p>It&#8217;s important to note, that if you rely on any externally distributed library or tools (like the <a target="_blank" href="https://github.com/kristoferjoseph/sprout-robotlegs">Robot Legs library</a> for example), you should add that dependency to this Gemfile.</p>
+<h2>2) Update the Rakefile</h2>
+<p>Project Sprouts has always been an ambitious effort that probably attempts to do a little too much. One of the things that has been difficult to manage is how much or how little <em>magic sauce</em> to use. I believe that the 0.7 release of Sprouts uses too much magic, and the version 1.0 beta is a major attempt to remedy that.</p>
+<p>Some things that are noticably absent in the new version are the <em>ProjectModel</em> and <em>Rake Task Helpers</em>. There are other major features that aren&#8217;t quite ready yet too, like <em>AsDoc</em> and <em>Continuous Integration</em> support.</p>
+<p>As of right now, there is no plan to bring back the <em>Project Model</em> or the <em>Task Helpers</em>, but you can expect <em>AsDoc</em> and <em>CI</em> support in the near future &#8211; it will be even sooner if you <a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/master">fork</a> and build them yourself!</p>
+<p>Getting back to this new Rakefile, the idea here, is that someone who is new to Ruby and new to Rake, should be able to read a newly generated Sprouts project, and have at least some idea as to how they might modify it. In the past, this was not possible &#8211; you would need to investigate quite a lot before you could make sense of what this Rakefile did.</p>
+<p>This new Rakefile is obviously much more verbose, but it&#8217;s also much more natural and readable.</p>
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;bundler&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;bundler/setup&#39;</span>
+
+<span class="nb">require</span> <span class="s1">&#39;rake/clean&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;flashsdk&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;asunit4&#39;</span>
+
+<span class="c1"># Use the Flex Compiler SHell (FCSH)</span>
+<span class="c1"># ENV[&#39;USE_FCSH&#39;] = true</span>
+
+<span class="c1">##############################</span>
+<span class="c1"># Debug</span>
+
+<span class="c1"># Compile the debug swf</span>
+<span class="n">mxmlc</span> <span class="s2">&quot;bin/SomeProject-debug.swf&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">t</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="s2">&quot;src/SomeProject.as&quot;</span>
+  <span class="n">t</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="k">end</span>
+
+<span class="n">desc</span> <span class="s2">&quot;Compile and run the debug swf&quot;</span>
+<span class="n">flashplayer</span> <span class="ss">:run</span> <span class="o">=&gt;</span> <span class="s2">&quot;bin/SomeProject-debug.swf&quot;</span>
+
+<span class="c1">##############################</span>
+<span class="c1"># SWC</span>
+
+<span class="n">compc</span> <span class="s2">&quot;bin/SomeProject.swc&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">t</span><span class="o">.</span><span class="n">input_class</span> <span class="o">=</span> <span class="s2">&quot;SomeProject&quot;</span>
+  <span class="n">t</span><span class="o">.</span><span class="n">source_path</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;src&#39;</span>
+<span class="k">end</span>
+
+<span class="n">desc</span> <span class="s2">&quot;Compile the SWC file&quot;</span>
+<span class="n">task</span> <span class="ss">:swc</span> <span class="o">=&gt;</span> <span class="s1">&#39;bin/SomeProject.swc&#39;</span>
+
+<span class="c1">##############################</span>
+<span class="c1"># Test</span>
+
+<span class="n">library</span> <span class="ss">:asunit4</span>
+
+<span class="c1"># Compile the test swf</span>
+<span class="n">mxmlc</span> <span class="s2">&quot;bin/SomeProject-test.swf&quot;</span> <span class="o">=&gt;</span> <span class="ss">:asunit4</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">t</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="s2">&quot;src/SomeProjectRunner.as&quot;</span>
+  <span class="n">t</span><span class="o">.</span><span class="n">source_path</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;test&#39;</span>
+  <span class="n">t</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="k">end</span>
+
+<span class="n">desc</span> <span class="s2">&quot;Compile and run the test swf&quot;</span>
+<span class="n">flashplayer</span> <span class="ss">:test</span> <span class="o">=&gt;</span> <span class="s2">&quot;bin/SomeProject-test.swf&quot;</span>
+
+<span class="n">task</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="ss">:run</span>
+</code></pre>
+</div><p>I&#8217;m going to assume you have some slightly more sophisticated work in your Rakefile. Perhaps you were even using the <em>ProjectModel</em> to set up your <em>source_path</em>?</p>
+<p>With the new version, you do this by creating a <em>Plain Old Ruby</em> method, and sending your tasks to it by reference.</p>
+<p>It goes a little like this:</p>
+<div class="highlight"><pre><code class="ruby"><span class="c1">##</span>
+<span class="c1"># This task must be *above* any </span>
+<span class="c1"># line that calls it.</span>
+<span class="k">def</span> <span class="nf">configure_task</span> <span class="n">t</span>
+  <span class="n">t</span><span class="o">.</span><span class="n">library_path</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;lib/corelib.swc&#39;</span>
+  <span class="n">t</span><span class="o">.</span><span class="n">source_path</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;lib/your_custom_lib_folder&#39;</span>
+<span class="k">end</span>
+
+<span class="n">mxmlc</span> <span class="s1">&#39;bin/SomeProject.swf&#39;</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">configure_task</span> <span class="n">t</span>
+  <span class="n">t</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="s1">&#39;src/SomeProject.as&#39;</span>
+<span class="k">end</span>
+
+<span class="n">library</span> <span class="ss">:asunit4</span>
+
+<span class="n">mxmlc</span> <span class="s1">&#39;bin/SomeProjectRunner.swf&#39;</span> <span class="o">=&gt;</span> <span class="ss">:asunit4</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">configure_task</span> <span class="n">t</span>
+  <span class="n">t</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="s1">&#39;src/SomeProjectRunner.as&#39;</span>
+<span class="k">end</span>
+</code></pre>
+</div><p>If you have a more sophisticated Rakefile, and find yourself struggling with the migration, feel free to <a target="_blank" href="http://groups.google.com/group/projectsprouts/">ask questions on the list</a>.</p>
+  </div>
+</div>
+
+<div class="center even-section">
+  <div class="content header-shadow">
+
+    <div id="disqus_thread"></div>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+
+  <div id="footer">
+    <div class="center">
+      <div class="content header-shadow">
+
+        <table>
+
+          <tr>
+            <td>
+
+              <ul>
+                <li class="header">Details</li>
+                <li class="home"><a href="/">Home</a></li>
+                <li class="troubleshooting"><a href="/troubleshooting.html">Troubleshooting</a></li>
+                <li class="migrating"><a href="/2010/12/29/migrating.html">Migration Guide</a></li>
+                <li class="legacy-docs"><a href="/rdoc/index.html">Legacy Docs (0.7)</a></li>
+                <li class="legacy-site"><a href="/legacy/index.html">Legacy Site (0.7)</a></li>
+              </ul>
+
+            </td>
+            <td>
+
+              <ul>
+                <li class="header">Posts <a href="/atom.xml"><img class="footer-feed-icon" src="/images/35px-Feed-icon.png" /></a></li>
+                
+                <li class="post"><a href="/2010/12/29/migrating.html"><span class="date">2010-12-29</span> | Migrating from 0.7 to 1.0 beta</a></li>
+                
+                <li class="post"><a href="/2010/12/28/version-1.0-announced.html"><span class="date">2010-12-28</span> | Project Sprouts Version 1.0 Beta Released!</a></li>
+                
+              </ul>
+
+            </td>
+            <td>
+
+              <ul>
+                <li class="header">Do It</li>
+                <li><a target="_blank" href="http://groups.google.com/group/projectsprouts">Contact</a> (Google Groups)</li>
+                <li><a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/master">Source Code</a> (Github)</li>
+                <li><a target="_blank" href="https://github.com/lukebayes/project-sprouts/issues">File an Issue</a> (Github)</li>
+                <li><a target="_blank" href="http://rubygems.org/gems/sprout">Download</a> (RubyGems)</li>
+                <li><a target="_blank" href="http://projectsprouts.org/docs/1.1/frames.html">Documentation</a> 
+                (<a target="_blank" href="http://projectsprouts.org/docs/1.1/index.html">No Frames</a>)</li>
+              </ul>
+
+            </td>
+
+          </tr>
+
+        </table>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+<!-- Google Analytics for projectsprouts.org -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-1619511-4");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+
+<!-- Disquss -->
+<script type="text/javascript">
+    //var disqus_developer = 1;
+    var disqus_shortname = 'projectsprouts';
+    var disqus_title     = 'Migrating from 0.7 to 1.0 beta'
+    var disqus_url       = 'http://projectsprouts.org/2010/12/29/migrating.html';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+</html>
+

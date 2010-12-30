@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>Project Sprouts</title>
+  <link href="http://projectsprouts.org/atom.xml" rel="self"/>
+  <link href="http://projectsprouts.org/"/>
+  <updated>2010-12-30T00:47:17-08:00</updated>
+  <id>http://projectsprouts.org/</id>
+  <author>
+    <name>Project Sprouts</name>
+    <email>projectsprouts@googlegroups.com</email>
+  </author>
+
+  
+  <entry>
+    <title>Migrating from 0.7 to 1.0 beta</title>
+    <link href="http://projectsprouts.org/2010/12/29/migrating.html"/>
+    <updated>2010-12-29T00:00:00-08:00</updated>
+    <id>http://projectsprouts.org/2010/12/29/migrating</id>
+    <content type="html">&lt;h1&gt;Migrating from 0.7 to 1.0 beta&lt;/h1&gt;
+&lt;p&gt;29 December, 2010 &amp;#8211; Luke Bayes&lt;/p&gt;
+&lt;p&gt;There are some significant changes that have come with the new version of Sprouts. This guide should help you transition a legacy Sprouts project into the new hotness. Let&amp;#8217;s get sideways.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;attribution&quot;&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/4981869236_6578a75813_z.jpg&quot; title=&quot;Sprouted Onion&quot; alt=&quot;Sprouted Onion&quot; /&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.flickr.com/photos/bigrhys/4981869236/&quot;&gt;Image&lt;/a&gt; courtesy of &lt;a href=&quot;http://www.flickr.com/photos/bigrhys/&quot;&gt;Rhys Alton&lt;/a&gt; and the &lt;a href=&quot;http://creativecommons.org/licenses/by/2.0/&quot;&gt;Creative Commons&lt;/a&gt; license.&lt;br /&gt;
+&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In order to simplify this, let&amp;#8217;s start assuming you have a default version 0.7 project called &amp;#8216;SomeProject&amp;#8217;.&lt;/p&gt;
+&lt;p&gt;Assuming this is so, you&amp;#8217;ll likely have some AsUnit 3.0 tests, and a Rakefile that looks something like the following:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;sprout&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Optionally load gems from a server other than rubyforge:&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# set_sources &amp;#39;http://gems.projectsprouts.org&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sprout&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;as3&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;############################################&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Configure your Project Model&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;project_model&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:model&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;project_name&lt;/span&gt;            &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;SomeProject&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;language&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;as3&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;background_color&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;#FFFFFF&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;width&lt;/span&gt;                   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;970&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;                  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;550&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.use_fdb               = true&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.use_fcsh              = true&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.preprocessor          = &amp;#39;cpp -D__DEBUG=false -P - - | tail -c +3&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.preprocessed_path     = &amp;#39;.preprocessed&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.src_dir               = &amp;#39;src&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.lib_dir               = &amp;#39;lib&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.swc_dir               = &amp;#39;lib&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.bin_dir               = &amp;#39;bin&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.test_dir              = &amp;#39;test&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.doc_dir               = &amp;#39;doc&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.asset_dir             = &amp;#39;assets&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.compiler_gem_name     = &amp;#39;sprout-flex4sdk-tool&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.compiler_gem_version  = &amp;#39;&amp;gt;= 4.0.0&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.source_path           &amp;lt;&amp;lt; &amp;quot;#{m.lib_dir}/somelib&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# m.libraries             &amp;lt;&amp;lt; :corelib&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Compile and debug the application&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:debug&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Compile run the test harness&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;unit&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:test&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Compile the optimized deployment&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;deploy&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:deploy&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Create documentation&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;document&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:doc&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Compile a SWC file&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;swc&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:swc&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Compile and run the test harness for CI&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:cruise&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# set up the default rake task&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:debug&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;One of the (many) problems with this Rakefile, is that there is too much magic.&lt;/p&gt;
+&lt;p&gt;All of this magic makes it very difficult for new users to learn what&amp;#8217;s going on here. While it looks simple, there is an enormous amount of work happening. If we wanted all of the same features that are exposed in this project, but using Sprouts v 1.0, here&amp;#8217;s what should happen.&lt;/p&gt;
+&lt;h2&gt;1) Add a Gemfile&lt;/h2&gt;
+&lt;p&gt;Add a new file to the root of the project named &lt;em&gt;Gemfile&lt;/em&gt;, with the following contents:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://rubygems.org&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;flashsdk&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;gt;= 1.0.0.pre&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;asunit4&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;gt;= 4.2.2.pre&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;This Gemfile is a feature of &lt;a target=&quot;_blank&quot; href=&quot;http://gembundler.com&quot;&gt;Gem Bundler&lt;/a&gt; which is an awesome tool that does a great job of helping us decouple our applications from the mechanism that is used to distribute them &amp;#8211; generally &lt;a target=&quot;_blank&quot; href=&quot;http://rubygems.org&quot;&gt;RubyGems&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This file describes all of the Ruby Gems that our application should load in order for the &lt;em&gt;require&lt;/em&gt; statements within it to work.&lt;/p&gt;
+&lt;p&gt;Of course, some Ruby Gems require others, which themselves require others. Gem Bundler does a great job of managing these dependencies for us, so we should only declare our outermost dependencies.&lt;/p&gt;
+&lt;p&gt;It&amp;#8217;s important to note, that if you rely on any externally distributed library or tools (like the &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/kristoferjoseph/sprout-robotlegs&quot;&gt;Robot Legs library&lt;/a&gt; for example), you should add that dependency to this Gemfile.&lt;/p&gt;
+&lt;h2&gt;2) Update the Rakefile&lt;/h2&gt;
+&lt;p&gt;Project Sprouts has always been an ambitious effort that probably attempts to do a little too much. One of the things that has been difficult to manage is how much or how little &lt;em&gt;magic sauce&lt;/em&gt; to use. I believe that the 0.7 release of Sprouts uses too much magic, and the version 1.0 beta is a major attempt to remedy that.&lt;/p&gt;
+&lt;p&gt;Some things that are noticably absent in the new version are the &lt;em&gt;ProjectModel&lt;/em&gt; and &lt;em&gt;Rake Task Helpers&lt;/em&gt;. There are other major features that aren&amp;#8217;t quite ready yet too, like &lt;em&gt;AsDoc&lt;/em&gt; and &lt;em&gt;Continuous Integration&lt;/em&gt; support.&lt;/p&gt;
+&lt;p&gt;As of right now, there is no plan to bring back the &lt;em&gt;Project Model&lt;/em&gt; or the &lt;em&gt;Task Helpers&lt;/em&gt;, but you can expect &lt;em&gt;AsDoc&lt;/em&gt; and &lt;em&gt;CI&lt;/em&gt; support in the near future &amp;#8211; it will be even sooner if you &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/project-sprouts/tree/master&quot;&gt;fork&lt;/a&gt; and build them yourself!&lt;/p&gt;
+&lt;p&gt;Getting back to this new Rakefile, the idea here, is that someone who is new to Ruby and new to Rake, should be able to read a newly generated Sprouts project, and have at least some idea as to how they might modify it. In the past, this was not possible &amp;#8211; you would need to investigate quite a lot before you could make sense of what this Rakefile did.&lt;/p&gt;
+&lt;p&gt;This new Rakefile is obviously much more verbose, but it&amp;#8217;s also much more natural and readable.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;rubygems&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;bundler&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;bundler/setup&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;rake/clean&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;flashsdk&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;asunit4&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Use the Flex Compiler SHell (FCSH)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# ENV[&amp;#39;USE_FCSH&amp;#39;] = true&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;##############################&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Debug&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Compile the debug swf&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;mxmlc&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;bin/SomeProject-debug.swf&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;src/SomeProject.as&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Compile and run the debug swf&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;flashplayer&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:run&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;bin/SomeProject-debug.swf&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;##############################&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# SWC&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;compc&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;bin/SomeProject.swc&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input_class&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;SomeProject&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source_path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;src&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Compile the SWC file&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:swc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;bin/SomeProject.swc&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;##############################&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Test&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:asunit4&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Compile the test swf&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;mxmlc&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;bin/SomeProject-test.swf&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:asunit4&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;src/SomeProjectRunner.as&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source_path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;desc&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Compile and run the test swf&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;flashplayer&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;bin/SomeProject-test.swf&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:run&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;I&amp;#8217;m going to assume you have some slightly more sophisticated work in your Rakefile. Perhaps you were even using the &lt;em&gt;ProjectModel&lt;/em&gt; to set up your &lt;em&gt;source_path&lt;/em&gt;?&lt;/p&gt;
+&lt;p&gt;With the new version, you do this by creating a &lt;em&gt;Plain Old Ruby&lt;/em&gt; method, and sending your tasks to it by reference.&lt;/p&gt;
+&lt;p&gt;It goes a little like this:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;##&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# This task must be *above* any &lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# line that calls it.&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configure_task&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library_path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;lib/corelib.swc&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source_path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;lib/your_custom_lib_folder&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;mxmlc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;bin/SomeProject.swf&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;configure_task&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;src/SomeProject.as&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:asunit4&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;mxmlc&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;bin/SomeProjectRunner.swf&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:asunit4&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;configure_task&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;src/SomeProjectRunner.as&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;If you have a more sophisticated Rakefile, and find yourself struggling with the migration, feel free to &lt;a target=&quot;_blank&quot; href=&quot;http://groups.google.com/group/projectsprouts/&quot;&gt;ask questions on the list&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
+    <title>Project Sprouts Version 1.0 Beta Released!</title>
+    <link href="http://projectsprouts.org/2010/12/28/version-1.0-announced.html"/>
+    <updated>2010-12-28T00:00:00-08:00</updated>
+    <id>http://projectsprouts.org/2010/12/28/version-1.0-announced</id>
+    <content type="html">&lt;h1&gt;Project Sprouts Version 1.0 Beta Released!&lt;/h1&gt;
+&lt;p&gt;28 December, 2010 &amp;#8211; Luke Bayes&lt;/p&gt;
+&lt;h2&gt;The Thinker&lt;/h2&gt;
+&lt;p&gt;After &lt;a target=&quot;_blank&quot; href=&quot;http://rubyforge.org/projects/asproject/&quot;&gt;over 4 years&lt;/a&gt; of thinking, rethinking, designing, implementing and reimplementing, I&amp;#8217;m elated to announce the immediate availability of the Project Sprouts version 1.0 beta.&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;bordered&quot; src=&quot;/images/3638652042_3cb4b970bd_z.jpg&quot; title=&quot;Tiny Sprout&quot; alt=&quot;Tiny Sprout&quot; /&gt;&lt;span class=&quot;attribution&quot;&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.flickr.com/photos/san_ast/3638652042/&quot;&gt;Image&lt;/a&gt; courtesy of &lt;a href=&quot;http://www.flickr.com/people/san_ast/&quot;&gt;Santhosh Nandakumar&lt;/a&gt; and the &lt;a href=&quot;http://creativecommons.org/licenses/by/2.0/&quot;&gt;Creative Commons&lt;/a&gt; license.&lt;br /&gt;
+&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;You can install the beta as follows:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;gem install sprout --pre
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;You can test out the Flash &lt;span class=&quot;caps&quot;&gt;SDK&lt;/span&gt; with:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;gem install flashsdk --pre
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;You should receive further instructions in your terminal after installation.&lt;/p&gt;
+&lt;h2&gt;Moar Plz!&lt;/h2&gt;
+&lt;p&gt;This release represents a nearly complete rewrite of Sprouts internals with a focus on testability, extensibility and decoupling. This build sets out to solve &amp;#8211; in a general way &amp;#8211; many problems associated with building cross platform, distributed tools with Ruby, and along the way, it makes life much easier for those of us that work with ActionScript or Flex. As you dig around and uncover various dark corners, you&amp;#8217;re likely to notice areas that could use some improvement. You may even stumble over an error or two. If you see anything at all suspicious (especially full-blown failures), please do &lt;a target=&quot;_blank&quot; href=&quot;http://groups.google.com/group/projectsprouts/&quot;&gt;let us know&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you&amp;#8217;re working with ActionScript 3.0 or Flex projects, please check out this latest release. This release does &lt;em&gt;not&lt;/em&gt; include support for ActionScript 2.0 projects, and unless someone from the community contributes that functionality, it probably isn&amp;#8217;t going to get done.&lt;/p&gt;
+&lt;p&gt;While the new style of Rake tasks should be familiar to anyone using Sprouts 0.7, legacy Rakefiles will not run without modification.&lt;/p&gt;
+&lt;p&gt;If you&amp;#8217;re migrating a legacy Sprouts project, please check out the &lt;a href=&quot;/2010/12/29/migrating.html&quot;&gt;migration guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We are also working hard to completely revamp our &lt;a href=&quot;/docs/1.1/index.html&quot;&gt;documentation&lt;/a&gt; using the &lt;a target=&quot;_blank&quot; href=&quot;http://yardoc.org/&quot;&gt;Yard documentation engine&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We still have a handful of features that need some attention, so if you&amp;#8217;ve been meaning to contribute some time to an open-source project, this could be a great opportunity.&lt;/p&gt;
+&lt;p&gt;This is also the inaugural post to the new Project Sprouts Blog!&lt;/p&gt;
+&lt;p&gt;Be sure to subscribe to the &lt;a href=&quot;/atom.xml&quot;&gt;atom feed&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This blog (and site) was created with &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/mojombo/jekyll&quot;&gt;Jekyll&lt;/a&gt;, and is stored in the &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/project-sprouts/tree/gh-pages&quot;&gt;gh-pages branch&lt;/a&gt;. If you have an article (or correction) that you&amp;#8217;d like to contribute, please fork and send me a pull request!&lt;/p&gt;
+&lt;h2&gt;Thanks for your support!&lt;/h2&gt;
+&lt;p&gt;I sincerely hope you enjoy this new release of Sprouts, it is truly so much easier to test and extend and work with. I have high hopes for our growing community in the coming months and years.&lt;/p&gt;</content>
+  </entry>
+  
+
+</feed>
