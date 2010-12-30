@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+<div class="center">
+  <div class="content header-shadow">
+
+h1. 404 Url Not Found
+
+Unable to find the requested Url.
+
+Please check the url and try again, or <a href="/">return to the start page</a>.
+
+  </div>
+</div>
+
