@@ -1,0 +1,196 @@
+---
+layout: post
+title: Migrating from 0.7 to 1.0 beta
+author: Luke Bayes
+---
+
+h1. Migrating from 0.7 to 1.0 beta
+
+29 December, 2010 - Luke Bayes
+
+There are some significant changes that have come with the new version of Sprouts. This guide should help you transition a legacy Sprouts project into the new hotness. Let's get sideways.
+
+<span class="attribution">
+!/images/4981869236_6578a75813_z.jpg(Sprouted Onion)!
+"Image":http://www.flickr.com/photos/bigrhys/4981869236/ courtesy of "Rhys Alton":http://www.flickr.com/photos/bigrhys/ and the "Creative Commons":http://creativecommons.org/licenses/by/2.0/ license.
+</span>
+
+In order to simplify this, let's start assuming you have a default version 0.7 project called 'SomeProject'.
+
+Assuming this is so, you'll likely have some AsUnit 3.0 tests, and a Rakefile that looks something like the following:
+
+{% highlight ruby %}
+require 'sprout'
+# Optionally load gems from a server other than rubyforge:
+# set_sources 'http://gems.projectsprouts.org'
+sprout 'as3'
+
+############################################
+# Configure your Project Model
+project_model :model do |m|
+  m.project_name            = 'SomeProject'
+  m.language                = 'as3'
+  m.background_color        = '#FFFFFF'
+  m.width                   = 970
+  m.height                  = 550
+  # m.use_fdb               = true
+  # m.use_fcsh              = true
+  # m.preprocessor          = 'cpp -D__DEBUG=false -P - - | tail -c +3'
+  # m.preprocessed_path     = '.preprocessed'
+  # m.src_dir               = 'src'
+  # m.lib_dir               = 'lib'
+  # m.swc_dir               = 'lib'
+  # m.bin_dir               = 'bin'
+  # m.test_dir              = 'test'
+  # m.doc_dir               = 'doc'
+  # m.asset_dir             = 'assets'
+  # m.compiler_gem_name     = 'sprout-flex4sdk-tool'
+  # m.compiler_gem_version  = '>= 4.0.0'
+  # m.source_path           << "#{m.lib_dir}/somelib"
+  # m.libraries             << :corelib
+end
+
+desc 'Compile and debug the application'
+debug :debug
+
+desc 'Compile run the test harness'
+unit :test
+
+desc 'Compile the optimized deployment'
+deploy :deploy
+
+desc 'Create documentation'
+document :doc
+
+desc 'Compile a SWC file'
+swc :swc
+
+desc 'Compile and run the test harness for CI'
+ci :cruise
+
+# set up the default rake task
+task :default => :debug
+{% endhighlight %}
+
+One of the (many) problems with this Rakefile, is that there is too much magic.
+
+All of this magic makes it very difficult for new users to learn what's going on here. While it looks simple, there is an enormous amount of work happening. If we wanted all of the same features that are exposed in this project, but using Sprouts v 1.0, here's what should happen.
+
+h2. 1) Add a Gemfile
+
+Add a new file to the root of the project named _Gemfile_, with the following contents:
+
+{% highlight ruby %}
+source "http://rubygems.org"
+
+gem "flashsdk", ">= 1.0.0.pre"
+gem "asunit4", ">= 4.2.2.pre"
+{% endhighlight %}
+
+This Gemfile is a feature of <a target="_blank" href="http://gembundler.com">Gem Bundler</a> which is an awesome tool that does a great job of helping us decouple our applications from the mechanism that is used to distribute them - generally <a target="_blank" href="http://rubygems.org">RubyGems</a>.
+
+This file describes all of the Ruby Gems that our application should load in order for the _require_ statements within it to work.
+
+Of course, some Ruby Gems require others, which themselves require others. Gem Bundler does a great job of managing these dependencies for us, so we should only declare our outermost dependencies.
+
+It's important to note, that if you rely on any externally distributed library or tools (like the <a target="_blank" href="https://github.com/kristoferjoseph/sprout-robotlegs">Robot Legs library</a> for example), you should add that dependency to this Gemfile.
+
+h2. 2) Update the Rakefile
+
+Project Sprouts has always been an ambitious effort that probably attempts to do a little too much. One of the things that has been difficult to manage is how much or how little _magic sauce_ to use. I believe that the 0.7 release of Sprouts uses too much magic, and the version 1.0 beta is a major attempt to remedy that.
+
+Some things that are noticably absent in the new version are the _ProjectModel_ and _Rake Task Helpers_. There are other major features that aren't quite ready yet too, like _AsDoc_ and _Continuous Integration_ support.
+
+As of right now, there is no plan to bring back the _Project Model_ or the _Task Helpers_, but you can expect _AsDoc_ and _CI_ support in the near future - it will be even sooner if you <a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/master">fork</a> and build them yourself!
+
+Getting back to this new Rakefile, the idea here, is that someone who is new to Ruby and new to Rake, should be able to read a newly generated Sprouts project, and have at least some idea as to how they might modify it. In the past, this was not possible - you would need to investigate quite a lot before you could make sense of what this Rakefile did. 
+
+This new Rakefile is obviously much more verbose, but it's also much more natural and readable.
+
+{% highlight ruby %}
+require 'rubygems'
+require 'bundler'
+require 'bundler/setup'
+
+require 'rake/clean'
+require 'flashsdk'
+require 'asunit4'
+
+# Use the Flex Compiler SHell (FCSH)
+# ENV['USE_FCSH'] = true
+
+##############################
+# Debug
+
+# Compile the debug swf
+mxmlc "bin/SomeProject-debug.swf" do |t|
+  t.input = "src/SomeProject.as"
+  t.debug = true
+end
+
+desc "Compile and run the debug swf"
+flashplayer :run => "bin/SomeProject-debug.swf"
+
+##############################
+# SWC
+
+compc "bin/SomeProject.swc" do |t|
+  t.input_class = "SomeProject"
+  t.source_path << 'src'
+end
+
+desc "Compile the SWC file"
+task :swc => 'bin/SomeProject.swc'
+
+##############################
+# Test
+
+library :asunit4
+
+# Compile the test swf
+mxmlc "bin/SomeProject-test.swf" => :asunit4 do |t|
+  t.input = "src/SomeProjectRunner.as"
+  t.source_path << 'test'
+  t.debug = true
+end
+
+desc "Compile and run the test swf"
+flashplayer :test => "bin/SomeProject-test.swf"
+
+task :default => :run
+{% endhighlight %}
+
+I'm going to assume you have some slightly more sophisticated work in your Rakefile. Perhaps you were even using the _ProjectModel_ to set up your _source_path_?
+
+With the new version, you do this by creating a _Plain Old Ruby_ method, and sending your tasks to it by reference.
+
+It goes a little like this:
+
+{% highlight ruby %}
+##
+# This task must be *above* any 
+# line that calls it.
+def configure_task t
+  t.library_path << 'lib/corelib.swc'
+  t.source_path << 'lib/your_custom_lib_folder'
+end
+
+mxmlc 'bin/SomeProject.swf' do |t|
+  configure_task t
+  t.input = 'src/SomeProject.as'
+end
+
+library :asunit4
+
+mxmlc 'bin/SomeProjectRunner.swf' => :asunit4 do |t|
+  configure_task t
+  t.input = 'src/SomeProjectRunner.as'
+end
+{% endhighlight %}
+
+If you have a more sophisticated Rakefile, and find yourself struggling with the migration, feel free to <a target="_blank" href="http://groups.google.com/group/projectsprouts/">ask questions on the list</a>.
+
+h2. Thanks for your support!
+
+I sincerely hope you enjoy this new release of Sprouts, it is truly so much easier to test, grow and enhance, I have high hopes for our growing community in the coming months and years.
+

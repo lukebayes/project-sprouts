@@ -4,6 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>{{ page.title }}</title>
   <link rel="stylesheet" type="text/css" href="/css/reset-min.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/css/pygments.css" media="all" />
   <link rel="stylesheet" type="text/css" href="/css/sprouts.css" media="all" />
   <script src="/javascripts/jquery-min-1.4.4.js"></script>
   <script src="/javascripts/sprouts.js"></script>
@@ -18,7 +19,7 @@
     </div>
   </div>
 
-  <a href="http://github.com/lukebayes/project-sprouts/tree/master"><img style="position: absolute; top: 300; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+  <a href="http://github.com/lukebayes/project-sprouts/tree/master"><img style="position: absolute; top: 300; right: 0; border: 0;" src="/images/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
 {{ content }}
 
@@ -35,6 +36,8 @@
                 <li class="header">Details</li>
                 <li class="home"><a href="/">Home</a></li>
                 <li class="troubleshooting"><a href="/troubleshooting.html">Troubleshooting</a></li>
+                <li class="migrating"><a href="/2010/12/29/migrating.html">Migration Guide</a></li>
+                <li class="developer"><a href="/2010/12/29/developer.html">Developer Guide</a></li>
                 <!--
                 <li class=""><a href="/generators.html">Generators</a></li>
                 <li class=""><a href="/libraries.html">Libraries</a></li>
@@ -46,9 +49,9 @@
             <td>
 
               <ul>
-                <li class="header">Posts</li>
+                <li class="header">Posts <a href="/atom.xml"><img class="footer-feed-icon" src="/images/35px-Feed-icon.png" /></a></li>
                 {% for post in site.posts limit:10 %}
-                <li class="post"><a href="{{ post.url }}">{{ post.title }}</a> <span class="date"></span></li>
+                <li class="post"><a href="{{ post.url }}">{{ post.date | date: "%Y %m %d" }} - {{ post.title }}</a> <span class="date"></span></li>
                 {% endfor %}
               </ul>
 
@@ -66,6 +69,7 @@
               </ul>
 
             </td>
+
           </tr>
 
         </table>
