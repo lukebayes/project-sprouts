@@ -30,6 +30,22 @@ We highly recommend Windows users get going with the <a href="http://rubyinstall
 
 I haven't tried it myself, but it might be worth checking out <a target="_blank" href="https://github.com/vertiginous/pik">Pic</a> (Ruby Version Manager for Windows).
 
+h3. Missing MSVCR71.dll
+
+As far as I can tell, this issue appears to have something to do with Java and Microsoft trying to piss on each other, and since Adobe (in a supremely questionable decision) decided to used Java to build their compilers, we get to suffer the consequences.
+
+I was able to find a copy of this dll on a (reasonably) fresh installation of Windows server 2008 here:
+
+  <pre>C:\Users\Administrator\AppData\LocalLow\Sun\Java\Deployment\SystemCache\6.0\46</pre>
+
+I manually copied this file to:
+
+  <pre>C:\Users\Administrator\Sprouts\1.1\cache\flex4\4.1.0.16076\bin</pre>
+
+Whenever I get a new Flex SDK, I have to copy this file into the newly unpacked bin folder.
+
+If you have other information about this issue, please let us know.
+
   </div>
 </div>
 
