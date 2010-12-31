@@ -5,8 +5,7 @@ module Sprout::Generator
     protected
 
     def resolve_template
-      template_content = read_source
-      generator.resolve_template template_content
+      generator.resolve_template read_source
     end
   end
 end

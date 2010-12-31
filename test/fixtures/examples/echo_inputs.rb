@@ -16,6 +16,8 @@ class EchoInputs < Sprout::Executable::Base
 
   add_param :long_truthy, Boolean
 
+  add_param :default_truthy, Boolean, { :default => true }
+
   ##
   # A boolean parameter that defaults to true, and must be 
   # explicitly set to false in order to turn it off.

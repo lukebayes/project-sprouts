@@ -6,12 +6,21 @@ module Sprout::Generator
 
     def create
       content = resolve_template
-      
-      File.open path, 'w+' do |file|
-        file.write content
+
+      if File.exists?(path)
+        if generator.force
+          write_file path, content
+          say "Replaced file:     #{path}"
+          true
+        else
+          say "Skipped file:      #{path}"
+          false
+        end
+      else
+        write_file path, content
+        say "Created file:      #{path}"
+        true
       end
-      say "Created file:      #{path}"
-      true
     end
 
     def destroy
@@ -32,6 +41,12 @@ module Sprout::Generator
     end
 
     protected
+
+    def write_file path, content
+      File.open path, 'w+' do |file|
+        file.write content
+      end
+    end
 
     def resolve_template
       read_source

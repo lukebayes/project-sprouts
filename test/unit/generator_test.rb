@@ -58,6 +58,29 @@ class GeneratorTest < Test::Unit::TestCase
         end
       end
 
+      should "not clobber existing files" do
+        dir = File.join(@fixture, 'some_project', 'src')
+        FileUtils.mkdir_p dir
+        File.open File.join(dir, 'SomeProject.as'), 'w+' do |f|
+          f.write "Hello World"
+        end
+        @generator.input = 'some_project'
+        @generator.execute
+        assert_matches /Hello World/, File.read(File.join(dir, 'SomeProject.as'))
+      end
+
+      should "clobber existing files if --force" do
+        dir = File.join(@fixture, 'some_project', 'src')
+        FileUtils.mkdir_p dir
+        File.open File.join(dir, 'SomeProject.as'), 'w+' do |f|
+          f.write "Hello World"
+        end
+        @generator.input = 'some_project'
+        @generator.force = true
+        @generator.execute
+        assert_matches /public function SomeProject/, File.read(File.join(dir, 'SomeProject.as'))
+      end
+
       should "call another generator" do
         @generator.external = true
         @generator.execute
@@ -78,6 +101,7 @@ class GeneratorTest < Test::Unit::TestCase
       should "respect updates from subclasses" do
         @generator = configure_generator SubclassedGenerator.new
         @generator.input = 'some_project'
+        @generator.force = true
         @generator.execute
         assert_file File.join(@fixture, 'some_project', 'SomeFile') do |content|
           assert_matches /Living Jest enough for the City and SomeProject/, content
@@ -103,7 +127,7 @@ class GeneratorTest < Test::Unit::TestCase
 
       should "notify user of all files created" do
         @generator.input = 'some_project'
-        @string_io.expects(:puts).with('Skipped existing:  .')
+        @string_io.expects(:puts).with('Skipped directory: .')
         @string_io.expects(:puts).with('Created directory: ./some_project')
         @string_io.expects(:puts).with('Created file:      ./some_project/SomeFile')
         @string_io.expects(:puts).with('Created file:      ./some_project/SomeOtherFile')

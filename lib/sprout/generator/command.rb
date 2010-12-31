@@ -34,7 +34,7 @@ module Sprout::Generator
       end
 
       def file path, template=nil
-        raise sprout::errors::generatorerror.new "Cannot create file with nil path" if path.nil?
+        raise Sprout::Errors::GeneratorError.new "Cannot create file with nil path" if path.nil?
         manifest           = FileManifest.new
         manifest.generator = @generator
         manifest.path      = File.join( working_dir.path, path )
@@ -44,7 +44,7 @@ module Sprout::Generator
       end
 
       def generator name, options={}
-        raise sprout::errors::generatorerror.new "Cannot call another generator with nil name" if name.nil?
+        raise Sprout::Errors::GeneratorError.new "Cannot call another generator with nil name" if name.nil?
         instance        = Sprout::Generator.create_instance name, options
         instance.logger = logger
         instance.path   = working_dir.path

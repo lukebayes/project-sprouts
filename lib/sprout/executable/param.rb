@@ -318,7 +318,7 @@ module Sprout
       # How this parameter is provided to the
       # Ruby OptionParser when being exposed as a Ruby Executable.
       def option_parser_declaration
-        declaration = [ prefix, option_parser_name ]
+        declaration = default_option_parser_declaration
         # TODO: Need to figure out how to support hidden name inputs...
         #if(hidden_name?)
           #declaration = [option_parser_type_output]
@@ -327,6 +327,10 @@ module Sprout
           declaration << delimiter << option_parser_type_output
         end
         declaration.join('')
+      end
+
+      def default_option_parser_declaration
+        [ prefix, option_parser_name ]
       end
 
       ##

@@ -34,6 +34,12 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
       @exe.parse! [ '--long-truthy', @default_input ]
       assert @exe.long_truthy
     end
+
+    should "accept negative truthy" do
+      assert @exe.default_truthy, "Should default true"
+      @exe.parse! [ '--no-default-truthy', @default_input ]
+      assert !@exe.default_truthy, "Should accept no- prefix"
+    end
     
     should "always accept help option" do
       @exe.expects :puts

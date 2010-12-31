@@ -58,11 +58,15 @@ module Sprout
         @hidden_value            = true
       end
 
+      def default_option_parser_declaration
+        [prefix, '[no-]', option_parser_name]
+      end
+
       ##
-      # Convert string representations of truthiness
-      # to something more Booley.
+      # Convert string representations of falsiness
+      # to something more Booleaney.
       def value=(value)
-        value = (value == "true" || value === true) ? true : false 
+        value = (value == "false" || value == false) ? false : true
         super value
       end
       

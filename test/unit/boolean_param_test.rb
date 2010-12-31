@@ -30,7 +30,7 @@ class BooleanParamTest < Test::Unit::TestCase
         @param.show_on_false = true
         @param.default = true
         @param.hidden_value = false
-        assert_equal "--foo [BOOL]", @param.option_parser_declaration
+        assert_equal "--[no-]foo [BOOL]", @param.option_parser_declaration
       end
     end
   end
