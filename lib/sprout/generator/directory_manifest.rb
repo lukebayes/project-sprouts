@@ -26,10 +26,10 @@ module Sprout::Generator
 
       if success && can_remove?
         FileUtils.rmdir path
-        say "Removed directory: #{path}"
+        say "Removed directory:           #{path}"
         true
       else
-        say "Skipped remove directory: #{path}"
+        say "Skipped remove directory:    #{path}"
         false
       end
     end

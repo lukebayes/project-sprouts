@@ -23,10 +23,10 @@ module Sprout::Generator
       actual_content = File.read path
       if generator.force || actual_content == expected_content
         FileUtils.rm path
-        say "Removed file: #{path}"
+        say "Removed file:                #{path}"
         true
       else
-        say "Skipped remove file: #{path}"
+        say "Skipped remove file:         #{path}"
         false
       end
     end
