@@ -59,7 +59,8 @@ module Sprout
       end
 
       def default_option_parser_declaration
-        [prefix, '[no-]', option_parser_name]
+        return [prefix, '[no-]', option_parser_name] if default == true
+        super
       end
 
       ##

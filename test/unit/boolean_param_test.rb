@@ -32,6 +32,11 @@ class BooleanParamTest < Test::Unit::TestCase
         @param.hidden_value = false
         assert_equal "--[no-]foo [BOOL]", @param.option_parser_declaration
       end
+
+      should "not insert [no] param modifier unless default true" do
+        @param.name = 'something_off'
+        assert_equal "--something-off", @param.option_parser_declaration
+      end
     end
   end
 end
