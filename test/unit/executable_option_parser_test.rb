@@ -28,6 +28,12 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
       @exe.parse! [ '--truthy', @default_input ]
       assert @exe.truthy
     end
+
+    should "accept long boolean with hidden_value" do
+      assert !@exe.long_truthy
+      @exe.parse! [ '--long-truthy', @default_input ]
+      assert @exe.long_truthy
+    end
     
     should "always accept help option" do
       @exe.expects :puts
