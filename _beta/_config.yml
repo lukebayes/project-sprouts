@@ -3,4 +3,5 @@ server: true
 server_port: 3000
 pygments: true
 lsi: true
+exclude: ['Rakefile']
 
