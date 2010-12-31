@@ -61,7 +61,7 @@ class DaemonTest < Test::Unit::TestCase
       @fdb.quit
       @fdb.wait # wait for actions to finish.
 
-      assert_equal "This is an error!\nThis is more details about the error!\nHere are even more details!\n", Sprout.stderr.read
+      assert_matches /This is an error!/, Sprout.stderr.read
     end
 
     should "execute from rake task" do
