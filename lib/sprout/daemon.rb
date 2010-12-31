@@ -193,6 +193,7 @@ module Sprout
 
     def wait
       Process.wait process_runner.pid
+    rescue Errno::ECHILD
     end
 
     ##
