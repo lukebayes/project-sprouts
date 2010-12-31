@@ -28,6 +28,8 @@ It is especially critical that Windows users be running a Ruby that is greater t
 
 We highly recommend Windows users get going with the <a href="http://rubyinstaller.org/">Ruby Installer</a>. You should know that this installer includes a version of Mingw
 
+I haven't tried it myself, but it might be worth checking out <a target="_blank" href="https://github.com/vertiginous/pik">Pic</a> (Ruby Version Manager for Windows).
+
   </div>
 </div>
 
