@@ -31,6 +31,11 @@ module Sprout
       add_param :quiet, Boolean
 
       ##
+      # Display the paths this generator will use to look
+      # for templates on this system and exit.
+      add_param :show_template_paths, Boolean
+
+      ##
       # A collection of paths to look in for named templates.
       add_param :templates, Paths
 
@@ -72,8 +77,14 @@ module Sprout
       ##
       # Record the actions and trigger them
       def execute
+        return do_show_template_paths if show_template_paths
         return prepare_command.unexecute if destroy
         prepare_command.execute
+      end
+
+      def validate
+        return true if show_template_paths
+        super
       end
 
       ##
@@ -105,11 +116,31 @@ module Sprout
       # Sprout::Generator.search_paths + 'templates' folders.
       #
       def template_paths
-        templates << Sprout::Generator::template_folder_for(self)
-        templates.concat default_search_paths
+        create_template_paths
+      end
+
+      def create_template_paths
+        paths = templates.dup
+        paths = paths.concat Sprout::Generator.search_paths
+        paths << Sprout::Generator::template_folder_for(self)
       end
 
       protected
+
+      def do_show_template_paths
+        @logger ||= $stdout
+        message = "The following paths will be checked for templates:\n"
+        
+        paths = ["--templates+=[value]"]
+        paths = paths.concat Sprout::Generator.create_search_paths
+        paths << "ENV['SPROUT_GENERATORS']"
+        paths << Sprout::Generator::template_folder_for(self)
+
+        message << "  * "
+        message << paths.join("\n  * ")
+        say message
+        message
+      end
 
       def default_search_paths
         Sprout::Generator.search_paths.collect { |path| File.join(path, 'templates') }

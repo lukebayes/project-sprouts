@@ -58,6 +58,13 @@ class GeneratorTest < Test::Unit::TestCase
         end
       end
 
+      should "show template paths and nothing else" do
+        @generator.parse! ['--show-template-paths']
+        output = @generator.execute
+
+        assert_equal 7, output.split("\n").size
+      end
+
       should "not clobber existing files" do
         dir = File.join(@fixture, 'some_project', 'src')
         FileUtils.mkdir_p dir
@@ -149,7 +156,7 @@ class GeneratorTest < Test::Unit::TestCase
       end
 
       should "not update superclass parameter collection" do
-        assert_equal 6, Sprout::Generator::Base.static_parameter_collection.size
+        assert_equal 7, Sprout::Generator::Base.static_parameter_collection.size
         assert_equal 1, Sprout::Generator::Base.static_default_value_collection.size
       end
 

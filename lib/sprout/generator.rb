@@ -209,8 +209,6 @@ module Sprout
         create_search_paths.select { |path| File.directory?(path) }
       end
 
-      private
-
       def create_search_paths
         paths = [
                   File.join('config', 'generators'),
@@ -220,6 +218,8 @@ module Sprout
         paths << ENV['SPROUT_GENERATORS'] unless ENV['SPROUT_GENERATORS'].nil?
         paths
       end
+
+      private
 
       ##
       # I know this seems weird - but we can't instantiate the classes
