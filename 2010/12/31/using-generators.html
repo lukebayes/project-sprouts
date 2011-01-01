@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Using Sprout Generators</title>
+  <link rel="stylesheet" type="text/css" href="/css/reset-min.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/css/pygments.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/css/sprouts.css" media="all" />
+  <script src="/javascripts/jquery-min-1.4.4.js"></script>
+  <script src="/javascripts/sprouts.js"></script>
+</head>
+<body>
+  <div id="header">
+    <div class="center">
+      <div class="content header-shadow">
+        <div class="logo"><a href="/">Sprouts</a></div>
+        <div class="tagline">Software development&mdash;evolved</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="http://github.com/lukebayes/project-sprouts/tree/master"><img style="position: absolute; top: 300; right: 0; border: 0;" src="/images/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
+<div class="center">
+  <div class="content header-shadow">
+    <h1>Using Sprout Generators</h1>
+<p>31 December, 2010 &#8211; Luke Bayes</p>
+<h2>Introduction</h2>
+<p>Generators have been rewritten from scratch for Project Sprouts v1. The new generators are much easier to test, distribute, and modify. This post is going to cover usage (or consumption) of existing generators, we&#8217;ll put together a second post where we go into more detail about creating generators.</p>
+<p>There are now two kinds of generator, an <em>Application</em> generator and a <em>Feature</em> generator. The primary difference between them, is that a <em>Feature</em> generator expects to be run from a folder that contains a <em>Gemfile</em>. This is because feature generators can be easily overwridden by gems that are loaded from the Gemfile.</p>
+<p>For example, the default <code>sprout-class</code> generator calls a null <em>TestGenerator</em> that does nothing. But the <a target="_blank" href="https://github.com/patternpark/asunit/blob/master/asunit-4.0/sprout/lib/asunit4/test_class_generator.rb">AsUnit 4</a> Rubygem overrides the TestGenerator with one that generates an AsUnit 4 test case, and then calls the <em>SuiteGenerator</em> &#8211; which it <a target="_blank" href="https://github.com/patternpark/asunit/blob/master/asunit-4.0/sprout/lib/asunit4/suite_class_generator.rb">also provides</a>. Someone that is so inclined, could easily build a <em>flexunit</em> Rubygem that overrides the TestGenerator code so that it gets called instead of AsUnit <em>(hint, hint)</em>.</p>
+<h2>The Application Generator</h2>
+<p>Let&#8217;s start out by demonstrating a few generators and talking about what they do. If you haven&#8217;t already, get the Flash <span class="caps">SDK</span> installed on your system:</p>
+<div class="highlight"><pre><code class="bash"><span class="c"># Install the ActionScript 3 / Flash / Flex bundle:</span>
+gem install flashsdk --pre
+</code></pre>
+</div><p>Now, let&#8217;s see what generators we have available to us by running the following and then hitting the <span class="caps">TAB</span> key.</p>
+<div class="highlight"><pre><code class="bash">sprout-
+</code></pre>
+</div><p>You should see a collection of executables &#8211; something like:</p>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>sprout-
+sprout-as3        sprout-class      sprout-flex       sprout-generator  <span class="o">[</span>etc<span class="o">]</span>
+</code></pre>
+</div><p>We&#8217;re going to go ahead and create an ActionScript 3 project named, &#8216;SomeProject&#8217; with the following:</p>
+<div class="highlight"><pre><code class="bash">sprout-as3 SomeProject
+</code></pre>
+</div><p>You should see something like the following in your terminal:</p>
+<div class="highlight"><pre><code class="bash">Created directory: ./SomeProject
+Created file:      ./SomeProject/rakefile.rb
+Created file:      ./SomeProject/Gemfile
+Created directory: ./SomeProject/src
+Created file:      ./SomeProject/src/SomeProject.as
+Created file:      ./SomeProject/src/SomeProjectRunner.as
+Created directory: ./SomeProject/assets
+Created directory: ./SomeProject/assets/skins
+Created file:      ./SomeProject/assets/skins/DefaultProjectImage.png
+Created directory: ./SomeProject/lib
+Created directory: ./SomeProject/bin
+</code></pre>
+</div><p>Let&#8217;s pretend we don&#8217;t like what just happened. Maybe we meant to call this <em>OtherProject</em> instead. All generator actions can easily be &#8220;un-executed&#8221; by appending the same command with the argument <code>--destroy</code>. Let&#8217;s try this now, by pressing the up-arrow in the terminal, to get the most recently executed command, and then add <code>--destroy</code> to the end.</p>
+<div class="highlight"><pre><code class="bash">sprout-as3 SomeProject --destroy
+</code></pre>
+</div><p>You should see something like:</p>
+<div class="highlight"><pre><code class="bash">Removed directory: ./SomeProject/bin
+Removed directory: ./SomeProject/lib
+Removed file:      ./SomeProject/assets/skins/DefaultProjectImage.png
+Removed directory: ./SomeProject/assets/skins
+Removed directory: ./SomeProject/assets
+Removed file:      ./SomeProject/src/SomeProjectRunner.as
+Removed file:      ./SomeProject/src/SomeProject.as
+Removed directory: ./SomeProject/src
+Removed file:      ./SomeProject/Gemfile
+Removed file:      ./SomeProject/rakefile.rb
+Removed directory: ./SomeProject
+</code></pre>
+</div><p>This removal is safe, in that it should only delete directories that the generator created, and it should only delete them if they&#8217;re empty. It should also only delete files if they&#8217;re identical to what would be generated.</p>
+<p>Now, let&#8217;s run the generator again with <em>&#8216;other_project&#8217;</em> for the input: <em>(Note the snake case)</em></p>
+<div class="highlight"><pre><code class="bash">sprout-as3 other_project
+</code></pre>
+</div><p>You should see something like:</p>
+<div class="highlight"><pre><code class="bash">Created directory: ./other_project
+Created file:      ./other_project/rakefile.rb
+Created file:      ./other_project/Gemfile
+Created directory: ./other_project/src
+Created file:      ./other_project/src/OtherProject.as
+Created file:      ./other_project/src/OtherProjectRunner.as
+Created directory: ./other_project/assets
+Created directory: ./other_project/assets/skins
+Created file:      ./other_project/assets/skins/DefaultProjectImage.png
+Created directory: ./other_project/lib
+Created directory: ./other_project/bin
+</code></pre>
+</div><p>Notice how the snake case was respected for the project directory, but it was converted to camel case for the classes and files. This is one of the great features of the new generators. You can see how easy it is to do this by checking out the <a target="_blank" href="https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/project_generator.rb#L14">source file for the class generator</a>.</p>
+<h2>The Feature Generator</h2>
+<p>Now, let&#8217;s go into the new project and generate a class.</p>
+<div class="highlight"><pre><code class="bash"><span class="nb">cd </span>other_project
+sprout-class utils.MathUtil
+</code></pre>
+</div><p><em>(You may need to run <code>bundle install</code> first)</em></p>
+<p>You should see output something like:</p>
+<div class="highlight"><pre><code class="bash">Created directory: ./src/utils
+Created file:      ./src/utils/MathUtil.as
+Created directory: ./test/utils
+Created file:      ./test/utils/MathUtilTest.as
+Skipped existing:  ./test
+Created file:      ./test/AllTests.as
+</code></pre>
+</div><p>Notice how a test case and test suite were created. These were only created because the project Gemfile loads the asunit4 gem.</p>
+<p>Here&#8217;s what&#8217;s in that Gemfile:</p>
+<div class="highlight"><pre><code class="bash"><span class="nb">source</span> <span class="s2">&quot;http://rubygems.org&quot;</span>
+
+gem <span class="s2">&quot;flashsdk&quot;</span>, <span class="s2">&quot;&gt;= 1.0.0.pre&quot;</span>
+gem <span class="s2">&quot;asunit4&quot;</span>, <span class="s2">&quot;&gt;= 4.2.2.pre&quot;</span>
+</code></pre>
+</div><p>This Gemfile is how the ClassGenerator, TestGenerator and SuiteGenerator knew what to build. If you&#8217;re interested in learning more about Gemfiles, you should check out the <a target="_blank" href="http://gembundler.com">GemBundler</a> site.</p>
+<p>Even though I&#8217;m sure no one would <em>ever</em> want to generate a class without an associated test case, let&#8217;s pretend we want to do just that. Since I can never remember exactly what parameters to use, let&#8217;s go ahead and run the generator with no arguments in order to see it&#8217;s help content:</p>
+<div class="highlight"><pre><code class="bash">sprout-class
+</code></pre>
+</div><p>You should see something like the following:</p>
+<div class="highlight"><pre><code class="text">[ERROR - Sprout::Errors::MissingArgumentError] input is required and must not be nil
+
+Usage: sprout-class [options]
+        --help                       Display this help message
+        --path=[STRING]              Default Description
+    -d, --destroy                    Default Description
+    -f, --force                      Default Description
+    -q, --quiet                      Default Description
+        --templates+=[a,b,c]         Default Description
+    -i, --input=STRING               Default Description
+    -p, --package=[STRING]           Default Description
+    -a, --assets=[STRING]            Default Description
+        --skins=[STRING]             Default Description
+        --test=[STRING]              Default Description
+    -l, --lib=[STRING]               Default Description
+    -b, --bin=[STRING]               Default Description
+    -s, --src=[STRING]               Default Description
+    -t, --[no-]test-class            Default Description
+</code></pre>
+</div><p>Of course, now that we see the help output, we see that we could have run the generator with the <code>--help</code> parameter.</p>
+<p>Notice how all of these say, &#8220;Default Description&#8221;, this is because I&#8217;d like to extract the rdoc comment directly from the <a target="_blank" href="https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L25">source file</a> in order to avoid duplication. I haven&#8217;t gotten around to this task, so if you&#8217;re interested in contributing, please fork and send a pull request.</p>
+<p>Even though these directives don&#8217;t have descriptions, and we can experiment with some confidence thanks to the <code>--destroy</code> argument, I would still check my work into a Git repository before running any generators in an existing project.</p>
+<p>In any case, let&#8217;s go ahead and try to run this class generator with the <code>--no-test-class</code> argument for a new class.</p>
+<div class="highlight"><pre><code class="bash">sprout-class utils.OtherUtil --no-test-class
+</code></pre>
+</div><p>You should see that the test case and test suite were not created:</p>
+<div class="highlight"><pre><code class="bash">Skipped directory: ./src/utils
+Created file:      ./src/utils/OtherUtil.as
+</code></pre>
+</div><h2>Working with Templates</h2>
+<p>The ability to easily customize and control generator templates is one of the main driving forces behind the generator rewrite. You can override a particular template for a single generator execution, a specific project, or globally for your system. Generator templates are simply named erb files, and each template is loaded individually.</p>
+<p>The first thing you&#8217;ll want to figure out, is the name of the template you want to override. For the time being, you can find this out by checking the source code for the project that defined the generator. Following are some template folders to peruse:</p>
+<ul>
+	<li><a target="_blank" href="https://github.com/lukebayes/sprout-flashsdk/tree/master/lib/flashsdk/generators/templates">Flash <span class="caps">SDK</span> Templates</a></li>
+	<li><a target="_blank" href="https://github.com/patternpark/asunit/tree/master/asunit-4.0/sprout/lib/asunit4/templates">AsUnit Templates</a></li>
+	<li><a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/master/lib/sprout/generators">Sprouts Templates</a></li>
+</ul>
+<p>Let&#8217;s assume we want to replace the template for the <a target="_blank" href="https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L59">ClassGenerator</a>, found in the Flash <span class="caps">SDK</span>. You can see on line 59 that the generator is looking for a template file named, &#8216;ActionScript3Class.as&#8217;.</p>
+<p>This means that once we decide which scope to operate on, we need to place a file with the same name into the correct directory.</p>
+<h3>Execution Templates</h3>
+<p>Let&#8217;s start by replacing the template for a single generator execution. Let&#8217;s start with the contents of the <a target="_blank" href="https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/templates/ActionScript3Class.as">original template</a>.</p>
+<div class="highlight"><pre><code class="actionscript"><span class="kd">package</span> <span class="o">&lt;%=</span> <span class="nx">package_name</span> <span class="o">%&gt;</span><span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="o">&lt;%=</span> <span class="nx">class_name</span> <span class="o">%&gt;</span> <span class="p">{</span>
+
+        <span class="kd">public</span> <span class="kd">function</span> <span class="o">&lt;%=</span> <span class="nx">class_name</span> <span class="o">%&gt;</span><span class="p">()</span> <span class="p">{</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div><p>While I&#8217;m sure <em>you</em> would <em>never</em> want to unsnuggle your brackets, let&#8217;s imagine your boss is going to <em>force</em> you to do it &#8211; just for this one file.</p>
+<p>Create a new directory in your project (from above) called, &#8220;bossypoo&#8221; and within that directory, create a new file named ActionScript3Class.as, and paste the following contents into it.</p>
+<div class="highlight"><pre><code class="actionscript"><span class="cm">/*********************</span>
+<span class="cm">Copyright: Pointyhaired Bossypoo, 2010</span>
+<span class="cm">*********************/</span>
+<span class="kd">package</span> <span class="o">&lt;%=</span> <span class="nx">package_name</span> <span class="o">%&gt;</span>
+
+<span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">class</span> <span class="o">&lt;%=</span> <span class="nx">class_name</span> <span class="o">%&gt;</span>
+
+    <span class="p">{</span>
+
+        <span class="kd">public</span> <span class="kd">function</span> <span class="o">&lt;%=</span> <span class="nx">class_name</span> <span class="o">%&gt;</span><span class="p">()</span>
+        <span class="p">{</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div><p>Now run the class generator just like before, but provide the new, custom templates folder:</p>
+<div class="highlight"><pre><code class="bash">sprout-class utils.BossyUtil --templates+<span class="o">=</span>bossypoo
+</code></pre>
+</div><p>You&#8217;ll have to forgive the extra carriage returns, as my <span class="caps">ERB</span> templating appears to be a little greedy with whitespace. After running the generator, you should see everything looks normal.</p>
+<p>Now that approach is pretty neat, but we don&#8217;t want to have to remember to add that &#8212;templates argument every.single.time we run a generator. Which brings us to;</p>
+<h3>Project Templates</h3>
+<p>In addition to setting the &#8212;template parameter manually, there are a number of locations that generators will scan for templates. You can get the definitive list for your system by running the generator with the &#8212;show-template-paths parameter.</p>
+<p>On my computer, this results in:</p>
+<div class="highlight"><pre><code class="bash">The following paths will be checked <span class="k">for </span>templates:
+  * --templates+<span class="o">=[</span>value<span class="o">]</span>
+  * config/generators
+  * vendor/generators
+  * /Users/lbayes/Library/Sprouts/1.1/cache/generators
+  * ENV<span class="o">[</span><span class="s1">&#39;SPROUT_GENERATORS&#39;</span><span class="o">]</span>
+  * /Users/lbayes/.gem/ruby/1.9.2/gems/flashsdk-1.0.17.pre/lib/flashsdk/generators/templates
+</code></pre>
+</div><p>If you create either of the config/generators or vender/generators paths in your project directory and place that template in there, anytime you run the class generator, it will get picked up.</p>
+<h3>System Templates</h3>
+<p>If you look closely at the previous list, you&#8217;ll see that one of the folders is in the global Sprout cache, and another is an environmental variable. I hope you can figure out how to create a folder in the cache location and for the environmental variable, you can set it on the command line like this:</p>
+<div class="highlight"><pre><code class="text">sprout-class utils.MathUtil SPROUT_GENERATORS=relative/or/absolute/path/to/templates
+</code></pre>
+</div><p>Or you can set it within your .bash_profile or .bashrc file like:</p>
+<div class="highlight"><pre><code class="text">export SPROUT_GENERATORS=/absolute/path/to/templates
+</code></pre>
+</div><h2>Conclusion</h2>
+<p>This brings us to the end of the &#8220;Using Generators&#8221; tutorial. If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet &#8211; <a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/gh-pages/_beta">fork</a>, fix and send a pull request.</p>
+<p>The next article in the series will describe how to create generators.</p>
+  </div>
+</div>
+
+<div class="center even-section">
+  <div class="content header-shadow">
+
+    <div id="disqus_thread"></div>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+
+  <div id="footer">
+    <div class="center">
+      <div class="content header-shadow">
+
+        <table>
+
+          <tr>
+            <td>
+
+              <ul>
+                <li class="header">Details</li>
+                <li class="home"><a href="/">Home</a></li>
+                <li class="troubleshooting"><a href="/troubleshooting.html">Troubleshooting</a></li>
+                <li class="migrating"><a href="/2010/12/29/migrating.html">Migration Guide</a></li>
+                <li class="legacy-docs"><a href="/rdoc/index.html">Legacy Docs (0.7)</a></li>
+                <li class="legacy-site"><a href="/legacy/index.html">Legacy Site (0.7)</a></li>
+              </ul>
+
+            </td>
+            <td>
+
+              <ul>
+                <li class="header">Posts <a href="/atom.xml"><img class="footer-feed-icon" src="/images/35px-Feed-icon.png" /></a></li>
+                
+                <li class="post"><a href="/2010/12/31/using-generators.html"><span class="date">2010-12-31</span> | Using Sprout Generators</a></li>
+                
+                <li class="post"><a href="/2010/12/29/migrating.html"><span class="date">2010-12-29</span> | Migrating from 0.7 to 1.0 beta</a></li>
+                
+                <li class="post"><a href="/2010/12/28/version-1.0-announced.html"><span class="date">2010-12-28</span> | Project Sprouts Version 1.0 Beta Released!</a></li>
+                
+              </ul>
+
+            </td>
+            <td>
+
+              <ul>
+                <li class="header">Do It</li>
+                <li><a target="_blank" href="http://groups.google.com/group/projectsprouts">Contact</a> (Google Groups)</li>
+                <li><a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/master">Source Code</a> (Github)</li>
+                <li><a target="_blank" href="https://github.com/lukebayes/project-sprouts/issues">File an Issue</a> (Github)</li>
+                <li><a target="_blank" href="http://rubygems.org/gems/sprout">Download</a> (RubyGems)</li>
+                <li><a target="_blank" href="http://projectsprouts.org/docs/1.1/frames.html">Documentation</a> 
+                (<a target="_blank" href="http://projectsprouts.org/docs/1.1/index.html">No Frames</a>)</li>
+              </ul>
+
+            </td>
+
+          </tr>
+
+        </table>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+<!-- Google Analytics for projectsprouts.org -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-1619511-4");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+
+<!-- Disquss -->
+<script type="text/javascript">
+    //var disqus_developer = 1;
+    var disqus_shortname = 'projectsprouts';
+    var disqus_title     = 'Using Sprout Generators'
+    var disqus_url       = 'http://projectsprouts.org/2010/12/31/using-generators.html';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+</html>
+

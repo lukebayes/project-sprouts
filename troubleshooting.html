@@ -26,8 +26,29 @@
 <h1>Troubleshooting</h1>
 <p>As badly as we want this process to be seamless and simple for everyone, there always seem to be bits of complexity that cause problems. We consider this a failure of Sprouts and would like to see improvements made so that manual debugging of Sprouts installations becomes a thing of the past. If you have an issue, please let us know and feel free to fork the source and submit a fix!</p>
 <p>Following are some of the more common issues that have come up in the past.</p>
-<h3></h3>
-</div>
+<h2>General Issues</h2>
+<h3>Bundler::GemNotFound</h3>
+<p>You may see something like the following after running <code>rake</code> or a generator within a project.</p>
+<div class="highlight"><pre><code class="text">.../bundler-1.0.3/lib/bundler/spec_set.rb:87:in
+&#39;block in materialize&#39;: Could not find sprout-1.1.3.pre 
+in any of the sources (Bundler::GemNotFound)
+        from .../bundler-1.0.3/lib/bundler/spec_set.rb:81:in `map!&#39;
+        from .../bundler-1.0.3/lib/bundler/spec_set.rb:81:in `materialize&#39;
+        from .../bundler-1.0.3/lib/bundler/definition.rb:93:in `specs&#39;
+        from .../bundler-1.0.3/lib/bundler/definition.rb:137:in `specs_for&#39;
+        from .../bundler-1.0.3/lib/bundler/definition.rb:126:in `requested_specs&#39;
+        from .../bundler-1.0.3/lib/bundler/environment.rb:23:in `requested_specs&#39;
+        from .../bundler-1.0.3/lib/bundler/runtime.rb:11:in `setup&#39;
+        from .../bundler-1.0.3/lib/bundler.rb:100:in `setup&#39;
+        from .../bundler-1.0.3/lib/bundler.rb:112:in `require&#39;
+        from .../sprout-1.1.4.pre/bin/sprout-class:5:in `&lt;top (required)&gt;&#39;
+        from .../bin/sprout-class:19:in `load&#39;
+        from .../bin/sprout-class:19:in `&lt;main&gt;&#39;
+</code></pre>
+</div><p>This error is generated because your Gemfile.lock is referring to a gem that is no longer installed. To fix this, just run:</p>
+<div class="highlight"><pre><code class="bash">bundle install
+</code></pre>
+</div></div>
 </div>
 <div class="center even-section">
 <div class="content header-shadow">
@@ -87,6 +108,8 @@
 
               <ul>
                 <li class="header">Posts <a href="/atom.xml"><img class="footer-feed-icon" src="/images/35px-Feed-icon.png" /></a></li>
+                
+                <li class="post"><a href="/2010/12/31/using-generators.html"><span class="date">2010-12-31</span> | Using Sprout Generators</a></li>
                 
                 <li class="post"><a href="/2010/12/29/migrating.html"><span class="date">2010-12-29</span> | Migrating from 0.7 to 1.0 beta</a></li>
                 

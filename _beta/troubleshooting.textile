@@ -12,7 +12,35 @@ As badly as we want this process to be seamless and simple for everyone, there a
 
 Following are some of the more common issues that have come up in the past.
 
-h3. 
+h2. General Issues
+
+h3. Bundler::GemNotFound
+
+You may see something like the following after running <code>rake</code> or a generator within a project.
+
+{% highlight text %}
+.../bundler-1.0.3/lib/bundler/spec_set.rb:87:in
+'block in materialize': Could not find sprout-1.1.3.pre 
+in any of the sources (Bundler::GemNotFound)
+        from .../bundler-1.0.3/lib/bundler/spec_set.rb:81:in `map!'
+        from .../bundler-1.0.3/lib/bundler/spec_set.rb:81:in `materialize'
+        from .../bundler-1.0.3/lib/bundler/definition.rb:93:in `specs'
+        from .../bundler-1.0.3/lib/bundler/definition.rb:137:in `specs_for'
+        from .../bundler-1.0.3/lib/bundler/definition.rb:126:in `requested_specs'
+        from .../bundler-1.0.3/lib/bundler/environment.rb:23:in `requested_specs'
+        from .../bundler-1.0.3/lib/bundler/runtime.rb:11:in `setup'
+        from .../bundler-1.0.3/lib/bundler.rb:100:in `setup'
+        from .../bundler-1.0.3/lib/bundler.rb:112:in `require'
+        from .../sprout-1.1.4.pre/bin/sprout-class:5:in `<top (required)>'
+        from .../bin/sprout-class:19:in `load'
+        from .../bin/sprout-class:19:in `<main>'
+{% endhighlight %}
+
+This error is generated because your Gemfile.lock is referring to a gem that is no longer installed. To fix this, just run:
+
+{% highlight bash %}
+bundle install
+{% endhighlight %}
 
   </div>
 </div>
