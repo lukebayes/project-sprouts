@@ -11,9 +11,9 @@ h2. Introduction
 
 Generators have been rewritten from scratch for Project Sprouts v1. The new generators are much easier to test, distribute, and modify. This post is going to cover usage (or consumption) of existing generators, we'll put together a second post where we go into more detail about creating generators.
 
-There are now two kinds of generator, an _Application_ generator and a _Feature_ generator. The primary difference between them, is that a _Feature_ generator expects to be run from a folder that contains a _Gemfile_. This is because feature generators can be easily overwridden by gems that are loaded from the Gemfile.
+There are two kinds of generator, an _Application_ generator and a _Feature_ generator. The primary difference between them, is that a _Feature_ generator expects to be run from a folder that contains a _Gemfile_. This is because feature generators can be easily overridden by gems that are loaded from the Gemfile.
 
-For example, the default <code>sprout-class</code> generator calls a null _TestGenerator_ that does nothing. But the <a target="_blank" href="https://github.com/patternpark/asunit/blob/master/asunit-4.0/sprout/lib/asunit4/test_class_generator.rb">AsUnit 4</a> Rubygem overrides the TestGenerator with one that generates an AsUnit 4 test case, and then calls the _SuiteGenerator_ - which it <a target="_blank" href="https://github.com/patternpark/asunit/blob/master/asunit-4.0/sprout/lib/asunit4/suite_class_generator.rb">also provides</a>. Someone that is so inclined, could easily build a _flexunit_ Rubygem that overrides the TestGenerator code so that it gets called instead of AsUnit _(hint, hint)_.
+For example, the default <code>sprout-class</code> generator <a target="_blank" href="https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L63-65">calls</a> a <a target="_blank" href="https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L71-81">null TestClassGenerator</a> that does nothing. But the <a target="_blank" href="https://github.com/patternpark/asunit/blob/master/asunit-4.0/sprout/lib/asunit4/test_class_generator.rb">AsUnit 4</a> Rubygem overrides the TestClassGenerator with one that generates an AsUnit 4 test case, and then calls the _SuiteClassGenerator_ - which it <a target="_blank" href="https://github.com/patternpark/asunit/blob/master/asunit-4.0/sprout/lib/asunit4/suite_class_generator.rb">also provides</a>. Someone that is so inclined, could easily build a _flexunit_ Rubygem that overrides the TestClassGenerator code so that it gets called instead of AsUnit _(hint, hint)_.
 
 h2. The Application Generator
 
@@ -140,7 +140,7 @@ gem "flashsdk", ">= 1.0.0.pre"
 gem "asunit4", ">= 4.2.2.pre"
 {% endhighlight %}
 
-This Gemfile is how the ClassGenerator, TestGenerator and SuiteGenerator knew what to build. If you're interested in learning more about Gemfiles, you should check out the <a target="_blank" href="http://gembundler.com">GemBundler</a> site.
+This Gemfile is how the ClassGenerator, TestClassGenerator and SuiteClassGenerator knew what to build. If you're interested in learning more about Gemfiles, you should check out the <a target="_blank" href="http://gembundler.com">GemBundler</a> site.
 
 Even though I'm sure no one would _ever_ want to generate a class without an associated test case, let's pretend we want to do just that. Since I can never remember exactly what parameters to use, let's go ahead and run the generator with no arguments in order to see it's help content:
 
