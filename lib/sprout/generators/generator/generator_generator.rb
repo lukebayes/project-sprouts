@@ -47,6 +47,8 @@ module Sprout
     add_param :extension, String, { :default => '.as' }
 
     def manifest  
+      massage_input
+
       directory bin do
         template "#{input.snake_case}", "generator_executable"
       end
@@ -76,6 +78,13 @@ module Sprout
       #This should actually be moved to the library generator
       #directory vendor
 
+    end
+
+    protected
+
+    def massage_input
+      self.input = input.gsub(/_generator$/, '')
+      self.input = input.gsub(/Generator$/, '')
     end
 
   end

@@ -19,6 +19,19 @@ class GeneratorGeneratorTest < Test::Unit::TestCase
       remove_file @temp
     end
 
+    ['TestClassGenerator', 'test_class_generator', 'test_class', 'TestClass'].each do |input|
+
+      should "massage '#{input}' into appropriate value" do
+        @generator.input = "TestClassGenerator"
+        @generator.execute
+
+        test_file = File.join(@temp, 'test', 'unit', 'test_class_generator_test.rb')
+        assert_file test_file do |content|
+          assert_matches /TestClassGeneratorTest/, content
+        end
+      end
+    end
+
     should "generate a new generator" do
       @generator.input = 'fwee'
       @generator.execute
