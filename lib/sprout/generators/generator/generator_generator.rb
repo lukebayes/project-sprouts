@@ -77,6 +77,16 @@ module Sprout
 
       if !File.exists? 'Gemfile'
         template 'Gemfile', 'generator_gemfile'
+      else
+        say "[INFO] It seems you already have a Gemfile in this project, please be sure it has the following content:"
+        say ''
+        say '  gem "sprout", ">= #{Sprout::VERSION::STRING}"'
+        say ''
+        say '  group :development do'
+        say '    gem "shoulda"'
+        say '    gem "mocha"'
+        say '  end'
+        say ''
       end
     end
 
