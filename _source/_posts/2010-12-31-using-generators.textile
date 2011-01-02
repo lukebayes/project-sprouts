@@ -17,11 +17,17 @@ For example, the default <code>sprout-class</code> generator <a target="_blank" 
 
 h2. The Application Generator
 
-Let's start out by demonstrating a few generators and talking about what they do. If you haven't already, get the Flash SDK installed on your system:
+Let's start out by demonstrating a few generators and talking about what they do. If you haven't already, get the Flash SDK (>= 1.0.18) installed on your system:
 
 {% highlight bash %}
 # Install the ActionScript 3 / Flash / Flex bundle:
 gem install flashsdk --pre
+{% endhighlight %}
+
+You can figure out what version you have installed with:
+
+{% highlight bash %}
+gem list flashsdk
 {% endhighlight %}
 
 Now, let's see what generators we have available to us by running the following and then hitting the TAB key.
@@ -33,7 +39,6 @@ sprout-
 You should see a collection of executables - something like:
 
 {% highlight bash %}
-$ sprout-
 sprout-as3        sprout-class      sprout-flex       sprout-generator  [etc]
 {% endhighlight %}
 
@@ -109,16 +114,20 @@ Notice how the snake case was respected for the project directory, but it was co
 
 h2. The Feature Generator
 
-Now, let's go into the new project and generate a class.
+Now, let's go into the new project and make sure our gems are up to date:
 
 {% highlight bash %}
 cd other_project
+bundle install
+{% endhighlight %}
+
+Create a new class using the fully-qualified name:
+
+{% highlight bash %}
 sprout-class utils.MathUtil
 {% endhighlight %}
 
-_(You may need to run <code>bundle install</code> first)_
-
-You should see output something like:
+You should see output like:
 
 {% highlight bash %}
 Created directory: ./src/utils
@@ -140,7 +149,7 @@ gem "flashsdk", ">= 1.0.0.pre"
 gem "asunit4", ">= 4.2.2.pre"
 {% endhighlight %}
 
-This Gemfile is how the ClassGenerator, TestClassGenerator and SuiteClassGenerator knew what to build. If you're interested in learning more about Gemfiles, you should check out the <a target="_blank" href="http://gembundler.com">GemBundler</a> site.
+This Gemfile is how the ClassGenerator, TestClassGenerator and SuiteClassGenerator knew what to build. If you're interested in learning more about Gemfiles in general, you should check out the <a target="_blank" href="http://gembundler.com">GemBundler</a> site.
 
 Even though I'm sure no one would _ever_ want to generate a class without an associated test case, let's pretend we want to do just that. Since I can never remember exactly what parameters to use, let's go ahead and run the generator with no arguments in order to see it's help content:
 
@@ -173,7 +182,7 @@ Usage: sprout-class [options]
 
 Of course, now that we see the help output, we see that we could have run the generator with the <code>--help</code> parameter.
 
-Notice how all of these say, "Default Description", this is because I'd like to extract the rdoc comment directly from the <a target="_blank" href="https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L25">source file</a> in order to avoid duplication. I haven't gotten around to this task, so if you're interested in contributing, please fork and send a pull request.
+Notice how all of these say, "Default Description", this is because I'd like to extract the rdoc comment directly from the <a target="_blank" href="https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L25">source file</a> in order to avoid duplication. I haven't gotten around to this task, so if you're interested in contributing, please <a target="_blank" target="https://github.com/lukebayes/project-sprouts/blob/master/lib/sprout/executable/base.rb#L57-58">fork</a> and send a pull request.
 
 Even though these directives don't have descriptions, and we can experiment with some confidence thanks to the <code>--destroy</code> argument, I would still check my work into a Git repository before running any generators in an existing project.
 
@@ -192,15 +201,15 @@ Created file:      ./src/utils/OtherUtil.as
 
 h2. Working with Templates
 
-The ability to easily customize and control generator templates is one of the main driving forces behind the generator rewrite. You can override a particular template for a single generator execution, a specific project, or globally for your system. Generator templates are simply named erb files, and each template is loaded individually.
+The ability to easily customize and control generator templates is one of the main driving forces behind the generator rewrite. You can override a particular template for a single generator execution, a specific project, or globally for your system. Generator templates are simply named erb files - <a target="_blank" href="https://github.com/lukebayes/project-sprouts/blob/master/lib/sprout/generator/base.rb#L100-110">but allowances have been made for alternative template languages</a>. Each template is loaded and rendered individually, so you you only need to replace those templates that you're interested in.
 
 The first thing you'll want to figure out, is the name of the template you want to override. For the time being, you can find this out by checking the source code for the project that defined the generator. Following are some template folders to peruse:
 
 * <a target="_blank" href="https://github.com/lukebayes/sprout-flashsdk/tree/master/lib/flashsdk/generators/templates">Flash SDK Templates</a>
 * <a target="_blank" href="https://github.com/patternpark/asunit/tree/master/asunit-4.0/sprout/lib/asunit4/templates">AsUnit Templates</a>
-* <a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/master/lib/sprout/generators">Sprouts Templates</a>
+* <a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/master/lib/sprout/generators">Sprouts Generators</a>
 
-Let's assume we want to replace the template for the <a target="_blank" href="https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L59">ClassGenerator</a>, found in the Flash SDK. You can see on line 59 that the generator is looking for a template file named, 'ActionScript3Class.as'.
+Let's assume we want to replace the template for the ClassGenerator, found in the Flash SDK. You <a target="_blank" href="https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L59">can see on line 59</a> that the generator is looking for a template file named, 'ActionScript3Class.as'.
 
 This means that once we decide which scope to operate on, we need to place a file with the same name into the correct directory.
 
@@ -251,15 +260,15 @@ sprout-class utils.BossyUtil --templates+=bossypoo
 
 You'll have to forgive the extra carriage returns, as my ERB templating appears to be a little greedy with whitespace. After running the generator, you should see everything looks normal.
 
-Now that approach is pretty neat, but we don't want to have to remember to add that --templates argument every.single.time we run a generator. Which brings us to;
+Now that approach is pretty neat, but we don't want to have to remember to add that <code>--templates</code> argument every.single.time we run a generator. Which brings us to;
 
 h3. Project Templates
 
-In addition to setting the --template parameter manually, there are a number of locations that generators will scan for templates. You can get the definitive list for your system by running the generator with the --show-template-paths parameter.
+In addition to setting the <code>--templates</code> parameter manually, there are a number of locations that generators will scan for templates. You can get the definitive list for your system by running the generator with the <code>--show-template-paths</code> parameter.
 
 On my computer, this results in:
 
-{% highlight bash %}
+{% highlight text %}
 The following paths will be checked for templates:
   * --templates+=[value]
   * config/generators
@@ -269,11 +278,13 @@ The following paths will be checked for templates:
   * /Users/lbayes/.gem/ruby/1.9.2/gems/flashsdk-1.0.17.pre/lib/flashsdk/generators/templates
 {% endhighlight %}
 
-If you create either of the config/generators or vender/generators paths in your project directory and place that template in there, anytime you run the class generator, it will get picked up.
+If you create either of the <code>config/generators</code> or <code>vender/generators</code> paths in your project directory and place that template in there, anytime you run the class generator, it will get picked up.
 
 h3. System Templates
 
-If you look closely at the previous list, you'll see that one of the folders is in the global Sprout cache, and another is an environmental variable. I hope you can figure out how to create a folder in the cache location and for the environmental variable, you can set it on the command line like this:
+If you look closely at the previous list, you'll see that one of the folders is in the global Sprout cache, and another is an environmental variable. I hope you can figure out how to create a folder in the cache location. If you place a generator template here, it will be picked up for any _Application_ generators, and any projects that don't override the template in their own scope.
+
+You can set the environmental variable in a number ways, one of which is on the command line like this:
 
 {% highlight text %}
 sprout-class utils.MathUtil SPROUT_GENERATORS=relative/or/absolute/path/to/templates
@@ -285,9 +296,15 @@ Or you can set it within your .bash_profile or .bashrc file like:
 export SPROUT_GENERATORS=/absolute/path/to/templates
 {% endhighlight %}
 
+You could also set it in any Ruby source file that gets loaded from your Gemfile. In Ruby, this would look like:
+
+{% highlight ruby %}
+ENV['SPROUT_GENERATORS'] = /absolute/path/to/templates
+{% endhighlight %}
+
 h2. Conclusion
 
-This brings us to the end of the "Using Generators" tutorial. If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet - <a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/gh-pages/_beta">fork</a>, fix and send a pull request.
+This brings us to the end of the "Using Generators" tutorial. If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet - <a target="_blank" href="https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts/2010-12-31-using-generators.textile">fork</a>, fix and send a pull request.
 
 The next article in the series will describe how to create generators.
 
