@@ -14,7 +14,8 @@ $:.unshift lib unless $:.include? lib
 
 require 'sprout'
 
-$:.unshift File.expand_path(File.join(File.dirname(__FILE__), '..'))
+test = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+$:.unshift test unless $:.include? test
 
 require 'unit/fake_process_runner'
 require 'unit/fake_executable_task'

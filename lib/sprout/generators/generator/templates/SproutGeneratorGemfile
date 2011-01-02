@@ -1,0 +1,10 @@
+
+source "http://rubygems.org"
+
+gem "sprout", ">= #{Sprout::VERSION}"
+
+group :development do
+  gem "shoulda"
+  gem "mocha"
+end
+

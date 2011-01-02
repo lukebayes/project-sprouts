@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 require 'rubygems'
 require 'sprout'
 require 'generators/<%= input.snake_case %>_generator'

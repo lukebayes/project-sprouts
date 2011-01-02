@@ -74,10 +74,10 @@ module Sprout
           directory "generators"
         end
       end
-      
-      #This should actually be moved to the library generator
-      #directory vendor
 
+      if !File.exists? 'Gemfile'
+        file 'Gemfile', 'SproutGeneratorGemfile'
+      end
     end
 
     protected

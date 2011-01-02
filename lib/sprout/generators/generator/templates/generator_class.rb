@@ -1,11 +1,14 @@
 
 module Sprout
+  ##
+  # This is where you describe your new Generator.
   class <%= input.camel_case %>Generator < Generator::Base
     
     ##
     # This is how you add a parameter to your generator
     #
-    #   add_param :fwee, String, :default => "fwee"
+    #   # @return [String] Say fwee!
+    #   add_param :fwee, String, { :default => "fwee" }
     #
     def manifest
       directory input.snake_case do
