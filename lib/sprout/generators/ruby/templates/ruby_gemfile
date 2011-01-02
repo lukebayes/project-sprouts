@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'sprout', '>= 1.0.0.pre'
+gem 'sprout', '>= <%= Sprout::VERSION::STRING %>'
 
 group :development do
   gem 'rake'

@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), '..', 'test_helper')
+require 'test_helper'
 
 class <%= input.camel_case %>Test < Test::Unit::TestCase
   include SproutTestCase
