@@ -76,7 +76,7 @@ module Sprout
       end
 
       if !File.exists? 'Gemfile'
-        file 'Gemfile', 'SproutGeneratorGemfile'
+        template 'Gemfile', 'generator_gemfile'
       end
     end
 
