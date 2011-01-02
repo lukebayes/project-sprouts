@@ -117,7 +117,7 @@ gem <span class="s2">&quot;flashsdk&quot;</span>, <span class="s2">&quot;&gt;= 1
 gem <span class="s2">&quot;asunit4&quot;</span>, <span class="s2">&quot;&gt;= 4.2.2.pre&quot;</span>
 </code></pre>
 </div><p>This Gemfile is how the ClassGenerator, TestClassGenerator and SuiteClassGenerator knew what to build. If you&#8217;re interested in learning more about Gemfiles in general, you should check out the <a target="_blank" href="http://gembundler.com">GemBundler</a> site.</p>
-<p>Even though I&#8217;m sure no one would <em>ever</em> want to generate a class without an associated test case, let&#8217;s pretend we want to do just that. Since I can never remember exactly what parameters to use, let&#8217;s go ahead and run the generator with no arguments in order to see it&#8217;s help content:</p>
+<p>Even though I&#8217;m sure no one would <em>ever</em> want to generate a class without an associated test case, let&#8217;s pretend we want to do just that. Since I can never remember exactly what parameters to use, let&#8217;s go ahead and run the generator with no arguments in order to see its help content:</p>
 <div class="highlight"><pre><code class="bash">sprout-class
 </code></pre>
 </div><p>You should see something like the following:</p>
@@ -196,7 +196,7 @@ Created file:      ./src/utils/OtherUtil.as
 </div><p>You&#8217;ll have to forgive the extra carriage returns, as my <span class="caps">ERB</span> templating appears to be a little greedy with whitespace. After running the generator, you should see everything looks normal.</p>
 <p>Now that approach is pretty neat, but we don&#8217;t want to have to remember to add that <code>--templates</code> argument every.single.time we run a generator. Which brings us to;</p>
 <h3>Project Templates</h3>
-<p>In addition to setting the <code>--templates</code> parameter manually, there are a number of locations that generators will scan for templates. You can get the definitive list for your system by running the generator with the <code>--show-template-paths</code> parameter.</p>
+<p>In addition to setting the <code>--templates</code> parameter manually, there are a number of locations that generators will scan for templates. You can get the definitive list of template paths for any generator that extends Sprout::Generator::Base by running the generator with the <code>--show-template-paths</code> parameter.</p>
 <p>On my computer, this results in:</p>
 <div class="highlight"><pre><code class="text">The following paths will be checked for templates:
   * --templates+=[value]

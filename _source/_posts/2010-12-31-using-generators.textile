@@ -151,7 +151,7 @@ gem "asunit4", ">= 4.2.2.pre"
 
 This Gemfile is how the ClassGenerator, TestClassGenerator and SuiteClassGenerator knew what to build. If you're interested in learning more about Gemfiles in general, you should check out the <a target="_blank" href="http://gembundler.com">GemBundler</a> site.
 
-Even though I'm sure no one would _ever_ want to generate a class without an associated test case, let's pretend we want to do just that. Since I can never remember exactly what parameters to use, let's go ahead and run the generator with no arguments in order to see it's help content:
+Even though I'm sure no one would _ever_ want to generate a class without an associated test case, let's pretend we want to do just that. Since I can never remember exactly what parameters to use, let's go ahead and run the generator with no arguments in order to see its help content:
 
 {% highlight bash %}
 sprout-class
@@ -264,7 +264,7 @@ Now that approach is pretty neat, but we don't want to have to remember to add t
 
 h3. Project Templates
 
-In addition to setting the <code>--templates</code> parameter manually, there are a number of locations that generators will scan for templates. You can get the definitive list for your system by running the generator with the <code>--show-template-paths</code> parameter.
+In addition to setting the <code>--templates</code> parameter manually, there are a number of locations that generators will scan for templates. You can get the definitive list of template paths for any generator that extends Sprout::Generator::Base by running the generator with the <code>--show-template-paths</code> parameter.
 
 On my computer, this results in:
 
