@@ -13,7 +13,7 @@ post_image_title: Generators
 
 h1. {{ page.title }}
 
-{{ prettydate }} - {{ page.author }}
+{{ page.prettydate }} - {{ page.author }}
 
 Introduction here
 

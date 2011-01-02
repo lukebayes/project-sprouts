@@ -13,8 +13,7 @@ post_image_title: Generators
 
 h1. {{ page.title }}
 
-{{ prettydate }} - {{ page.author }}
-31 December, 2010 - Luke Bayes
+{{ page.prettydate }} - {{ page.author }}
 
 h2. Introduction
 
