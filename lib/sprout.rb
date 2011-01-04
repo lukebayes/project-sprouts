@@ -43,6 +43,7 @@ require 'sprout/rdoc_parser'
 require 'sprout/specification'
 require 'sprout/executable'
 require 'sprout/daemon'
+require 'sprout/command_line'
 
 # Generators
 require 'sprout/generator'

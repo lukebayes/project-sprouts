@@ -1,4 +1,9 @@
-#!/usr/bin/bash
+#!/usr/bin/env ruby
 
-echo 'Type sprout- and then hit the tab key to see the new sprout binaries.'
+require 'rubygems'
+require 'sprout'
+
+generator = Sprout::CommandLine.new
+generator.parse! ARGV
+generator.execute
 

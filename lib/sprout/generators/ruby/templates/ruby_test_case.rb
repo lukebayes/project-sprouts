@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class <%= input.camel_case %>Test < Test::Unit::TestCase
-  include SproutTestCase
+  include Sprout::TestHelper
 
   context "A <%= input.camel_case %>" do
 

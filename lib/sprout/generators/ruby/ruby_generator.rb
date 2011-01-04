@@ -50,8 +50,8 @@ module Sprout
           directory fixtures
           directory unit do
             template "#{input.snake_case}_test.rb", 'ruby_test_case.rb'
+            template 'test_helper.rb', 'ruby_test_helper.rb'
           end
-          template 'test_helper.rb', 'ruby_test_helper.rb'
         end
 
         directory bin do

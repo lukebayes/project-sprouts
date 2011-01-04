@@ -50,7 +50,7 @@ module Sprout
       massage_input
 
       directory bin do
-        template "#{input.snake_case}", "generator_executable"
+        template "#{input.dash_case}", "generator_executable"
       end
 
       directory lib do
