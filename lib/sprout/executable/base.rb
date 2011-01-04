@@ -503,8 +503,7 @@ module Sprout
 
       def add_help_param
         option_parser.on '--help', 'Display this help message' do
-          puts option_parser.to_s
-          exit
+          abort option_parser.to_s
         end
       end
 

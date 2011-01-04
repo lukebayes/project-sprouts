@@ -55,13 +55,13 @@ class RubyGeneratorTest < Test::Unit::TestCase
       test_dir = File.join project_dir, 'test'
       assert_file test_dir
 
-      test_helper = File.join test_dir, 'test_helper.rb'
+      unit_dir = File.join test_dir, 'unit'
+      assert_file unit_dir
+
+      test_helper = File.join unit_dir, 'test_helper.rb'
       assert_file test_helper do |content|
         assert_matches /require 'some_project'/, content
       end
-
-      unit_dir = File.join test_dir, 'unit'
-      assert_file unit_dir
 
       test_case = File.join unit_dir, 'some_project_test.rb'
       assert_file test_case do |content|

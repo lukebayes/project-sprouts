@@ -42,8 +42,8 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
     end
     
     should "always accept help option" do
-      @exe.expects :puts
-      assert_raises SystemExit do
+      @exe.expects :abort
+      assert_raises Sprout::Errors::MissingArgumentError do
         @exe.parse! [ '--help' ]
       end
     end

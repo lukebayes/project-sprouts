@@ -6,15 +6,20 @@ class CommandLineTest < Test::Unit::TestCase
   context "a new command line ui" do
     
     setup do
-      @instance = Sprout::CommandLine.new
-      @instance.logger = Sprout::OutputBuffer.new
+      @logger          = Sprout::OutputBuffer.new
+      @instance        = Sprout::CommandLine.new
+      @instance.logger = @logger
     end
 
     should "display the version number" do
-      @instance.version = true
+      @instance.parse! ['--version']
       @instance.execute
+      assert_matches /sprout #{Sprout::VERSION::STRING}/, @logger.read
+    end
 
-      assert_matches /sprout #{Sprout::VERSION::STRING}/, @instance.logger.read
+    should "display helper if no options provided" do
+      @instance.expects :abort
+      @instance.parse! []
     end
   end
 end
