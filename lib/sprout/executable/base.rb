@@ -365,7 +365,7 @@ module Sprout
       # @returns [File] Path to the executable binary that should be executed.
       #
       def binary_path=(path)
-        @path = path
+        @binary_path = path
       end
 
       ##
