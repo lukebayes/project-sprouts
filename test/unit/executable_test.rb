@@ -172,6 +172,11 @@ class ExecutableTest < Test::Unit::TestCase
       end
     end
 
+    should "accept custom binary_path" do
+      @tool.binary_path = @mxmlc_executable
+      assert_equal @mxmlc_executable, @tool.binary_path
+    end
+
     should "accept default gem name" do
       assert_equal 'flex4sdk', @tool.pkg_name
     end

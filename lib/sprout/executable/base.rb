@@ -333,6 +333,47 @@ module Sprout
         @default_file_expression ||= Sprout::Executable::DEFAULT_FILE_EXPRESSION
       end
 
+      ##
+      # Replace the binary that will be executed with a path to one of your 
+      # choosing. This work is usually performed on the yielded instance from
+      # Rake like:
+      #
+      #   mxmlc 'bin/SomeProject.swf' do |t|
+      #     t.input = 'src/SomeProject.as'
+      #     t.binary_path = 'vendor/sdks/4.1.0/bin/mxmlc'
+      #   end
+      #
+      # It's important to note that Windows systems will check
+      # the provided path for binaries of the same name that end with .exe
+      # and .bat and will use those in place of the provided name if they
+      # exist.
+      #
+      # For example, if you set +binary_path+ to:
+      #
+      #   t.binary_path = 'vendor/sdks/4.0.1/bin/mxmlc'
+      #
+      # And there is a similarly-named file in the same directory, but named:
+      #
+      #   vendor/sdks/4.0.1/bin/mxmlc.bat
+      #
+      # Windows systems will execute this .bat file.
+      #
+      # 
+      # @param path [File] Path to the executable binary that should be executed instead 
+      #   of whatever Sprout.load would have provided. If a value is set here, Sprout.load 
+      #   will not be called.
+      # @returns [File] Path to the executable binary that should be executed.
+      #
+      def binary_path=(path)
+        @path = path
+      end
+
+      ##
+      # @returns [File] Path to the executable binary that should be executed.
+      def binary_path
+        @binary_path ||= Sprout::Executable.load(executable, pkg_name, pkg_version).path
+      end
+
       protected
 
       ##
@@ -416,10 +457,6 @@ module Sprout
       end
 
       private
-
-      def binary_path
-        Sprout::Executable.load(executable, pkg_name, pkg_version).path
-      end
 
       def handle_library_prerequisites items
         items.each do |task_name|
