@@ -13,6 +13,7 @@ require 'sprout/executable/urls'
 require 'sprout/executable/parameter_factory'
 require 'rake/clean'
 require 'sprout/executable/base'
+require 'sprout/executable/session'
 
 module Sprout
 

@@ -1,9 +1,45 @@
 require 'test_helper'
 require 'fixtures/executable/fdb'
 
-class DaemonTest < Test::Unit::TestCase
+class ExecutableSessionTest < Test::Unit::TestCase
   include Sprout::TestHelper
 
+  context "a new executable session" do
+
+    setup do
+      # Uncomment the following to see interactive sessions:
+      #Sprout.stdout = $stdout
+      #Sprout.stderr = $stderr
+
+      # Comment the following and install the flashsdk
+      # to run test against actual fdb:
+      #insert_fake_executable File.join(fixtures, 'executable', 'flex3sdk_gem', 'fdb')
+    end
+
+    should "execute without shell params" do
+      @fdb = Sprout::FDB.new
+      @fdb.execute false
+      @fdb.run
+ 
+      # on OSX:
+      Kernel.system 'open ~/Projects/Sprouts/flashsdk/test/fixtures/flashplayer/AsUnit\ Runner.swf'
+
+      @fdb.wait_for_prompt
+
+      @fdb.break "AsUnitRunner:12"
+
+      @fdb.continue
+      @fdb.continue
+      @fdb.quit
+
+      #@fdb.handle_user_input
+    end
+  end
+
+end
+
+
+=begin
   context "a new daemon delegate" do
 
     setup do
@@ -90,4 +126,5 @@ class DaemonTest < Test::Unit::TestCase
   end
 
 end
+=end
 

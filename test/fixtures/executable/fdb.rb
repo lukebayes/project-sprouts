@@ -1,25 +1,21 @@
 
 module Sprout
 
-  class FDB < Daemon
+  class FDB < Executable::Session
 
     set :default_prefix, '-'
 
     ##
-    # The default gem name
-    set :pkg_name, 'flex4'
+    # Set the binary_path explicitly since we 
+    # don't need pkg_name or pkg_version for test environment.
+    #set :binary_path, 'test/fixtures/executable/flex3sdk_gem/fdb'
+    #Toggle comments to use the real exe:
+    set :binary_path, '~/Library/Sprouts/1.1/cache/flex4/4.1.0.16076/bin/fdb'
 
-    ##
-    # The default gem version
-    set :pkg_version, '>= 4.1.0.pre'
-
-    ##
-    # The default executable target
-    set :executable, :fdb
 
     ##
     # The regex for when input can be accepted again.
-    set :prompt, /^\(fdb\) |\(y or n\) /
+    set :prompt, /^\(fdb\) |\(y or n\) |^Waiting for Player to connect/
 
     ##
     # Force the fake to write to stderr:

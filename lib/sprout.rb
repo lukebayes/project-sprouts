@@ -42,7 +42,6 @@ require 'sprout/remote_file_target'
 require 'sprout/rdoc_parser'
 require 'sprout/specification'
 require 'sprout/executable'
-require 'sprout/daemon'
 require 'sprout/command_line'
 
 # Generators

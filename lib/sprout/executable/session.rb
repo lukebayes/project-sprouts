@@ -1,5 +1,5 @@
 
-module Sprout
+module Sprout::Executable
 
   ##
   # The Sprout::Daemon class exposes the Domain Specific Language
@@ -43,7 +43,7 @@ module Sprout
   #     t.do_something_else
   #   end
   #
-  class Daemon < Executable::Base
+  class Session < Base
 
     class << self
 
@@ -187,8 +187,7 @@ module Sprout
       @process_launched = true
       wait_for_prompt
       execute_actions
-      handle_user_session if should_wait
-      wait if should_wait
+      handle_user_input if should_wait
     end
 
     def wait
@@ -201,73 +200,50 @@ module Sprout
     # an input prompt, so that another action
     # can be submitted, or user input can be
     # collected.
-    def wait_for_prompt expected_prompt=nil
-      expected_prompt = expected_prompt || prompt
-
-      fake_stderr = Sprout::OutputBuffer.new
-      fake_stdout = Sprout::OutputBuffer.new
-      stderr = read_from process_runner.e, fake_stderr
-      stdout = read_from process_runner.r, fake_stdout, expected_prompt
-      stdout.join && stderr.kill
-
-      stdout_str = fake_stdout.read
-      stderr_str = fake_stderr.read
-
-      Sprout.stderr.printf(stderr_str)
-      Sprout.stdout.printf(stdout_str)
+    def wait_for_prompt
+      read_from process_runner.r
     end
 
     ##
     # Expose the running process to manual
     # input on the terminal, and write stdout
     # back to the user.
-    def handle_user_session
-      while !process_runner.r.eof?
-        input = $stdin.gets.chomp!
-        execute_action input, true
-        wait_for_prompt
+    def handle_user_input
+      while !process_runner.r.closed?
+        begin
+          input = $stdin.gets.chomp!
+        rescue SignalException => e
+          return false
+        end
+        should_continue = execute_action input, true
+        break unless should_continue
       end
+      wait
     end
 
     protected
 
-    ##
-    # This is the ass-hattery that we need to go
-    # through in order to read from stderr and
-    # stdout from a long-running process without
-    # eternally blocking the parent - and providing
-    # the ability to asynchronously write into the
-    # input stream.
-    #
-    # If you know how to better do this accross
-    # platforms (mac, win and nix) without losing
-    # information (i.e. combining stderr and stdout
-    # into a single stream), I'm all ears!
-    def read_from pipe, to, until_prompt=nil
+    def read_from pipe 
       line = ''
-      lines = ''
-      Thread.new do
-        Thread.current.abort_on_exception = true
-        while true do
-          break if pipe.eof?
-          char = pipe.readpartial 1
-          line << char
-          if char == "\n"
-            to.puts line
-            to.flush
-            lines << line
-            line = ''
-          end
-          if !until_prompt.nil? && line.match(until_prompt)
-            lines << line
-            to.printf line
-            to.flush
-            line = ''
-            break
-          end
+      #puts ">> READ FROM WITH: SIZE: #{pipe.count}"
+      pipe.each_char do |char|
+        line << char
+        break if pipe.closed?
+        break if line.match prompt
+
+        if char == "\n"
+          $stdout.printf line
+          line = ''
         end
-        lines
       end
+
+      $stdout.printf line
+      
+      should_continue_reading? line, pipe
+    end
+
+    def should_continue_reading? line, pipe
+      return !(line == '' && pipe.eof?)
     end
 
     def process_launched?
@@ -322,8 +298,7 @@ module Sprout
     ##
     # Execute a single action.
     def execute_action action, silence=false
-      action = action.strip
-      Sprout.stdout.puts("#{action}\n") unless silence
+      $stdout.puts(action) unless silence
       process_runner.puts action
       wait_for_prompt
     end
