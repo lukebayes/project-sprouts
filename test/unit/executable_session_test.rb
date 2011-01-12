@@ -10,10 +10,6 @@ class ExecutableSessionTest < Test::Unit::TestCase
       # Uncomment the following to see interactive sessions:
       #Sprout.stdout = $stdout
       #Sprout.stderr = $stderr
-
-      # Comment the following and install the flashsdk
-      # to run test against actual fdb:
-      #insert_fake_executable File.join(fixtures, 'executable', 'flex3sdk_gem', 'fdb')
     end
 
     should "execute without shell params" do
@@ -21,11 +17,9 @@ class ExecutableSessionTest < Test::Unit::TestCase
       @fdb.execute false
       @fdb.run
  
-      # on OSX:
       Kernel.system 'open ~/Projects/Sprouts/flashsdk/test/fixtures/flashplayer/AsUnit\ Runner.swf'
 
       @fdb.wait_for_prompt
-
       @fdb.break "AsUnitRunner:12"
 
       @fdb.continue

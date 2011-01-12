@@ -225,7 +225,6 @@ module Sprout::Executable
 
     def read_from pipe 
       line = ''
-      #puts ">> READ FROM WITH: SIZE: #{pipe.count}"
       pipe.each_char do |char|
         line << char
         break if pipe.closed?
