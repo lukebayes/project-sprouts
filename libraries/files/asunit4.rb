@@ -5,7 +5,7 @@
 name = File.basename(__FILE__).split('.').shift
 
 gem_wrap name do |t|
-  t.version       = '4.0.1'
+  t.version       = '4.0.20'
   t.summary       = "AsUnit4 is an ActionScript unit test framework for AIR, Flex 2/3 and ActionScript 3 projects"
   t.author        = "Luke Bayes and Ali Mills"
   t.email         = "projectsprouts@googlegroups.com"
@@ -16,8 +16,8 @@ gem_wrap name do |t|
   filename: asunit4.zip
   library_path: asunit4
   archive_type: zip
-  url: http://github.com/lukebayes/asunit/zipball/4.0.3
-  md5: 51fa35e79e2d4349d0e0d44652fb00cb
-  archive_path: 'lukebayes-asunit-4.0.3-0-ge2af845/as3/src'
+  url: https://download.github.com/patternpark-asunit-4.0.3-0-ge2af845.zip
+  md5: 9fa5c9e95a34319d2c7851c6de489d65
+  archive_path: 'patternpark-asunit-e2af845/asunit-4/src'
 EOF
 end
