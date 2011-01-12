@@ -37,7 +37,6 @@ module Sprout
       response = nil
       name = uri.path.split("/").pop
       
-      raise RemoteFileLoaderError.new("The RemoteFileTask failed for #{name}. We can only handle HTTP requests at this time, it seems you were trying: '#{uri.scheme}'") if uri.scheme != 'http'
       begin
         open(uri.to_s, :content_length_proc => lambda {|t|
           if t && t > 0
