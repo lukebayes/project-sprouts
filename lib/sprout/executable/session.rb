@@ -305,6 +305,7 @@ module Sprout::Executable
     ##
     # Execute a single action.
     def execute_action action, silence=false
+      action = action.strip
       stdout.puts(action) unless silence
       process_runner.puts action
       wait_for_prompt
