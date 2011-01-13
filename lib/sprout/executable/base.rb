@@ -236,6 +236,14 @@ module Sprout
         initialize_parameters
       end
 
+      def stdout=(io)
+        @stdout = io
+      end
+
+      def stdout
+        @stdout ||= Sprout.stdout
+      end
+
       def parse! commandline_options
         begin
           option_parser.parse! commandline_options

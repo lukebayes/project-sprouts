@@ -231,12 +231,12 @@ module Sprout::Executable
         break if line.match prompt
 
         if char == "\n"
-          $stdout.printf line
+          stdout.printf line
           line = ''
         end
       end
 
-      $stdout.printf line
+      stdout.printf line
       
       should_continue_reading? line, pipe
     end
@@ -280,6 +280,14 @@ module Sprout::Executable
     #
     # @return [Thread]
     def system_execute binary, params
+      # Combine the stderr and stdout for long-lived
+      # processes so that they are both written to
+      # stdout, this allows us to collect these streams
+      # without threads or blocking eternally.
+      #
+      # Thanks to https://github.com/apinstein for this
+      # solution.
+      params = "#{params} " + '2>&1'
       Sprout.current_system.execute_thread binary, params
     end
 
@@ -297,7 +305,7 @@ module Sprout::Executable
     ##
     # Execute a single action.
     def execute_action action, silence=false
-      $stdout.puts(action) unless silence
+      stdout.puts(action) unless silence
       process_runner.puts action
       wait_for_prompt
     end
