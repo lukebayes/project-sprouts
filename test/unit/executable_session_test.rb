@@ -26,10 +26,11 @@ class ExecutableSessionTest < Test::Unit::TestCase
       @fdb.wait_for_prompt
       
       @fdb.break "AsUnitRunner:12"
-      @fdb.handle_user_input
 
       #@fdb.continue
       #@fdb.continue
+
+      @fdb.handle_user_input
       #@fdb.quit
     end
 

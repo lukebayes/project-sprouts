@@ -147,6 +147,10 @@ module Sprout::Executable
     attr_reader :process_runner
 
     ##
+    # The Thread that contains the forked running process.
+    attr_reader :process_thread
+
+    ##
     # @return [Array<Hash>] Return or create a new array.
     def action_stack
       @action_stack ||= []
@@ -207,9 +211,10 @@ module Sprout::Executable
     # can be submitted, or user input can be
     # collected.
     def wait_for_prompt
-      while !prompted?
+      while process_thread.alive? && !prompted?
         sleep 0.2
       end
+      process_thread.alive?
     end
 
     ##
@@ -219,15 +224,12 @@ module Sprout::Executable
     def handle_user_input
       while true
         begin
-          wait_for_prompt
+          break if !wait_for_prompt
           input = $stdin.gets.chomp!
+          execute_action(input, true)
         rescue SignalException => e
           return false
         end
-        execute_action(input, true)
-
-        # TODO: Figure out if you should CONTINUE
-        # or NOT....
       end
       wait
     end
@@ -277,10 +279,11 @@ module Sprout::Executable
       # Thanks to https://github.com/apinstein for this
       # solution.
       #params = "#{params} " + '2>&1'
-      Sprout.current_system.execute_thread binary, params, prompt do |message|
+      @process_thread = Sprout.current_system.execute_thread binary, params, prompt do |message|
         Sprout.stdout.printf message
         @prompted = true
       end
+      @process_runner = process_thread['runner']
     end
 
     private
@@ -297,11 +300,12 @@ module Sprout::Executable
     ##
     # Execute a single action.
     def execute_action action, silence=false
-      wait_for_prompt
-      action = action.strip
-      stdout.puts(action) unless silence
-      @prompted = false
-      process_runner.puts action
+      if wait_for_prompt
+        action = action.strip
+        stdout.puts(action) unless silence
+        @prompted = false
+        process_runner.puts action
+      end
     end
 
   end

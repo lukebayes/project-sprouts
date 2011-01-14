@@ -105,23 +105,23 @@ module Sprout::System
     # @yield [String] Message that was received from the process, called when #prompt is encountered.
     #
     def execute_thread tool, options='', prompt=nil, &block
-      runner = nil
-      Thread.new do
+      t = Thread.new do
         Thread.current.abort_on_exception = true
         runner = execute_silent(tool, options)
+        Thread.current['runner'] = runner
+        out = read_from runner.r, prompt, &block
+        err = read_from runner.e, prompt, &block
+        out.join && err.kill
       end
 
       # Wait for the runner to be created
       # before returning a nil reference
       # that never gets populated...
-      while runner.nil? do
+      while t['runner'].nil? do
         sleep(0.1)
       end
 
-      read_from runner.r, prompt, &block
-      read_from runner.e, prompt, &block
-
-      runner
+      t
     end
 
     def read_from pipe, prompt, &block
@@ -129,13 +129,14 @@ module Sprout::System
         Thread.current.abort_on_exception = true
         lines = ''
         line = ''
+        pipe.sync = true
         pipe.each_char do |char|
-          line << char
           break if pipe.closed?
+          line << char
 
           if line.match prompt
+            yield line if block_given?
             lines << line
-            yield lines if block_given?
             lines = ''
             line = ''
             next
@@ -143,16 +144,11 @@ module Sprout::System
 
           if char == "\n"
             lines << line
+            yield line if block_given?
             line = ''
           end
         end
-
-        should_continue_reading? line, pipe
       end
-    end
-
-    def should_continue_reading? line, pipe
-      return !(line == '' && pipe.eof?)
     end
 
     ##
