@@ -281,7 +281,7 @@ module Sprout::Executable
       #params = "#{params} " + '2>&1'
       @process_thread = Sprout.current_system.execute_thread binary, params, prompt do |message|
         Sprout.stdout.printf message
-        @prompted = true
+        @prompted = true if prompt.match message
       end
       @process_runner = process_thread['runner']
     end
@@ -300,8 +300,8 @@ module Sprout::Executable
     ##
     # Execute a single action.
     def execute_action action, silence=false
+      action = action.strip
       if wait_for_prompt
-        action = action.strip
         stdout.puts(action) unless silence
         @prompted = false
         process_runner.puts action

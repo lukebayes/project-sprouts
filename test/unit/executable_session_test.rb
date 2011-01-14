@@ -27,8 +27,8 @@ class ExecutableSessionTest < Test::Unit::TestCase
       
       @fdb.break "AsUnitRunner:12"
 
-      #@fdb.continue
-      #@fdb.continue
+      @fdb.continue
+      @fdb.continue
 
       @fdb.handle_user_input
       #@fdb.quit
