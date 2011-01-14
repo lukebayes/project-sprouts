@@ -153,6 +153,12 @@ module Sprout::Executable
     end
 
     ##
+    # @return [Boolean] If executable is awaiting input.
+    def prompted?
+      @prompted
+    end
+
+    ##
     # Execute the Daemon executable, followed
     # by the collection of stored actions in 
     # the order they were called.
@@ -201,7 +207,9 @@ module Sprout::Executable
     # can be submitted, or user input can be
     # collected.
     def wait_for_prompt
-      read_from process_runner.r
+      while !prompted?
+        sleep 0.2
+      end
     end
 
     ##
@@ -209,41 +217,22 @@ module Sprout::Executable
     # input on the terminal, and write stdout
     # back to the user.
     def handle_user_input
-      while !process_runner.r.closed?
+      while true
         begin
+          wait_for_prompt
           input = $stdin.gets.chomp!
         rescue SignalException => e
           return false
         end
-        should_continue = execute_action input, true
-        break unless should_continue
+        execute_action(input, true)
+
+        # TODO: Figure out if you should CONTINUE
+        # or NOT....
       end
       wait
     end
 
     protected
-
-    def read_from pipe 
-      line = ''
-      pipe.each_char do |char|
-        line << char
-        break if pipe.closed?
-        break if line.match prompt
-
-        if char == "\n"
-          stdout.printf line
-          line = ''
-        end
-      end
-
-      stdout.printf line
-      
-      should_continue_reading? line, pipe
-    end
-
-    def should_continue_reading? line, pipe
-      return !(line == '' && pipe.eof?)
-    end
 
     def process_launched?
       @process_launched
@@ -287,8 +276,11 @@ module Sprout::Executable
       #
       # Thanks to https://github.com/apinstein for this
       # solution.
-      params = "#{params} " + '2>&1'
-      Sprout.current_system.execute_thread binary, params
+      #params = "#{params} " + '2>&1'
+      Sprout.current_system.execute_thread binary, params, prompt do |message|
+        Sprout.stdout.printf message
+        @prompted = true
+      end
     end
 
     private
@@ -305,10 +297,11 @@ module Sprout::Executable
     ##
     # Execute a single action.
     def execute_action action, silence=false
+      wait_for_prompt
       action = action.strip
       stdout.puts(action) unless silence
+      @prompted = false
       process_runner.puts action
-      wait_for_prompt
     end
 
   end

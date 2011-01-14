@@ -77,21 +77,23 @@ module Sprout
     ##
     # Kill the process.
     def kill
-      Process.kill(9, pid)
+      update_status 9
     end
     
     ##
     # Close the process
     def close
-      update_status
+      w.close_write
     end
     
     ##
     # Send an update signal to the process.
-    def update_status
+    #
+    # @param sig [Integer] The signal to send, default 0 (or no action requested)
+    def update_status sig=0
       pid_int = Integer("#{ @pid }")
       begin
-        Process::kill 0, pid_int
+        Process::kill sig, pid_int
         true
       rescue Errno::ESRCH
         false

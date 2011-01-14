@@ -95,21 +95,64 @@ module Sprout::System
     end
 
     ##
-    # Execute a new process in a separate thread.
+    # Execute a new process in a separate thread and yield whatever output
+    # is written to its stderr and stdout.
     #
-    def execute_thread(tool, options='')
+    # @return [Sprout::ProcessRunner]
+    # @param tool [File] Path to the executable.
+    # @param options [String] The command line options that the executable accepts.
+    # @param prompt [Regex] The prompt that will trigger the listener block to be called.
+    # @yield [String] Message that was received from the process, called when #prompt is encountered.
+    #
+    def execute_thread tool, options='', prompt=nil, &block
       runner = nil
       Thread.new do
         Thread.current.abort_on_exception = true
         runner = execute_silent(tool, options)
       end
+
       # Wait for the runner to be created
       # before returning a nil reference
       # that never gets populated...
       while runner.nil? do
         sleep(0.1)
       end
+
+      read_from runner.r, prompt, &block
+      read_from runner.e, prompt, &block
+
       runner
+    end
+
+    def read_from pipe, prompt, &block
+      Thread.new do
+        Thread.current.abort_on_exception = true
+        lines = ''
+        line = ''
+        pipe.each_char do |char|
+          line << char
+          break if pipe.closed?
+
+          if line.match prompt
+            lines << line
+            yield lines if block_given?
+            lines = ''
+            line = ''
+            next
+          end
+
+          if char == "\n"
+            lines << line
+            line = ''
+          end
+        end
+
+        should_continue_reading? line, pipe
+      end
+    end
+
+    def should_continue_reading? line, pipe
+      return !(line == '' && pipe.eof?)
     end
 
     ##
