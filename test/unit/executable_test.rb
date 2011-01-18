@@ -44,6 +44,26 @@ class ExecutableTest < Test::Unit::TestCase
       assert_equal "---string-param=string1", @tool.to_shell
     end
 
+    should "create default stdout" do
+      assert_equal Sprout.stdout, @tool.stdout
+    end
+
+    should "accept custom stdout" do
+      out = StringIO.new
+      @tool.stdout = out
+      assert_equal out, @tool.stdout
+    end
+
+    should "create default stderr" do
+      assert_equal Sprout.stderr, @tool.stderr
+    end
+
+    should "accept custom stderr" do
+      err = StringIO.new
+      @tool.stderr = err
+      assert_equal err, @tool.stderr
+    end
+
     should "not share parameter values across instances" do
       first = FakeOtherExecutableTask.new
       second = FakeOtherExecutableTask.new

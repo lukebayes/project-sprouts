@@ -244,6 +244,14 @@ module Sprout
         @stdout ||= Sprout.stdout
       end
 
+      def stderr=(io)
+        @stderr = io
+      end
+
+      def stderr
+        @stderr ||= Sprout.stderr
+      end
+
       def parse! commandline_options
         begin
           option_parser.parse! commandline_options
