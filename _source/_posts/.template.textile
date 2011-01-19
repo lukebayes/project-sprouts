@@ -2,13 +2,13 @@
 layout: post
 title: 
 author: Luke Bayes
-prettydate: 1 January, 2011
-post_image_flickr: http://www.flickr.com/photos/joost-ijmuiden/3613829273/
-post_image_author_link: http://www.flickr.com/photos/joost-ijmuiden/
-post_image_author_name: Joost J. Bakker
-post_image_license: http://creativecommons.org/licenses/by/2.0/
-post_image_local: /images/3613829273_911657b418_z.jpg
-post_image_title: Generators
+prettydate: 19 January, 2011
+post_image_flickr: 
+post_image_author_link: 
+post_image_author_name: 
+post_image_license: 
+post_image_local: 
+post_image_title: 
 ---
 
 h1. {{ page.title }}
@@ -22,11 +22,8 @@ Introduction here
 <a href="{{ page.post_image_flickr }}">Image</a> courtesy of <a href="{{ page.post_image_author_link }}">{{ page.post_image_author_name }}</a> and the <a href="{{ page.post_image_license }}">Creative Commons</a> license.
 </span>
 
-If you have a more sophisticated Rakefile, and find yourself struggling with the migration, feel free to <a target="_blank" href="http://groups.google.com/group/projectsprouts/">ask questions on the list</a>.
 
 h2. Conclusion
 
 This brings us to the end of the "{{ page.title }}" post. If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet - <a target="_blank" href="https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts">fork</a>, fix and send a pull request.
-
-The next article in the series will describe how to create generators.
 
