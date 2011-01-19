@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Using the Flex Compiler SHell (FCSH)</title>
+  <link rel="stylesheet" type="text/css" href="/css/reset-min.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/css/pygments.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/css/sprouts.css" media="all" />
+  <script src="/javascripts/jquery-min-1.4.4.js"></script>
+  <script src="/javascripts/sprouts.js"></script>
+</head>
+<body>
+  <div id="header">
+    <div class="center">
+      <div class="content header-shadow">
+        <div class="logo"><a href="/">Sprouts</a></div>
+        <div class="tagline">Software development&mdash;evolved</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="http://github.com/lukebayes/project-sprouts/tree/master"><img style="position: absolute; top: 300; right: 0; border: 0;" src="/images/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
+<div class="center">
+  <div class="content header-shadow">
+    <h1>Using the Flex Compiler SHell (<span class="caps">FCSH</span>)</h1>
+<p>01 January, 2011 &#8211; Luke Bayes</p>
+<h2>What The sHell?</h2>
+<p><span class="caps">MXMLC</span> and <span class="caps">COMPC</span>, when run by themselves, are slow. Not a little slow, not kind of slow &#8211; but brutally, soul-crushingly, terribly <span class="caps">SLOW</span>. At least that&#8217;s how they feel to someone like me. Someone that suffers from chronic, advanced, impatience.</p>
+<p>Fortunately, there is finally relief!</p>
+<p><span class="attribution"><br />
+<image class="bordered" src="/images/3438900700_755cf91138_z.jpg" title="Sprouts Shell" /><br />
+<a href="http://www.flickr.com/photos/mike-bensalem/3438900700">Sprouts Shell</a> courtesy of <a href="http://www.flickr.com/photos/mike-bensalem/">Mike Epp</a> and the <a href="http://creativecommons.org/licenses/by-nc-nd/2.0/">Creative Commons</a> license.<br />
+</span></p>
+<h2>What is that at the end of this long, dark tunnel?</h2>
+<p>More than a few years ago, someone at Macrodobe realized how slow their compilers are, and released the inappropriately-named, yet awesomely helpful, &#8220;Flex Compiler SHell&#8221; (or <span class="caps">FCSH</span> for short). <span class="caps">FCSH</span> doesn&#8217;t necesarily have anything to do with the Flex framework, but provides a long-lived process that we can start up once, leave running, and ask to execute our compilation tasks. This process will retain lots of expensive information in memory and only recompile files that have changed since the last request. Using <span class="caps">FCSH</span> by hand is really not practical, and with previous versions of Sprouts, it was also not as easy as it should be.</p>
+<h2>I do believe that is a light!</h2>
+<p>After many, countless hours of deliberation and coding and testing and coding again, <span class="caps">FCSH</span> is finally exposed to Sprout projects in a very simple way:</p>
+<p>1) In a new terminal, start the fcsh service.</p>
+<div class="highlight"><pre><code class="bash"><span class="c"># cd into your project:</span>
+<span class="nb">cd</span> ~/SomeProject
+<span class="c"># Start the fcsh session:</span>
+rake fcsh:start
+</code></pre>
+</div><p><em>(Hit CTRL+C any time to terminate this <span class="caps">FCSH</span> process)</em></p>
+<p>2) In another new terminal (I use <a target="_blank" href="http://www.gnu.org/software/screen/"><span class="caps">GNU</span> Screen</a> thanks to a <a target="_blank" href="http://bhanoo.com/~hemant/">smart guy</a> I work with), execute the <em>fcsh</em> task before any <em>mxmlc</em> or <em>compc</em> tasks that you would normally call.</p>
+<div class="highlight"><pre><code class="bash"><span class="c"># cd into your project:</span>
+<span class="nb">cd</span> ~/SomeProject
+<span class="c"># Compile and run tests:</span>
+rake fcsh <span class="nb">test</span>
+<span class="c"># or the &#39;default&#39; task:</span>
+rake fcsh default
+<span class="c"># or clean first:</span>
+rake clean fcsh <span class="nb">test</span>
+</code></pre>
+</div><p>That&#8217;s it!</p>
+<p>Just run the <code>fcsh</code> task before any other tasks, no editing of source files necessary!</p>
+<h2>But how does it really work?</h2>
+<p>I&#8217;m so glad you asked!</p>
+<p>Under the covers, in the latest release of the flashsdk, the <code>mxmlc</code> and <code>compc</code> tasks check for a couple of environment variables before actually calling out to the underlying process.</p>
+<p>If the <code>USE_FCSH</code> environment variable value is &#8216;true&#8217;, then the compiler will attempt to connect to an FCSHSocket on <code>FCSH_PORT</code> (12321 by default). The fcsh task simply sets this value to &#8216;true&#8217;, but you can also set this value on the command line, like:</p>
+<div class="highlight"><pre><code class="bash">rake <span class="nb">test </span><span class="nv">USE_FCSH</span><span class="o">=</span><span class="nb">true</span>
+</code></pre>
+</div><p>In your .bashrc or .bash_profile (will impact all Sprout v1.x projects on your system):</p>
+<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">USE_FCSH</span><span class="o">=</span><span class="nb">true</span>
+</code></pre>
+</div><p>Or in your Rakefile to always use <span class="caps">FCSH</span> for this project:</p>
+<div class="highlight"><pre><code class="bash"><span class="c"># Yes, it&#39;s a smelly string, but that&#39;s what Ruby wants for some reason...</span>
+ENV<span class="o">[</span><span class="s1">&#39;USE_FCSH&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span>
+</code></pre>
+</div><p>Regardless of which method you choose to trigger a build with <span class="caps">FCSH</span>, you must have an instance of the <span class="caps">FCSH</span> server running from the same project directory before calling the build task, or else you&#8217;ll get a failure. Once again, you can start the <span class="caps">FCSH</span> server with:</p>
+<div class="highlight"><pre><code class="bash">rake fcsh:start
+</code></pre>
+</div><p>If you forget this mysterious incantation, you can always list out the available rake tasks with the -T option:</p>
+<div class="highlight"><pre><code class="bash">rake -T
+</code></pre>
+</div><h2>The Railroad</h2>
+<p>If you want to run builds with <span class="caps">FCSH</span> from multiple directories, you&#8217;ll need to give each client and server a unique port to connect on. You can do this in any of the ways indicated above for the <code>USE_FCSH</code> parameter, except you&#8217;ll specify the <code>FCSH_PORT</code> instead.</p>
+<p>On the command line:</p>
+<div class="highlight"><pre><code class="bash">rake fcsh <span class="nb">test </span><span class="nv">FCSH_PORT</span><span class="o">=</span>12567
+</code></pre>
+</div><p>In each shell instance:</p>
+<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">FCSH_PORT</span><span class="o">=</span>12567
+</code></pre>
+</div><p><em>(Note: To always use a custom port, the <code>export</code> could be placed into your .bashrc or .bash_profile)</em></p>
+<p>Anywhere in your Rakefile:</p>
+<div class="highlight"><pre><code class="bash">ENV<span class="o">[</span><span class="s1">&#39;FCSH_PORT&#39;</span><span class="o">]</span> <span class="o">=</span> 12567
+</code></pre>
+</div><h2>Conclusion</h2>
+<p>You should now be able to easily integrate <span class="caps">FCSH</span> into your Sprouts v1.x build process at whatever scope you prefer and customize it appropriately too.</p>
+<p>This brings us to the end of the &#8220;Using the Flex Compiler SHell (<span class="caps">FCSH</span>)&#8221; post. If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet &#8211; <a target="_blank" href="https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts">fork</a>, fix and send a pull request.</p>
+  </div>
+</div>
+
+<div class="center even-section">
+  <div class="content header-shadow">
+
+    <div id="disqus_thread"></div>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+
+  <div id="footer">
+    <div class="center">
+      <div class="content header-shadow">
+
+        <table>
+
+          <tr>
+            <td>
+
+              <ul>
+                <li class="header">Details</li>
+                <li class="home"><a href="/">Home</a></li>
+                <li class="troubleshooting"><a href="/troubleshooting.html">Troubleshooting</a></li>
+                <li class="migrating"><a href="/2010/12/29/migrating.html">Migration Guide</a></li>
+
+                <li class="current-docs"><a href="/docs/1.1/frames.html">Docs (1.1 &mdash; Frames)</a></li>
+                <li><a href="/docs/1.1/index.html">Docs (1.1 &mdash; No Frames)</a></li>
+
+                <li class="legacy-docs"><a href="/rdoc/index.html">Legacy Docs (0.7)</a></li>
+                <li class="legacy-site"><a href="/legacy/index.html">Legacy Site (0.7)</a></li>
+              </ul>
+
+            </td>
+            <td>
+
+              <ul>
+                <li class="header">Posts <a href="/atom.xml"><img class="footer-feed-icon" src="/images/35px-Feed-icon.png" /></a></li>
+                
+                <li class="post"><a href="/2011/01/18/using-fcsh.html"><span class="date">2011-01-18</span> | Using the Flex Compiler SHell (FCSH)</a></li>
+                
+                <li class="post"><a href="/2010/12/31/using-generators.html"><span class="date">2010-12-31</span> | Using Sprout Generators</a></li>
+                
+                <li class="post"><a href="/2010/12/29/migrating.html"><span class="date">2010-12-29</span> | Migrating from 0.7 to 1.0 beta</a></li>
+                
+                <li class="post"><a href="/2010/12/28/version-1.0-announced.html"><span class="date">2010-12-28</span> | Project Sprouts Version 1.0 Beta Released!</a></li>
+                
+              </ul>
+
+            </td>
+            <td>
+
+              <ul>
+                <li class="header">Do It</li>
+                <li><a target="_blank" href="http://groups.google.com/group/projectsprouts">Contact</a> (Google Groups)</li>
+                <li><a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/master">Source Code</a> (Github)</li>
+                <li><a target="_blank" href="https://github.com/lukebayes/project-sprouts/issues">File an Issue</a> (Github)</li>
+                <li><a target="_blank" href="http://rubygems.org/gems/sprout">Download</a> (RubyGems)</li>
+                <li><a target="_blank" href="http://projectsprouts.org/docs/1.1/frames.html">Documentation</a> 
+                (<a target="_blank" href="http://projectsprouts.org/docs/1.1/index.html">No Frames</a>)</li>
+              </ul>
+
+            </td>
+
+          </tr>
+
+        </table>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+<!-- Google Analytics for projectsprouts.org -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-1619511-4");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+
+<!-- Disquss -->
+<script type="text/javascript">
+    //var disqus_developer = 1;
+    var disqus_shortname = 'projectsprouts';
+    var disqus_title     = 'Using the Flex Compiler SHell (FCSH)'
+    var disqus_url       = 'http://projectsprouts.org/2011/01/18/using-fcsh.html';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+</html>
+

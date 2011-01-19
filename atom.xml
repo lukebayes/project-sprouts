@@ -4,13 +4,86 @@
   <title>Project Sprouts</title>
   <link href="http://projectsprouts.org/atom.xml" rel="self"/>
   <link href="http://projectsprouts.org/"/>
-  <updated>2010-12-31T17:36:59-08:00</updated>
+  <updated>2011-01-18T22:31:38-08:00</updated>
   <id>http://projectsprouts.org/</id>
   <author>
     <name>Project Sprouts</name>
     <email>projectsprouts@googlegroups.com</email>
   </author>
 
+  
+  <entry>
+    <title>Using the Flex Compiler SHell (FCSH)</title>
+    <link href="http://projectsprouts.org/2011/01/18/using-fcsh.html"/>
+    <updated>2011-01-18T00:00:00-08:00</updated>
+    <id>http://projectsprouts.org/2011/01/18/using-fcsh</id>
+    <content type="html">&lt;h1&gt;Using the Flex Compiler SHell (&lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt;)&lt;/h1&gt;
+&lt;p&gt;01 January, 2011 &amp;#8211; Luke Bayes&lt;/p&gt;
+&lt;h2&gt;What The sHell?&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&quot;caps&quot;&gt;MXMLC&lt;/span&gt; and &lt;span class=&quot;caps&quot;&gt;COMPC&lt;/span&gt;, when run by themselves, are slow. Not a little slow, not kind of slow &amp;#8211; but brutally, soul-crushingly, terribly &lt;span class=&quot;caps&quot;&gt;SLOW&lt;/span&gt;. At least that&amp;#8217;s how they feel to someone like me. Someone that suffers from chronic, advanced, impatience.&lt;/p&gt;
+&lt;p&gt;Fortunately, there is finally relief!&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;attribution&quot;&gt;&lt;br /&gt;
+&lt;image class=&quot;bordered&quot; src=&quot;/images/3438900700_755cf91138_z.jpg&quot; title=&quot;Sprouts Shell&quot; /&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.flickr.com/photos/mike-bensalem/3438900700&quot;&gt;Sprouts Shell&lt;/a&gt; courtesy of &lt;a href=&quot;http://www.flickr.com/photos/mike-bensalem/&quot;&gt;Mike Epp&lt;/a&gt; and the &lt;a href=&quot;http://creativecommons.org/licenses/by-nc-nd/2.0/&quot;&gt;Creative Commons&lt;/a&gt; license.&lt;br /&gt;
+&lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;What is that at the end of this long, dark tunnel?&lt;/h2&gt;
+&lt;p&gt;More than a few years ago, someone at Macrodobe realized how slow their compilers are, and released the inappropriately-named, yet awesomely helpful, &amp;#8220;Flex Compiler SHell&amp;#8221; (or &lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt; for short). &lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt; doesn&amp;#8217;t necesarily have anything to do with the Flex framework, but provides a long-lived process that we can start up once, leave running, and ask to execute our compilation tasks. This process will retain lots of expensive information in memory and only recompile files that have changed since the last request. Using &lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt; by hand is really not practical, and with previous versions of Sprouts, it was also not as easy as it should be.&lt;/p&gt;
+&lt;h2&gt;I do believe that is a light!&lt;/h2&gt;
+&lt;p&gt;After many, countless hours of deliberation and coding and testing and coding again, &lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt; is finally exposed to Sprout projects in a very simple way:&lt;/p&gt;
+&lt;p&gt;1) In a new terminal, start the fcsh service.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# cd into your project:&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/SomeProject
+&lt;span class=&quot;c&quot;&gt;# Start the fcsh session:&lt;/span&gt;
+rake fcsh:start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;(Hit CTRL+C any time to terminate this &lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt; process)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;2) In another new terminal (I use &lt;a target=&quot;_blank&quot; href=&quot;http://www.gnu.org/software/screen/&quot;&gt;&lt;span class=&quot;caps&quot;&gt;GNU&lt;/span&gt; Screen&lt;/a&gt; thanks to a &lt;a target=&quot;_blank&quot; href=&quot;http://bhanoo.com/~hemant/&quot;&gt;smart guy&lt;/a&gt; I work with), execute the &lt;em&gt;fcsh&lt;/em&gt; task before any &lt;em&gt;mxmlc&lt;/em&gt; or &lt;em&gt;compc&lt;/em&gt; tasks that you would normally call.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# cd into your project:&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/SomeProject
+&lt;span class=&quot;c&quot;&gt;# Compile and run tests:&lt;/span&gt;
+rake fcsh &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# or the &amp;#39;default&amp;#39; task:&lt;/span&gt;
+rake fcsh default
+&lt;span class=&quot;c&quot;&gt;# or clean first:&lt;/span&gt;
+rake clean fcsh &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;That&amp;#8217;s it!&lt;/p&gt;
+&lt;p&gt;Just run the &lt;code&gt;fcsh&lt;/code&gt; task before any other tasks, no editing of source files necessary!&lt;/p&gt;
+&lt;h2&gt;But how does it really work?&lt;/h2&gt;
+&lt;p&gt;I&amp;#8217;m so glad you asked!&lt;/p&gt;
+&lt;p&gt;Under the covers, in the latest release of the flashsdk, the &lt;code&gt;mxmlc&lt;/code&gt; and &lt;code&gt;compc&lt;/code&gt; tasks check for a couple of environment variables before actually calling out to the underlying process.&lt;/p&gt;
+&lt;p&gt;If the &lt;code&gt;USE_FCSH&lt;/code&gt; environment variable value is &amp;#8216;true&amp;#8217;, then the compiler will attempt to connect to an FCSHSocket on &lt;code&gt;FCSH_PORT&lt;/code&gt; (12321 by default). The fcsh task simply sets this value to &amp;#8216;true&amp;#8217;, but you can also set this value on the command line, like:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;rake &lt;span class=&quot;nb&quot;&gt;test &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;USE_FCSH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;In your .bashrc or .bash_profile (will impact all Sprout v1.x projects on your system):&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;USE_FCSH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;Or in your Rakefile to always use &lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt; for this project:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Yes, it&amp;#39;s a smelly string, but that&amp;#39;s what Ruby wants for some reason...&lt;/span&gt;
+ENV&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;USE_FCSH&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;true&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;Regardless of which method you choose to trigger a build with &lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt;, you must have an instance of the &lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt; server running from the same project directory before calling the build task, or else you&amp;#8217;ll get a failure. Once again, you can start the &lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt; server with:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;rake fcsh:start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;If you forget this mysterious incantation, you can always list out the available rake tasks with the -T option:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;rake -T
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;h2&gt;The Railroad&lt;/h2&gt;
+&lt;p&gt;If you want to run builds with &lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt; from multiple directories, you&amp;#8217;ll need to give each client and server a unique port to connect on. You can do this in any of the ways indicated above for the &lt;code&gt;USE_FCSH&lt;/code&gt; parameter, except you&amp;#8217;ll specify the &lt;code&gt;FCSH_PORT&lt;/code&gt; instead.&lt;/p&gt;
+&lt;p&gt;On the command line:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;rake fcsh &lt;span class=&quot;nb&quot;&gt;test &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;FCSH_PORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;12567
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;In each shell instance:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;FCSH_PORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;12567
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;(Note: To always use a custom port, the &lt;code&gt;export&lt;/code&gt; could be placed into your .bashrc or .bash_profile)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Anywhere in your Rakefile:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;ENV&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;FCSH_PORT&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 12567
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;You should now be able to easily integrate &lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt; into your Sprouts v1.x build process at whatever scope you prefer and customize it appropriately too.&lt;/p&gt;
+&lt;p&gt;This brings us to the end of the &amp;#8220;Using the Flex Compiler SHell (&lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt;)&amp;#8221; post. If you find anything here in error, &lt;a target=&quot;_blank&quot; href=&quot;http://groups.google.com/group/projectsprouts&quot;&gt;please let us know&lt;/a&gt;, or better yet &amp;#8211; &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts&quot;&gt;fork&lt;/a&gt;, fix and send a pull request.&lt;/p&gt;</content>
+  </entry>
   
   <entry>
     <title>Using Sprout Generators</title>
@@ -21,19 +94,25 @@
 &lt;p&gt;31 December, 2010 &amp;#8211; Luke Bayes&lt;/p&gt;
 &lt;h2&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;Generators have been rewritten from scratch for Project Sprouts v1. The new generators are much easier to test, distribute, and modify. This post is going to cover usage (or consumption) of existing generators, we&amp;#8217;ll put together a second post where we go into more detail about creating generators.&lt;/p&gt;
-&lt;p&gt;There are now two kinds of generator, an &lt;em&gt;Application&lt;/em&gt; generator and a &lt;em&gt;Feature&lt;/em&gt; generator. The primary difference between them, is that a &lt;em&gt;Feature&lt;/em&gt; generator expects to be run from a folder that contains a &lt;em&gt;Gemfile&lt;/em&gt;. This is because feature generators can be easily overwridden by gems that are loaded from the Gemfile.&lt;/p&gt;
-&lt;p&gt;For example, the default &lt;code&gt;sprout-class&lt;/code&gt; generator calls a null &lt;em&gt;TestGenerator&lt;/em&gt; that does nothing. But the &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/patternpark/asunit/blob/master/asunit-4.0/sprout/lib/asunit4/test_class_generator.rb&quot;&gt;AsUnit 4&lt;/a&gt; Rubygem overrides the TestGenerator with one that generates an AsUnit 4 test case, and then calls the &lt;em&gt;SuiteGenerator&lt;/em&gt; &amp;#8211; which it &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/patternpark/asunit/blob/master/asunit-4.0/sprout/lib/asunit4/suite_class_generator.rb&quot;&gt;also provides&lt;/a&gt;. Someone that is so inclined, could easily build a &lt;em&gt;flexunit&lt;/em&gt; Rubygem that overrides the TestGenerator code so that it gets called instead of AsUnit &lt;em&gt;(hint, hint)&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;attribution&quot;&gt;&lt;br /&gt;
+&lt;image class=&quot;bordered&quot; src=&quot;/images/5187023831_8a158e6e0d_z.jpg&quot; title=&quot;Manure Generator&quot; /&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.flickr.com/photos/usdagov/5187023831&quot;&gt;Manure Generator Image&lt;/a&gt; courtesy of &lt;a href=&quot;http://www.flickr.com/photos/usdagov/&quot;&gt;USDAgov&lt;/a&gt; and the &lt;a href=&quot;http://creativecommons.org/licenses/by-nd/2.0/&quot;&gt;Creative Commons&lt;/a&gt; license.&lt;br /&gt;
+&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;There are two kinds of generator, an &lt;em&gt;Application&lt;/em&gt; generator and a &lt;em&gt;Feature&lt;/em&gt; generator. The primary difference between them, is that a &lt;em&gt;Feature&lt;/em&gt; generator expects to be run from a folder that contains a &lt;em&gt;Gemfile&lt;/em&gt;. This is because feature generators can be easily overridden by gems that are loaded from the Gemfile.&lt;/p&gt;
+&lt;p&gt;For example, the default &lt;code&gt;sprout-class&lt;/code&gt; generator &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L63-65&quot;&gt;calls&lt;/a&gt; a &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L71-81&quot;&gt;null TestClassGenerator&lt;/a&gt; that does nothing. But the &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/patternpark/asunit/blob/master/asunit-4.0/sprout/lib/asunit4/test_class_generator.rb&quot;&gt;AsUnit 4&lt;/a&gt; Rubygem overrides the TestClassGenerator with one that generates an AsUnit 4 test case, and then calls the &lt;em&gt;SuiteClassGenerator&lt;/em&gt; &amp;#8211; which it &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/patternpark/asunit/blob/master/asunit-4.0/sprout/lib/asunit4/suite_class_generator.rb&quot;&gt;also provides&lt;/a&gt;. Someone that is so inclined, could easily build a &lt;em&gt;flexunit&lt;/em&gt; Rubygem that overrides the TestClassGenerator code so that it gets called instead of AsUnit &lt;em&gt;(hint, hint)&lt;/em&gt;.&lt;/p&gt;
 &lt;h2&gt;The Application Generator&lt;/h2&gt;
-&lt;p&gt;Let&amp;#8217;s start out by demonstrating a few generators and talking about what they do. If you haven&amp;#8217;t already, get the Flash &lt;span class=&quot;caps&quot;&gt;SDK&lt;/span&gt; installed on your system:&lt;/p&gt;
+&lt;p&gt;Let&amp;#8217;s start out by demonstrating a few generators and talking about what they do. If you haven&amp;#8217;t already, get the Flash &lt;span class=&quot;caps&quot;&gt;SDK&lt;/span&gt; (&amp;gt;= 1.0.18) installed on your system:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Install the ActionScript 3 / Flash / Flex bundle:&lt;/span&gt;
 gem install flashsdk --pre
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;You can figure out what version you have installed with:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;gem list flashsdk
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;p&gt;Now, let&amp;#8217;s see what generators we have available to us by running the following and then hitting the &lt;span class=&quot;caps&quot;&gt;TAB&lt;/span&gt; key.&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;sprout-
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;p&gt;You should see a collection of executables &amp;#8211; something like:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sprout-
-sprout-as3        sprout-class      sprout-flex       sprout-generator  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;etc&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;sprout-as3        sprout-class      sprout-flex       sprout-generator  &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;etc&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;p&gt;We&amp;#8217;re going to go ahead and create an ActionScript 3 project named, &amp;#8216;SomeProject&amp;#8217; with the following:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;sprout-as3 SomeProject
@@ -86,12 +165,14 @@ Created directory: ./other_project/bin
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;p&gt;Notice how the snake case was respected for the project directory, but it was converted to camel case for the classes and files. This is one of the great features of the new generators. You can see how easy it is to do this by checking out the &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/project_generator.rb#L14&quot;&gt;source file for the class generator&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;The Feature Generator&lt;/h2&gt;
-&lt;p&gt;Now, let&amp;#8217;s go into the new project and generate a class.&lt;/p&gt;
+&lt;p&gt;Now, let&amp;#8217;s go into the new project and make sure our gems are up to date:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;other_project
-sprout-class utils.MathUtil
+bundle install
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;p&gt;&lt;em&gt;(You may need to run &lt;code&gt;bundle install&lt;/code&gt; first)&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;You should see output something like:&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;Create a new class using the fully-qualified name:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;sprout-class utils.MathUtil
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;You should see output like:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;Created directory: ./src/utils
 Created file:      ./src/utils/MathUtil.as
 Created directory: ./test/utils
@@ -106,8 +187,8 @@ Created file:      ./test/AllTests.as
 gem &lt;span class=&quot;s2&quot;&gt;&amp;quot;flashsdk&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;gt;= 1.0.0.pre&amp;quot;&lt;/span&gt;
 gem &lt;span class=&quot;s2&quot;&gt;&amp;quot;asunit4&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;gt;= 4.2.2.pre&amp;quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;p&gt;This Gemfile is how the ClassGenerator, TestGenerator and SuiteGenerator knew what to build. If you&amp;#8217;re interested in learning more about Gemfiles, you should check out the &lt;a target=&quot;_blank&quot; href=&quot;http://gembundler.com&quot;&gt;GemBundler&lt;/a&gt; site.&lt;/p&gt;
-&lt;p&gt;Even though I&amp;#8217;m sure no one would &lt;em&gt;ever&lt;/em&gt; want to generate a class without an associated test case, let&amp;#8217;s pretend we want to do just that. Since I can never remember exactly what parameters to use, let&amp;#8217;s go ahead and run the generator with no arguments in order to see it&amp;#8217;s help content:&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;This Gemfile is how the ClassGenerator, TestClassGenerator and SuiteClassGenerator knew what to build. If you&amp;#8217;re interested in learning more about Gemfiles in general, you should check out the &lt;a target=&quot;_blank&quot; href=&quot;http://gembundler.com&quot;&gt;GemBundler&lt;/a&gt; site.&lt;/p&gt;
+&lt;p&gt;Even though I&amp;#8217;m sure no one would &lt;em&gt;ever&lt;/em&gt; want to generate a class without an associated test case, let&amp;#8217;s pretend we want to do just that. Since I can never remember exactly what parameters to use, let&amp;#8217;s go ahead and run the generator with no arguments in order to see its help content:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;sprout-class
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;p&gt;You should see something like the following:&lt;/p&gt;
@@ -131,7 +212,7 @@ Usage: sprout-class [options]
     -t, --[no-]test-class            Default Description
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;p&gt;Of course, now that we see the help output, we see that we could have run the generator with the &lt;code&gt;--help&lt;/code&gt; parameter.&lt;/p&gt;
-&lt;p&gt;Notice how all of these say, &amp;#8220;Default Description&amp;#8221;, this is because I&amp;#8217;d like to extract the rdoc comment directly from the &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L25&quot;&gt;source file&lt;/a&gt; in order to avoid duplication. I haven&amp;#8217;t gotten around to this task, so if you&amp;#8217;re interested in contributing, please fork and send a pull request.&lt;/p&gt;
+&lt;p&gt;Notice how all of these say, &amp;#8220;Default Description&amp;#8221;, this is because I&amp;#8217;d like to extract the rdoc comment directly from the &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L25&quot;&gt;source file&lt;/a&gt; in order to avoid duplication. I haven&amp;#8217;t gotten around to this task, so if you&amp;#8217;re interested in contributing, please &lt;a target=&quot;_blank&quot; target=&quot;https://github.com/lukebayes/project-sprouts/blob/master/lib/sprout/executable/base.rb#L57-58&quot;&gt;fork&lt;/a&gt; and send a pull request.&lt;/p&gt;
 &lt;p&gt;Even though these directives don&amp;#8217;t have descriptions, and we can experiment with some confidence thanks to the &lt;code&gt;--destroy&lt;/code&gt; argument, I would still check my work into a Git repository before running any generators in an existing project.&lt;/p&gt;
 &lt;p&gt;In any case, let&amp;#8217;s go ahead and try to run this class generator with the &lt;code&gt;--no-test-class&lt;/code&gt; argument for a new class.&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;sprout-class utils.OtherUtil --no-test-class
@@ -141,14 +222,14 @@ Usage: sprout-class [options]
 Created file:      ./src/utils/OtherUtil.as
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;h2&gt;Working with Templates&lt;/h2&gt;
-&lt;p&gt;The ability to easily customize and control generator templates is one of the main driving forces behind the generator rewrite. You can override a particular template for a single generator execution, a specific project, or globally for your system. Generator templates are simply named erb files, and each template is loaded individually.&lt;/p&gt;
+&lt;p&gt;The ability to easily customize and control generator templates is one of the main driving forces behind the generator rewrite. You can override a particular template for a single generator execution, a specific project, or globally for your system. Generator templates are simply named erb files &amp;#8211; &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/project-sprouts/blob/master/lib/sprout/generator/base.rb#L100-110&quot;&gt;but allowances have been made for alternative template languages&lt;/a&gt;. Each template is loaded and rendered individually, so you you only need to replace those templates that you&amp;#8217;re interested in.&lt;/p&gt;
 &lt;p&gt;The first thing you&amp;#8217;ll want to figure out, is the name of the template you want to override. For the time being, you can find this out by checking the source code for the project that defined the generator. Following are some template folders to peruse:&lt;/p&gt;
 &lt;ul&gt;
 	&lt;li&gt;&lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/sprout-flashsdk/tree/master/lib/flashsdk/generators/templates&quot;&gt;Flash &lt;span class=&quot;caps&quot;&gt;SDK&lt;/span&gt; Templates&lt;/a&gt;&lt;/li&gt;
 	&lt;li&gt;&lt;a target=&quot;_blank&quot; href=&quot;https://github.com/patternpark/asunit/tree/master/asunit-4.0/sprout/lib/asunit4/templates&quot;&gt;AsUnit Templates&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/project-sprouts/tree/master/lib/sprout/generators&quot;&gt;Sprouts Templates&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/project-sprouts/tree/master/lib/sprout/generators&quot;&gt;Sprouts Generators&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Let&amp;#8217;s assume we want to replace the template for the &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L59&quot;&gt;ClassGenerator&lt;/a&gt;, found in the Flash &lt;span class=&quot;caps&quot;&gt;SDK&lt;/span&gt;. You can see on line 59 that the generator is looking for a template file named, &amp;#8216;ActionScript3Class.as&amp;#8217;.&lt;/p&gt;
+&lt;p&gt;Let&amp;#8217;s assume we want to replace the template for the ClassGenerator, found in the Flash &lt;span class=&quot;caps&quot;&gt;SDK&lt;/span&gt;. You &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/class_generator.rb#L59&quot;&gt;can see on line 59&lt;/a&gt; that the generator is looking for a template file named, &amp;#8216;ActionScript3Class.as&amp;#8217;.&lt;/p&gt;
 &lt;p&gt;This means that once we decide which scope to operate on, we need to place a file with the same name into the correct directory.&lt;/p&gt;
 &lt;h3&gt;Execution Templates&lt;/h3&gt;
 &lt;p&gt;Let&amp;#8217;s start by replacing the template for a single generator execution. Let&amp;#8217;s start with the contents of the &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/sprout-flashsdk/blob/master/lib/flashsdk/generators/templates/ActionScript3Class.as&quot;&gt;original template&lt;/a&gt;.&lt;/p&gt;
@@ -184,28 +265,32 @@ Created file:      ./src/utils/OtherUtil.as
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;sprout-class utils.BossyUtil --templates+&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bossypoo
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;p&gt;You&amp;#8217;ll have to forgive the extra carriage returns, as my &lt;span class=&quot;caps&quot;&gt;ERB&lt;/span&gt; templating appears to be a little greedy with whitespace. After running the generator, you should see everything looks normal.&lt;/p&gt;
-&lt;p&gt;Now that approach is pretty neat, but we don&amp;#8217;t want to have to remember to add that &amp;#8212;templates argument every.single.time we run a generator. Which brings us to;&lt;/p&gt;
+&lt;p&gt;Now that approach is pretty neat, but we don&amp;#8217;t want to have to remember to add that &lt;code&gt;--templates&lt;/code&gt; argument every.single.time we run a generator. Which brings us to;&lt;/p&gt;
 &lt;h3&gt;Project Templates&lt;/h3&gt;
-&lt;p&gt;In addition to setting the &amp;#8212;template parameter manually, there are a number of locations that generators will scan for templates. You can get the definitive list for your system by running the generator with the &amp;#8212;show-template-paths parameter.&lt;/p&gt;
+&lt;p&gt;In addition to setting the &lt;code&gt;--templates&lt;/code&gt; parameter manually, there are a number of locations that generators will scan for templates. You can get the definitive list of template paths for any generator that extends Sprout::Generator::Base by running the generator with the &lt;code&gt;--show-template-paths&lt;/code&gt; parameter.&lt;/p&gt;
 &lt;p&gt;On my computer, this results in:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;The following paths will be checked &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;templates:
-  * --templates+&lt;span class=&quot;o&quot;&gt;=[&lt;/span&gt;value&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;The following paths will be checked for templates:
+  * --templates+=[value]
   * config/generators
   * vendor/generators
   * /Users/lbayes/Library/Sprouts/1.1/cache/generators
-  * ENV&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;SPROUT_GENERATORS&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  * ENV[&amp;#39;SPROUT_GENERATORS&amp;#39;]
   * /Users/lbayes/.gem/ruby/1.9.2/gems/flashsdk-1.0.17.pre/lib/flashsdk/generators/templates
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;p&gt;If you create either of the config/generators or vender/generators paths in your project directory and place that template in there, anytime you run the class generator, it will get picked up.&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;If you create either of the &lt;code&gt;config/generators&lt;/code&gt; or &lt;code&gt;vender/generators&lt;/code&gt; paths in your project directory and place that template in there, anytime you run the class generator, it will get picked up.&lt;/p&gt;
 &lt;h3&gt;System Templates&lt;/h3&gt;
-&lt;p&gt;If you look closely at the previous list, you&amp;#8217;ll see that one of the folders is in the global Sprout cache, and another is an environmental variable. I hope you can figure out how to create a folder in the cache location and for the environmental variable, you can set it on the command line like this:&lt;/p&gt;
+&lt;p&gt;If you look closely at the previous list, you&amp;#8217;ll see that one of the folders is in the global Sprout cache, and another is an environmental variable. I hope you can figure out how to create a folder in the cache location. If you place a generator template here, it will be picked up for any &lt;em&gt;Application&lt;/em&gt; generators, and any projects that don&amp;#8217;t override the template in their own scope.&lt;/p&gt;
+&lt;p&gt;You can set the environmental variable in a number ways, one of which is on the command line like this:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;sprout-class utils.MathUtil SPROUT_GENERATORS=relative/or/absolute/path/to/templates
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;p&gt;Or you can set it within your .bash_profile or .bashrc file like:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text&quot;&gt;export SPROUT_GENERATORS=/absolute/path/to/templates
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;You could also set it in any Ruby source file that gets loaded from your Gemfile. In Ruby, this would look like:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;ENV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;SPROUT_GENERATORS&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/absolute/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;templates&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;h2&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;This brings us to the end of the &amp;#8220;Using Generators&amp;#8221; tutorial. If you find anything here in error, &lt;a target=&quot;_blank&quot; href=&quot;http://groups.google.com/group/projectsprouts&quot;&gt;please let us know&lt;/a&gt;, or better yet &amp;#8211; &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/project-sprouts/tree/gh-pages/_beta&quot;&gt;fork&lt;/a&gt;, fix and send a pull request.&lt;/p&gt;
+&lt;p&gt;This brings us to the end of the &amp;#8220;Using Generators&amp;#8221; tutorial. If you find anything here in error, &lt;a target=&quot;_blank&quot; href=&quot;http://groups.google.com/group/projectsprouts&quot;&gt;please let us know&lt;/a&gt;, or better yet &amp;#8211; &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts/2010-12-31-using-generators.textile&quot;&gt;fork&lt;/a&gt;, fix and send a pull request.&lt;/p&gt;
 &lt;p&gt;The next article in the series will describe how to create generators.&lt;/p&gt;</content>
   </entry>
   
