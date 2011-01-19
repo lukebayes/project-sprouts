@@ -1,0 +1,199 @@
+---
+layout: post
+title: Using the Flex DeBugger (FDB)
+author: Luke Bayes
+prettydate: 19 January, 2011
+post_image_flickr: http://www.flickr.com/photos/ocean_of_stars/3263240819/
+post_image_author_link: http://www.flickr.com/photos/ocean_of_stars/
+post_image_author_name: oceandesetoiles
+post_image_license: http://creativecommons.org/licenses/by-nc-sa/2.0/
+post_image_local: /images/3263240819_52c1b7e59b_z.jpg
+post_image_title: layDeBugger
+---
+
+h1. {{ page.title }}
+
+{{ page.prettydate }} - {{ page.author }}
+
+h2. Debug what?
+
+FDB is a command line debugger. It provides us with the ability to capture, introspect and control the execution flow of a running SWF file by connecting to the Debug Flash Player and exposing a variety of actions to its user. In order to use FDB, we need to first build a SWF file with the @debug@ flag set to @true@, and secondly, we need to run that SWF within a debug Flash Player.
+
+It just so happens that Sprouts downloads, installs and executes a debug Flash Player for whatever operating system you're on.
+
+As you'll soon see, we also make it incredibly simple to drop into a debug session with any SWF file that you build with Sprouts.
+
+To complete this tutorial, you'll need the following RubyGems installed:
+* @flashsdk@ >= 1.0.20.pre
+* @sprout@ >= 1.1.10.pre
+
+You can get both of these with:
+
+{% highlight bash %}
+gem update flashsdk --pre
+{% endhighlight %}
+
+<span class="attribution">
+<image class="bordered" src="{{ page.post_image_local }}" title="{{ page.post_image_title}}" />
+<a href="{{ page.post_image_flickr }}">{{ page.post_image_title }} Image</a> courtesy of <a href="{{ page.post_image_author_link }}">{{ page.post_image_author_name }}</a> and the <a href="{{ page.post_image_license }}">Creative Commons</a> license.
+</span>
+
+h2. How do I do what?
+
+You can coerce any @flashplayer@ task to drop into FDB by simply calling the @fdb@ task first.
+
+{% highlight bash %}
+rake fdb test
+{% endhighlight %}
+
+This should produce something that approximates the following output:
+
+{% highlight bash %}
+(in /Users/lbayes/Projects/Sandbox/OtherProject)
+mxmlc -debug 
+      -library-path+=lib/asunit4/AsUnit-4.2.2.pre.swc 
+      -output=bin/OtherProject-test.swf 
+      -source-path+=test 
+      -static-link-runtime-shared-libraries src/OtherProjectRunner.as
+
+Loading configuration file flex-config.xml
+bin/OtherProject-test.swf (49771 bytes)
+[MXMLC] Compilation complete in 3.305054 seconds.
+Adobe fdb (Flash Player Debugger) [build 16076]
+Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.
+Waiting for Player to connect
+(fdb) run
+
+Player connected; session starting.
+Set breakpoints and then type 'continue' to resume the session.
+[SWF] bin:OtherProject-test.swf - 110,886 bytes after decompression
+(fdb) 
+{% endhighlight %}
+
+You should notice that the Flash Player has been initiated, but doesn't have focus and is basically unresponsive. At this time, you can interact with FDB in preparation for the execution of your SWF file. This is usually the point in time when one might set some breakpoints.
+
+Before we dig into break points, let's ask FDB what else we can do here by typing 'help' and hitting enter.
+
+{% highlight bash %}
+(fdb) help
+{% endhighlight %}
+
+Typing help, should produce something like the following:
+
+{% highlight bash %}
+New to fdb? Do 'tutorial' for basic info.
+List of fdb commands:
+bt (bt)             Print backtrace of all stack frames
+break (b)           Set breakpoint at specified line or function
+catch (ca)          Halt when an exception is thrown
+cf (cf)             Display the name and number of the current file
+clear (cl)          Clear breakpoint at specified line or function
+condition (cond)    Apply/remove conditional expression to a breakpoint
+continue (c)        Continue execution after stopping at breakpoint
+commands (com)      Sets commands to execute when breakpoint hit
+delete (d)          Delete breakpoints or auto-display expressions
+directory (dir)     Add a directory to the search path for source files
+disable (disab)     Disable breakpoints or auto-display expressions
+disassemble (disas) Disassemble source lines or functions
+display (disp)      Add an auto-display expressions
+enable (e)          Enable breakpoints or auto-display expressions
+file (fil)          Specify application to be debugged.
+finish (f)          Execute until current function returns
+handle (han)        Specify how to handle a fault
+help (h)            Display help on fdb commands
+home (ho)           Set listing location to where execution is halted
+info (i)            Display information about the program being debugged
+kill (k)            Kill execution of program being debugged
+list (l)            List specified function or line
+next (n)            Step program
+print (p)           Print value of variable EXP
+pwd (pw)            Print working directory
+quit (q)            Exit fdb
+run (r)             Start debugged program
+set (se)            Set the value of a variable
+source (so)         Read fdb commands from a file
+step (s)            Step program until it reaches a different source line
+tutorial (t)        Display a tutorial on how to use fdb
+undisplay (u)       Remove an auto-display expression
+viewswf (v)         Set or clear filter for file listing based on swf
+watch (wa)          Add a watchpoint on a given variable
+what (wh)           Displays the context of a variable
+where (w)           Same as bt
+Type 'help' followed by command name for full documentation.
+{% endhighlight %}
+
+This is a list of commands (and shortcuts) for interacting with FDB. If you look closely at the history in your terminal, you should see that Sprouts has already called the @run@ command and then opened your SWF file. You should also note that you can run the @tutorial@ command any time to get another, slightly more terse introduction to command line debugging.
+
+You can get more specific help on a given command by typing @help@ followed by the command you're interested in. Try this now, with the @break@ command:
+
+{% highlight bash %}
+(fdb) help break
+{% endhighlight %}
+
+This should produce something like:
+
+{% highlight bash %}
+Set breakpoint at specified line or function.
+Examples:
+  break 87
+    Sets a breakpoint at line 87 of the current file.
+  break myapp.mxml:56
+    Sets a breakpoint at line 56 of myapp.mxml.
+  break #3:29
+    Sets a breakpoint at line 29 of file #3.
+  break doThis
+    Sets a breakpoint at function doThis() in the current file.
+  break myapp.mxml:doThat
+    Sets a breakpoint at function doThat() in file myapp.mxml.
+  break #3:doOther
+    Sets a breakpoint at function doOther() in file #3.
+  break
+   Sets a breakpoint at the current execution address in the
+   current stack frame. This is useful for breaking on return
+   to a stack frame.
+To see file names and numbers, do 'info sources' or 'info files'.
+To see function names, do 'info functions'.
+Abbreviated file names and function names are accepted if unambiguous.
+If line number is specified, break at start of code for that line.
+If function is specified, break at start of code for that function.
+See 'commands' and 'condition' for further breakpoint control.
+{% endhighlight %}
+
+We can see from this help content, that there are a variety of ways that we might set a breakpoint. My project was created with the @sprout-as3@ command and was called @OtherProject@, which means that I have a test runner called @OtherProjectRunner@. I'm going to set a break point in that file now with:
+
+{% highlight bash %}
+(fdb) break OtherProjectRunner:15
+{% endhighlight %}
+
+And then I'm going to @continue@ execution of the SWF until the breakpoint is encountered.
+
+{% highlight bash %}
+(fdb) continue
+{% endhighlight %}
+
+_(If you remember the help content, this can also be done by simply typing @c@ followed by the enter key)_
+
+The SWF will execute until it encounters the breakpoint that I set and once the breakpoint is hit, FDB will emit some context information like:
+
+{% highlight bash %}
+Breakpoint 1, OtherProjectRunner() at OtherProjectRunner.as:15
+ 15                core.start(AllTests, null, this);
+(fdb) 
+{% endhighlight %}
+
+Following are some of the things I might do here:
+
+* Introspect the running SWF file with the @info@ commands (type @info@ to see these options)
+* Set variables and values directly into the environment to see what happens using the @set@ command
+* Step through the SWF, one line or function at a time using the @step@ command, followed by @list@ or @i s@ (info stack).
+
+When you're done, you can type the @quit@ command, or you can @continue@ past your breakpoints and then manually close the SWF. Or you can just hit CTRL+C to kill the process - which should clean everything up for you.
+
+Upcoming releases of Sprouts will combine a special test result printer, with the FDB task to figure out when your test harness has finished running and then automatically kill the Flash Player process.
+
+This should be enough to get you going with the Flex DeBugger in your Sprout projects.
+
+h2. Conclusion
+
+This brings us to the end of the "{{ page.title }}" post. If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet - <a target="_blank" href="https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts">fork</a>, fix and send a pull request.
+

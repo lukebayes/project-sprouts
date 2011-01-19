@@ -4,7 +4,7 @@
   <title>Project Sprouts</title>
   <link href="http://projectsprouts.org/atom.xml" rel="self"/>
   <link href="http://projectsprouts.org/"/>
-  <updated>2011-01-18T22:31:38-08:00</updated>
+  <updated>2011-01-18T23:52:56-08:00</updated>
   <id>http://projectsprouts.org/</id>
   <author>
     <name>Project Sprouts</name>
@@ -13,12 +13,160 @@
 
   
   <entry>
+    <title>Using the Flex DeBugger (FDB)</title>
+    <link href="http://projectsprouts.org/2011/01/19/using-fdb.html"/>
+    <updated>2011-01-19T00:00:00-08:00</updated>
+    <id>http://projectsprouts.org/2011/01/19/using-fdb</id>
+    <content type="html">&lt;h1&gt;Using the Flex DeBugger (&lt;span class=&quot;caps&quot;&gt;FDB&lt;/span&gt;)&lt;/h1&gt;
+&lt;p&gt;19 January, 2011 &amp;#8211; Luke Bayes&lt;/p&gt;
+&lt;h2&gt;Debug what?&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&quot;caps&quot;&gt;FDB&lt;/span&gt; is a command line debugger. It provides us with the ability to capture, introspect and control the execution flow of a running &lt;span class=&quot;caps&quot;&gt;SWF&lt;/span&gt; file by connecting to the Debug Flash Player and exposing a variety of actions to its user. In order to use &lt;span class=&quot;caps&quot;&gt;FDB&lt;/span&gt;, we need to first build a &lt;span class=&quot;caps&quot;&gt;SWF&lt;/span&gt; file with the &lt;code&gt;debug&lt;/code&gt; flag set to &lt;code&gt;true&lt;/code&gt;, and secondly, we need to run that &lt;span class=&quot;caps&quot;&gt;SWF&lt;/span&gt; within a debug Flash Player.&lt;/p&gt;
+&lt;p&gt;It just so happens that Sprouts downloads, installs and executes a debug Flash Player for whatever operating system you&amp;#8217;re on.&lt;/p&gt;
+&lt;p&gt;As you&amp;#8217;ll soon see, we also make it incredibly simple to drop into a debug session with any &lt;span class=&quot;caps&quot;&gt;SWF&lt;/span&gt; file that you build with Sprouts.&lt;/p&gt;
+&lt;p&gt;To complete this tutorial, you&amp;#8217;ll need the following RubyGems installed:&lt;/p&gt;
+&lt;ul&gt;
+	&lt;li&gt;&lt;code&gt;flashsdk&lt;/code&gt; &amp;gt;= 1.0.20.pre&lt;/li&gt;
+	&lt;li&gt;&lt;code&gt;sprout&lt;/code&gt; &amp;gt;= 1.1.10.pre&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can get both of these with:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;gem update flashsdk --pre
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;&lt;span class=&quot;attribution&quot;&gt;&lt;br /&gt;
+&lt;image class=&quot;bordered&quot; src=&quot;/images/3263240819_52c1b7e59b_z.jpg&quot; title=&quot;layDeBugger&quot; /&gt;&lt;br /&gt;
+&lt;a href=&quot;http://www.flickr.com/photos/ocean_of_stars/3263240819/&quot;&gt;layDeBugger Image&lt;/a&gt; courtesy of &lt;a href=&quot;http://www.flickr.com/photos/ocean_of_stars/&quot;&gt;oceandesetoiles&lt;/a&gt; and the &lt;a href=&quot;http://creativecommons.org/licenses/by-nc-sa/2.0/&quot;&gt;Creative Commons&lt;/a&gt; license.&lt;br /&gt;
+&lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;How do I do what?&lt;/h2&gt;
+&lt;p&gt;You can coerce any &lt;code&gt;flashplayer&lt;/code&gt; task to drop into &lt;span class=&quot;caps&quot;&gt;FDB&lt;/span&gt; by simply calling the &lt;code&gt;fdb&lt;/code&gt; task first.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;rake fdb &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;This should produce something that approximates the following output:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;in /Users/lbayes/Projects/Sandbox/OtherProject&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+mxmlc -debug 
+      -library-path+&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lib/asunit4/AsUnit-4.2.2.pre.swc 
+      -output&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;bin/OtherProject-test.swf 
+      -source-path+&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; 
+      -static-link-runtime-shared-libraries src/OtherProjectRunner.as
+
+Loading configuration file flex-config.xml
+bin/OtherProject-test.swf &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;49771 bytes&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;MXMLC&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Compilation &lt;span class=&quot;nb&quot;&gt;complete &lt;/span&gt;in 3.305054 seconds.
+Adobe fdb &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Flash Player Debugger&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;build 16076&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2004-2007 Adobe, Inc. All rights reserved.
+Waiting &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Player to connect
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;fdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; run
+
+Player connected; session starting.
+Set breakpoints and &lt;span class=&quot;k&quot;&gt;then &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;continue&amp;#39;&lt;/span&gt; to resume the session.
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;SWF&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; bin:OtherProject-test.swf - 110,886 bytes after decompression
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;fdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;You should notice that the Flash Player has been initiated, but doesn&amp;#8217;t have focus and is basically unresponsive. At this time, you can interact with &lt;span class=&quot;caps&quot;&gt;FDB&lt;/span&gt; in preparation for the execution of your &lt;span class=&quot;caps&quot;&gt;SWF&lt;/span&gt; file. This is usually the point in time when one might set some breakpoints.&lt;/p&gt;
+&lt;p&gt;Before we dig into break points, let&amp;#8217;s ask &lt;span class=&quot;caps&quot;&gt;FDB&lt;/span&gt; what else we can do here by typing &amp;#8216;help&amp;#8217; and hitting enter.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;fdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;help&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;Typing help, should produce something like the following:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;New to fdb? Do &lt;span class=&quot;s1&quot;&gt;&amp;#39;tutorial&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;basic info.
+List of fdb commands:
+bt &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;bt&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;             Print backtrace of all stack frames
+&lt;span class=&quot;nb&quot;&gt;break&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;b&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;           Set breakpoint at specified line or &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;
+catch &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ca&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;          Halt when an exception is thrown
+cf &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;cf&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;             Display the name and number of the current file
+clear &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;cl&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;          Clear breakpoint at specified line or &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;
+condition &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;cond&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;    Apply/remove conditional expression to a breakpoint
+&lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;        Continue execution after stopping at breakpoint
+commands &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;com&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;      Sets commands to execute when breakpoint hit
+delete &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;d&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;          Delete breakpoints or auto-display expressions
+directory &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;dir&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;     Add a directory to the search path &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;files
+disable &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;disab&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;     Disable breakpoints or auto-display expressions
+disassemble &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;disas&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Disassemble &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;lines or functions
+display &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;disp&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;      Add an auto-display expressions
+&lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;e&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;          Enable breakpoints or auto-display expressions
+file &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;fil&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;          Specify application to be debugged.
+finish &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;          Execute &lt;span class=&quot;k&quot;&gt;until &lt;/span&gt;current &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;returns
+handle &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;han&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;        Specify how to handle a fault
+&lt;span class=&quot;nb&quot;&gt;help&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;h&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;            Display &lt;span class=&quot;nb&quot;&gt;help &lt;/span&gt;on fdb commands
+home &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ho&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;           Set listing location to where execution is halted
+info &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;i&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;            Display information about the program being debugged
+&lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;k&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;            Kill execution of program being debugged
+list &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;l&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;            List specified &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;or line
+next &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;n&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;            Step program
+print &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;           Print value of variable EXP
+&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;pw&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;            Print working directory
+quit &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;q&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;            Exit fdb
+run &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;r&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;             Start debugged program
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;se&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;            Set the value of a variable
+&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;so&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;         Read fdb commands from a file
+step &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;s&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;            Step program &lt;span class=&quot;k&quot;&gt;until &lt;/span&gt;it reaches a different &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;line
+tutorial &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;t&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;        Display a tutorial on how to use fdb
+undisplay &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;u&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;       Remove an auto-display expression
+viewswf &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;v&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;         Set or clear filter &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;file listing based on swf
+watch &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;wa&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;          Add a watchpoint on a given variable
+what &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;wh&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;           Displays the context of a variable
+where &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;w&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;           Same as bt
+Type &lt;span class=&quot;s1&quot;&gt;&amp;#39;help&amp;#39;&lt;/span&gt; followed by &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;name &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;full documentation.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;This is a list of commands (and shortcuts) for interacting with &lt;span class=&quot;caps&quot;&gt;FDB&lt;/span&gt;. If you look closely at the history in your terminal, you should see that Sprouts has already called the &lt;code&gt;run&lt;/code&gt; command and then opened your &lt;span class=&quot;caps&quot;&gt;SWF&lt;/span&gt; file. You should also note that you can run the &lt;code&gt;tutorial&lt;/code&gt; command any time to get another, slightly more terse introduction to command line debugging.&lt;/p&gt;
+&lt;p&gt;You can get more specific help on a given command by typing &lt;code&gt;help&lt;/code&gt; followed by the command you&amp;#8217;re interested in. Try this now, with the &lt;code&gt;break&lt;/code&gt; command:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;fdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;help break&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;This should produce something like:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;Set breakpoint at specified line or &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;.
+Examples:
+  &lt;span class=&quot;nb&quot;&gt;break &lt;/span&gt;87
+    Sets a breakpoint at line 87 of the current file.
+  &lt;span class=&quot;nb&quot;&gt;break &lt;/span&gt;myapp.mxml:56
+    Sets a breakpoint at line 56 of myapp.mxml.
+  &lt;span class=&quot;nb&quot;&gt;break&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#3:29&lt;/span&gt;
+    Sets a breakpoint at line 29 of file &lt;span class=&quot;c&quot;&gt;#3.&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;break &lt;/span&gt;doThis
+    Sets a breakpoint at &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;doThis&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; in the current file.
+  &lt;span class=&quot;nb&quot;&gt;break &lt;/span&gt;myapp.mxml:doThat
+    Sets a breakpoint at &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;doThat&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; in file myapp.mxml.
+  &lt;span class=&quot;nb&quot;&gt;break&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#3:doOther&lt;/span&gt;
+    Sets a breakpoint at &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;doOther&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; in file &lt;span class=&quot;c&quot;&gt;#3.&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;break&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;   &lt;/span&gt;Sets a breakpoint at the current execution address in the
+   current stack frame. This is useful &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;breaking on &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;   &lt;/span&gt;to a stack frame.
+To see file names and numbers, &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;info sources&amp;#39;&lt;/span&gt; or &lt;span class=&quot;s1&quot;&gt;&amp;#39;info files&amp;#39;&lt;/span&gt;.
+To see &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;names, &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;info functions&amp;#39;&lt;/span&gt;.
+Abbreviated file names and &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;names are accepted &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;unambiguous.
+If line number is specified, &lt;span class=&quot;nb&quot;&gt;break &lt;/span&gt;at start of code &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;that line.
+If &lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;is specified, &lt;span class=&quot;nb&quot;&gt;break &lt;/span&gt;at start of code &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;that &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;.
+See &lt;span class=&quot;s1&quot;&gt;&amp;#39;commands&amp;#39;&lt;/span&gt; and &lt;span class=&quot;s1&quot;&gt;&amp;#39;condition&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;further breakpoint control.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;We can see from this help content, that there are a variety of ways that we might set a breakpoint. My project was created with the &lt;code&gt;sprout-as3&lt;/code&gt; command and was called &lt;code&gt;OtherProject&lt;/code&gt;, which means that I have a test runner called &lt;code&gt;OtherProjectRunner&lt;/code&gt;. I&amp;#8217;m going to set a break point in that file now with:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;fdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;break &lt;/span&gt;OtherProjectRunner:15
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;And then I&amp;#8217;m going to &lt;code&gt;continue&lt;/code&gt; execution of the &lt;span class=&quot;caps&quot;&gt;SWF&lt;/span&gt; until the breakpoint is encountered.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;fdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;&lt;em&gt;(If you remember the help content, this can also be done by simply typing &lt;code&gt;c&lt;/code&gt; followed by the enter key)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;span class=&quot;caps&quot;&gt;SWF&lt;/span&gt; will execute until it encounters the breakpoint that I set and once the breakpoint is hit, &lt;span class=&quot;caps&quot;&gt;FDB&lt;/span&gt; will emit some context information like:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;Breakpoint 1, OtherProjectRunner&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; at OtherProjectRunner.as:15
+ 15                core.start&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;AllTests, null, this&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;fdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;p&gt;Following are some of the things I might do here:&lt;/p&gt;
+&lt;ul&gt;
+	&lt;li&gt;Introspect the running &lt;span class=&quot;caps&quot;&gt;SWF&lt;/span&gt; file with the &lt;code&gt;info&lt;/code&gt; commands (type &lt;code&gt;info&lt;/code&gt; to see these options)&lt;/li&gt;
+	&lt;li&gt;Set variables and values directly into the environment to see what happens using the &lt;code&gt;set&lt;/code&gt; command&lt;/li&gt;
+	&lt;li&gt;Step through the &lt;span class=&quot;caps&quot;&gt;SWF&lt;/span&gt;, one line or function at a time using the &lt;code&gt;step&lt;/code&gt; command, followed by &lt;code&gt;list&lt;/code&gt; or &lt;code&gt;i s&lt;/code&gt; (info stack).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When you&amp;#8217;re done, you can type the &lt;code&gt;quit&lt;/code&gt; command, or you can &lt;code&gt;continue&lt;/code&gt; past your breakpoints and then manually close the &lt;span class=&quot;caps&quot;&gt;SWF&lt;/span&gt;. Or you can just hit CTRL+C to kill the process &amp;#8211; which should clean everything up for you.&lt;/p&gt;
+&lt;p&gt;Upcoming releases of Sprouts will combine a special test result printer, with the &lt;span class=&quot;caps&quot;&gt;FDB&lt;/span&gt; task to figure out when your test harness has finished running and then automatically kill the Flash Player process.&lt;/p&gt;
+&lt;p&gt;This should be enough to get you going with the Flex DeBugger in your Sprout projects.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;This brings us to the end of the &amp;#8220;Using the Flex DeBugger (&lt;span class=&quot;caps&quot;&gt;FDB&lt;/span&gt;)&amp;#8221; post. If you find anything here in error, &lt;a target=&quot;_blank&quot; href=&quot;http://groups.google.com/group/projectsprouts&quot;&gt;please let us know&lt;/a&gt;, or better yet &amp;#8211; &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts&quot;&gt;fork&lt;/a&gt;, fix and send a pull request.&lt;/p&gt;</content>
+  </entry>
+  
+  <entry>
     <title>Using the Flex Compiler SHell (FCSH)</title>
     <link href="http://projectsprouts.org/2011/01/18/using-fcsh.html"/>
     <updated>2011-01-18T00:00:00-08:00</updated>
     <id>http://projectsprouts.org/2011/01/18/using-fcsh</id>
     <content type="html">&lt;h1&gt;Using the Flex Compiler SHell (&lt;span class=&quot;caps&quot;&gt;FCSH&lt;/span&gt;)&lt;/h1&gt;
-&lt;p&gt;01 January, 2011 &amp;#8211; Luke Bayes&lt;/p&gt;
+&lt;p&gt;18 January, 2011 &amp;#8211; Luke Bayes&lt;/p&gt;
 &lt;h2&gt;What The sHell?&lt;/h2&gt;
 &lt;p&gt;&lt;span class=&quot;caps&quot;&gt;MXMLC&lt;/span&gt; and &lt;span class=&quot;caps&quot;&gt;COMPC&lt;/span&gt;, when run by themselves, are slow. Not a little slow, not kind of slow &amp;#8211; but brutally, soul-crushingly, terribly &lt;span class=&quot;caps&quot;&gt;SLOW&lt;/span&gt;. At least that&amp;#8217;s how they feel to someone like me. Someone that suffers from chronic, advanced, impatience.&lt;/p&gt;
 &lt;p&gt;Fortunately, there is finally relief!&lt;/p&gt;

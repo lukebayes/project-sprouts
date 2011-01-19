@@ -15,13 +15,14 @@ h1. {{ page.title }}
 
 {{ page.prettydate }} - {{ page.author }}
 
+h2. Introduction Header
+
 Introduction here
 
 <span class="attribution">
-<image src="{{ page.post_image_local }}" title="{{ page.post_image_title}}" />
-<a href="{{ page.post_image_flickr }}">Image</a> courtesy of <a href="{{ page.post_image_author_link }}">{{ page.post_image_author_name }}</a> and the <a href="{{ page.post_image_license }}">Creative Commons</a> license.
+<image class="bordered" src="{{ page.post_image_local }}" title="{{ page.post_image_title}}" />
+<a href="{{ page.post_image_flickr }}">{{ page.post_image_title }} Image</a> courtesy of <a href="{{ page.post_image_author_link }}">{{ page.post_image_author_name }}</a> and the <a href="{{ page.post_image_license }}">Creative Commons</a> license.
 </span>
-
 
 h2. Conclusion
 
