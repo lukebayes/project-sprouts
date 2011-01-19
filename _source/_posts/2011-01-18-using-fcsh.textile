@@ -2,7 +2,7 @@
 layout: post
 title: Using the Flex Compiler SHell (FCSH)
 author: Luke Bayes
-prettydate: 01 January, 2011
+prettydate: 18 January, 2011
 
 post_image_flickr: http://www.flickr.com/photos/mike-bensalem/3438900700
 post_image_author_link: http://www.flickr.com/photos/mike-bensalem/
