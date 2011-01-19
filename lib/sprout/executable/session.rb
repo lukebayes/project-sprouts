@@ -292,7 +292,7 @@ module Sprout::Executable
     # Execute the collection of provided actions.
     def execute_actions
       action_stack.each do |action|
-        break unless execute_action(action)
+        execute_action(action)
       end
       @action_stack = []
     end
