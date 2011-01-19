@@ -234,25 +234,6 @@ module Sprout::TestHelper
   end
 
   ##
-  # Update the Sprout::Executable registry so that subsequent
-  # requests for an executable return a fake one instead of
-  # the real one.
-  #
-  # @param exe [Symbol] The executable that will be sent to the load request (e.g. :fdb, :mxmlc, etc.).
-  # @param fake_name [String] The path to the fake executable that should be used.
-  #
-  # Note: Calling this method will set a mocha expectation
-  # that the Sprout::Executable.load method will be called during
-  # the test method run.
-  #
-  def insert_fake_executable fake
-    # Comment the following and install the flashsdk gem
-    # to run test against actual executables instead of fakes:
-    path_response = OpenStruct.new(:path => fake)
-    Sprout::Executable.expects(:load).returns path_response
-  end
-
-  ##
   # Create and/or return sprout/cache directory relative to the
   # fixtures folder nearest the file that calls this method.
   # @return [Dir] The path to the cache directory.
