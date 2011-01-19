@@ -2,11 +2,12 @@
 layout: post
 title: Migrating from 0.7 to 1.0 beta
 author: Luke Bayes
+prettydate: 29 December, 2010
 ---
 
-h1. Migrating from 0.7 to 1.0 beta
+h1. {{ page.title }}
 
-29 December, 2010 - Luke Bayes
+{{ page.prettydate }} - {{ page.author }}
 
 There are some significant changes that have come with the new version of Sprouts. This guide should help you transition a legacy Sprouts project into the new hotness. Let's get sideways.
 
