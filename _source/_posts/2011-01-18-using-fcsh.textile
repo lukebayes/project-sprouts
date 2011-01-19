@@ -1,0 +1,135 @@
+---
+layout: post
+title: Using the Flex Compiler SHell (FCSH)
+author: Luke Bayes
+prettydate: 01 January, 2011
+
+post_image_flickr: http://www.flickr.com/photos/mike-bensalem/3438900700
+post_image_author_link: http://www.flickr.com/photos/mike-bensalem/
+post_image_author_name: Mike Epp
+post_image_license: http://creativecommons.org/licenses/by-nc-nd/2.0/
+post_image_local: /images/3438900700_755cf91138_z.jpg
+post_image_title: Sprouts Shell
+---
+
+h1. {{ page.title }}
+
+{{ page.prettydate }} - {{ page.author }}
+
+h2. What The sHell?
+
+MXMLC and COMPC, when run by themselves, are slow. Not a little slow, not kind of slow - but brutally, soul-crushingly, terribly SLOW. At least that's how they feel to someone like me. Someone that suffers from chronic, advanced, impatience.
+
+Fortunately, there is finally relief!
+
+<span class="attribution">
+<image class="bordered" src="{{ page.post_image_local }}" title="{{ page.post_image_title}}" />
+<a href="{{ page.post_image_flickr }}">{{ page.post_image_title }}</a> courtesy of <a href="{{ page.post_image_author_link }}">{{ page.post_image_author_name }}</a> and the <a href="{{ page.post_image_license }}">Creative Commons</a> license.
+</span>
+
+h2. What is that at the end of this long, dark tunnel?
+
+More than a few years ago, someone at Macrodobe realized how slow their compilers are, and released the inappropriately-named, yet awesomely helpful, "Flex Compiler SHell" (or FCSH for short). FCSH doesn't necesarily have anything to do with the Flex framework, but provides a long-lived process that we can start up once, leave running, and ask to execute our compilation tasks. This process will retain lots of expensive information in memory and only recompile files that have changed since the last request. Using FCSH by hand is really not practical, and with previous versions of Sprouts, it was also not as easy as it should be.
+
+h2. I do believe that is a light!
+
+After many, countless hours of deliberation and coding and testing and coding again, FCSH is finally exposed to Sprout projects in a very simple way: 
+
+1) In a new terminal, start the fcsh service.
+
+
+{% highlight bash %}
+# cd into your project:
+cd ~/SomeProject
+# Start the fcsh session:
+rake fcsh:start
+{% endhighlight %}
+
+_(Hit CTRL+C any time to terminate this FCSH process)_
+
+2) In another new terminal (I use <a target="_blank" href="http://www.gnu.org/software/screen/">GNU Screen</a> thanks to a <a target="_blank" href="http://bhanoo.com/~hemant/">smart guy</a> I work with), execute the _fcsh_ task before any _mxmlc_ or _compc_ tasks that you would normally call.
+
+
+{% highlight bash %}
+# cd into your project:
+cd ~/SomeProject
+# Compile and run tests:
+rake fcsh test
+# or the 'default' task:
+rake fcsh default
+# or clean first:
+rake clean fcsh test
+{% endhighlight %}
+
+That's it!
+
+Just run the @fcsh@ task before any other tasks, no editing of source files necessary!
+
+h2. But how does it really work?
+
+I'm so glad you asked! 
+
+Under the covers, in the latest release of the flashsdk, the @mxmlc@ and @compc@ tasks check for a couple of environment variables before actually calling out to the underlying process.
+
+If the @USE_FCSH@ environment variable value is 'true', then the compiler will attempt to connect to an FCSHSocket on @FCSH_PORT@ (12321 by default). The fcsh task simply sets this value to 'true', but you can also set this value on the command line, like:
+
+{% highlight bash %}
+rake test USE_FCSH=true
+{% endhighlight %}
+
+In your .bashrc or .bash_profile (will impact all Sprout v1.x projects on your system):
+
+{% highlight bash %}
+export USE_FCSH=true
+{% endhighlight %}
+
+Or in your Rakefile to always use FCSH for this project:
+
+{% highlight bash %}
+# Yes, it's a smelly string, but that's what Ruby wants for some reason...
+ENV['USE_FCSH'] = 'true'
+{% endhighlight %}
+
+Regardless of which method you choose to trigger a build with FCSH, you must have an instance of the FCSH server running from the same project directory before calling the build task, or else you'll get a failure. Once again, you can start the FCSH server with:
+
+{% highlight bash %}
+rake fcsh:start
+{% endhighlight %}
+
+If you forget this mysterious incantation, you can always list out the available rake tasks with the -T option:
+
+{% highlight bash %}
+rake -T
+{% endhighlight %}
+
+h2. The Railroad
+
+If you want to run builds with FCSH from multiple directories, you'll need to give each client and server a unique port to connect on. You can do this in any of the ways indicated above for the @USE_FCSH@ parameter, except you'll specify the @FCSH_PORT@ instead.
+
+On the command line:
+
+{% highlight bash %}
+rake fcsh test FCSH_PORT=12567
+{% endhighlight %}
+
+In each shell instance:
+
+{% highlight bash %}
+export FCSH_PORT=12567
+{% endhighlight %}
+
+_(Note: To always use a custom port, the @export@ could be placed into your .bashrc or .bash_profile)_
+
+Anywhere in your Rakefile:
+
+{% highlight bash %}
+ENV['FCSH_PORT'] = 12567
+{% endhighlight %}
+
+
+h2. Conclusion
+
+You should now be able to easily integrate FCSH into your Sprouts v1.x build process at whatever scope you prefer and customize it appropriately too.
+
+This brings us to the end of the "{{ page.title }}" post. If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet - <a target="_blank" href="https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts">fork</a>, fix and send a pull request.
+
