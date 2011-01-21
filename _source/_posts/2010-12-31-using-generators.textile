@@ -2,27 +2,24 @@
 layout: post
 title: Using Sprout Generators
 author: Luke Bayes
-prettydate: 31 December, 2010
 
-post_image_flickr: http://www.flickr.com/photos/usdagov/5187023831
-post_image_author_link: http://www.flickr.com/photos/usdagov/
-post_image_author_name: USDAgov
-post_image_license: http://creativecommons.org/licenses/by-nd/2.0/
-post_image_local: /images/5187023831_8a158e6e0d_z.jpg
-post_image_title: Manure Generator
+post_image_author_link: https://www.easygreen.com/
+post_image_author_name: Easy Green
+post_image_local: /images/KGrHqYOKigEzS.jpg
+post_image_title: Sprout Germinator
 ---
 
 h1. {{ page.title }}
 
-{{ page.prettydate }} - {{ page.author }}
+{{ page.date | date_to_string }} - {{ page.author }}
 
 h2. Introduction
 
 Generators have been rewritten from scratch for Project Sprouts v1. The new generators are much easier to test, distribute, and modify. This post is going to cover usage (or consumption) of existing generators, we'll put together a second post where we go into more detail about creating generators.
 
 <span class="attribution">
-<image class="bordered" src="{{ page.post_image_local }}" title="{{ page.post_image_title}}" />
-<a href="{{ page.post_image_flickr }}">Manure Generator Image</a> courtesy of <a href="{{ page.post_image_author_link }}">{{ page.post_image_author_name }}</a> and the <a href="{{ page.post_image_license }}">Creative Commons</a> license.
+<image src="{{ page.post_image_local }}" title="{{ page.post_image_title}}" />
+<a href="{{ page.post_image_flickr }}">{{ page.post_image_title }}</a> image courtesy of <a href="{{ page.post_image_author_link }}">{{ page.post_image_author_name }}</a>.
 </span>
 
 There are two kinds of generator, an _Application_ generator and a _Feature_ generator. The primary difference between them, is that a _Feature_ generator expects to be run from a folder that contains a _Gemfile_. This is because feature generators can be easily overridden by gems that are loaded from the Gemfile.

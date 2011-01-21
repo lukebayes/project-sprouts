@@ -1,0 +1,143 @@
+---
+layout: post
+title: Using MXMLC in Sprouts
+author: Luke Bayes
+prettydate: 19 January, 2011
+post_image_flickr: http://www.flickr.com/photos/nagarazoku/139503315 
+post_image_author_link: http://www.flickr.com/photos/nagarazoku/
+post_image_author_name: titanium22
+post_image_license: http://creativecommons.org/licenses/by-sa/2.0/
+post_image_local: /images/139503315_80bbcf6114_z.jpg
+post_image_title: Illuminated Compiler
+---
+
+h1. {{ page.title }}
+
+{{ page.prettydate }} - {{ page.author }}
+
+h2. What is MXMLC
+
+MXMLC is Adobe's command line compiler. This compiler can assemble SWF applications from any combination of ActionScript 3, MXML, random text files and media assets, including external SWCs and SWFs. Like most sophisticated terminal applications (especially compilers) MXMLC is relatively difficult to work with directly. Sprouts provides a simple Rake task wrapper that delegates to the provided MXMLC executable. This wrapper is exposed to any Ruby script that requires it from the @flashsdk@, but it is most often used from Rakefiles.
+
+<span class="attribution">
+<image class="bordered" src="{{ page.post_image_local }}" title="{{ page.post_image_title}}" />
+<a href="{{ page.post_image_flickr }}">{{ page.post_image_title }}</a> courtesy of <a href="{{ page.post_image_author_link }}">{{ page.post_image_author_name }}</a> and the <a href="{{ page.post_image_license }}">Creative Commons</a> license.
+</span>
+
+h2. The Basics
+
+The first thing you'll need is a new ActionScript project, please stop right now and run the following commands in your terminal:
+
+{% highlight bash %}
+# Create the project:
+sprout-as3 SomeProject
+# Change to the new directory:
+cd SomeProject
+# Build the debug SWF:
+rake
+# Generate a new class, test and suite:
+sprout-class utils.MathUtil
+# Compile and run tests:
+rake test
+{% endhighlight %}
+
+Now let's open the Rakefile with your text editor of choice (I prefer <a target="_blank" href="http://www.vim.org/">VIM</a>).
+
+You should find a Rake task that looks something like the following:
+
+{% highlight ruby %}
+# Compile the debug swf
+mxmlc "bin/SomeProject-debug.swf" do |t|
+  t.input = "src/SomeProject.as"
+  t.debug = true
+end
+{% endhighlight %}
+
+This may look like some strange stuff at first, but I promise, if you stick with it, everything will become extremely legible. 
+
+The first thing I would recommend you do, is check these files into version control. This way, you'll have a clean point that you can always get back to, should you get into a terribly bad state. Of the options out there, I strongly prefer <a target="_blank" href="http://git-scm.com">Git</a> and recommend you check it out at your earliest opportunity. Git is a distributed version control system (DVCS), and as such gives us the ability to revision and checkpoint files without even connecting to (or configuring) a remote server somewhere. This is the last I'll harp on it, but please. Please check out Git.
+
+h2. Ruby and Rake What?!
+
+If you're a Ruby and Rake expert, please go ahead and skip to the next section. 
+
+For the rest of you that aren't familiar with Ruby and Rake, I'm about to do my very best to provide a gentle introduction, and when we're done, I hope you'll be comfortable editing this file with confidence. 
+
+Firstly, some fundamentals:
+
+<div id="quotes">
+  <blockquote>Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.</blockquote>
+  <div class="attribution"> "Ruby Website":http://ruby-lang.org </div>
+</div>
+
+This means that Ruby has an opinion. Many of Ruby's opinions are exactly the opposite from ActionScript's opinions. There was a time when this made me uncomfortable, and I'm sure it will make some of you uncomfortable. Well, not _you_ of course, but maybe someone you know... 
+
+If you're perfectly happy with Ant build scripts, manually keeping build environments consistent, and your current workflow, please stop reading now. Sprouts is probably *not* for you. 
+
+If you, like Ant's creator, remain unconvinced that XML is an appropriate language for describing complex behavior, or if you, like me, believe there's always room for improvements, let's get going....
+
+Ruby syntax has a few rules that can trip you up at first, so I'll start with them.
+
+* The parenthesis around the arguments in a Ruby method declaration, and calls are _optional_, and are only added when necessary for the parser by custom.
+
+This means that the following method:
+
+{% highlight ruby %}
+def foo(a, b)
+  puts "a #{a}, b #{b}"
+end
+{% endhighlight %}
+
+Is the same as:
+
+{% highlight ruby %}
+def foo a, b
+  puts "a #{a}, b #{b}"
+end
+{% endhighlight %}
+
+And the following call to that method:
+
+{% highlight ruby %}
+foo("bar", "baz")
+{% endhighlight %}
+
+Is the same as:
+
+{% highlight ruby %}
+foo "bar", "baz"
+{% endhighlight %}
+
+* Ruby Hashes are _(<a target="_blank" href="http://blog.peepcode.com/tutorials/2011/rip-ruby-hash-rocket-syntax">historically</a>)_ delimited by a "Hash Rocket", this is an equal sign, followed by a greater than sign, like: @=>@.
+
+To show what I mean, the following Ruby Hash:
+
+{% highlight ruby %}
+hash = { :a => 'a', :b => 'b', :c => 'c' }
+{% endhighlight %}
+
+This is similar to the following ActionScript:
+
+{% highlight ruby %}
+var obj:Object = { a : 'a', b : 'b', c : 'c' };
+{% endhighlight %}
+
+Notice how the Ruby Hash prefixes the Hash keys with a colon. This indicates that we're working with a Ruby Symbol, which is sort of like a String, but sort of not like a String. We'll get to them momentarily.
+
+* Like the parenthesis for arguments, the curly brackets around Ruby Hashes are optional, and often omitted.
+
+* Ruby is a dynamic language, which means that a variable can be essentially any concrete data type. This leads to commonly used method signatures like:
+
+{% highlight ruby %}
+def file_task file_path_or_options_hash
+  # Perform work with either a String path to a file,
+  # or operate on an options hash.
+end
+{% endhighlight %}
+
+I bring this up, because this method signature is exactly what Rake uses for Rake::Task helpers.
+
+h2. Conclusion
+
+This brings us to the end of the "{{ page.title }}" post. If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet - <a target="_blank" href="https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts">fork</a>, fix and send a pull request.
+

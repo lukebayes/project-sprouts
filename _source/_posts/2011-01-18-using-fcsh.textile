@@ -2,7 +2,6 @@
 layout: post
 title: Using the Flex Compiler SHell (FCSH)
 author: Luke Bayes
-prettydate: 18 January, 2011
 
 post_image_flickr: http://www.flickr.com/photos/mike-bensalem/3438900700
 post_image_author_link: http://www.flickr.com/photos/mike-bensalem/
@@ -14,9 +13,9 @@ post_image_title: Sprouts Shell
 
 h1. {{ page.title }}
 
-{{ page.prettydate }} - {{ page.author }}
+{{ page.date | date_to_string }} - {{ page.author }}
 
-h2. What The sHell?
+h2. What the sHell?
 
 MXMLC and COMPC, when run by themselves, are slow. Not a little slow, not kind of slow - but brutally, soul-crushingly, terribly SLOW. At least that's how they feel to someone like me. Someone that suffers from chronic, advanced, impatience.
 

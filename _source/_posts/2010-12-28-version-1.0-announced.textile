@@ -6,7 +6,7 @@ author: Luke Bayes
 
 h1. Project Sprouts Version 1.0 Beta Released!
 
-28 December, 2010 - Luke Bayes
+{{ page.date | date_to_string }} - {{ page.author }}
 
 h2. The Thinker
 

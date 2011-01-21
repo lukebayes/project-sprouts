@@ -49,7 +49,7 @@
             <td>
 
               <ul>
-                <li class="header">Posts <a href="/atom.xml"><img class="footer-feed-icon" src="/images/35px-Feed-icon.png" /></a></li>
+                <li class="header">Blog <a href="/atom.xml"><img class="footer-feed-icon" src="/images/35px-Feed-icon.png" /></a></li>
                 {% for post in site.posts limit:10 %}
                 <li class="post"><a href="{{ post.url }}"><span class="date">{{ post.date | date: "%Y-%m-%d" }}</span> | {{ post.title }}</a></li>
                 {% endfor %}
