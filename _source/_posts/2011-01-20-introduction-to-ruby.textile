@@ -21,9 +21,7 @@ h1. {{ page.title }}
 
 This means that Ruby has opinions, and many of Ruby's opinions are exactly inverted from what you may have grown to love in ActionScript. There was a time when this made me uncomfortable, and I'm sure it will make some of you uncomfortable. Well, not _you_ of course, but maybe someone you know...
 
-If you're perfectly content with massive, repetitive build scripts, manually keeping build environments consistent, and your current workflow, please stop reading now. Sprouts is probably *not* for you. 
-
-For the rest of you that aren't familiar with Ruby and the build system Rake, I'm about to do my very best to provide a gentle introduction, and when we're done, I hope you'll be comfortable at least reading, and hopefully, editing Rakefiles with confidence.
+The intention of this article, is to provide a brief introduction to Ruby for developers that are already familiar with ActionScript 3.0. It is not my intention to provide comprehensive coverage of the Ruby language here. For a much more well-written and far more comprehensive explanation of Ruby, please take the time to read <a target="_blank" href="http://mislav.uniqpath.com/poignant-guide/">Why's Poignant Guide to Ruby</a>, quite possibly the most entertaining and well-written computer book in history.
 
 <span class="attribution">
 <image class="bordered" src="{{ page.post_image_local }}" title="{{ page.post_image_title}}" />
@@ -32,11 +30,9 @@ For the rest of you that aren't familiar with Ruby and the build system Rake, I'
 
 h1. Quack like a what?
 
-Ruby is a dynamic language, which means that a variable can be essentially any concrete data type. The important thing is that an object define the methods and attributes that its clients attempt to access. This paradigm is often referred to as <a target="_blank" href="http://en.wikipedia.org/wiki/Duck_typing">Duck Typing</a>.
+Ruby is a dynamic language, which means that a variable can be any concrete data type. The important thing is that an object define the methods and attributes that its clients attempt to access. This paradigm is often referred to as <a target="_blank" href="http://en.wikipedia.org/wiki/Duck_typing">Duck Typing</a>.
 
 When it's unfamiliar, Ruby syntax has a few rules that can trip you up, so I'll kick this off by reviewing some key features of the language.
-
-I'm going to do my best to give you the basics of Ruby here, but you should definitely make time to read <a target="_blank" href="http://mislav.uniqpath.com/poignant-guide/">Why's Poignant Guide to Ruby</a>.  
 
 h2. Trying Ruby
 
@@ -62,16 +58,21 @@ When using irb, you can do the following to try out Sprout features.
 require 'rubygems'
 require 'sprout'
 
-# do something here...
+# Output the methods on Sprout (minus the detritus from Object):
+puts Sprout.methods - Object.methods
+
+# Output Sprout.home
+puts Sprout.home
+puts Sprout.cache
 {% endhighlight %}
 
 h2. Strings
 
 There are a handful of different ways to declare Strings in Ruby, but the main thing I'd like to highlight here is the difference between single quotes and double quotes.
 
-A String that is defined within single quotes will contain literally whatever is defined within the quotes. This means that backslashes will not be rendered as escape sequences, they will literally just be backslashes.
+A String that is defined within single quotes will contain literally whatever is defined within the quotes. This means that backslashes will not be rendered as escape sequences, they will just be backslash characters. There is no way to insert expressions in between single quotes, so if you want to assemble a string with single quotes, this is done by concatenating different strings together.
 
-Single quotes require less overhead from the Ruby interpreter and are therefore preferred. I usually use single quotes wherever I don't need an evaluated expression or escape sequence.
+Single quoted strings require Ruby interpreter to do less work and are therefore preferred. I usually use single quotes wherever I don't need an evaluated expression or escape sequence, but for the benefit of people that don't know about these differences, I do try to use double quotes in generated Rake files wherever someone might try an expression (like in task names for example).
 
 {% highlight ruby %}
 puts 'Hello World'
@@ -102,7 +103,7 @@ This will insert an empty String for values that are nil.
 
 h2. Symbols
 
-Ruby has an interesting primitive called a @Symbol@. Symbols are not Strings, but are often used in places where a String might also suffice. There are some differences between Symbols and Strings and the first one is that Symbols are more memory efficient than Strings. The key difference (for me at least) is that Symbols have rules about what characters are acceptable that don't apply to String values. The rules for what can and can't be used in a Symbol name are essentially the same rules for what can and can't be used for a Ruby method name. You can transform a String to a Symbol with the @to_sym@ method, and you can transform a Symbol to a String with the @to_s@ method. 
+Ruby has an interesting primitive called a @Symbol@. Symbols are not Strings, but are often used in places where a String might also suffice. There are some differences between Symbols and Strings and the first one is that Symbols are slightly more memory efficient than Strings. 
 
 A Symbol is defined (or referenced) in Ruby with a leading colon as follows:
 
@@ -110,17 +111,32 @@ A Symbol is defined (or referenced) in Ruby with a leading colon as follows:
 name = :beaker
 {% endhighlight %}
 
-Symbols are most often used in Ruby as Hash keys, when referring to methods, and wherever a descriptive name is desirable, but all the functionality of a String is not required.
+A good rule of thumb that Jim Weirich shared and that I agree with, is as follows:
 
-Symbols are a tricky part of Ruby and it's important when working with Rake files to understand when a Symbol is appropriate and when it is not. In Rake, a Symbol is often used for a Rake task name, _unless_ that task refers to a file, then a String must be used. This is because Symbols cannot include slashes, dots or other important components of a File name.
+# If the contents (i.e. the sequence of characters) of the object is important, use a String.
+# If the identity of the object is important, use a Symbol.
+
+The idea here, is that if you're just trying to give a meaningful name to a pointer (as in Hash keys, or referring to methods by name), then Symbols are probably appropriate. If the value is what's important, Strings might make more sense.
+
+You can transform a String to a Symbol with the @to_sym@ method, and you can transform a Symbol to a String with the @to_s@ method. Outside of a Rails application Strings are not considered equal to Symbols that look similar.
+
+{% highlight ruby %}
+:beaker == 'beaker'        # false
+:beaker.to_s == 'beaker'   # true
+:beaker == 'beaker'.to_sym # true
+{% endhighlight %}
+
+Symbols are a tricky part of Ruby and it's important when working with Rake files to understand when a Symbol is appropriate and when it is not. 
+
+In Rake, a Symbol is often used for a Rake task name, _unless_ that task refers to a file, then a String must be used. This is because Symbols cannot include slashes, dots or other important components of a File name.
 
 <a target="_blank" target="http://glu.ttono.us/articles/2005/08/19/understanding-ruby-symbols">More information on Symbols</a>
 
 h2. Parentheses
 
-The parentheses that surround parameters in a Ruby method declaration (and method calls) are _optional_, and by convention, are only used when they are required for the parser to work properly.
+The parentheses that surround parameters in a Ruby method declaration (and method calls) are _optional_, and by convention, are only used when critical for proper execution, or to improve legibility for nested expressions. As with most things _stylish_, there is <a target="_blank" href="http://stackoverflow.com/questions/340624/do-you-leave-parentheses-in-or-out-in-ruby">little consensus</a> on when to use or omit parentheses in Ruby.
 
-This does take some time to get used to, but it leads to some interesting improvements in readability. Generally, when I find myself adding parentheses to a statement, this is a (very mild) "smell":http://martinfowler.com/bliki/CodeSmell.html that I might be doing too much in one line.
+This does take some time to get used to, but it leads to some interesting improvements in readability, especially in environments like Rake files.
 
 Following are some examples to help you understand this issue.
 
@@ -174,7 +190,7 @@ assert foo("bar", "baz")
 
 This expression is calling the imaginary @foo@ method, sending it two arguments, @bar@ and @baz@, then it's sending the return value of that method call to the @assert@ method. 
 
-Even though the interpreter can figure out what's going on here, it's much more readable to parenthesize nested expressions like this.
+Even though the interpreter can figure out what's going on here, it's arguably more readable to parenthesize nested expressions.
 
 h2. Return values
 
@@ -200,11 +216,11 @@ Could be written in Ruby like this:
 hash = { :a => 'a', :b => 'b', :c => 'c' }
 {% endhighlight %}
 
-Even thought the Hash Rocket is no longer required in Ruby 1.9.x, Sprouts is still using it for the time being. We'll likely update to the new syntax at some point in the future.
+Even thought the Hash Rocket is no longer required in Ruby 1.9.x, Sprouts is still using it for the time being. We'll likely update to the new (more ECMA-like) syntax at some point in the future.
 
 h2. Hash Brackets
 
-You should also note that, like parentheses on methods, curly brackets around Hashes are optional, so the previous Hash would normally be declared like:
+You should also note that, like parentheses on methods, curly brackets around Hashes are optional, so the previous Hash may also be declared like:
 
 {% highlight ruby %}
 hash = :a => 'a', :b => 'b', :c => 'c'
@@ -212,59 +228,9 @@ hash = :a => 'a', :b => 'b', :c => 'c'
 
 Notice how the Ruby Hash prefixes the Hash keys with a colon. This indicates that we're using Symbols as keys.
 
-h1. Rake
-
-Rake is the library for creating and running build scripts using Ruby. I'm going to do my best to introduce some of the most basic features here, but you should definitely stop now and read <a target="_blank" href="http://martinfowler.com/articles/rake.html">Martin Fowler's seminal Rake article</a> on the subject.
-
-h2. Tasks
-
-Rake tasks are exposed in a Rake file as a simple Ruby method. You can create a new Rake task by calling the @task@ method and providing a task name as follows:
-
-{% highlight ruby %}
-task :my_task
-{% endhighlight %}
-
-This task isn't very exciting and won't do much at all when invoked. Before we get too deep here, I'd like to talk about that name argument. That argument can be a Symbol a String or a Hash, let's dig into when and why it might be each of these.
-
-h3. Symbol Names
-
-Rake tasks that don't directly result in the creation of a file on disk are usually named with Symbols. If you *can* name your task with a Symbol, you usually should.
-
-{% highlight ruby %}
-task :my_task
-{% endhighlight %}
-
-h3. String Names
-
-Rake file tasks are named with a String. This is because the rules for Symbols cannot accomodate the requirements of file names. Rake tasks that need to be named with special characters for whatever reason are also named with Strings.
-
-{% highlight ruby %}
-file 'bin/SomeFile.xml'
-{% endhighlight %}
-
-h3. Hash Names
-
-Rake tasks can be declared with a Hash if they depend on other tasks. The idea here is that the Hash has a single key/value pair, and the key is either a String or Symbol that is the name of the current task, and the value is a String, a Symbol or an Array (of Strings and/or Symbols) and defines which tasks must be invoked *before* this one. 
-
-If that doesn't make sense, please read it a few more times. Understanding this complexity is really the crux of understanding Rake and being able to edit your Sprout Rake files.
-
-Let's dig into a few examples.
-
-The following is a very simple Rake task that depends on another very simple Rake task:
-
-{% highlight ruby %}
-task :my_task => :other_task
-{% endhighlight %}
-
-And here is one that depends on two other simple tasks:
-
-{% highlight ruby %}
-task :my_task => [:first_other_task, :second_other_task]
-{% endhighlight %}
-
-Noice how the hash rocket delimits the difference between the task name and it's value. Notice how we added the square brackets around the Array.
-
 h2. Conclusion
+
+That's probably enough Ruby to get you through reading and editing a Rake file. I sincerely hope you find yourself intrigued by this language and, like me, get drawn into a new way of considering programming problems.
 
 This brings us to the end of the "{{ page.title }}" post. If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet - <a target="_blank" href="https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts">fork</a>, fix and send a pull request.
 

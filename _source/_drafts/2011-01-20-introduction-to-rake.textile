@@ -1,0 +1,75 @@
+---
+layout: post
+title: Rake and Sprouts
+author: Luke Bayes
+post_image_flickr: http://www.flickr.com/photos/greencolander/2895452690
+post_image_author_link: http://www.flickr.com/photos/greencolander/
+post_image_author_name: Greencolander
+post_image_license: http://creativecommons.org/licenses/by/2.0/
+post_image_local: /images/2895452690_911065b1f3_z.jpg
+post_image_title: Ruby Pomegranate Seeds
+---
+
+h1. {{ page.title }}
+
+{{ page.date | date_to_string }} - {{ page.author }}
+
+<span class="attribution">
+<image class="bordered" src="{{ page.post_image_local }}" title="{{ page.post_image_title}}" />
+<a href="{{ page.post_image_flickr }}">{{ page.post_image_title }}</a> courtesy of <a href="{{ page.post_image_author_link }}">{{ page.post_image_author_name }}</a> and the <a href="{{ page.post_image_license }}">Creative Commons</a> license.
+</span>
+
+Rake is the library for creating and running build scripts using Ruby. I'm going to do my best to introduce some of the most basic features here, but you should definitely stop now and read <a target="_blank" href="http://martinfowler.com/articles/rake.html">Martin Fowler's seminal Rake article</a> on the subject.
+
+h2. Tasks
+
+Rake tasks are exposed in a Rake file as a simple Ruby method. You can create a new Rake task by calling the @task@ method and providing a task name as follows:
+
+{% highlight ruby %}
+task :my_task
+{% endhighlight %}
+
+This task isn't very exciting and won't do much at all when invoked. Before we get too deep here, I'd like to talk about that name argument. That argument can be a Symbol a String or a Hash, let's dig into when and why it might be each of these.
+
+h3. Symbol Names
+
+Rake tasks that don't directly result in the creation of a file on disk are usually named with Symbols. If you *can* name your task with a Symbol, you usually should.
+
+{% highlight ruby %}
+task :my_task
+{% endhighlight %}
+
+h3. String Names
+
+Rake file tasks are named with a String. This is because the rules for Symbols cannot accomodate the requirements of file names. Rake tasks that need to be named with special characters for whatever reason are also named with Strings.
+
+{% highlight ruby %}
+file 'bin/SomeFile.xml'
+{% endhighlight %}
+
+h3. Hash Names
+
+Rake tasks can be declared with a Hash if they depend on other tasks. The idea here is that the Hash has a single key/value pair, and the key is either a String or Symbol that is the name of the current task, and the value is a String, a Symbol or an Array (of Strings and/or Symbols) and defines which tasks must be invoked *before* this one. 
+
+If that doesn't make sense, please read it a few more times. Understanding this complexity is really the crux of understanding Rake and being able to edit your Sprout Rake files.
+
+Let's dig into a few examples.
+
+The following is a very simple Rake task that depends on another very simple Rake task:
+
+{% highlight ruby %}
+task :my_task => :other_task
+{% endhighlight %}
+
+And here is one that depends on two other simple tasks:
+
+{% highlight ruby %}
+task :my_task => [:first_other_task, :second_other_task]
+{% endhighlight %}
+
+Noice how the hash rocket delimits the difference between the task name and it's value. Notice how we added the square brackets around the Array.
+
+h2. Conclusion
+
+This brings us to the end of the "{{ page.title }}" post. If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet - <a target="_blank" href="https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts">fork</a>, fix and send a pull request.
+

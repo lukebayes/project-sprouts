@@ -30,16 +30,14 @@
   <div class="attribution"> <a href="http://ruby-lang.org">Ruby Website</a> </div>
 </div>
 <p>This means that Ruby has opinions, and many of Ruby&#8217;s opinions are exactly inverted from what you may have grown to love in ActionScript. There was a time when this made me uncomfortable, and I&#8217;m sure it will make some of you uncomfortable. Well, not <em>you</em> of course, but maybe someone you know&#8230;</p>
-<p>If you&#8217;re perfectly content with massive, repetitive build scripts, manually keeping build environments consistent, and your current workflow, please stop reading now. Sprouts is probably <strong>not</strong> for you.</p>
-<p>For the rest of you that aren&#8217;t familiar with Ruby and the build system Rake, I&#8217;m about to do my very best to provide a gentle introduction, and when we&#8217;re done, I hope you&#8217;ll be comfortable at least reading, and hopefully, editing Rakefiles with confidence.</p>
+<p>The intention of this article, is to provide a brief introduction to Ruby for developers that are already familiar with ActionScript 3.0. It is not my intention to provide comprehensive coverage of the Ruby language here. For a much more well-written and far more comprehensive explanation of Ruby, please take the time to read <a target="_blank" href="http://mislav.uniqpath.com/poignant-guide/">Why&#8217;s Poignant Guide to Ruby</a>, quite possibly the most entertaining and well-written computer book in history.</p>
 <p><span class="attribution"><br />
 <image class="bordered" src="/images/2895452690_911065b1f3_z.jpg" title="Ruby Pomegranate Seeds" /><br />
 <a href="http://www.flickr.com/photos/greencolander/2895452690">Ruby Pomegranate Seeds</a> courtesy of <a href="http://www.flickr.com/photos/greencolander/">Greencolander</a> and the <a href="http://creativecommons.org/licenses/by/2.0/">Creative Commons</a> license.<br />
 </span></p>
 <h1>Quack like a what?</h1>
-<p>Ruby is a dynamic language, which means that a variable can be essentially any concrete data type. The important thing is that an object define the methods and attributes that its clients attempt to access. This paradigm is often referred to as <a target="_blank" href="http://en.wikipedia.org/wiki/Duck_typing">Duck Typing</a>.</p>
+<p>Ruby is a dynamic language, which means that a variable can be any concrete data type. The important thing is that an object define the methods and attributes that its clients attempt to access. This paradigm is often referred to as <a target="_blank" href="http://en.wikipedia.org/wiki/Duck_typing">Duck Typing</a>.</p>
 <p>When it&#8217;s unfamiliar, Ruby syntax has a few rules that can trip you up, so I&#8217;ll kick this off by reviewing some key features of the language.</p>
-<p>I&#8217;m going to do my best to give you the basics of Ruby here, but you should definitely make time to read <a target="_blank" href="http://mislav.uniqpath.com/poignant-guide/">Why&#8217;s Poignant Guide to Ruby</a>.</p>
 <h2>Trying Ruby</h2>
 <p>If you have installed Ruby and gotten it into your system path, you can kick off a <a target="_blank" href="http://en.wikipedia.org/wiki/Read-eval-print_loop">Read Eval Print Loop (<span class="caps">REPL</span>)</a> by typing:</p>
 <div class="highlight"><pre><code class="bash">irb
@@ -53,12 +51,17 @@
 <div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;sprout&#39;</span>
 
-<span class="c1"># do something here...</span>
+<span class="c1"># Output the methods on Sprout (minus the detritus from Object):</span>
+<span class="nb">puts</span> <span class="no">Sprout</span><span class="o">.</span><span class="n">methods</span> <span class="o">-</span> <span class="no">Object</span><span class="o">.</span><span class="n">methods</span>
+
+<span class="c1"># Output Sprout.home</span>
+<span class="nb">puts</span> <span class="no">Sprout</span><span class="o">.</span><span class="n">home</span>
+<span class="nb">puts</span> <span class="no">Sprout</span><span class="o">.</span><span class="n">cache</span>
 </code></pre>
 </div><h2>Strings</h2>
 <p>There are a handful of different ways to declare Strings in Ruby, but the main thing I&#8217;d like to highlight here is the difference between single quotes and double quotes.</p>
-<p>A String that is defined within single quotes will contain literally whatever is defined within the quotes. This means that backslashes will not be rendered as escape sequences, they will literally just be backslashes.</p>
-<p>Single quotes require less overhead from the Ruby interpreter and are therefore preferred. I usually use single quotes wherever I don&#8217;t need an evaluated expression or escape sequence.</p>
+<p>A String that is defined within single quotes will contain literally whatever is defined within the quotes. This means that backslashes will not be rendered as escape sequences, they will just be backslash characters. There is no way to insert expressions in between single quotes, so if you want to assemble a string with single quotes, this is done by concatenating different strings together.</p>
+<p>Single quoted strings require Ruby interpreter to do less work and are therefore preferred. I usually use single quotes wherever I don&#8217;t need an evaluated expression or escape sequence, but for the benefit of people that don&#8217;t know about these differences, I do try to use double quotes in generated Rake files wherever someone might try an expression (like in task names for example).</p>
 <div class="highlight"><pre><code class="ruby"><span class="nb">puts</span> <span class="s1">&#39;Hello World&#39;</span>
 </code></pre>
 </div><p>A String that is defined within double quotes will be interpreted for embedded Ruby expressions and escape sequences will be resolved so that they are replaced with the character literal that they represent.</p>
@@ -75,16 +78,27 @@
 </code></pre>
 </div><p>This will insert an empty String for values that are nil.</p>
 <h2>Symbols</h2>
-<p>Ruby has an interesting primitive called a <code>Symbol</code>. Symbols are not Strings, but are often used in places where a String might also suffice. There are some differences between Symbols and Strings and the first one is that Symbols are more memory efficient than Strings. The key difference (for me at least) is that Symbols have rules about what characters are acceptable that don&#8217;t apply to String values. The rules for what can and can&#8217;t be used in a Symbol name are essentially the same rules for what can and can&#8217;t be used for a Ruby method name. You can transform a String to a Symbol with the <code>to_sym</code> method, and you can transform a Symbol to a String with the <code>to_s</code> method.</p>
+<p>Ruby has an interesting primitive called a <code>Symbol</code>. Symbols are not Strings, but are often used in places where a String might also suffice. There are some differences between Symbols and Strings and the first one is that Symbols are slightly more memory efficient than Strings.</p>
 <p>A Symbol is defined (or referenced) in Ruby with a leading colon as follows:</p>
 <div class="highlight"><pre><code class="ruby"><span class="nb">name</span> <span class="o">=</span> <span class="ss">:beaker</span>
 </code></pre>
-</div><p>Symbols are most often used in Ruby as Hash keys, when referring to methods, and wherever a descriptive name is desirable, but all the functionality of a String is not required.</p>
-<p>Symbols are a tricky part of Ruby and it&#8217;s important when working with Rake files to understand when a Symbol is appropriate and when it is not. In Rake, a Symbol is often used for a Rake task name, <em>unless</em> that task refers to a file, then a String must be used. This is because Symbols cannot include slashes, dots or other important components of a File name.</p>
+</div><p>A good rule of thumb that Jim Weirich shared and that I agree with, is as follows:</p>
+<ol>
+	<li>If the contents (i.e. the sequence of characters) of the object is important, use a String.</li>
+	<li>If the identity of the object is important, use a Symbol.</li>
+</ol>
+<p>The idea here, is that if you&#8217;re just trying to give a meaningful name to a pointer (as in Hash keys, or referring to methods by name), then Symbols are probably appropriate. If the value is what&#8217;s important, Strings might make more sense.</p>
+<p>You can transform a String to a Symbol with the <code>to_sym</code> method, and you can transform a Symbol to a String with the <code>to_s</code> method. Outside of a Rails application Strings are not considered equal to Symbols that look similar.</p>
+<div class="highlight"><pre><code class="ruby"><span class="ss">:beaker</span> <span class="o">==</span> <span class="s1">&#39;beaker&#39;</span>        <span class="c1"># false</span>
+<span class="ss">:beaker</span><span class="o">.</span><span class="n">to_s</span> <span class="o">==</span> <span class="s1">&#39;beaker&#39;</span>   <span class="c1"># true</span>
+<span class="ss">:beaker</span> <span class="o">==</span> <span class="s1">&#39;beaker&#39;</span><span class="o">.</span><span class="n">to_sym</span> <span class="c1"># true</span>
+</code></pre>
+</div><p>Symbols are a tricky part of Ruby and it&#8217;s important when working with Rake files to understand when a Symbol is appropriate and when it is not.</p>
+<p>In Rake, a Symbol is often used for a Rake task name, <em>unless</em> that task refers to a file, then a String must be used. This is because Symbols cannot include slashes, dots or other important components of a File name.</p>
 <p><a target="_blank" target="http://glu.ttono.us/articles/2005/08/19/understanding-ruby-symbols">More information on Symbols</a></p>
 <h2>Parentheses</h2>
-<p>The parentheses that surround parameters in a Ruby method declaration (and method calls) are <em>optional</em>, and by convention, are only used when they are required for the parser to work properly.</p>
-<p>This does take some time to get used to, but it leads to some interesting improvements in readability. Generally, when I find myself adding parentheses to a statement, this is a (very mild) <a href="http://martinfowler.com/bliki/CodeSmell.html">smell</a> that I might be doing too much in one line.</p>
+<p>The parentheses that surround parameters in a Ruby method declaration (and method calls) are <em>optional</em>, and by convention, are only used when critical for proper execution, or to improve legibility for nested expressions. As with most things <em>stylish_, there is </em>blank&quot; href=&#8220;http://stackoverflow.com/questions/340624/do-you-leave-parentheses-in-or-out-in-ruby&#8221;&gt;little consensus</a> on when to use or omit parentheses in Ruby.</p>
+<p>This does take some time to get used to, but it leads to some interesting improvements in readability, especially in environments like Rake files.</p>
 <p>Following are some examples to help you understand this issue.</p>
 <p>This method in ActionScript:</p>
 <div class="highlight"><pre><code class="javascript"><span class="kr">public</span> <span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">a</span><span class="o">:</span><span class="nb">String</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="nb">String</span><span class="p">)</span><span class="o">:</span><span class="k">void</span> <span class="p">{</span>
@@ -114,7 +128,7 @@
 <div class="highlight"><pre><code class="ruby"><span class="n">assert</span> <span class="n">foo</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">)</span>
 </code></pre>
 </div><p>This expression is calling the imaginary <code>foo</code> method, sending it two arguments, <code>bar</code> and <code>baz</code>, then it&#8217;s sending the return value of that method call to the <code>assert</code> method.</p>
-<p>Even though the interpreter can figure out what&#8217;s going on here, it&#8217;s much more readable to parenthesize nested expressions like this.</p>
+<p>Even though the interpreter can figure out what&#8217;s going on here, it&#8217;s arguably more readable to parenthesize nested expressions.</p>
 <h2>Return values</h2>
 <p>You should also know that Ruby methods always return a value, whether you use the <code>return</code> keyword or not. The last expression that is evaluated within a Ruby method is what is returned. This can of course, be nil.</p>
 <h2>Hash Rockets</h2>
@@ -127,39 +141,14 @@
 </div><p>Could be written in Ruby like this:</p>
 <div class="highlight"><pre><code class="ruby"><span class="nb">hash</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:a</span> <span class="o">=&gt;</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="ss">:b</span> <span class="o">=&gt;</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="ss">:c</span> <span class="o">=&gt;</span> <span class="s1">&#39;c&#39;</span> <span class="p">}</span>
 </code></pre>
-</div><p>Even thought the Hash Rocket is no longer required in Ruby 1.9.x, Sprouts is still using it for the time being. We&#8217;ll likely update to the new syntax at some point in the future.</p>
+</div><p>Even thought the Hash Rocket is no longer required in Ruby 1.9.x, Sprouts is still using it for the time being. We&#8217;ll likely update to the new (more <span class="caps">ECMA</span>-like) syntax at some point in the future.</p>
 <h2>Hash Brackets</h2>
-<p>You should also note that, like parentheses on methods, curly brackets around Hashes are optional, so the previous Hash would normally be declared like:</p>
+<p>You should also note that, like parentheses on methods, curly brackets around Hashes are optional, so the previous Hash may also be declared like:</p>
 <div class="highlight"><pre><code class="ruby"><span class="nb">hash</span> <span class="o">=</span> <span class="ss">:a</span> <span class="o">=&gt;</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="ss">:b</span> <span class="o">=&gt;</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="ss">:c</span> <span class="o">=&gt;</span> <span class="s1">&#39;c&#39;</span>
 </code></pre>
 </div><p>Notice how the Ruby Hash prefixes the Hash keys with a colon. This indicates that we&#8217;re using Symbols as keys.</p>
-<h1>Rake</h1>
-<p>Rake is the library for creating and running build scripts using Ruby. I&#8217;m going to do my best to introduce some of the most basic features here, but you should definitely stop now and read <a target="_blank" href="http://martinfowler.com/articles/rake.html">Martin Fowler&#8217;s seminal Rake article</a> on the subject.</p>
-<h2>Tasks</h2>
-<p>Rake tasks are exposed in a Rake file as a simple Ruby method. You can create a new Rake task by calling the <code>task</code> method and providing a task name as follows:</p>
-<div class="highlight"><pre><code class="ruby"><span class="n">task</span> <span class="ss">:my_task</span>
-</code></pre>
-</div><p>This task isn&#8217;t very exciting and won&#8217;t do much at all when invoked. Before we get too deep here, I&#8217;d like to talk about that name argument. That argument can be a Symbol a String or a Hash, let&#8217;s dig into when and why it might be each of these.</p>
-<h3>Symbol Names</h3>
-<p>Rake tasks that don&#8217;t directly result in the creation of a file on disk are usually named with Symbols. If you <strong>can</strong> name your task with a Symbol, you usually should.</p>
-<div class="highlight"><pre><code class="ruby"><span class="n">task</span> <span class="ss">:my_task</span>
-</code></pre>
-</div><h3>String Names</h3>
-<p>Rake file tasks are named with a String. This is because the rules for Symbols cannot accomodate the requirements of file names. Rake tasks that need to be named with special characters for whatever reason are also named with Strings.</p>
-<div class="highlight"><pre><code class="ruby"><span class="n">file</span> <span class="s1">&#39;bin/SomeFile.xml&#39;</span>
-</code></pre>
-</div><h3>Hash Names</h3>
-<p>Rake tasks can be declared with a Hash if they depend on other tasks. The idea here is that the Hash has a single key/value pair, and the key is either a String or Symbol that is the name of the current task, and the value is a String, a Symbol or an Array (of Strings and/or Symbols) and defines which tasks must be invoked <strong>before</strong> this one.</p>
-<p>If that doesn&#8217;t make sense, please read it a few more times. Understanding this complexity is really the crux of understanding Rake and being able to edit your Sprout Rake files.</p>
-<p>Let&#8217;s dig into a few examples.</p>
-<p>The following is a very simple Rake task that depends on another very simple Rake task:</p>
-<div class="highlight"><pre><code class="ruby"><span class="n">task</span> <span class="ss">:my_task</span> <span class="o">=&gt;</span> <span class="ss">:other_task</span>
-</code></pre>
-</div><p>And here is one that depends on two other simple tasks:</p>
-<div class="highlight"><pre><code class="ruby"><span class="n">task</span> <span class="ss">:my_task</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:first_other_task</span><span class="p">,</span> <span class="ss">:second_other_task</span><span class="o">]</span>
-</code></pre>
-</div><p>Noice how the hash rocket delimits the difference between the task name and it&#8217;s value. Notice how we added the square brackets around the Array.</p>
 <h2>Conclusion</h2>
+<p>That&#8217;s probably enough Ruby to get you through reading and editing a Rake file. I sincerely hope you find yourself intrigued by this language and, like me, get drawn into a new way of considering programming problems.</p>
 <p>This brings us to the end of the &#8220;Introducing Ruby to ActionScripters&#8221; post. If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet &#8211; <a target="_blank" href="https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts">fork</a>, fix and send a pull request.</p>
   </div>
 </div>
