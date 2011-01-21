@@ -13,8 +13,6 @@ h1. {{ page.title }}
 
 {{ page.date | date_to_string }} - {{ page.author }}
 
-h2. Introduction
-
 Generators have been rewritten from scratch for Project Sprouts v1. The new generators are much easier to test, distribute, and modify. This post is going to cover usage (or consumption) of existing generators, we'll put together a second post where we go into more detail about creating generators.
 
 <span class="attribution">
