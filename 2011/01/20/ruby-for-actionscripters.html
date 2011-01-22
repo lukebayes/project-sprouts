@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Ruby for ActionScripters</title>
+  <link rel="stylesheet" type="text/css" href="/css/reset-min.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/css/pygments.css" media="all" />
+  <link rel="stylesheet" type="text/css" href="/css/sprouts.css" media="all" />
+  <script src="/javascripts/jquery-min-1.4.4.js"></script>
+  <script src="/javascripts/sprouts.js"></script>
+</head>
+<body>
+  <div id="header">
+    <div class="center">
+      <div class="content header-shadow">
+        <div class="logo"><a href="/">Sprouts</a></div>
+        <div class="tagline">Software development&mdash;evolved</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="http://github.com/lukebayes/project-sprouts/tree/master"><img style="position: absolute; top: 300; right: 0; border: 0;" src="/images/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
+<div class="center">
+  <div class="post-content content header-shadow">
+    <h1>Ruby for ActionScripters</h1>
+<p>20 Jan 2011 &#8211; Luke Bayes</p>
+<div id="quotes">
+  <blockquote>Ruby is a dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.</blockquote>
+  <div class="attribution"> <a href="http://ruby-lang.org">Ruby Website</a> </div>
+</div>
+<p>This means that Ruby has opinions, and many of Ruby&#8217;s opinions are exactly inverted from what you may have grown to love in ActionScript. There was a time when this made me uncomfortable, and I&#8217;m sure it will make some of you uncomfortable too. Well, not <em>you</em> of course, but maybe someone you know&#8230;</p>
+<p>The intention of this article, is to provide a brief introduction to Ruby for developers that are already familiar with ActionScript 3.0. It is not my intention to provide comprehensive coverage of the Ruby language here. For a much more well-written and far more comprehensive explanation of Ruby, please take the time to read <a target="_blank" href="http://mislav.uniqpath.com/poignant-guide/">Why&#8217;s Poignant Guide to Ruby</a>, quite possibly the most entertaining and well-written computer book in history.</p>
+<p><span class="attribution"><br />
+<image class="bordered" src="/images/2895452690_911065b1f3_z.jpg" title="Ruby Pomegranate Seeds" /><br />
+<a href="http://www.flickr.com/photos/greencolander/2895452690">Ruby Pomegranate Seeds</a> courtesy of <a href="http://www.flickr.com/photos/greencolander/">Greencolander</a> and the <a href="http://creativecommons.org/licenses/by/2.0/">Creative Commons</a> license.<br />
+</span></p>
+<h1>Quack like a what?</h1>
+<p>Ruby is a dynamic language, which means that a variable can be any concrete data type. The important thing is that an object define the methods and attributes that its clients attempt to access. This paradigm is often referred to as <a target="_blank" href="http://en.wikipedia.org/wiki/Duck_typing">Duck Typing</a>.</p>
+<h2>Trying Ruby</h2>
+<p>If you have <a target="_blank" href="http://www.ruby-lang.org/en/downloads/">installed Ruby</a> (Preferably with <a target="_blank" href="http://rvm.beginrescueend.com/"><span class="caps">RVM</span></a> or <a target="_blank" href="https://github.com/vertiginous/pik">something similar</a>), you can kick off a <a target="_blank" href="http://en.wikipedia.org/wiki/Read-eval-print_loop">Read Eval Print Loop (<span class="caps">REPL</span>)</a> by typing:</p>
+<div class="highlight"><pre><code class="bash">irb
+</code></pre>
+</div><p><em>(Type &#8216;quit&#8217; and hit enter to leave the <span class="caps">REPL</span>)</em></p>
+<p>The <code>puts</code> method will send a String value to stdout and you can think of this like ActionScript&#8217;s <code>trace</code> method.</p>
+<div class="highlight"><pre><code class="ruby"><span class="nb">puts</span> <span class="s1">&#39;Hello World&#39;</span>
+</code></pre>
+</div><p>Try running irb and then <code>puts</code> some messages now.</p>
+<p>When using irb, you can do the following to try out Sprout features.</p>
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;sprout&#39;</span>
+
+<span class="c1"># Output the methods on Sprout (minus the detritus from Object):</span>
+<span class="nb">puts</span> <span class="no">Sprout</span><span class="o">.</span><span class="n">methods</span> <span class="o">-</span> <span class="no">Object</span><span class="o">.</span><span class="n">methods</span>
+
+<span class="c1"># Output Sprout.home</span>
+<span class="nb">puts</span> <span class="no">Sprout</span><span class="o">.</span><span class="n">home</span>
+<span class="nb">puts</span> <span class="no">Sprout</span><span class="o">.</span><span class="n">cache</span>
+</code></pre>
+</div><h2>Strings</h2>
+<p>There are a handful of different ways to declare Strings in Ruby, but the main thing I&#8217;d like to highlight here is the difference between single quotes and double quotes.</p>
+<p>A String that is defined within single quotes will contain literally whatever is defined within the quotes. This means that backslashes will not be rendered as escape sequences, they will just be backslash characters. There is no way to insert expressions in between single quotes, so if you want to assemble a string with single quotes, this is done by concatenating different strings together.</p>
+<p>Single quoted strings are usually preferred as they cost less in terms of work. I usually use single quotes wherever I don&#8217;t need an evaluated expression or escape sequence, but for the benefit of people that don&#8217;t know about these differences, I do try to use double quotes in generated Rake files wherever someone might try an expression (like in task names).</p>
+<p>A String that is defined within double quotes will be interpreted for embedded Ruby expressions and escape sequences will be resolved so that they are replaced with the character literal that they represent.</p>
+<div class="highlight"><pre><code class="ruby"><span class="n">suffix</span> <span class="o">=</span> <span class="s2">&quot;World!</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="n">str</span> <span class="o">=</span> <span class="s2">&quot;Hello </span><span class="si">#{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre>
+</div><p>If you&#8217;re thinking in ActionScript, you&#8217;ll probably be tempted to concatenate Strings with expressions like:</p>
+<div class="highlight"><pre><code class="ruby"><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;aaa&#39;</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s1">&#39;bbb&#39;</span>
+<span class="nb">puts</span> <span class="s1">&#39;a: &#39;</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="s1">&#39; b: &#39;</span> <span class="o">+</span> <span class="n">b</span>
+</code></pre>
+</div><p>While this will usually work, it will explode if the expression values are nil. The preferred way to assemble Strings and expression values (especially for debugging), is to use double quotes and Ruby expression syntax like:</p>
+<div class="highlight"><pre><code class="ruby"><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;aaa&#39;</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s1">&#39;bbb&#39;</span>
+<span class="nb">puts</span> <span class="s2">&quot;a: </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2"> b: </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre>
+</div><p>This will call <code>to_s</code> on provided expressions and insert an empty String for values that are nil.</p>
+<h2>Symbols</h2>
+<p>Ruby has an interesting primitive called a <code>Symbol</code>. Symbols are not Strings, but are often used in places where a String might also suffice. There are some differences between Symbols and Strings and the first one is that Symbols are more memory efficient than Strings.</p>
+<p>A Symbol is defined (or referenced) in Ruby with a leading colon as follows:</p>
+<div class="highlight"><pre><code class="ruby"><span class="nb">name</span> <span class="o">=</span> <span class="ss">:beaker</span>
+</code></pre>
+</div><p>A good rule of thumb that Jim Weirich shared and that I agree with, is as follows:</p>
+<ol>
+	<li>If the contents (i.e. the sequence of characters) of the object is important, use a String.</li>
+	<li>If the identity of the object is important, use a Symbol.</li>
+</ol>
+<p>The idea here, is that if you&#8217;re just trying to give a meaningful name to a pointer (as in Hash keys, or referring to methods by name), then Symbols are probably appropriate. If the value is what&#8217;s important, Strings might make more sense.</p>
+<p>You can transform a String to a Symbol with the <code>to_sym</code> method, and you can transform a Symbol to a String with the <code>to_s</code> method. Outside of a Rails application Strings are not considered equal to Symbols that look similar.</p>
+<div class="highlight"><pre><code class="ruby"><span class="ss">:beaker</span> <span class="o">==</span> <span class="s1">&#39;beaker&#39;</span>        <span class="c1"># false</span>
+<span class="ss">:beaker</span><span class="o">.</span><span class="n">to_s</span> <span class="o">==</span> <span class="s1">&#39;beaker&#39;</span>   <span class="c1"># true</span>
+<span class="ss">:beaker</span> <span class="o">==</span> <span class="s1">&#39;beaker&#39;</span><span class="o">.</span><span class="n">to_sym</span> <span class="c1"># true</span>
+</code></pre>
+</div><p>Symbols are a tricky part of Ruby and it&#8217;s important when working with Rake files to understand when a Symbol is appropriate and when it is not.</p>
+<p>In Rake, a Symbol is often used for a Rake task name, <em>unless</em> that task refers to a file, then a String must be used. This is because Symbols cannot include slashes, dots or other important components of a File name.</p>
+<p><a target="_blank" target="http://glu.ttono.us/articles/2005/08/19/understanding-ruby-symbols">More information on Symbols</a></p>
+<h2>Parentheses</h2>
+<p>The parentheses that surround parameters in a Ruby method declaration (and method calls) are <em>optional</em>, and by convention, are only used when critical for proper execution, or to improve legibility for nested expressions. As with most things <em>stylish</em> there is <a target="_blank" href="http://stackoverflow.com/questions/340624/do-you-leave-parentheses-in-or-out-in-ruby">little consensus</a> on when to use or omit parentheses in Ruby.</p>
+<p>Making parentheses optional does take some time to get used to, but eventually it leads to improved readability, especially in environments like Rake files.</p>
+<p>Following are some examples to help you understand this issue.</p>
+<p>This method in ActionScript:</p>
+<div class="highlight"><pre><code class="javascript"><span class="kr">public</span> <span class="kd">function</span> <span class="nx">foo</span><span class="p">(</span><span class="nx">a</span><span class="o">:</span><span class="nb">String</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="nb">String</span><span class="p">)</span><span class="o">:</span><span class="k">void</span> <span class="p">{</span>
+  <span class="nx">trace</span><span class="p">(</span><span class="s2">&quot;a: &quot;</span> <span class="o">+</span> <span class="nx">a</span> <span class="o">+</span> <span class="s2">&quot; b: &quot;</span> <span class="o">+</span> <span class="nx">b</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div><p>Could be defined like this in Ruby:</p>
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">foo</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span>
+  <span class="nb">puts</span> <span class="s2">&quot;a </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2">, b </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">end</span>
+</code></pre>
+</div><p>But may also be written like this:</p>
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">&quot;a </span><span class="si">#{</span><span class="n">a</span><span class="si">}</span><span class="s2">, b </span><span class="si">#{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">end</span>
+</code></pre>
+</div><p>Additionally, to call that method in ActionScript you might:</p>
+<div class="highlight"><pre><code class="ruby"><span class="n">foo</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">);</span>
+</code></pre>
+</div><p>But in Ruby:</p>
+<div class="highlight"><pre><code class="ruby"><span class="n">foo</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span>
+</code></pre>
+</div><p>Of course, the following is also valid Ruby:</p>
+<div class="highlight"><pre><code class="ruby"><span class="n">foo</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">)</span>
+</code></pre>
+</div><p>You may be wondering, &#8220;When <em>should</em> I add the parens?&#8221; at this point. Here is a reasonable example of an expression that probably should get parentheses:</p>
+<div class="highlight"><pre><code class="ruby"><span class="n">assert</span> <span class="n">foo</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">)</span>
+</code></pre>
+</div><p>This expression is calling the imaginary <code>foo</code> method, sending it two arguments, <code>bar</code> and <code>baz</code>, then it&#8217;s sending the return value of that method call to the <code>assert</code> method.</p>
+<p>Even though the interpreter can figure out what&#8217;s going on without them, it&#8217;s arguably more readable to parenthesize nested expressions.</p>
+<h2>Return values</h2>
+<p>You should also know that Ruby methods always return a value, whether you use the <code>return</code> keyword or not. The last expression that is evaluated within a Ruby method is what is returned. This can of course, be nil.</p>
+<h2>Hash Rockets</h2>
+<p>Ruby Hashes are historically delimited by a &#8220;Hash Rocket&#8221;, this is an equal sign, followed by a greater than sign, like:</p>
+<div class="highlight"><pre><code class="ruby"><span class="o">=&gt;</span>
+</code></pre>
+</div><p>To show what I mean, the following ActionScript Hash:</p>
+<div class="highlight"><pre><code class="javascript"><span class="kd">var</span> <span class="nx">hash</span><span class="o">:</span><span class="nb">Object</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span> <span class="s1">&#39;c&#39;</span> <span class="p">};</span>
+</code></pre>
+</div><p>Could be written in Ruby like this:</p>
+<div class="highlight"><pre><code class="ruby"><span class="nb">hash</span> <span class="o">=</span> <span class="p">{</span> <span class="ss">:a</span> <span class="o">=&gt;</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="ss">:b</span> <span class="o">=&gt;</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="ss">:c</span> <span class="o">=&gt;</span> <span class="s1">&#39;c&#39;</span> <span class="p">}</span>
+</code></pre>
+</div><p>Even though the Hash Rocket is <a target="_blank" href="http://blog.peepcode.com/tutorials/2011/rip-ruby-hash-rocket-syntax">no longer required</a> in Ruby 1.9.x, Sprouts is still using it for the time being. We&#8217;ll likely update to the new (more <span class="caps">ECMA</span>-like) syntax at some point in the future, but while we generally work in legacy versions of Ruby, there&#8217;s no good reason to actively break backwards compatibility.</p>
+<h2>Hash Brackets</h2>
+<p>You should also note that, like parentheses on methods, curly brackets around Hashes are optional, so the previous Hash may also be declared like:</p>
+<div class="highlight"><pre><code class="ruby"><span class="nb">hash</span> <span class="o">=</span> <span class="ss">:a</span> <span class="o">=&gt;</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="ss">:b</span> <span class="o">=&gt;</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="ss">:c</span> <span class="o">=&gt;</span> <span class="s1">&#39;c&#39;</span>
+</code></pre>
+</div><p>Notice how the Ruby Hash prefixes the Hash keys with a colon. This indicates that we&#8217;re using Symbols as keys.</p>
+<h2>Rake</h2>
+<p>I believe that Rake (and how Sprouts uses) it is a large enough topic for it&#8217;s own post, but while we&#8217;re talking about duck typing, Strings, Symbols and Hashes, I really want to highlight how these syntactic concepts are exploited in Rake.</p>
+<p>A simple, named Rake task:</p>
+<div class="highlight"><pre><code class="ruby"><span class="c1"># Note the Symbol name:</span>
+<span class="n">task</span> <span class="ss">:my_task</span> <span class="k">do</span>
+  <span class="c1"># Do some work here.</span>
+<span class="k">end</span>
+</code></pre>
+</div><p>A simple, <em>file</em> Rake task:</p>
+<div class="highlight"><pre><code class="ruby"><span class="c1"># Note the single quotes:</span>
+<span class="nb">name</span> <span class="o">=</span> <span class="s1">&#39;SomeProject&#39;</span>
+
+<span class="c1"># Note the double-quotes and expression:</span>
+<span class="n">file</span> <span class="s2">&quot;bin/</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">Runner.swf&quot;</span> <span class="k">do</span>
+  <span class="c1"># Create the file here.</span>
+<span class="k">end</span>
+</code></pre>
+</div><p>A simple, named Rake task that depends on another:</p>
+<div class="highlight"><pre><code class="ruby"><span class="c1"># Note the hash with a single Symbol key</span>
+<span class="c1"># and Symbol value:</span>
+<span class="n">task</span> <span class="ss">:my_task</span> <span class="o">=&gt;</span> <span class="ss">:other_task</span> <span class="k">do</span>
+  <span class="c1"># Do some work here.</span>
+<span class="k">end</span>
+</code></pre>
+</div><p>A simple, named Rake task that depends on multiple other tasks:</p>
+<div class="highlight"><pre><code class="ruby"><span class="c1"># Not the hash with a single Symbol key,</span>
+<span class="c1"># and Array of Symbol values:</span>
+<span class="n">task</span> <span class="ss">:my_task</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:other_task_one</span><span class="p">,</span> <span class="ss">:other_task_two</span><span class="o">]</span> <span class="k">do</span>
+  <span class="c1"># Do some work here.</span>
+<span class="k">end</span>
+</code></pre>
+</div><p>When referring to Rake tasks by name, it&#8217;s generally a good idea to use Symbols for tasks that were defined with Symbols and Strings for tasks that were defined as such.</p>
+<p>For more detailed (and well-written) information, be sure to read Martin Fowler&#8217;s <a target="_blank" href="http://martinfowler.com/articles/rake.html">seminal post</a> on Rake.</p>
+<h2>Conclusion</h2>
+<p>That&#8217;s probably enough Ruby to get you through reading and editing a Rake file. I sincerely hope you find yourself intrigued by this language and, like me, get drawn into a new way of considering programming problems.</p>
+<p>If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet &#8211; <a target="_blank" href="https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts">fork</a>, fix and send a pull request.</p>
+  </div>
+</div>
+
+<div class="center even-section">
+  <div class="content header-shadow">
+
+    <div id="disqus_thread"></div>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+
+
+  <div id="footer">
+    <div class="center">
+      <div class="content header-shadow">
+
+        <table>
+
+          <tr>
+            <td>
+
+              <ul>
+                <li class="header">Details</li>
+                <li class="home"><a href="/">Home</a></li>
+                <li class="troubleshooting"><a href="/troubleshooting.html">Troubleshooting</a></li>
+                <li class="migrating"><a href="/2010/12/29/migrating.html">Migration Guide</a></li>
+
+                <li class="current-docs"><a href="/docs/1.1/frames.html">Docs (1.1 &mdash; Frames)</a></li>
+                <li><a href="/docs/1.1/index.html">Docs (1.1 &mdash; No Frames)</a></li>
+
+                <li class="legacy-docs"><a href="/rdoc/index.html">Legacy Docs (0.7)</a></li>
+                <li class="legacy-site"><a href="/legacy/index.html">Legacy Site (0.7)</a></li>
+              </ul>
+
+            </td>
+            <td>
+
+              <ul>
+                <li class="header">Blog <a href="/atom.xml"><img class="footer-feed-icon" src="/images/35px-Feed-icon.png" /></a></li>
+                
+                <li class="post"><a href="/2011/01/20/ruby-for-actionscripters.html"><span class="date">2011-01-20</span> | Ruby for ActionScripters</a></li>
+                
+                <li class="post"><a href="/2011/01/19/using-fdb.html"><span class="date">2011-01-19</span> | Using the Flex DeBugger (FDB)</a></li>
+                
+                <li class="post"><a href="/2011/01/18/using-fcsh.html"><span class="date">2011-01-18</span> | Using the Flex Compiler SHell (FCSH)</a></li>
+                
+                <li class="post"><a href="/2010/12/31/using-generators.html"><span class="date">2010-12-31</span> | Using Sprout Generators</a></li>
+                
+                <li class="post"><a href="/2010/12/29/migrating.html"><span class="date">2010-12-29</span> | Migrating from 0.7 to 1.0 beta</a></li>
+                
+                <li class="post"><a href="/2010/12/28/version-1.0-announced.html"><span class="date">2010-12-28</span> | Project Sprouts Version 1.0 Beta Released!</a></li>
+                
+              </ul>
+
+            </td>
+            <td>
+
+              <ul>
+                <li class="header">Do It</li>
+                <li><a target="_blank" href="http://groups.google.com/group/projectsprouts">Contact</a> (Google Groups)</li>
+                <li><a target="_blank" href="https://github.com/lukebayes/project-sprouts/tree/master">Source Code</a> (Github)</li>
+                <li><a target="_blank" href="https://github.com/lukebayes/project-sprouts/issues">File an Issue</a> (Github)</li>
+                <li><a target="_blank" href="http://rubygems.org/gems/sprout">Download</a> (RubyGems)</li>
+                <li><a target="_blank" href="http://projectsprouts.org/docs/1.1/frames.html">Documentation</a> 
+                (<a target="_blank" href="http://projectsprouts.org/docs/1.1/index.html">No Frames</a>)</li>
+              </ul>
+
+            </td>
+
+          </tr>
+
+        </table>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+<!-- Google Analytics for projectsprouts.org -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-1619511-4");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+
+<!-- Disquss -->
+<script type="text/javascript">
+    //var disqus_developer = 1;
+    var disqus_shortname = 'projectsprouts';
+    var disqus_title     = 'Ruby for ActionScripters'
+    var disqus_url       = 'http://projectsprouts.org/2011/01/20/ruby-for-actionscripters.html';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+
+</html>
+

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Introducing Ruby to ActionScripters
+title: Ruby for ActionScripters
 author: Luke Bayes
 post_image_flickr: http://www.flickr.com/photos/greencolander/2895452690
 post_image_author_link: http://www.flickr.com/photos/greencolander/
@@ -19,7 +19,7 @@ h1. {{ page.title }}
   <div class="attribution"> "Ruby Website":http://ruby-lang.org </div>
 </div>
 
-This means that Ruby has opinions, and many of Ruby's opinions are exactly inverted from what you may have grown to love in ActionScript. There was a time when this made me uncomfortable, and I'm sure it will make some of you uncomfortable. Well, not _you_ of course, but maybe someone you know...
+This means that Ruby has opinions, and many of Ruby's opinions are exactly inverted from what you may have grown to love in ActionScript. There was a time when this made me uncomfortable, and I'm sure it will make some of you uncomfortable too. Well, not _you_ of course, but maybe someone you know...
 
 The intention of this article, is to provide a brief introduction to Ruby for developers that are already familiar with ActionScript 3.0. It is not my intention to provide comprehensive coverage of the Ruby language here. For a much more well-written and far more comprehensive explanation of Ruby, please take the time to read <a target="_blank" href="http://mislav.uniqpath.com/poignant-guide/">Why's Poignant Guide to Ruby</a>, quite possibly the most entertaining and well-written computer book in history.
 
@@ -32,11 +32,9 @@ h1. Quack like a what?
 
 Ruby is a dynamic language, which means that a variable can be any concrete data type. The important thing is that an object define the methods and attributes that its clients attempt to access. This paradigm is often referred to as <a target="_blank" href="http://en.wikipedia.org/wiki/Duck_typing">Duck Typing</a>.
 
-When it's unfamiliar, Ruby syntax has a few rules that can trip you up, so I'll kick this off by reviewing some key features of the language.
-
 h2. Trying Ruby
 
-If you have installed Ruby and gotten it into your system path, you can kick off a <a target="_blank" href="http://en.wikipedia.org/wiki/Read-eval-print_loop">Read Eval Print Loop (REPL)</a> by typing:
+If you have <a target="_blank" href="http://www.ruby-lang.org/en/downloads/">installed Ruby</a> (Preferably with <a target="_blank" href="http://rvm.beginrescueend.com/">RVM</a> or <a target="_blank" href="https://github.com/vertiginous/pik">something similar</a>), you can kick off a <a target="_blank" href="http://en.wikipedia.org/wiki/Read-eval-print_loop">Read Eval Print Loop (REPL)</a> by typing:
 
 {% highlight bash %}
 irb
@@ -47,7 +45,7 @@ _(Type 'quit' and hit enter to leave the REPL)_
 The @puts@ method will send a String value to stdout and you can think of this like ActionScript's @trace@ method.
 
 {% highlight ruby %}
-puts "Hello World"
+puts 'Hello World'
 {% endhighlight %}
 
 Try running irb and then @puts@ some messages now.
@@ -72,11 +70,7 @@ There are a handful of different ways to declare Strings in Ruby, but the main t
 
 A String that is defined within single quotes will contain literally whatever is defined within the quotes. This means that backslashes will not be rendered as escape sequences, they will just be backslash characters. There is no way to insert expressions in between single quotes, so if you want to assemble a string with single quotes, this is done by concatenating different strings together.
 
-Single quoted strings require Ruby interpreter to do less work and are therefore preferred. I usually use single quotes wherever I don't need an evaluated expression or escape sequence, but for the benefit of people that don't know about these differences, I do try to use double quotes in generated Rake files wherever someone might try an expression (like in task names for example).
-
-{% highlight ruby %}
-puts 'Hello World'
-{% endhighlight %}
+Single quoted strings are usually preferred as they cost less in terms of work. I usually use single quotes wherever I don't need an evaluated expression or escape sequence, but for the benefit of people that don't know about these differences, I do try to use double quotes in generated Rake files wherever someone might try an expression (like in task names).
 
 A String that is defined within double quotes will be interpreted for embedded Ruby expressions and escape sequences will be resolved so that they are replaced with the character literal that they represent.
 
@@ -85,7 +79,7 @@ suffix = "World!\n"
 str = "Hello #{suffix}"
 {% endhighlight %}
 
-If you're coming from ActionScript, you'll probably be tempted to concatenate Strings with expressions like:
+If you're thinking in ActionScript, you'll probably be tempted to concatenate Strings with expressions like:
 
 {% highlight ruby %}
 a = 'aaa'
@@ -96,14 +90,16 @@ puts 'a: ' + a + ' b: ' + b
 While this will usually work, it will explode if the expression values are nil. The preferred way to assemble Strings and expression values (especially for debugging), is to use double quotes and Ruby expression syntax like:
 
 {% highlight ruby %}
+a = 'aaa'
+b = 'bbb'
 puts "a: #{a} b: #{b}"
 {% endhighlight %}
 
-This will insert an empty String for values that are nil.
+This will call @to_s@ on provided expressions and insert an empty String for values that are nil.
 
 h2. Symbols
 
-Ruby has an interesting primitive called a @Symbol@. Symbols are not Strings, but are often used in places where a String might also suffice. There are some differences between Symbols and Strings and the first one is that Symbols are slightly more memory efficient than Strings. 
+Ruby has an interesting primitive called a @Symbol@. Symbols are not Strings, but are often used in places where a String might also suffice. There are some differences between Symbols and Strings and the first one is that Symbols are more memory efficient than Strings. 
 
 A Symbol is defined (or referenced) in Ruby with a leading colon as follows:
 
@@ -134,9 +130,9 @@ In Rake, a Symbol is often used for a Rake task name, _unless_ that task refers 
 
 h2. Parentheses
 
-The parentheses that surround parameters in a Ruby method declaration (and method calls) are _optional_, and by convention, are only used when critical for proper execution, or to improve legibility for nested expressions. As with most things _stylish_, there is <a target="_blank" href="http://stackoverflow.com/questions/340624/do-you-leave-parentheses-in-or-out-in-ruby">little consensus</a> on when to use or omit parentheses in Ruby.
+The parentheses that surround parameters in a Ruby method declaration (and method calls) are _optional_, and by convention, are only used when critical for proper execution, or to improve legibility for nested expressions. As with most things _stylish_ there is <a target="_blank" href="http://stackoverflow.com/questions/340624/do-you-leave-parentheses-in-or-out-in-ruby">little consensus</a> on when to use or omit parentheses in Ruby.
 
-This does take some time to get used to, but it leads to some interesting improvements in readability, especially in environments like Rake files.
+Making parentheses optional does take some time to get used to, but eventually it leads to improved readability, especially in environments like Rake files.
 
 Following are some examples to help you understand this issue.
 
@@ -148,7 +144,7 @@ public function foo(a:String, b:String):void {
 }
 {% endhighlight %}
 
-Would be defined like this in Ruby:
+Could be defined like this in Ruby:
 
 {% highlight ruby %}
 def foo a, b
@@ -182,7 +178,7 @@ Of course, the following is also valid Ruby:
 foo("bar", "baz")
 {% endhighlight %}
 
-You may be wondering, "When _should_ I add the parens?" at this point. Here is a reasonable example of an expression that needs parens:
+You may be wondering, "When _should_ I add the parens?" at this point. Here is a reasonable example of an expression that probably should get parentheses:
 
 {% highlight ruby %}
 assert foo("bar", "baz")
@@ -190,7 +186,7 @@ assert foo("bar", "baz")
 
 This expression is calling the imaginary @foo@ method, sending it two arguments, @bar@ and @baz@, then it's sending the return value of that method call to the @assert@ method. 
 
-Even though the interpreter can figure out what's going on here, it's arguably more readable to parenthesize nested expressions.
+Even though the interpreter can figure out what's going on without them, it's arguably more readable to parenthesize nested expressions.
 
 h2. Return values
 
@@ -198,7 +194,7 @@ You should also know that Ruby methods always return a value, whether you use th
 
 h2. Hash Rockets
 
-Ruby Hashes are _(<a target="_blank" href="http://blog.peepcode.com/tutorials/2011/rip-ruby-hash-rocket-syntax">historically</a>)_ delimited by a "Hash Rocket", this is an equal sign, followed by a greater than sign, like:
+Ruby Hashes are historically delimited by a "Hash Rocket", this is an equal sign, followed by a greater than sign, like:
 
 {% highlight ruby %}
 =>
@@ -216,7 +212,7 @@ Could be written in Ruby like this:
 hash = { :a => 'a', :b => 'b', :c => 'c' }
 {% endhighlight %}
 
-Even thought the Hash Rocket is no longer required in Ruby 1.9.x, Sprouts is still using it for the time being. We'll likely update to the new (more ECMA-like) syntax at some point in the future.
+Even though the Hash Rocket is <a target="_blank" href="http://blog.peepcode.com/tutorials/2011/rip-ruby-hash-rocket-syntax">no longer required</a> in Ruby 1.9.x, Sprouts is still using it for the time being. We'll likely update to the new (more ECMA-like) syntax at some point in the future, but while we generally work in legacy versions of Ruby, there's no good reason to actively break backwards compatibility.
 
 h2. Hash Brackets
 
@@ -228,9 +224,58 @@ hash = :a => 'a', :b => 'b', :c => 'c'
 
 Notice how the Ruby Hash prefixes the Hash keys with a colon. This indicates that we're using Symbols as keys.
 
+h2. Rake
+
+I believe that Rake (and how Sprouts uses) it is a large enough topic for it's own post, but while we're talking about duck typing, Strings, Symbols and Hashes, I really want to highlight how these syntactic concepts are exploited in Rake.
+
+A simple, named Rake task:
+
+{% highlight ruby %}
+# Note the Symbol name:
+task :my_task do
+  # Do some work here.
+end
+{% endhighlight %}
+
+A simple, _file_ Rake task:
+
+{% highlight ruby %}
+# Note the single quotes:
+name = 'SomeProject'
+
+# Note the double-quotes and expression:
+file "bin/#{name}Runner.swf" do
+  # Create the file here.
+end
+{% endhighlight %}
+
+A simple, named Rake task that depends on another:
+
+{% highlight ruby %}
+# Note the hash with a single Symbol key
+# and Symbol value:
+task :my_task => :other_task do
+  # Do some work here.
+end
+{% endhighlight %}
+
+A simple, named Rake task that depends on multiple other tasks:
+
+{% highlight ruby %}
+# Not the hash with a single Symbol key,
+# and Array of Symbol values:
+task :my_task => [:other_task_one, :other_task_two] do
+  # Do some work here.
+end
+{% endhighlight %}
+
+When referring to Rake tasks by name, it's generally a good idea to use Symbols for tasks that were defined with Symbols and Strings for tasks that were defined as such.
+
+For more detailed (and well-written) information, be sure to read Martin Fowler's <a target="_blank" href="http://martinfowler.com/articles/rake.html">seminal post</a> on Rake.
+
 h2. Conclusion
 
 That's probably enough Ruby to get you through reading and editing a Rake file. I sincerely hope you find yourself intrigued by this language and, like me, get drawn into a new way of considering programming problems.
 
-This brings us to the end of the "{{ page.title }}" post. If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet - <a target="_blank" href="https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts">fork</a>, fix and send a pull request.
+If you find anything here in error, <a target="_blank" href="http://groups.google.com/group/projectsprouts">please let us know</a>, or better yet - <a target="_blank" href="https://github.com/lukebayes/project-sprouts/blob/gh-pages/_source/_posts">fork</a>, fix and send a pull request.
 
