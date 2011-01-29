@@ -378,14 +378,14 @@ module Sprout
       # @param path [File] Path to the executable binary that should be executed instead 
       #   of whatever Sprout.load would have provided. If a value is set here, Sprout.load 
       #   will not be called.
-      # @returns [File] Path to the executable binary that should be executed.
+      # @return [File] Path to the executable binary that should be executed.
       #
       def binary_path=(path)
         @binary_path = path
       end
 
       ##
-      # @returns [File] Path to the executable binary that should be executed.
+      # @return [File] Path to the executable binary that should be executed.
       def binary_path
         @binary_path ||= Sprout::Executable.load(executable, pkg_name, pkg_version).path
       end
