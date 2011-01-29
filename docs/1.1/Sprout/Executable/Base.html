@@ -85,7 +85,7 @@
 
 <div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="../../FlashSDK/ADL.html" title="FlashSDK::ADL (class)">FlashSDK::ADL</a></span>, <span class='object_link'><a href="../../FlashSDK/ADT.html" title="FlashSDK::ADT (class)">FlashSDK::ADT</a></span>, <span class='object_link'><a href="../../FlashSDK/CompilerBase.html" title="FlashSDK::CompilerBase (class)">FlashSDK::CompilerBase</a></span>, <span class='object_link'><a href="../Daemon.html" title="Sprout::Daemon (class)">Daemon</a></span>, <span class='object_link'><a href="../Generator/Base.html" title="Sprout::Generator::Base (class)">Generator::Base</a></span></p>
+  <p class="children"><span class='object_link'><a href="../../FlashSDK/ADL.html" title="FlashSDK::ADL (class)">FlashSDK::ADL</a></span>, <span class='object_link'><a href="../../FlashSDK/ADT.html" title="FlashSDK::ADT (class)">FlashSDK::ADT</a></span>, <span class='object_link'><a href="../../FlashSDK/CompilerBase.html" title="FlashSDK::CompilerBase (class)">FlashSDK::CompilerBase</a></span>, <span class='object_link'><a href="../CommandLine.html" title="Sprout::CommandLine (class)">CommandLine</a></span>, <span class='object_link'><a href="Session.html" title="Sprout::Executable::Session (class)">Session</a></span>, <span class='object_link'><a href="../Generator/Base.html" title="Sprout::Generator::Base (class)">Generator::Base</a></span></p>
 </div>
 
   <h2>Constant Summary</h2>
@@ -501,6 +501,53 @@ Rake::Task[:name] property and apply it to this field.</p>
 
     <ul class="summary">
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#binary_path-instance_method" title="#binary_path (instance method)">- (File) <strong>binary_path</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Path to the executable binary that should be executed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#binary_path%3D-instance_method" title="#binary_path= (instance method)">- (File) <strong>binary_path=</strong>(path) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Replace the binary that will be executed with a path to one of your 
+choosing.</p>
+</div></span>
+  
+</li>
+
+      
         <li class="protected ">
   <span class="summary_signature">
     
@@ -741,6 +788,90 @@ whatever customization is necessary for a particular library type.</p>
   
   
   <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stderr-instance_method" title="#stderr (instance method)">- (Object) <strong>stderr</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stderr%3D-instance_method" title="#stderr= (instance method)">- (Object) <strong>stderr=</strong>(io) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stdout-instance_method" title="#stdout (instance method)">- (Object) <strong>stdout</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stdout%3D-instance_method" title="#stdout= (instance method)">- (Object) <strong>stdout=</strong>(io) </a>
+    
+
+    
+  </span>
+  
+  
+  
   
   
   
@@ -1667,7 +1798,162 @@ interpreted in the order they are defined using <tt>add_param</tt>.</p>
     
     
       <div class="method_details first">
-  <p class="signature first" id="create_outer_task-instance_method">
+  <p class="signature first" id="binary_path-instance_method">
+  
+    - (<tt>File</tt>) <strong>binary_path</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Path to the executable binary that should be executed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the executable binary that should be executed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+389
+390
+391</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 389</span>
+
+<span class='kw'>def</span> <span class='id binary_path'>binary_path</span>
+  <span class='ivar'>@binary_path</span> <span class='op'>||=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Executable</span><span class='period'>.</span><span class='id load'>load</span><span class='lparen'>(</span><span class='id executable'>executable</span><span class='comma'>,</span> <span class='id pkg_name'>pkg_name</span><span class='comma'>,</span> <span class='id pkg_version'>pkg_version</span><span class='rparen'>)</span><span class='period'>.</span><span class='id path'>path</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="binary_path=-instance_method">
+  
+    - (<tt>File</tt>) <strong>binary_path=</strong>(path) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Replace the binary that will be executed with a path to one of your 
+choosing. This work is usually performed on the yielded instance from Rake
+like:</p>
+
+<pre class="code"><span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id binary_path'>binary_path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>vendor/sdks/4.1.0/bin/mxmlc</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+<p>It's important to note that Windows systems will check the provided path
+for binaries of the same name that end with .exe and .bat and will use
+those in place of the provided name if they exist.</p>
+
+<p>For example, if you set <tt>binary_path</tt> to:</p>
+
+<pre class="code"><span class='id t'>t</span><span class='period'>.</span><span class='id binary_path'>binary_path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>vendor/sdks/4.0.1/bin/mxmlc</span><span class='tstring_end'>'</span></span></pre>
+
+<p>And there is a similarly-named file in the same directory, but named:</p>
+
+<pre class="code">vendor/sdks/4.0.1/bin/mxmlc.bat</pre>
+
+<p>Windows systems will execute this .bat file.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+        <span class='name'>path</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the executable binary that should be executed instead  of whatever
+Sprout.load would have provided. If a value is set here, Sprout.load  will
+not be called.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the executable binary that should be executed.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+383
+384
+385</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 383</span>
+
+<span class='kw'>def</span> <span class='id binary_path='>binary_path=</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span>
+  <span class='ivar'>@binary_path</span> <span class='op'>=</span> <span class='id path'>path</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_outer_task-instance_method">
   
     - (<tt>Object</tt>) <strong>create_outer_task</strong>(*args)  <span class="extras">(protected)</span>
   
@@ -1698,14 +1984,14 @@ executables that do not result in the creation of a file.</p>
       <pre class="lines">
 
 
-363
-364
-365
-366
-367</pre>
+420
+421
+422
+423
+424</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 363</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 420</span>
 
 <span class='kw'>def</span> <span class='id create_outer_task'>create_outer_task</span> <span class='op'>*</span><span class='id args'>args</span>
   <span class='id file'>file</span> <span class='op'>*</span><span class='id args'>args</span> <span class='kw'>do</span>
@@ -1740,12 +2026,12 @@ executables that do not result in the creation of a file.</p>
       <pre class="lines">
 
 
-332
-333
-334</pre>
+348
+349
+350</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 332</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 348</span>
 
 <span class='kw'>def</span> <span class='id default_file_expression'>default_file_expression</span>
   <span class='ivar'>@default_file_expression</span> <span class='op'>||=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Executable</span><span class='op'>::</span><span class='const'>DEFAULT_FILE_EXPRESSION</span>
@@ -1782,13 +2068,13 @@ calling execute will wind up executing the  external process.</p>
       <pre class="lines">
 
 
-258
-259
-260
-261</pre>
+274
+275
+276
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 258</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 274</span>
 
 <span class='kw'>def</span> <span class='id execute'>execute</span>
   <span class='id prepare'>prepare</span>
@@ -1824,12 +2110,12 @@ calling execute will wind up executing the  external process.</p>
       <pre class="lines">
 
 
-343
-344
-345</pre>
+400
+401
+402</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 343</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 400</span>
 
 <span class='kw'>def</span> <span class='id execute_delegate'>execute_delegate</span>
   <span class='id system_execute'>system_execute</span> <span class='id binary_path'>binary_path</span><span class='comma'>,</span> <span class='id to_shell'>to_shell</span>
@@ -1864,16 +2150,16 @@ parameters than generator B.</p>
       <pre class="lines">
 
 
-302
-303
-304
-305
-306
-307
-308</pre>
+318
+319
+320
+321
+322
+323
+324</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 302</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 318</span>
 
 <span class='kw'>def</span> <span class='id from_hash'>from_hash</span> <span class='id hash'>hash</span>
   <span class='id hash'>hash</span><span class='period'>.</span><span class='id each_pair'>each_pair</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id key'>key</span><span class='comma'>,</span> <span class='id value'>value</span><span class='op'>|</span>
@@ -1914,11 +2200,11 @@ folder), or it can be an Array of paths to files (or folders).</p>
       <pre class="lines">
 
 
-411
-412</pre>
+468
+469</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 411</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 468</span>
 
 <span class='kw'>def</span> <span class='id library_added'>library_added</span> <span class='id path_or_paths'>path_or_paths</span>
 <span class='kw'>end</span></pre>
@@ -1940,18 +2226,18 @@ folder), or it can be an Array of paths to files (or folders).</p>
       <pre class="lines">
 
 
-239
-240
-241
-242
-243
-244
-245
-246
-247</pre>
+255
+256
+257
+258
+259
+260
+261
+262
+263</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 239</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 255</span>
 
 <span class='kw'>def</span> <span class='id parse!'>parse!</span> <span class='id commandline_options'>commandline_options</span>
   <span class='kw'>begin</span>
@@ -1980,19 +2266,19 @@ folder), or it can be an Array of paths to files (or folders).</p>
       <pre class="lines">
 
 
-392
-393
-394
-395
-396
-397
-398
-399
-400
-401</pre>
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 392</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 449</span>
 
 <span class='kw'>def</span> <span class='id parse_extra_options!'>parse_extra_options!</span> <span class='id options'>options</span>
   <span class='id options'>options</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id value'>value</span><span class='op'>|</span>
@@ -2022,16 +2308,16 @@ folder), or it can be an Array of paths to files (or folders).</p>
       <pre class="lines">
 
 
-384
-385
-386
-387
-388
-389
-390</pre>
+441
+442
+443
+444
+445
+446
+447</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 384</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 441</span>
 
 <span class='kw'>def</span> <span class='id parse_rake_task_arg'>parse_rake_task_arg</span> <span class='id arg'>arg</span>
   <span class='kw'>return</span> <span class='id arg'>arg</span> <span class='kw'>if</span> <span class='id arg'>arg</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Symbol</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id arg'>arg</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span>
@@ -2058,16 +2344,16 @@ folder), or it can be an Array of paths to files (or folders).</p>
       <pre class="lines">
 
 
-347
-348
-349
-350
-351
-352
-353</pre>
+404
+405
+406
+407
+408
+409
+410</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 347</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 404</span>
 
 <span class='kw'>def</span> <span class='id prepare'>prepare</span>
   <span class='kw'>return</span> <span class='kw'>if</span> <span class='ivar'>@prepared</span>
@@ -2075,6 +2361,118 @@ folder), or it can be an Array of paths to files (or folders).</p>
   <span class='id params'>params</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id param'>param</span><span class='op'>|</span>
     <span class='id param'>param</span><span class='period'>.</span><span class='id prepare'>prepare</span>
   <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="stderr-instance_method">
+  
+    - (<tt>Object</tt>) <strong>stderr</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+251
+252
+253</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 251</span>
+
+<span class='kw'>def</span> <span class='id stderr'>stderr</span>
+  <span class='ivar'>@stderr</span> <span class='op'>||=</span> <span class='const'>Sprout</span><span class='period'>.</span><span class='id stderr'>stderr</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="stderr=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>stderr=</strong>(io) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+247
+248
+249</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 247</span>
+
+<span class='kw'>def</span> <span class='id stderr='>stderr=</span><span class='lparen'>(</span><span class='id io'>io</span><span class='rparen'>)</span>
+  <span class='ivar'>@stderr</span> <span class='op'>=</span> <span class='id io'>io</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="stdout-instance_method">
+  
+    - (<tt>Object</tt>) <strong>stdout</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+243
+244
+245</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 243</span>
+
+<span class='kw'>def</span> <span class='id stdout'>stdout</span>
+  <span class='ivar'>@stdout</span> <span class='op'>||=</span> <span class='const'>Sprout</span><span class='period'>.</span><span class='id stdout'>stdout</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="stdout=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>stdout=</strong>(io) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+239
+240
+241</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 239</span>
+
+<span class='kw'>def</span> <span class='id stdout='>stdout=</span><span class='lparen'>(</span><span class='id io'>io</span><span class='rparen'>)</span>
+  <span class='ivar'>@stdout</span> <span class='op'>=</span> <span class='id io'>io</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2094,12 +2492,12 @@ folder), or it can be an Array of paths to files (or folders).</p>
       <pre class="lines">
 
 
-414
-415
-416</pre>
+471
+472
+473</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 414</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 471</span>
 
 <span class='kw'>def</span> <span class='id system_execute'>system_execute</span> <span class='id binary'>binary</span><span class='comma'>,</span> <span class='id params'>params</span>
   <span class='const'>Sprout</span><span class='period'>.</span><span class='id current_system'>current_system</span><span class='period'>.</span><span class='id execute'>execute</span> <span class='id binary'>binary</span><span class='comma'>,</span> <span class='id params'>params</span>
@@ -2134,16 +2532,16 @@ handled manually, or patches are welcome!</p>
       <pre class="lines">
 
 
-289
-290
-291
-292
-293
-294
-295</pre>
+305
+306
+307
+308
+309
+310
+311</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 289</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 305</span>
 
 <span class='kw'>def</span> <span class='id to_hash'>to_hash</span>
   <span class='id result'>result</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -2170,12 +2568,12 @@ handled manually, or patches are welcome!</p>
       <pre class="lines">
 
 
-310
-311
-312</pre>
+326
+327
+328</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 310</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 326</span>
 
 <span class='kw'>def</span> <span class='id to_help'>to_help</span>
   <span class='id option_parser'>option_parser</span><span class='period'>.</span><span class='id to_s'>to_s</span>
@@ -2239,30 +2637,30 @@ handled manually, or patches are welcome!</p>
       <pre class="lines">
 
 
-263
-264
-265
-266
-267
-268
-269
-270
-271
-272
-273
-274
-275
-276
-277
-278
 279
 280
 281
 282
-283</pre>
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 263</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 279</span>
 
 <span class='kw'>def</span> <span class='id to_rake'>to_rake</span> <span class='op'>*</span><span class='id args'>args</span>
   <span class='comment'># Define the file task first - so that
@@ -2314,22 +2712,22 @@ execution</p>
       <pre class="lines">
 
 
-315
-316
-317
-318
-319
-320
-321
-322
-323
-324
-325
-326
-327</pre>
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 315</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 331</span>
 
 <span class='kw'>def</span> <span class='id to_shell'>to_shell</span>
   <span class='kw'>return</span> <span class='ivar'>@to_shell_proc</span><span class='period'>.</span><span class='id call'>call</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@to_shell_proc</span><span class='period'>.</span><span class='id nil?'>nil?</span>
@@ -2382,14 +2780,14 @@ this method and prevent it from calling <tt>CLEAN.add</tt>.</p>
       <pre class="lines">
 
 
-378
-379
-380
-381
-382</pre>
+435
+436
+437
+438
+439</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 378</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/base.rb', line 435</span>
 
 <span class='kw'>def</span> <span class='id update_rake_task_name_from_args'>update_rake_task_name_from_args</span> <span class='op'>*</span><span class='id args'>args</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id rake_task_name'>rake_task_name</span> <span class='op'>=</span> <span class='id parse_rake_task_arg'>parse_rake_task_arg</span> <span class='id args'>args</span><span class='period'>.</span><span class='id last'>last</span>
@@ -2406,7 +2804,7 @@ this method and prevent it from calling <tt>CLEAN.add</tt>.</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 28 12:34:48 2010 by 
+  Generated on Sat Jan 29 11:23:25 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

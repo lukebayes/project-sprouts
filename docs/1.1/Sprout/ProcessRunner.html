@@ -624,7 +624,7 @@ previous example with:</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#update_status-instance_method" title="#update_status (instance method)">- (Object) <strong>update_status</strong> </a>
+      <a href="#update_status-instance_method" title="#update_status (instance method)">- (Object) <strong>update_status</strong>(sig = 0) </a>
     
 
     
@@ -1048,7 +1048,7 @@ previous example with:</p>
       <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id close'>close</span>
-  <span class='id update_status'>update_status</span>
+  <span class='id w'>w</span><span class='period'>.</span><span class='id close_write'>close_write</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1078,12 +1078,12 @@ previous example with:</p>
       <pre class="lines">
 
 
-145
-146
-147</pre>
+147
+148
+149</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 145</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 147</span>
 
 <span class='kw'>def</span> <span class='id close_write'>close_write</span>
   <span class='ivar'>@w</span><span class='period'>.</span><span class='id close_write'>close_write</span>
@@ -1152,8 +1152,8 @@ generally only used by Cygwin and *nix variants (including OS X).</p>
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Execute the provided command using the win32-open3 library. This is
-generally used only only Windows systems (even 64 bit).</p>
+<p>Execute the provided command using the win32-open3 library. This should
+only be used on Windows systems (even 64 bit).</p>
 
 
   </div>
@@ -1208,12 +1208,12 @@ generally used only only Windows systems (even 64 bit).</p>
       <pre class="lines">
 
 
-121
-122
-123</pre>
+123
+124
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 121</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 123</span>
 
 <span class='kw'>def</span> <span class='id flush'>flush</span>
   <span class='ivar'>@w</span><span class='period'>.</span><span class='id flush'>flush</span>
@@ -1246,12 +1246,12 @@ generally used only only Windows systems (even 64 bit).</p>
       <pre class="lines">
 
 
-127
-128
-129</pre>
+129
+130
+131</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 129</span>
 
 <span class='kw'>def</span> <span class='id getc'>getc</span>
   <span class='ivar'>@r</span><span class='period'>.</span><span class='id getc'>getc</span>
@@ -1292,7 +1292,7 @@ generally used only only Windows systems (even 64 bit).</p>
       <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id kill'>kill</span>
-  <span class='const'>Process</span><span class='period'>.</span><span class='id kill'>kill</span><span class='lparen'>(</span><span class='int'>9</span><span class='comma'>,</span> <span class='id pid'>pid</span><span class='rparen'>)</span>
+  <span class='id update_status'>update_status</span> <span class='int'>9</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1322,12 +1322,12 @@ generally used only only Windows systems (even 64 bit).</p>
       <pre class="lines">
 
 
-133
-134
-135</pre>
+135
+136
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 133</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 135</span>
 
 <span class='kw'>def</span> <span class='id print'>print</span> <span class='id msg'>msg</span>
   <span class='ivar'>@w</span><span class='period'>.</span><span class='id print'>print</span> <span class='id msg'>msg</span>
@@ -1360,12 +1360,12 @@ generally used only only Windows systems (even 64 bit).</p>
       <pre class="lines">
 
 
-139
-140
-141</pre>
+141
+142
+143</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 141</span>
 
 <span class='kw'>def</span> <span class='id puts'>puts</span><span class='lparen'>(</span><span class='id msg'>msg</span><span class='rparen'>)</span>
   <span class='ivar'>@w</span><span class='period'>.</span><span class='id puts'>puts</span><span class='lparen'>(</span><span class='id msg'>msg</span><span class='rparen'>)</span>
@@ -1398,12 +1398,12 @@ generally used only only Windows systems (even 64 bit).</p>
       <pre class="lines">
 
 
-151
-152
-153</pre>
+153
+154
+155</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 153</span>
 
 <span class='kw'>def</span> <span class='id read'>read</span>
   <span class='kw'>return</span> <span class='ivar'>@r</span><span class='period'>.</span><span class='id read'>read</span>
@@ -1436,12 +1436,12 @@ generally used only only Windows systems (even 64 bit).</p>
       <pre class="lines">
 
 
-157
-158
-159</pre>
+159
+160
+161</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='id read_err'>read_err</span>
   <span class='kw'>return</span> <span class='ivar'>@e</span><span class='period'>.</span><span class='id read'>read</span>
@@ -1507,12 +1507,12 @@ generally used only only Windows systems (even 64 bit).</p>
       <pre class="lines">
 
 
-115
-116
-117</pre>
+117
+118
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 117</span>
 
 <span class='kw'>def</span> <span class='id readlines'>readlines</span> <span class='id count'>count</span>
   <span class='ivar'>@r</span><span class='period'>.</span><span class='id readlines'>readlines</span> <span class='id count'>count</span>
@@ -1578,12 +1578,12 @@ generally used only only Windows systems (even 64 bit).</p>
       <pre class="lines">
 
 
-106
-107
-108</pre>
+108
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 108</span>
 
 <span class='kw'>def</span> <span class='id readpartial'>readpartial</span> <span class='id count'>count</span>
   <span class='ivar'>@r</span><span class='period'>.</span><span class='id readpartial'>readpartial</span> <span class='id count'>count</span>
@@ -1606,12 +1606,12 @@ generally used only only Windows systems (even 64 bit).</p>
       <pre class="lines">
 
 
-161
-162
-163</pre>
+163
+164
+165</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 163</span>
 
 <span class='kw'>def</span> <span class='id readpartial_err'>readpartial_err</span> <span class='id count'>count</span>
   <span class='kw'>return</span> <span class='ivar'>@e</span><span class='period'>.</span><span class='id readpartial'>readpartial</span> <span class='id count'>count</span>
@@ -1624,7 +1624,7 @@ generally used only only Windows systems (even 64 bit).</p>
       <div class="method_details ">
   <p class="signature " id="update_status-instance_method">
   
-    - (<tt>Object</tt>) <strong>update_status</strong> 
+    - (<tt>Object</tt>) <strong>update_status</strong>(sig = 0) 
   
 
   
@@ -1637,30 +1637,52 @@ generally used only only Windows systems (even 64 bit).</p>
   </div>
 </div>
 <div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
   
+    <li>
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+        <span class='name'>sig</span>
+      
+      
+        <em class="default">(defaults to: <tt>0</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The signal to send, default 0 (or no action requested)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-91
-92
 93
 94
 95
 96
 97
 98
-99</pre>
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 91</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/process_runner.rb', line 93</span>
 
-<span class='kw'>def</span> <span class='id update_status'>update_status</span>
+<span class='kw'>def</span> <span class='id update_status'>update_status</span> <span class='id sig'>sig</span><span class='op'>=</span><span class='int'>0</span>
   <span class='id pid_int'>pid_int</span> <span class='op'>=</span> <span class='const'>Integer</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span> <span class='ivar'>@pid</span> <span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>begin</span>
-    <span class='const'>Process</span><span class='op'>::</span><span class='id kill'>kill</span> <span class='int'>0</span><span class='comma'>,</span> <span class='id pid_int'>pid_int</span>
+    <span class='const'>Process</span><span class='op'>::</span><span class='id kill'>kill</span> <span class='id sig'>sig</span><span class='comma'>,</span> <span class='id pid_int'>pid_int</span>
     <span class='kw'>true</span>
   <span class='kw'>rescue</span> <span class='const'>Errno</span><span class='op'>::</span><span class='const'>ESRCH</span>
     <span class='kw'>false</span>
@@ -1676,7 +1698,7 @@ generally used only only Windows systems (even 64 bit).</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 28 12:34:47 2010 by 
+  Generated on Sat Jan 29 11:23:24 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

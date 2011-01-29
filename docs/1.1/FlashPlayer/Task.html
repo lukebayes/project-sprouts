@@ -165,6 +165,58 @@
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stderr-instance_method" title="#stderr (instance method)">- (Object) <strong>stderr</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute stderr.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#stdout-instance_method" title="#stdout (instance method)">- (Object) <strong>stdout</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute stdout.</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
 
@@ -294,9 +346,6 @@
       <pre class="lines">
 
 
-13
-14
-15
 16
 17
 18
@@ -305,19 +354,26 @@
 21
 22
 23
-24</pre>
+24
+25
+26
+27
+28
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/task.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/task.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id initialize'>initialize</span> <span class='id task_name'>task_name</span><span class='comma'>,</span> <span class='id rake_application'>rake_application</span>
   <span class='kw'>super</span>
-  <span class='ivar'>@logger</span>       <span class='op'>=</span> <span class='gvar'>$stdout</span>
   <span class='ivar'>@mm_config</span>    <span class='op'>=</span> <span class='const'>MMConfig</span><span class='period'>.</span><span class='id new'>new</span>
   <span class='ivar'>@reader</span>       <span class='op'>=</span> <span class='const'>LogFile</span><span class='period'>.</span><span class='id new'>new</span>
   <span class='ivar'>@trust_config</span> <span class='op'>=</span> <span class='const'>Trust</span><span class='period'>.</span><span class='id new'>new</span>
   <span class='ivar'>@process</span>      <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='ivar'>@input</span>        <span class='op'>=</span> <span class='id task_name'>task_name</span>
+  <span class='ivar'>@stdout</span>       <span class='op'>=</span> <span class='gvar'>$stdout</span>
+  <span class='ivar'>@stderr</span>       <span class='op'>=</span> <span class='gvar'>$stderr</span>
+  <span class='ivar'>@logger</span>       <span class='op'>=</span> <span class='gvar'>$stdout</span>
 
   <span class='ivar'>@pkg_name</span>     <span class='op'>=</span> <span class='const'>FlashPlayer</span><span class='op'>::</span><span class='const'>NAME</span>
   <span class='ivar'>@pkg_version</span>  <span class='op'>=</span> <span class='const'>FlashPlayer</span><span class='op'>::</span><span class='const'>VERSION</span>
@@ -455,6 +511,88 @@
 </table>
 </div>
     
+      
+      <span id="stderr=-instance_method"></span>
+      <span id="stderr-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="stderr-instance_method">
+  
+    - (<tt>Object</tt>) <strong>stderr</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute stderr</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+11
+12
+13</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/task.rb', line 11</span>
+
+<span class='kw'>def</span> <span class='id stderr'>stderr</span>
+  <span class='ivar'>@stderr</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="stdout=-instance_method"></span>
+      <span id="stdout-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="stdout-instance_method">
+  
+    - (<tt>Object</tt>) <strong>stdout</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute stdout</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/task.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='id stdout'>stdout</span>
+  <span class='ivar'>@stdout</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 
@@ -475,19 +613,24 @@
       <pre class="lines">
 
 
-26
-27
-28
-29
-30
 31
 32
 33
 34
-35</pre>
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/task.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/task.rb', line 31</span>
 
 <span class='kw'>def</span> <span class='id execute'>execute</span> <span class='op'>*</span><span class='id args'>args</span>
   <span class='kw'>super</span>
@@ -496,8 +639,13 @@
     <span class='id update_mm_config'>update_mm_config</span>
     <span class='id update_trust_config_with'>update_trust_config_with</span> <span class='id input'>input</span>
   <span class='kw'>end</span>
-  <span class='id player_thread'>player_thread</span> <span class='op'>=</span> <span class='id launch_player_with'>launch_player_with</span> <span class='id input'>input</span>
-  <span class='id tail_flashlog'>tail_flashlog</span> <span class='id player_thread'>player_thread</span>
+
+  <span class='kw'>if</span> <span class='id use_fdb?'>use_fdb?</span>
+    <span class='id launch_fdb_and_player_with'>launch_fdb_and_player_with</span> <span class='id input'>input</span>
+  <span class='kw'>else</span>
+    <span class='id player_thread'>player_thread</span> <span class='op'>=</span> <span class='id launch_player_with'>launch_player_with</span> <span class='id input'>input</span>
+    <span class='id tail_flashlog'>tail_flashlog</span> <span class='id player_thread'>player_thread</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -517,12 +665,12 @@
       <pre class="lines">
 
 
-44
-45
-46</pre>
+54
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/task.rb', line 44</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/task.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id logger'>logger</span>
   <span class='ivar'>@logger</span>
@@ -545,15 +693,15 @@
       <pre class="lines">
 
 
-37
-38
-39
-40
-41
-42</pre>
+47
+48
+49
+50
+51
+52</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/task.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/task.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='id logger='>logger=</span><span class='lparen'>(</span><span class='id logger'>logger</span><span class='rparen'>)</span>
   <span class='ivar'>@logger</span>              <span class='op'>=</span> <span class='id logger'>logger</span>
@@ -571,7 +719,7 @@
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 28 12:34:46 2010 by 
+  Generated on Sat Jan 29 11:23:23 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

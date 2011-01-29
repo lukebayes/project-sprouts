@@ -129,6 +129,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#asdoc-instance_method" title="#asdoc (instance method)">- (FlashSDK::AsDoc) <strong>asdoc</strong>(args, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a new Rake::File task that will execute <span class='object_link'><a href="FlashSDK/AsDoc.html" title="FlashSDK::AsDoc (class)">FlashSDK::AsDoc</a></span>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#compc-instance_method" title="#compc (instance method)">- (Object) <strong>compc</strong>(args, &amp;block) </a>
     
 
@@ -217,7 +240,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#mxmlc-instance_method" title="#mxmlc (instance method)">- (Sprout::MXMLC) <strong>mxmlc</strong>(args, &amp;block) </a>
+      <a href="#mxmlc-instance_method" title="#mxmlc (instance method)">- (FlashSDK::MXMLC) <strong>mxmlc</strong>(args, &amp;block) </a>
     
 
     
@@ -311,6 +334,81 @@
 </div>
     
       <div class="method_details ">
+  <p class="signature " id="asdoc-instance_method">
+  
+    - (<tt><span class='object_link'><a href="FlashSDK/AsDoc.html" title="FlashSDK::AsDoc (class)">FlashSDK::AsDoc</a></span></tt>) <strong>asdoc</strong>(args, &amp;block) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a new Rake::File task that will execute <span class='object_link'><a href="FlashSDK/AsDoc.html" title="FlashSDK::AsDoc (class)">FlashSDK::AsDoc</a></span>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'>
+<p>The following is a simple AsDoc task:</p>
+</div></h4>
+      <pre class="example code">
+<span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the SWF</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id library_path'>library_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/corelib.swc</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span>
+
+<span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Generate documentation</span><span class='tstring_end'>&quot;</span></span>
+<span class='id asdoc'>asdoc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>docs/</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id doc_sources'>doc_sources</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+    
+  </div>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FlashSDK/AsDoc.html" title="FlashSDK::AsDoc (class)">FlashSDK::AsDoc</a></span></tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+149
+150
+151
+152
+153</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/asdoc.rb', line 149</span>
+
+<span class='kw'>def</span> <span class='id asdoc'>asdoc</span> <span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id exe'>exe</span> <span class='op'>=</span> <span class='const'>FlashSDK</span><span class='op'>::</span><span class='const'>AsDoc</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id exe'>exe</span><span class='period'>.</span><span class='id to_rake'>to_rake</span> <span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id exe'>exe</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <p class="signature " id="compc-instance_method">
   
     - (<tt>Object</tt>) <strong>compc</strong>(args, &amp;block) 
@@ -323,14 +421,14 @@
       <pre class="lines">
 
 
-110
-111
-112
-113
-114</pre>
+116
+117
+118
+119
+120</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compc.rb', line 110</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compc.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='id compc'>compc</span> <span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
   <span class='id exe'>exe</span> <span class='op'>=</span> <span class='const'>FlashSDK</span><span class='op'>::</span><span class='const'>COMPC</span><span class='period'>.</span><span class='id new'>new</span>
@@ -403,12 +501,12 @@
       <pre class="lines">
 
 
-96
-97
-98</pre>
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/task.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashplayer/task.rb', line 146</span>
 
 <span class='kw'>def</span> <span class='id flashplayer'>flashplayer</span> <span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
   <span class='const'>FlashPlayer</span><span class='op'>::</span><span class='const'>Task</span><span class='period'>.</span><span class='id define_task'>define_task</span> <span class='op'>*</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
@@ -483,7 +581,7 @@ like:</p>
       <div class="method_details ">
   <p class="signature " id="mxmlc-instance_method">
   
-    - (<tt>Sprout::MXMLC</tt>) <strong>mxmlc</strong>(args, &amp;block) 
+    - (<tt><span class='object_link'><a href="FlashSDK/MXMLC.html" title="FlashSDK::MXMLC (class)">FlashSDK::MXMLC</a></span></tt>) <strong>mxmlc</strong>(args, &amp;block) 
   
 
   
@@ -515,7 +613,7 @@ like:</p>
   
     <li>
       
-        <span class='type'>(<tt>Sprout::MXMLC</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="FlashSDK/MXMLC.html" title="FlashSDK::MXMLC (class)">FlashSDK::MXMLC</a></span></tt>)</span>
       
       
       
@@ -530,18 +628,18 @@ like:</p>
       <pre class="lines">
 
 
-94
-95
-96
-97
-98</pre>
+150
+151
+152
+153
+154</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/mxmlc.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/mxmlc.rb', line 150</span>
 
 <span class='kw'>def</span> <span class='id mxmlc'>mxmlc</span> <span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
   <span class='id exe'>exe</span> <span class='op'>=</span> <span class='const'>FlashSDK</span><span class='op'>::</span><span class='const'>MXMLC</span><span class='period'>.</span><span class='id new'>new</span>
-  <span class='id exe'>exe</span><span class='period'>.</span><span class='id to_rake'>to_rake</span><span class='lparen'>(</span><span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span><span class='rparen'>)</span>
+  <span class='id exe'>exe</span><span class='period'>.</span><span class='id to_rake'>to_rake</span> <span class='id args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
   <span class='id exe'>exe</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -554,7 +652,7 @@ like:</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 28 12:34:52 2010 by 
+  Generated on Sat Jan 29 11:23:30 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

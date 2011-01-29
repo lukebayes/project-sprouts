@@ -357,7 +357,7 @@ stream.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#execute_thread-instance_method" title="#execute_thread (instance method)">- (Object) <strong>execute_thread</strong>(tool, options = '') </a>
+      <a href="#execute_thread-instance_method" title="#execute_thread (instance method)">- (Sprout::ProcessRunner) <strong>execute_thread</strong>(tool, options = '', prompt = nil) {|String| ... }</a>
     
 
     
@@ -371,7 +371,8 @@ stream.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Execute a new process in a separate thread.</p>
+<p>Execute a new process in a separate thread and yield whatever output is
+written to its stderr and stdout.</p>
 </div></span>
   
 </li>
@@ -539,6 +540,27 @@ where applications are expected to store files for a particular system.</p>
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_from-instance_method" title="#read_from (instance method)">- (Object) <strong>read_from</strong>(pipe, prompt, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
         <li class="protected ">
   <span class="summary_signature">
     
@@ -624,12 +646,12 @@ where applications are expected to store files for a particular system.</p>
       <pre class="lines">
 
 
-179
-180
-181</pre>
+219
+220
+221</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 179</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 219</span>
 
 <span class='kw'>def</span> <span class='id alt_separator?'>alt_separator?</span>
   <span class='const'>File</span><span class='op'>::</span><span class='const'>ALT_SEPARATOR</span>
@@ -669,12 +691,12 @@ store data.</p>
       <pre class="lines">
 
 
-139
-140
-141</pre>
+179
+180
+181</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 179</span>
 
 <span class='kw'>def</span> <span class='id application_home'>application_home</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='id library'>library</span><span class='comma'>,</span> <span class='id format_application_name'>format_application_name</span><span class='lparen'>(</span><span class='id name'>name</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='semicolon'>;</span>
@@ -762,11 +784,11 @@ appropriately for their operating  system.</p>
       <pre class="lines">
 
 
-126
-127</pre>
+166
+167</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 126</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 166</span>
 
 <span class='kw'>def</span> <span class='id clean_path'>clean_path</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
@@ -788,12 +810,12 @@ appropriately for their operating  system.</p>
       <pre class="lines">
 
 
-171
-172
-173</pre>
+211
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 171</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 211</span>
 
 <span class='kw'>def</span> <span class='id env_home'>env_home</span>
   <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>HOME</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
@@ -816,12 +838,12 @@ appropriately for their operating  system.</p>
       <pre class="lines">
 
 
-153
-154
-155</pre>
+193
+194
+195</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 153</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 193</span>
 
 <span class='kw'>def</span> <span class='id env_homedrive'>env_homedrive</span>
   <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>HOMEDRIVE</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
@@ -844,14 +866,14 @@ appropriately for their operating  system.</p>
       <pre class="lines">
 
 
-161
-162
-163
-164
-165</pre>
+201
+202
+203
+204
+205</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 201</span>
 
 <span class='kw'>def</span> <span class='id env_homedrive_and_homepath'>env_homedrive_and_homepath</span>
   <span class='id drive'>drive</span> <span class='op'>=</span> <span class='id env_homedrive'>env_homedrive</span>
@@ -876,12 +898,12 @@ appropriately for their operating  system.</p>
       <pre class="lines">
 
 
-157
-158
-159</pre>
+197
+198
+199</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 197</span>
 
 <span class='kw'>def</span> <span class='id env_homepath'>env_homepath</span>
   <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>HOMEPATH</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
@@ -904,12 +926,12 @@ appropriately for their operating  system.</p>
       <pre class="lines">
 
 
-167
-168
-169</pre>
+207
+208
+209</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 167</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 207</span>
 
 <span class='kw'>def</span> <span class='id env_userprofile'>env_userprofile</span>
   <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>USERPROFILE</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
@@ -1029,55 +1051,156 @@ FCSH or FDB.</p>
       <div class="method_details ">
   <p class="signature " id="execute_thread-instance_method">
   
-    - (<tt>Object</tt>) <strong>execute_thread</strong>(tool, options = '') 
+    - (<tt><span class='object_link'><a href="../ProcessRunner.html" title="Sprout::ProcessRunner (class)">Sprout::ProcessRunner</a></span></tt>) <strong>execute_thread</strong>(tool, options = '', prompt = nil) {|String| ... }
   
 
   
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Execute a new process in a separate thread.</p>
+<p>Execute a new process in a separate thread and yield whatever output is
+written to its stderr and stdout.</p>
 
 
   </div>
 </div>
 <div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
   
+    <li>
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+        <span class='name'>tool</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the executable.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+        <span class='name'>options</span>
+      
+      
+        <em class="default">(defaults to: <tt>''</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The command line options that the executable accepts.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>Regex</tt>)</span>
+      
+      
+        <span class='name'>prompt</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The prompt that will trigger the listener block to be called.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Yields:</h3>
+<ul class="yield">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../String.html" title="String (class)">String</a></span></tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Message that was received from the process, called when #prompt is
+encountered.</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../ProcessRunner.html" title="Sprout::ProcessRunner (class)">Sprout::ProcessRunner</a></span></tt>)</span>
+      
+      
+      
+      
+    </li>
+  
+</ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-100
-101
-102
-103
-104
-105
-106
 107
 108
 109
 110
 111
-112</pre>
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 107</span>
 
-<span class='kw'>def</span> <span class='id execute_thread'>execute_thread</span><span class='lparen'>(</span><span class='id tool'>tool</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
-  <span class='id runner'>runner</span> <span class='op'>=</span> <span class='kw'>nil</span>
-  <span class='const'>Thread</span><span class='period'>.</span><span class='id new'>new</span> <span class='kw'>do</span>
+<span class='kw'>def</span> <span class='id execute_thread'>execute_thread</span> <span class='id tool'>tool</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id prompt'>prompt</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='id t'>t</span> <span class='op'>=</span> <span class='const'>Thread</span><span class='period'>.</span><span class='id new'>new</span> <span class='kw'>do</span>
+    <span class='const'>Thread</span><span class='period'>.</span><span class='id current'>current</span><span class='period'>.</span><span class='id abort_on_exception'>abort_on_exception</span> <span class='op'>=</span> <span class='kw'>true</span>
     <span class='id runner'>runner</span> <span class='op'>=</span> <span class='id execute_silent'>execute_silent</span><span class='lparen'>(</span><span class='id tool'>tool</span><span class='comma'>,</span> <span class='id options'>options</span><span class='rparen'>)</span>
+    <span class='const'>Thread</span><span class='period'>.</span><span class='id current'>current</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>runner</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id runner'>runner</span>
+    <span class='id out'>out</span> <span class='op'>=</span> <span class='id read_from'>read_from</span> <span class='id runner'>runner</span><span class='period'>.</span><span class='id r'>r</span><span class='comma'>,</span> <span class='id prompt'>prompt</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+    <span class='id err'>err</span> <span class='op'>=</span> <span class='id read_from'>read_from</span> <span class='id runner'>runner</span><span class='period'>.</span><span class='id e'>e</span><span class='comma'>,</span> <span class='id prompt'>prompt</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+    <span class='id out'>out</span><span class='period'>.</span><span class='id join'>join</span> <span class='op'>&amp;&amp;</span> <span class='id err'>err</span><span class='period'>.</span><span class='id kill'>kill</span>
   <span class='kw'>end</span>
+
   <span class='comment'># Wait for the runner to be created
 </span>  <span class='comment'># before returning a nil reference
 </span>  <span class='comment'># that never gets populated...
-</span>  <span class='kw'>while</span> <span class='id runner'>runner</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='kw'>do</span>
+</span>  <span class='kw'>while</span> <span class='id t'>t</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>runner</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='kw'>do</span>
     <span class='id sleep'>sleep</span><span class='lparen'>(</span><span class='float'>0.1</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
-  <span class='id runner'>runner</span>
+
+  <span class='id t'>t</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1097,21 +1220,21 @@ FCSH or FDB.</p>
       <pre class="lines">
 
 
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199</pre>
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 188</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 228</span>
 
 <span class='kw'>def</span> <span class='id find_home'>find_home</span>
   <span class='lbracket'>[</span><span class='symbol'>:env_userprofile</span><span class='comma'>,</span> <span class='symbol'>:env_home</span><span class='comma'>,</span> <span class='symbol'>:env_homedrive_and_homepath</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id key'>key</span><span class='op'>|</span>
@@ -1153,12 +1276,12 @@ FCSH or FDB.</p>
       <pre class="lines">
 
 
-147
-148
-149</pre>
+187
+188
+189</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 147</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 187</span>
 
 <span class='kw'>def</span> <span class='id format_application_name'>format_application_name</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
   <span class='id name'>name</span>
@@ -1197,14 +1320,14 @@ provided <tt>options</tt>.</p>
       <pre class="lines">
 
 
-211
-212
-213
-214
-215</pre>
+251
+252
+253
+254
+255</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 211</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 251</span>
 
 <span class='kw'>def</span> <span class='id get_and_execute_process_runner'>get_and_execute_process_runner</span> <span class='id tool'>tool</span><span class='comma'>,</span> <span class='id options'>options</span><span class='op'>=</span><span class='kw'>nil</span>
   <span class='id runner'>runner</span> <span class='op'>=</span> <span class='id get_process_runner'>get_process_runner</span>
@@ -1384,6 +1507,80 @@ classes.</p>
 </div>
     
       <div class="method_details ">
+  <p class="signature " id="read_from-instance_method">
+  
+    - (<tt>Object</tt>) <strong>read_from</strong>(pipe, prompt, &amp;block) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 127</span>
+
+<span class='kw'>def</span> <span class='id read_from'>read_from</span> <span class='id pipe'>pipe</span><span class='comma'>,</span> <span class='id prompt'>prompt</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id block'>block</span>
+  <span class='const'>Thread</span><span class='period'>.</span><span class='id new'>new</span> <span class='kw'>do</span>
+    <span class='const'>Thread</span><span class='period'>.</span><span class='id current'>current</span><span class='period'>.</span><span class='id abort_on_exception'>abort_on_exception</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='id lines'>lines</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+    <span class='id line'>line</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+    <span class='id pipe'>pipe</span><span class='period'>.</span><span class='id sync'>sync</span> <span class='op'>=</span> <span class='kw'>true</span>
+    <span class='id pipe'>pipe</span><span class='period'>.</span><span class='id each_char'>each_char</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id char'>char</span><span class='op'>|</span>
+      <span class='kw'>break</span> <span class='kw'>if</span> <span class='id pipe'>pipe</span><span class='period'>.</span><span class='id closed?'>closed?</span>
+      <span class='id line'>line</span> <span class='op'>&lt;&lt;</span> <span class='id char'>char</span>
+
+      <span class='kw'>if</span> <span class='id line'>line</span><span class='period'>.</span><span class='id match'>match</span> <span class='id prompt'>prompt</span>
+        <span class='kw'>yield</span> <span class='id line'>line</span> <span class='kw'>if</span> <span class='id block_given?'>block_given?</span>
+        <span class='id lines'>lines</span> <span class='op'>&lt;&lt;</span> <span class='id line'>line</span>
+        <span class='id lines'>lines</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+        <span class='id line'>line</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+        <span class='kw'>next</span>
+      <span class='kw'>end</span>
+
+      <span class='kw'>if</span> <span class='id char'>char</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span>
+        <span class='id lines'>lines</span> <span class='op'>&lt;&lt;</span> <span class='id line'>line</span>
+        <span class='kw'>yield</span> <span class='id line'>line</span> <span class='kw'>if</span> <span class='id block_given?'>block_given?</span>
+        <span class='id line'>line</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <p class="signature " id="tilde_home-instance_method">
   
     - (<tt>Object</tt>) <strong>tilde_home</strong>  <span class="extras">(protected)</span>
@@ -1396,12 +1593,12 @@ classes.</p>
       <pre class="lines">
 
 
-175
-176
-177</pre>
+215
+216
+217</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 175</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 215</span>
 
 <span class='kw'>def</span> <span class='id tilde_home'>tilde_home</span>
   <span class='const'>File</span><span class='period'>.</span><span class='id expand_path'>expand_path</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>~</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
@@ -1424,13 +1621,13 @@ classes.</p>
       <pre class="lines">
 
 
-183
-184
-185
-186</pre>
+223
+224
+225
+226</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/system/base_system.rb', line 223</span>
 
 <span class='kw'>def</span> <span class='id worst_case_home'>worst_case_home</span>
   <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>C:\\</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id alt_separator?'>alt_separator?</span>
@@ -1446,7 +1643,7 @@ classes.</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 28 12:34:50 2010 by 
+  Generated on Sat Jan 29 11:23:28 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

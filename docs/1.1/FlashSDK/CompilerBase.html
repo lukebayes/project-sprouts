@@ -91,6 +91,9 @@
 <p>This is the abstract base class that defines common fields for ActionScript
 compilers like <span class='object_link'><a href="MXMLC.html" title="FlashSDK::MXMLC (class)">MXMLC</a></span> and <span class='object_link'><a href="COMPC.html" title="FlashSDK::COMPC (class)">COMPC</a></span>.</p>
 
+<p>Examples provided below will assume <span class='object_link'><a href="MXMLC.html" title="FlashSDK::MXMLC (class)">MXMLC</a></span> is being used, but should
+generally be applicable for any subclass.</p>
+
 
   </div>
 </div>
@@ -98,7 +101,7 @@ compilers like <span class='object_link'><a href="MXMLC.html" title="FlashSDK::M
   
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="COMPC.html" title="FlashSDK::COMPC (class)">COMPC</a></span>, <span class='object_link'><a href="MXMLC.html" title="FlashSDK::MXMLC (class)">MXMLC</a></span></p>
+  <p class="children"><span class='object_link'><a href="AsDoc.html" title="FlashSDK::AsDoc (class)">AsDoc</a></span>, <span class='object_link'><a href="COMPC.html" title="FlashSDK::COMPC (class)">COMPC</a></span>, <span class='object_link'><a href="MXMLC.html" title="FlashSDK::MXMLC (class)">MXMLC</a></span></p>
 </div>
 
   <h2>Constant Summary</h2>
@@ -437,7 +440,7 @@ flex-services.xml file.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Sets the application's background color.</p>
+<p>Sets the SWF background color.</p>
 </div></span>
   
 </li>
@@ -541,7 +544,7 @@ flex-services.xml file.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Defines the default application size, in pixels for example: .</p>
+<p>Defines the default application size, in pixels as a String.</p>
 </div></span>
   
 </li>
@@ -711,6 +714,32 @@ compiling a SWF file.</p>
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#fcsh_port-instance_method" title="#fcsh_port (instance method)">- (Object) <strong>fcsh_port</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The FCSH port to use for connections.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#file_specs-instance_method" title="#file_specs (instance method)">- (Array&lt;String&gt; [Files]) <strong>file_specs</strong> </a>
     
 
@@ -842,7 +871,7 @@ cache for each font face.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#frames_frame-instance_method" title="#frames_frame (instance method)">- (String) <strong>frames_frame</strong> </a>
+      <a href="#frames_frame-instance_method" title="#frames_frame (instance method)">- (Array&lt;String&gt;) <strong>frames_frame</strong> </a>
     
 
     
@@ -859,8 +888,8 @@ cache for each font face.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Specifies a SWF file frame label with a sequence of class names that are
-linked onto the frame.</p>
+<p>Specifies a SWF file frame label with a sequence of one or more class names
+that will be linked onto the frame.</p>
 </div></span>
   
 </li>
@@ -1183,7 +1212,7 @@ not those classes are required at compile time.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#link_report-instance_method" title="#link_report (instance method)">- (File) <strong>link_report</strong> </a>
+      <a href="#link_report-instance_method" title="#link_report (instance method)">- (String) <strong>link_report</strong> </a>
     
 
     
@@ -1516,7 +1545,7 @@ a resource bundle SWC file.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Specifies a list of run-time shared libraries (RSLs) to use for this
+<p>Specifies a list of run-time shared libraries (RSLs)  to use for this
 application.</p>
 </div></span>
   
@@ -1543,7 +1572,8 @@ application.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Runtime shared library path.</p>
+<p>Setting up Runtime Shared Libraries (RSLs) is extremely complicated and
+usually not worth doing unless you're using the Flex framework.</p>
 </div></span>
   
 </li>
@@ -1674,7 +1704,7 @@ property.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Adds directories or files to the source path.</p>
+<p>Adds directories to the source path.</p>
 </div></span>
   
 </li>
@@ -1701,7 +1731,7 @@ property.</p>
   
     <span class="summary_desc"><div class='inline'>
 <p>Statically link the libraries specified by the
--runtime-shared-libraries-path option.</p>
+#runtime_shared_libraries_path option.</p>
 </div></span>
   
 </li>
@@ -1884,7 +1914,7 @@ type checking on assignments and options supplied to method calls.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Generates source code that includes line numbers.</p>
+<p>Generates source code that includes source files and line numbers.</p>
 </div></span>
   
 </li>
@@ -2094,6 +2124,27 @@ found in the Rake::Task prerequisite list.</p>
 </li>
 
       
+        <li class="protected ">
+  <span class="summary_signature">
+    
+      <a href="#update_fcsh-instance_method" title="#update_fcsh (instance method)">- (Object) <strong>update_fcsh</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  <span class="note title protected">protected</span>
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -2106,7 +2157,7 @@ found in the Rake::Task prerequisite list.</p>
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Sprout/Executable/Base.html" title="Sprout::Executable::Base (class)">Sprout::Executable::Base</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../Sprout/Executable/Base.html#add_param-class_method" title="Sprout::Executable::Base.add_param (method)">add_param</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#add_param_alias-class_method" title="Sprout::Executable::Base.add_param_alias (method)">add_param_alias</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#create_outer_task-instance_method" title="Sprout::Executable::Base#create_outer_task (method)">#create_outer_task</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#default_file_expression-instance_method" title="Sprout::Executable::Base#default_file_expression (method)">#default_file_expression</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#from_hash-instance_method" title="Sprout::Executable::Base#from_hash (method)">#from_hash</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#initialize-instance_method" title="Sprout::Executable::Base#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#parse%21-instance_method" title="Sprout::Executable::Base#parse! (method)">#parse!</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#parse_extra_options%21-instance_method" title="Sprout::Executable::Base#parse_extra_options! (method)">#parse_extra_options!</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#parse_rake_task_arg-instance_method" title="Sprout::Executable::Base#parse_rake_task_arg (method)">#parse_rake_task_arg</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#set-class_method" title="Sprout::Executable::Base.set (method)">set</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#static_default_value_collection-class_method" title="Sprout::Executable::Base.static_default_value_collection (method)">static_default_value_collection</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#static_parameter_collection-class_method" title="Sprout::Executable::Base.static_parameter_collection (method)">static_parameter_collection</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#system_execute-instance_method" title="Sprout::Executable::Base#system_execute (method)">#system_execute</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#to_hash-instance_method" title="Sprout::Executable::Base#to_hash (method)">#to_hash</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#to_help-instance_method" title="Sprout::Executable::Base#to_help (method)">#to_help</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#to_rake-instance_method" title="Sprout::Executable::Base#to_rake (method)">#to_rake</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#to_shell-instance_method" title="Sprout::Executable::Base#to_shell (method)">#to_shell</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#update_rake_task_name_from_args-instance_method" title="Sprout::Executable::Base#update_rake_task_name_from_args (method)">#update_rake_task_name_from_args</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../Sprout/Executable/Base.html#add_param-class_method" title="Sprout::Executable::Base.add_param (method)">add_param</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#add_param_alias-class_method" title="Sprout::Executable::Base.add_param_alias (method)">add_param_alias</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#binary_path-instance_method" title="Sprout::Executable::Base#binary_path (method)">#binary_path</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#binary_path%3D-instance_method" title="Sprout::Executable::Base#binary_path= (method)">#binary_path=</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#create_outer_task-instance_method" title="Sprout::Executable::Base#create_outer_task (method)">#create_outer_task</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#default_file_expression-instance_method" title="Sprout::Executable::Base#default_file_expression (method)">#default_file_expression</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#from_hash-instance_method" title="Sprout::Executable::Base#from_hash (method)">#from_hash</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#initialize-instance_method" title="Sprout::Executable::Base#initialize (method)">#initialize</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#parse%21-instance_method" title="Sprout::Executable::Base#parse! (method)">#parse!</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#parse_extra_options%21-instance_method" title="Sprout::Executable::Base#parse_extra_options! (method)">#parse_extra_options!</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#parse_rake_task_arg-instance_method" title="Sprout::Executable::Base#parse_rake_task_arg (method)">#parse_rake_task_arg</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#set-class_method" title="Sprout::Executable::Base.set (method)">set</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#static_default_value_collection-class_method" title="Sprout::Executable::Base.static_default_value_collection (method)">static_default_value_collection</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#static_parameter_collection-class_method" title="Sprout::Executable::Base.static_parameter_collection (method)">static_parameter_collection</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#stderr-instance_method" title="Sprout::Executable::Base#stderr (method)">#stderr</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#stderr%3D-instance_method" title="Sprout::Executable::Base#stderr= (method)">#stderr=</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#stdout-instance_method" title="Sprout::Executable::Base#stdout (method)">#stdout</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#stdout%3D-instance_method" title="Sprout::Executable::Base#stdout= (method)">#stdout=</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#system_execute-instance_method" title="Sprout::Executable::Base#system_execute (method)">#system_execute</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#to_hash-instance_method" title="Sprout::Executable::Base#to_hash (method)">#to_hash</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#to_help-instance_method" title="Sprout::Executable::Base#to_help (method)">#to_help</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#to_rake-instance_method" title="Sprout::Executable::Base#to_rake (method)">#to_rake</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#to_shell-instance_method" title="Sprout::Executable::Base#to_shell (method)">#to_shell</a></span>, <span class='object_link'><a href="../Sprout/Executable/Base.html#update_rake_task_name_from_args-instance_method" title="Sprout::Executable::Base#update_rake_task_name_from_args (method)">#update_rake_task_name_from_args</a></span></p>
 
   
   
@@ -2153,7 +2204,12 @@ found in the Rake::Task prerequisite list.</p>
 <p>Enables accessibility features when compiling the Flex application or SWC
 file. The default value is false.</p>
 
-<pre class="code"><span class='id t'>t</span><span class='period'>.</span><span class='id accessible'>accessible</span> <span class='op'>=</span> <span class='kw'>true</span></pre>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id accessible'>accessible</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -2264,8 +2320,15 @@ file. The default value is false.</p>
   <div class="discussion">
     
 <p>Checks if a source-path entry is a subdirectory of another source-path
-entry. It helps make the package names of MXML components unambiguous. This
-is an advanced option.</p>
+entry. It helps make the package names of MXML components unambiguous.</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/com/foo</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id allow_source_path_overlap'>allow_source_path_overlap</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -2324,10 +2387,18 @@ is an advanced option.</p>
 and better error reporting. In the class-based object model, most built-in
 functions are implemented as fixed methods of classes.</p>
 
+<p>Setting this value to false will switch the compiler into a more
+ECMA-compatible mode.</p>
+
 <p>The default value is true. If you set this value to false, you must set the
 es option to true.</p>
 
-<p>This is an advanced option.</p>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id as3'>as3</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -2384,6 +2455,13 @@ es option to true.</p>
     
 <p>Prints detailed compile times to the standard output. The default value is
 true.</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id benchmark'>benchmark</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -2680,6 +2758,13 @@ href="http://livedocs.adobe.com/flex/2/docs/00001540.html#181846">livedocs.adobe
 <p>Flex also uses the verbose-stacktraces setting to determine whether line
 numbers are added to the stacktrace.</p>
 
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id debug'>debug</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+
 
   </div>
 </div>
@@ -2702,6 +2787,15 @@ numbers are added to the stacktrace.</p>
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#optimize-instance_method" title="FlashSDK::CompilerBase#optimize (method)">#optimize</a></span></li>
+    
+      <li><span class='object_link'><a href="#verbose_stacktraces-instance_method" title="FlashSDK::CompilerBase#verbose_stacktraces (method)">#verbose_stacktraces</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -2733,8 +2827,7 @@ numbers are added to the stacktrace.</p>
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Lets you engage in remote debugging sessions with the Flash IDE. This is an
-advanced option.</p>
+<p>Lets you engage in remote debugging sessions with the Flash IDE.</p>
 
 
   </div>
@@ -2789,16 +2882,29 @@ advanced option.</p>
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Sets the application's background color. You use the 0x notation to set the
-color, as the following example shows:</p>
+<p>Sets the SWF background color.</p>
 
-<pre class="code"><span class='op'>-</span><span class='id default'>default</span><span class='op'>-</span><span class='id background'>background</span><span class='op'>-</span><span class='id color'>color</span><span class='op'>=</span><span class='int'>0xCCCCFF</span></pre>
+<p>If you're using the Flex framework, the default background IMAGE is that
+sickly, horrendous, blue-green-grey gradient.</p>
 
-<p>The default value is null. The default background of a Flex application is
-an image of a gray gradient. You must override this image for the value of
-the default-background-color option to be visible.</p>
+<p>If you want to see the background color that you set here, you will also
+need to override the <tt>backgroundImage</tt> property in your Flex
+Application document.</p>
 
-<p>This is an advanced option.</p>
+<p>You can also set the background color (and other values) using the
+<tt>[Embed]</tt> metadata directive directly in your Document Root class.</p>
+
+<pre class="code"><span class='lbracket'>[</span><span class='const'>SWF</span><span class='lparen'>(</span><span class='id width'>width</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>400</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id height'>height</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>300</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id backgroundColor'>backgroundColor</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>#ffffff</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id frameRate'>frameRate</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>30</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='rbracket'>]</span></pre>
+
+<p>To set the background color from a Rake task, use the 0x notation, as the
+following example shows:</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id default_background_color'>default_background_color</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>0xffcc00</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -2910,8 +3016,14 @@ framework.swc file.</p>
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Sets the application's frame rate. The default value is 24. This is an
-advanced option.</p>
+<p>Sets the application's frame rate. The default value is 24.</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id default_frame_rate'>default_frame_rate</span> <span class='op'>=</span> <span class='int'>24</span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -2979,13 +3091,16 @@ set this value above 60 seconds.</p>
 
 <p>Example:</p>
 
-<pre class="code"><span class='comment'># 900 is new max-recursion-depth
-</span><span class='comment'># 20 is new max-execution-time
-</span><span class='id t'>t</span><span class='period'>.</span><span class='id default_script_limits'>default_script_limits</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>900 20</span><span class='tstring_end'>'</span></span></pre>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='comment'># 900 is new max-recursion-depth
+</span>  <span class='comment'># 20 is new max-execution-time
+</span>  <span class='id t'>t</span><span class='period'>.</span><span class='id default_script_limits'>default_script_limits</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>900 20</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
 
 <p>You can override these settings in the application.</p>
-
-<p>This is an advanced option.</p>
 
 
   </div>
@@ -3040,15 +3155,27 @@ set this value above 60 seconds.</p>
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Defines the default application size, in pixels for example:</p>
+<p>Defines the default application size, in pixels as a String.</p>
 
-<pre class="code">default_size = '950 550'.</pre>
+<p>If you're using the Flex 4 SDK, these values should be comma-delimited
+like:</p>
 
-<p>If you're using the Flex 4 SDK, this value should be comma-delimited like:</p>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id default_size'>default_size</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>950,550</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
 
-<pre class="code"><span class='id default_size'>default_size</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>950,550</span><span class='tstring_end'>'</span></span></pre>
+<p>If you're using the Flex 3 SDK, these values should be space-delimited
+like:</p>
 
-<p>This is an advanced option.</p>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id default_size'>default_size</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>950 550</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -3107,9 +3234,57 @@ set this value above 60 seconds.</p>
 with Sprouts and Rake, we needed to rename it and chose:
 'define_conditional'.</p>
 
-<p>Define a global AS3 conditional compilation definition, e.g.
--define=CONFIG::debugging,true or -define+=CONFIG::debugging,true (to
-append to existing definitions in flex-config.xml)  (advanced, repeatable)</p>
+<p>The format of each String value is "namespace::variable_name,value", for 
+example, if I wanted an Environment named 'production' available to 
+conditional compilation statements, I might do the following:</p>
+
+<p>Define a global AS3 conditional compilation definition:</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id define_conditional'>define_conditional</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>CONFIG::environment,production</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+<p>Then, in any given ActionScript class, we might add the following:</p>
+
+<pre class="code"><span class='id public'>public</span> <span class='id static'>static</span> <span class='id const'>const</span> <span class='label'>environent:</span><span class='const'>String</span> <span class='op'>=</span> <span class='const'>CONFIG</span><span class='op'>::</span><span class='id environment'>environment</span></pre>
+
+<p>This value would be available to code at runtime where we can then branch
+on different environments.</p>
+
+<p>We can also use IFDEF like statements to completely remove or add code
+based on a conditional value. This is (sadly) done with Boolean
+conditionals as follows:</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id define_conditional'>define_conditional</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>CONFIG::release,true</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id define_conditional'>define_conditional</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>CONFIG::debug,false</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+<p>Then, in any given ActionScript class, we might add the following:</p>
+
+<pre class="code">CONFIG::release
+public function getValue():String {
+    return value;
+}
+
+CONFIG::debug
+public function getValue():String {
+    return value + &quot; : &quot; + debugInfo;
+}</pre>
+
+<p>Note how the CONFIG::[name] statement precedes an ActionScript statement,
+but doesn't need to enclose it brackets or anything. This can go in front
+of any ActionScript statement (functions, classes, variables, etc).</p>
+
+<p>For more information, please read <a
+href="http://livedocs.adobe.com/flex/3/html/compilers_21.html">Adobe's
+documentation</a> on conditional compilation.</p>
 
 
   </div>
@@ -3165,6 +3340,13 @@ append to existing definitions in flex-config.xml)  (advanced, repeatable)</p>
   <div class="discussion">
     
 <p>Sets metadata in the resulting SWF file.</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id description'>description</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>This SWF was built with Project Sprouts!</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -3222,9 +3404,12 @@ append to existing definitions in flex-config.xml)  (advanced, repeatable)</p>
 <p>Outputs the compiler options in the flex-config.xml file to the target
 path; for example:</p>
 
-<pre class="code">mxmlc -dump-config myapp-config.xml</pre>
-
-<p>This is an advanced option.</p>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id dump_config'>dump_config</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>mxmlc-config.xml</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -3248,6 +3433,13 @@ path; for example:</p>
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#load_config-instance_method" title="FlashSDK::CompilerBase#load_config (method)">#load_config</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -3288,9 +3480,15 @@ objects.</p>
 result in compiler errors for references to dynamic properties.</p>
 
 <p>The default value is false. If you set this option to true, you must set
-the es3 option to false.</p>
+the as3 option to false.</p>
 
-<p>This is an advanced option.</p>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id es'>es</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id as3'>as3</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -3346,13 +3544,22 @@ the es3 option to false.</p>
   <div class="discussion">
     
 <p>Specifies a list of SWC files or directories to exclude from linking when
-compiling a SWF file. This option provides compile-time link checking for
-external components that are dynamically linked.</p>
+compiling a SWF file.</p>
 
-<p>You can use the += operator to append the new SWC file to the list of
-external libraries.</p>
+<p>This option provides compile-time link checking for external components
+that are dynamically linked.</p>
 
-<p>This parameter has been aliased as <tt>el</tt>.</p>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id external_library_path'>external_library_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/com/domain/project/SomeClass.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id external_library_path'>external_library_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/somelib/</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id external_library_path'>external_library_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/otherlib/OtherLibrary.swc</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+<p>To dynamically link against classes instead of files, folders or SWCs, see
+<span class='object_link'><a href="#externs-instance_method" title="FlashSDK::CompilerBase#externs (method)">#externs</a></span>.</p>
 
 
   </div>
@@ -3412,7 +3619,16 @@ external libraries.</p>
 <p>This option provides compile-time link checking for external references
 that are dynamically linked.</p>
 
-<p>This is an advanced option.</p>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id externs'>externs</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>com.somedomain.SomeClass</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id externs'>externs</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>com.otherdomain.OtherClass</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+<p>To dynamically link against files, folders or SWCs instead of classes, see
+<span class='object_link'><a href="#external_library_path-instance_method" title="FlashSDK::CompilerBase#external_library_path (method)">#external_library_path</a></span>.</p>
 
 
   </div>
@@ -3449,6 +3665,55 @@ that are dynamically linked.</p>
       <pre class="code"><span class="info file"># File ''</span>
 
 <span class='id add_param'>add_param</span> <span class='symbol'>:externs</span><span class='comma'>,</span> <span class='const'>Strings</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="fcsh_port=-instance_method"></span>
+      <span id="fcsh_port-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="fcsh_port-instance_method">
+  
+    - (<tt>Object</tt>) <strong>fcsh_port</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>The FCSH port to use for connections. If you are building from multiple
+different directories, you will need to start up the FCSH servers on
+different ports. This can be done like:</p>
+
+<pre class="code">rake fcsh:start FCSH_PORT=12322</pre>
+
+<p>and in another terminal:</p>
+
+<pre class="code"><span class='id rake'>rake</span> <span class='id fcsh'>fcsh</span> <span class='id mxmlc'>mxmlc</span> <span class='const'>FCSH_PORT</span><span class='op'>=</span><span class='int'>12322</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1030
+1031
+1032</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 1030</span>
+
+<span class='kw'>def</span> <span class='id fcsh_port'>fcsh_port</span>
+  <span class='ivar'>@fcsh_port</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -3525,8 +3790,6 @@ compiler.</p>
     
 <p>Specifies the range of Unicode settings for that language.</p>
 
-<p>This is an advanced option.</p>
-
 
   </div>
 </div>
@@ -3583,8 +3846,6 @@ compiler.</p>
 <p>Defines the font manager. The default is flash.fonts.JREFontManager. You
 can also use the flash.fonts.BatikFontManager.</p>
 
-<p>This is an advanced option.</p>
-
 
   </div>
 </div>
@@ -3639,8 +3900,6 @@ can also use the flash.fonts.BatikFontManager.</p>
   <div class="discussion">
     
 <p>Sets the maximum number of fonts to keep in the server cache.</p>
-
-<p>This is an advanced option.</p>
 
 
   </div>
@@ -3698,8 +3957,6 @@ can also use the flash.fonts.BatikFontManager.</p>
 <p>Sets the maximum number of character glyph-outlines to keep in the server
 cache for each font face.</p>
 
-<p>This is an advanced option.</p>
-
 
   </div>
 </div>
@@ -3746,19 +4003,23 @@ cache for each font face.</p>
       <div class="method_details ">
   <p class="signature " id="frames_frame-instance_method">
   
-    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>frames_frame</strong> 
+    - (<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>) <strong>frames_frame</strong> 
   
 
   
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Specifies a SWF file frame label with a sequence of class names that are
-linked onto the frame.</p>
+<p>Specifies a SWF file frame label with a sequence of one or more class names
+that will be linked onto the frame.</p>
 
-<p>For example: frames_frame = 'someLabel MyProject OtherProject FoodProject'</p>
-
-<p>This is an advanced option.</p>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id frames_frame'>frames_frame</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>someFrameLabel SomeClass OtherClass AnotherClass</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id frames_frame'>frames_frame</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>anotherFrameLabel YetAnotherClass</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -3769,14 +4030,14 @@ linked onto the frame.</p>
   
     <li>
       
-        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
+        <span class='type'>(<tt>Array&lt;<span class='object_link'><a href="../String.html" title="String (class)">String</a></span>&gt;</tt>)</span>
       
       
       
       
         &mdash;
         <div class='inline'>
-<p>An instance of String</p>
+<p>An instance of Array&lt;String&gt;</p>
 </div>
       
     </li>
@@ -3794,7 +4055,7 @@ linked onto the frame.</p>
     <td>
       <pre class="code"><span class="info file"># File ''</span>
 
-<span class='id add_param'>add_param</span> <span class='symbol'>:frames_frame</span><span class='comma'>,</span> <span class='const'>String</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:shell_name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-frames.frame</span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
+<span class='id add_param'>add_param</span> <span class='symbol'>:frames_frame</span><span class='comma'>,</span> <span class='const'>Strings</span><span class='comma'>,</span> <span class='lbrace'>{</span> <span class='symbol'>:shell_name</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-frames.frame</span><span class='tstring_end'>'</span></span> <span class='rbrace'>}</span></pre>
     </td>
   </tr>
 </table>
@@ -3815,7 +4076,15 @@ linked onto the frame.</p>
     
 <p>Toggles the generation of an IFlexBootstrap-derived loader class.</p>
 
-<p>This is an advanced option.</p>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id generate_frame_loader'>generate_frame_loader</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+<ul><li>
+<p>Might be deprecated?</p>
+</li></ul>
 
 
   </div>
@@ -3870,15 +4139,14 @@ linked onto the frame.</p>
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Enables the headless implementation of the Flex compiler. This sets the
-following:</p>
+<p>Enables the headless implementation of the Flex compiler.</p>
+
+<p>This sets the following (in Java):</p>
 
 <pre class="code"><span class='const'>System</span><span class='period'>.</span><span class='id setProperty'>setProperty</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>java.awt.headless</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>true</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span></pre>
 
-<p>The headless setting (java.awt.headless=true) is required to use fonts and
-SVG on UNIX systems without X Windows.</p>
-
-<p>This is an advanced option.</p>
+<p>The headless setting (java.awt.headless=true) is required to  compile SWFs
+that use fonts and SVG on UNIX systems that aren't  running X Windows.</p>
 
 
   </div>
@@ -3936,13 +4204,20 @@ SVG on UNIX systems without X Windows.</p>
 <p>Links all classes inside a SWC file to the resulting application SWF file,
 regardless of whether or not they are used.</p>
 
-<p>Contrast this option with the library-path option that includes only those
-classes that are referenced at compile time.</p>
+<p>Contrast this option with the <span class='object_link'><a href="#library_path-instance_method" title="FlashSDK::CompilerBase#library_path (method)">#library_path</a></span> option that includes only
+those classes that are referenced at compile time.</p>
 
 <p>To link one or more classes whether or not they are used and not an entire
-SWC file, use the includes option.</p>
+SWC file, use the <span class='object_link'><a href="#includes-instance_method" title="FlashSDK::CompilerBase#includes (method)">#includes</a></span> option.</p>
 
 <p>This option is commonly used to specify resource bundles.</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id include_libraries'>include_libraries</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/somelib/SomeLib.swc</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -3966,6 +4241,17 @@ SWC file, use the includes option.</p>
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#include_path-instance_method" title="FlashSDK::CompilerBase#include_path (method)">#include_path</a></span></li>
+    
+      <li><span class='object_link'><a href="#includes-instance_method" title="FlashSDK::CompilerBase#includes (method)">#includes</a></span></li>
+    
+      <li><span class='object_link'><a href="#library_path-instance_method" title="FlashSDK::CompilerBase#library_path (method)">#library_path</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -3999,7 +4285,15 @@ SWC file, use the includes option.</p>
     
 <p>Define one or more directory paths for include processing. For each path
 that is provided, all .as and .mxml files found forward of that path will
-be included in the SWF regardless of whether they are imported or not.</p>
+be included in the SWF regardless of whether they are referenced elsewhere.</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/somelib</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id include_path'>include_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/somelib/com/somelib/net</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -4023,6 +4317,17 @@ be included in the SWF regardless of whether they are imported or not.</p>
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#include_libraries-instance_method" title="FlashSDK::CompilerBase#include_libraries (method)">#include_libraries</a></span></li>
+    
+      <li><span class='object_link'><a href="#includes-instance_method" title="FlashSDK::CompilerBase#includes (method)">#includes</a></span></li>
+    
+      <li><span class='object_link'><a href="#library_path-instance_method" title="FlashSDK::CompilerBase#library_path (method)">#library_path</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -4058,7 +4363,15 @@ be included in the SWF regardless of whether they are imported or not.</p>
 not those classes are required at compile time.</p>
 
 <p>To link an entire SWC file rather than individual classes, use the
-include-libraries option.</p>
+<span class='object_link'><a href="#include_libraries-instance_method" title="FlashSDK::CompilerBase#include_libraries (method)">#include_libraries</a></span> option.</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/somelib</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id includes'>includes</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>com.domain.SomeClass</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -4082,6 +4395,17 @@ include-libraries option.</p>
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#include_libraries-instance_method" title="FlashSDK::CompilerBase#include_libraries (method)">#include_libraries</a></span></li>
+    
+      <li><span class='object_link'><a href="#include_path-instance_method" title="FlashSDK::CompilerBase#include_path (method)">#include_path</a></span></li>
+    
+      <li><span class='object_link'><a href="#library_path-instance_method" title="FlashSDK::CompilerBase#library_path (method)">#library_path</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -4115,9 +4439,11 @@ include-libraries option.</p>
     
 <p>Enables incremental compilation.</p>
 
-<p>This option is true by default for the Flex Builder application compiler.
-For the command-line compiler, the default is false. The web-tier compiler
-does not support incremental compilation.</p>
+<p>This option is true by default for the Flex Builder application compiler.</p>
+
+<p>For the command-line compiler, the default is false.</p>
+
+<p>The web-tier compiler does not support incremental compilation.</p>
 
 
   </div>
@@ -4172,22 +4498,32 @@ does not support incremental compilation.</p>
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Keep the specified metadata in the SWF (advanced, repeatable).</p>
+<p>Keep the specified metadata in the SWF (advanced, repeatable). This
+parameter must be set if you attempt to define new metadata tags.</p>
 
-<p>Example:</p>
+<p>If you define metadata tags and use this parameter to include them when
+building a SWC, consumers of your SWC library will not also need to
+re-include the same metadata tags.</p>
 
-<p>Rakefile:</p>
+<p>Following is an example Rakefile that is setting this property:</p>
 
-<pre class="code"><span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
   <span class='id t'>t</span><span class='period'>.</span><span class='id keep_as3_metadata'>keep_as3_metadata</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Orange</span><span class='tstring_end'>'</span></span>
 <span class='kw'>end</span></pre>
 
-<p>Source Code:</p>
+<p>There could be a class somewhere that defines this metadata tag:</p>
 
 <pre class="code">[Orange(isTasty=true)]
 public function eatOranges():void {
     // do something
 }</pre>
+
+<p>There would normally be another class that does some kind of reflection to
+perform some special operation on all entities that declare themselves as
+[Orange].</p>
 
 
   </div>
@@ -4254,7 +4590,7 @@ exist, the compiler creates one.</p>
 <p>The default names of the primary generated class files are
 filename-generated.as and filename-interface.as.</p>
 
-<p>The default value is false.nThis is an advanced option.</p>
+<p>The default value is false.</p>
 
 
   </div>
@@ -4368,8 +4704,6 @@ filename-generated.as and filename-interface.as.</p>
 
 <p>The default value is false.</p>
 
-<p>This is an advanced option.</p>
-
 
   </div>
 </div>
@@ -4424,29 +4758,37 @@ filename-generated.as and filename-interface.as.</p>
   <div class="discussion">
     
 <p>Links SWC files to the resulting application SWF file. The compiler only
-links in those classes for the SWC file that are required.</p>
+links in those classes for the SWC file that are referenced from your
+Document Root, or another class that it references.</p>
 
-<p>The default value of the library-path option includes all SWC files in the
-libs directory and the current locale. These are required.</p>
+<p>The default value of the <span class='object_link'><a href="#library_path-instance_method" title="FlashSDK::CompilerBase#library_path (method)">#library_path</a></span> option includes all SWC files in
+the libs directory and the current locale. These are required.</p>
 
 <p>To point to individual classes or packages rather than entire SWC files,
-use the source-path option.</p>
-
-<p>If you set the value of the library_path using the '=' operator, you must
-also explicitly add the framework.swc and  locale SWC files. Your new entry
-is not appended to the library-path but replaces it.</p>
-
-<pre class="code"><span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
-  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
-  <span class='id t'>t</span><span class='period'>.</span><span class='id library_path'>library_path</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/SomeLib.swc</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
-<span class='kw'>end</span></pre>
+use the <span class='object_link'><a href="#source_path-instance_method" title="FlashSDK::CompilerBase#source_path (method)">#source_path</a></span> option.</p>
 
 <p>You can use the &lt;&lt; operator to append the new argument to the list of
-existing SWC files.</p>
+existing library paths:</p>
 
-<pre class="code"><span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
   <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
-  <span class='id t'>t</span><span class='period'>.</span><span class='id library_path'>library_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/SomeLib.swc</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id library_path'>library_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/somelib/SomeLib.swc</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+<p>If you set the value of the library_path using the '=' operator, you must
+set the entire Array.</p>
+
+<p>You may also need to explicitly add the framework.swc and locale SWC files.
+Your new entry is  not appended to the <span class='object_link'><a href="#library_path-instance_method" title="FlashSDK::CompilerBase#library_path (method)">#library_path</a></span> but replaces it.
+Once the value has been set, you can use  the '&lt;&lt;' operator for
+subsequent applications.</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id library_path'>library_path</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/somelib/SomeLib.swc</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
 <span class='kw'>end</span></pre>
 
 <p>In a configuration file, you can set the append attribute of the
@@ -4475,6 +4817,13 @@ the library path rather than replace it.</p>
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>FlashSDK::CompilerBase.{{#source_path}</li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -4509,8 +4858,6 @@ the library path rather than replace it.</p>
 <p>&lt;product&gt; &lt;serial-number&gt;</p>
 
 <p>Specifies a product and a serial number.  (repeatable)</p>
-
-<p>This is an advanced option.</p>
 
 
   </div>
@@ -4558,7 +4905,7 @@ the library path rather than replace it.</p>
       <div class="method_details ">
   <p class="signature " id="link_report-instance_method">
   
-    - (<tt>File</tt>) <strong>link_report</strong> 
+    - (<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>) <strong>link_report</strong> 
   
 
   
@@ -4570,12 +4917,17 @@ XML file that contains</p>
 
 <pre class="code">&lt;def&gt;, &lt;pre&gt;, and &lt;ext&gt;</pre>
 
-<p>symbols showing linker dependencies in the final SWF file.</p>
+<p>Symbols showing linker dependencies in the final SWF file.</p>
 
 <p>The file format output by this command can be used to write a file for
-input to the load-externs option.</p>
+input to the <span class='object_link'><a href="#load_externs-instance_method" title="FlashSDK::CompilerBase#load_externs (method)">#load_externs</a></span> option.</p>
 
-<p>This is an advanced option.</p>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id link_report'>link_report</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>ext/link-report.xml</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -4586,19 +4938,26 @@ input to the load-externs option.</p>
   
     <li>
       
-        <span class='type'>(<tt>File</tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
       
       
       
       
         &mdash;
         <div class='inline'>
-<p>An instance of File</p>
+<p>An instance of String</p>
 </div>
       
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#load_externs-instance_method" title="FlashSDK::CompilerBase#load_externs (method)">#load_externs</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -4611,7 +4970,7 @@ input to the load-externs option.</p>
     <td>
       <pre class="code"><span class="info file"># File ''</span>
 
-<span class='id add_param'>add_param</span> <span class='symbol'>:link_report</span><span class='comma'>,</span> <span class='const'>File</span></pre>
+<span class='id add_param'>add_param</span> <span class='symbol'>:link_report</span><span class='comma'>,</span> <span class='const'>String</span></pre>
     </td>
   </tr>
 </table>
@@ -4633,14 +4992,21 @@ input to the load-externs option.</p>
 <p>Specifies the location of the configuration file that defines compiler
 options.</p>
 
-<p>If you specify a configuration file, you can override individual options by
-setting them on the command line.</p>
+<p>If you specify a configuration file, you can still override individual
+options by setting them on the command line.</p>
 
 <p>All relative paths in the configuration file are relative to the location
 of the configuration file itself.</p>
 
-<p>Use the += operator to chain this configuration file to other configuration
-files.</p>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id load_config'>load_config</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>mxmlc-config.xml</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+<p>If you would like to see this file for your current configuration, you can
+set the <span class='object_link'><a href="#dump_config-instance_method" title="FlashSDK::CompilerBase#dump_config (method)">#dump_config</a></span> parameter and run your rake task.</p>
 
 
   </div>
@@ -4664,6 +5030,13 @@ files.</p>
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#dump_config-instance_method" title="FlashSDK::CompilerBase#dump_config (method)">#dump_config</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -4707,6 +5080,24 @@ option.</p>
 <p>This option provides compile-time link checking for external components
 that are dynamically linked.</p>
 
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id load_externs'>load_externs</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>framework-link-report.xml</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
+<p>The input for this parameter is often the output of another build task that
+is set up to emit a <span class='object_link'><a href="#link_report-instance_method" title="FlashSDK::CompilerBase#link_report (method)">#link_report</a></span>,  for example, the previous example
+might be loading a <span class='object_link'><a href="#link_report-instance_method" title="FlashSDK::CompilerBase#link_report (method)">#link_report</a></span> from a task that looks like:</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id compc'>compc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/rsls</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id directory'>directory</span> <span class='op'>=</span> <span class='kw'>true</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id include_sources'>include_sources</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/framework</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id link_report'>link_report</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>framework-link-report.xml</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
+
 
   </div>
 </div>
@@ -4729,6 +5120,13 @@ that are dynamically linked.</p>
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#link_report-instance_method" title="FlashSDK::CompilerBase#link_report (method)">#link_report</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -4767,9 +5165,40 @@ en_EN).</p>
 one locale,  with only the locale option changing.</p>
 
 <p>You must also include the parent directory of the individual locale
-directories,  plus the token locale, in the source-path; for example:</p>
+directories,  plus the token locale, in the source-path.</p>
 
-<pre class="code">mxmlc -locale en_EN -source-path locale/{locale} -file-specs MainApp.mxml</pre>
+<p>One way to do this with Rake might be as follows:</p>
+
+<pre class="code"><span class='comment'># Create a new, empty task to asseble the locale-specific
+</span><span class='comment'># build tasks:
+</span><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Build localized SWF files</span><span class='tstring_end'>'</span></span>
+<span class='id task'>task</span> <span class='symbol'>:build_locales</span>
+
+<span class='comment'># For each supported locale, create a new build task:
+</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>en_US</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>en_EN</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>es_ES</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id locale'>locale</span><span class='op'>|</span>
+
+  <span class='id swf'>swf</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/SomeProject-</span><span class='embexpr_beg'>#{</span><span class='id locale'>locale</span><span class='rbrace'>}</span><span class='tstring_content'>.swf</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='id mxmlc'>mxmlc</span> <span class='id swf'>swf</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+    <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+    <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+    <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>locale/</span><span class='embexpr_beg'>#{</span><span class='id locale'>locale</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id t'>t</span><span class='period'>.</span><span class='id locale'>locale</span> <span class='op'>=</span> <span class='id locale'>locale</span>
+  <span class='kw'>end</span>
+
+  <span class='comment'># Add the localized build task as a prerequisite
+</span>  <span class='comment'># to the aggregate task:
+</span>  <span class='id task'>task</span> <span class='symbol'>:build_locales</span> <span class='op'>=&gt;</span> <span class='id swf'>swf</span>
+<span class='kw'>end</span></pre>
+
+<p>If the previous code was in a Rake file, you could build all localized SWFs
+with:</p>
+
+<pre class="code"><span class='id rake'>rake</span> <span class='id build_locales'>build_locales</span></pre>
+
+<p>You could also build a single locale with:</p>
+
+<pre class="code"><span class='id rake'>rake</span> <span class='id bin'>bin</span><span class='op'>/</span><span class='const'>SomeProject</span><span class='op'>-</span><span class='id en_US'>en_US</span><span class='period'>.</span><span class='id swf'>swf</span></pre>
 
 
   </div>
@@ -4992,9 +5421,16 @@ This path is relative to the MXML file.</p>
   <div class="discussion">
     
 <p>Enables the ActionScript optimizer. This optimizer reduces file size and
-increases performance by optimizing the SWF file's bytecode.</p>
+increases performance by optimizing the SWF file's bytecode, but  takes
+slightly longer to compile. This should usually be set to true for any SWF
+files that are headed to production.</p>
 
-<p>The default value is false.</p>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id optimize'>optimize</span> <span class='op'>=</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -5018,6 +5454,13 @@ increases performance by optimizing the SWF file's bytecode.</p>
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#debug-instance_method" title="FlashSDK::CompilerBase#debug (method)">#debug</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -5049,21 +5492,21 @@ increases performance by optimizing the SWF file's bytecode.</p>
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Specifies the output path and filename for the resulting file. If you omit
-this option, the compiler saves the SWF file to the directory where the
-target file is located.</p>
+<p>Specifies the output path and filename for the resulting file.</p>
 
-<p>The default SWF filename matches the target filename, but with a SWF file
-extension.</p>
+<p>If you omit this option, the compiler saves the SWF file to the  directory
+where the target file is located. The default SWF  filename matches the
+target filename, but with a SWF file extension. When  using this option
+with the component compiler (compc), the output is a  SWC file rather than
+a SWF file.</p>
 
-<p>If you use a relative path to define the filename, it is always relative to
-the current working directory, not the target MXML application root.</p>
-
-<p>The compiler creates extra directories based on the specified filename if
+<p>The compiler creates extra directories based on the specified filename  if
 those directories are not present.</p>
 
-<p>When using this option with the component compiler, the output is a SWC
-file rather than a SWF file.</p>
+<p>The <span class='object_link'><a href="../top-level-namespace.html#mxmlc-instance_method" title="#mxmlc (method)">#mxmlc</a></span> Rake task uses a Rake::File task under the covers, and will
+automatically set this value with the string passed into the task name.</p>
+
+<p>This parameter should not be set directly within the task body.</p>
 
 
   </div>
@@ -5286,13 +5729,13 @@ that contains the list of bundles.</p>
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Specifies a list of run-time shared libraries (RSLs) to use for this
+<p>Specifies a list of run-time shared libraries (RSLs)  to use for this
 application. RSLs are dynamically-linked at run time.</p>
 
-<p>You specify the location of the SWF file relative to the deployment
-location of the application. For example, if you store a file named
-library.swf file in the web_root/libraries directory on the web server, and
-the application in the web root, you specify libraries/library.swf.</p>
+<p>You specify the location of the SWF file relative to the deployment 
+location of the application. For example, if you store a file named 
+library.swf file in the web_root/libraries directory on the web server, 
+and the application in the web root, you specify libraries/library.swf.</p>
 
 
   </div>
@@ -5347,9 +5790,43 @@ the application in the web root, you specify libraries/library.swf.</p>
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Runtime shared library path.</p>
+<p>Setting up Runtime Shared Libraries (RSLs) is extremely complicated and
+usually not worth doing unless you're using the Flex framework.</p>
 
-<pre class="code"><span class='id t'>t</span><span class='period'>.</span><span class='id runtime_shared_library_path'>runtime_shared_library_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[path-element] [rsl-url] [policy-file-url]</span><span class='tstring_end'>&quot;</span></span></pre>
+<p>Following are some URLs where you might learn more about using RSLs:</p>
+<ul><li>
+<p><a href="http://www.newtriks.com/?p=802">www.newtriks.com/?p=802</a></p>
+</li><li>
+<p><a
+href="http://blogs.adobe.com/rgonzalez/2006/06/modular_applications_part_2.html">blogs.adobe.com/rgonzalez/2006/06/modular_applications_part_2.html</a></p>
+</li><li>
+<p><a
+href="http://code.google.com/p/maashaack/wiki/Metadata">code.google.com/p/maashaack/wiki/Metadata</a></p>
+</li><li>
+<p><a
+href="http://flexscript.wordpress.com/2008/11/15/using-runtime-shared-libraries-utilizing-flash-player-cache">flexscript.wordpress.com/2008/11/15/using-runtime-shared-libraries-utilizing-flash-player-cache</a>/</p>
+</li></ul>
+
+<p>If you're not using the Flex framework, the most difficult thing you'll
+need to do is set up a Preloader and figure out how to determine which urls
+to load the RSLs from.</p>
+
+<p>If you are setting up RSLs with the Flex framework, you should be able to
+create a build task something like the following:</p>
+
+<pre class="code"><span class='id version'>version</span>     <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>4.1.0.16076</span><span class='tstring_end'>'</span></span>
+<span class='id rsls_dir'>rsls_dir</span>    <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/rsls</span><span class='tstring_end'>'</span></span>
+<span class='id crossdomain'>crossdomain</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+<span class='id host'>host</span>        <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>http://yourdomain.com</span><span class='tstring_end'>'</span></span>
+
+<span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span>       <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.mxml</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id pkg_version'>pkg_version</span> <span class='op'>=</span> <span class='id version'>version</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id runtime_shared_library_path'>runtime_shared_library_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib/framework_</span><span class='embexpr_beg'>#{</span><span class='id version'>version</span><span class='rbrace'>}</span><span class='tstring_content'>.swc,</span><span class='embexpr_beg'>#{</span><span class='id host'>host</span><span class='rbrace'>}</span><span class='embexpr_beg'>#{</span><span class='id rsls_dir'>rsls_dir</span><span class='rbrace'>}</span><span class='tstring_content'>/framework_</span><span class='embexpr_beg'>#{</span><span class='id version'>version</span><span class='rbrace'>}</span><span class='tstring_content'>.swz,</span><span class='embexpr_beg'>#{</span><span class='id crossdomain'>crossdomain</span><span class='rbrace'>}</span><span class='tstring_content'>,</span><span class='embexpr_beg'>#{</span><span class='id host'>host</span><span class='rbrace'>}</span><span class='embexpr_beg'>#{</span><span class='id rsls_dir'>rsls_dir</span><span class='rbrace'>}</span><span class='tstring_content'>/framework_</span><span class='embexpr_beg'>#{</span><span class='id version'>version</span><span class='rbrace'>}</span><span class='tstring_content'>.swf</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id runtime_shared_library_path'>runtime_shared_library_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lib/rpc_</span><span class='embexpr_beg'>#{</span><span class='id version'>version</span><span class='rbrace'>}</span><span class='tstring_content'>.swc,</span><span class='embexpr_beg'>#{</span><span class='id host'>host</span><span class='rbrace'>}</span><span class='embexpr_beg'>#{</span><span class='id rsls_dir'>rsls_dir</span><span class='rbrace'>}</span><span class='tstring_content'>/rpc_</span><span class='embexpr_beg'>#{</span><span class='id version'>version</span><span class='rbrace'>}</span><span class='tstring_content'>.swz,</span><span class='embexpr_beg'>#{</span><span class='id crossdomain'>crossdomain</span><span class='rbrace'>}</span><span class='tstring_content'>,</span><span class='embexpr_beg'>#{</span><span class='id host'>host</span><span class='rbrace'>}</span><span class='embexpr_beg'>#{</span><span class='id rsls_dir'>rsls_dir</span><span class='rbrace'>}</span><span class='tstring_content'>/rpc_</span><span class='embexpr_beg'>#{</span><span class='id version'>version</span><span class='rbrace'>}</span><span class='tstring_content'>.swf</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -5373,13 +5850,6 @@ the application in the web root, you specify libraries/library.swf.</p>
     </li>
   
 </ul>
-
-  <h3>See Also:</h3>
-  <ul class="see">
-    
-      <li>Sprout::MXMLC#rslp</li>
-    
-  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -5471,6 +5941,13 @@ by Flex Data Services.</p>
 
 <p>The default value is true.</p>
 
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.as</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id show_actionscript_warnings'>show_actionscript_warnings</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+
 
   </div>
 </div>
@@ -5528,6 +6005,13 @@ by Flex Data Services.</p>
 property.</p>
 
 <p>The default value is true.</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.mxml</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id show_binding_warnings'>show_binding_warnings</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -5587,6 +6071,13 @@ ActionScript classes, use the show-actionscript-warnings option.</p>
 
 <p>The default value is true.</p>
 
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.mxml</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id show_deprecation_warnings'>show_deprecation_warnings</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+
 
   </div>
 </div>
@@ -5640,22 +6131,26 @@ ActionScript classes, use the show-actionscript-warnings option.</p>
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Adds directories or files to the source path. The Flex compiler searches
-directories in the source path for MXML or AS source files that are used in
-your Flex applications and includes those that are required at compile
-time.</p>
+<p>Adds directories to the source path. The compiler searches directories in
+the source path for MXML or AS source files based on import statements and
+type references.</p>
 
-<p>You can use wildcards to include all files and subdirectories of a
-directory.</p>
+<p>Only those files that have been referenced will be included in a compiled
+SWF or SWC file.</p>
 
-<p>To link an entire library SWC file and not individual classes or
-directories, use the library-path option.</p>
+<p>To add the contents of a SWC file to the entity search, use the
+<span class='object_link'><a href="#library_path-instance_method" title="FlashSDK::CompilerBase#library_path (method)">#library_path</a></span> option.</p>
 
-<p>The source path is also used as the search path for the component
-compiler's include-classes and include-resource-bundles options.</p>
+<p>The source path is also used as the search path for the component 
+compiler's #include_classes and linclude_resource_bundles options.</p>
 
-<p>You can also use the += operator to append the new argument to the list of
-existing source path entries.</p>
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.mxml</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/othersrc</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lib/anothersrc</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -5711,9 +6206,7 @@ existing source path entries.</p>
   <div class="discussion">
     
 <p>Statically link the libraries specified by the
--runtime-shared-libraries-path option.</p>
-
-<pre class="code">alias -static-rsls</pre>
+#runtime_shared_libraries_path option.</p>
 
 
   </div>
@@ -5737,6 +6230,13 @@ existing source path entries.</p>
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li>#runtime_shared_libraries_path</li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -5771,7 +6271,17 @@ existing source path entries.</p>
 <p>Prints undefined property and function calls; also performs compile-time
 type checking on assignments and options supplied to method calls.</p>
 
+<p>Turning of strict typing will essentially enable Duck-Typing in the Flash
+Player.</p>
+
 <p>The default value is true.</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.mxml</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id strict'>strict</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -5830,6 +6340,15 @@ type checking on assignments and options supplied to method calls.</p>
 
 <p>Features requiring a later version will not be compiled into the
 application. The minimum value supported is "9.0.0".</p>
+
+<p>Be aware that this value is a String.</p>
+
+<pre class="code"><span class='id desc'>desc</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Compile the Application</span><span class='tstring_end'>&quot;</span></span>
+<span class='id mxmlc'>mxmlc</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bin/SomeProject.swf</span><span class='tstring_end'>'</span></span> <span class='kw'>do</span> <span class='op'>|</span><span class='id t'>t</span><span class='op'>|</span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id input'>input</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src/SomeProject.mxml</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id source_path'>source_path</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>src</span><span class='tstring_end'>'</span></span>
+  <span class='id t'>t</span><span class='period'>.</span><span class='id target_player'>target_player</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>10</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span></pre>
 
 
   </div>
@@ -6046,12 +6565,12 @@ end</pre>
       <pre class="lines">
 
 
-639
-640
-641</pre>
+1017
+1018
+1019</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 639</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 1017</span>
 
 <span class='kw'>def</span> <span class='id use_fcsh'>use_fcsh</span>
   <span class='ivar'>@use_fcsh</span>
@@ -6078,9 +6597,9 @@ end</pre>
 
 <p>The default value is true.</p>
 
-<p>When the use-network property is set to false, the application can access
-the local filesystem (for example, use the XML.load() method with file:
-URLs) but not network services. In most circumstances, the value of this
+<p>When the use-network property is set to false, the application can  access
+the local filesystem (for example, use the XML.load() method  with file:
+URLs) but not network services. In most circumstances, the  value of this
 property should be true.</p>
 
 
@@ -6136,11 +6655,12 @@ property should be true.</p>
 </p><div class="docstring">
   <div class="discussion">
     
-<p>Generates source code that includes line numbers. When a run-time error
-occurs, the stacktrace shows these line numbers.</p>
+<p>Generates source code that includes source files and line numbers. When  a
+run-time error occurs, the stacktrace shows these line numbers.</p>
 
-<p>Enabling this option generates larger SWF files.nThe default value is
-false.</p>
+<p>Enabling this option generates larger SWF files.</p>
+
+<p>The default value is false.</p>
 
 
   </div>
@@ -6164,6 +6684,13 @@ false.</p>
     </li>
   
 </ul>
+
+  <h3>See Also:</h3>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="#debug-instance_method" title="FlashSDK::CompilerBase#debug (method)">#debug</a></span></li>
+    
+  </ul>
 
 </div><table class="source_code">
   <tr>
@@ -6381,13 +6908,13 @@ Remove this method override.</p>
       <pre class="lines">
 
 
-644
-645
-646
-647</pre>
+1035
+1036
+1037
+1038</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 644</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 1035</span>
 
 <span class='kw'>def</span> <span class='id execute'>execute</span>
   <span class='id prepare'>prepare</span>
@@ -6421,12 +6948,12 @@ Remove this method override.</p>
       <pre class="lines">
 
 
-682
-683
-684</pre>
+1081
+1082
+1083</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 682</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 1081</span>
 
 <span class='kw'>def</span> <span class='id execute_delegate'>execute_delegate</span>
   <span class='lparen'>(</span><span class='id use_fcsh'>use_fcsh</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id execute_with_fcsh'>execute_with_fcsh</span> <span class='op'>:</span> <span class='kw'>super</span>
@@ -6449,16 +6976,18 @@ Remove this method override.</p>
       <pre class="lines">
 
 
-686
-687
-688</pre>
+1085
+1086
+1087
+1088</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 686</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 1085</span>
 
 <span class='kw'>def</span> <span class='id execute_with_fcsh'>execute_with_fcsh</span>
-  <span class='comment'>#puts &quot;[execute_with_fcsh] #{executable} #{to_shell}&quot;
-</span><span class='kw'>end</span></pre>
+  <span class='id client'>client</span> <span class='op'>=</span> <span class='const'>FlashSDK</span><span class='op'>::</span><span class='const'>FCSHSocket</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id client'>client</span><span class='period'>.</span><span class='id execute'>execute</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id executable'>executable</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='rbrace'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id to_shell'>to_shell</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>FCSH_PORT</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -6526,17 +7055,17 @@ found in the Rake::Task prerequisite list.</p>
       <pre class="lines">
 
 
-659
-660
-661
-662
-663
-664
-665
-666</pre>
+1063
+1064
+1065
+1066
+1067
+1068
+1069
+1070</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 659</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 1063</span>
 
 <span class='kw'>def</span> <span class='id library_added'>library_added</span> <span class='id path'>path</span>
   <span class='kw'>if</span><span class='lparen'>(</span><span class='id path'>path</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>\.swc$</span><span class='regexp_end'>/</span></span><span class='rparen'>)</span>
@@ -6574,27 +7103,63 @@ found in the Rake::Task prerequisite list.</p>
       <pre class="lines">
 
 
-670
-671
-672
-673
-674
-675
-676
-677
-678</pre>
+1074
+1075
+1076
+1077</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 670</span>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 1074</span>
 
 <span class='kw'>def</span> <span class='id prepare'>prepare</span>
+  <span class='id update_fcsh'>update_fcsh</span> <span class='kw'>if</span> <span class='id use_fcsh'>use_fcsh</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='kw'>super</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="update_fcsh-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_fcsh</strong>  <span class="extras">(protected)</span>
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+1042
+1043
+1044
+1045
+1046
+1047
+1048
+1049
+1050
+1051
+1052
+1053</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/compiler_base.rb', line 1042</span>
+
+<span class='kw'>def</span> <span class='id update_fcsh'>update_fcsh</span>
   <span class='comment'># Check for USE_FCSH on the environment
 </span>  <span class='comment'># variable hash, update instance value
 </span>  <span class='comment'># if found to be true:
 </span>  <span class='kw'>if</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>USE_FCSH</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>true</span><span class='tstring_end'>'</span></span>
     <span class='kw'>self</span><span class='period'>.</span><span class='id use_fcsh'>use_fcsh</span> <span class='op'>=</span> <span class='kw'>true</span>
   <span class='kw'>end</span>
-  <span class='kw'>super</span>
+
+  <span class='kw'>if</span> <span class='op'>!</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>FCSH_PORT</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id fcsh_port'>fcsh_port</span> <span class='op'>=</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>FCSH_PORT</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -6606,7 +7171,7 @@ found in the Rake::Task prerequisite list.</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 28 12:34:50 2010 by 
+  Generated on Sat Jan 29 11:23:27 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

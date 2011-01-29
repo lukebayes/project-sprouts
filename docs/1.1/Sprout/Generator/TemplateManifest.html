@@ -135,7 +135,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="FileManifest.html" title="Sprout::Generator::FileManifest (class)">FileManifest</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="FileManifest.html#create-instance_method" title="Sprout::Generator::FileManifest#create (method)">#create</a></span>, <span class='object_link'><a href="FileManifest.html#destroy-instance_method" title="Sprout::Generator::FileManifest#destroy (method)">#destroy</a></span>, <span class='object_link'><a href="FileManifest.html#read_source-instance_method" title="Sprout::Generator::FileManifest#read_source (method)">#read_source</a></span>, <span class='object_link'><a href="FileManifest.html#source_name-instance_method" title="Sprout::Generator::FileManifest#source_name (method)">#source_name</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="FileManifest.html#create-instance_method" title="Sprout::Generator::FileManifest#create (method)">#create</a></span>, <span class='object_link'><a href="FileManifest.html#destroy-instance_method" title="Sprout::Generator::FileManifest#destroy (method)">#destroy</a></span>, <span class='object_link'><a href="FileManifest.html#read_source-instance_method" title="Sprout::Generator::FileManifest#read_source (method)">#read_source</a></span>, <span class='object_link'><a href="FileManifest.html#source_name-instance_method" title="Sprout::Generator::FileManifest#source_name (method)">#source_name</a></span>, <span class='object_link'><a href="FileManifest.html#write_file-instance_method" title="Sprout::Generator::FileManifest#write_file (method)">#write_file</a></span></p>
 
   
   
@@ -167,15 +167,13 @@
 
 7
 8
-9
-10</pre>
+9</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generator/template_manifest.rb', line 7</span>
 
 <span class='kw'>def</span> <span class='id resolve_template'>resolve_template</span>
-  <span class='id template_content'>template_content</span> <span class='op'>=</span> <span class='id read_source'>read_source</span>
-  <span class='id generator'>generator</span><span class='period'>.</span><span class='id resolve_template'>resolve_template</span> <span class='id template_content'>template_content</span>
+  <span class='id generator'>generator</span><span class='period'>.</span><span class='id resolve_template'>resolve_template</span> <span class='id read_source'>read_source</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -187,7 +185,7 @@
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 28 12:34:50 2010 by 
+  Generated on Sat Jan 29 11:23:28 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

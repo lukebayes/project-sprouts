@@ -444,30 +444,6 @@ it does not.</p>
         <li class="protected ">
   <span class="summary_signature">
     
-      <a href="#insert_fake_executable-instance_method" title="#insert_fake_executable (instance method)">- (Object) <strong>insert_fake_executable</strong>(fake) </a>
-    
-
-    
-  </span>
-  
-  
-  <span class="note title protected">protected</span>
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Update the Sprout::Executable registry so that subsequent requests for an
-executable return a fake one instead of the real one.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="protected ">
-  <span class="summary_signature">
-    
       <a href="#make_temp_folder-instance_method" title="#make_temp_folder (instance method)">- (Dir) <strong>make_temp_folder</strong>(from) </a>
     
 
@@ -723,19 +699,19 @@ nearest the file that calls this method.</p>
       <pre class="lines">
 
 
-324
-325
-326
-327
-328
-329
-330
-331
-332
-333</pre>
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 324</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 312</span>
 
 <span class='kw'>def</span> <span class='id as_a_mac_system'>as_a_mac_system</span>
   <span class='id sys'>sys</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>OSXSystem</span><span class='period'>.</span><span class='id new'>new</span>
@@ -815,19 +791,19 @@ nearest the file that calls this method.</p>
       <pre class="lines">
 
 
-304
-305
-306
-307
-308
-309
-310
-311
-312
-313</pre>
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 304</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 292</span>
 
 <span class='kw'>def</span> <span class='id as_a_unix_system'>as_a_unix_system</span>
   <span class='id sys'>sys</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>UnixSystem</span><span class='period'>.</span><span class='id new'>new</span>
@@ -907,19 +883,19 @@ nearest the file that calls this method.</p>
       <pre class="lines">
 
 
-364
-365
-366
-367
-368
-369
-370
-371
-372
-373</pre>
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 364</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 352</span>
 
 <span class='kw'>def</span> <span class='id as_a_win_nix_system'>as_a_win_nix_system</span>
   <span class='id sys'>sys</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>WinNixSystem</span><span class='period'>.</span><span class='id new'>new</span>
@@ -999,19 +975,19 @@ nearest the file that calls this method.</p>
       <pre class="lines">
 
 
-344
-345
-346
-347
-348
-349
-350
-351
-352
-353</pre>
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 344</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 332</span>
 
 <span class='kw'>def</span> <span class='id as_a_windows_system'>as_a_windows_system</span>
   <span class='id sys'>sys</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='op'>::</span><span class='const'>WinSystem</span><span class='period'>.</span><span class='id new'>new</span>
@@ -1100,27 +1076,27 @@ longer be available after the provided block is complete.</p>
       <pre class="lines">
 
 
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
 276
 277
 278
 279
 280
-281
-282
-283
-284
-285
-286
-287
-288
-289
-290
-291
-292
-293</pre>
+281</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 276</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 264</span>
 
 <span class='kw'>def</span> <span class='id as_each_system'>as_each_system</span>
   <span class='lbracket'>[</span>
@@ -1210,13 +1186,13 @@ exist.</p>
       <pre class="lines">
 
 
-191
-192
-193
-194</pre>
+198
+199
+200
+201</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 191</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 198</span>
 
 <span class='kw'>def</span> <span class='id assert_directory'>assert_directory</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id message'>message</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id message'>message</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Expected directory not found at </span><span class='embexpr_beg'>#{</span><span class='id path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -1314,14 +1290,14 @@ like:</p>
       <pre class="lines">
 
 
-176
-177
-178
-179
-180</pre>
+183
+184
+185
+186
+187</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 176</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 183</span>
 
 <span class='kw'>def</span> <span class='id assert_file'>assert_file</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id message'>message</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id message'>message</span> <span class='op'>||=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Expected file not found at </span><span class='embexpr_beg'>#{</span><span class='id path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -1361,17 +1337,17 @@ messages without extra work.</p>
       <pre class="lines">
 
 
-220
-221
-222
-223
-224
-225
-226
-227</pre>
+227
+228
+229
+230
+231
+232
+233
+234</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 220</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 227</span>
 
 <span class='kw'>def</span> <span class='id assert_matches'>assert_matches</span><span class='lparen'>(</span><span class='id expression'>expression</span><span class='comma'>,</span> <span class='id string'>string</span><span class='comma'>,</span> <span class='id message'>message</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
   <span class='kw'>if</span><span class='lparen'>(</span><span class='id expression'>expression</span><span class='period'>.</span><span class='id is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1451,15 +1427,15 @@ or is empty.</p>
       <pre class="lines">
 
 
-205
-206
-207
-208
-209
-210</pre>
+212
+213
+214
+215
+216
+217</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 205</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 212</span>
 
 <span class='kw'>def</span> <span class='id assert_not_empty'>assert_not_empty</span><span class='lparen'>(</span><span class='id path'>path</span><span class='comma'>,</span> <span class='id message'>message</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id assert_file'>assert_file</span> <span class='id path'>path</span><span class='comma'>,</span> <span class='id message'>message</span>
@@ -1495,14 +1471,14 @@ or is empty.</p>
       <pre class="lines">
 
 
-133
-134
-135
-136
-137</pre>
+140
+141
+142
+143
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 133</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='id clear_tasks'>clear_tasks</span>
   <span class='const'>CLEAN</span><span class='period'>.</span><span class='id delete_if'>delete_if</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id a'>a</span><span class='op'>|</span> <span class='kw'>true</span> <span class='rbrace'>}</span>
@@ -1575,14 +1551,14 @@ or is empty.</p>
       <pre class="lines">
 
 
-144
-145
-146
-147
-148</pre>
+151
+152
+153
+154
+155</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 144</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 151</span>
 
 <span class='kw'>def</span> <span class='id create_file'>create_file</span> <span class='id path'>path</span>
   <span class='id dir'>dir</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id dirname'>dirname</span> <span class='id path'>path</span>
@@ -1691,100 +1667,15 @@ or is empty.</p>
       <pre class="lines">
 
 
-127
-128
-129</pre>
+134
+135
+136</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 134</span>
 
 <span class='kw'>def</span> <span class='id get_task'>get_task</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id application'>application</span><span class='lbracket'>[</span><span class='id name'>name</span><span class='rbracket'>]</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <p class="signature " id="insert_fake_executable-instance_method">
-  
-    - (<tt>Object</tt>) <strong>insert_fake_executable</strong>(fake)  <span class="extras">(protected)</span>
-  
-
-  
-</p><div class="docstring">
-  <div class="discussion">
-    
-<p>Update the Sprout::Executable registry so that subsequent requests for an
-executable return a fake one instead of the real one.</p>
-
-<p>Note: Calling this method will set a mocha expectation that the
-Sprout::Executable.load method will be called during the test method run.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <h3>Parameters:</h3>
-<ul class="param">
-  
-    <li>
-      
-        <span class='type'>(<tt>Symbol</tt>)</span>
-      
-      
-        <span class='name'>exe</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>The executable that will be sent to the load request (e.g. :fdb, :mxmlc,
-etc.).</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='type'>(<tt><span class='object_link'><a href="../String.html" title="String (class)">String</a></span></tt>)</span>
-      
-      
-        <span class='name'>fake_name</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>The path to the fake executable that should be used.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-241
-242
-243
-244
-245
-246</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 241</span>
-
-<span class='kw'>def</span> <span class='id insert_fake_executable'>insert_fake_executable</span> <span class='id fake'>fake</span>
-  <span class='comment'># Comment the following and install the flashsdk gem
-</span>  <span class='comment'># to run test against actual executables instead of fakes:
-</span>  <span class='id path_response'>path_response</span> <span class='op'>=</span> <span class='const'>OpenStruct</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='symbol'>:path</span> <span class='op'>=&gt;</span> <span class='id fake'>fake</span><span class='rparen'>)</span>
-  <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Executable</span><span class='period'>.</span><span class='id expects'>expects</span><span class='lparen'>(</span><span class='symbol'>:load</span><span class='rparen'>)</span><span class='period'>.</span><span class='id returns'>returns</span> <span class='id path_response'>path_response</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1852,14 +1743,14 @@ etc.).</p>
       <pre class="lines">
 
 
-107
-108
-109
-110
-111</pre>
+114
+115
+116
+117
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 114</span>
 
 <span class='kw'>def</span> <span class='id make_temp_folder'>make_temp_folder</span> <span class='id from'>from</span>
   <span class='id dir'>dir</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='id fixtures'>fixtures</span><span class='lparen'>(</span><span class='id from'>from</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>tmp</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
@@ -1916,14 +1807,14 @@ etc.).</p>
       <pre class="lines">
 
 
-155
-156
-157
-158
-159</pre>
+162
+163
+164
+165
+166</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 155</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 162</span>
 
 <span class='kw'>def</span> <span class='id remove_file'>remove_file</span><span class='lparen'>(</span><span class='id path'>path</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='kw'>if</span><span class='lparen'>(</span><span class='id path'>path</span> <span class='op'>&amp;&amp;</span> <span class='const'>File</span><span class='period'>.</span><span class='id exists?'>exists?</span><span class='lparen'>(</span><span class='id path'>path</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1976,14 +1867,14 @@ etc.).</p>
       <pre class="lines">
 
 
-117
-118
-119
-120
-121</pre>
+124
+125
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 124</span>
 
 <span class='kw'>def</span> <span class='id run_task'>run_task</span><span class='lparen'>(</span><span class='id name'>name</span><span class='rparen'>)</span>
   <span class='id t'>t</span> <span class='op'>=</span> <span class='const'>Rake</span><span class='period'>.</span><span class='id application'>application</span><span class='lbracket'>[</span><span class='id name'>name</span><span class='rbracket'>]</span>
@@ -2022,13 +1913,27 @@ the test method runs.</p>
 63
 64
 65
-66</pre>
+66
+67
+68
+69
+70
+71
+72
+73</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 63</span>
 
 <span class='kw'>def</span> <span class='id setup'>setup</span>
   <span class='kw'>super</span>
+
+  <span class='comment'># Prevent log messages from interrupting test output,
+</span>  <span class='comment'># and create a pipe that test cases can read to ensure
+</span>  <span class='comment'># user output is provided properly.
+</span>  <span class='const'>Sprout</span><span class='period'>.</span><span class='id stdout'>stdout</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>OutputBuffer</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='const'>Sprout</span><span class='period'>.</span><span class='id stderr'>stderr</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>OutputBuffer</span><span class='period'>.</span><span class='id new'>new</span>
+
   <span class='ivar'>@start_path</span> <span class='op'>=</span> <span class='const'>Dir</span><span class='period'>.</span><span class='id pwd'>pwd</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -2090,13 +1995,6 @@ like, clearing lingering rake tasks, and removing temporary folders.</p>
       <pre class="lines">
 
 
-72
-73
-74
-75
-76
-77
-78
 79
 80
 81
@@ -2104,10 +2002,17 @@ like, clearing lingering rake tasks, and removing temporary folders.</p>
 83
 84
 85
-86</pre>
+86
+87
+88
+89
+90
+91
+92
+93</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 72</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id teardown'>teardown</span>
   <span class='kw'>super</span>
@@ -2171,13 +2076,13 @@ nearest the file that calls this method.</p>
       <pre class="lines">
 
 
-252
-253
-254
-255</pre>
+240
+241
+242
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 252</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 240</span>
 
 <span class='kw'>def</span> <span class='id temp_cache'>temp_cache</span>
   <span class='id dir'>dir</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id dirname'>dirname</span><span class='lparen'>(</span><span class='const'>Sprout</span><span class='period'>.</span><span class='id file_from_caller'>file_from_caller</span><span class='lparen'>(</span><span class='id caller'>caller</span><span class='period'>.</span><span class='id first'>first</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -2229,13 +2134,13 @@ nearest the file that calls this method.</p>
       <pre class="lines">
 
 
-95
-96
-97
-98</pre>
+102
+103
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 95</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/test_helper.rb', line 102</span>
 
 <span class='kw'>def</span> <span class='id temp_path'>temp_path</span>
   <span class='id caller_file'>caller_file</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='period'>.</span><span class='id file_from_caller'>file_from_caller</span> <span class='id caller'>caller</span><span class='period'>.</span><span class='id first'>first</span>
@@ -2251,7 +2156,7 @@ nearest the file that calls this method.</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 28 12:34:46 2010 by 
+  Generated on Sat Jan 29 11:23:23 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

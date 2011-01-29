@@ -1,0 +1,626 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: FlashSDK::FCSHSocket</title>
+<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="../css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '..';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="../_index.html">Index (F)</a> &raquo; 
+    <span class='title'><span class='object_link'><a href="../FlashSDK.html" title="FlashSDK (module)">FlashSDK</a></span></span>
+     &raquo; 
+    <span class="title">FCSHSocket</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: FlashSDK::FCSHSocket
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">FlashSDK::FCSHSocket</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">flashsdk/lib/flashsdk/fcsh_socket.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This is a client to the long-running FCSH process.</p>
+
+<p>The server side of this connection should be started before starting the
+client.</p>
+
+<p>To do this, just open a new terminal, cd into your project directory, and
+run:</p>
+
+<pre class="code"><span class='id rake'>rake</span> <span class='label'>fcsh:</span><span class='id start'>start</span></pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+  <h2>Constant Summary</h2>
+  
+    <dl class="constants">
+      
+        <dt id="DEFAULT_PORT-constant" class="">DEFAULT_PORT =
+          <div class="docstring">
+  <div class="discussion">
+    
+<p>The default TCP port that FCSH will use to connect.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>12321</span></pre></dd>
+      
+    </dl>
+  
+
+
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#port-instance_method" title="#port (instance method)">- (Object) <strong>port</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute port.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#requests-instance_method" title="#requests (instance method)">- (Object) <strong>requests</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute requests.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#execute-instance_method" title="#execute (instance method)">- (Object) <strong>execute</strong>(command, port = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (FCSHSocket) <strong>initialize</strong> </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Create a new FCSHClient.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#listen-instance_method" title="#listen (instance method)">- (Object) <strong>listen</strong>(pkg_name = nil, pkg_version = nil, port = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="FlashSDK::FCSHSocket (class)">FCSHSocket</a></span></tt>) <strong>initialize</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Create a new FCSHClient</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+28
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/fcsh_socket.rb', line 28</span>
+
+<span class='kw'>def</span> <span class='id initialize'>initialize</span>
+  <span class='ivar'>@port</span> <span class='op'>=</span> <span class='const'>DEFAULT_PORT</span>
+  <span class='ivar'>@requests</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id="port=-instance_method"></span>
+      <span id="port-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="port-instance_method">
+  
+    - (<tt>Object</tt>) <strong>port</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute port</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/fcsh_socket.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='id port'>port</span>
+  <span class='ivar'>@port</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <span id="requests-instance_method"></span>
+      <div class="method_details ">
+  <p class="signature " id="requests-instance_method">
+  
+    - (<tt>Object</tt>) <strong>requests</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute requests</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/fcsh_socket.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id requests'>requests</span>
+  <span class='ivar'>@requests</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="execute-instance_method">
+  
+    - (<tt>Object</tt>) <strong>execute</strong>(command, port = nil) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/fcsh_socket.rb', line 88</span>
+
+<span class='kw'>def</span> <span class='id execute'>execute</span> <span class='id command'>command</span><span class='comma'>,</span> <span class='id port'>port</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id start'>start</span> <span class='op'>=</span> <span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span>
+  <span class='id port'>port</span> <span class='op'>=</span> <span class='id port'>port</span> <span class='op'>||</span> <span class='ivar'>@port</span>
+  <span class='kw'>begin</span>
+    <span class='id session'>session</span> <span class='op'>=</span> <span class='const'>TCPSocket</span><span class='period'>.</span><span class='id new'>new</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>localhost</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id port'>port</span>
+    <span class='id session'>session</span><span class='period'>.</span><span class='id puts'>puts</span> <span class='id command'>command</span>
+    <span class='id response'>response</span> <span class='op'>=</span> <span class='id session'>session</span><span class='period'>.</span><span class='id read'>read</span>
+    <span class='kw'>if</span> <span class='id response'>response</span><span class='period'>.</span><span class='id match'>match</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>Error</span><span class='regexp_end'>/</span></span>
+      <span class='id raise'>raise</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Errors</span><span class='op'>::</span><span class='const'>UsageError</span><span class='period'>.</span><span class='id new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[FCSH] </span><span class='embexpr_beg'>#{</span><span class='id response'>response</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>else</span>
+      <span class='const'>Sprout</span><span class='period'>.</span><span class='id stdout'>stdout</span><span class='period'>.</span><span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[FCSH] </span><span class='embexpr_beg'>#{</span><span class='id response'>response</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+    <span class='id response'>response</span>
+  <span class='kw'>rescue</span> <span class='const'>Errno</span><span class='op'>::</span><span class='const'>ECONNREFUSED</span> <span class='op'>=&gt;</span> <span class='id e'>e</span>
+    <span class='id message'>message</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[ERROR] </span><span class='tstring_end'>&quot;</span></span>
+    <span class='id message'>message</span> <span class='op'>&lt;&lt;</span> <span class='id e'>e</span><span class='period'>.</span><span class='id message'>message</span>
+    <span class='id message'>message</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>: Could not connect to an FCSH server on port: </span><span class='embexpr_beg'>#{</span><span class='id port'>port</span><span class='rbrace'>}</span><span class='tstring_content'> at: </span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id pwd'>pwd</span><span class='rbrace'>}</span><span class='tstring_content'>.\n\n</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id message'>message</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>This is probably because one has not been started. To start a new FCSH server, open a new </span><span class='tstring_end'>&quot;</span></span>
+    <span class='id message'>message</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>terminal and run the following:\n\n</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id message'>message</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cd </span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id pwd'>pwd</span><span class='rbrace'>}</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id message'>message</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rake fcsh:start\n</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id raise'>raise</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Errors</span><span class='op'>::</span><span class='const'>UsageError</span><span class='period'>.</span><span class='id new'>new</span> <span class='id message'>message</span>
+  <span class='kw'>ensure</span>
+    <span class='kw'>if</span> <span class='op'>!</span><span class='id session'>session</span><span class='period'>.</span><span class='id nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id session'>session</span><span class='period'>.</span><span class='id closed?'>closed?</span>
+      <span class='id session'>session</span><span class='period'>.</span><span class='id flush'>flush</span>
+      <span class='id session'>session</span><span class='period'>.</span><span class='id close'>close</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>if</span> <span class='id command'>command</span><span class='period'>.</span><span class='id match'>match</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^mxmlc|^compc</span><span class='regexp_end'>/</span></span>
+    <span class='const'>Sprout</span><span class='period'>.</span><span class='id stdout'>stdout</span><span class='period'>.</span><span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>[FCSH] complete in </span><span class='embexpr_beg'>#{</span><span class='lparen'>(</span><span class='const'>Time</span><span class='period'>.</span><span class='id now'>now</span> <span class='op'>-</span> <span class='id start'>start</span><span class='rparen'>)</span><span class='period'>.</span><span class='id seconds'>seconds</span><span class='rbrace'>}</span><span class='tstring_content'> seconds.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="listen-instance_method">
+  
+    - (<tt>Object</tt>) <strong>listen</strong>(pkg_name = nil, pkg_version = nil, port = nil) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'flashsdk/lib/flashsdk/fcsh_socket.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='id listen'>listen</span> <span class='id pkg_name'>pkg_name</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id pkg_version'>pkg_version</span><span class='op'>=</span><span class='kw'>nil</span><span class='comma'>,</span> <span class='id port'>port</span><span class='op'>=</span><span class='kw'>nil</span>
+  <span class='id port'>port</span> <span class='op'>=</span> <span class='id port'>port</span> <span class='op'>||</span> <span class='ivar'>@port</span>
+  <span class='comment'># Instantiate FCSH:
+</span>  <span class='id fcsh'>fcsh</span>             <span class='op'>=</span> <span class='const'>FlashSDK</span><span class='op'>::</span><span class='const'>FCSH</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='id fcsh'>fcsh</span><span class='period'>.</span><span class='id pkg_name'>pkg_name</span>    <span class='op'>=</span> <span class='id pkg_name'>pkg_name</span> <span class='kw'>unless</span> <span class='id pkg_name'>pkg_name</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='id fcsh'>fcsh</span><span class='period'>.</span><span class='id pkg_version'>pkg_version</span> <span class='op'>=</span> <span class='id pkg_version'>pkg_version</span> <span class='kw'>unless</span> <span class='id pkg_version'>pkg_version</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+
+  <span class='comment'># Notify the outer shell that we're ready:
+</span>  <span class='const'>Sprout</span><span class='period'>.</span><span class='id stdout'>stdout</span><span class='period'>.</span><span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>FCSH socket open with: </span><span class='embexpr_beg'>#{</span><span class='id fcsh'>fcsh</span><span class='period'>.</span><span class='id pkg_name'>pkg_name</span><span class='rbrace'>}</span><span class='tstring_content'> and </span><span class='embexpr_beg'>#{</span><span class='id fcsh'>fcsh</span><span class='period'>.</span><span class='id pkg_version'>pkg_version</span><span class='rbrace'>}</span><span class='tstring_content'>, waiting for connections on port </span><span class='embexpr_beg'>#{</span><span class='id port'>port</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='const'>Sprout</span><span class='period'>.</span><span class='id stdout'>stdout</span><span class='period'>.</span><span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+
+  <span class='comment'># Start up the FCSH Session:
+</span>  <span class='id fcsh'>fcsh</span><span class='period'>.</span><span class='id execute'>execute</span> <span class='kw'>false</span>
+
+  <span class='comment'># Create a readable IO pipe:
+</span>  <span class='id output'>output</span> <span class='op'>=</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>OutputBuffer</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='comment'># Associate the IO pipe with our 
+</span>  <span class='comment'># outputs so that FCSH will write
+</span>  <span class='comment'># to it.
+</span>  <span class='const'>Sprout</span><span class='period'>.</span><span class='id stdout'>stdout</span> <span class='op'>=</span> <span class='id output'>output</span>
+  <span class='const'>Sprout</span><span class='period'>.</span><span class='id stderr'>stderr</span> <span class='op'>=</span> <span class='id output'>output</span>
+
+  <span class='id server'>server</span> <span class='op'>=</span> <span class='const'>TCPServer</span><span class='period'>.</span><span class='id new'>new</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>localhost</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id port'>port</span>
+
+  <span class='comment'># Create a thread that will exit
+</span>  <span class='comment'># when FCSH exits.
+</span>  <span class='id t'>t</span> <span class='op'>=</span> <span class='const'>Thread</span><span class='period'>.</span><span class='id new'>new</span> <span class='kw'>do</span>
+    <span class='id fcsh'>fcsh</span><span class='period'>.</span><span class='id wait'>wait</span>
+  <span class='kw'>end</span>
+
+  <span class='kw'>while</span> <span class='id t'>t</span><span class='period'>.</span><span class='id alive?'>alive?</span> <span class='kw'>do</span>
+    <span class='const'>Sprout</span><span class='period'>.</span><span class='id stdout'>stdout</span><span class='period'>.</span><span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id session'>session</span>  <span class='op'>=</span> <span class='id server'>server</span><span class='period'>.</span><span class='id accept'>accept</span>
+    <span class='id rendered'>rendered</span> <span class='op'>=</span> <span class='id render_request'>render_request</span> <span class='id session'>session</span><span class='period'>.</span><span class='id gets'>gets</span>
+    <span class='id parts'>parts</span>    <span class='op'>=</span> <span class='id rendered'>rendered</span><span class='period'>.</span><span class='id split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id method'>method</span>   <span class='op'>=</span> <span class='id parts'>parts</span><span class='period'>.</span><span class='id shift'>shift</span><span class='period'>.</span><span class='id strip'>strip</span>
+    <span class='kw'>if</span> <span class='id parts'>parts</span><span class='period'>.</span><span class='id size'>size</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+      <span class='id fcsh'>fcsh</span><span class='period'>.</span><span class='id send'>send</span> <span class='id method'>method</span><span class='comma'>,</span> <span class='id parts'>parts</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id fcsh'>fcsh</span><span class='period'>.</span><span class='id send'>send</span> <span class='id method'>method</span>
+    <span class='kw'>end</span>
+
+    <span class='id fcsh'>fcsh</span><span class='period'>.</span><span class='id wait_for_prompt'>wait_for_prompt</span>
+
+    <span class='kw'>if</span> <span class='id method'>method</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>clear</span><span class='tstring_end'>&quot;</span></span>
+      <span class='id clear_requests'>clear_requests</span>
+    <span class='kw'>end</span>
+
+    <span class='id response'>response</span> <span class='op'>=</span> <span class='id output'>output</span><span class='period'>.</span><span class='id read'>read</span>
+    <span class='id session'>session</span><span class='period'>.</span><span class='id puts'>puts</span> <span class='id response'>response</span><span class='period'>.</span><span class='id gsub'>gsub</span><span class='lparen'>(</span><span class='id fcsh'>fcsh</span><span class='period'>.</span><span class='id prompt'>prompt</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+    <span class='id session'>session</span><span class='period'>.</span><span class='id flush'>flush</span>
+    <span class='id session'>session</span><span class='period'>.</span><span class='id close'>close</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sat Jan 29 11:23:25 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

@@ -236,6 +236,27 @@ improvements to  the Google Group.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#create_search_paths-class_method" title="create_search_paths (class method)">+ (Object) <strong>create_search_paths</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#register-class_method" title="register (class method)">+ (Hash) <strong>register</strong>(generator_class, templates_path = nil) </a>
     
 
@@ -418,6 +439,46 @@ argument would be <tt>:test_suite</tt></p>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
   <span class='id raise'>raise</span> <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>Errors</span><span class='op'>::</span><span class='const'>MissingGeneratorError</span><span class='period'>.</span><span class='id new'>new</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Could not find any generator named: (</span><span class='embexpr_beg'>#{</span><span class='id class_name'>class_name</span><span class='rbrace'>}</span><span class='tstring_content'>). Perhaps you need to add a RubyGem to your Gemfile?</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_search_paths-class_method">
+  
+    + (<tt>Object</tt>) <strong>create_search_paths</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+212
+213
+214
+215
+216
+217
+218
+219
+220</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/generator.rb', line 212</span>
+
+<span class='kw'>def</span> <span class='id create_search_paths'>create_search_paths</span>
+  <span class='id paths'>paths</span> <span class='op'>=</span> <span class='lbracket'>[</span>
+            <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>config</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>generators</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+            <span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>vendor</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>generators</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+            <span class='const'>Sprout</span><span class='period'>.</span><span class='id generator_cache'>generator_cache</span>
+          <span class='rbracket'>]</span>
+  <span class='id paths'>paths</span> <span class='op'>&lt;&lt;</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>SPROUT_GENERATORS</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='kw'>unless</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>SPROUT_GENERATORS</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id nil?'>nil?</span>
+  <span class='id paths'>paths</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -680,7 +741,7 @@ inheritance chain.</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 28 12:34:46 2010 by 
+  Generated on Sat Jan 29 11:23:22 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>

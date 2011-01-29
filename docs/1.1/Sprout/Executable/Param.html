@@ -710,6 +710,27 @@ instance methods on the  Sprout::Executable that uses it.</p>
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_option_parser_declaration-instance_method" title="#default_option_parser_declaration (instance method)">- (Object) <strong>default_option_parser_declaration</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
         <li class="protected ">
   <span class="summary_signature">
     
@@ -1351,12 +1372,12 @@ help.</p>
       <pre class="lines">
 
 
-360
-361
-362</pre>
+364
+365
+366</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 360</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 364</span>
 
 <span class='kw'>def</span> <span class='id file_expression'>file_expression</span>
   <span class='ivar'>@file_expression</span> <span class='op'>||=</span> <span class='id belongs_to'>belongs_to</span><span class='period'>.</span><span class='id default_file_expression'>default_file_expression</span>
@@ -1665,12 +1686,12 @@ executable is invoked without this parameter first being set.</p>
       <pre class="lines">
 
 
-364
-365
-366</pre>
+368
+369
+370</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 364</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 368</span>
 
 <span class='kw'>def</span> <span class='id shell_name'>shell_name</span>
   <span class='ivar'>@shell_name</span> <span class='op'>||=</span> <span class='id prefix'>prefix</span> <span class='op'>+</span> <span class='id name'>name</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>_</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
@@ -1708,12 +1729,12 @@ the same first character, the first one encountered will win.</p>
       <pre class="lines">
 
 
-345
-346
-347</pre>
+349
+350
+351</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 345</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 349</span>
 
 <span class='kw'>def</span> <span class='id short_name'>short_name</span>
   <span class='ivar'>@short_name</span> <span class='op'>||=</span> <span class='id name'>name</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id shift'>shift</span>
@@ -1930,12 +1951,12 @@ instance methods on the  Sprout::Executable that uses it.</p>
       <pre class="lines">
 
 
-417
-418
-419</pre>
+421
+422
+423</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 417</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 421</span>
 
 <span class='kw'>def</span> <span class='id clean_path'>clean_path</span> <span class='id path'>path</span>
   <span class='const'>Sprout</span><span class='op'>::</span><span class='const'>System</span><span class='period'>.</span><span class='id create'>create</span><span class='period'>.</span><span class='id clean_path'>clean_path</span> <span class='id path'>path</span>
@@ -2028,6 +2049,34 @@ instances.</p>
 </div>
     
       <div class="method_details ">
+  <p class="signature " id="default_option_parser_declaration-instance_method">
+  
+    - (<tt>Object</tt>) <strong>default_option_parser_declaration</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+332
+333
+334</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 332</span>
+
+<span class='kw'>def</span> <span class='id default_option_parser_declaration'>default_option_parser_declaration</span>
+  <span class='lbracket'>[</span> <span class='id prefix'>prefix</span><span class='comma'>,</span> <span class='id option_parser_name'>option_parser_name</span> <span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <p class="signature " id="file_is_output?-instance_method">
   
     - (<tt><span class='object_link'><a href="Boolean.html" title="Sprout::Executable::Boolean (class)">Boolean</a></span></tt>) <strong>file_is_output?</strong>(file)  <span class="extras">(protected)</span>
@@ -2070,12 +2119,12 @@ Sprout::Executable.</p>
       <pre class="lines">
 
 
-431
-432
-433</pre>
+435
+436
+437</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 431</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 435</span>
 
 <span class='kw'>def</span> <span class='id file_is_output?'>file_is_output?</span> <span class='id file'>file</span>
   <span class='id belongs_to'>belongs_to</span><span class='period'>.</span><span class='id respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:output</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id belongs_to'>belongs_to</span><span class='period'>.</span><span class='id output'>output</span><span class='period'>.</span><span class='id to_s'>to_s</span> <span class='op'>==</span> <span class='id file'>file</span>
@@ -2229,7 +2278,7 @@ as a Ruby Executable.</p>
       <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 320</span>
 
 <span class='kw'>def</span> <span class='id option_parser_declaration'>option_parser_declaration</span>
-  <span class='id declaration'>declaration</span> <span class='op'>=</span> <span class='lbracket'>[</span> <span class='id prefix'>prefix</span><span class='comma'>,</span> <span class='id option_parser_name'>option_parser_name</span> <span class='rbracket'>]</span>
+  <span class='id declaration'>declaration</span> <span class='op'>=</span> <span class='id default_option_parser_declaration'>default_option_parser_declaration</span>
   <span class='comment'># TODO: Need to figure out how to support hidden name inputs...
 </span>  <span class='comment'>#if(hidden_name?)
 </span>    <span class='comment'>#declaration = [option_parser_type_output]
@@ -2257,12 +2306,12 @@ as a Ruby Executable.</p>
       <pre class="lines">
 
 
-399
-400
-401</pre>
+403
+404
+405</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 399</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 403</span>
 
 <span class='kw'>def</span> <span class='id option_parser_name'>option_parser_name</span>
   <span class='id name'>name</span><span class='period'>.</span><span class='id to_s'>to_s</span><span class='period'>.</span><span class='id gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>_</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
@@ -2295,12 +2344,12 @@ as a Ruby Executable.</p>
       <pre class="lines">
 
 
-334
-335
-336</pre>
+338
+339
+340</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 334</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 338</span>
 
 <span class='kw'>def</span> <span class='id option_parser_short_name'>option_parser_short_name</span>
   <span class='lbracket'>[</span> <span class='id short_prefix'>short_prefix</span><span class='comma'>,</span> <span class='id short_name'>short_name</span> <span class='rbracket'>]</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
@@ -2323,12 +2372,12 @@ as a Ruby Executable.</p>
       <pre class="lines">
 
 
-403
-404
-405</pre>
+407
+408
+409</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 403</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 407</span>
 
 <span class='kw'>def</span> <span class='id option_parser_type_name'>option_parser_type_name</span>
   <span class='ivar'>@option_parser_type_name</span>
@@ -2351,13 +2400,13 @@ as a Ruby Executable.</p>
       <pre class="lines">
 
 
-407
-408
-409
-410</pre>
+411
+412
+413
+414</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 407</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 411</span>
 
 <span class='kw'>def</span> <span class='id option_parser_type_output'>option_parser_type_output</span>
   <span class='id type'>type</span> <span class='op'>=</span> <span class='id hidden_value?'>hidden_value?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span> <span class='op'>:</span> <span class='id option_parser_type_name'>option_parser_type_name</span>
@@ -2422,11 +2471,11 @@ context we're in.</p>
       <pre class="lines">
 
 
-412
-413</pre>
+416
+417</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 412</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 416</span>
 
 <span class='kw'>def</span> <span class='id prepare_prerequisites'>prepare_prerequisites</span>
 <span class='kw'>end</span></pre>
@@ -2564,12 +2613,12 @@ platforms.</p>
       <pre class="lines">
 
 
-356
-357
-358</pre>
+360
+361
+362</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 356</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 360</span>
 
 <span class='kw'>def</span> <span class='id shell_value'>shell_value</span>
   <span class='id value'>value</span><span class='period'>.</span><span class='id to_s'>to_s</span>
@@ -2632,16 +2681,16 @@ description</p>
       <pre class="lines">
 
 
-389
-390
-391
-392
 393
 394
-395</pre>
+395
+396
+397
+398
+399</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 389</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 393</span>
 
 <span class='kw'>def</span> <span class='id to_rdoc'>to_rdoc</span>
   <span class='id result'>result</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
@@ -2682,18 +2731,18 @@ template method unless <tt>prepared?</tt> returns <tt>true</tt>.</p>
       <pre class="lines">
 
 
-375
-376
-377
-378
 379
 380
 381
 382
-383</pre>
+383
+384
+385
+386
+387</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 375</span>
+      <pre class="code"><span class="info file"># File 'sprout/lib/sprout/executable/param.rb', line 379</span>
 
 <span class='kw'>def</span> <span class='id to_shell'>to_shell</span>
   <span class='id prepare'>prepare</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id prepared?'>prepared?</span>
@@ -2809,7 +2858,7 @@ are not nil</p>
 </div>
     
     <div id="footer">
-  Generated on Tue Dec 28 12:34:48 2010 by 
+  Generated on Sat Jan 29 11:23:25 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.9.2).
 </div>
