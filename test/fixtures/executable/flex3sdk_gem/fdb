@@ -3,6 +3,7 @@
 class FakeFDB
 
   def initialize
+    validate_argv
     str = "Adobe fdb (Flash Player Debugger) [build 16076]\n"
     str << "Copyright (c) 2004-2007 Adobe, Inc. All rights reserved.\n"
     str << "(fdb) "
@@ -39,6 +40,12 @@ class FakeFDB
     gather_input
   end
 
+  def validate_argv
+    if ARGV.size > 0
+      raise "FAKE FDB doesn't expect any params, but received, #{ARGV}"
+    end
+  end
+
   def handle_run args
     str = "Waiting for Player to connect\n"
     str << "Player connected; session starting.\n"
@@ -57,6 +64,9 @@ class FakeFDB
 
   def handle_continue args
     str = "Continuing now\n"
+    str << "<TestResults>\n"
+    str << "Fake Content\n"
+    str << "</TestResults>\n"
     str << "(fdb) "
     printf str
   end
@@ -87,4 +97,5 @@ class FakeFDB
 end
 
 fake_fdb = FakeFDB.new
+
 

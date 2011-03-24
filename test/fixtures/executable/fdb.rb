@@ -3,6 +3,43 @@ module Sprout
 
   class FDB < Executable::Session
 
+    ##
+    # Path to the file where test results should be written.
+    #
+    # @default 'TestResults.xml'
+    # @see :test_result_prefix
+    # @see :test_result_suffix
+    attr_accessor :test_result_file
+
+    ##
+    # Regular expression that will match the preamble that is sent
+    # by your test framework to indicate the beginning of structured
+    # test output.
+    #
+    # @default /<TestResults>/
+    # @see :test_result_file
+    # @see :test_result_suffix
+    attr_accessor :test_result_prefix
+
+    ##
+    # Regular expression that will match the suffix that is sent
+    # by your test framework to indicate the end of structured
+    # test output.
+    #
+    # @default /<\/TestResults>/
+    # @see :test_result_file
+    # @see :test_result_prefix
+    attr_accessor :test_result_suffix
+
+    def initialize
+      super
+      @test_result = ''
+      @inside_test_result = false
+      @test_result_file = 'TestResults.xml'
+      @test_result_prefix = /<TestResults>/
+      @test_result_suffix = /<\/TestResults>/
+    end
+
     set :default_prefix, '-'
 
     ##
@@ -736,6 +773,30 @@ module Sprout
     # Displays the context in which a variable is resolved.
     add_action :what
     add_action_alias :wh, :what
+
+    def system_execute binary, params
+      super do |message|
+        if message.match test_result_suffix
+          write_test_result
+        end
+        if @inside_test_result
+          @test_result << message
+        end
+        if message.match test_result_prefix
+          @inside_test_result = true
+        end
+      end
+    end
+
+    private
+
+    def write_test_result
+      File.open test_result_file, 'w+' do |f|
+        f.write @test_result
+      end
+      @test_result = ''
+      @inside_test_result = false
+    end
 
   end
 end

@@ -99,21 +99,22 @@ module Sprout::Executable
       # already exists.
       def create_action_method options
         name = options[:name]
-        accessor_can_be_defined_at name
-
-        define_method(name) do |*params|
-          action = name.to_s
-          action = "y" if name == :confirm # Convert affirmation
-          action << " #{params.join(' ')}" unless params.nil?
-          action_stack << action
-          execute_actions if process_launched?
+        if accessor_can_be_defined_at? name
+          define_method(name) do |*params|
+            action = name.to_s
+            action = "y" if name == :confirm # Convert confirmation
+            action << " #{params.join(' ')}" unless params.nil?
+            action_stack << action
+            execute_actions if process_launched?
+          end
         end
       end
 
       ##
-      # TODO: Raise an exception if the name is 
+      # TODO: Raise an exception and/or return false if the name is 
       # already taken?
-      def accessor_can_be_defined_at name
+      def accessor_can_be_defined_at? name
+        true
       end
 
     end
@@ -280,6 +281,7 @@ module Sprout::Executable
       # solution.
       #params = "#{params} " + '2>&1'
       @process_thread = Sprout.current_system.execute_thread binary, params, prompt do |message|
+        yield message if block_given?
         Sprout.stdout.printf message
         @prompted = true if prompt.match message
       end

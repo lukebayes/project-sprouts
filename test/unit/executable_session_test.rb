@@ -10,12 +10,18 @@ class ExecutableSessionTest < Test::Unit::TestCase
       # Uncomment the following to see interactive sessions:
       #Sprout.stdout = $stdout
       #Sprout.stderr = $stderr
+      @test_result_file = File.join fixtures, 'executable', 'Result.xml'
+    end
+
+    teardown do
+      remove_file @test_result_file
     end
 
     should "execute without shell params" do
       @fdb = Sprout::FDB.new
       # Comment to hit real FDB:
       @fdb.binary_path = File.join fixtures, 'executable', 'flex3sdk_gem', 'fdb'
+      @fdb.test_result_file = @test_result_file
 
       @fdb.execute false
       @fdb.run
@@ -28,10 +34,14 @@ class ExecutableSessionTest < Test::Unit::TestCase
       @fdb.break "AsUnitRunner:12"
 
       @fdb.continue
-      @fdb.continue
+      #@fdb.continue
 
       #@fdb.handle_user_input
       @fdb.quit
+
+      assert_file @test_result_file do |content|
+        assert_match content, /Fake Content/
+      end
     end
 
   end

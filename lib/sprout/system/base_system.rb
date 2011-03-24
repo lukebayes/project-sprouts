@@ -121,6 +121,10 @@ module Sprout::System
         sleep(0.1)
       end
 
+      if !t.alive?
+        raise Sprout::Errors::UsageError.new(t['runner'].read_err)
+      end
+
       t
     end
 
