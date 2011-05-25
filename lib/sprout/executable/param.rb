@@ -121,9 +121,8 @@ module Sprout
       attr_accessor :prefix
 
       ##
-      # A Symbol that refers to a custom attribute reader
-      # that is available to instance methods on the 
-      # Sprout::Executable that uses it.
+      # A Symbol that refers to a method that will return
+      # the expected value when called. This method can be private.
       #
       #   add_param :visible, Boolean, :reader => :get_visible
       #
@@ -164,14 +163,22 @@ module Sprout
       attr_accessor :value
 
       ##
-      # A Symbol that refers to a custom attribute writer
-      # that is available to instance methods on the 
-      # Sprout::Executable that uses it.
+      # A Symbol that refers to a method (not accessor) that
+      # will be called when the value is set. This method is 
+      # not responsible for actually storing the value, but 
+      # should instead be thought of as a badly named callback
+      # that will be triggered with the new value whenever the
+      # value changes.
+      #
+      # This method can be private.
       #
       #   add_param :visible, Boolean, :writer => :set_visible
       #
-      #   def set_visible=(vis)
-      #     @visible = vis
+      #   private
+      #
+      #   def set_visible value
+      #     do_something_with value
+      #     value
       #   end
       #
       attr_accessor :writer

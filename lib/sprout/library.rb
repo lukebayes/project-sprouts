@@ -15,6 +15,7 @@ module Sprout
   # * Source Code: Raw or pre-compiled (swc, jar, abc)
   #
   # = Specification
+  #
   # Libraries can be added to local or remote file targets in a 
   # Sprout::Specification. When calling add_library, one must provide the 
   # library name (symbol that will be used from Rake) and a relative path (or 
@@ -60,7 +61,48 @@ module Sprout
   # When the library task is executed, the library should be resolved and 
   # expanded into the project. When the mxmlc task is executed, the installed 
   # library should be associated with the compilation command.
-  #   
+  #
+  # Some library Specifications include multiple targets within the same Specification.
+  #
+  # One good example of such a Spec, is the FlashSDK :flex4 Specification.
+  #
+  # Following is a truncated version of that Spec:
+  #
+  #   Sprout::Specification.new do |s|
+  #     s.name    = 'flex4'
+  #     s.version = '4.1.0.16076'
+  #     s.add_remote_file_target do |t|
+  #       t.platform     = :universal
+  #       t.archive_type = :zip
+  #       t.url          = "http://fpdownload.adobe.com/pub/flex/sdk/builds/flex4/flex_sdk_4.1.0.16076.zip"
+  #       t.md5          = "4c5f3d3fa4e1f5be244679210cd852c0"
+  #       t.add_library :flex,         "frameworks/libs/flex.swc"
+  #       t.add_library :flex4,        "frameworks/libs/flex4.swc"
+  #       t.add_library :f_textlayout, "frameworks/libs/framework_textLayout.swc"
+  #       t.add_library :framework,    "frameworks/libs/framework.swc"
+  #       t.add_library :rpc,          "frameworks/libs/rpc.swc"
+  #       t.add_library :sparkskins,   "frameworks/libs/sparkskins.swc"
+  #       t.add_library :textlayout,   "frameworks/libs/textLayout.swc"
+  #       t.add_library :utilities,    "frameworks/libs/utilities.swc"
+  #     end
+  #   end
+  #
+  # Because this library Specification is included in the flashsdk Rubygem, you
+  # would register the spec by loading the flashsdk gem from your Gemfile like:
+  #
+  #   gem 'flashsdk', '>= 1.0.0.pre'
+  #
+  # Once the Rubygem is installed, you can load and register this library with
+  # the following library task in your rakefile:
+  #
+  #   library :flex4
+  #
+  # Once the library is registered, you can refer to particular SWC files within the library like:
+  #
+  #   mxmlc "bin/Foo.swf" => [:utilities, :textlayout] do |t|
+  #     ...
+  #   end
+  #
   # ---
   # 
   # Previous Topic: {Sprout::Generator}
