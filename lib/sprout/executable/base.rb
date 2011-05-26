@@ -75,25 +75,6 @@ module Sprout
           @static_default_value_collection ||= []
         end
 
-        ##
-        # A collection of parameters that we should allow
-        # executables to clobber, even if they already exist.
-        #
-        # One should be able to add to this list if
-        # you have parameters that you'd like to clobber
-        # in an Executable base class.
-        #
-        # When Rake 0.9.x was released, they added these
-        # fields (and more) to global which caused failing
-        # tests in this project and FlashSDK.
-        def clobberable_params
-          @clobberable_params ||= {
-            :directory => true,
-            :namespace => true,
-            :file => true,
-          }
-        end
-
         def set key, value
           set_default_value key, value
         end
@@ -101,12 +82,7 @@ module Sprout
         private
 
         def accessor_can_be_defined_at name
-          if(instance_defines? name)
-            # Do not explode if the parameter name is "clobberable":
-            return if clobberable_params[name]
-            message = "add_param called with a name that is already in use (#{name}=) on (#{self})"
-            raise Sprout::Errors::DuplicateMemberError.new(message)
-          end
+          true
         end
 
         def create_param_accessors options
@@ -439,7 +415,7 @@ module Sprout
       #
       # @see update_rake_task_name_from_args
       def create_outer_task *args
-        file *args do
+        Rake::FileTask.define_task(*args) do 
           execute
         end
       end

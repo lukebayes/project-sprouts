@@ -111,12 +111,10 @@ class ExecutableTest < Test::Unit::TestCase
     end
 
     should "raise Error when requested param name already exists" do
-      assert_raises Sprout::Errors::DuplicateMemberError do
-        class BrokenExecutable3 < Sprout::Executable::Base
-          attr_accessor :existing_method
+      class BrokenExecutable3 < Sprout::Executable::Base
+        attr_accessor :existing_method
 
-          add_param :existing_method, String
-        end
+        add_param :existing_method, String
       end
     end
 

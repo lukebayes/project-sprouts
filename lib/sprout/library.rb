@@ -188,7 +188,7 @@ module Sprout
     end
 
     def create_outer_task
-      t = task pkg_name
+      t = Rake::Task.define_task pkg_name
       # This helps executable rake tasks decide if they
       # want to do something special for library tasks.
       t.sprout_entity = self

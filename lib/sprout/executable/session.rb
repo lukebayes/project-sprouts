@@ -248,7 +248,7 @@ module Sprout::Executable
     #
     # @return [Rake::Task]
     def create_outer_task *args
-      task *args do
+      Rake::Task.define_task *args do
         execute
       end
     end
