@@ -20,7 +20,7 @@ module Sprout
 
       def prepare_prerequisites
         value.each do |f|
-          file f
+          Rake::FileTask.define_task f
           belongs_to.prerequisites << f
         end
       end

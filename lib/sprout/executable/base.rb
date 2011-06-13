@@ -288,7 +288,7 @@ module Sprout
 
         # Add the library resolution rake task
         # as a prerequisite
-        outer_task.prerequisites << task(Sprout::Library::TASK_NAME)
+        outer_task.prerequisites << Rake::Task.define_task(Sprout::Library::TASK_NAME)
         prerequisites.each do |prereq|
           outer_task.prerequisites << prereq
         end

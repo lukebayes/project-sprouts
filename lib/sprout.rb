@@ -4,7 +4,6 @@ $:.unshift lib unless $:.include?(lib)
 
 # External tools and std libs:
 require 'rake'
-require 'rake/dsl'
 require 'delegate'
 require 'logger'
 

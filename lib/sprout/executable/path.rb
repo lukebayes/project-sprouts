@@ -16,7 +16,7 @@ module Sprout
         if(value && !file_is_output?(value))
           files = FileList[value + file_expression]
           files.each do |f|
-            file f
+            Rake::FileTask.define_task f
             belongs_to.prerequisites << f
           end
         end

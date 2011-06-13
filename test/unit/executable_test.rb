@@ -236,9 +236,8 @@ class ExecutableTest < Test::Unit::TestCase
 
     should "add libraries as provided" do
       as_a_unix_system do
-
-        task 'abcd'
-        task 'bin/OtherFileTask.swf'
+        Rake::Task.define_task 'abcd'
+        Rake::Task.define_task 'bin/OtherFileTask.swf'
 
         asunit_lib = Sprout::Library.new :name => :swc, :pkg_name => :asunit4, :path => 'lib/AsUnit-4.4.2.swc'
         Sprout::Library.register asunit_lib
@@ -256,8 +255,8 @@ class ExecutableTest < Test::Unit::TestCase
 
     should "accept configuration with prereqs as a file task" do
       as_a_unix_system do
-        task :clean
-        task :other_task
+        Rake::Task.define_task :clean
+        Rake::Task.define_task :other_task
         @tool = mxmlc 'bin/SomeFile.swf' => [:clean, :other_task] do |t|
           t.source_path << 'test/fixtures/executable/src'
           t.input = 'test/fixtures/executable/src/Main.as'

@@ -42,7 +42,7 @@ module Sprout
         end
 
         if prerequisite?(value)
-          file value
+          Rake::FileTask.define_task value
           belongs_to.prerequisites << value
         end
       end

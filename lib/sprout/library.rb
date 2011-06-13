@@ -254,10 +254,10 @@ module Sprout
     end
 
     def define_file_task name
-      file name do |t|
+      Rake::FileTask.define_task name do |t|
         yield if block_given?
       end
-      task Sprout::Library::TASK_NAME => name
+      Rake::Task.define_task Sprout::Library::TASK_NAME => name
     end
   end
 
