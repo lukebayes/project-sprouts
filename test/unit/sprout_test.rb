@@ -37,11 +37,11 @@ class SproutTest < Test::Unit::TestCase
     [
       ArchiveUnpackerError,
       DestinationExistsError,
-      ExecutionError, 
+      ExecutionError,
       ExecutableRegistrationError,
       MissingExecutableError,
       ProcessRunnerError,
-      SproutError, 
+      SproutError,
       ExecutableError,
       UnknownArchiveType,
       UsageError,
@@ -124,7 +124,7 @@ class SproutTest < Test::Unit::TestCase
         assert_not_nil path
       end
     end
-    
+
     context "with a stubbed load path" do
 
       setup do

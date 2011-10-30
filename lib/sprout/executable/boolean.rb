@@ -46,7 +46,7 @@ module Sprout
       # Serialize to the shell with:
       #
       #   foo -visible=false
-      # 
+      #
       attr_accessor :show_on_false
 
       def initialize
@@ -70,7 +70,7 @@ module Sprout
         value = (value == "false" || value == false) ? false : true
         super value
       end
-      
+
       def visible?
         @visible ||= value
         if(show_on_false)

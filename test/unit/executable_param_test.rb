@@ -5,7 +5,7 @@ class ExecutableParamTest < Test::Unit::TestCase
 
   context "a new, simple Executable::Param" do
 
-    setup do 
+    setup do
       @param = Sprout::Executable::Param.new
     end
 

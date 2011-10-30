@@ -58,7 +58,7 @@ module Sprout::TestHelper
   end
 
   ##
-  # Override the setup method in order to record the 
+  # Override the setup method in order to record the
   # working directory before the test method runs.
   def setup
     super
@@ -97,7 +97,7 @@ module Sprout::TestHelper
   ##
   # Create a temporary folder relative to the
   # test case that calls this method.
-  # 
+  #
   # @return [Dir] Path to the requested temp folder.
   def temp_path
     caller_file = Sprout.file_from_caller caller.first
@@ -126,7 +126,7 @@ module Sprout::TestHelper
     t.invoke
     return t
   end
-  
+
   ##
   # Retrieve a registered Rake task by name.
   #
@@ -166,14 +166,14 @@ module Sprout::TestHelper
   end
 
   ##
-  # Assert that a file exists at +path+ and display +message+ 
+  # Assert that a file exists at +path+ and display +message+
   # if it does not.
   #
   # @param path [File] Path to the file that should exist.
   # @param message [String] The message that should be displayed if the expected file does not exist.
   # @yield [String] The contents of the file.
   #
-  # This method yields the file contents so that you can write 
+  # This method yields the file contents so that you can write
   # readable tests like:
   #
   #   assert_file File.join(fixtures, 'my_file') do |f|
@@ -204,7 +204,7 @@ module Sprout::TestHelper
   # Assert that a file exists at +path+ and is not empty. Display
   # +message+ if the file does not exist or if it is empty.
   # @param path [File] Path to the file that should exist.
-  # @param message [String] The message that should be displayed if 
+  # @param message [String] The message that should be displayed if
   #   the expected file does not exist or is empty.
   #
   #   assert_not_empty File.join(fixtures, 'SomeFile')
@@ -215,7 +215,7 @@ module Sprout::TestHelper
     message ||= " - Expected #{path} to not be empty, but it was"
     assert files.size > 0, message
   end
-  
+
   ##
   # Assert that an expression matches the provided string.
   #
@@ -251,13 +251,13 @@ module Sprout::TestHelper
   #      puts ">> Sprout.home: #{Sprout.home}"
   #    end
   #
-  # This method is primarily used to ensure that we create 
+  # This method is primarily used to ensure that we create
   # system-appropriate paths and processes.
   #
   # NOTE: This process automatically calls Mocha::Mockery.instance.teardown
   # after the yield. This means that any mocks that have been created will
   # no longer be available after the provided block is complete.
-  # 
+  #
   # @return [Sprout::System::BaseSystem] The concrete class that was created.
   # @yield [Sprout::System::BaseSystem] The concrete subclass of BaseSystem
   #
@@ -319,7 +319,7 @@ module Sprout::TestHelper
     #Mocha::Mockery.instance.teardown
     sys
   end
-  
+
   ##
   # Execute a block as a WinSystem.
   #
@@ -360,7 +360,7 @@ module Sprout::TestHelper
     sys
   end
 
-  
+
   private
 
   ##

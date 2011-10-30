@@ -44,13 +44,13 @@ module Sprout
 
       ##
       # Default value for the parameter prefix.
-      # Should usually be pulled from the 
+      # Should usually be pulled from the
       # +belongs_to+ Sprout::Executable.
       DEFAULT_PREFIX                  = '--'
 
-      ## 
+      ##
       # Default prefix for truncated parameters.
-      # Should usually be pulled from the 
+      # Should usually be pulled from the
       # +belongs_to+ Sprout::Executable.
       DEFAULT_SHORT_PREFIX            = '-'
 
@@ -61,7 +61,7 @@ module Sprout
 
       ##
       # Executable::Params join their name/value pair with an
-      # equals sign by default, this can be modified 
+      # equals sign by default, this can be modified
       # To a space or whatever you wish.
       attr_accessor :delimiter
 
@@ -76,7 +76,7 @@ module Sprout
       #
       #    add_param :name, String, :hidden_name => true
       #
-      # Without this option, the above parameter would 
+      # Without this option, the above parameter would
       # serialize to the process like:
       #
       #   foo --name=Value
@@ -114,7 +114,7 @@ module Sprout
       # The String prefix that should be in front of each
       # command line parameter.
       #
-      # If no value is set for this option, the 
+      # If no value is set for this option, the
       # DEFAULT_PREFIX (--) will be used for regular parameters,
       # and the DEFAULT_SHORT_PREFIX (-) will be used for short
       # parameters.
@@ -145,7 +145,7 @@ module Sprout
 
       ##
       # An optional Proc that should be called when this parameter
-      # is serialized to shell output. The Proc should return a 
+      # is serialized to shell output. The Proc should return a
       # String value that makes sense to the underlying process.
       #
       #   add_param :visible, Boolean, :to_shell_proc => Proc.new {|p| "---result" }
@@ -156,16 +156,16 @@ module Sprout
       # The data type of the parameter, used to generate more appropriate
       # RDoc content for the concrete Sprout::Executable.
       attr_accessor :type
-      
+
       ##
-      # The value that was assigned to this parameter when the 
+      # The value that was assigned to this parameter when the
       # concrete Sprout::Executable was instantiated and configured.
       attr_accessor :value
 
       ##
       # A Symbol that refers to a method (not accessor) that
-      # will be called when the value is set. This method is 
-      # not responsible for actually storing the value, but 
+      # will be called when the value is set. This method is
+      # not responsible for actually storing the value, but
       # should instead be thought of as a badly named callback
       # that will be triggered with the new value whenever the
       # value changes.
@@ -245,13 +245,13 @@ module Sprout
       def visible?
         !value.nil?
       end
-      
+
       ##
       # Returns Boolean value if this parameter is required.
       def required?
         (required == true)
       end
-      
+
       ##
       # Ensure this parameter is in a valid state, raise a Sprout::Errors::MissingArgumentError
       # if it is not.
@@ -264,7 +264,7 @@ module Sprout
       ##
       # Set the default value of the parameter.
       # Using this option will ensure that required parameters
-      # are not nil, and default values can be overridden on 
+      # are not nil, and default values can be overridden on
       # instances.
       #
       #   add_param :name, String, :default => 'Bob'
@@ -279,7 +279,7 @@ module Sprout
       def default
         @default
       end
-      
+
       ##
       # Prepare the parameter for execution or delegation, depending
       # on what context we're in.
@@ -293,21 +293,21 @@ module Sprout
       def prepared?
         @prepared
       end
-      
+
       ##
       # Should the param name be hidden from the shell?
       # Used for params like 'input' on mxmlc
       def hidden_name?
         @hidden_name
       end
-      
+
       ##
       # Should the param value be hidden from the shell?
       # Usually used for Boolean toggles like '-debug'
       def hidden_value?
         @hidden_value
       end
-      
+
       ##
       # Leading character for each parameter
       # Can sometimes be an empty string,
@@ -345,7 +345,7 @@ module Sprout
       def option_parser_short_name
         [ short_prefix, short_name ].join('')
       end
-      
+
       ##
       # The short name for this parameter.
       # If it's not explicitly, the first
@@ -392,7 +392,7 @@ module Sprout
         return shell_name if hidden_value?
         return [shell_name, delimiter, shell_value].join
       end
-      
+
       # Create a string that can be turned into a file
       # that rdoc can parse to describe the customized
       # or generated task using param name, type and

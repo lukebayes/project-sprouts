@@ -5,7 +5,7 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
   include Sprout::TestHelper
 
   context "a new ruby executable" do
-    
+
     setup do
       @exe = EchoInputs.new
       @exe.abort_on_failure = false
@@ -40,7 +40,7 @@ class ExecutableOptionParserTest < Test::Unit::TestCase
       @exe.parse! [ '--no-default-truthy', @default_input ]
       assert !@exe.default_truthy, "Should accept no- prefix"
     end
-    
+
     should "always accept help option" do
       @exe.expects :abort
       assert_raises Sprout::Errors::MissingArgumentError do

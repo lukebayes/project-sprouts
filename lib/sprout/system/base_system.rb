@@ -4,7 +4,7 @@ module Sprout::System
   # The abstract base class for all supported system/platform types.
   # In general, users are created by calling the +create+ factory method
   # on the +System+ module.
-  #     
+  #
   #     System.create
   #
   # Assuming you call the create method, you should wind up with
@@ -25,7 +25,7 @@ module Sprout::System
 
     ##
     # Set the home path for a system on a particular operating system.
-    # 
+    #
     # If you request the home path before setting it, we will
     # attempt to determine the home path of the current system for
     # the current operating system.
@@ -37,11 +37,11 @@ module Sprout::System
     end
 
     ##
-    # Some operating systems (like OS X and Windows) have a 
+    # Some operating systems (like OS X and Windows) have a
     # specific location where applications are expected to store
     # files for a particular system. This location is generally
     # a subdirectory of +home+.
-    # 
+    #
     # The value of this location will usually be overridden in
     # concrete System classes.
     #
@@ -162,9 +162,9 @@ module Sprout::System
     # Each operating system behaves differently when we
     # attempt to execute a file with spaces in the +path+
     # to the file.
-    # 
+    #
     # Subclasses will generally override this method and
-    # clean the path appropriately for their operating 
+    # clean the path appropriately for their operating
     # system.
     #
     def clean_path(path)
@@ -174,7 +174,7 @@ module Sprout::System
     # Different operating systems will store Application data
     # different default locations.
     #
-    # Subclasses will generally override this method and 
+    # Subclasses will generally override this method and
     # return the appropriate location for their operating system.
     #
     # +name+ String value of the Application name for which we'd

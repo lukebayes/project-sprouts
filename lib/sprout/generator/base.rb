@@ -5,7 +5,7 @@ module Sprout
 
       def self.inherited base
         # NOTE: We can NOT instantiate the class here,
-        # because only it's first line has been interpreted, if we 
+        # because only it's first line has been interpreted, if we
         # instantiate here, none of the code declared in the class body will
         # be associated with this instance.
         #
@@ -48,8 +48,8 @@ module Sprout
       set :name, :application
 
       ##
-      # The symbol name for which this generator is most 
-      # appropriate. 
+      # The symbol name for which this generator is most
+      # appropriate.
       #
       # This value defaults to :application so, if you're working on an
       # application generator, you can leave it as the default.
@@ -110,9 +110,9 @@ module Sprout
       end
 
       ##
-      # Returns a collection of templates that were provided on the 
-      # command line, followed by templates that are created by a 
-      # concrete generator, followed by the 
+      # Returns a collection of templates that were provided on the
+      # command line, followed by templates that are created by a
+      # concrete generator, followed by the
       # Sprout::Generator.search_paths + 'templates' folders.
       #
       def template_paths
@@ -130,7 +130,7 @@ module Sprout
       def do_show_template_paths
         @logger ||= $stdout
         message = "The following paths will be checked for templates:\n"
-        
+
         paths = ["--templates+=[value]"]
         paths = paths.concat Sprout::Generator.create_search_paths
         paths << "ENV['SPROUT_GENERATORS']"

@@ -9,7 +9,7 @@ module Sprout
     # @see Sprout::Executable::Param
     # @see Sprout::Executable::CollectionParam
     #
-    class Paths < Files 
+    class Paths < Files
 
       def prepare_prerequisites
         value.each do |path|

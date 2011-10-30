@@ -91,7 +91,7 @@ module Sprout
       if expected_md5sum
         downloaded_md5 = Digest::MD5.new
         downloaded_md5 << bytes
-        
+
         if(expected_md5sum != downloaded_md5.hexdigest)
           return prompt_for_md5_failure downloaded_md5, expected_md5sum
         end

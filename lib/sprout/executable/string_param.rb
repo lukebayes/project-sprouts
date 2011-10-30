@@ -5,7 +5,7 @@ module Sprout
     ##
     # A parameter with a String value.
     #
-    # Any spaces in the value will be escaped when 
+    # Any spaces in the value will be escaped when
     # returned to a shell.
     #
     # @see Sprout::Executable::Param

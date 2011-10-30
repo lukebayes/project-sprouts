@@ -44,7 +44,7 @@ module Sprout
       super
       @ruby_version = RUBY_VERSION
     end
-    
+
     ##
     # Execute the provided command using the open4.popen4
     # library. This is generally only used by Cygwin and
@@ -57,7 +57,7 @@ module Sprout
         @pid, @w, @r, @e = open4_popen4_block *command.join(' ')
       end
     end
-    
+
     ##
     # Execute the provided command using the win32-open3
     # library. This should only be used on Windows
@@ -73,19 +73,19 @@ module Sprout
     def alive?
       @alive = update_status
     end
-    
+
     ##
     # Kill the process.
     def kill
       update_status 9
     end
-    
+
     ##
     # Close the process
     def close
       w.close_write
     end
-    
+
     ##
     # Send an update signal to the process.
     #
@@ -99,7 +99,7 @@ module Sprout
         false
       end
     end
-    
+
     ##
     # Read +count+ characters from the process standard out.
     #
@@ -108,7 +108,7 @@ module Sprout
     def readpartial count
       @r.readpartial count
     end
-    
+
     ##
     # Read +count+ lines from the process standard out.
     #
@@ -117,43 +117,43 @@ module Sprout
     def readlines count
       @r.readlines count
     end
-    
+
     ##
     # Flush the write IO to the process.
     def flush
       @w.flush
     end
-    
+
     ##
     # Get user input on the read stream from the process.
     def getc
       @r.getc
     end
-    
+
     ##
     # Print some characters to process without an end of line character.
     def print msg
       @w.print msg
     end
-    
+
     ##
     # Print characters to the process followed by an end of line.
     def puts(msg)
       @w.puts(msg)
     end
-    
+
     ##
     # Close the write stream - usually terminates the process.
     def close_write
       @w.close_write
     end
-    
+
     ##
     # Wait for the process to end and return the entire standard output.
     def read
       return @r.read
     end
-    
+
     ##
     # Wait for the process to end and return the entire standard error.
     def read_err
@@ -201,7 +201,7 @@ module Sprout
     def execute_with_block *command
       begin
         @alive = true
-        yield 
+        yield
       rescue Errno::EACCES => eacces
         update_executable_mode(*command)
         yield
@@ -218,7 +218,7 @@ module Sprout
         FileUtils.chmod(0744, str)
       end
     end
-    
+
   end
 end
 

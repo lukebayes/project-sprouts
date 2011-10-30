@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.summary                   = "Software development - evolved"
   s.description               = "Project Sprouts gives you access to beautiful generators and easily customized templates, automated build scripts, distributed libraries and simple system configuration"
   s.required_rubygems_version = ">= 1.3.6"
-  s.rubyforge_project         = "sprout" 
+  s.rubyforge_project         = "sprout"
   s.require_path              = ['lib']
   s.files                     = FileList['**/**/*'].exclude /.git|.svn|.DS_Store/
   s.executables               = ['sprout', 'sprout-generator', 'sprout-class', 'sprout-test', 'sprout-suite', 'sprout-ruby']

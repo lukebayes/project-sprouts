@@ -44,7 +44,7 @@ class WinSystemTest < Test::Unit::TestCase
 
       should "find library outside home" do
         File.stubs(:exists?).returns false
-        assert (@user.library =~ /Application Data/).nil?, "Shouldn't use app data if it doesn't exist" 
+        assert (@user.library =~ /Application Data/).nil?, "Shouldn't use app data if it doesn't exist"
       end
 
       should "wrap paths that have spaces with escaped quotes" do

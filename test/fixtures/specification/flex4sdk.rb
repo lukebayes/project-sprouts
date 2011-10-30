@@ -2,7 +2,7 @@
 Sprout::Specification.new do |s|
   # This is the Specification that loads the Flex 4 SDK,
   # To use the Flex 4 SDK from your build tasks, you can
-  # simply update the pkg_name parameter of your build 
+  # simply update the pkg_name parameter of your build
   # task as follows:
   #
   #   mxmlc 'bin/SomeProject.swf' do |t|
@@ -70,7 +70,7 @@ Sprout::Specification.new do |s|
 
     # Locale-Specific Flex SWCs:
     [
-      'da_DK', 'de_DE', 'en_US', 'es_ES', 'fi_FL', 'fr_FR', 'it_IT', 'ja_JP', 
+      'da_DK', 'de_DE', 'en_US', 'es_ES', 'fi_FL', 'fr_FR', 'it_IT', 'ja_JP',
       'ko_KR', 'nb_NO', 'nl_NL', 'pt_BR', 'ru_RU', 'sv_SE', 'zh_CN', 'zh_TW'
     ].each do |locale|
       t.add_library "flex_4_#{locale}".to_sym,       "frameworks/locale/#{locale}/flex4_rb.swc"

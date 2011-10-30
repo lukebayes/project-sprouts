@@ -13,14 +13,14 @@ class Sprout::ArchiveUnpacker
 
   ##
   # Unpack the provided +archive+ into the provided +destination+.
-  # 
+  #
   # If a +type+ is not provided, a type will be inferred from the file name suffix.
-  # 
+  #
   # @param archive [File] Path to the archive that will be unpacked (or copied)
   # @param destination [Path] Path to the folder where unpacked files should be placed (or copied).
   # @param type [Symbol] The type of the archive in cases where it can't be inferred
   #     from the name. Acceptable values are: :zip, :tgz, :swc, :exe or :rb
-  # @param clobber [Boolean] If the destination already contains the expected file(s), 
+  # @param clobber [Boolean] If the destination already contains the expected file(s),
   #     the unpacker will not run unless +clobber+ is true.
   # @return [String] path to the unpacked files (usually same as destination).
   # @raise Sprout::Errors::UnknownArchiveType If the archive type cannot be inferred and a valid type is not provided.
@@ -43,7 +43,7 @@ class Sprout::ArchiveUnpacker
   #
   # @param archive [File] Path to the archive that will be unpacked.
   # @param destination [Path] Path to the folder where unpacked files should be placed.
-  # @param clobber [Boolean] If the destination already contains the expected file(s), 
+  # @param clobber [Boolean] If the destination already contains the expected file(s),
   #     the unpacker will not run unless +clobber+ is true.
   # @return [File] the file or directory that was created.
   def unpack_zip archive, destination, clobber=nil
@@ -75,8 +75,8 @@ class Sprout::ArchiveUnpacker
 
   ##
   # Optimization for zip files on OSX. Uses the native
-  # 'unzip' utility which is much faster (and more reliable) 
-  # than Ruby for large archives (like the Flex SDK) and 
+  # 'unzip' utility which is much faster (and more reliable)
+  # than Ruby for large archives (like the Flex SDK) and
   # binaries that Ruby corrupts (like the Flash Player).
   #
   # @return [File] the file or directory that was created.
@@ -104,7 +104,7 @@ class Sprout::ArchiveUnpacker
 
     Archive::Tar::Minitar.unpack(tar, destination)
 
-    # Recurse and unpack gzipped children (Adobe did this double 
+    # Recurse and unpack gzipped children (Adobe did this double
     # gzip with the Linux FlashPlayer for some weird reason)
     ["#{destination}/**/*.tgz", "#{destination}/**/*.tar.gz"].each do |pattern|
       Dir.glob(pattern).each do |child|
@@ -162,7 +162,7 @@ class Sprout::ArchiveUnpacker
     type == :swc || !archive.match(/\.swc$/).nil?
   end
 
-  ## 
+  ##
   # Return true if the downloaded archive is a .rb file or the +type+ argument is +:rb+.
   # @return [Boolean]
   def is_rb? archive, type=nil

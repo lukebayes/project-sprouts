@@ -2,7 +2,7 @@
 module Sprout
 
   class OutputBuffer < String
-    
+
     def initialize *args
       super
       @characters = ''
@@ -25,7 +25,7 @@ module Sprout
       @characters = ''
       response
     end
-    
+
     def flush
     end
 

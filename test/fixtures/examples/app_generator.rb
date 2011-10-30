@@ -2,11 +2,11 @@
 # This is an example of how I think generators ought to look.
 #
 # The current interface to Rubigen is unacceptable because
-# of it's dependence on duplicate boilerplate, and global 
+# of it's dependence on duplicate boilerplate, and global
 # state.
 #
-# should also be a generator helper that allows you 
-# to reference an existing directory on disk, and will 
+# should also be a generator helper that allows you
+# to reference an existing directory on disk, and will
 # emit a new generator (gem?) that would recreate those files:
 #
 #     sprout-generator-importer ~/Projects/SomeProject
@@ -79,7 +79,7 @@ class AppGenerator
   def get_input
     @input.camel_case
   end
-  
+
 end
 
 
@@ -103,7 +103,7 @@ class AppGeneratorTest
 
     setup do
       @fixture = File.join fixtures, 'generators'
-      @generator = ProjectGenerator.new 
+      @generator = ProjectGenerator.new
       @generator.path = @fixture
       @generator.name = 'SomeProject'
       @generator.execute

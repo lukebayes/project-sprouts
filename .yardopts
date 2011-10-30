@@ -1,7 +1,7 @@
---files=README.textile 
---exclude=templates/* 
---protected 
---load=./script/add_param_handler.rb 
+--files=README.textile
+--exclude=templates/*
+--protected
+--load=./script/add_param_handler.rb
 --title='Sprouts v.1.0.34.pre'
-lib/**/*.rb 
+lib/**/*.rb
 

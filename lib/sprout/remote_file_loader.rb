@@ -6,13 +6,13 @@ module Sprout
   class RemoteFileLoader
 
     class << self
-    
+
       def load uri, md5=nil, display_name=nil
         fetch uri.to_s, display_name
       end
 
       private
-      
+
       def fetch uri, display_name=nil
         begin
           return open_uri uri, display_name
@@ -32,7 +32,7 @@ module Sprout
         progress = nil
         response = nil
         display_name ||= uri.path.split("/").pop
-        
+
         # Why was this here? Shouldn't the 'open' command work for other
         # protocols like https?
         #
@@ -41,7 +41,7 @@ module Sprout
 
         # This is the strangest implementation I've seen in Ruby yet.
         # Double lambda arguments with a block to top it off?! Gawsh.
-        open(uri.to_s, 
+        open(uri.to_s,
           :content_length_proc => lambda {|length|
             length ||= 0
             progress = Sprout::ProgressBar.new(display_name, length)

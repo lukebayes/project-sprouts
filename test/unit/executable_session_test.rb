@@ -25,12 +25,12 @@ class ExecutableSessionTest < Test::Unit::TestCase
 
       @fdb.execute false
       @fdb.run
- 
-      # Uncomment if you are on OSX and want to 
+
+      # Uncomment if you are on OSX and want to
       # test the real FDB while running a real SWF:
       #Kernel.system 'open ~/Projects/Sprouts/flashsdk/test/fixtures/flashplayer/AsUnit\ Runner.swf'
       #@fdb.wait_for_prompt
-      
+
       @fdb.break "AsUnitRunner:12"
 
       @fdb.continue

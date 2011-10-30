@@ -2,19 +2,19 @@
 module Sprout
 
   ##
-  # Sprouts provides us with the ability to distribute source files, 
-  # precompiled libraries, and remote executables. It does all of 
+  # Sprouts provides us with the ability to distribute source files,
+  # precompiled libraries, and remote executables. It does all of
   # this by (ab)using RubyGems.
   #
-  # RubyGems gives us the ability to version-manage, and distribute 
+  # RubyGems gives us the ability to version-manage, and distribute
   # arbitrary text and binary payloads.
   #
   # In order to support Flash development, we have one major problem
-  # that RubyGems does not solve for us. This is the fact that 
+  # that RubyGems does not solve for us. This is the fact that
   # many elements of our executable chain are not open-source, and we do
   # not have the rights to directly distribute them.
   #
-  # This restriction means that many of our tools and dependencies cannot be 
+  # This restriction means that many of our tools and dependencies cannot be
   # packaged and distributed _directly_ within a RubyGem (or from
   # any server other than Adobe's as a matter of fact).
   #
@@ -43,7 +43,7 @@ module Sprout
   # http://rubygems.rubyforge.org/rdoc/Gem/Specification.html
   #
   # To learn more about published RubyGems:
-  # 
+  #
   # http://rubygems.org/pages/gem_docs
   #
   # To package a SWC library into a Sprout RubyGem, you would create a file (usually)
@@ -52,7 +52,7 @@ module Sprout
   # This is your Gem::Specification.
   #
   # You would also create a file named [projet_name.rb] and put that
-  # into the root of the project or some other folder that you have added to 
+  # into the root of the project or some other folder that you have added to
   # the Gem::Specification.require_paths parameter.
   #
   # == Example: Include a file directly in the RubyGem
@@ -71,14 +71,14 @@ module Sprout
   #
   # == Example: Create custom downloads for each supported platform
   #
-  # For projects like the Flash Player itself, we need to refer to different 
+  # For projects like the Flash Player itself, we need to refer to different
   # downloadable content for each supported platform.
   #
   #    :include:../../test/fixtures/specification/flashplayer.rb
   #
   # == Packaging and Sharing
   #
-  # Public RubyGems are hosted at http://rubygems.org. 
+  # Public RubyGems are hosted at http://rubygems.org.
   class Specification
 
     attr_accessor :name
@@ -118,10 +118,10 @@ module Sprout
     # If no env_names are set, or the requested executable is not found within
     # any that are identified, Sprouts will check to see if the archive
     # has already been unpacked into the expected location:
-    # 
+    #
     #     #{SPROUT_HOME}/cache/#{SPROUT_VERSION}/flex4sdk/#{md5}/4.0.pre
     #
-    # If the archive been unpacked, Sprouts will return the path to the 
+    # If the archive been unpacked, Sprouts will return the path to the
     # requested executable.
     #
     # If the archive has not been unpacked, Sprouts will check to see if the
@@ -141,7 +141,7 @@ module Sprout
 
     # Add a file to the RubyGem itself. This is a great way to package smallish libraries in either
     # source or already-packaged form. For example, one might add a SWC to a RubyGem library.
-    # 
+    #
     # Each time this method is called, a new Sprout::FileTarget instance will be yielded to the
     # provided block, and added to a collection for packaging.
     #
@@ -174,7 +174,7 @@ module Sprout
       #
       #   target.add_library :swc, 'abcd'
       #   target.add_library :src, 'efgh'
-      # 
+      #
       # When loading, if no name is specified, the :swc will be
       # returned to clients.
       register_items target.libraries, Sprout::Library, target

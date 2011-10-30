@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.homepage          = "<%= homepage %>"
   s.summary           = "<%= summary %>"
   s.description       = "<%= description %>"
-  s.rubyforge_project = "sprout" 
+  s.rubyforge_project = "sprout"
   s.files             = FileList['**/**/*'].exclude /.git|.svn|.DS_Store/
   s.add_bundler_dependencies
   s.require_paths << '.'
