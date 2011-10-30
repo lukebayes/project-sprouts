@@ -6,19 +6,19 @@ module Sprout::Executable
   # entities from a set of known types.
   #
   # If an unrecognized Class reference is provided
-  # we will instantiate it and ensure that it 
-  # responds to the public members of the 
+  # we will instantiate it and ensure that it
+  # responds to the public members of the
   # Executable::Param interface.
   #
   # This Factory gives you the ability to create new,
   # custom parameter types by simply ensuring they are
-  # available to Ruby before your executable is 
+  # available to Ruby before your executable is
   # interpreted.
   #
   # Following is an example of a custom Parameter:
   #
   #   class CustomParam < Sprout::Executable::Param
-  #     
+  #
   #     def to_shell
   #       "--foo-bar=#{value}"
   #     end
@@ -35,9 +35,9 @@ module Sprout::Executable
   #     add_param :name, CustomParam
   #
   #   end
-  #    
+  #
   # That's it, there is no need to register your custom types
-  # with the Factory, just get it into your load path and 
+  # with the Factory, just get it into your load path and
   # require it.
   #
   class ParameterFactory
@@ -45,10 +45,10 @@ module Sprout::Executable
     class << self
 
       ##
-      # This factory allows us to use classes by 
-      # reference in the Executable interface. 
+      # This factory allows us to use classes by
+      # reference in the Executable interface.
       # Since there are already Ruby primitives for
-      # String and File and we don't want to clobber 
+      # String and File and we don't want to clobber
       # them, we use this factory to convert those
       # to the appropriate types.
       def create type

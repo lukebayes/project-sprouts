@@ -16,7 +16,7 @@ module Sprout
   #
   #   # Create a remote library dependency on the corelib swc.
   #   library :corelib
-  # 
+  #
   #   # Alias the compilation task with one that is easier to type
   #   task :compile => 'SomeProject.swf'
   #
@@ -34,17 +34,17 @@ module Sprout
   # http://livedocs.adobe.com/flex/2/docs/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&file=00001481.html
   #
   class MXMLC < Sprout::Executable::Base
-    
+
     ##
     # Enables accessibility features when compiling the Flex application or SWC file. The default value is false.
     #
     add_param :accessible, Boolean, { :hidden_value => true }
-    
+
     ##
     # Sets the file encoding for ActionScript files. For more information see: http://livedocs.adobe.com/flex/2/docs/00001503.html#149244
     #
     add_param :actionscript_file_encoding, String
-    
+
     ##
     # Checks if a source-path entry is a subdirectory of another source-path entry. It helps make the package names of MXML components unambiguous. This is an advanced option.
     #
@@ -57,39 +57,39 @@ module Sprout
     #
     # This is an advanced option.
     add_param :as3, Boolean, { :default => true, :show_on_false => true }
-    
+
     ##
     # Prints detailed compile times to the standard output. The default value is true.
     #
     add_param :benchmark, Boolean, { :default => true, :show_on_false => true }
-    
+
     ##
     # Sets the value of the {context.root} token in channel definitions in the flex-services.xml file. If you do not specify the value of this option, Flex uses an empty string.
     #
     # For more information on using the {context.root} token, see http://livedocs.adobe.com/flex/2/docs/00001446.html#205687.
     #
     add_param :context_root, Path
-    
+
     ##
     # Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).
     #
     add_param :contributor, String
-    
+
     ##
     # Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files. (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380)
     #
     add_param :creator, String
-    
+
     ##
     # Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files. (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380)
     #
     add_param :date, String
-    
+
     ##
     # Generates a debug SWF file. This file includes line numbers and filenames of all the source files. When a run-time error occurs, the stacktrace shows these line numbers and filenames. This information is also used by the command-line debugger and the Flex Builder debugger. Enabling the debug option generates larger SWF files.
     #
-    # For the mxmlc compiler, the default value is false. For the compc compiler, the default value is true. 
-    # 
+    # For the mxmlc compiler, the default value is false. For the compc compiler, the default value is true.
+    #
     # For SWC files generated with the compc compiler, set this value to true, unless the target SWC file is an RSL. In that case, set the debug option to false.
     #
     # For information about the command-line debugger, see Using the Command-Line Debugger (http://livedocs.adobe.com/flex/2/docs/00001540.html#181846).
@@ -97,28 +97,28 @@ module Sprout
     # Flex also uses the verbose-stacktraces setting to determine whether line numbers are added to the stacktrace.
     #
     add_param :debug, Boolean, { :hidden_value => true }
-    
+
     ##
     # Lets you engage in remote debugging sessions with the Flash IDE. This is an advanced option.
     #
     add_param :debug_password, String
-    
+
     ##
     # Sets the application's background color. You use the 0x notation to set the color, as the following example shows:
-    # 
+    #
     #     -default-background-color=0xCCCCFF
     #
     # The default value is null. The default background of a Flex application is an image of a gray gradient. You must override this image for the value of the default-background-color option to be visible. For more information, see Editing application settings (http://livedocs.adobe.com/flex/2/docs/00001504.html#138781).
     #
     # This is an advanced option.
-    # 
+    #
     add_param :default_background_color, String
-    
+
     ##
     # Sets the application's frame rate. The default value is 24. This is an advanced option.
     #
     add_param :default_frame_rate, Number
-    
+
     ##
     # Defines the application's script execution limits.
     #
@@ -137,12 +137,12 @@ module Sprout
     # This is an advanced option.
     #
     add_param :default_script_limits, String
-    
+
     ##
     # Defines the default application size, in pixels for example: default_size = '950 550'. This is an advanced option.
     #
     add_param :default_size, String, { :delimiter => ' ' }
-    
+
     ##
     # Defines the location of the default style sheet. Setting this option overrides the implicit use of the defaults.css style sheet in the framework.swc file.
     #
@@ -158,12 +158,12 @@ module Sprout
     # Define a global AS3 conditional compilation definition, e.g. -define=CONFIG::debugging,true or -define+=CONFIG::debugging,true (to append to existing definitions in flex-config.xml)  (advanced, repeatable)
     #
     add_param :define_conditional, Strings, { :shell_name => "-define" }
-    
+
     ##
     # Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).
     #
     add_param :description, String
-    
+
     ##
     # Outputs the compiler options in the flex-config.xml file to the target path; for example:
     #
@@ -172,7 +172,7 @@ module Sprout
     # This is an advanced option.
     #
     add_param :dump_config, File
-    
+
     ##
     # Use the ECMAScript edition 3 prototype-based object model to allow dynamic overriding of prototype properties. In the prototype-based object model, built-in functions are implemented as dynamic properties of prototype objects.
     #
@@ -183,7 +183,7 @@ module Sprout
     # This is an advanced option.
     #
     add_param :es, Boolean
-    
+
     ##
     # Sets a list of symbols to exclude from linking when compiling a SWF file.
     #
@@ -192,9 +192,9 @@ module Sprout
     # For more information about dynamic linking, see About linking (http://livedocs.adobe.com/flex/2/docs/00001521.html#205852).
     #
     # This is an advanced option.
-    # 
+    #
     add_param :externs, Strings
-    
+
     ##
     # Specifies a list of SWC files or directories to exclude from linking when compiling a SWF file. This option provides compile-time link checking for external components that are dynamically linked.
     #
@@ -205,17 +205,17 @@ module Sprout
     # This parameter has been aliased as +el+.
     #
     add_param :external_library_path, Files
-    
+
     ##
     # Alias for external_library_path
     #
     add_param_alias :el, :external_library_path
-    
+
     ##
     # Specifies source files to compile. This is the default option for the mxmlc compiler.
     #
     add_param :file_specs, Files
-    
+
     ##
     # Specifies the range of Unicode settings for that language. For more information, see Using Styles and Themes (http://livedocs.adobe.com/flex/2/docs/00000751.html#241755) in Flex 2 Developer's Guide.
     #
@@ -229,37 +229,37 @@ module Sprout
     # This is an advanced option.
     #
     add_param :fonts_managers, Strings
-    
+
     ##
     # Sets the maximum number of fonts to keep in the server cache. For more information, see Caching fonts and glyphs (http://livedocs.adobe.com/flex/2/docs/00001469.html#208457).
     #
     # This is an advanced option.
     #
     add_param :fonts_max_cached_fonts, Number
-    
+
     ##
     # Sets the maximum number of character glyph-outlines to keep in the server cache for each font face. For more information, see Caching fonts and glyphs (http://livedocs.adobe.com/flex/2/docs/00001469.html#208457).
     #
     # This is an advanced option.
-    # 
+    #
     add_param :fonts_max_glyphs_per_face, Number
-    
+
     ##
     # Specifies a SWF file frame label with a sequence of class names that are linked onto the frame.
     #
     # For example: frames_frame = 'someLabel MyProject OtherProject FoodProject'
     #
     # This is an advanced option.
-    # 
+    #
     add_param :frames_frame, String, { :shell_name => '-frames.frame' }
-    
+
     ##
     # Toggles the generation of an IFlexBootstrap-derived loader class.
     #
     # This is an advanced option.
     #
     add_param :generate_frame_loader, Boolean
-    
+
     ##
     # Enables the headless implementation of the Flex compiler. This sets the following:
     #
@@ -270,7 +270,7 @@ module Sprout
     # This is an advanced option.
     #
     add_param :headless_server, Boolean
-    
+
     ##
     # Links all classes inside a SWC file to the resulting application SWF file, regardless of whether or not they are used.
     #
@@ -288,19 +288,19 @@ module Sprout
     # To link an entire SWC file rather than individual classes, use the include-libraries option.
     #
     add_param :includes, Strings
-    
+
     ##
     # Define one or more directory paths for include processing. For each path that is provided, all .as and .mxml files found forward of that path will
     # be included in the SWF regardless of whether they are imported or not.
     add_param :include_path, Paths
-    
+
     ##
     # Enables incremental compilation. For more information, see About incremental compilation (http://livedocs.adobe.com/flex/2/docs/00001506.html#153980).
-    # 
+    #
     # This option is true by default for the Flex Builder application compiler. For the command-line compiler, the default is false. The web-tier compiler does not support incremental compilation.
     #
     add_param :incremental, Boolean
-    
+
     ##
     # Keep the specified metadata in the SWF (advanced, repeatable).
     #
@@ -320,7 +320,7 @@ module Sprout
     #     }
     #
     add_param :keep_as3_metadata, Strings
-    
+
     ##
     # Determines whether to keep the generated ActionScript class files.
     #
@@ -333,12 +333,12 @@ module Sprout
     # The default value is false.\nThis is an advanced option.
     #
     add_param :keep_generated_actionscript, Boolean
-    
+
     ##
     # Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).
     #
     add_param :language, String
-    
+
     ##
     # Enables ABC bytecode lazy initialization.
     #
@@ -357,7 +357,7 @@ module Sprout
     # This is an advanced option.
     #
     add_param :license, String
-    
+
     ##
     # Links SWC files to the resulting application SWF file. The compiler only links in those classes for the SWC file that are required.
     #
@@ -372,17 +372,17 @@ module Sprout
     # In a configuration file, you can set the append attribute of the library-path tag to true to indicate that the values should be appended to the library path rather than replace it.
     #
     add_param :library_path, Files
-    
+
     ##
     # Alias to library_path
     #
     add_param_alias :l, :library_path
-    
+
     ##
-    # Prints linking information to the specified output file. 
-    # This file is an XML file that contains 
+    # Prints linking information to the specified output file.
+    # This file is an XML file that contains
     #
-    #     <def>, <pre>, and <ext> 
+    #     <def>, <pre>, and <ext>
     #
     # symbols showing linker dependencies in the final SWF file.
     #
@@ -393,7 +393,7 @@ module Sprout
     # This is an advanced option.
     #
     add_param :link_report, File
-    
+
     ##
     # Specifies the location of the configuration file that defines compiler options.
     #
@@ -406,15 +406,15 @@ module Sprout
     # For more information on using configuration files to provide options to the command-line compilers, see About configuration files (http://livedocs.adobe.com/flex/2/docs/00001490.html#138195).
     #
     add_param :load_config, Files
-    
+
     ##
-    # Specifies the location of an XML file that contains 
+    # Specifies the location of an XML file that contains
     #
-    #     <def>, <pre>, and <ext> 
+    #     <def>, <pre>, and <ext>
     #
-    # symbols to omit from linking when compiling a SWF file. 
+    # symbols to omit from linking when compiling a SWF file.
     #
-    # The XML file uses the same syntax as the one produced by the link-report option. 
+    # The XML file uses the same syntax as the one produced by the link-report option.
     #
     # For more information on the report, see Examining linker dependencies (http://livedocs.adobe.com/flex/2/docs/00001394.html#211202).
     #
@@ -425,17 +425,17 @@ module Sprout
     # This is an advanced option.
     #
     add_param :load_externs, File
-    
+
     ##
-    # Specifies the locale that should be packaged in the SWF file (for example, en_EN). 
+    # Specifies the locale that should be packaged in the SWF file (for example, en_EN).
     #
-    # You run the mxmlc compiler multiple times to create SWF files for more than one locale, 
+    # You run the mxmlc compiler multiple times to create SWF files for more than one locale,
     # with only the locale option changing.
     #
     # For more information, see Localizing Flex Applications in (http://livedocs.adobe.com/flex/2/docs/00000898.html#129288) Flex 2 Developer's Guide.
     #
     add_param :locale, String
-    
+
     ##
     # Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).
     #
@@ -445,21 +445,21 @@ module Sprout
     # Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380)."
     #
     add_param :localized_title, String
-    
+
     ##
     # Specifies a namespace for the MXML file. You must include a URI and the location of the manifest file that defines the contents of this namespace. This path is relative to the MXML file.
     #
     # For more information about manifest files, see About manifest files (http://livedocs.adobe.com/flex/2/docs/00001519.html#134676).
     #
     add_param :namespaces_namespace, String
-    
+
     ##
     # Enables the ActionScript optimizer. This optimizer reduces file size and increases performance by optimizing the SWF file's bytecode.
     #
     # The default value is false.
     #
     add_param :optimize, Boolean
-    
+
     ##
     # Specifies the output path and filename for the resulting file. If you omit this option, the compiler saves the SWF file to the directory where the target file is located.
     #
@@ -473,7 +473,7 @@ module Sprout
     #
     add_param :output, File, { :file_task_name => true }
 
-    
+
     ##
     # Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).
     #
@@ -483,14 +483,14 @@ module Sprout
     # XML text to store in the SWF metadata (overrides metadata.* configuration) (advanced)
     #
     add_param :raw_metadata, String
-    
+
     ##
     # Prints a list of resource bundles to input to the compc compiler to create a resource bundle SWC file. The filename argument is the name of the file that contains the list of bundles.
     #
     # For more information, see Localizing Flex Applications (http://livedocs.adobe.com/flex/2/docs/00000898.html#129288) in Flex 2 Developer's Guide.
     #
     add_param :resource_bundle_list, File
-    
+
     ##
     # Specifies a list of run-time shared libraries (RSLs) to use for this application. RSLs are dynamically-linked at run time.
     #
@@ -500,7 +500,7 @@ module Sprout
     #
     add_param :runtime_shared_libraries, Strings
 
-    ## 
+    ##
     # Alias for runtime_shared_libraries
     #
     add_param_alias :rsl, :runtime_shared_libraries
@@ -513,12 +513,12 @@ module Sprout
     # @see Sprout::MXMLC#rslp
     #
     add_param :runtime_shared_library_path, Strings
-    
+
     ##
     # Alias for #runtime_shared_library_path
     #
     add_param_alias :rslp, :runtime_shared_library_path
-    
+
     ##
     # Specifies the location of the services-config.xml file. This file is used by Flex Data Services.
     #
@@ -541,7 +541,7 @@ module Sprout
     # For more information about compiler warnings, see Using SWC files (http://livedocs.adobe.com/flex/2/docs/00001505.html#158337).
     #
     add_param :show_binding_warnings, Boolean, { :default => true, :show_on_false => true }
-    
+
     ##
     # Shows deprecation warnings for Flex components. To see warnings for ActionScript classes, use the show-actionscript-warnings option.
     #
@@ -550,7 +550,7 @@ module Sprout
     # For more information about viewing warnings and errors, see Viewing warnings and errors.
     #
     add_param :show_deprecation_warnings, Boolean, { :default => true, :show_on_false => true }
-    
+
     ##
     # Adds directories or files to the source path. The Flex compiler searches directories in the source path for MXML or AS source files that are used in your Flex applications and includes those that are required at compile time.
     #
@@ -563,8 +563,8 @@ module Sprout
     # You can also use the += operator to append the new argument to the list of existing source path entries.
     #
     add_param :source_path, Paths
-    
-    add_param_alias :sp, :source_path 
+
+    add_param_alias :sp, :source_path
 
     ##
     # Statically link the libraries specified by the -runtime-shared-libraries-path option.
@@ -576,8 +576,8 @@ module Sprout
     ##
     # Alias for static_link_runtime_shared_libraries
     #
-    add_param_alias :static_rsls, :static_link_runtime_shared_libraries 
-    
+    add_param_alias :static_rsls, :static_link_runtime_shared_libraries
+
     ##
     # Prints undefined property and function calls; also performs compile-time type checking on assignments and options supplied to method calls.
     #
@@ -586,26 +586,26 @@ module Sprout
     # For more information about viewing warnings and errors, see Viewing warnings and errors (http://livedocs.adobe.com/flex/2/docs/00001517.html#182413).
     #
     add_param :strict, Boolean, { :default => true, :show_on_false => true }
-    
+
     ##
     # Specifies the version of the player the application is targeting.
     #
     # Features requiring a later version will not be compiled into the application. The minimum value supported is "9.0.0".
     #
     add_param :target_player, String
-    
+
     ##
     # Specifies a list of theme files to use with this application. Theme files can be SWC files with CSS files inside them or CSS files.
     #
     # For information on compiling a SWC theme file, see Using Styles and Themes (http://livedocs.adobe.com/flex/2/docs/00000751.html#241755) in Flex 2 Developer's Guide.
     #
     add_param :theme, Files
-    
+
     ##
     # Sets metadata in the resulting SWF file. For more information, see Adding metadata to SWF files (http://livedocs.adobe.com/flex/2/docs/00001502.html#145380).
     #
     add_param :title, String
-    
+
     ##
     # Specifies that the current application uses network services.
     #
@@ -616,7 +616,7 @@ module Sprout
     # For more information about the use-network property, see Applying Flex Security (http://livedocs.adobe.com/flex/2/docs/00001328.html#137544).
     #
     add_param :use_network, Boolean, { :default => true, :show_on_false => true }
-    
+
     ##
     # Generates source code that includes line numbers. When a run-time error occurs, the stacktrace shows these line numbers.
     #
@@ -628,12 +628,12 @@ module Sprout
     # Verifies the libraries loaded at runtime are the correct ones.
     #
     add_param :verify_digests, Boolean
-  
+
     ##
     # Enables specified warnings. For more information, see Viewing warnings and errors (http://livedocs.adobe.com/flex/2/docs/00001517.html#182413).
     #
     add_param :warn_warning_type, Boolean
-    
+
     ##
     # Enables all warnings. Set to false to disable all warnings. This option overrides the warn-warning_type options.
     #
@@ -665,7 +665,7 @@ module Sprout
     # The default gem version
     #
     set :pkg_version, '>= 1.0.pre'
-    
+
     ##
     # The default executable target
     #

@@ -4,7 +4,7 @@ class RemoteFileTargetTest < Test::Unit::TestCase
   include Sprout::TestHelper
 
   context "an improperly configured remote file target" do
-  
+
     should "throw validation error on archive_type" do
       assert_raises Sprout::Errors::ValidationError do
         t = Sprout::RemoteFileTarget.new
@@ -59,7 +59,7 @@ class RemoteFileTargetTest < Test::Unit::TestCase
 
       @downloaded_file = File.join(temp_cache, 'downloaded.zip')
       @target.stubs(:downloaded_file).returns @downloaded_file
-	  
+
       @unpacked_file = File.join(temp_cache, 'unpacked')
 
 
@@ -100,7 +100,7 @@ class RemoteFileTargetTest < Test::Unit::TestCase
       should "load from env path if available" do
       end
     end
-	
+
     context "that has already been UNPACKED" do
       should "not be DOWNLOADED or unpacked" do
         FileUtils.mkdir_p @unpacked_file

@@ -9,7 +9,7 @@ module Sprout
     #
     # TODO: Should provide some custom validations for values
     # that should be a URL.
-    # 
+    #
     class Url < StringParam
     end
   end

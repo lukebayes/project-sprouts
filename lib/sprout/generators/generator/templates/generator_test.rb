@@ -8,7 +8,7 @@ class <%= input.camel_case %>GeneratorTest < Test::Unit::TestCase
   context "A new <%= input.camel_case %> generator" do
 
     setup do
-      # Create a temporary directory the generator can 
+      # Create a temporary directory the generator can
       # add files to:
       @temp             = File.join(fixtures, 'generators', 'tmp')
       FileUtils.mkdir_p @temp

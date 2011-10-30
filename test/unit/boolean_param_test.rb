@@ -5,7 +5,7 @@ class BooleanParamTest < Test::Unit::TestCase
 
   context "a new, simple BooleanParam" do
 
-    setup do 
+    setup do
       @param = Sprout::Executable::Boolean.new
       @param.name = 'foo'
     end
@@ -25,7 +25,7 @@ class BooleanParamTest < Test::Unit::TestCase
     end
 
     context "when configuring option parser" do
-      
+
       should "update correctly" do
         @param.show_on_false = true
         @param.default = true

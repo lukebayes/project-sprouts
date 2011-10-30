@@ -25,7 +25,7 @@ class ProcessRunnerTest < Test::Unit::TestCase
     end
 
     #--------------------------------------------------
-    context "on nix" do 
+    context "on nix" do
 
       should "accept and forward multiple arguments" do
         @runner.expects(:execute_with_block).once.with("ls", "-la").returns nil
@@ -103,7 +103,7 @@ class ProcessRunnerTest < Test::Unit::TestCase
 
     context "an unknown process" do
       should "raise an exception if the executable doesn't exist" do
-        assert_raise Sprout::Errors::ProcessRunnerError do 
+        assert_raise Sprout::Errors::ProcessRunnerError do
           @runner.stubs(:open4_popen4_block).raises Errno::ENOENT
           @runner.execute_open4('SomeUnknownExecutableThatCantBeInYourPath', '--some-arg true --other-arg false')
         end
@@ -113,7 +113,7 @@ class ProcessRunnerTest < Test::Unit::TestCase
   end
 
   private
-  
+
   def execute_with_open4_and_bad_mode(command, options="")
     assert !File.stat(command).executable?, "File should not be executable to begin"
     @runner.expects(:update_executable_mode)

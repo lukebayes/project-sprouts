@@ -27,7 +27,7 @@ module Sprout
       return WinSystem.new    if p.windows?
       return JavaSystem.new   if p.java?
       return OSXSystem.new    if p.mac?
-      return UnixSystem.new 
+      return UnixSystem.new
     end
 
   end

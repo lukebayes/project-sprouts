@@ -12,7 +12,7 @@ class UserTest < Test::Unit::TestCase
     end
   end
 
-=begin 
+=begin
 
   ['cygwin', 'mingw', 'bccwin'].each do |variant|
     context variant do
@@ -34,7 +34,7 @@ class UserTest < Test::Unit::TestCase
 
   ['solaris', 'redhat', 'ubuntu'].each do |variant|
     context variant do
-       
+
       setup do
         @success_exec = File.join(fixtures, 'process_runner', 'success')
         @failure_exec = File.join(fixtures, 'process_runner', 'failure')
@@ -43,12 +43,12 @@ class UserTest < Test::Unit::TestCase
         # Allows this test to run on Windows:
         @system.stubs(:get_process_runner).returns @process
       end
-      
+
       should "create a Unix System" do
         Sprout::Platform.any_instance.stubs(:ruby_platform).returns variant
         assert Sprout::System.create.is_a?(Sprout::System::UnixUser)
       end
-      
+
       should "execute external processes" do
         @system.execute @success_exec
       end
@@ -96,11 +96,11 @@ class UserTest < Test::Unit::TestCase
       setup do
         # Block all of the automatic path introspection:
         [
-          :env_userprofile, 
-          :env_home, 
-          :env_homedrive, 
-          :env_homepath, 
-          :tilde_home, 
+          :env_userprofile,
+          :env_home,
+          :env_homedrive,
+          :env_homepath,
+          :tilde_home,
           :alt_separator?
         ].each do |accessor|
           @system.stubs(accessor).returns nil

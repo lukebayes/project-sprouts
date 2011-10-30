@@ -59,7 +59,7 @@ class SpecificationTest < Test::Unit::TestCase
         library = Sprout::Library.load nil, 'foo_sdk'
         assert_equal 'foo', File.basename(library.path)
       end
-     
+
     end
   end
 
@@ -116,7 +116,7 @@ class SpecificationTest < Test::Unit::TestCase
 =begin
   ##
   # This test method is EXTREMELY slow!
-  # It attempts to download and unpack the 
+  # It attempts to download and unpack the
   # Flex SDK - but only the first time
   # it's run on a particular system...
   context "a universal collection of executables" do

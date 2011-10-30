@@ -55,7 +55,7 @@ module Sprout
       #rdoc test/fixtures/examples/echo_inputs.rb --fmt=xml --op=tmp --all -q
       # But the following does not do the same thing:
       #response = rdoc.document [ file, '--fmt=xml', '--op=tmp', '--all', '-q' ]
-      
+
       options           = RDoc::Options.new
       options.files     = FileList[ file ]
       options.formatter = 'markup'
@@ -66,7 +66,7 @@ module Sprout
 
       #rdoc.stats        = RDoc::Stats.new 1, options.verbosity
       #response = rdoc.document []
-      
+
       response = rdoc.parse_files [ file ]
       render_rdoc_toplevel response
     end

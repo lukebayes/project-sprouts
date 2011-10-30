@@ -43,7 +43,7 @@ module Sprout
     set :default_prefix, '-'
 
     ##
-    # Set the binary_path explicitly since we 
+    # Set the binary_path explicitly since we
     # don't need pkg_name or pkg_version for test environment.
     #set :binary_path, 'test/fixtures/executable/flex3sdk_gem/fdb'
     #Toggle comments to use the real exe:
@@ -72,19 +72,19 @@ module Sprout
     #
     # @example Sets a breakpoint at line 56 of myapp.mxml
     #   break myapp.mxml:56
-    #     
+    #
     # @example Sets a breakpoint at line 29 of file #3
     #   break #3:29
-    #     
+    #
     # @example Sets a breakpoint at function doThis() in the current file
     #   break doThis
-    #     
+    #
     # @example Sets a breakpoint at function doThat() in file myapp.mxml
     #   break myapp.mxml:doThat
-    #     
+    #
     # @example Sets a breakpoint at function doOther() in file #3
     #   break #3:doOther
-    #     
+    #
     # @example Sets a breakpoint at the current execution address in the
     # current stack frame. This is useful for breaking on return
     # to a stack frame.
@@ -147,7 +147,7 @@ module Sprout
     # Examples:
     #
     #   clear 87
-    #   
+    #
     # Clears the breakpoint at line 87 of the current file.
     #
     #   clear myapp.mxml:56
@@ -159,7 +159,7 @@ module Sprout
     # Clears the breakpoint at line 29 of file #3.
     #
     #   clear doThis
-    # 
+    #
     # Clears the breakpoint at function doThis() in the current file.
     #
     #   clear myapp.mxml:doThat
@@ -237,15 +237,15 @@ module Sprout
 
     ##
     # Modify the list of directories in which fdb searches for source files.
-    # 
+    #
     # Examples:
-    # 
+    #
     #   directory
     #
     # Restores list to the default, which is the directory in which the source
     # file was compiled into object code, followed by the current working
     # directory.
-    # 
+    #
     #   directory C:\MySource        (Windows)
     #   directory /MySource          (Mac)
     #
@@ -253,13 +253,13 @@ module Sprout
     # which will be searched for source.  When looking for the source for class
     # mypackage.MyClass, for example, the debugger would look for both
     # C:\MySource\mypackage\MyClass.as and C:\MySource\MyClass.as.
-    # 
+    #
     #   directory C:\Dir1;C:\Dir2    (Windows -- use ';' as separator)
     #   directory /Dir1:/Dir2        (Mac -- use ':' as separator)
     #
     # Adds several directories to the beginning of the list of directories
     # which will be searched for source.
-    # 
+    #
     # To see the current list, do 'show directories'.
     add_action :directory, Path
     add_action_alias :dir, :directory
@@ -296,7 +296,7 @@ module Sprout
 
     ##
     # (ActionScript 2 only; not supported when debugging ActionScript 3)
-    # 
+    #
     # Disassemble a specified portion of source code.
     # The default is the current listing line.
     # Arguments supported are the same as with the list command
@@ -306,11 +306,11 @@ module Sprout
     # disassemble 87
     #
     # Disassembles line 87 in the current file.
-    # 
+    #
     # disassemble 87 102
     # disassembles lines 87 to 102 in current file.
     # disassemble doThis
-    # 
+    #
     # Disassembles the function doThis() in the current file.
     #
     # In addition to using simple line numbers as above, you can specify lines
@@ -349,15 +349,15 @@ module Sprout
     # Investigate duplicate add_action calls.
     #add_action :display, String
     #add_action_alias :disp, :display
-    
+
     ##
     # Enable breakpoints or auto-display expressions
     add_action :enable
     add_action_alias :e, :enable
-    
+
     ##
     # Specify an application to be debugged, without starting it.
-    # 
+    #
     # Examples:
     #
     #   file http://www.mysite.com/myapp.mxml
@@ -504,11 +504,11 @@ module Sprout
     # Examples:
     #
     #   list
-    # 
+    #
     # Lists ten more lines in current file after or around previous listing.
-    # 
+    #
     #   list -
-    # 
+    #
     # Lists the ten lines in current file before a previous listing.
     #
     #   list 87
@@ -525,7 +525,7 @@ module Sprout
     #   doThis
     #
     # The first line of function doThis() in the current file.
-    # 
+    #
     #   myapp.mxml
     #
     # Line 1 in myapp.mxml.
@@ -537,9 +537,9 @@ module Sprout
     #   myapp.mxml:56
     #
     # Line 56 in myapp.mxml.
-    # 
+    #
     #   #3
-    # 
+    #
     # Line 1 in file #3.
     #
     #   #3:doOther
@@ -579,9 +579,9 @@ module Sprout
     # Examples:
     #
     #   print i
-    # 
+    #
     # Print the value of 'i'.
-    # 
+    #
     #   print employee.name
     #
     # Print the value of 'employee.name'.
@@ -597,7 +597,7 @@ module Sprout
     # Print the values of all the properties of the 'employee' Object.
     #
     #   print *employee
-    # 
+    #
     # Print the values of all the properties of the 'employee' Object.
     # The prefix * operator is the prefix alternative to the postfix . operator.
     #
@@ -650,7 +650,7 @@ module Sprout
     # 'run' will start the application in a browser or standalone Flash Player.
     # As soon as the application starts, it will break into fdb so that you can
     # set breakpoints, etc.
-    # 
+    #
     # On the Macintosh, the only supported form of the command is 'run' with no
     # arguments.  You must then manually launch the Flash player.
     add_action :run, String
@@ -664,7 +664,7 @@ module Sprout
     # be any name that does not conflict with any existing
     # variable.  For example, $myVar.  Convenience variables
     # are also used to control various aspects of fdb.
-    # 
+    #
     # The following convenience variables are used by fdb.
     # $listsize          - number of source lines to display for 'list'
     # $columnwrap        - column number on which output will wrap
@@ -673,11 +673,11 @@ module Sprout
     # $bpnum             - the last defined breakpoint number
     # $displayattributes - if 1, 'print var.' displays all attributes of members
     #                      of 'var' (e.g. private, static)
-    # 
+    #
     # Examples:
     #
     #   set i = 3
-    # 
+    #
     # Sets the variable 'i' to the number 3.
     #
     #   set employee.name = "Susan"
@@ -728,10 +728,10 @@ module Sprout
     # This command takes no arguments.
     add_action :tutorial
     add_action_alias :t, :tutorial
-    
+
     ##
     # Provide a negative response to a confirmation screen.
-    # 
+    #
     # See also: confirm
     add_action :unconfirm
 
@@ -763,7 +763,7 @@ module Sprout
     # execution when the variable's value changes.
     #
     # Example:
-    # 
+    #
     #   watch foo
     #
     add_action :watch, String

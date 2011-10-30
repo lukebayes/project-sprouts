@@ -22,7 +22,7 @@ module Sprout
   # for describing Command Line Interface (CLI) applications.
   #
   # This module can be included by any class, and depending on how that class
-  # is used, one can either parse command line arguments into meaningful, 
+  # is used, one can either parse command line arguments into meaningful,
   # structured data, or delegate ruby code and configuration to an existing,
   # external command line process.
   #

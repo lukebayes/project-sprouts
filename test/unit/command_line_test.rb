@@ -4,7 +4,7 @@ class CommandLineTest < Test::Unit::TestCase
   include Sprout::TestHelper
 
   context "a new command line ui" do
-    
+
     setup do
       @logger          = Sprout::OutputBuffer.new
       @instance        = Sprout::CommandLine.new

@@ -3,7 +3,7 @@ module Sprout
   ##
   # This class was copied from Rails source code and enhances
   # Ruby's native mixin functionality for our Sprout::RubyFeature.
-  # 
+  #
   # I'd like to work to get rid of this class, and the confusion
   # that it introduces.
   #
@@ -12,7 +12,7 @@ module Sprout
     ##
     # Callback handler when a class is extended. This
     # handler will set the @_dependencies array on the
-    # concrete class that just extended a 
+    # concrete class that just extended a
     # 'Concern'.
     #
     # This callback is often triggered with:
@@ -26,7 +26,7 @@ module Sprout
     end
 
     ##
-    # Apply both class and instance features found in the 
+    # Apply both class and instance features found in the
     # base class to the new subclass.
     def append_features(base)
       if base.instance_variable_defined?("@_dependencies")

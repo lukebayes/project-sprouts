@@ -6,7 +6,7 @@ require 'sprout'
 class CustomParameter < Sprout::Executable::Param; end
 
 class EchoInputs < Sprout::Executable::Base
-  
+
   ##
   # A boolean parameter that will be set to true if present.
   #
@@ -19,11 +19,11 @@ class EchoInputs < Sprout::Executable::Base
   add_param :default_truthy, Boolean, { :default => true }
 
   ##
-  # A boolean parameter that defaults to true, and must be 
+  # A boolean parameter that defaults to true, and must be
   # explicitly set to false in order to turn it off.
   #
   #  echo-inputs --falsey=false
-  #  
+  #
   add_param :falsey, Boolean, { :default => true, :hidden_value => false, :show_on_false => true }
 
   ##
@@ -50,7 +50,7 @@ class EchoInputs < Sprout::Executable::Base
 
   ##
   # A relative or fully-qualified path to a directory.
-  # 
+  #
   #   echo-inputs --path=lib/
   #
   add_param :path, Path
@@ -101,7 +101,7 @@ class EchoInputs < Sprout::Executable::Base
   ##
   # A required value with a hidden name. This kind of value is often
   # presented as the default option.
-  # 
+  #
   #   echo-inputs lib/sprout.rb
   #
   add_param :input, File, { :required => true }
@@ -134,7 +134,7 @@ end
 
 ##
 # Expose this application to Rake like:
-# 
+#
 #    echo_inputs do |t|
 #      t.string = 'Foo'
 #      t.falsey = false

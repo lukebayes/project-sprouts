@@ -22,7 +22,7 @@ module Sprout
     add_param :test, String, { :default => 'test' }
 
     ##
-    # The name of the child folder of the test folder where 
+    # The name of the child folder of the test folder where
     # unit tests should be generated.
     add_param :unit, String, { :default => 'unit' }
 
@@ -46,7 +46,7 @@ module Sprout
     # files. This should hint at the project type.
     add_param :extension, String, { :default => '.as' }
 
-    def manifest  
+    def manifest
       massage_input
 
       directory bin do

@@ -52,7 +52,7 @@ module Sprout::Executable
       # the long-lived process is active.
       #
       # This method should raise a Sprout::Errors::UsageError
-      # if the provided action name is already defined for 
+      # if the provided action name is already defined for
       # the provided instance.
       #
       # @param name [Symbol, String] The name of the method.
@@ -60,7 +60,7 @@ module Sprout::Executable
       # @param options [Hash] The options hash is reserved for future use.
       #
       #   class Foo < Sprout::Daemon
-      #     
+      #
       #     add_action :continue
       #
       #     add_action :quit
@@ -111,7 +111,7 @@ module Sprout::Executable
       end
 
       ##
-      # TODO: Raise an exception and/or return false if the name is 
+      # TODO: Raise an exception and/or return false if the name is
       # already taken?
       def accessor_can_be_defined_at? name
         true
@@ -165,7 +165,7 @@ module Sprout::Executable
 
     ##
     # Execute the Daemon executable, followed
-    # by the collection of stored actions in 
+    # by the collection of stored actions in
     # the order they were called.
     #
     # If none of the stored actions result in
@@ -182,7 +182,7 @@ module Sprout::Executable
     #
     #    # Do something else while FDB
     #    # is open, then:
-    #    
+    #
     #    fdb.run
     #    fdb.break "AsUnitRunner:12"
     #    fdb.continue
@@ -267,7 +267,7 @@ module Sprout::Executable
     ##
     # This is the override of the underlying
     # Sprout::Executable template method so that we
-    # create the process in a thread 
+    # create the process in a thread
     # in order to read and write to it.
     #
     # @return [Thread]

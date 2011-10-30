@@ -22,7 +22,7 @@ module Sprout
     #
     # @see Sprout::Executable::Param
     #
-    class FileParam < Param 
+    class FileParam < Param
 
       attr_accessor :file_task_name
 

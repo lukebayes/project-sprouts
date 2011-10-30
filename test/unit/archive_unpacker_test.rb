@@ -8,7 +8,7 @@ class ArchiveUnpackerTest < Test::Unit::TestCase
     fixture     = File.join fixtures, 'archive_unpacker'
     @zip_file   = File.join fixture, 'zip', 'some_file.zip'
     @zip_folder = File.join fixture, 'zip', 'some folder.zip'
-    
+
     @tgz_file   = File.join fixture, 'tgz', 'some_file.tgz'
     @tgz_folder = File.join fixture, 'tgz', 'some folder.tgz'
 

@@ -153,6 +153,6 @@ class RubyFeatureTest < Test::Unit::TestCase
   class OtherFakePlugin
     include Sprout::RubyFeature
   end
-end 
+end
 
 

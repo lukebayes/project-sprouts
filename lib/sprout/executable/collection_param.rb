@@ -6,8 +6,8 @@ module Sprout
     # Included by any parameters that represent
     # a collection of values, rather than a single
     # value.
-    # 
-    # Should only be included by classes that 
+    #
+    # Should only be included by classes that
     # extend Sprout::Executable::Param.
     #
     # @see Sprout::Executable::Files
@@ -40,7 +40,7 @@ module Sprout
       #
       #   foo :name do |t|
       #     t.collection << 'A'
-      #   end 
+      #   end
       #
       # The following example is also correct and should not raise an exception:
       #

@@ -10,7 +10,7 @@ Sprout::Specification.new do |s|
     t.md5          = "abcd"
 
     t.add_library :swc, "primates/bin/FlexUnit.swc"
-    t.add_library :src, "primates/dist" 
+    t.add_library :src, "primates/dist"
   end
 
 end

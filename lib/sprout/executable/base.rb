@@ -16,8 +16,8 @@ module Sprout
         # +name+ is a symbol or string that represents the parameter that you would like to add
         # such as :debug or :source_path.
         #
-        # +type+ is a class reference of the Executable::Param that you'd like to use. 
-        # At the time of this writing, add_param will accept 2 class references that 
+        # +type+ is a class reference of the Executable::Param that you'd like to use.
+        # At the time of this writing, add_param will accept 2 class references that
         # do not extend Param - String and File. The ParameterFactory will automatically
         # resolve these to the correct data type when they are created.
         #
@@ -40,7 +40,7 @@ module Sprout
         # can set and get those parameters from any newly created executable instance,
         # or from the command line.
         #
-        # In the case of an executable delegate, parameter values will be sent to the 
+        # In the case of an executable delegate, parameter values will be sent to the
         # command line executable in the order they are added using +add_param+.
         #
         # In the case of a Ruby executable, command line parameters will be interpreted
@@ -62,7 +62,7 @@ module Sprout
           static_parameter_collection << options
           options
         end
-        
+
         def add_param_alias new_name, old_name
           create_param_accessors :name => new_name, :real_name => old_name
         end
@@ -100,7 +100,7 @@ module Sprout
           end
 
           # define the reader:
-          define_method(name) do     
+          define_method(name) do
             if(options[:reader].nil?)
               if(param_hash[real_name].nil?)
                 raise Sprout::Errors::UsageError.new "Unable to use requested parameter (#{real_name}) try adding it using:\n\n    add_param :#{real_name}, String\n\n"
@@ -173,7 +173,7 @@ module Sprout
       # applications (like MXMLC) prefer '-'.
       #
       attr_accessor :default_prefix
-      
+
       ##
       # The default command line prefix for short name parameters.
       #
@@ -209,7 +209,7 @@ module Sprout
       # If the executable is configured as a Rake::Task, it will extract the
       # Rake::Task[:name] property and apply it to this field.
       #
-      # Concrete parameters can pull this value from their +belongs_to+ 
+      # Concrete parameters can pull this value from their +belongs_to+
       # parameter.
       attr_accessor :rake_task_name
 
@@ -264,9 +264,9 @@ module Sprout
       # with command line arguments.
       #
       # Subclasses will generally override this method
-      # if they are a Ruby executable, but if you're 
+      # if they are a Ruby executable, but if you're
       # just delegating to an external CLI application,
-      # calling execute will wind up executing the 
+      # calling execute will wind up executing the
       # external process.
       def execute
         prepare
@@ -280,7 +280,7 @@ module Sprout
         update_rake_task_name_from_args *args
         yield self if block_given?
         prepare
-        
+
         # TODO: Tried auto-updating with library
         # prerequisites, but this led to strange
         # behavior with multiple registrations.
@@ -347,7 +347,7 @@ module Sprout
       end
 
       ##
-      # Replace the binary that will be executed with a path to one of your 
+      # Replace the binary that will be executed with a path to one of your
       # choosing. This work is usually performed on the yielded instance from
       # Rake like:
       #
@@ -371,9 +371,9 @@ module Sprout
       #
       # Windows systems will execute this .bat file.
       #
-      # 
-      # @param path [File] Path to the executable binary that should be executed instead 
-      #   of whatever Sprout.load would have provided. If a value is set here, Sprout.load 
+      #
+      # @param path [File] Path to the executable binary that should be executed instead
+      #   of whatever Sprout.load would have provided. If a value is set here, Sprout.load
       #   will not be called.
       # @return [File] Path to the executable binary that should be executed.
       #
@@ -407,7 +407,7 @@ module Sprout
       end
 
       ##
-      # Create the outer rake task. 
+      # Create the outer rake task.
       # For most executables, this will be a Rake::File task,
       # This is a template method that should be overridden
       # for executables that do not result in the creation of
@@ -415,7 +415,7 @@ module Sprout
       #
       # @see update_rake_task_name_from_args
       def create_outer_task *args
-        Rake::FileTask.define_task(*args) do 
+        Rake::FileTask.define_task(*args) do
           execute
         end
       end
@@ -423,7 +423,7 @@ module Sprout
       ##
       # This method will add the current task to the Rake CLEAN
       # collection.
-      # 
+      #
       # Any Executable that does not create a Rake::File task
       # should also override this method and prevent it from
       # calling +CLEAN.add+.
@@ -511,8 +511,8 @@ module Sprout
           param = initialize_parameter declaration
           short = param.option_parser_short_name
 
-          option_parser.on short, 
-                           param.option_parser_declaration, 
+          option_parser.on short,
+                           param.option_parser_declaration,
                            param.description do |value|
             if(param.is_a?(CollectionParam) && param.delimiter == '+=')
               eval "self.#{param.name} << '#{value}'"
@@ -573,7 +573,7 @@ module Sprout
       def create_parameter declaration
         param = ParameterFactory.create declaration[:type]
         param.belongs_to = self
-          
+
         begin
           declaration.each_pair do |key, value|
             param.send "#{key}=", value

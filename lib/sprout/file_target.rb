@@ -3,7 +3,7 @@ module Sprout
 
   # This is a class that is generally used by the Sprout::Specification::add_file_target method.
   #
-  # File targets are files that are embedded into (or referred to by) a RubyGem in such a way 
+  # File targets are files that are embedded into (or referred to by) a RubyGem in such a way
   # that Sprouts can use them as a library or executable.
   #
   # A given FileTarget may be configured to work on a specific platform, or it may be
@@ -37,11 +37,11 @@ module Sprout
 
     ##
     # Add a library to the package.
-    # 
+    #
     # @return [Sprout::Library] The newly created library that was added.
     # @param name [Symbol] Name that will be used to retrieve this library on +load+.
-    # @param path [File, Path, Array] File or files that will be associated with 
-    #   this library and copied into the target project library folder when loaded. 
+    # @param path [File, Path, Array] File or files that will be associated with
+    #   this library and copied into the target project library folder when loaded.
     #   (If the path is a directory, all files forward of that directory will be included.)
     def add_library name, path
       if path.is_a?(Array)
@@ -75,7 +75,7 @@ module Sprout
       raise Sprout::Errors::UsageError.new "FileTarget.pkg_version is required" if pkg_version.nil?
     end
 
-    ## 
+    ##
     # This is a template method that is overridden
     # by RemoteFileTarget.
     def expand_local_path path

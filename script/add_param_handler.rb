@@ -31,7 +31,7 @@ class AddParamHandler < YARD::Handlers::Ruby::MethodHandler
             o.parameters = [['value', nil]]
           else
             new_tag = YARD::Tags::Tag.new(:return, "An instance of #{class_name}", class_name)
-            o.docstring.add_tag(new_tag) 
+            o.docstring.add_tag(new_tag)
           end
 
           o.visibility = visibility

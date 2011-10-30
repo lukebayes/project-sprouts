@@ -85,7 +85,7 @@ module Sprout
     end
 
     ##
-    # @return [Sprout::System] That is currently being used to 
+    # @return [Sprout::System] That is currently being used to
     # determine features like the cache path and how external processes
     # are executed.
     #
@@ -95,23 +95,23 @@ module Sprout
     def current_system
       Sprout::System.create
     end
-    
+
     def stdout=(out)
       @stdout = out
     end
-    
+
     def stdout
       @stdout ||= $stdout
     end
-    
+
     def stderr=(err)
       @stderr = err
     end
-    
+
     def stderr
       @stderr ||= $stderr
     end
-    
+
     ##
     # @return [File] Path to the file from the 'caller' property of
     # a Ruby exception.

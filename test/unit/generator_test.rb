@@ -15,7 +15,7 @@ class GeneratorTest < Test::Unit::TestCase
       assert_equal Sprout.generator_cache, paths.shift
       assert_equal Dir.pwd, paths.shift
     end
-    
+
     should "return empty search paths if no defaults are found" do
       File.stubs(:directory?).returns false
       paths = Sprout::Generator.search_paths
@@ -166,7 +166,7 @@ class GeneratorTest < Test::Unit::TestCase
     end
 
     context "that is asked to unexecute/delete" do
-      
+
       setup do
         @generator.input = 'some_project'
         @generator.execute
@@ -176,7 +176,7 @@ class GeneratorTest < Test::Unit::TestCase
 
         assert_file File.join(@fixture, 'some_project')
       end
-      
+
       should "remove the expected files" do
         @generator.unexecute
         assert !File.exists?(@project), "Project should be deleted"
@@ -224,7 +224,7 @@ class GeneratorTest < Test::Unit::TestCase
   end
 
   private
-  
+
   def configure_generator generator
     generator.input  = 'some_project'
     generator.logger = @string_io
@@ -234,10 +234,10 @@ class GeneratorTest < Test::Unit::TestCase
   end
 
   ##
-  # This is a fake Generator that should 
+  # This is a fake Generator that should
   # exercise the inputs.
   class FakeGenerator < Sprout::Generator::Base
-    
+
     add_param :external, Boolean
 
     ##
@@ -305,7 +305,7 @@ class GeneratorTest < Test::Unit::TestCase
         generator = Sprout::Generator.load :demo, 'unknown_file', '>= 1.0.pre'
       end
     end
-    
+
     should "be loadable if it's in the load path" do
       generator = Sprout::Generator.load :application, 'temp_generator', '>= 1.0.pre'
       assert_not_nil generator

@@ -2,7 +2,7 @@
 module Sprout
 
   ##
-  # Sprout Libraries provide support for sharing and versioning raw or 
+  # Sprout Libraries provide support for sharing and versioning raw or
   # pre-compiled source code across projects.
   #
   # Sprout Libraries give us the ability to include raw (or pre-compiled) source
@@ -16,12 +16,12 @@ module Sprout
   #
   # = Specification
   #
-  # Libraries can be added to local or remote file targets in a 
-  # Sprout::Specification. When calling add_library, one must provide the 
-  # library name (symbol that will be used from Rake) and a relative path (or 
+  # Libraries can be added to local or remote file targets in a
+  # Sprout::Specification. When calling add_library, one must provide the
+  # library name (symbol that will be used from Rake) and a relative path (or
   # Array of paths) from the Specification to the library file or directory.
   #
-  # Following is an example of a Sprout::Specification that registers a SWC 
+  # Following is an example of a Sprout::Specification that registers a SWC
   # that will be distributed directly within a Ruby Gem:
   #
   #   Sprout::Specification.new do |s|
@@ -58,8 +58,8 @@ module Sprout
   #     t.input = 'src/SomeProject.as'
   #   end
   #
-  # When the library task is executed, the library should be resolved and 
-  # expanded into the project. When the mxmlc task is executed, the installed 
+  # When the library task is executed, the library should be resolved and
+  # expanded into the project. When the mxmlc task is executed, the installed
   # library should be associated with the compilation command.
   #
   # Some library Specifications include multiple targets within the same Specification.
@@ -104,13 +104,13 @@ module Sprout
   #   end
   #
   # ---
-  # 
+  #
   # Previous Topic: {Sprout::Generator}
   #
   # Next Topic: {Sprout::Executable}
   #
   # ---
-  # 
+  #
   # @see Sprout::Generator
   # @see Sprout::Executable
   # @see Sprout::Specification
@@ -135,7 +135,7 @@ module Sprout
       # Set the path within a project
       # where libraries should be loaded.
       #
-      # From top of your Rakefile, you can 
+      # From top of your Rakefile, you can
       # set this value with:
       #
       #   Sprout::Library.project_path = 'libs'
@@ -145,7 +145,7 @@ module Sprout
       end
 
       ##
-      # The path within a project where 
+      # The path within a project where
       # libraries should be added.
       #
       # Defaults to 'lib'

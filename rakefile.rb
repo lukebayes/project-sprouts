@@ -51,7 +51,7 @@ namespace :test do
           t.output_dir = ".coverage/#{target}"
           t.verbose = true
           t.rcov_opts = ["--sort coverage",
-                         "--aggregate coverage.data", 
+                         "--aggregate coverage.data",
                          "--exclude .bundle",
                          "--exclude .gem",
                          "--exclude errors.rb",

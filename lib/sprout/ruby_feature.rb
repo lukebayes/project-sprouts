@@ -105,7 +105,7 @@ module Sprout
       end
 
       #
-      # Used by the Generator::Base to update inputs from 
+      # Used by the Generator::Base to update inputs from
       # empty class definitions to instances..
       def update_registered_entities
       end
@@ -119,7 +119,7 @@ module Sprout
           #puts ">> entity: #{entity.name} platform: #{entity.platform} pkg_name: #{entity.pkg_name} version: #{entity.pkg_version}"
         #end
         registered_entities.reverse.select do |entity|
-            satisfies_name?(entity, name_or_names) && 
+            satisfies_name?(entity, name_or_names) &&
             satisfies_platform?(entity) &&
             satisfies_pkg_name?(entity, pkg_name) &&
             satisfies_version?(entity, version_requirement)

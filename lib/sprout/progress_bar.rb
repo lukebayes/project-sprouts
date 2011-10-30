@@ -7,7 +7,7 @@
 # You can redistribute it and/or modify it under the terms
 # of Ruby's license.
 #
-# Modified by Luke Bayes to support progress display on 
+# Modified by Luke Bayes to support progress display on
 # multiple simultaneous connections, and to silence output
 # during test runs.
 require 'singleton'
@@ -17,7 +17,7 @@ module Sprout
     VERSION = "0.9"
     @@debug = false
     @@outio = $stderr
-    
+
     def self.new(title, total)
       return ProgressBarManager.instance.add(title, total)
     end
@@ -25,7 +25,7 @@ module Sprout
     def self.debug?
       @@debug
     end
-    
+
     def self.debug=(debug)
       @@debug = debug
       if(debug)
@@ -34,7 +34,7 @@ module Sprout
         @@outio = $stderr
       end
     end
-    
+
     def self.outio
       @@outio
     end
@@ -42,7 +42,7 @@ module Sprout
   end
 
   class ProgressBarImpl
-    
+
     def initialize (title, total, out = STDERR)
       @title = title
       @total = total
@@ -66,11 +66,11 @@ module Sprout
     attr_accessor :start_time,
                   :title_width,
                   :bar_mark
-                  
+
     def fmt_bar
       bar_width = do_percentage * @terminal_width / 100
-      sprintf("|%s%s|", 
-              @bar_mark * bar_width, 
+      sprintf("|%s%s|",
+              @bar_mark * bar_width,
               " " *  (@terminal_width - bar_width))
     end
 
@@ -83,9 +83,9 @@ module Sprout
     end
 
     def fmt_stat_for_file_transfer
-      if @finished_p then 
+      if @finished_p then
         sprintf("%s %s %s", bytes, transfer_rate, elapsed)
-      else 
+      else
         sprintf("%s %s %s", bytes, transfer_rate, eta)
       end
     end
@@ -122,7 +122,7 @@ module Sprout
       hour = t / 3600
       sprintf("%02d:%02d:%02d", hour, min, sec)
     end
-    
+
     # ETA stands for Estimated Time of Arrival.
     def eta
       if @current == 0
@@ -138,7 +138,7 @@ module Sprout
       elapsed_time = Time.now - @start_time
       sprintf("Time: %s", format_time(elapsed_time))
     end
-    
+
     def eol
       if @finished_p then "\n" else "\r" end
     end
@@ -204,7 +204,7 @@ module Sprout
       end
 
       # Use "!=" instead of ">" to support negative changes
-      if cur_percentage != prev_percentage || 
+      if cur_percentage != prev_percentage ||
           Time.now - @previous_time >= 1 || @finished_p
         show
       end
@@ -273,35 +273,35 @@ module Sprout
 
   class ProgressBarOutputStream
     attr_reader :title
-    
+
     def initialize(mgr)
       @mgr = mgr
       @msg = ''
     end
-    
+
     def print(msg)
       @msg = msg
     end
-    
+
     def flush
       @mgr.flush
     end
-    
+
     def to_s
       return @msg.clone.split("\n").join("").split("\r").join("")
     end
-    
+
   end
 
   class ProgressBarManager
     include Singleton
-    
+
     def initialize
       @finished = {}
       @bars = {}
       @outs = {}
     end
-    
+
     def add(title, total1)
   #    if(@bars[title])
   #      raise StandardError.new
@@ -309,7 +309,7 @@ module Sprout
       @outs[title] = ProgressBarOutputStream.new(self)
       @bars[title] = ProgressBarImpl.new(title, total1, @outs[title])
     end
-    
+
     def print(title)
       str = ''
       str += @outs[title].to_s
@@ -317,16 +317,16 @@ module Sprout
       outio.print "\r"
       outio.print str
     end
-    
+
     def outio
       ProgressBar.outio
     end
-    
+
     def flush
       @bars.keys.each do |title|
         print(title)
       end
-      
+
       @bars.values.each do |bar|
         if(bar.finished?)
           print(bar.title)

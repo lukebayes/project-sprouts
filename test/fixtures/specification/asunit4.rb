@@ -10,8 +10,8 @@ Sprout::Specification.new do |s|
   #s.summary     = "The fastest and most flexible ActionScript unit test framework"
   #s.description = <<EOS
  #AsUnit is the only ActionScript unit test framework that
- #supports every development and runtime environment that is currently available. 
- #This includes Flex 2, 3, 4, AIR 1 and 2, Flash Lite, and of course the 
+ #supports every development and runtime environment that is currently available.
+ #This includes Flex 2, 3, 4, AIR 1 and 2, Flash Lite, and of course the
  #Flash Authoring executable.
 #EOS
 
