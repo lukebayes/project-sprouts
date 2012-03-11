@@ -19,11 +19,5 @@ group :development do
   gem "flay"
   gem "flog"
   gem "heckle"
-  
-  # rcov doesn't appear to install on
-  # debian/ubuntu. Boo. Ideas?
-  if RUBY_PLATFORM =~ /darwin/i
-    gem "rcov"
-  end
 end
 

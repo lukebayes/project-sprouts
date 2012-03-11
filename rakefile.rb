@@ -32,36 +32,6 @@ namespace :test do
     task(:clean) { rm_f "coverage.data" }
   end
 
-  # Apparently, rcov does not work on Windows or Ubuntu?
-  # Hide these tasks so that we can at least
-  # run the others...
-  if(RUBY_PLATFORM =~ /darwin/i)
-    require 'rcov/rcovtask'
-
-    CLEAN.add('coverage.data')
-    CLEAN.add('.coverage')
-
-    # Hold collection in case we need it:
-    #%w[unit functional integration].each do |target|
-    %w[unit].each do |target|
-      namespace :coverage do
-        Rcov::RcovTask.new(target) do |t|
-          t.libs = ["lib", "test"]
-          t.test_files = FileList["test/#{target}/**/*_test.rb"]
-          t.output_dir = ".coverage/#{target}"
-          t.verbose = true
-          t.rcov_opts = ["--sort coverage",
-                         "--aggregate coverage.data", 
-                         "--exclude .bundle",
-                         "--exclude .gem",
-                         "--exclude errors.rb",
-                         "--exclude progress_bar.rb"]
-        end
-      end
-      task :coverage => "test:coverage:#{target}"
-    end
-  end
-
   namespace :torture do
     desc "Flog the Sprouts"
     task :flog do
