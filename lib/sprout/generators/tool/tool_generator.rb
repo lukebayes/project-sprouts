@@ -22,7 +22,7 @@ module Sprout
       directory snake_input do
         template 'Gemfile'
         template "#{snake_input}.gemspec", 'tool.gemspec'
-        template "#{snake_input}.rb", 'tool.rb'
+        template "#{snake_input}.rb", 'tool.erb'
       end
     end
 

@@ -57,7 +57,7 @@ module Sprout
         #We need to add a folder with the same name as the module to be used in order to faux namespace our generators to avoid collisions from super classes
         directory namespace do
           directory generators do
-            template "#{input.snake_case}_generator.rb", "generator_class.rb"
+            template "#{input.snake_case}_generator.rb", "generator_class.erb"
             directory "templates" do
               template "#{input.camel_case}#{extension}", "generator_template"
             end
@@ -67,8 +67,8 @@ module Sprout
 
       directory test do
         directory unit do
-          template "#{input.snake_case}_generator_test.rb", "generator_test.rb"
-          template "test_helper.rb", "generator_test_helper.rb"
+          template "#{input.snake_case}_generator_test.rb", "generator_test.erb"
+          template "test_helper.rb", "generator_test_helper.erb"
         end
         directory fixtures do
           directory "generators"

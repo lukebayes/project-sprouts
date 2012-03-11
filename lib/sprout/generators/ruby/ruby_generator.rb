@@ -40,17 +40,17 @@ module Sprout
         template "#{input.snake_case}.gemspec", 'ruby_gemspec'
 
         directory lib do
-          template "#{snake}.rb", 'ruby_input.rb'
+          template "#{snake}.rb", 'ruby_input.erb'
           directory snake do
-            template 'base.rb', 'ruby_base.rb'
+            template 'base.rb', 'ruby_base.erb'
           end
         end
 
         directory test do
           directory fixtures
           directory unit do
-            template "#{input.snake_case}_test.rb", 'ruby_test_case.rb'
-            template 'test_helper.rb', 'ruby_test_helper.rb'
+            template "#{input.snake_case}_test.rb", 'ruby_test_case.erb'
+            template 'test_helper.rb', 'ruby_test_helper.erb'
           end
         end
 
@@ -61,4 +61,3 @@ module Sprout
     end
   end
 end
-

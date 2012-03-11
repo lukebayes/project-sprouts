@@ -12,7 +12,7 @@ module Sprout
 
     def manifest
       template "#{input.snake_case}.gemspec", 'library.gemspec'
-      template "#{input.snake_case}.rb", 'library.rb'
+      template "#{input.snake_case}.rb", 'library.erb'
     end
 
   end
