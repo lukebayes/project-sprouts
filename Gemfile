@@ -2,7 +2,7 @@ source "http://rubygems.org"
 
 gem "bundler", ">= 0.9.19"
 gem "rake", ">= 0.9.2"
-gem "rubyzip", "0.9.4"
+gem "rubyzip", "~> 1.2.1"
 gem "archive-tar-minitar", "0.5.2"
 
 if RUBY_PLATFORM =~ /mswin/i
